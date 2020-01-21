@@ -11,6 +11,7 @@
           type="button">
           Log Out
         </button>
+        <router-link to="/users/me">Profile</router-link>
       </div>
     </nav>
   </header>
@@ -28,8 +29,11 @@ export default {
   },
   methods: {
     handleLogout() {
-      this.$store.dispatch('auth/logOut');
-      alert('You have been logged out');
+      this.$store.dispatch('auth/logOut')
+      .then(() => {
+        this.$router.push('/')
+        alert('You have been logged out')
+      })
     }
   }
 }
