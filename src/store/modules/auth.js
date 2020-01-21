@@ -14,14 +14,6 @@ export default {
     }
   },
   actions: {
-    logIn(context, {email, password}) {
-      return firebase.auth().signInWithEmailAndPassword(email, password)
-        .catch(error => Promise.reject(error.message))
-    },
-    logOut({commit}) {
-      return firebase.auth().signOut()
-        .then(() => commit('setAuthUser', null))
-    },
     signUp(context, {email, password}) {
       return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(({user}) => {
@@ -31,9 +23,17 @@ export default {
           return Promise.reject(message);
         })
     },
+    logIn(context, {email, password}) {
+      return firebase.auth().signInWithEmailAndPassword(email, password)
+        .catch(error => Promise.reject(error.message))
+    },
+    logOut({commit}) {
+      return firebase.auth().signOut()
+        .then(() => commit('setAuthUser', null))
+    },
     createUserProfile(context, {uid, userProfile}) {
       return db
-        .collection('users')
+        .collection('profiles')
         .doc(uid)
         .set(userProfile)
     },
@@ -51,7 +51,7 @@ export default {
     },
     updateProfile({commit}, profile) {
       return db
-        .collection('users')
+        .collection('profiles')
         .doc(profile.user)
         .update(profile)
         .then(() => {
