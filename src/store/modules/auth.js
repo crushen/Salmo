@@ -25,13 +25,13 @@ export default {
     },
     createUserProfile(context, {uid, userProfile}) {
       return db
-        .collection('profiles')
+        .collection('users')
         .doc(uid)
         .set(userProfile)
     },
     updateProfile({commit}, profile) {
       return db
-        .collection('profiles')
+        .collection('users')
         .doc(profile.user)
         .update(profile)
         .then(_ => {
