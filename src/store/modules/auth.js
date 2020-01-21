@@ -20,7 +20,7 @@ export default {
     },
     logOut({commit}) {
       return firebase.auth().signOut()
-        .then(_ => commit('setAuthUser', null))
+        .then(() => commit('setAuthUser', null))
     },
     signUp(context, {email, password}) {
       return firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -54,7 +54,7 @@ export default {
         .collection('users')
         .doc(profile.user)
         .update(profile)
-        .then(_ => {
+        .then(() => {
           commit('setUserProfile', profile)
           return true
         })

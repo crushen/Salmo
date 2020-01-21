@@ -60,6 +60,7 @@ export default {
     handleSignup() {
       this.$store.dispatch('auth/signUp', this.form)
         .then(async user => {
+          // waits for user profile to be created before  executing the rest of the function
           await this.$store.dispatch('auth/createUserProfile', {
             uid: user.uid, 
             userProfile: {
