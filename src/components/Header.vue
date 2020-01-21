@@ -28,8 +28,8 @@ export default {
   },
   methods: {
     handleLogout() {
-      // Alert
       this.$store.dispatch('auth/logOut');
+      alert('You have been logged out');
     }
   }
 }
