@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <app-nav />
+    <app-header />
     <router-view/>
   </div>
 </template>
 
 <script>
-import AppNav from '@/components/Nav.vue'
+import AppHeader from '@/components/Header'
 
 export default {
   components: {
-    AppNav
+    AppHeader
   }
 }
 </script>
