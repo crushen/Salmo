@@ -5,6 +5,9 @@ import Login from '../views/Login'
 import Signup from '../views/Signup'
 import ProfilePage from '../views/Profile'
 
+import firebase from 'firebase/app'
+import 'firebase/auth'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -16,17 +19,20 @@ const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    meta: { onlyGuestUser: true }
   },
   {
     path: '/signup',
     name: 'signup',
-    component: Signup
+    component: Signup,
+    meta: { onlyGuestUser: true }
   },
   { 
     path: '/users/me', 
     name: 'ProfilePage', 
-    component: ProfilePage
+    component: ProfilePage,
+    meta: { onlyAuthUser: true } 
   }
 ]
 
@@ -34,6 +40,25 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const authenticatedUser = firebase.auth().currentUser;
+  if(to.meta.onlyAuthUser) {
+    if(authenticatedUser) {
+      next();
+    } else {
+      next({name: 'login'})
+    }
+  } else if(to.meta.onlyGuestUser) {
+    if(authenticatedUser) {
+      next({name: 'home'});
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 })
 
 export default router
