@@ -1,17 +1,23 @@
 <template>
   <header>
-    <nav id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/login">Login</router-link>
-      <router-link to="/signup">Signup</router-link>
+    <nav id="nav" :class="isAuthenticated ? '' : 'flex-end'">
       <div v-if="isAuthenticated">
-        <p>{{ user.email }}</p>
-        <button 
-          @click="handleLogout"
-          type="button">
-          Log Out
-        </button>
-        <router-link to="/users/me">Profile</router-link>
+        <p>Hello, {{ user.profile.firstName }}</p>
+      </div>
+      <div class="nav-links">
+        <router-link to="/">Home</router-link>
+        <template v-if="!isAuthenticated">
+          <router-link to="/login">Login</router-link>
+          <router-link to="/signup">Signup</router-link>
+        </template>
+        <template v-else>
+          <router-link to="/users/me">Profile</router-link>
+          <button 
+            @click="handleLogout"
+            type="button">
+            Log Out
+          </button>
+        </template>
       </div>
     </nav>
   </header>
@@ -31,7 +37,9 @@ export default {
     handleLogout() {
       this.$store.dispatch('auth/logOut')
       .then(() => {
-        this.$router.push('/')
+        if(this.$route.path !== '/') {
+          this.$router.push('/')
+        }
         alert('You have been logged out')
       })
     }
@@ -40,7 +48,28 @@ export default {
 </script>
 
 <style scoped>
-  a {
-    margin: 16px;
-  }
+a {
+  margin: 16px;
+}
+
+nav, .nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav.flex-end {
+  justify-content: flex-end;
+}
+
+button {
+  border: none;
+  background: #2c3e50;
+  color: white;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 8px;
+}
 </style>
