@@ -55,6 +55,24 @@ export default {
         confirmPassword: ''
       }
     }
+  },
+  methods: {
+    handleRegister() {
+      this.$store.dispatch('auth/signUp', this.form)
+        .then(async user => {
+          await this.$store.dispatch('auth/createUserProfile', {
+            uid: user.uid, 
+            userProfile: {
+              firstName: this.form.firstName,
+              lastName: this.form.lastName,
+              user: user.uid
+            }
+          })
+          this.$router.push('/')
+        }).catch(errorMessage => {
+          alert(errorMessage);
+        })
+    }
   }
 }
 </script>
