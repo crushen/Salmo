@@ -18,6 +18,10 @@ export default {
       return firebase.auth().signInWithEmailAndPassword(email, password)
         .catch(error => Promise.reject(error.message))
     },
+    logOut({commit}) {
+      return firebase.auth().signOut()
+        .then(_ => commit('setAuthUser', null))
+    },
     signUp(context, {email, password}) {
       return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(({user}) => {
@@ -33,6 +37,18 @@ export default {
         .doc(uid)
         .set(userProfile)
     },
+    storeAuthUser({commit}, user) {
+      return db
+        .collection('profiles')
+        .doc(user.uid)
+        .get()
+        .then(snapshot => {
+          const profile = snapshot.data()
+          user.profile = profile
+          commit('setAuthUser', user)
+          return profile
+        })
+    },
     updateProfile({commit}, profile) {
       return db
         .collection('users')
@@ -45,6 +61,9 @@ export default {
     }
   },
   mutations: {
+    setAuthUser(state, user) {
+      state.user = user;
+    },
     setUserProfile(state, profile) {
       // state.user.profile = profile
       Vue.set(state.user, 'profile', profile)
