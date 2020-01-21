@@ -35,7 +35,7 @@
           placeholder="Confirm Password">
       </div>
       <button 
-        @click="handleRegister"
+        @click="handleSignup"
         type="button">
         Sign Up
       </button>
@@ -57,7 +57,7 @@ export default {
     }
   },
   methods: {
-    handleRegister() {
+    handleSignup() {
       this.$store.dispatch('auth/signUp', this.form)
         .then(async user => {
           await this.$store.dispatch('auth/createUserProfile', {
