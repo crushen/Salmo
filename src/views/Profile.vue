@@ -2,7 +2,7 @@
   <div>
     <p>Name: {{ user.profile.firstName }} {{ user.profile.lastName }}</p>
     <p>Email: {{ user.email }}</p>
-    <p>Email varfied: {{ user.emailVerified }}</p>
+    <p>Email varified: {{ user.emailVerified }}</p>
   </div>
 </template>
 

@@ -31,6 +31,9 @@ export default {
       return firebase.auth().signOut()
         .then(() => commit('setAuthUser', null))
     },
+    sendEmailVerification() {
+      return firebase.auth().currentUser.sendEmailVerification();
+    },
     createUserProfile(context, {uid, userProfile}) {
       return db
         .collection('profiles')
