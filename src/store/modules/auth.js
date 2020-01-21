@@ -14,6 +14,10 @@ export default {
     }
   },
   actions: {
+    logIn(context, {email, password}) {
+      return firebase.auth().signInWithEmailAndPassword(email, password)
+        .catch(error => Promise.reject(error.message))
+    },
     signUp(context, {email, password}) {
       return firebase.auth().createUserWithEmailAndPassword(email, password)
         .then(({user}) => {
