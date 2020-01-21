@@ -38,8 +38,10 @@ export default {
   methods: {
     handleLogin() {
       this.$store.dispatch('auth/logIn', this.form)
-        .then(() => this.$router.push('/'))
-        .then(() => alert('You have logged in'))
+        .then(() => {
+          this.$router.push('/')
+          alert('You have logged in')
+        })
         .catch(errorMessage => {
           alert(errorMessage);
         })
