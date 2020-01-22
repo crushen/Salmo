@@ -70,7 +70,7 @@ export default {
             }
           })
           this.$router.push('/')
-          this.$store.dispatch('auth/sendEmailVerification')
+          //this.$store.dispatch('auth/sendEmailVerification')
         }).catch(errorMessage => {
           alert(errorMessage);
         })

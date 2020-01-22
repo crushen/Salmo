@@ -1,14 +1,17 @@
 <template>
-  <div>
-    <p>Name: {{ user.profile.firstName }} {{ user.profile.lastName }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Email varified: {{ user.emailVerified }}</p>
-  </div>
+  <section>
+    <div v-if="!user.emailVerified"> <!-- for now -->
+      <p>Name: {{ user.profile.firstName }} {{ user.profile.lastName }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Email verified: {{ user.emailVerified }}</p>
+    </div>
+    <div v-else>
+      <p>Please verify your email to continue</p>
+    </div>
+  </section>
 </template>
 
 <script>
-
-
 export default {
   computed: {
     user() {
@@ -28,4 +31,4 @@ export default {
 
 <style scoped>
 
-</style> 
+</style>
