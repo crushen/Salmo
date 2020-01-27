@@ -1,30 +1,39 @@
 <template>
   <section>
     <div v-if="user.emailVerified">
+
       <p>Name: {{ user.profile.firstName }} {{ user.profile.lastName }}</p>
       <p>Email: {{ user.email }}</p>
       <p>Email verified: {{ user.emailVerified }}</p>
+
+      <questionnaire :questions="questions" />
+      
     </div>
+
     <div v-else>
       <p>Please verify your email to continue</p>
     </div>
+
   </section>
 </template>
 
 <script>
+import questionnaire from '@/components/Questionnaire';
+
 export default {
+  components: {
+    questionnaire
+  },
   computed: {
     user() {
       return this.$store.state.auth.user;
+    },
+    questions() {
+      return this.$store.state.questions.items;
     }
   },
-  methods: {
-    updateProfile(profile, closeModal) {
-      this.$store.dispatch('auth/updateProfile', profile)
-        .then(_ => {
-          closeModal();
-        })
-    }
+  created() {
+    this.$store.dispatch('questions/getQuestions');
   }
 }
 </script>
