@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div v-if="!user.emailVerified"> <!-- for now -->
+    <div v-if="user.emailVerified">
       <p>Name: {{ user.profile.firstName }} {{ user.profile.lastName }}</p>
       <p>Email: {{ user.email }}</p>
       <p>Email verified: {{ user.emailVerified }}</p>
