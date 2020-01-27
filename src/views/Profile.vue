@@ -7,7 +7,7 @@
       <p>Email verified: {{ user.emailVerified }}</p>
 
       <questionnaire :questions="questions" />
-      
+
     </div>
 
     <div v-else>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import questionnaire from '@/components/Questionnaire';
+import questionnaire from '@/components/questionnaire/Questionnaire';
 
 export default {
   components: {

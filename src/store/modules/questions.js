@@ -9,11 +9,11 @@ const questions = [
     answers: [
       {
         text: 'Cat', 
-        isCat: true 
+        value: 'Cat'
       }, 
       { 
         text: 'Dog', 
-        isDog: true
+        value: 'Dog'
       }
     ]
   },
