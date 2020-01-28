@@ -1,7 +1,9 @@
 <template>
   <section>
  
-  <div class="question">
+  <div 
+    v-if="!finished"
+    class="question">
     <question :question="question" />
     <div class="answer">
       <answers 
@@ -10,17 +12,23 @@
     </div>
   </div>
 
+  <div v-else>
+    <results />
+  </div>
+
   </section>
 </template>
 
 <script>
 import question from '@/components/questionnaire/Question';
 import answers from '@/components/questionnaire/Answers';
+import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
     question,
-    answers
+    answers,
+    results
   },
   data() {
     return {
@@ -33,7 +41,8 @@ export default {
         minnie: 0,
         squirrel: 0,
         baldrick: 0
-      }
+      },
+      finished: false
     }
   },
   methods:{
@@ -62,13 +71,11 @@ export default {
       if(this.questions[0]) {
         this.activeQuestion = this.questions.shift();
         this.question = this.activeQuestion.question;
-      } 
-
-      // If no questions left, commit results to sotre and show results page
-      // else {
-      //   this.$store.commit('questions/setResults', this.result);
-      //   this.$router.push({name: 'results'})
-      // }
+      } else {
+        // If no questions left, commit results to sotre and show results page
+        this.$store.commit('questions/setResults', this.result);
+        this.finished = true;
+      }
     }
   },
   created(){
