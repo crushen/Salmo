@@ -35,14 +35,30 @@ export default {
       questions: this.$store.state.questions.items,
       question: '',
       activeQuestion: {},
-      result: {
-        zora: 0,
-        rito: 0,
-        minnie: 0,
-        squirrel: 0,
-        baldrick: 0
-      },
-      finished: false
+      finished: false,
+
+      results: [
+        {
+          name: 'Zora',
+          score: 0
+        },        
+        {
+          name: 'Rito',
+          score: 0
+        },        
+        {
+          name: 'Minnie',
+          score: 0
+        },        
+        {
+          name: 'Squirrel',
+          score: 0
+        },        
+        {
+          name: 'Baldrick',
+          score: 0
+        }
+      ]
     }
   },
   methods:{
@@ -53,27 +69,19 @@ export default {
       } else if(answer === 'Dog') {
         this.questions = this.questions.filter(question => question.isDog);
       }
-
       // Check if answer is the same & +1 to chosen result
-      if(answer === 'Zora') {
-        this.result.zora++;
-      } else if(answer === 'Rito') {
-        this.result.rito++;
-      } else if(answer === 'Minnie') {
-        this.result.minnie++;
-      } else if(answer === 'Squirrel') {
-        this.result.squirrel++;
-      } else if(answer === 'Baldrick') {
-        this.result.baldrick++;
-      }
-
+      this.results.forEach(result => {
+        if(answer === result.name) {
+          result.score++;
+        }
+      });
       // If there are still questions left, show following question
       if(this.questions[0]) {
         this.activeQuestion = this.questions.shift();
         this.question = this.activeQuestion.question;
       } else {
         // If no questions left, commit results to sotre and show results page
-        this.$store.commit('questions/setResults', this.result);
+        this.$store.commit('questions/setResults', this.results);
         this.finished = true;
       }
     }

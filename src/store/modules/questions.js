@@ -119,13 +119,28 @@ export default {
   namespaced: true,
   state: {
     items: [],
-    results: {
-      zora: 0,
-      rito: 0,
-      minnie: 0,
-      squirrel: 0,
-      baldrick: 0
-    }
+    results: [
+      {
+        name: 'Zora',
+        score: 0
+      },        
+      {
+        name: 'Rito',
+        score: 0
+      },        
+      {
+        name: 'Minnie',
+        score: 0
+      },        
+      {
+        name: 'Squirrel',
+        score: 0
+      },        
+      {
+        name: 'Baldrick',
+        score: 0
+      }
+    ]
   },
   getters: {
 
@@ -140,11 +155,13 @@ export default {
       state.items = questions;
     },
     setResults(state, answers) {
-      state.results.zora = answers.zora;
-      state.results.rito = answers.rito;
-      state.results.minnie = answers.minnie;
-      state.results.squirrel = answers.squirrel;
-      state.results.baldrick = answers.baldrick;
+      state.results.forEach(result => {
+        answers.forEach(answer => {
+          if(result.name === answer.name) {
+            result.score = answer.score;
+          }
+        });
+      });
     }
   }
 }
