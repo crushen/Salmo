@@ -24,6 +24,7 @@ export default {
   },
   data() {
     return {
+      questions: this.$store.state.questions.items,
       question: '',
       activeQuestion: {},
       result: {
@@ -35,23 +36,27 @@ export default {
       }
     }
   },
-  computed: {
-    questions() {
-      return this.$store.state.questions.items;
-    }
-  },
   methods:{
     getQuestion(answer) {
-      // Check if answer is the same as the answer values & +1 to chosen result
+      // Check if answer is Dog or Cat, and then filter questions 
+      if(answer === 'Cat') {
+        this.questions = this.questions.filter(question => question.isCat);
+        console.log(this.questions);
+      } else if(answer === 'Dog') {
+        this.questions = this.questions.filter(question => question.isDog);
+        console.log(this.questions);
+      }
+
+      // Check if answer is the same & +1 to chosen result
       if(answer === 'Zora') {
         this.result.zora++;
-      } else if (answer === 'Rito') {
+      } else if(answer === 'Rito') {
         this.result.rito++;
-      } else if (answer === 'Minnie') {
+      } else if(answer === 'Minnie') {
         this.result.minnie++;
-      } else if (answer === 'Squirrel') {
+      } else if(answer === 'Squirrel') {
         this.result.squirrel++;
-      } else if (answer === 'Baldrick') {
+      } else if(answer === 'Baldrick') {
         this.result.baldrick++;
       }
 
@@ -62,7 +67,6 @@ export default {
       } 
 
       // If no questions left, commit results to sotre and show results page
-
       // else {
       //   this.$store.commit('questions/setResults', this.result);
       //   this.$router.push({name: 'results'})

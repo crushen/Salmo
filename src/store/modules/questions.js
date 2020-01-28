@@ -4,19 +4,19 @@
 // import { db } from '@/db'
 
 const questions = [
-  // {
-  //   question: 'What kind of bebe do you relate to?',
-  //   answers: [
-  //     {
-  //       text: 'Cat', 
-  //       value: 'Cat'
-  //     }, 
-  //     { 
-  //       text: 'Dog', 
-  //       value: 'Dog'
-  //     }
-  //   ]
-  // },
+  {
+    question: 'What kind of bebe do you relate to?',
+    answers: [
+      {
+        text: 'Cat', 
+        value: 'Cat'
+      }, 
+      { 
+        text: 'Dog', 
+        value: 'Dog'
+      }
+    ]
+  },
   {
     isCat: true,
     question: 'What colour is de most bootiful?',
