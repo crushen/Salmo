@@ -1,89 +1,13 @@
 <template>
   <section>
-    <!-- <form 
-      v-for="(item, index) in questions.slice(0, 1)"
-      :key="index">
-
-      <div class="question">
-        <label>{{ item.question }}</label>
-        <div class="answer"
-          v-for="answer in item.answers"
-          :key="answer.text">
-          <input 
-            v-model="animal"
-            type="radio"
-            name="question"
-            :value="answer.value">
-            {{ answer.text }}
-        </div>
-      </div>
-
-    </form> -->
-
-  <!-- Core questions first -->
-  <!-- <form>
-
-    <div class="question">
-      <label>What kind of bebe do you relate to?</label>
-      <div class="answer">
-        <input 
-          v-model="animal"
-          type="radio"
-          value="cat">
-          Cat
-      </div>
-      <div class="answer">
-        <input 
-          v-model="animal"
-          type="radio"
-          value="dog">
-          Dog
-      </div>
-    </div> -->
-
-    <!-- <div 
-      v-show="animal === 'cat' "
-      class="question">
-      <label>What kind of bebe do you relate to?</label>
-      <div class="answer">
-        <input 
-          v-model="animal"
-          type="radio"
-          value="cat">
-          Cat
-      </div>
-      <div class="answer">
-        <input 
-          v-model="animal"
-          type="radio"
-          value="dog">
-          Dog
-      </div>
-    </div>
-  
-  </form> -->
-
-    <!-- <form>
-
-      <div class="question">
-        <label>{{ question }}</label>
-        <div class="answer">
-          <input 
-            v-model="animal"
-            type="radio"
-            name="question"
-            :value="answer.value">
-            {{ answer.text }}
-        </div>
-      </div>
-
-    </form>  -->
-
+ 
   <div class="question">
     <question :question="question" />
-    <answers 
-      :activeQuestion="activeQuestion" 
-      @nextQuestion="getQuestion"/> 
+    <div class="answer">
+      <answers 
+        :activeQuestion="activeQuestion" 
+        @nextQuestion="getQuestion"/> 
+    </div>
   </div>
 
   </section>
