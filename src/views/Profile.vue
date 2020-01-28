@@ -6,7 +6,7 @@
       <p>Email: {{ user.email }}</p>
       <p>Email verified: {{ user.emailVerified }}</p>
 
-      <questionnaire :questions="questions" />
+      <questionnaire />
 
     </div>
 
@@ -27,9 +27,6 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user;
-    },
-    questions() {
-      return this.$store.state.questions.items;
     }
   },
   created() {

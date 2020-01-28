@@ -4,19 +4,19 @@
 // import { db } from '@/db'
 
 const questions = [
-  {
-    question: 'What kind of bebe do you relate to?',
-    answers: [
-      {
-        text: 'Cat', 
-        value: 'Cat'
-      }, 
-      { 
-        text: 'Dog', 
-        value: 'Dog'
-      }
-    ]
-  },
+  // {
+  //   question: 'What kind of bebe do you relate to?',
+  //   answers: [
+  //     {
+  //       text: 'Cat', 
+  //       value: 'Cat'
+  //     }, 
+  //     { 
+  //       text: 'Dog', 
+  //       value: 'Dog'
+  //     }
+  //   ]
+  // },
   {
     isCat: true,
     question: 'What colour is de most bootiful?',
@@ -118,7 +118,14 @@ const questions = [
 export default {
   namespaced: true,
   state: {
-    items: []
+    items: [],
+    results: {
+      zora: 0,
+      rito: 0,
+      minnie: 0,
+      squirrel: 0,
+      baldrick: 0
+    }
   },
   getters: {
 
@@ -131,6 +138,13 @@ export default {
   mutations: {
     setQuestions(state, questions) {
       state.items = questions;
+    },
+    setResults(state, answers) {
+      state.results.zora = answers.zora;
+      state.results.rito = answers.rito;
+      state.results.minnie = answers.minnie;
+      state.results.squirrel = answers.squirrel;
+      state.results.baldrick = answers.baldrick;
     }
   }
 }

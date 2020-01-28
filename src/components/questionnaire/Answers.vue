@@ -1,14 +1,14 @@
 <template>
   <div class="answers">
     <div
-      v-for="(option, index) in options"
+      v-for="(answer, index) in answers"
       :key="index">
       <input 
         v-model="selected"
         type="radio"
         name="question"
-        :value="option.value">
-        {{ option.text }}
+        :value="answer.value">
+        {{ answer.text }}
 
     </div>
     <button
@@ -26,13 +26,13 @@ export default {
   },
   data () {
     return{
-      options: [],
+      answers: [],
       selected: ''
     }
   },
   methods: {
     assign() {
-      this.options = this.activeQuestion.answers;
+      this.answers = this.activeQuestion.answers;
       this.selected = '';
     },
     nextQuestion() {
@@ -40,7 +40,7 @@ export default {
     }
   },
   watch: {
-    '$props': {
+    '$props':{
       handler(val, oldVal) {
         this.assign()
       },
