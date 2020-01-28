@@ -70,8 +70,7 @@ export default {
     }
   },
   created(){
-    this.getQuestion()
-    console.log(this.questions)
+    this.getQuestion();
   }
 }
 </script>
