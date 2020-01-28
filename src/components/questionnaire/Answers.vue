@@ -40,7 +40,7 @@ export default {
     }
   },
   watch: {
-    '$props':{
+    '$props': {
       handler(val, oldVal) {
         this.assign()
       },

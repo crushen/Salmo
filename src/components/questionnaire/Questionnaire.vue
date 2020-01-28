@@ -118,27 +118,27 @@ export default {
   },
   methods:{
     getQuestion(answer) {
+      // Check if answer is the same as the answer values & +1 to chosen result
       if(answer === 'Zora') {
         this.result.zora++;
-        console.log(`Zora: ${this.result.zora}`);
       } else if (answer === 'Rito') {
         this.result.rito++;
-        console.log(`Rito: ${this.result.rito}`);
       } else if (answer === 'Minnie') {
         this.result.minnie++;
-        console.log(`Minnie: ${this.result.minnie}`);
       } else if (answer === 'Squirrel') {
         this.result.squirrel++;
-        console.log(`Squirrel: ${this.result.squirrel}`);
       } else if (answer === 'Baldrick') {
         this.result.baldrick++;
-        console.log(`Baldrick: ${this.result.baldrick}`);
       }
 
+      // If there are still questions left, show following question
       if(this.questions[0]) {
         this.activeQuestion = this.questions.shift();
         this.question = this.activeQuestion.question;
       } 
+
+      // If no questions left, commit results to sotre and show results page
+
       // else {
       //   this.$store.commit('questions/setResults', this.result);
       //   this.$router.push({name: 'results'})
