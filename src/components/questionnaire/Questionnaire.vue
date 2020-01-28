@@ -41,10 +41,8 @@ export default {
       // Check if answer is Dog or Cat, and then filter questions 
       if(answer === 'Cat') {
         this.questions = this.questions.filter(question => question.isCat);
-        console.log(this.questions);
       } else if(answer === 'Dog') {
         this.questions = this.questions.filter(question => question.isDog);
-        console.log(this.questions);
       }
 
       // Check if answer is the same & +1 to chosen result
