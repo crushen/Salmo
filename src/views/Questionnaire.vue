@@ -1,7 +1,11 @@
 <template>
   <section>
  
-    <button @click="startQuestionnaire">Start Questionnaire</button>
+    <button 
+      v-if="!started"
+      @click="startQuestionnaire">
+      Start Questionnaire
+    </button>
 
     <div v-if="started">
       <div 
