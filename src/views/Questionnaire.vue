@@ -97,7 +97,18 @@ export default {
   },
   created() {
     this.$store.dispatch('questions/getQuestions');
-    this.questions = this.$store.state.questions.items;
+    const storeArray = this.$store.state.questions.items;
+    this.questions = storeArray.slice(0, storeArray.length);
+  },
+  beforeRouteLeave(to, from, next) {
+    if(this.started) {
+      const confirmLeave = confirm('Are you sure? Your progress will be lost');
+      if(confirmLeave) {
+        next();
+      }
+    } else {
+      next();
+    }
   }
 }
 </script>
