@@ -5,14 +5,14 @@
         <p>Hello, {{ user.profile.firstName }}</p>
       </div>
       <div class="nav-links">
-        <router-link to="/">Home</router-link>
+        <router-link :to="{ name: 'home' }">Home</router-link>
         <template v-if="!isAuthenticated">
-          <router-link to="/login">Login</router-link>
-          <router-link to="/signup">Signup</router-link>
+          <router-link :to="{ name: 'login' }">Login</router-link>
+          <router-link :to="{ name: 'signup' }">Signup</router-link>
         </template>
         <template v-else>
-          <router-link to="/user">Profile</router-link>
-          <router-link to="/user/questionnaire">Questionnaire</router-link>
+          <router-link :to="{ name: 'profile'}">Profile</router-link>
+          <router-link :to="{ name: 'questionnaire' }">Questionnaire</router-link>
           <button 
             @click="handleLogout"
             type="button">

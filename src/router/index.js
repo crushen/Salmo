@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home'
 import Login from '../views/Login'
 import Signup from '../views/Signup'
-import ProfilePage from '../views/Profile'
+import Profile from '../views/Profile'
 import Questionnaire from '../views/Questionnaire'
 
 import firebase from 'firebase/app'
@@ -31,13 +31,13 @@ const routes = [
   },
   { 
     path: '/user', 
-    name: 'ProfilePage', 
-    component: ProfilePage,
+    name: 'profile', 
+    component: Profile,
     meta: { onlyAuthUser: true } 
   },
   { 
     path: '/user/questionnaire', 
-    name: 'Questionnaire', 
+    name: 'questionnaire', 
     component: Questionnaire,
     meta: { onlyAuthUser: true } 
   }
