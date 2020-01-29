@@ -1,20 +1,24 @@
 <template>
   <section>
  
-  <div 
-    v-if="!finished"
-    class="question">
-    <question :question="question" />
-    <div class="answer">
-      <answers 
-        :activeQuestion="activeQuestion" 
-        @nextQuestion="getQuestion"/> 
-    </div>
-  </div>
+    <button @click="startQuestionnaire">Start Questionnaire</button>
 
-  <div v-else>
-    <results />
-  </div>
+    <div v-if="started">
+      <div 
+        v-if="!finished"
+        class="question">
+        <question :question="question" />
+        <div class="answer">
+          <answers 
+            :activeQuestion="activeQuestion" 
+            @nextQuestion="getQuestion"/> 
+        </div>
+      </div>
+
+      <div v-else>
+        <results />
+      </div>
+    </div>
 
   </section>
 </template>
@@ -32,9 +36,10 @@ export default {
   },
   data() {
     return {
-      questions: this.$store.state.questions.items,
+      questions: [],
       question: '',
       activeQuestion: {},
+      started: false,
       finished: false,
 
       results: [
@@ -62,6 +67,10 @@ export default {
     }
   },
   methods:{
+    startQuestionnaire() {
+      this.started = true;
+      this.getQuestion();
+    },
     getQuestion(answer) {
       // Check if answer is Dog or Cat, and then filter questions 
       if(answer === 'Cat') {
@@ -86,8 +95,10 @@ export default {
       }
     }
   },
-  created(){
-    this.getQuestion();
+  created() {
+    console.log('created');
+    this.$store.dispatch('questions/getQuestions');
+    this.questions = this.$store.state.questions.items;
   }
 }
 </script>

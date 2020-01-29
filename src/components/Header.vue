@@ -11,7 +11,8 @@
           <router-link to="/signup">Signup</router-link>
         </template>
         <template v-else>
-          <router-link to="/users/me">Profile</router-link>
+          <router-link to="/user">Profile</router-link>
+          <router-link to="/user/questionnaire">Questionnaire</router-link>
           <button 
             @click="handleLogout"
             type="button">

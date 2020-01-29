@@ -4,6 +4,7 @@ import Home from '../views/Home'
 import Login from '../views/Login'
 import Signup from '../views/Signup'
 import ProfilePage from '../views/Profile'
+import Questionnaire from '../views/Questionnaire'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -29,9 +30,15 @@ const routes = [
     meta: { onlyGuestUser: true }
   },
   { 
-    path: '/users/me', 
+    path: '/user', 
     name: 'ProfilePage', 
     component: ProfilePage,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/user/questionnaire', 
+    name: 'Questionnaire', 
+    component: Questionnaire,
     meta: { onlyAuthUser: true } 
   }
 ]

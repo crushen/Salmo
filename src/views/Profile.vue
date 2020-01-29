@@ -6,8 +6,6 @@
       <p>Email: {{ user.email }}</p>
       <p>Email verified: {{ user.emailVerified }}</p>
 
-      <questionnaire />
-
     </div>
 
     <div v-else>
@@ -18,19 +16,12 @@
 </template>
 
 <script>
-import questionnaire from '@/components/questionnaire/Questionnaire';
 
 export default {
-  components: {
-    questionnaire
-  },
-  computed: {
-    user() {
-      return this.$store.state.auth.user;
+  data() {
+    return {
+      user: this.$store.state.auth.user
     }
-  },
-  created() {
-    this.$store.dispatch('questions/getQuestions');
   }
 }
 </script>
