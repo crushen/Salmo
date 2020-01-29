@@ -96,7 +96,6 @@ export default {
     }
   },
   created() {
-    console.log('created');
     this.$store.dispatch('questions/getQuestions');
     this.questions = this.$store.state.questions.items;
   }
