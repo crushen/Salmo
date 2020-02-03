@@ -1,7 +1,7 @@
 // import Vue from 'vue'
 // import firebase from 'firebase/app'
 // import 'firebase/auth'
-// import { db } from '@/db'
+ import { db } from '@/db'
 
 const questions = [
   {
@@ -148,6 +148,13 @@ export default {
   actions: {
     getQuestions({commit}) {
       commit('setQuestions', questions);
+    },
+    setUserProfileResults(context, {user, results}) {
+      return db
+      .collection('profiles')
+      .doc(user.uid)
+      .set(results)
+      // TODO: This works, but rewrites name data and goes a bit fucky.. needs work
     }
   },
   mutations: {
