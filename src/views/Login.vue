@@ -4,7 +4,7 @@
     <form>
       <div class="field">
         <input 
-          v-model="form.email"
+          v-model.trim="form.email"
           type="email"
           placeholder="Email"
           autocomplete="email">
@@ -20,7 +20,7 @@
 
       <div class="field">
         <input 
-          v-model="form.password"
+          v-model.trim="form.password"
           type="password"
           placeholder="Password"
           autocomplete="current-password">
