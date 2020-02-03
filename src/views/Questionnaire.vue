@@ -96,6 +96,7 @@ export default {
         // If no questions left, commit results to sotre and show results page
         this.$store.commit('questions/setResults', this.results);
         this.finished = true;
+        // TODO: Add results to user profile in Firebase
       }
     }
   },

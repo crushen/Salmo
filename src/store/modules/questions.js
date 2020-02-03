@@ -155,6 +155,7 @@ export default {
       state.items = questions;
     },
     setResults(state, answers) {
+      // TODO: Add results to user profile in Firebase
       state.results.forEach(result => {
         answers.forEach(answer => {
           if(result.name === answer.name) {
