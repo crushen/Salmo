@@ -71,6 +71,11 @@
           </span>
         </div>
       </div>
+
+      <div v-if="error">
+        {{ errorMsg }}
+      </div>
+
       <button 
         @click="onSignup"
         type="button">
@@ -92,7 +97,9 @@ export default {
         email: '',
         password: '',
         confirmPassword: ''
-      }
+      },
+      errorMsg: '',
+      error: false
     }
   },
   validations: {
@@ -137,8 +144,13 @@ export default {
           })
           this.$router.push('/')
           this.$store.dispatch('auth/sendEmailVerification')
-        }).catch(errorMessage => {
-          console.log(errorMessage);
+        })
+        .catch(errorMessage => {
+          this.errorMsg = errorMessage;
+          this.error = true;
+          setTimeout(() => {
+            this.error = false;
+          }, 3000);
         })
     }
   }

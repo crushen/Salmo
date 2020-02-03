@@ -17,6 +17,7 @@
           </span>
         </div>
       </div>
+
       <div class="field">
         <input 
           v-model="form.password"
@@ -29,6 +30,11 @@
           </span>
         </div>
       </div>
+
+      <div v-if="error">
+        {{ errorMsg }}
+      </div>
+
       <button 
         @click="onLogin"
         type="button">
@@ -47,7 +53,9 @@ export default {
       form: {
         email: '',
         password: ''
-      }
+      },
+      errorMsg: '',
+      error: false
     }
   },
   validations: {
@@ -75,7 +83,11 @@ export default {
           alert('You have logged in')
         })
         .catch(errorMessage => {
-          alert(errorMessage);
+          this.errorMsg = errorMessage;
+          this.error = true;
+          setTimeout(() => {
+            this.error = false;
+          }, 3000);
         })
     }
   }
