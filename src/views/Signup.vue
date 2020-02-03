@@ -4,7 +4,7 @@
     <form>
       <div class="field">
         <input 
-          v-model="form.firstName"
+          v-model.trim="form.firstName"
           type="text"
           placeholder="First Name">
         <div v-if="$v.form.firstName.$error">
@@ -16,7 +16,7 @@
 
       <div class="field">
         <input 
-          v-model="form.lastName"
+          v-model.trim="form.lastName"
           type="text"
           placeholder="Last Name">
         <div v-if="$v.form.lastName.$error">
@@ -28,7 +28,7 @@
 
       <div class="field">
         <input 
-          v-model="form.email"
+          v-model.trim="form.email"
           type="email"
           placeholder="Email"
           autocomplete="email">
@@ -44,7 +44,7 @@
 
       <div class="field">
         <input 
-          v-model="form.password"
+          v-model.trim="form.password"
           type="password"
           placeholder="Password"
           autocomplete="current-password">
@@ -62,7 +62,7 @@
 
       <div class="field">
         <input 
-          v-model="form.confirmPassword"
+          v-model.trim="form.confirmPassword"
           type="password"
           placeholder="Confirm Password">
         <div v-if="$v.form.confirmPassword.$error">
