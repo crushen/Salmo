@@ -94,12 +94,8 @@ export default {
         this.question = this.activeQuestion.question;
       } else {
         // If no questions left, commit results to sotre and show results page
-        this.$store.commit('questions/setResults', this.results);
+        this.$store.dispatch('questions/getResults', this.results);
         this.finished = true;
-        this.$store.dispatch('questions/setUserProfileResults', {
-          user: this.$store.state.auth.user,
-          results: {...[this.results]} // TODO: This works, but rewrites name data and goes a bit fucky.. needs work
-        })
       }
     }
   },

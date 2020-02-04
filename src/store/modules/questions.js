@@ -140,7 +140,13 @@ export default {
         name: 'Baldrick',
         score: 0
       }
-    ]
+    ],
+    filteredResults: {
+      user: '',
+      topResult: '',
+      secondResult: '',
+      thirdResult: ''
+    }
   },
   getters: {
 
@@ -149,12 +155,13 @@ export default {
     getQuestions({commit}) {
       commit('setQuestions', questions);
     },
-    setUserProfileResults(context, {user, results}) {
-      return db
-      .collection('profiles')
-      .doc(user.uid)
-      .set(results)
-      // TODO: This works, but rewrites name data and goes a bit fucky.. needs work
+    getResults(context, results) {
+      // First set state results
+      context.commit('setResults', results);
+      // Then use filtered results for questionnaireResults collection, and add reference to the user
+      context.state.filteredResults.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
+      return db.collection('questionnaireResults').add(context.state.filteredResults);
+      // TODO: After result is created, add result to user profile on Firestore and locally in Vue store
     }
   },
   mutations: {
@@ -162,7 +169,7 @@ export default {
       state.items = questions;
     },
     setResults(state, answers) {
-      // TODO: Add results to user profile in Firebase
+      // Set state results from questionnaire answers
       state.results.forEach(result => {
         answers.forEach(answer => {
           if(result.name === answer.name) {
@@ -170,6 +177,12 @@ export default {
           }
         });
       });
+      // Sort results for highest scores
+      const sortedResults = state.results.sort((a, b) => b.score - a.score);
+      // Assign top 3 results in filteredResults
+      state.filteredResults.topResult = sortedResults[0].name;
+      state.filteredResults.secondResult = sortedResults[1].name;
+      state.filteredResults.thirdResult = sortedResults[2].name;
     }
   }
 }
