@@ -160,8 +160,17 @@ export default {
       context.commit('setResults', results);
       // Then use filtered results for questionnaireResults collection, and add reference to the user
       context.state.filteredResults.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
-      return db.collection('questionnaireResults').add(context.state.filteredResults);
-      // TODO: After result is created, add result to user profile on Firestore and locally in Vue store
+      return db.collection('questionnaireResults')
+        .add(context.state.filteredResults)
+
+        // Not working?? Maybe need to do the firebase stuff first 
+        // .then(docRef => {
+        //   context.commit('auth/addResultsToUser', docRef.id, {root: true})
+        //   return true
+        // }) 
+
+
+      // TODO: After result is created, add result to user profile on Firestore
     }
   },
   mutations: {
