@@ -17,6 +17,11 @@ exports.addResultsToProfile = functions.firestore
     db.collection('profiles')
       .doc(addedResults.user.id)
       .update({
-        questionnaireResults: admin.firestore.FieldValue.arrayUnion(resultsId)
+        questionnaireResults: admin.firestore.FieldValue.arrayUnion({
+          id: resultsId,
+          topResult: addedResults.topResult,
+          secondResult: addedResults.secondResult,
+          thirdResult: addedResults.thirdResult,
+        })
       })
   })

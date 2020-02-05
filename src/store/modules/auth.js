@@ -71,8 +71,8 @@ export default {
       // state.user.profile = profile
       Vue.set(state.user, 'profile', profile)
     },
-    addResultsToUser(state, resultsId) {
-      state.user.profile.questionnaireResults.push(resultsId);
+    addResultsToUser(state, results) {
+      state.user.profile.questionnaireResults.push(results);
     }
   }
 }

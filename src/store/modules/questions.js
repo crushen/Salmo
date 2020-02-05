@@ -163,9 +163,10 @@ export default {
       context.state.filteredResults.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
       return db.collection('questionnaireResults')
         .add(context.state.filteredResults)
-        // Add questionnaireResults ID to local user profile
+        // Add filtered questionnaireResults and ID to local user profile
         .then(docRef => {
-          context.commit('auth/addResultsToUser', docRef.id, {root: true})
+          context.state.filteredResults.id = docRef.id;
+          context.commit('auth/addResultsToUser', context.state.filteredResults, {root: true})
           return true
         })
     }
