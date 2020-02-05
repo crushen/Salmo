@@ -1,11 +1,10 @@
 <template>
   <div>
     <p>Quiz done</p>
-    <p
-      v-for="(result, index) in filteredResults"
-      :key="index">
-      {{ result.name }}: {{ result.score }}
-    </p>
+
+    <p>Top Result: {{ results.topResult }}</p>
+    <p>Second Result: {{ results.secondResult }}</p>
+    <p>Third Result: {{ results.thirdResult }}</p>
   </div>
 </template>
 
@@ -13,18 +12,18 @@
 export default {
   data() {
     return {
-      results: this.$store.state.questions.results,
-      filteredResults: {}
+      results: this.$store.state.questions.filteredResults
+      //filteredResults: {}
     }
-  },
-  methods: {
-    handleFilter() {
-      this.filteredResults = this.results.filter(result => result.score > 0);
-    }
-  },
-  created() {
-    this.handleFilter();
   }
+  // methods: {
+  //   handleFilter() {
+  //     this.filteredResults = this.results.filter(result => result.score > 0);
+  //   }
+  // },
+  // created() {
+  //   this.handleFilter();
+  // }
 }
 </script>
 
