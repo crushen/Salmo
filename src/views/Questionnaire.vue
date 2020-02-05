@@ -86,6 +86,13 @@ export default {
       this.results.forEach(result => {
         if(answer === result.name) {
           result.score++;
+          // Check if answer is array, and if yes then +1 to all results that match array items
+        } else if(Array.isArray(answer)) {
+          answer.forEach((item) => {
+            if(item === result.name) {
+              result.score++;
+            }
+          })
         }
       });
       // If there are still questions left, show following question

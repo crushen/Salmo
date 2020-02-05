@@ -5,6 +5,7 @@
 
 const questions = [
   {
+    // 'Core Question' - Will define whether you're asked questions about cats or dogs
     question: 'What kind of bebe do you relate to?',
     answers: [
       {
@@ -18,6 +19,38 @@ const questions = [
     ]
   },
   {
+    // These are questions that are relevant for both cats and dogs and will show for either
+    isCat: true,
+    isDog: true,
+    question: 'What are your toe beans like?',
+    answers: [
+      {
+        text: 'Pink and soft',
+        value: ['Zora', 'Rito']
+      },
+      {
+        text: 'Black and rough',
+        value: ['Minnie', 'Baldrick', 'Squirrel']
+      }
+    ]
+  },  
+  {
+    isCat: true,
+    isDog: true,
+    question: 'What do you do at 3am?',
+    answers: [
+      {
+        text: 'Run around like crazy',
+        value: ['Zora', 'Rito']
+      },
+      {
+        text: 'Sleep nice and snug',
+        value: ['Minnie', 'Baldrick', 'Squirrel']
+      }
+    ]
+  },
+  {
+    // Only these will show when answered Cat
     isCat: true,
     question: 'What colour is de most bootiful?',
     answers: [
@@ -60,6 +93,7 @@ const questions = [
     ]
   },
   {
+    // Only these will show when answered Dog
     isDog: true,
     question: 'What colour is de most bootiful?',
     answers: [
