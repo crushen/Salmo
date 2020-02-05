@@ -159,18 +159,15 @@ export default {
       // First set state results
       context.commit('setResults', results);
       // Then use filtered results for questionnaireResults collection, and add reference to the user
+      // (There is a firebase function set up to add questionnaireResults ID to user profile)
       context.state.filteredResults.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
       return db.collection('questionnaireResults')
         .add(context.state.filteredResults)
-
-        // Not working?? Maybe need to do the firebase stuff first 
-        // .then(docRef => {
-        //   context.commit('auth/addResultsToUser', docRef.id, {root: true})
-        //   return true
-        // }) 
-
-
-      // TODO: After result is created, add result to user profile on Firestore
+        // Add questionnaireResults ID to local user profile
+        .then(docRef => {
+          context.commit('auth/addResultsToUser', docRef.id, {root: true})
+          return true
+        })
     }
   },
   mutations: {
