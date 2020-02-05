@@ -6,6 +6,14 @@
       <p>Email: {{ user.email }}</p>
       <p>Email verified: {{ user.emailVerified }}</p>
 
+      <div 
+        v-if="mostRecentResult"
+        class="margin">
+        <p>Top Result: {{ mostRecentResult.topResult }}</p>
+        <p>Second Result: {{ mostRecentResult.secondResult }}</p>
+        <p>Third Result: {{ mostRecentResult.thirdResult }}</p>
+      </div>
+
     </div>
 
     <div v-else>
@@ -22,10 +30,17 @@ export default {
     return {
       user: this.$store.state.auth.user
     }
+  },
+  computed: {
+    mostRecentResult() {
+      return this.user.profile.questionnaireResults.slice(-1)[0];
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.margin {
+  margin-top: 50px;
+}
 </style>
