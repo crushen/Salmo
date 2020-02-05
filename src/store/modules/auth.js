@@ -73,7 +73,6 @@ export default {
     },
     addResultsToUser(state, resultsId) {
       state.user.profile.questionnaireResults.push(resultsId);
-      console.log(state.user.profile);
     }
   }
 }

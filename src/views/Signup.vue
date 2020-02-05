@@ -139,7 +139,8 @@ export default {
             userProfile: {
               firstName: this.form.firstName,
               lastName: this.form.lastName,
-              user: user.uid
+              user: user.uid,
+              questionnaireResults: []
             }
           })
           this.$router.push('/')
