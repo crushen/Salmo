@@ -33,7 +33,22 @@ const questions = [
         value: ['Minnie', 'Baldrick', 'Squirrel']
       }
     ]
-  },  
+  },
+  {
+    isCat: true,
+    isDog: true,
+    question: 'What sound do you make?',
+    answers: [
+      {
+        text: 'Meow',
+        value: ['Zora', 'Rito']
+      },
+      {
+        text: 'Bark',
+        value: ['Minnie', 'Baldrick', 'Squirrel']
+      }
+    ]
+  },    
   {
     isCat: true,
     isDog: true,
