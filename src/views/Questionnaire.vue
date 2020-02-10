@@ -7,7 +7,7 @@
       Start Questionnaire
     </button>
 
-    <div v-if="started">
+    <div v-else>
       <div 
         v-if="!finished"
         class="question">
@@ -18,10 +18,10 @@
             @nextQuestion="getQuestion"/> 
         </div>
       </div>
+    </div>
 
-      <div v-else>
-        <results />
-      </div>
+    <div v-if="finished">
+      <results />
     </div>
 
   </section>
@@ -72,8 +72,15 @@ export default {
   },
   methods:{
     startQuestionnaire() {
+      this.finished = false;
       this.started = true;
+      this.getQuestions();
       this.getQuestion();
+    },
+    getQuestions() {
+      this.$store.dispatch('questions/getQuestions');
+      const storeArray = this.$store.state.questions.items;
+      this.questions = storeArray.slice(0, storeArray.length);
     },
     getQuestion(answer) {
       // Check if answer is Dog or Cat, and then filter questions 
@@ -102,14 +109,13 @@ export default {
       } else {
         // If no questions left, commit results to sotre and show results page
         this.$store.dispatch('questions/getResults', this.results);
+        this.started = false;
         this.finished = true;
       }
     }
   },
   created() {
-    this.$store.dispatch('questions/getQuestions');
-    const storeArray = this.$store.state.questions.items;
-    this.questions = storeArray.slice(0, storeArray.length);
+    this.getQuestions();
   },
   beforeRouteLeave(to, from, next) {
     if(this.started) {
@@ -138,5 +144,9 @@ section {
 
 .answer {
   margin-top: 16px;
+}
+
+button {
+  margin-bottom: 50px;
 }
 </style>
