@@ -4,6 +4,7 @@
 
     <div class="date-picker">
       <v-date-picker
+        :max-date="maxDate"
         v-model="date" />
     </div>
 
@@ -26,6 +27,13 @@ export default {
     return {
       profileToUpdate: {...this.userProfile},
       date: new Date()
+    }
+  },
+  computed: {
+    maxDate() {
+      const underFourYears = new Date();
+      underFourYears.setFullYear(underFourYears.getFullYear() - 4);
+      return underFourYears;
     }
   },
   watch: {
