@@ -11,7 +11,7 @@
 
       <ask-country 
         v-if="!askDOB"
-        @updateProfile="updateProfile"
+        @submitCountry="submitCountry"
         :userProfile="user.profile" />
 
       <div v-else>
@@ -88,13 +88,14 @@ export default {
     }
   },
   methods:{
-    // Update user profile with country
+    submitCountry(profile) {
+      // Update user profile with country
+      this.updateProfile(profile);
+      // Ask DOB
+      this.askDOB = true;
+    },
     updateProfile(profile) {
-      this.$store.dispatch('auth/updateProfile', profile)
-        // Ask DOB
-        .then(() => {
-          this.askDOB = true;
-        })
+      this.$store.dispatch('auth/updateProfile', profile);
     },
     startQuestionnaire() {
       this.finished = false;

@@ -16,7 +16,7 @@
     </div>
 
     <button
-      @click="updateProfile">
+      @click="submitCountry">
       Next
     </button> 
   </div>
@@ -38,8 +38,8 @@ export default {
     }
   },
   methods: {
-    updateProfile() {
-      this.$emit('updateProfile', {...this.profileToUpdate});
+    submitCountry() {
+      this.$emit('submitCountry', {...this.profileToUpdate});
     }
   }
 }
