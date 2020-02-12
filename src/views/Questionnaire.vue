@@ -8,19 +8,18 @@
     </button>
 
     <div v-else>
-
       <ask-country 
-        v-if="!askDOB"
+        v-if="!askDOB && !startQuestions"
         @submitCountry="submitCountry"
         :userProfile="user.profile" />
 
       <ask-age
-        v-else
+        v-if="askDOB"
+        @submitAge="submitAge"
         :userProfile="user.profile" />
 
-
-      <!-- <div 
-        v-if="!finished"
+      <div 
+        v-if="startQuestions"
         class="question">
         <question :question="question" />
         <div class="answer">
@@ -28,9 +27,7 @@
             :activeQuestion="activeQuestion" 
             @nextQuestion="getQuestion"/> 
         </div>
-      </div> -->
-
-
+      </div>
     </div>
 
     <div v-if="finished">
@@ -50,19 +47,20 @@ import results from '@/components/questionnaire/Results';
 export default {
   components: {
     askCountry,
-    askAge
-    // question,
-    // answers,
-    // results
+    askAge,
+    question,
+    answers,
+    results
   },
   data() {
     return {
       user: this.$store.state.auth.user,
+      started: false,
       askDOB: false,
+      startQuestions: false,
       questions: [],
       question: '',
       activeQuestion: {},
-      started: false,
       finished: false,
 
       results: [
@@ -93,8 +91,13 @@ export default {
     submitCountry(profile) {
       // Update user profile with country
       this.updateProfile(profile);
-      // Ask DOB
       this.askDOB = true;
+    },
+    submitAge(profile) {
+      // Update user profile with age
+      this.updateProfile(profile);
+      this.startQuestions = true;
+      this.askDOB = false;
     },
     updateProfile(profile) {
       this.$store.dispatch('auth/updateProfile', profile);
