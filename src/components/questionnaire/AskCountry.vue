@@ -4,7 +4,7 @@
 
     <div>
       <select 
-        v-model="country"
+        v-model="profileToUpdate.country"
         name="Country">
         <option
           v-for="country in countries"
@@ -16,7 +16,7 @@
     </div>
 
     <button
-      @click="askDOB">
+      @click="updateProfile">
       Next
     </button> 
   </div>
@@ -24,15 +24,22 @@
 
 <script>
 export default {
+  props: {
+    userProfile: {
+      required: true,
+      type: Object
+    }
+  },
   data() {
     return {
+      profileToUpdate: {...this.userProfile},
       countries: ['China', 'Taiwan', 'Turkey', 'United States of America', 'United Kingdom'],
       country: ''
     }
   },
   methods: {
-    askDOB() {
-      this.$emit('askDOB', this.country);
+    updateProfile() {
+      this.$emit('updateProfile', {...this.profileToUpdate});
     }
   }
 }

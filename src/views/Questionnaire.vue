@@ -10,8 +10,9 @@
     <div v-else>
 
       <ask-country 
-        v-if="!country"
-        @askDOB="askDOB" />
+        v-if="!askDOB"
+        @updateProfile="updateProfile"
+        :userProfile="user.profile" />
 
       <div v-else>
         DOB
@@ -54,8 +55,8 @@ export default {
   },
   data() {
     return {
-      country: '',
-      DOB: '',
+      user: this.$store.state.auth.user,
+      askDOB: false,
       questions: [],
       question: '',
       activeQuestion: {},
@@ -87,9 +88,13 @@ export default {
     }
   },
   methods:{
-    askDOB(country) {
-      this.country = country;
-      console.log(this.country);
+    // Update user profile with country
+    updateProfile(profile) {
+      this.$store.dispatch('auth/updateProfile', profile)
+        // Ask DOB
+        .then(() => {
+          this.askDOB = true;
+        })
     },
     startQuestionnaire() {
       this.finished = false;
