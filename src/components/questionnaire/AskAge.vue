@@ -21,19 +21,9 @@ export default {
   },
   data() {
     return {
-      profileToUpdate: {...this.userProfile},
-      date: 1,
-      month: 'January',
-      year: 
-      age: null
-
+      profileToUpdate: {...this.userProfile}
     }
   },
-  computed() {
-    date() {
-      return newDate.getDate();
-    }
-  }
   methods: {
     // submitAge() {
     //   this.$emit('submitCountry', {...this.profileToUpdate});
