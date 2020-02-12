@@ -14,9 +14,9 @@
         @submitCountry="submitCountry"
         :userProfile="user.profile" />
 
-      <div v-else>
-        DOB
-      </div>
+      <ask-age
+        v-else
+        :userProfile="user.profile" />
 
 
       <!-- <div 
@@ -42,13 +42,15 @@
 
 <script>
 import askCountry from '@/components/questionnaire/AskCountry';
+import askAge from '@/components/questionnaire/AskAge';
 import question from '@/components/questionnaire/Question';
 import answers from '@/components/questionnaire/Answers';
 import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
-    askCountry
+    askCountry,
+    askAge
     // question,
     // answers,
     // results
