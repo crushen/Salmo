@@ -3,12 +3,14 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import Vuelidate from 'vuelidate';
+import VCalendar from 'v-calendar';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
 Vue.config.productionTip = false;
 Vue.use(Vuelidate);
+Vue.use(VCalendar);
 
 let app;
 firebase.auth().onAuthStateChanged(async user => {
