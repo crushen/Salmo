@@ -8,7 +8,17 @@
     </button>
 
     <div v-else>
-      <div 
+
+      <ask-country 
+        v-if="!country"
+        @askDOB="askDOB" />
+
+      <div v-else>
+        DOB
+      </div>
+
+
+      <!-- <div 
         v-if="!finished"
         class="question">
         <question :question="question" />
@@ -17,7 +27,9 @@
             :activeQuestion="activeQuestion" 
             @nextQuestion="getQuestion"/> 
         </div>
-      </div>
+      </div> -->
+
+
     </div>
 
     <div v-if="finished">
@@ -28,18 +40,22 @@
 </template>
 
 <script>
+import askCountry from '@/components/questionnaire/AskCountry';
 import question from '@/components/questionnaire/Question';
 import answers from '@/components/questionnaire/Answers';
 import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
-    question,
-    answers,
-    results
+    askCountry
+    // question,
+    // answers,
+    // results
   },
   data() {
     return {
+      country: '',
+      DOB: '',
       questions: [],
       question: '',
       activeQuestion: {},
@@ -71,6 +87,10 @@ export default {
     }
   },
   methods:{
+    askDOB(country) {
+      this.country = country;
+      console.log(this.country);
+    },
     startQuestionnaire() {
       this.finished = false;
       this.started = true;
