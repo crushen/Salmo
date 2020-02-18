@@ -2,12 +2,12 @@
   <section>
  
     <button 
-      v-if="!started"
+      v-if="introStage"
       @click="startQuestionnaire">
       Start Questionnaire
     </button>
 
-    <div v-else>
+    <div v-if="questionsStage">
       <core-questions
         v-if="buildProfile"
         :userProfile="user.profile"
@@ -16,16 +16,14 @@
       <div 
         v-else
         class="question">
-        <question :question="question" />
-        <div class="answer">
-          <answers 
-            :activeQuestion="activeQuestion" 
-            @nextQuestion="getQuestion"/> 
-        </div>
+        <question 
+          :question="questions[currentQuestion]"
+          @answer="handleAnswer" />
+
       </div>
     </div>
 
-    <div v-if="finished">
+    <div v-if="resultsStage">
       <results />
     </div>
 
@@ -35,26 +33,24 @@
 <script>
 import coreQuestions from '@/components/questionnaire/CoreQuestions'
 import question from '@/components/questionnaire/Question';
-import answers from '@/components/questionnaire/Answers';
 import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
     coreQuestions,
     question,
-    answers,
     results
   },
   data() {
     return {
       user: this.$store.state.auth.user,
-      started: false,
+      introStage: true,
+      questionsStage: false,
       buildProfile: false,
+      resultsStage: false,
       questions: [],
-      question: '',
-      activeQuestion: {},
-      finished: false,
-
+      currentQuestion: 0,
+      answers: [],
       results: [
         {
           name: 'Zora',
@@ -85,18 +81,17 @@ export default {
       this.buildProfile = false;
     },
     startQuestionnaire() {
-      this.finished = false;
+      this.introStage = false;
+      this.questionsStage = true;
       this.buildProfile = true;
-      this.started = true;
-      this.getQuestions();
-      this.getQuestion();
     },
     getQuestions() {
       this.$store.dispatch('questions/getQuestions');
-      const storeArray = this.$store.state.questions.items;
-      this.questions = storeArray.slice(0, storeArray.length);
+      this.questions = this.$store.state.questions.items;
+      // const storeArray = this.$store.state.questions.items;
+      // this.questions = storeArray.slice(0, storeArray.length);
     },
-    getQuestion(answer) {
+    handleAnswer(answer) {
       // Check if answer is Dog or Cat, and then filter questions 
       if(answer === 'Cat') {
         this.questions = this.questions.filter(question => question.isCat);
@@ -116,15 +111,15 @@ export default {
           })
         }
       });
-      // If there are still questions left, show following question
-      if(this.questions[0]) {
-        this.activeQuestion = this.questions.shift();
-        this.question = this.activeQuestion.question;
-      } else {
-        // If no questions left, commit results to sotre and show results page
+      // If no questions left, commit results to sotre and show results page
+      if((this.currentQuestion + 1) === this.questions.length) {
         this.$store.dispatch('questions/getResults', this.results);
-        this.started = false;
-        this.finished = true;
+        this.introStage = false;
+        this.questionsStage = false;
+        this.resultsStage = true;
+        // If there are still questions left, show following question
+      } else {
+        this.currentQuestion++;
       }
     }
   },
@@ -132,7 +127,7 @@ export default {
     this.getQuestions();
   },
   beforeRouteLeave(to, from, next) {
-    if(this.started) {
+    if(this.questionsStage) {
       const confirmLeave = confirm('Are you sure? Your progress will be lost');
       if(confirmLeave) {
         next();
