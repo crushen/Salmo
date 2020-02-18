@@ -21,7 +21,8 @@
           :questions="questions"
           :currentQuestion="currentQuestion"
           @submitAnswer="handleAnswer" 
-          @previousQuestion="previousQuestion" />
+          @previousQuestion="previousQuestion"
+          @backToCoreQuestions="backToCoreQuestions" />
 
       </div>
     </div>
@@ -137,6 +138,12 @@ export default {
           result.score--;
         }
       })
+    },
+    backToCoreQuestions() {
+      this.buildProfile = true;
+      this.results.forEach(result => {
+        result.score = 0;
+      })
     }
   },
   created() {
@@ -164,14 +171,5 @@ section {
   width: 50%;
   margin: 60px auto 0 auto;
   padding: 20px;
-  border: 2px solid pink;
-}
-
-.answer {
-  margin-top: 16px;
-}
-
-button {
-  margin-bottom: 50px;
 }
 </style>

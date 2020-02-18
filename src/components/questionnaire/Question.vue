@@ -14,11 +14,19 @@
           {{ answer.text }}
 
       </div>
+      <!-- Previous question button shows after first question answered -->
       <button
         v-if="currentQuestion > 0"
         @click="previousQuestion">
         Previous
-      </button>     
+      </button>
+      <!-- If on first question, previous button goes back to last core question -->
+      <button 
+        v-else
+        @click="backToCoreQuestions">
+        Redo Core Questions
+      </button>  
+      <!-- Previous question button shows after first question answered --> 
       <button
         @click="submitAnswer">
         Next
@@ -46,6 +54,9 @@ export default {
     },
     previousQuestion() {
       this.$emit('previousQuestion');
+    },
+    backToCoreQuestions() {
+      this.$emit('backToCoreQuestions');
     }
   }
 }
