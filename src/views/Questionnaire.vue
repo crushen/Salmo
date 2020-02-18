@@ -8,18 +8,13 @@
     </button>
 
     <div v-else>
-      <ask-country 
-        v-if="!askDOB && !startQuestions"
-        @submitCountry="submitCountry"
-        :userProfile="user.profile" />
-
-      <ask-age
-        v-if="askDOB"
-        @submitAge="submitAge"
-        :userProfile="user.profile" />
+      <core-questions
+        v-if="buildProfile"
+        :userProfile="user.profile"
+        @submitProfile=submitProfile />
 
       <div 
-        v-if="startQuestions"
+        v-else
         class="question">
         <question :question="question" />
         <div class="answer">
@@ -38,16 +33,14 @@
 </template>
 
 <script>
-import askCountry from '@/components/questionnaire/AskCountry';
-import askAge from '@/components/questionnaire/AskAge';
+import coreQuestions from '@/components/questionnaire/CoreQuestions'
 import question from '@/components/questionnaire/Question';
 import answers from '@/components/questionnaire/Answers';
 import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
-    askCountry,
-    askAge,
+    coreQuestions,
     question,
     answers,
     results
@@ -56,8 +49,7 @@ export default {
     return {
       user: this.$store.state.auth.user,
       started: false,
-      askDOB: false,
-      startQuestions: false,
+      buildProfile: false,
       questions: [],
       question: '',
       activeQuestion: {},
@@ -88,22 +80,13 @@ export default {
     }
   },
   methods:{
-    submitCountry(profile) {
-      // Update user profile with country
-      this.updateProfile(profile);
-      this.askDOB = true;
-    },
-    submitAge(profile) {
-      // Update user profile with age
-      this.updateProfile(profile);
-      this.startQuestions = true;
-      this.askDOB = false;
-    },
-    updateProfile(profile) {
+    submitProfile(profile) {
       this.$store.dispatch('auth/updateProfile', profile);
+      this.buildProfile = false;
     },
     startQuestionnaire() {
       this.finished = false;
+      this.buildProfile = true;
       this.started = true;
       this.getQuestions();
       this.getQuestion();
