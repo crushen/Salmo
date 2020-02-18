@@ -18,7 +18,10 @@
         class="question">
         <question 
           :question="questions[currentQuestion]"
-          @answer="handleAnswer" />
+          :questions="questions"
+          :currentQuestion="currentQuestion"
+          @submitAnswer="handleAnswer" 
+          @previousQuestion="previousQuestion" />
 
       </div>
     </div>
@@ -49,8 +52,8 @@ export default {
       buildProfile: false,
       resultsStage: false,
       questions: [],
-      currentQuestion: 0,
       answers: [],
+      currentQuestion: 0,
       results: [
         {
           name: 'Zora',
@@ -104,7 +107,7 @@ export default {
           result.score++;
           // Check if answer is array, and if yes then +1 to all results that match array items
         } else if(Array.isArray(answer)) {
-          answer.forEach((item) => {
+          answer.forEach(item => {
             if(item === result.name) {
               result.score++;
             }
@@ -120,7 +123,20 @@ export default {
         // If there are still questions left, show following question
       } else {
         this.currentQuestion++;
+        this.answers.push(answer);
       }
+    },
+    previousQuestion() {
+      // Go back to previous question
+      this.currentQuestion--;
+      // Remove most recent result from answers
+      const previousResult = this.answers.pop();
+      this.results.forEach(result => {
+        // If the most recent result matches name in results, -1 from score
+        if(previousResult === result.name) {
+          result.score--;
+        }
+      })
     }
   },
   created() {

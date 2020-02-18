@@ -15,7 +15,11 @@
 
       </div>
       <button
-        v-if="selected"
+        v-if="currentQuestion > 0"
+        @click="previousQuestion">
+        Previous
+      </button>     
+      <button
         @click="submitAnswer">
         Next
       </button>
@@ -26,7 +30,9 @@
 <script>
 export default {
   props: {
-    question: { type: Object, required: true }
+    question: { type: Object, required: true },
+    questions: { type: Array, required: true },
+    currentQuestion: { type: Number, required: true }
   },
   data () {
     return {
@@ -35,8 +41,11 @@ export default {
   },
   methods: {
     submitAnswer() {
-      this.$emit('answer', this.selected);
+      this.$emit('submitAnswer', this.selected);
       this.selected = null;
+    },
+    previousQuestion() {
+      this.$emit('previousQuestion');
     }
   }
 }
