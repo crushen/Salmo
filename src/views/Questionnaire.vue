@@ -20,9 +20,8 @@
           :question="questions[currentQuestion]"
           :questions="questions"
           :currentQuestion="currentQuestion"
-          @submitAnswer="handleAnswer" 
-          @previousQuestion="previousQuestion"
-          @backToCoreQuestions="backToCoreQuestions" />
+          @submitAnswer="handleAnswer" />
+          <!-- @previousQuestion="previousQuestion" backToCoreQuestions="backToCoreQuestions" -->
 
       </div>
     </div>
@@ -80,51 +79,70 @@ export default {
       }
     },
     handleAnswer(answer) {
-      if(this.user.profile.age < 18) {
-        if(answer === 'T4 Child Student Visa') {
-          this.result.recommendedVisa = answer;
-          this.finishQuestionnaire();
-        } else if(answer === 'Family') { 
+      switch(answer) {
+        // Adult and Child
+        case 'Work':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.isWork);
+          break;
+        case 'Business':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.isBusiness);
+          break;
+        case 'Family':
+          this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isFamily);
-        }
+          break;
+        case 'Study':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.isStudy);
+          break;
+        // Child questions
+        case 'Adult Application':
+          this.currentQuestion = -1;
+          this.$store.dispatch('questions/getQuestions');
+          this.questions = this.$store.state.questions.items;
+          this.questions = this.questions.filter(question => question.isAdult);
+          break;
+        case 'T4 Child Student Visa':
+          this.finishQuestionnaire(answer);
+          break;
+        case 'Dependent Visa':
+          this.finishQuestionnaire(answer);
+          break;
+        case 'Family Visa':
+          this.finishQuestionnaire(answer);
+          break;
+        // Adult questions
       }
 
-
-
-
-      // If no questions left, commit results to sotre and show results page
-      if((this.currentQuestion + 1) === this.questions.length) {
-        this.$store.dispatch('questions/getResults', this.result);
-        this.introStage = false;
-        this.questionsStage = false;
-        this.resultsStage = true;
-        // If there are still questions left, show following question
-      } else {
-        this.currentQuestion++;
-        this.answers.push(answer);
-      }
+      this.currentQuestion++;
     },
-    previousQuestion() {
-      // Go back to previous question
-      this.currentQuestion--;
-      // Remove most recent result from answers
-      const previousResult = this.answers.pop();
-      this.results.forEach(result => {
-        // If the most recent result matches name in results, -1 from score
-        if(previousResult === result.name) {
-          result.score--;
-        }
-      })
-    },
-    backToCoreQuestions() {
-      this.buildProfile = true;
-      this.results.forEach(result => {
-        result.score = 0;
-      })
-    },
-    finishQuestionnaire() {
-      this.currentQuestion = this.questions.length - 1;
+    finishQuestionnaire(answer) {
+      this.result.recommendedVisa = answer;
+      this.$store.dispatch('questions/getResults', this.result);
+      this.introStage = false;
+      this.questionsStage = false;
+      this.resultsStage = true;
     }
+    // previousQuestion() {
+    //   // Go back to previous question
+    //   this.currentQuestion--;
+    //   // Remove most recent result from answers
+    //   const previousResult = this.answers.pop();
+    //   this.results.forEach(result => {
+    //     // If the most recent result matches name in results, -1 from score
+    //     if(previousResult === result.name) {
+    //       result.score--;
+    //     }
+    //   })
+    // },
+    // backToCoreQuestions() {
+    //   this.buildProfile = true;
+    //   this.results.forEach(result => {
+    //     result.score = 0;
+    //   })
+    // },
   },
   created() {
     this.getQuestions();
