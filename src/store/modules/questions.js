@@ -8,7 +8,16 @@ const questions = [
   {
     isChild: true,
     question: 'Will you be over 18 at the time of application?',
-    answers: ['Yes', 'No']
+    answers: [
+      {
+        text: 'Yes',
+        value: 'Adult Application'
+      },
+      {
+        text: 'No',
+        value: 'Child Application'
+      }
+    ]
   },
   {
     isChild: true,
@@ -43,13 +52,78 @@ const questions = [
   {
     isAdult: true,
     question: 'Why do you want to live in the UK?',
-    answers: ['Study', 'Work', 'Business', 'Family']
+    answers: [
+      {
+        text: 'Work',
+        value: 'Work'
+      },
+      {
+        text: 'Business',
+        value: 'Business'
+      },      
+      {
+        text: 'Family',
+        value: 'Family'
+      },
+      {
+        text: 'Study',
+        value: 'Study'
+      },
+    ]
   },
   {
     isAdult: true,
     isWork: true,
     question: 'How long do you plan to stay in the UK?',
-    answers: ['Yes', 'No']
+    answers: [
+      {
+        text: '2 years and over',
+        value: '2+'
+      },
+      {
+        text: 'Under 2 years',
+        value: '2-'
+      }
+    ]
+  },
+  {
+    isAdult: true,
+    isWork: true,
+    under2: true,
+    question: 'Which one of these best describes your work?',
+    answers: [
+      {
+        text: 'Charity',
+        value: 'Charity Worker Visa'
+      },
+      {
+        text: 'GOV Exchange',
+        value: 'GOV Authorised Exchange Visa'
+      },
+      {
+        text: 'Sport / Creative',
+        value: 'Creative and Sporting Visa'
+      },
+      {
+        text: 'Religious',
+        value: 'Religious Worker Visa'
+      },
+      {
+        text: 'Seasonal',
+        value: 'Seasonal Worker Visa'
+      },
+      {
+        text: 'Not Sure',
+        value: [
+          'Tier 2 General Work',
+          'Charity Worker Visa', 
+          'GOV Authorised Exchange Visa', 
+          'Creative and Sporting Visa',
+          'Religious Worker Visa',
+          'Seasonal Worker Visa'
+        ]
+      }
+    ]
   },
 ]
 
