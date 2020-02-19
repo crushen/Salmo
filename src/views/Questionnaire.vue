@@ -104,9 +104,11 @@ export default {
           this.questions = this.$store.state.questions.items;
           this.questions = this.questions.filter(question => question.isAdult);
           break;
+          // Study
         case 'T4 Child Student Visa':
           this.finishQuestionnaire(answer);
           break;
+          // Work
         case 'Dependent Visa':
           this.finishQuestionnaire(answer);
           break;
@@ -114,6 +116,25 @@ export default {
           this.finishQuestionnaire(answer);
           break;
         // Adult questions
+          // Work
+        case '2-':
+          this.questions = this.questions.filter(question => question.under2);
+          break;
+        case 'Charity Worker Visa':
+          this.finishQuestionnaire(answer);
+          break;
+        case 'GOV Authorised Exchange Visa':
+          this.finishQuestionnaire(answer);
+          break;
+        case 'Sport / Creative':
+          this.finishQuestionnaire(answer);
+          break;
+        case 'Religious Worker Visa':
+          this.finishQuestionnaire(answer);
+          break;
+        case 'Seasonal Worker Visa':
+          this.finishQuestionnaire(answer);
+          break;
       }
 
       this.currentQuestion++;
