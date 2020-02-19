@@ -55,28 +55,9 @@ export default {
       questions: [],
       answers: [],
       currentQuestion: 0,
-      results: [
-        {
-          name: 'Zora',
-          score: 0
-        },        
-        {
-          name: 'Rito',
-          score: 0
-        },        
-        {
-          name: 'Minnie',
-          score: 0
-        },        
-        {
-          name: 'Squirrel',
-          score: 0
-        },        
-        {
-          name: 'Baldrick',
-          score: 0
-        }
-      ]
+      result: {
+        recommendedVisa: ''
+      }
     }
   },
   methods:{
@@ -92,32 +73,49 @@ export default {
     getQuestions() {
       this.$store.dispatch('questions/getQuestions');
       this.questions = this.$store.state.questions.items;
+      if(this.user.profile.age < 18) {
+        this.questions = this.questions.filter(question => question.isChild);
+      } else if(this.user.profile.age >= 18) {
+        this.questions = this.questions.filter(question => question.isAdult);
+      }
       // const storeArray = this.$store.state.questions.items;
       // this.questions = storeArray.slice(0, storeArray.length);
     },
     handleAnswer(answer) {
-      // Check if answer is Dog or Cat, and then filter questions 
-      if(answer === 'Cat') {
-        this.questions = this.questions.filter(question => question.isCat);
-      } else if(answer === 'Dog') {
-        this.questions = this.questions.filter(question => question.isDog);
-      }
-      // Check if answer is the same & +1 to chosen result
-      this.results.forEach(result => {
-        if(answer === result.name) {
-          result.score++;
-          // Check if answer is array, and if yes then +1 to all results that match array items
-        } else if(Array.isArray(answer)) {
-          answer.forEach(item => {
-            if(item === result.name) {
-              result.score++;
-            }
-          })
+      // // Check if answer is Dog or Cat, and then filter questions 
+      // if(answer === 'Cat') {
+      //   this.questions = this.questions.filter(question => question.isCat);
+      // } else if(answer === 'Dog') {
+      //   this.questions = this.questions.filter(question => question.isDog);
+      // }
+      // // Check if answer is the same & +1 to chosen result
+      // this.results.forEach(result => {
+      //   if(answer === result.name) {
+      //     result.score++;
+      //     // Check if answer is array, and if yes then +1 to all results that match array items
+      //   } else if(Array.isArray(answer)) {
+      //     answer.forEach(item => {
+      //       if(item === result.name) {
+      //         result.score++;
+      //       }
+      //     })
+      //   }
+      // });
+      if(this.user.profile.age < 18) {
+        if(answer === 'T4 Child Student Visa') {
+          this.result.recommendedVisa = answer;
+          this.finishQuestionnaire();
+        } else if(answer === 'Family') { 
+          this.questions = this.questions.filter(question => question.isFamily);
         }
-      });
+      }
+
+
+
+
       // If no questions left, commit results to sotre and show results page
       if((this.currentQuestion + 1) === this.questions.length) {
-        this.$store.dispatch('questions/getResults', this.results);
+        this.$store.dispatch('questions/getResults', this.result);
         this.introStage = false;
         this.questionsStage = false;
         this.resultsStage = true;
@@ -144,6 +142,9 @@ export default {
       this.results.forEach(result => {
         result.score = 0;
       })
+    },
+    finishQuestionnaire() {
+      this.currentQuestion = this.questions.length - 1;
     }
   },
   created() {

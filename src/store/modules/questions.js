@@ -3,223 +3,226 @@
 // import 'firebase/auth'
  import { db } from '@/db'
 
-const questions = [
-  {
-    // 'Core Question' - Will define whether you're asked questions about cats or dogs
-    question: 'What kind of bebe do you relate to?',
-    answers: [
-      {
-        text: 'Cat', 
-        value: 'Cat'
-      }, 
-      { 
-        text: 'Dog', 
-        value: 'Dog'
-      }
-    ]
-  },
-  {
-    // These are questions that are relevant for both cats and dogs and will show for either
-    isCat: true,
-    isDog: true,
-    question: 'What are your toe beans like?',
-    answers: [
-      {
-        text: 'Pink and soft',
-        value: ['Zora', 'Rito']
-      },
-      {
-        text: 'Black and rough',
-        value: ['Minnie', 'Baldrick', 'Squirrel']
-      }
-    ]
-  },
-  {
-    isCat: true,
-    isDog: true,
-    question: 'What sound do you make?',
-    answers: [
-      {
-        text: 'Meow',
-        value: ['Zora', 'Rito']
-      },
-      {
-        text: 'Bark',
-        value: ['Minnie', 'Baldrick', 'Squirrel']
-      }
-    ]
-  },    
-  {
-    isCat: true,
-    isDog: true,
-    question: 'What do you do at 3am?',
-    answers: [
-      {
-        text: 'Run around like crazy',
-        value: ['Zora', 'Rito']
-      },
-      {
-        text: 'Sleep nice and snug',
-        value: ['Minnie', 'Baldrick', 'Squirrel']
-      }
-    ]
-  },
-  {
-    // Only these will show when answered Cat
-    isCat: true,
-    question: 'What colour is de most bootiful?',
-    answers: [
-        {
-        text: 'Calico', 
-        value: 'Zora' 
-      }, 
-      { 
-        text: 'Ginger', 
-        value: 'Rito'
-      }
-    ]
-  },
-  {
-    isCat: true,
-    question: 'Are you a fatty?',
-    answers: [
-      {
-        text: 'No way, I have bird bones', 
-        value: 'Rito' 
-      }, 
-      { 
-        text: 'I am a little chunk', 
-        value: 'Zora'
-      }
-    ]
-  },
-  {
-    isCat: true,
-    question: 'What is favourite snack?',
-    answers: [
-      {
-        text: 'Burrito', 
-        value: 'Rito' 
-      }, 
-      { 
-        text: 'Pakora', 
-        value: 'Zora'
-      }
-    ]
-  },
-  {
-    // Only these will show when answered Dog
-    isDog: true,
-    question: 'What colour is de most bootiful?',
-    answers: [
-      {
-        text: 'Ginger', 
-        value: 'Squirrel' 
-      }, 
-      { 
-        text: 'Black', 
-        value: 'Baldrick'
-      }, 
-      { 
-        text: 'Black with grey highlights', 
-        value: 'Minnie'
-      }
-    ]
-  },
-  {
-    isDog: true,
-    question: 'What is the best way to eat din dins?',
-    answers: [
-      {
-        text: 'Wait for hoomans to give me chiquen', 
-        value: 'Minnie' 
-      }, 
-      { 
-        text: 'Swallow without even chewing', 
-        value: 'Baldrick'
-      }, 
-      { 
-        text: 'Fight a bitch for their food', 
-        value: 'Squirrel'
-      }
-    ]
-  },
-  {
-    isDog: true,
-    question: 'What to do if you see a cat?',
-    answers: [
-      {
-        text: 'Run and hide', 
-        value: 'Baldrick' 
-      }, 
-      { 
-        text: 'Yap like never before', 
-        value: 'Minnie'
-      }, 
-      { 
-        text: 'Kill', 
-        value: 'Squirrel'
-      }
-    ]
-  }
-]
-
-// const questions = [ //coreQuestions?
+// const questions = [
 //   {
-//     question: 'What is your country of origin?',
-//     countries: [
+//     // 'Core Question' - Will define whether you're asked questions about cats or dogs
+//     question: 'What kind of bebe do you relate to?',
+//     answers: [
 //       {
-//         value: 'China'
-//       },
-//       {
-//         value: 'Turkey'
-//       },
-//       {
-//         value: 'United Kingdom'
+//         text: 'Cat', 
+//         value: 'Cat'
+//       }, 
+//       { 
+//         text: 'Dog', 
+//         value: 'Dog'
 //       }
 //     ]
 //   },
 //   {
-//     question: 'What is your date of birth?',
-//     day: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31],
-//     month: ['Jan', 'Feb', 'March'],
-//     year: [1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008]
-    
+//     // These are questions that are relevant for both cats and dogs and will show for either
+//     isCat: true,
+//     isDog: true,
+//     question: 'What are your toe beans like?',
+//     answers: [
+//       {
+//         text: 'Pink and soft',
+//         value: ['Zora', 'Rito']
+//       },
+//       {
+//         text: 'Black and rough',
+//         value: ['Minnie', 'Baldrick', 'Squirrel']
+//       }
+//     ]
+//   },
+//   {
+//     isCat: true,
+//     isDog: true,
+//     question: 'What sound do you make?',
+//     answers: [
+//       {
+//         text: 'Meow',
+//         value: ['Zora', 'Rito']
+//       },
+//       {
+//         text: 'Bark',
+//         value: ['Minnie', 'Baldrick', 'Squirrel']
+//       }
+//     ]
+//   },    
+//   {
+//     isCat: true,
+//     isDog: true,
+//     question: 'What do you do at 3am?',
+//     answers: [
+//       {
+//         text: 'Run around like crazy',
+//         value: ['Zora', 'Rito']
+//       },
+//       {
+//         text: 'Sleep nice and snug',
+//         value: ['Minnie', 'Baldrick', 'Squirrel']
+//       }
+//     ]
+//   },
+//   {
+//     // Only these will show when answered Cat
+//     isCat: true,
+//     question: 'What colour is de most bootiful?',
+//     answers: [
+//         {
+//         text: 'Calico', 
+//         value: 'Zora' 
+//       }, 
+//       { 
+//         text: 'Ginger', 
+//         value: 'Rito'
+//       }
+//     ]
+//   },
+//   {
+//     isCat: true,
+//     question: 'Are you a fatty?',
+//     answers: [
+//       {
+//         text: 'No way, I have bird bones', 
+//         value: 'Rito' 
+//       }, 
+//       { 
+//         text: 'I am a little chunk', 
+//         value: 'Zora'
+//       }
+//     ]
+//   },
+//   {
+//     isCat: true,
+//     question: 'What is favourite snack?',
+//     answers: [
+//       {
+//         text: 'Burrito', 
+//         value: 'Rito' 
+//       }, 
+//       { 
+//         text: 'Pakora', 
+//         value: 'Zora'
+//       }
+//     ]
+//   },
+//   {
+//     // Only these will show when answered Dog
+//     isDog: true,
+//     question: 'What colour is de most bootiful?',
+//     answers: [
+//       {
+//         text: 'Ginger', 
+//         value: 'Squirrel' 
+//       }, 
+//       { 
+//         text: 'Black', 
+//         value: 'Baldrick'
+//       }, 
+//       { 
+//         text: 'Black with grey highlights', 
+//         value: 'Minnie'
+//       }
+//     ]
+//   },
+//   {
+//     isDog: true,
+//     question: 'What is the best way to eat din dins?',
+//     answers: [
+//       {
+//         text: 'Wait for hoomans to give me chiquen', 
+//         value: 'Minnie' 
+//       }, 
+//       { 
+//         text: 'Swallow without even chewing', 
+//         value: 'Baldrick'
+//       }, 
+//       { 
+//         text: 'Fight a bitch for their food', 
+//         value: 'Squirrel'
+//       }
+//     ]
+//   },
+//   {
+//     isDog: true,
+//     question: 'What to do if you see a cat?',
+//     answers: [
+//       {
+//         text: 'Run and hide', 
+//         value: 'Baldrick' 
+//       }, 
+//       { 
+//         text: 'Yap like never before', 
+//         value: 'Minnie'
+//       }, 
+//       { 
+//         text: 'Kill', 
+//         value: 'Squirrel'
+//       }
+//     ]
 //   }
 // ]
+
+const questions = [
+  // CHILD QUESTIONS
+  {
+    isChild: true,
+    question: 'Why do you want to live in the UK?',
+    answers: [
+      {
+        text: 'Study',
+        value: 'T4 Child Student Visa'
+      },
+      {
+        text: 'Family',
+        value: 'Family'
+      }
+    ]
+  },
+  {
+    isChild: true,
+    isFamily: true,
+    question: 'Do your parents / guardian have IDL or PR?',
+    answers: [
+      {
+        text: 'Yes',
+        value: 'Dependent Visa'
+      },
+      {
+        text: 'No',
+        value: 'Family Visa'
+      }
+    ]
+  },
+  // ADULT QUESTIONS
+  {
+    isAdult: true,
+    question: 'Why do you want to live in the UK?',
+    answers: ['Study', 'Work', 'Business', 'Family']
+  },
+  {
+    isAdult: true,
+    isWork: true,
+    question: 'How long do you plan to stay in the UK?',
+    answers: ['Yes', 'No']
+  },
+]
 
 export default {
   namespaced: true,
   state: {
     items: [],
-    results: [
-      {
-        name: 'Zora',
-        score: 0
-      },        
-      {
-        name: 'Rito',
-        score: 0
-      },        
-      {
-        name: 'Minnie',
-        score: 0
-      },        
-      {
-        name: 'Squirrel',
-        score: 0
-      },        
-      {
-        name: 'Baldrick',
-        score: 0
-      }
-    ],
-    filteredResults: {
+    result: {
       user: '',
-      topResult: '',
-      secondResult: '',
-      thirdResult: ''
+      recommendedVisa: ''
     }
+    // filteredResults: {
+    //   user: '',
+    //   topResult: '',
+    //   secondResult: '',
+    //   thirdResult: ''
+    // }
   },
   getters: {
 
@@ -228,18 +231,18 @@ export default {
     getQuestions({commit}) {
       commit('setQuestions', questions);
     },
-    getResults(context, results) {
+    getResults(context, result) {
       // First set state results
-      context.commit('setResults', results);
+      context.commit('setResults', result);
       // Then use filtered results for questionnaireResults collection, and add reference to the user
       // (There is a firebase function set up to add questionnaireResults ID to user profile)
-      context.state.filteredResults.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
+      context.state.result.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
       return db.collection('questionnaireResults')
-        .add(context.state.filteredResults)
+        .add(context.state.result)
         // Add filtered questionnaireResults and ID to local user profile
         .then(docRef => {
-          context.state.filteredResults.id = docRef.id;
-          context.commit('auth/addResultsToUser', context.state.filteredResults, {root: true})
+          context.state.result.id = docRef.id;
+          context.commit('auth/addResultsToUser', context.state.result, {root: true})
           return true
         })
     }
@@ -248,21 +251,22 @@ export default {
     setQuestions(state, questions) {
       state.items = questions;
     },
-    setResults(state, answers) {
-      // Set state results from questionnaire answers
-      state.results.forEach(result => {
-        answers.forEach(answer => {
-          if(result.name === answer.name) {
-            result.score = answer.score;
-          }
-        });
-      });
-      // Sort results for highest scores
-      const sortedResults = state.results.sort((a, b) => b.score - a.score);
-      // Assign top 3 results in filteredResults
-      state.filteredResults.topResult = sortedResults[0].name;
-      state.filteredResults.secondResult = sortedResults[1].name;
-      state.filteredResults.thirdResult = sortedResults[2].name;
+    setResults(state, result) {
+    //   // Set state results from questionnaire answers
+    //   state.results.forEach(result => {
+    //     answers.forEach(answer => {
+    //       if(result.name === answer.name) {
+    //         result.score = answer.score;
+    //       }
+    //     });
+    //   });
+    //   // Sort results for highest scores
+    //   const sortedResults = state.results.sort((a, b) => b.score - a.score);
+    //   // Assign top 3 results in filteredResults
+    //   state.filteredResults.topResult = sortedResults[0].name;
+    //   state.filteredResults.secondResult = sortedResults[1].name;
+    //   state.filteredResults.thirdResult = sortedResults[2].name;
+      state.result.recommendedVisa = result.recommendedVisa;
     }
   }
 }
