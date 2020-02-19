@@ -19,9 +19,7 @@ exports.addResultsToProfile = functions.firestore
       .update({
         questionnaireResults: admin.firestore.FieldValue.arrayUnion({
           id: resultsId,
-          topResult: addedResults.topResult,
-          secondResult: addedResults.secondResult,
-          thirdResult: addedResults.thirdResult,
+          recommendedVisa: addedResults.recommendedVisa
         })
       })
   })
