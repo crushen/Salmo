@@ -2,18 +2,37 @@
   <div>
     <label>{{ question.question }}</label>
 
-      <div class="answers">
-      <div
-        v-for="(answer, index) in question.answers"
-        :key="index">
-        <input 
-          v-model="selected"
-          type="radio"
-          name="question"
-          :value="answer.value">
-          {{ answer.text }}
+      <!-- Multiple choice questions -->
+      <div v-if=" typeof question.answers[0] === 'object' ">
+        <div
+          v-for="(answer, index) in question.answers"
+          :key="index">
+          <input 
+            v-model="selected"
+            type="radio"
+            :value="answer.value">
+            {{ answer.text }}
 
+        </div>
       </div>
+
+      <!-- Yes / No questions -->
+      <div v-if=" typeof question.answers[0] === 'string' ">
+        <div
+          v-for="(answer, index) in question.answers"
+          :key="index">
+          <input 
+            v-model="selected"
+            type="radio"
+            :value="answer">
+            {{ answer }}
+
+        </div>
+      </div>
+
+
+
+
       <!-- Previous question button shows after first question answered -->
       <button
         v-if="currentQuestion > 0"
@@ -31,7 +50,7 @@
         @click="submitAnswer">
         Next
       </button>
-    </div>
+
   </div>
 </template>
 
