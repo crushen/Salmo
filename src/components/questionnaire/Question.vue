@@ -34,17 +34,17 @@
 
 
       <!-- Previous question button shows after first question answered -->
-      <button
+      <!-- <button
         v-if="currentQuestion > 0"
         @click="previousQuestion">
         Previous
-      </button>
+      </button> -->
       <!-- If on first question, previous button goes back to last core question -->
-      <button 
+      <!-- <button 
         v-else
         @click="backToCoreQuestions">
         Redo Core Questions
-      </button>  
+      </button>   -->
       <!-- Previous question button shows after first question answered --> 
       <button
         @click="submitAnswer">
@@ -70,13 +70,13 @@ export default {
     submitAnswer() {
       this.$emit('submitAnswer', this.selected);
       this.selected = null;
-    },
-    previousQuestion() {
-      this.$emit('previousQuestion');
-    },
-    backToCoreQuestions() {
-      this.$emit('backToCoreQuestions');
     }
+    // previousQuestion() {
+    //   this.$emit('previousQuestion');
+    // },
+    // backToCoreQuestions() {
+    //   this.$emit('backToCoreQuestions');
+    // }
   }
 }
 </script>

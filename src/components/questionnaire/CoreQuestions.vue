@@ -48,16 +48,16 @@
           {{ visa }}
         </option>
       </select>
-      <button
+      <!-- <button
         @click="prev">
         Previous
-      </button> 
+      </button> -->
       <!-- If user is 18 or over, go to Dependants question. Else, sumbit profile -->
       <button
         v-if="age >= 18"
         @click="next">
         Next
-      </button> 
+      </button>
       <button
         v-else
         @click="submitProfile">
@@ -77,10 +77,10 @@
           {{ dependant }}
         </option>
       </select>
-      <button
+      <!-- <button
         @click="prev">
         Previous
-      </button> 
+      </button>  -->
       <button
         @click="submitProfile">
         Next
@@ -121,9 +121,9 @@ export default {
     next() {
       this.question++;
     },
-    prev() {
-      this.question--;
-    },
+    // prev() {
+    //   this.question--;
+    // },
     calculateAge(date) {
       let today = new Date(),
           birthDate = new Date(date),
