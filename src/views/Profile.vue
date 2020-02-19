@@ -9,9 +9,7 @@
       <div 
         v-if="mostRecentResult"
         class="margin">
-        <p>Top Result: {{ mostRecentResult.topResult }}</p>
-        <p>Second Result: {{ mostRecentResult.secondResult }}</p>
-        <p>Third Result: {{ mostRecentResult.thirdResult }}</p>
+        <p>{{ mostRecentResult.recommendedVisa }}</p>
       </div>
 
     </div>

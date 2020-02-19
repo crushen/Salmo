@@ -2,9 +2,7 @@
   <div>
     <p>Quiz done</p>
 
-    <p>Top Result: {{ results.topResult }}</p>
-    <p>Second Result: {{ results.secondResult }}</p>
-    <p>Third Result: {{ results.thirdResult }}</p>
+    <p>{{ result.recommendedVisa }}</p>
   </div>
 </template>
 
@@ -12,7 +10,7 @@
 export default {
   data() {
     return {
-      results: this.$store.state.questions.filteredResults
+      result: this.$store.state.questions.result
       //filteredResults: {}
     }
   }
