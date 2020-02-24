@@ -26,10 +26,10 @@
           :max-date="maxDate"
           v-model="date" />
       </div>
-      <button
+      <!-- <button
         @click="prev">
         Previous
-      </button> 
+      </button>  -->
       <button
         @click="next">
         Next
