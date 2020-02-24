@@ -107,11 +107,10 @@ export default {
           this.questions = this.questions.filter(question => question.isStudy);
         break;
       }
-      // Check if child applicant will be over 18 - if yes, ask adult questions
+      // Check if child applicant will be over 18 - if yes, reset questions and filter for adult
       if(answer === 'Adult Application') {
         this.currentQuestion = -1;
-        this.$store.dispatch('questions/getQuestions');
-        this.questions = this.$store.state.questions.items;
+        this.getQuestions();
         this.questions = this.questions.filter(question => question.isAdult);
       }
       // If question leads to visa, finish questionnaire and reccommend this visa
