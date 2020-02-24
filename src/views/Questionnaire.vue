@@ -66,7 +66,9 @@ export default {
         'GOV Authorised Exchange Visa',
         'Creative and Sporting Visa',
         'Religious Worker Visa',
-        'Seasonal Worker Visa'
+        'Seasonal Worker Visa',
+        'T2 Sportsperson Visa',
+        'T2 Minister of Religion Visa'
       ]
     }
   },
@@ -89,6 +91,7 @@ export default {
     handleAnswer(answer) {
       // Check which catagory of questions to ask
       switch(answer) {
+        // Visa catagories
         case 'Work':
           // Set currentQuestion to -1 as it will reset to 0
           this.currentQuestion = -1;
@@ -105,14 +108,42 @@ export default {
         case 'Study':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isStudy);
-        break;
+          break;
+        // WORK
+        // over 2 or under 2 years
+        case '2+':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.over2);
+          break;
+        case '2-':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.under2);
+          break;
+        // not sportsperson or minister of religion
+        case 'Non S or R':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.nonSR);
+          break;
+        // are they being transferred by current employer
+        case 'isTransferred':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.isTransferred);
+          break;
+        case 'notTransferred':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.notTransferred);
+          break;
       }
+
       // Check if child applicant will be over 18 - if yes, reset questions and filter for adult
       if(answer === 'Adult Application') {
         this.currentQuestion = -1;
         this.getQuestions();
         this.questions = this.questions.filter(question => question.isAdult);
       }
+
+
+      
       // If question leads to visa, finish questionnaire and reccommend this visa
       this.visaList.forEach(visa => {
         if(answer === visa) {

@@ -124,6 +124,43 @@ const questions = [
         ]
       }
     ]
+  }, // need to add from isTransferred / notTransferred
+  {
+    isAdult: true,
+    isWork: true,
+    over2: true,
+    question: 'Are you a sportsperson / minister of religion?',
+    answers: [
+      {
+        text: 'Sportsperson',
+        value: 'T2 Sportsperson Visa'
+      },
+      {
+        text: 'Minister of Religion',
+        value: 'T2 Minister of Religion Visa'
+      },
+      {
+        text: 'No',
+        value: 'Non S or R'
+      }
+    ]
+  },
+  {
+    isAdult: true,
+    isWork: true,
+    over2: true,
+    nonSR: true,
+    question: 'Are you being transferred by your current employer to UK?',
+    answers: [
+      {
+        text: 'Yes',
+        value: 'isTransferred'
+      },
+      {
+        text: 'No',
+        value: 'notTransferred'
+      }
+    ]
   },
 ]
 
