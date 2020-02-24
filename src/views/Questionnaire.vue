@@ -47,6 +47,7 @@ export default {
   data() {
     return {
       user: this.$store.state.auth.user,
+      userAge: null,
       introStage: true,
       questionsStage: false,
       buildProfile: false,
@@ -56,15 +57,27 @@ export default {
       currentQuestion: 0,
       result: {
         recommendedVisa: ''
-      }
+      },
+      visaList: [
+        'T4 Child Student Visa', 
+        'Dependent Visa', 
+        'Family Visa', 
+        'Charity Worker Visa', 
+        'GOV Authorised Exchange Visa',
+        'Creative and Sporting Visa',
+        'Religious Worker Visa',
+        'Seasonal Worker Visa'
+      ]
     }
   },
-  methods:{
+  methods: {
     submitProfile(profile) {
       this.$store.dispatch('auth/updateProfile', profile);
+      this.userAge = profile.age;
       this.buildProfile = false;
     },
     startQuestionnaire() {
+      this.getQuestions();
       this.introStage = false;
       this.questionsStage = true;
       this.buildProfile = true;
@@ -72,18 +85,14 @@ export default {
     getQuestions() {
       this.$store.dispatch('questions/getQuestions');
       this.questions = this.$store.state.questions.items;
-      if(this.user.profile.age < 18) {
-        this.questions = this.questions.filter(question => question.isChild);
-      } else if(this.user.profile.age >= 18) {
-        this.questions = this.questions.filter(question => question.isAdult);
-      }
     },
     handleAnswer(answer) {
+      // Check which catagory of questions to ask
       switch(answer) {
-        // Adult and Child
         case 'Work':
+          // Set currentQuestion to -1 as it will reset to 0
           this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isWork);
+          this.questions = this.questions.filter(question => question.isWork); 
           break;
         case 'Business':
           this.currentQuestion = -1;
@@ -96,47 +105,22 @@ export default {
         case 'Study':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isStudy);
-          break;
-        // Child questions
-        case 'Adult Application':
-          this.currentQuestion = -1;
-          this.$store.dispatch('questions/getQuestions');
-          this.questions = this.$store.state.questions.items;
-          this.questions = this.questions.filter(question => question.isAdult);
-          break;
-          // Study
-        case 'T4 Child Student Visa':
-          this.finishQuestionnaire(answer);
-          break;
-          // Work
-        case 'Dependent Visa':
-          this.finishQuestionnaire(answer);
-          break;
-        case 'Family Visa':
-          this.finishQuestionnaire(answer);
-          break;
-        // Adult questions
-          // Work
-        case '2-':
-          this.questions = this.questions.filter(question => question.under2);
-          break;
-        case 'Charity Worker Visa':
-          this.finishQuestionnaire(answer);
-          break;
-        case 'GOV Authorised Exchange Visa':
-          this.finishQuestionnaire(answer);
-          break;
-        case 'Sport / Creative':
-          this.finishQuestionnaire(answer);
-          break;
-        case 'Religious Worker Visa':
-          this.finishQuestionnaire(answer);
-          break;
-        case 'Seasonal Worker Visa':
-          this.finishQuestionnaire(answer);
-          break;
+        break;
       }
-
+      // Check if child applicant will be over 18 - if yes, ask adult questions
+      if(answer === 'Adult Application') {
+        this.currentQuestion = -1;
+        this.$store.dispatch('questions/getQuestions');
+        this.questions = this.$store.state.questions.items;
+        this.questions = this.questions.filter(question => question.isAdult);
+      }
+      // If question leads to visa, finish questionnaire and reccommend this visa
+      this.visaList.forEach(visa => {
+        if(answer === visa) {
+          this.finishQuestionnaire(answer);
+        }
+      });
+      // If question hasn't lead to visa, add 1 to currentQuestion
       this.currentQuestion++;
     },
     finishQuestionnaire(answer) {
@@ -165,8 +149,15 @@ export default {
     //   })
     // },
   },
-  created() {
-    this.getQuestions();
+  watch: {
+    // When age is updated after core questions, filter between child or adult questions
+    userAge(age) {
+      if(age < 18) {
+        this.questions = this.questions.filter(question => question.isChild);
+      } else if(age >= 18) {
+        this.questions = this.questions.filter(question => question.isAdult);
+      }
+    }
   },
   beforeRouteLeave(to, from, next) {
     if(this.questionsStage) {
