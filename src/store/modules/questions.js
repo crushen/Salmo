@@ -71,6 +71,7 @@ const questions = [
       },
     ]
   },
+  // WORK
   {
     isAdult: true,
     isWork: true,
@@ -121,10 +122,10 @@ const questions = [
           'Creative and Sporting Visa',
           'Religious Worker Visa',
           'Seasonal Worker Visa'
-        ]
+        ] // need to figure out what to do with array answers
       }
     ]
-  }, // need to add from isTransferred / notTransferred
+  },
   {
     isAdult: true,
     isWork: true,
@@ -158,10 +159,28 @@ const questions = [
       },
       {
         text: 'No',
-        value: 'notTransferred'
+        value: 'T2 General Work Visa'
       }
     ]
   },
+  {
+    isAdult: true,
+    isWork: true,
+    over2: true,
+    nonSR: true,
+    isTransferred: true,
+    question: 'Are you a recent graduate?',
+    answers: [
+      {
+        text: 'Yes',
+        value: 'Intra company Graduate / Trainee Visa'
+      },
+      {
+        text: 'No',
+        value: 'Intra company Visa'
+      }
+    ]
+  }
 ]
 
 export default {

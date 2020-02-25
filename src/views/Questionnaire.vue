@@ -68,7 +68,10 @@ export default {
         'Religious Worker Visa',
         'Seasonal Worker Visa',
         'T2 Sportsperson Visa',
-        'T2 Minister of Religion Visa'
+        'T2 Minister of Religion Visa',
+        'Intra company Graduate / Trainee Visa',
+        'Intra company Visa',
+        'T2 General Work Visa'
       ]
     }
   },
@@ -128,10 +131,6 @@ export default {
         case 'isTransferred':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isTransferred);
-          break;
-        case 'notTransferred':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.notTransferred);
           break;
       }
 
