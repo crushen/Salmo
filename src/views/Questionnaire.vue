@@ -76,7 +76,11 @@ export default {
         'Exceptional Talent Visa',
         'Investor Visa - 5 years for PR',
         'Investor Visa - 3 years for PR',
-        'Investor Visa - 2 years for PR'
+        'Investor Visa - 2 years for PR',
+        'Marriage Visa',
+        'Standard visitor Visa',
+        'Parent of T4 Visa',
+        'Marriage Visa'
       ]
     }
   },
@@ -136,6 +140,16 @@ export default {
         case 'isTransferred':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isTransferred);
+          break;
+        // FAMILY
+        // up to six months or over 6 months
+        case 'upToSixMonths':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.upToSixMonths);
+          break;
+        case 'overSixMonths':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.overSixMonths);
           break;
       }
 

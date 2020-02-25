@@ -220,6 +220,62 @@ const questions = [
         value: 'Investor Visa - 2 years for PR'
       }
     ]
+  },
+  // FAMILY
+  {
+    isAdult: true,
+    isFamily: true,
+    question: 'How long do you wish to live in the UK for?',
+    answers: [
+      {
+        text: 'Up to 6 months',
+        value: 'upToSixMonths' 
+      },
+      {
+        text: 'Over 6 months',
+        value: 'overSixMonths'
+      }
+    ]
+  },
+  {
+    isAdult: true,
+    isFamily: true,
+    upToSixMonths: true,
+    question: 'Which of the following best describes your situation?',
+    answers: [
+      {
+        text: 'Getting Married but not living in the UK',
+        value: 'Marriage Visa' 
+      },
+      {
+        text: 'Coming to visit partner / family',
+        value: 'Standard visitor Visa'
+      },
+      {
+        text: 'Visiting your child who is studying',
+        value: 'Parent of T4 Visa'
+      }
+    ]
+  },
+  {
+    isAdult: true,
+    isFamily: true,
+    overSixMonths: true,
+    question: 'Do you have a partner/family member that is British or ILR / PR ?',
+    answers: [
+      {
+        text: 'Yes',
+        value: 'Marriage Visa' 
+      },
+      {
+        text: 'No',
+        value: "You can't have a family visa." // Need to figure this out
+      },
+      {
+        text: "It's complicated",
+        value: 'As your situation is complex, does any of the following apply to you?' // Need to figure this out
+      }
+    ]
   }
 ]
 
