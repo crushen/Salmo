@@ -276,6 +276,22 @@ const questions = [
         value: 'As your situation is complex, does any of the following apply to you?' // Need to figure this out
       }
     ]
+  },
+  // STUDY
+  {
+    isAdult: true,
+    isStudy: true,
+    question: 'How long is your course?',
+    answers: [
+      {
+        text: 'Up to 6 months',
+        value: 'T4 Short Term Visa' 
+      },
+      {
+        text: 'Over 6 months',
+        value: 'T4 General Student Visa'
+      }
+    ]
   }
 ]
 

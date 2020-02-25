@@ -80,7 +80,9 @@ export default {
         'Marriage Visa',
         'Standard visitor Visa',
         'Parent of T4 Visa',
-        'Marriage Visa'
+        'Marriage Visa',
+        'T4 Short Term Visa',
+        'T4 General Student Visa'
       ]
     }
   },
