@@ -281,15 +281,36 @@ const questions = [
     answers: [
       {
         text: 'Yes',
-        value: 'Marriage Visa' 
+        value: 'familyIsILRorPR' 
       },
       {
         text: 'No',
-        value: "You can't have a family visa." // Need to figure this out
+        value: "None - You can't apply for a Family Visa"
       },
       {
         text: "It's complicated",
-        value: 'As your situation is complex, does any of the following apply to you?' // Need to figure this out
+        value: 'Family Visa - Apply on the basis of your private life'
+      }
+    ]
+  },
+  {
+    isAdult: true,
+    isFamily: true,
+    overSixMonths: true,
+    familyIsILRorPR: true,
+    question: 'Which of the following best describes your situation?',
+    answers: [
+      {
+        text: 'Coming as an adult to be cared for by a relative.',
+        value: 'Family Visa - Coming as an adult to be cared for by a relative route' 
+      },
+      {
+        text: 'Coming as a parent to join your child.',
+        value: 'Family Visa - Coming as a parent to join your child route'
+      },
+      {
+        text: "Coming to join your partner/ spouse.",
+        value: 'Family Visa - Coming to join your partner/spouse route'
       }
     ]
   },

@@ -82,7 +82,11 @@ export default {
         'Marriage Visa',
         'Standard visitor Visa',
         'Parent of T4 Visa',
-        'Marriage Visa',
+        "None - You can't apply for a Family Visa",
+        'Family Visa - Apply on the basis of your private life',
+        'Family Visa - Coming as an adult to be cared for by a relative route',
+        'Family Visa - Coming as a parent to join your child route',
+        'Family Visa - Coming to join your partner/spouse route',
         'T4 Short Term Visa',
         'T4 General Student Visa'
       ]
@@ -156,6 +160,11 @@ export default {
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.overSixMonths);
           break;
+        // family member has ILR or PR
+        case 'familyIsILRorPR':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.familyIsILRorPR);
+          break;
       }
       // If question leads to visa, finish questionnaire and reccommend this visa
       this.visaList.forEach(visa => {
@@ -163,6 +172,10 @@ export default {
           this.finishQuestionnaire(answer);
         }
       })
+      // If answer is array, list all visas in array
+      if(Array.isArray(answer)) {
+        this.finishQuestionnaire(answer);
+      }
       // Check if child applicant will be over 18 - if yes, reset questions and filter for adult
       if(answer === 'Adult Application') {
         this.currentQuestion = -1;
@@ -178,11 +191,7 @@ export default {
           this.finishQuestionnaire('Startup Visa');
         }
       }
-      // If answer is array, list all visas in array
-      if(Array.isArray(answer)) {
-        this.finishQuestionnaire(answer);
-      }
-      // If question hasn't lead to visa, add 1 to currentQuestion
+      // If question hasn't lead to visa yet, go to next question
       this.currentQuestion++;
     },
     finishQuestionnaire(answer) {
