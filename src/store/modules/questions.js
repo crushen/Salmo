@@ -25,7 +25,7 @@ const questions = [
     answers: [
       {
         text: 'Study',
-        value: 'T4 Child Student Visa'
+        value: 'Tier 4 Child Student Visa'
       },
       {
         text: 'Family',
@@ -95,33 +95,33 @@ const questions = [
     answers: [
       {
         text: 'Charity',
-        value: 'Charity Worker Visa'
+        value: 'Tier 5 Charity Worker Visa'
       },
       {
         text: 'GOV Exchange',
-        value: 'GOV Authorised Exchange Visa'
+        value: 'Tier 5 GOV Authorised Exchange Visa'
       },
       {
         text: 'Sport / Creative',
-        value: 'Creative and Sporting Visa'
+        value: 'Tier 5 Creative and Sporting Visa'
       },
       {
         text: 'Religious',
-        value: 'Religious Worker Visa'
+        value: 'Tier 5 Religious Worker Visa'
       },
       {
         text: 'Seasonal',
-        value: 'Seasonal Worker Visa'
+        value: 'Tier 5 Seasonal Worker Visa'
       },
       {
         text: 'Not Sure',
         value: [
-          'Tier 2 General Work',
-          'Charity Worker Visa', 
-          'GOV Authorised Exchange Visa', 
-          'Creative and Sporting Visa',
-          'Religious Worker Visa',
-          'Seasonal Worker Visa'
+          'Tier 2 General Work Visa',
+          'Tier 5 Charity Worker Visa', 
+          'Tier 5 GOV Authorised Exchange Visa', 
+          'Tier 5 Creative and Sporting Visa',
+          'Tier 5 Religious Worker Visa',
+          'Tier 5 Seasonal Worker Visa'
         ] 
       }
     ]
@@ -134,11 +134,11 @@ const questions = [
     answers: [
       {
         text: 'Sportsperson',
-        value: 'T2 Sportsperson Visa'
+        value: 'Tier 2 Sportsperson Visa'
       },
       {
         text: 'Minister of Religion',
-        value: 'T2 Minister of Religion Visa'
+        value: 'Tier 2 Minister of Religion Visa'
       },
       {
         text: 'No',
@@ -159,7 +159,7 @@ const questions = [
       },
       {
         text: 'No',
-        value: 'T2 General Work Visa'
+        value: 'Tier 2 General Work Visa'
       }
     ]
   },
@@ -173,11 +173,11 @@ const questions = [
     answers: [
       {
         text: 'Yes',
-        value: 'Intra company Graduate / Trainee Visa'
+        value: 'Tier 2 Intra-company Transfer Graduate Trainee Visa'
       },
       {
         text: 'No',
-        value: 'Intra company Visa'
+        value: 'Tier 2 Intra-company Transfer Long-term Staff Visa'
       }
     ]
   },
@@ -197,7 +197,7 @@ const questions = [
       },
       {
         text: 'Endorsed as exceptional talent/ top of field',
-        value: 'Exceptional Talent Visa'
+        value: 'Tier 1 Exceptional Talent Visa'
       }
     ]
   },
@@ -209,7 +209,7 @@ const questions = [
     answers: [
       {
         text: 'Yes',
-        value: 'Innovator Visa - Can switch to Entrepreneur Visa'
+        value: 'Innovator Visa'
       },
       {
         text: 'No',
@@ -225,15 +225,15 @@ const questions = [
     answers: [
       {
         text: '2 million +',
-        value: 'Investor Visa - 5 years for PR'
+        value: 'Tier 1 Investor Visa - 5 years for PR'
       },
       {
         text: '5 million +',
-        value: 'Investor Visa - 3 years for PR'
+        value: 'Tier 1 Investor Visa - 3 years for PR'
       },
       {
         text: '10 million +',
-        value: 'Investor Visa - 2 years for PR'
+        value: 'Tier 1 Investor Visa - 2 years for PR'
       }
     ]
   },
@@ -265,11 +265,11 @@ const questions = [
       },
       {
         text: 'Coming to visit partner / family',
-        value: 'Standard visitor Visa'
+        value: 'Standard Visitor Visa'
       },
       {
         text: 'Visiting your child who is studying',
-        value: 'Parent of T4 Visa'
+        value: 'Parent of Tier 4 Child Visa'
       }
     ]
   },
@@ -322,11 +322,11 @@ const questions = [
     answers: [
       {
         text: 'Up to 6 months',
-        value: 'T4 Short Term Visa' 
+        value: 'Tier 4 Short Term Study Visa' 
       },
       {
         text: 'Over 6 months',
-        value: 'T4 General Student Visa'
+        value: 'Tier 4 General Student Visa'
       }
     ]
   }
