@@ -180,6 +180,46 @@ const questions = [
         value: 'Intra company Visa'
       }
     ]
+  },
+  // BUSINESS
+  {
+    isAdult: true,
+    isBusiness: true,
+    question: 'Which one of these best describes your future business plans?',
+    answers: [
+      {
+        text: 'Start a Business',
+        value: 'Start Up Visa' // Default, but this needs to change depending on current visa
+      },
+      {
+        text: 'Invest in Business',
+        value: 'isInvestor'
+      },
+      {
+        text: 'Endorsed as exceptional talent/ top of field',
+        value: 'Exceptional Talent Visa'
+      }
+    ]
+  },
+  {
+    isAdult: true,
+    isBusiness: true,
+    isInvestor: true,
+    question: 'How much money can you invest?',
+    answers: [
+      {
+        text: '2 million +',
+        value: 'Investor Visa - 5 years for PR'
+      },
+      {
+        text: '5 million +',
+        value: 'Investor Visa - 3 years for PR'
+      },
+      {
+        text: '10 million +',
+        value: 'Investor Visa - 2 years for PR'
+      }
+    ]
   }
 ]
 

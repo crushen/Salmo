@@ -71,7 +71,12 @@ export default {
         'T2 Minister of Religion Visa',
         'Intra company Graduate / Trainee Visa',
         'Intra company Visa',
-        'T2 General Work Visa'
+        'T2 General Work Visa',
+        'Start Up Visa',
+        'Exceptional Talent Visa',
+        'Investor Visa - 5 years for PR',
+        'Investor Visa - 3 years for PR',
+        'Investor Visa - 2 years for PR'
       ]
     }
   },
