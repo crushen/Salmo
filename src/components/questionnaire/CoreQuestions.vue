@@ -105,7 +105,7 @@ export default {
       countries: ['China', 'Taiwan', 'Turkey', 'United States of America', 'United Kingdom'],
       date: new Date(),
       age: null,
-      visas: ['None', 'Tier 4 Student', 'Tier 2 General', 'Tier 2 Sportsperson', 'Tier 1 Innovator'],
+      visas: ['None', 'Tier 4 Student', 'Tier 2 General', 'Tier 2 Sportsperson', 'Tier 1 Innovator', 'Startup Visa'],
       dependants: ['None', 'Child / Children', 'Partner / Spouse', 'Elderly person'],
       profileToUpdate: {...this.userProfile}
     }

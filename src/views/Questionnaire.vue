@@ -48,6 +48,7 @@ export default {
     return {
       user: this.$store.state.auth.user,
       userAge: null,
+      currentVisa: null,
       introStage: true,
       questionsStage: false,
       buildProfile: false,
@@ -72,7 +73,8 @@ export default {
         'Intra company Graduate / Trainee Visa',
         'Intra company Visa',
         'T2 General Work Visa',
-        'Start Up Visa',
+        'Innovator Visa - Can switch to Entrepreneur Visa',
+        'Innovator Visa',
         'Exceptional Talent Visa',
         'Investor Visa - 5 years for PR',
         'Investor Visa - 3 years for PR',
@@ -90,6 +92,7 @@ export default {
     submitProfile(profile) {
       this.$store.dispatch('auth/updateProfile', profile);
       this.userAge = profile.age;
+      this.currentVisa = profile.currentVisa;
       this.buildProfile = false;
     },
     startQuestionnaire() {
@@ -154,18 +157,27 @@ export default {
           this.questions = this.questions.filter(question => question.overSixMonths);
           break;
       }
+      // If question leads to visa, finish questionnaire and reccommend this visa
+      this.visaList.forEach(visa => {
+        if(answer === visa) {
+          this.finishQuestionnaire(answer);
+        }
+      })
       // Check if child applicant will be over 18 - if yes, reset questions and filter for adult
       if(answer === 'Adult Application') {
         this.currentQuestion = -1;
         this.getQuestions();
         this.questions = this.questions.filter(question => question.isAdult);
       }
-      // If question leads to visa, finish questionnaire and reccommend this visa
-      this.visaList.forEach(visa => {
-        if(answer === visa) {
-          this.finishQuestionnaire(answer);
+      // Check if answer is Starting a business
+      if(answer === 'Start a Business') {
+        if(this.currentVisa === 'Startup Visa') {
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.isStartupVisa);
+        } else {
+          this.finishQuestionnaire('Startup Visa');
         }
-      });
+      }
       // If answer is array, list all visas in array
       if(Array.isArray(answer)) {
         this.finishQuestionnaire(answer);

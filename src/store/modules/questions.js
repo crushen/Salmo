@@ -189,7 +189,7 @@ const questions = [
     answers: [
       {
         text: 'Start a Business',
-        value: 'Start Up Visa' // Default, but this needs to change depending on current visa
+        value: 'Start a Business'
       },
       {
         text: 'Invest in Business',
@@ -198,6 +198,22 @@ const questions = [
       {
         text: 'Endorsed as exceptional talent/ top of field',
         value: 'Exceptional Talent Visa'
+      }
+    ]
+  },
+  {
+    isAdult: true,
+    isBusiness: true,
+    isStartupVisa: true,
+    question: 'Did you switch from Graduate Entrepreneur Visa in the second year?',
+    answers: [
+      {
+        text: 'Yes',
+        value: 'Innovator Visa - Can switch to Entrepreneur Visa'
+      },
+      {
+        text: 'No',
+        value: 'Innovator Visa'
       }
     ]
   },
