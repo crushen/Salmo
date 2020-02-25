@@ -154,27 +154,33 @@ export default {
           this.questions = this.questions.filter(question => question.overSixMonths);
           break;
       }
-
       // Check if child applicant will be over 18 - if yes, reset questions and filter for adult
       if(answer === 'Adult Application') {
         this.currentQuestion = -1;
         this.getQuestions();
         this.questions = this.questions.filter(question => question.isAdult);
       }
-
-
-      
       // If question leads to visa, finish questionnaire and reccommend this visa
       this.visaList.forEach(visa => {
         if(answer === visa) {
           this.finishQuestionnaire(answer);
         }
       });
+      // If answer is array, list all visas in array
+      if(Array.isArray(answer)) {
+        this.finishQuestionnaire(answer);
+      }
       // If question hasn't lead to visa, add 1 to currentQuestion
       this.currentQuestion++;
     },
     finishQuestionnaire(answer) {
       this.result.recommendedVisa = answer;
+      if(Array.isArray(answer)) {
+        this.result.recommendedVisa = [];
+        answer.forEach(visa => {
+          this.result.recommendedVisa.push(visa);
+        })
+      }
       this.$store.dispatch('questions/getResults', this.result);
       this.introStage = false;
       this.questionsStage = false;

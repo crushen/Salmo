@@ -122,7 +122,7 @@ const questions = [
           'Creative and Sporting Visa',
           'Religious Worker Visa',
           'Seasonal Worker Visa'
-        ] // need to figure out what to do with array answers
+        ] 
       }
     ]
   },
@@ -314,12 +314,9 @@ export default {
     getResults(context, result) {
       // First set state results
       context.commit('setResults', result);
-      // Then use filtered results for questionnaireResults collection, and add reference to the user
-      // (There is a firebase function set up to add questionnaireResults ID to user profile)
       context.state.result.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
       return db.collection('questionnaireResults')
         .add(context.state.result)
-        // Add filtered questionnaireResults and ID to local user profile
         .then(docRef => {
           context.state.result.id = docRef.id;
           context.commit('auth/addResultsToUser', context.state.result, {root: true})
@@ -333,6 +330,10 @@ export default {
     },
     setResults(state, result) {
       state.result.recommendedVisa = result.recommendedVisa;
+      if(Array.isArray(result)) {
+        state.result.recommendedVisa = [];
+        state.result.recommendedVisa = result.recommendedVisa;
+      }
     }
   }
 }

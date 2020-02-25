@@ -2,7 +2,16 @@
   <div>
     <p>Quiz done</p>
 
-    <p>{{ result.recommendedVisa }}</p>
+    <div v-if="Array.isArray(result.recommendedVisa)">
+      <p>Your options are:</p>
+      <p
+        v-for="visa in result.recommendedVisa"
+        :key="visa">
+        {{ visa }}
+      </p>
+    </div>
+
+    <p v-else>{{ result.recommendedVisa }}</p>
   </div>
 </template>
 
@@ -11,17 +20,8 @@ export default {
   data() {
     return {
       result: this.$store.state.questions.result
-      //filteredResults: {}
     }
   }
-  // methods: {
-  //   handleFilter() {
-  //     this.filteredResults = this.results.filter(result => result.score > 0);
-  //   }
-  // },
-  // created() {
-  //   this.handleFilter();
-  // }
 }
 </script>
 

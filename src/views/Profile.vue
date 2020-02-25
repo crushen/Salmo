@@ -9,7 +9,16 @@
       <div 
         v-if="mostRecentResult"
         class="margin">
-        <p>{{ mostRecentResult.recommendedVisa }}</p>
+        <div v-if="Array.isArray(mostRecentResult.recommendedVisa)">
+          <p>Your options are:</p>
+          <p
+            v-for="visa in mostRecentResult.recommendedVisa"
+            :key="visa">
+            {{ visa }}
+          </p>
+        </div>
+
+        <p v-else>{{ mostRecentResult.recommendedVisa }}</p>
       </div>
 
     </div>
