@@ -29,7 +29,7 @@ const questions = [
       },
       {
         text: 'Family',
-        value: 'Family'
+        value: 'isFamily'
       }
     ]
   },
@@ -55,19 +55,19 @@ const questions = [
     answers: [
       {
         text: 'Work',
-        value: 'Work'
+        value: 'isWork'
       },
       {
         text: 'Business',
-        value: 'Business'
+        value: 'isBusiness'
       },      
       {
         text: 'Family',
-        value: 'Family'
+        value: 'isFamily'
       },
       {
         text: 'Study',
-        value: 'Study'
+        value: 'isStudy'
       },
     ]
   },
@@ -78,19 +78,19 @@ const questions = [
     question: 'How long do you plan to stay in the UK?',
     answers: [
       {
-        text: '2 years and over',
-        value: '2+'
+        text: 'Under 2 years',
+        value: 'underTwoYears'
       },
       {
-        text: 'Under 2 years',
-        value: '2-'
+        text: '2 years and over',
+        value: 'overTwoYears'
       }
     ]
   },
   {
     isAdult: true,
     isWork: true,
-    under2: true,
+    underTwoYears: true,
     question: 'Which one of these best describes your work?',
     answers: [
       {
@@ -129,7 +129,7 @@ const questions = [
   {
     isAdult: true,
     isWork: true,
-    over2: true,
+    overTwoYears: true,
     question: 'Are you a sportsperson / minister of religion?',
     answers: [
       {
@@ -142,14 +142,14 @@ const questions = [
       },
       {
         text: 'No',
-        value: 'Non S or R'
+        value: 'nonSR'
       }
     ]
   },
   {
     isAdult: true,
     isWork: true,
-    over2: true,
+    overTwoYears: true,
     nonSR: true,
     question: 'Are you being transferred by your current employer to UK?',
     answers: [
@@ -166,7 +166,7 @@ const questions = [
   {
     isAdult: true,
     isWork: true,
-    over2: true,
+    overTwoYears: true,
     nonSR: true,
     isTransferred: true,
     question: 'Are you a recent graduate?',

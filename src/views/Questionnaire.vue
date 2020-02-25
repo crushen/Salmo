@@ -106,35 +106,35 @@ export default {
       // Check which catagory of questions to ask
       switch(answer) {
         // Visa catagories
-        case 'Work':
+        case 'isWork':
           // Set currentQuestion to -1 as it will reset to 0
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isWork); 
           break;
-        case 'Business':
+        case 'isBusiness':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isBusiness);
           break;
-        case 'Family':
+        case 'isFamily':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isFamily);
           break;
-        case 'Study':
+        case 'isStudy':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isStudy);
           break;
         // WORK
         // over 2 or under 2 years
-        case '2+':
+        case 'overTwoYears':
           this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.over2);
+          this.questions = this.questions.filter(question => question.overTwoYears);
           break;
-        case '2-':
+        case 'underTwoYears':
           this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.under2);
+          this.questions = this.questions.filter(question => question.underTwoYears);
           break;
         // not sportsperson or minister of religion
-        case 'Non S or R':
+        case 'nonSR':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.nonSR);
           break;
