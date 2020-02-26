@@ -1,26 +1,11 @@
 <template>
   <section>
     <div v-if="user.emailVerified">
-
       <p>Name: {{ user.profile.firstName }} {{ user.profile.lastName }}</p>
       <p>Email: {{ user.email }}</p>
       <p>Email verified: {{ user.emailVerified }}</p>
 
-      <div 
-        v-if="mostRecentResult"
-        class="margin">
-        <div v-if="Array.isArray(mostRecentResult.recommendedVisa)">
-          <p>Your options are:</p>
-          <p
-            v-for="visa in mostRecentResult.recommendedVisa"
-            :key="visa">
-            {{ visa }}
-          </p>
-        </div>
-
-        <p v-else>{{ mostRecentResult.recommendedVisa }}</p>
-      </div>
-
+      <results v-if="user.profile.questionnaireResults" />
     </div>
 
     <div v-else>
@@ -31,16 +16,15 @@
 </template>
 
 <script>
+import results from '@/components/questionnaire/Results';
 
 export default {
+  components: {
+    results
+  },
   data() {
     return {
       user: this.$store.state.auth.user
-    }
-  },
-  computed: {
-    mostRecentResult() {
-      return this.user.profile.questionnaireResults.slice(-1)[0];
     }
   }
 }
