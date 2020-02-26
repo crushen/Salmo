@@ -14,6 +14,8 @@
     <p v-else>{{ result }}</p>
 
     <p v-if="switchMessage">{{ switchMessage }}</p>
+    <p v-if="dependantMessage">{{ dependantMessage }}</p>
+
   </div>
 </template>
 
@@ -23,7 +25,9 @@ export default {
     return {
       result: this.$store.state.questions.result.recommendedVisa,
       currentVisa: this.$store.state.auth.user.profile.currentVisa,
-      switchMessage: null
+      dependants: this.$store.state.auth.user.profile.dependants,
+      switchMessage: null,
+      dependantMessage: null
     }
   },
   created() {
@@ -129,6 +133,21 @@ export default {
          this.currentVisa === 'Tier 2 Minister of Religion Visa' ||
          this.currentVisa === 'Tier 4 Child Student Visa') {
            this.switchMessage = 'You can switch to this visa';
+      }
+    }
+    // DEPENDANT MESSAGE
+    if(this.result === 'Tier 4 Child Student Visa' ||
+      this.result === 'Tier 4 Short Term Study Visa' ||
+      this.result === 'Tier 5 Seasonal Worker Visa' ||
+      this.result === 'Tier 5 Youth Mobility Scheme' ||
+      this.result === 'Marriage Visa' ||
+      this.result === 'Standard Visitor Visa') {
+        if(this.dependants !== 'None') {
+          this.dependantMessage = "We're sorry, you can't bring any dependants on this visa"
+        }
+    } else {
+      if(this.dependants !== 'None') {
+        this.dependantMessage = "You can bring dependants with you on this visa"
       }
     }
   }
