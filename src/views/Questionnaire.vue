@@ -206,6 +206,7 @@ export default {
       this.questionsStage = false;
       this.resultsStage = true;
     }
+    // For this - maybe make filtered questions new array, and if prev go back to prev array and sort out currentQuestion
     // previousQuestion() {
     //   // Go back to previous question
     //   this.currentQuestion--;
