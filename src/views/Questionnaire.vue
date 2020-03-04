@@ -151,6 +151,15 @@ export default {
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isTransferred);
           break;
+        // BUSINESS
+        case 'isStartup': // Startup is complex - needs work
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.isStartup);
+          break;
+        case 'isInvestor':
+          this.currentQuestion = -1;
+          this.questions = this.questions.filter(question => question.isInvestor);
+          break;
         // FAMILY
         // up to six months or over 6 months
         case 'upToSixMonths':

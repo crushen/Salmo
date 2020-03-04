@@ -188,8 +188,8 @@ const questions = [
     question: 'Which one of these best describes your future business plans?',
     answers: [
       {
-        text: 'Start a Business',
-        value: 'Start a Business'
+        text: 'Start a Business', // Startup is complex - needs work
+        value: 'isStartup'
       },
       {
         text: 'Invest in Business',
@@ -204,7 +204,7 @@ const questions = [
   {
     isAdult: true,
     isBusiness: true,
-    isStartupVisa: true,
+    isStartup: true,
     question: 'Did you switch from Graduate Entrepreneur Visa in the second year?',
     answers: [
       {
