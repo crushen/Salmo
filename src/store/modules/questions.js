@@ -209,11 +209,11 @@ const questions = [
     answers: [
       {
         text: 'Yes',
-        value: 'Innovator Visa'
+        value: 'Innovator Visa - Can switch to Entrepreneur Visa for limited time'
       },
       {
         text: 'No',
-        value: 'Innovator Visa'
+        value: "Innovator Visa - Can't switch to Entrepreneur Visa"
       }
     ]
   },
@@ -289,7 +289,7 @@ const questions = [
       },
       {
         text: "It's complicated",
-        value: 'Family Visa - Apply on the basis of your private life'
+        value: 'Family Visa - Apply on the basis of your private life' // This will also need to list details and ask if they apply
       }
     ]
   },

@@ -75,6 +75,8 @@ export default {
         'Tier 2 Intra-company Transfer Long-term Staff Visa',
         'Tier 2 General Work Visa',
         'Innovator Visa',
+        'Innovator Visa - Can switch to Entrepreneur Visa for limited time',
+        "Innovator Visa - Can't switch to Entrepreneur Visa",
         'Tier 1 Exceptional Talent Visa',
         'Tier 1 Investor Visa - 5 years for PR',
         'Tier 1 Investor Visa - 3 years for PR',
