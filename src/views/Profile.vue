@@ -5,7 +5,20 @@
       <p>Email: {{ user.email }}</p>
       <p>Email verified: {{ user.emailVerified }}</p>
 
-      <results v-if="user.profile.questionnaireResults" />
+      <div 
+        v-if="mostRecentResult"
+        class="margin">
+        <div v-if="Array.isArray(mostRecentResult.recommendedVisa)">
+          <p>Your options are:</p>
+          <p
+            v-for="visa in mostRecentResult.recommendedVisa"
+            :key="visa">
+            {{ visa }}
+          </p>
+        </div>
+
+        <p v-else>{{ mostRecentResult.recommendedVisa }}</p>
+      </div>
     </div>
 
     <div v-else>
@@ -16,16 +29,20 @@
 </template>
 
 <script>
-import results from '@/components/questionnaire/Results';
 
 export default {
-  components: {
-    results
-  },
   data() {
     return {
       user: this.$store.state.auth.user
     }
+  },
+  computed: {
+    mostRecentResult() {
+      return this.user.profile.questionnaireResults.slice(-1)[0];
+    }
+  },
+  created() {
+    this.user = this.$store.state.auth.user;
   }
 }
 </script>
