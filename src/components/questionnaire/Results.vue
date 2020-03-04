@@ -153,7 +153,6 @@ export default {
   }
 }
 
-// Testing
 </script>
 
 <style scoped>
