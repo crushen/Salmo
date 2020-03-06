@@ -1,6 +1,6 @@
 <template>
   <section>
-
+    <h1>Creating your profile...</h1>
     <div v-if="question === 1">
       <label>What is your country of origin?</label> 
       <select 

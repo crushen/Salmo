@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p>Quiz done</p>
+    <h1>Quiz done</h1>
 
     <div v-if="Array.isArray(result)">
       <p>Your options are:</p>

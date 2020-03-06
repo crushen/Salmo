@@ -16,6 +16,7 @@
       <div 
         v-else
         class="question">
+        <h1>Finding your visa...</h1>
         <question 
           :question="questions[currentQuestion]"
           :questions="questions"
