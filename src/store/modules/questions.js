@@ -339,7 +339,8 @@ export default {
     result: {
       user: '',
       recommendedVisa: '',
-      messages: {}
+      messages: {},
+      youthMobility: false
     }
   },
   actions: {
@@ -349,8 +350,9 @@ export default {
     getResults(context, result) {
       context.commit('setResults', result);
     },
-    sendDbResults(context, messages) {
+    sendDbResults(context, {messages, youthMobility}) {
       context.commit('setMessages', messages);
+      context.commit('setYouthMobility', youthMobility);
       context.state.result.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
       return db.collection('questionnaireResults')
         .add(context.state.result)
@@ -374,6 +376,9 @@ export default {
     },
     setMessages(state, messages) {
       state.result.messages = messages;
+    },
+    setYouthMobility(state, youthMobility) {
+      state.result.youthMobility = youthMobility;
     }
   }
 }

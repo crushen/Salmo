@@ -20,7 +20,8 @@ exports.addResultsToProfile = functions.firestore
         questionnaireResults: admin.firestore.FieldValue.arrayUnion({
           id: resultsId,
           recommendedVisa: addedResults.recommendedVisa,
-          messages: addedResults.messages
+          messages: addedResults.messages,
+          youthMobility: addedResults.youthMobility
         })
       })
   })

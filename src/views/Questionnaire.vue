@@ -206,18 +206,6 @@ export default {
       }
       // If question hasn't lead to visa yet, go to next question
       this.currentQuestion++;
-      // Check age, nationality and selected visa for youth mobility scheme
-      // const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)'];
-      // const YMvisas = ['Tier 2 General Work Visa', 'Tier 5 Charity Worker Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Tier 5 Creative and Sporting Visa', 'Tier 5 Religious Worker Visa', 'Tier 5 Seasonal Worker Visa' ];
-      // YMcountries.forEach(country => {
-      //   if(this.userNationality === country && this.userAge >= 18 && this.userAge <= 30) {
-      //     YMvisas.forEach(visa => {
-      //       if(answer === visa) {
-      //         this.finishQuestionnaire([answer, 'Tier 5 Youth Mobility Scheme']);
-      //       }
-      //     })
-      //   }
-      // })
     },
     finishQuestionnaire(answer) {
       this.result.recommendedVisa = answer;

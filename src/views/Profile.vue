@@ -20,9 +20,10 @@
         </div>
 
         <p v-else>{{ mostRecentResult.recommendedVisa }}</p>
-
         <p v-if="messages.switch">{{ messages.switch }}</p>
         <p v-if="messages.dependant">{{ messages.dependant }}</p>
+
+        <p v-if="mostRecentResult.youthMobility">Youth Mobility Visa</p>
       </div>
     </div>
 

@@ -12,9 +12,10 @@
     </div>
 
     <p v-else>{{ result }}</p>
-
     <p v-if="messages.switch">{{ messages.switch }}</p>
     <p v-if="messages.dependant">{{ messages.dependant }}</p>
+
+    <p v-if="youthMobility">Youth Mobility Visa</p>
 
   </div>
 </template>
@@ -23,17 +24,50 @@
 export default {
   data() {
     return {
+      userAge: this.$store.state.auth.user.profile.age,
+      userCountry: this.$store.state.auth.user.profile.country,
       result: this.$store.state.questions.result.recommendedVisa,
       currentVisa: this.$store.state.auth.user.profile.currentVisa,
       dependants: this.$store.state.auth.user.profile.dependants,
       messages: {
         switch: null,
         dependant: null
+      },
+      youthMobility: false
+    }
+  },
+  methods: {
+    checkYouthMobility() {
+      const YMvisas = ['Tier 2 General Work Visa', 'Tier 5 Charity Worker Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Tier 5 Creative and Sporting Visa', 'Tier 5 Religious Worker Visa', 'Tier 5 Seasonal Worker Visa' ];
+      const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)'];
+      let isYMvisa = false;
+      let isYMcountry = false;
+
+      YMvisas.forEach(visa => {
+        if(this.result === visa) {
+          isYMvisa = true;
+        }
+      });
+
+      YMcountries.forEach(country => {
+        if(this.userCountry === country) {
+          isYMcountry = true;
+        }
+      });
+
+      if(isYMvisa && 
+         isYMcountry && 
+         this.userAge >= 18 && 
+         this.userAge <= 30 &&
+         this.dependants === 'None') {
+        this.youthMobility = true;
       }
-      
     }
   },
   created() {
+    // Check if they qualify for youth mobility
+    this.checkYouthMobility();
+    // Check if they can switch from current visa
     // CHILD
     if(this.result === 'Tier 4 Child Student Visa') {
       if(this.currentVisa === 'Tier 4 General Student Visa') {
@@ -138,7 +172,7 @@ export default {
            this.messages.switch = 'You can switch to this visa';
       }
     }
-    // DEPENDANT MESSAGE
+    // Check if they can bring dependants
     if(this.result === 'Tier 4 Child Student Visa' ||
       this.result === 'Tier 4 Short Term Study Visa' ||
       this.result === 'Tier 5 Seasonal Worker Visa' ||
@@ -155,10 +189,12 @@ export default {
     }
 
     // Set messages in state, and then push to db
-    this.$store.dispatch('questions/sendDbResults', this.messages);
+    this.$store.dispatch('questions/sendDbResults', {
+      messages: this.messages,
+      youthMobility: this.youthMobility
+    });
   }
 }
-
 </script>
 
 <style scoped>
