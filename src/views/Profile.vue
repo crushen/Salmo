@@ -4,10 +4,12 @@
       <p>Name: {{ user.profile.firstName }} {{ user.profile.lastName }}</p>
       <p>Email: {{ user.email }}</p>
       <p>Email verified: {{ user.emailVerified }}</p>
+      <p>Current Visa: {{ currentVisa }}</p>
+      <p>Dependants: {{ dependants }}</p>
 
-      <div 
-        v-if="mostRecentResult"
-        class="margin">
+      <h1 class="margin">Visa Results:</h1>
+
+      <div v-if="mostRecentResult">
         <div v-if="Array.isArray(mostRecentResult.recommendedVisa)">
           <p>Your options are:</p>
           <p
