@@ -33,14 +33,6 @@ export default {
       
     }
   },
-  // watch: {
-  //   messages: {
-  //     handler(messages) {
-  //       this.$store.dispatch('questions/sendDbResults', messages);
-  //     },
-  //     deep: true
-  //   }
-  // },
   created() {
     // CHILD
     if(this.result === 'Tier 4 Child Student Visa') {

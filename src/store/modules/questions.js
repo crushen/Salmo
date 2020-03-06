@@ -342,33 +342,15 @@ export default {
       messages: {}
     }
   },
-  getters: {
-
-  },
   actions: {
     getQuestions({commit}) {
       commit('setQuestions', questions);
     },
     getResults(context, result) {
-      // First set state results
       context.commit('setResults', result);
-      // context.state.result.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
-      // return db.collection('questionnaireResults')
-      //   .add(context.state.result)
-      //   .then(docRef => {
-      //     context.state.result.id = docRef.id;
-      //     context.commit('auth/addResultsToUser', context.state.result, {root: true})
-      //     return true
-      //   })
     },
     sendDbResults(context, messages) {
       context.commit('setMessages', messages);
-      // return db
-      //   .collection('profiles')
-      //   .doc(context.rootState.auth.user.uid)
-      //   .update({
-      //     'messages': context.state.result.messages
-      //   })
       context.state.result.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
       return db.collection('questionnaireResults')
         .add(context.state.result)
