@@ -2,6 +2,7 @@
 // import firebase from 'firebase/app'
 // import 'firebase/auth'
 import { db } from '@/db'
+var _ = require('lodash');
 
 const questions = [
   // CHILD QUESTIONS
@@ -354,11 +355,18 @@ export default {
       context.commit('setMessages', messages);
       context.commit('setYouthMobility', youthMobility);
       context.state.result.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
+
+      // Still testing
+      const result = context.state.result;
+      if(_.isEmpty(result.messages)) {
+        delete result.messages;
+      }
+
       return db.collection('questionnaireResults')
-        .add(context.state.result)
+        .add(result)
         .then(docRef => {
-          context.state.result.id = docRef.id;
-          context.commit('auth/addResultsToUser', context.state.result, {root: true})
+          result.id = docRef.id;
+          context.commit('auth/addResultsToUser', result, {root: true})
           return true
         })
     },
@@ -375,7 +383,10 @@ export default {
       }
     },
     setMessages(state, messages) {
-      state.result.messages = messages;
+      for(const prop in messages) {
+        if(messages[prop] !== null)
+        state.result.messages[prop] = messages[prop];
+      }
     },
     setYouthMobility(state, youthMobility) {
       state.result.youthMobility = youthMobility;

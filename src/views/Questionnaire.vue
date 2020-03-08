@@ -155,10 +155,10 @@ export default {
           this.questions = this.questions.filter(question => question.isTransferred);
           break;
         // BUSINESS
-        case 'isStartup': // Startup is complex - needs work
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isStartup);
-          break;
+        // case 'isStartup': // Startup is complex - needs work
+        //   this.currentQuestion = -1;
+        //   this.questions = this.questions.filter(question => question.isStartup);
+        //   break;
         case 'isInvestor':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isInvestor);
@@ -196,14 +196,12 @@ export default {
         this.questions = this.questions.filter(question => question.isAdult);
       }
       // Check if answer is Starting a business
-      if(answer === 'Start a Business') {
-        if(this.currentVisa === 'Startup Visa') {
+      if(answer === 'isStartup' && this.currentVisa === 'Startup Visa') {
           this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isStartupVisa);
-        } else {
+          this.questions = this.questions.filter(question => question.isStartup);
+        } else if(answer === 'isStartup' && this.currentVisa !== 'Startup Visa') {
           this.finishQuestionnaire('Startup Visa');
         }
-      }
       // If question hasn't lead to visa yet, go to next question
       this.currentQuestion++;
     },
