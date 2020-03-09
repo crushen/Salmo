@@ -355,15 +355,15 @@ export default {
       context.commit('setMessages', messages);
       context.commit('setYouthMobility', youthMobility);
       context.state.result.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
-
-      // Still testing
+      // If messages is empty, don't send this to database
       const result = context.state.result;
       if(_.isEmpty(result.messages)) {
         delete result.messages;
       }
-
+      // Add results to database
       return db.collection('questionnaireResults')
         .add(result)
+        // Add results to local user profile
         .then(docRef => {
           result.id = docRef.id;
           context.commit('auth/addResultsToUser', result, {root: true})
