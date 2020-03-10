@@ -12,6 +12,9 @@
         v-if="buildProfile"
         :userProfile="user.profile"
         @submitProfile=submitProfile />
+        <!--:questionNumber="questionNumber"
+         @nextQuestion="nextQuestion"
+        @previousQuestion="previousQuestion" -->
 
       <div 
         v-else
@@ -22,7 +25,7 @@
           :questions="questions"
           :currentQuestion="currentQuestion"
           @submitAnswer="handleAnswer" />
-          <!-- @previousQuestion="previousQuestion" backToCoreQuestions="backToCoreQuestions" -->
+          <!-- @previousQuestion="previousQuestion" @backToCoreQuestions="backToCoreQuestions" -->
 
       </div>
     </div>
@@ -55,6 +58,7 @@ export default {
       questionsStage: false,
       buildProfile: false,
       resultsStage: false,
+      //questionNumber: 1,
       questions: [],
       answers: [],
       currentQuestion: 0,
@@ -155,10 +159,6 @@ export default {
           this.questions = this.questions.filter(question => question.isTransferred);
           break;
         // BUSINESS
-        // case 'isStartup': // Startup is complex - needs work
-        //   this.currentQuestion = -1;
-        //   this.questions = this.questions.filter(question => question.isStartup);
-        //   break;
         case 'isInvestor':
           this.currentQuestion = -1;
           this.questions = this.questions.filter(question => question.isInvestor);
@@ -217,26 +217,36 @@ export default {
       this.introStage = false;
       this.questionsStage = false;
       this.resultsStage = true;
-    }
-    // For this - maybe make filtered questions new array, and if prev go back to prev array and sort out currentQuestion
+    },
+
+
+
+  //   // For this - maybe make filtered questions new array, and if prev go back to prev array and sort out currentQuestion
+  //   previousQuestion() {
+  //     // Go back to previous question
+  //     this.currentQuestion--;
+  //     // Remove most recent result from answers
+  //     const previousResult = this.answers.pop();
+  //     this.results.forEach(result => {
+  //       // If the most recent result matches name in results, -1 from score
+  //       if(previousResult === result.name) {
+  //         result.score--;
+  //       }
+  //     })
+  //   },
+    // nextQuestion() {
+    //   this.questionNumber++;
+    // },
     // previousQuestion() {
-    //   // Go back to previous question
-    //   this.currentQuestion--;
-    //   // Remove most recent result from answers
-    //   const previousResult = this.answers.pop();
-    //   this.results.forEach(result => {
-    //     // If the most recent result matches name in results, -1 from score
-    //     if(previousResult === result.name) {
-    //       result.score--;
-    //     }
-    //   })
+    //   this.questionNumber--;
     // },
-    // backToCoreQuestions() {
+    // backToCoreQuestions(questionNumber) {
     //   this.buildProfile = true;
-    //   this.results.forEach(result => {
-    //     result.score = 0;
-    //   })
+    //   this.questionNumber = questionNumber;
+    //   this.getQuestions();
     // },
+
+
   },
   watch: {
     // When age is updated after core questions, filter between child or adult questions

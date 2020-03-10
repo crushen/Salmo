@@ -1,7 +1,7 @@
 <template>
   <section>
     <h1>Creating your profile...</h1>
-    <div v-if="question === 1">
+    <div v-if="questionNumber === 1">
       <label>What is your country of origin?</label> 
       <select 
         v-model="profileToUpdate.country"
@@ -19,24 +19,24 @@
       </button> 
     </div>
 
-    <div v-if="question === 2">
+    <div v-if="questionNumber === 2">
       <label>What is your date of birth?</label> 
       <div class="date-picker">
         <v-date-picker
           :max-date="maxDate"
           v-model="date" />
       </div>
-      <!-- <button
+      <button
         @click="prev">
         Previous
-      </button>  -->
+      </button> 
       <button
         @click="next">
         Next
       </button> 
     </div>
 
-    <div v-if="question === 3">
+    <div v-if="questionNumber === 3">
       <label>Do you currently have a UK visa?</label> 
       <select 
         v-model="profileToUpdate.currentVisa"
@@ -48,10 +48,10 @@
           {{ visa }}
         </option>
       </select>
-      <!-- <button
+      <button
         @click="prev">
         Previous
-      </button> -->
+      </button>
       <!-- If user is 18 or over, go to Dependants question. Else, sumbit profile -->
       <button
         v-if="age >= 18"
@@ -65,7 +65,7 @@
       </button> 
     </div>
 
-    <div v-if="age >= 18 && question === 4">
+    <div v-if="age >= 18 && questionNumber === 4">
       <label>Do you have any dependants?</label> 
       <select 
         v-model="profileToUpdate.dependants"
@@ -77,10 +77,10 @@
           {{ dependant }}
         </option>
       </select>
-      <!-- <button
+      <button
         @click="prev">
         Previous
-      </button>  -->
+      </button> 
       <button
         @click="submitProfile">
         Next
@@ -94,14 +94,12 @@
 
 export default {
   props: {
-    userProfile: {
-      required: true,
-      type: Object
-    }
+    //questionNumber: { required: true, type: Number },
+    userProfile: { required: true, type: Object }
   },
   data() {
     return {
-      question: 1,
+      questionNumber: 1,
       countries: [
         "Afghanistan",
         "Albania",
@@ -372,11 +370,13 @@ export default {
   },
   methods: {
     next() {
-      this.question++;
+      //this.$emit('nextQuestion');
+      this.questionNumber++;
     },
-    // prev() {
-    //   this.question--;
-    // },
+    prev() {
+      //this.$emit('previousQuestion');
+      this.questionNumber--;
+    },
     calculateAge(date) {
       let today = new Date(),
           birthDate = new Date(date),
