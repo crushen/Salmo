@@ -5,13 +5,13 @@
         <p>Hello, {{ user.profile.firstName }}</p>
       </div>
       <div class="nav-links">
-        <router-link :to="{ name: 'home' }">Home</router-link>
+        <router-link :to="{ name: 'home' }" exact>Home</router-link>
         <template v-if="!isAuthenticated">
           <router-link :to="{ name: 'login' }">Login</router-link>
           <router-link :to="{ name: 'signup' }">Signup</router-link>
         </template>
         <template v-else>
-          <router-link :to="{ name: 'profile'}">Profile</router-link>
+          <router-link :to="{ name: 'user-info', params: { uid:user.uid } }">Profile</router-link>
           <router-link :to="{ name: 'questionnaire' }">Questionnaire</router-link>
           <button 
             @click="handleLogout"

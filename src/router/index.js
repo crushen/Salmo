@@ -1,15 +1,17 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home'
-import Login from '../views/Login'
-import Signup from '../views/Signup'
-import Profile from '../views/Profile'
-import Questionnaire from '../views/Questionnaire'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '@/views/Home';
+import Login from '@/views/Login';
+import Signup from '@/views/Signup';
+import Profile from '@/views/profile/Profile';
+import UserInfo from '@/views/profile/UserInfo';
+import UpdateProfile from '@/views/profile/UpdateProfile';
+import Questionnaire from '@/views/Questionnaire'
 
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -31,9 +33,13 @@ const routes = [
   },
   { 
     path: '/user', 
-    name: 'profile', 
+    name: 'profile',
     component: Profile,
-    meta: { onlyAuthUser: true } 
+    meta: { onlyAuthUser: true },
+    children: [
+      { path: ':uid', name: 'user-info', component: UserInfo },
+      { path: ':uid/update-profile', name: 'update-profile', component: UpdateProfile }
+    ]
   },
   { 
     path: '/user/questionnaire', 
@@ -68,4 +74,4 @@ router.beforeEach((to, from, next) => {
   }
 })
 
-export default router
+export default router;
