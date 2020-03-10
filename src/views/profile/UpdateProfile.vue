@@ -99,10 +99,10 @@ export default {
   data() {
     return {
       user: this.$store.state.auth.user,
-      profileToUpdate: this.$store.state.auth.user.profile,
       questionNumber: 1,
       date: new Date(),
       age: null,
+      finished: false,
       countries: [
         "Afghanistan",
         "Albania",
@@ -362,6 +362,9 @@ export default {
     }
   },
   computed: {
+    profileToUpdate() { 
+      return {...this.user.profile} 
+    },
     maxDate() {
       const underFourYears = new Date();
       underFourYears.setFullYear(underFourYears.getFullYear() - 4);
@@ -387,6 +390,7 @@ export default {
     submitProfile() {
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
         .then(() => {
+          this.finished = true;
           this.$router.push({ name: 'user-info', params: { uid: this.user.uid } });
         })
     }
@@ -401,6 +405,17 @@ export default {
         this.profileToUpdate.dependants = 'None';
       }
     }
+  },
+  beforeRouteLeave(to, from, next) {
+    if(this.finished) {
+      next();
+    } else {
+      const confirmLeave = confirm('Are you sure? Your progress will be lost');
+      if(confirmLeave) {
+        next();
+      }
+    }
+
   }
 }
 </script>
