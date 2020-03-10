@@ -1,6 +1,5 @@
 <template>
   <section>
-    <h1>Creating your profile...</h1>
     <div v-if="questionNumber === 1">
       <label>What is your country of origin?</label> 
       <select 
@@ -61,7 +60,7 @@
       <button
         v-else
         @click="submitProfile">
-        Next
+        Update Profile
       </button> 
     </div>
 
@@ -83,10 +82,14 @@
       </button> 
       <button
         @click="submitProfile">
-        Next
+        Update Profile
       </button> 
     </div>
 
+    <button
+      @click="closeUpdate">
+      Back To Profile
+    </button> 
   </section>
 </template>
 
@@ -94,7 +97,6 @@
 
 export default {
   props: {
-    //questionNumber: { required: true, type: Number },
     userProfile: { required: true, type: Object }
   },
   data() {
@@ -370,12 +372,13 @@ export default {
   },
   methods: {
     next() {
-      //this.$emit('nextQuestion');
       this.questionNumber++;
     },
     prev() {
-      //this.$emit('previousQuestion');
       this.questionNumber--;
+    },
+    closeUpdate() {
+      this.$emit('closeUpdate');
     },
     calculateAge(date) {
       let today = new Date(),
@@ -400,6 +403,9 @@ export default {
         this.profileToUpdate.dependants = 'None';
       }
     }
+  },
+  beforeDestroy() {
+    console.log('hello')
   }
 }
 </script>

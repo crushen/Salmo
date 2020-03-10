@@ -8,16 +8,16 @@
     </button>
 
     <div v-if="questionsStage">
-      <core-questions
+      <!-- <core-questions
         v-if="buildProfile"
         :userProfile="user.profile"
-        @submitProfile=submitProfile />
+        @submitProfile=submitProfile /> -->
         <!--:questionNumber="questionNumber"
          @nextQuestion="nextQuestion"
         @previousQuestion="previousQuestion" -->
 
       <div 
-        v-else
+        
         class="question">
         <h1>Finding your visa...</h1>
         <question 
@@ -38,13 +38,13 @@
 </template>
 
 <script>
-import coreQuestions from '@/components/questionnaire/CoreQuestions'
+//import coreQuestions from '@/components/questionnaire/CoreQuestions'
 import question from '@/components/questionnaire/Question';
 import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
-    coreQuestions,
+    //coreQuestions,
     question,
     results
   },
