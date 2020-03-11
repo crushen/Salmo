@@ -4,7 +4,7 @@
 import { db } from '@/db'
 var _ = require('lodash');
 
-const questions = [
+const questions0 = [
   // CHILD QUESTIONS
   {
     isChild: true,
@@ -333,6 +333,82 @@ const questions = [
   }
 ]
 
+const questions = [
+  {
+    visa: 'Tier 4 General Student Visa',
+    questions: [
+      {
+        question: 'Which best describes why you would like to remain in the UK?',
+        number: 0,
+        answers: [
+          {
+            text: 'Here for family. This applies to you if you wish to stay with a partner or family after your studies.',
+            value: 'Family Visa (needs expanding)'
+          },
+          {
+            text: 'Here for business. This applies to you if you will be starting a business or investing after your studies.',
+            value: 1
+          },
+          {
+            text: 'Here for work. This applies to you if you will be employed by someone else after your studies.',
+            value: 2
+          }
+        ]
+      },
+      {
+        question: 'Would you like to invest in a UK based business or start your own?',
+        number: 1,
+        answers: [
+          {
+            text: 'Invest',
+            value: 'Tier 1 Investor Visa'
+          },
+          {
+            text: 'Start my own',
+            value: 'Startup Visa'
+          }
+        ]
+      },
+      {
+        question: 'Does your work involve Sports or Religion',
+        number: 2,
+        answers: [
+          {
+            text: 'Sports',
+            value: 'Tier 2 Sportsperson Visa'
+          },
+          {
+            text: 'Religion',
+            value: 'Tier 2 Minister of Religion Visa'
+          },
+          {
+            text: 'Neither',
+            value: 3
+          }
+        ]
+      },
+      {
+        question: 'Is your job a part of a approved government authorised exchange scheme?',
+        number: 3,
+        answers: [
+          {
+            text: 'Yes',
+            value: 'T5 Temporary Worker - Government Authorised Exchange Visa'
+          },
+          {
+            text: 'No',
+            value: 'Tier 2 General Work Visa'
+          },
+          {
+            text: 'Not sure',
+            value: 'Take customer to page describing the scheme'
+          }
+        ]
+      }
+    ]
+  }
+]
+
 export default {
   namespaced: true,
   state: {
@@ -345,8 +421,9 @@ export default {
     }
   },
   actions: {
-    getQuestions({commit}) {
-      commit('setQuestions', questions);
+    getQuestions(context) {
+      const userCurrentVisa = context.rootState.auth.user.profile.currentVisa;
+      context.commit('setQuestions', userCurrentVisa);
     },
     getResults(context, result) {
       context.commit('setResults', result);
@@ -355,7 +432,7 @@ export default {
       context.commit('setMessages', messages);
       context.commit('setYouthMobility', youthMobility);
       context.state.result.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
-      // If messages is empty, don't send this to database
+      // If messages is empty object, don't send it to database
       const result = context.state.result;
       if(_.isEmpty(result.messages)) {
         delete result.messages;
@@ -372,8 +449,12 @@ export default {
     },
   },
   mutations: {
-    setQuestions(state, questions) {
-      state.items = questions;
+    setQuestions(state, userCurrentVisa) {
+      questions.forEach(set => {
+        if(set.visa === userCurrentVisa) {
+          state.items = set.questions;
+        }
+      })
     },
     setResults(state, result) {
       state.result.recommendedVisa = result.recommendedVisa;
@@ -383,6 +464,7 @@ export default {
       }
     },
     setMessages(state, messages) {
+      state.result.messages = {};
       for(const prop in messages) {
         if(messages[prop] !== null)
         state.result.messages[prop] = messages[prop];

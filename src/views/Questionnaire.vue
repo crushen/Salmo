@@ -8,25 +8,15 @@
     </button>
 
     <div v-if="questionsStage">
-      <!-- <core-questions
-        v-if="buildProfile"
-        :userProfile="user.profile"
-        @submitProfile=submitProfile /> -->
-        <!--:questionNumber="questionNumber"
-         @nextQuestion="nextQuestion"
-        @previousQuestion="previousQuestion" -->
-
       <div 
-        
         class="question">
         <h1>Finding your visa...</h1>
         <question 
           :question="questions[currentQuestion]"
           :questions="questions"
           :currentQuestion="currentQuestion"
-          @submitAnswer="handleAnswer" />
-          <!-- @previousQuestion="previousQuestion" @backToCoreQuestions="backToCoreQuestions" -->
-
+          @submitAnswer="submitAnswer"
+          @previousQuestion="previousQuestion" />
       </div>
     </div>
 
@@ -38,30 +28,24 @@
 </template>
 
 <script>
-//import coreQuestions from '@/components/questionnaire/CoreQuestions'
 import question from '@/components/questionnaire/Question';
 import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
-    //coreQuestions,
     question,
     results
   },
   data() {
     return {
       user: this.$store.state.auth.user,
-      userAge: null,
-      userNationality: null,
-      currentVisa: null,
       introStage: true,
       questionsStage: false,
-      buildProfile: false,
       resultsStage: false,
-      //questionNumber: 1,
       questions: [],
       answers: [],
       currentQuestion: 0,
+      lastQuestionIndexes: [],
       result: {
         recommendedVisa: ''
       },
@@ -95,18 +79,20 @@ export default {
         'Family Visa - Coming as a parent to join your child route',
         'Family Visa - Coming to join your partner/spouse route',
         'Tier 4 Short Term Study Visa',
-        'Tier 4 General Student Visa'
+        'Tier 4 General Student Visa',
+        // From new questionnaire tree
+        'Family Visa (needs expanding)',
+        'Tier 1 Investor Visa',
+        'Startup Visa',
+        'Tier 2 Sportsperson Visa',
+        'Tier 2 Minister of Religion Visa',
+        'T5 Temporary Worker - Government Authorised Exchange Visa',
+        'Tier 2 General Work Visa',
+        'Take customer to page describing the scheme'
       ]
     }
   },
   methods: {
-    submitProfile(profile) {
-      this.$store.dispatch('auth/updateProfile', profile);
-      this.userAge = profile.age;
-      this.userNationality = profile.country;
-      this.currentVisa = profile.currentVisa;
-      this.buildProfile = false;
-    },
     startQuestionnaire() {
       this.getQuestions();
       this.introStage = false;
@@ -117,146 +103,30 @@ export default {
       this.$store.dispatch('questions/getQuestions');
       this.questions = this.$store.state.questions.items;
     },
-    handleAnswer(answer) {
-      // Check which catagory of questions to ask
-      switch(answer) {
-        // Visa catagories
-        case 'isWork':
-          // Set currentQuestion to -1 as it will reset to 0
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isWork); 
-          break;
-        case 'isBusiness':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isBusiness);
-          break;
-        case 'isFamily':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isFamily);
-          break;
-        case 'isStudy':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isStudy);
-          break;
-        // WORK
-        // over 2 or under 2 years
-        case 'overTwoYears':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.overTwoYears);
-          break;
-        case 'underTwoYears':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.underTwoYears);
-          break;
-        // not sportsperson or minister of religion
-        case 'nonSR':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.nonSR);
-          break;
-        // are they being transferred by current employer
-        case 'isTransferred':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isTransferred);
-          break;
-        // BUSINESS
-        case 'isInvestor':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isInvestor);
-          break;
-        // FAMILY
-        // up to six months or over 6 months
-        case 'upToSixMonths':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.upToSixMonths);
-          break;
-        case 'overSixMonths':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.overSixMonths);
-          break;
-        // family member has ILR or PR
-        case 'familyIsILRorPR':
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.familyIsILRorPR);
-          break;
-      }
+    submitAnswer(answer) {
       // If question leads to visa, finish questionnaire and reccommend this visa
       this.visaList.forEach(visa => {
         if(answer === visa) {
           this.finishQuestionnaire(answer);
         }
       })
-      // If answer is array, list all visas in array
-      if(Array.isArray(answer)) {
-        this.finishQuestionnaire(answer);
+      // If questions leads to number, go to this index in questions
+      if(Number.isInteger(answer)) {
+        this.lastQuestionIndexes.push(this.currentQuestion);
+        this.currentQuestion = answer;
       }
-      // Check if child applicant will be over 18 - if yes, reset questions and filter for adult
-      if(answer === 'Adult Application') {
-        this.currentQuestion = -1;
-        this.getQuestions();
-        this.questions = this.questions.filter(question => question.isAdult);
-      }
-      // Check if answer is Starting a business
-      if(answer === 'isStartup' && this.currentVisa === 'Startup Visa') {
-          this.currentQuestion = -1;
-          this.questions = this.questions.filter(question => question.isStartup);
-        } else if(answer === 'isStartup' && this.currentVisa !== 'Startup Visa') {
-          this.finishQuestionnaire('Startup Visa');
-        }
-      // If question hasn't lead to visa yet, go to next question
-      this.currentQuestion++;
+    },
+    previousQuestion() {
+      const lastQuestion = this.lastQuestionIndexes.pop();
+      this.currentQuestion = lastQuestion;
     },
     finishQuestionnaire(answer) {
       this.result.recommendedVisa = answer;
-      if(Array.isArray(answer)) {
-        this.result.recommendedVisa = [];
-        answer.forEach(visa => {
-          this.result.recommendedVisa.push(visa);
-        })
-      }
       this.$store.dispatch('questions/getResults', this.result);
       this.introStage = false;
       this.questionsStage = false;
       this.resultsStage = true;
     },
-
-
-
-  //   // For this - maybe make filtered questions new array, and if prev go back to prev array and sort out currentQuestion
-  //   previousQuestion() {
-  //     // Go back to previous question
-  //     this.currentQuestion--;
-  //     // Remove most recent result from answers
-  //     const previousResult = this.answers.pop();
-  //     this.results.forEach(result => {
-  //       // If the most recent result matches name in results, -1 from score
-  //       if(previousResult === result.name) {
-  //         result.score--;
-  //       }
-  //     })
-  //   },
-    // nextQuestion() {
-    //   this.questionNumber++;
-    // },
-    // previousQuestion() {
-    //   this.questionNumber--;
-    // },
-    // backToCoreQuestions(questionNumber) {
-    //   this.buildProfile = true;
-    //   this.questionNumber = questionNumber;
-    //   this.getQuestions();
-    // },
-
-
-  },
-  watch: {
-    // When age is updated after core questions, filter between child or adult questions
-    userAge(age) {
-      if(age < 18) {
-        this.questions = this.questions.filter(question => question.isChild);
-      } else if(age >= 18) {
-        this.questions = this.questions.filter(question => question.isAdult);
-      }
-    }
   },
   beforeRouteLeave(to, from, next) {
     if(this.questionsStage) {
