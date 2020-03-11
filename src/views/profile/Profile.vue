@@ -24,7 +24,7 @@ export default {
     }
   },
   created() {
-    this.$router.push({ name: 'user-info', params: { uid: this.user.uid } })
+    this.$router.push({ name: 'user-info' })
       .catch(error => {})
   }
 }

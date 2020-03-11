@@ -32,17 +32,17 @@ const routes = [
     meta: { onlyGuestUser: true }
   },
   { 
-    path: '/user', 
+    path: '/:uid', 
     name: 'profile',
     component: Profile,
     meta: { onlyAuthUser: true },
     children: [
-      { path: ':uid', name: 'user-info', component: UserInfo },
-      { path: ':uid/update-profile', name: 'update-profile', component: UpdateProfile }
+      { path: 'profile', name: 'user-info', component: UserInfo },
+      { path: 'update-profile', name: 'update-profile', component: UpdateProfile }
     ]
   },
   { 
-    path: '/user/questionnaire', 
+    path: '/:uid/questionnaire', 
     name: 'questionnaire', 
     component: Questionnaire,
     meta: { onlyAuthUser: true } 
