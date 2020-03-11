@@ -9,7 +9,6 @@
       </div>
     </div>
 
-
     <router-link 
       v-if="user.profile.age"
       :to="{ name: 'update-profile', params: { uid: user.uid } }">
@@ -20,7 +19,6 @@
       :to="{ name: 'update-profile', params: { uid: user.uid } }">
       Create Profile
     </router-link>
-
   </section>
 </template>
 
