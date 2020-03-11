@@ -9,7 +9,7 @@
     <!-- If user hasn't verified email -->
     <section v-else>
       <div>
-        <p>We've sent a link to <strong>{{ user.email }}</strong> to verify your email address. Testing</p>
+        <p>We've sent a link to <strong>{{ user.email }}</strong> to verify your email address.</p>
       </div>
     </section>
   </section>
