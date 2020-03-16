@@ -334,6 +334,7 @@ const questions0 = [
 ]
 
 const questions = [
+  // GENERAL STUDENT
   {
     visa: 'Tier 4 General Student Visa',
     questions: [
@@ -388,8 +389,68 @@ const questions = [
         ]
       },
       {
-        question: 'Is your job a part of a approved government authorised exchange scheme?',
+        question: 'Is your job a part of an approved government authorised exchange scheme?',
         number: 3,
+        answers: [
+          {
+            text: 'Yes',
+            value: 'T5 Temporary Worker - Government Authorised Exchange Visa'
+          },
+          {
+            text: 'No',
+            value: 'Tier 2 General Work Visa'
+          },
+          {
+            text: 'Not sure',
+            value: 'Take customer to page describing the scheme'
+          }
+        ]
+      }
+    ]
+  },
+  // CHILD STUDENT
+  {
+    visa: 'Tier 4 Child Student Visa',
+    questions: [
+      {
+        question: 'Which best describes why you would like to remain in the UK?',
+        number: 0,
+        answers: [
+          {
+            text: 'Here for family. This applies to you if you wish to stay with a partner or family after your studies.',
+            value: 'Family Visa (needs expanding)'
+          },
+          {
+            text: 'Here for study. This applies to you if you will be going from GCSE to higher education or university.',
+            value: 'Tier 4 General Student Visa'
+          },
+          {
+            text: 'Here for work. This applies to you if you will be employed by someone else after your studies.',
+            value: 1
+          }
+        ]
+      },
+      {
+        question: 'Does your work involve Sports or Religion',
+        number: 1,
+        answers: [
+          {
+            text: 'Sports',
+            value: 'Tier 2 Sportsperson Visa'
+          },
+          {
+            text: 'Religion',
+            value: 'Tier 2 Minister of Religion Visa'
+          },
+          {
+            text: 'Neither',
+            value: 2
+          }
+        ]
+      },
+      {
+        question: 'Is your job a part of an approved government authorised exchange scheme?',
+        number: 2,
         answers: [
           {
             text: 'Yes',

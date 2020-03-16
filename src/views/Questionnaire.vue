@@ -2,13 +2,13 @@
   <section>
     <!-- If user has updates profile info -->
     <div v-if="user.profile.age">
-      <p>This questionnaire will be specific to your current visa - <strong>{{ this.user.profile.currentVisa }}</strong></p>
-      <p>Click the button to continue, or <router-link :to="{name: 'profile'}">update current visa here.</router-link></p>
-      <button 
-        v-if="introStage"
-        @click="startQuestionnaire">
-        Start Questionnaire
-      </button>
+      <div v-if="introStage">
+        <p>This questionnaire will be specific to your current visa - <strong>{{ this.user.profile.currentVisa }}</strong></p>
+        <p>Click the button to continue, or <router-link :to="{name: 'profile'}">update current visa here.</router-link></p>
+        <button @click="startQuestionnaire">
+          Start Questionnaire
+        </button>
+      </div>
 
       <div v-if="questionsStage">
         <div 
@@ -103,7 +103,8 @@ export default {
         'Tier 2 Minister of Religion Visa',
         'T5 Temporary Worker - Government Authorised Exchange Visa',
         'Tier 2 General Work Visa',
-        'Take customer to page describing the scheme'
+        'Take customer to page describing the scheme',
+        'Tier 4 General Student Visa'
       ]
     }
   },
