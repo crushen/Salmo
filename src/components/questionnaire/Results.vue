@@ -16,7 +16,6 @@
     <p v-if="messages.dependant">{{ messages.dependant }}</p>
 
     <p v-if="youthMobility">Youth Mobility Visa</p>
-
   </div>
 </template>
 
@@ -174,14 +173,14 @@ export default {
     }
     // Check if they can bring dependants
     if(this.result === 'Tier 4 Child Student Visa' ||
-      this.result === 'Tier 4 Short Term Study Visa' ||
-      this.result === 'Tier 5 Seasonal Worker Visa' ||
-      this.result === 'Tier 5 Youth Mobility Scheme' ||
-      this.result === 'Marriage Visa' ||
-      this.result === 'Standard Visitor Visa') {
-        if(this.dependants !== 'None') {
+       this.result === 'Tier 4 Short Term Study Visa' ||
+       this.result === 'Tier 5 Seasonal Worker Visa' ||
+       this.result === 'Tier 5 Youth Mobility Scheme' ||
+       this.result === 'Marriage Visa' ||
+       this.result === 'Standard Visitor Visa') {
+         if(this.dependants !== 'None') {
           this.messages.dependant = "We're sorry, you can't bring any dependants on this visa"
-        }
+         }
     } else {
       if(this.dependants !== 'None') {
         this.messages.dependant = "You can bring dependants with you on this visa"
