@@ -11,8 +11,8 @@
           <router-link :to="{ name: 'signup' }">Signup</router-link>
         </template>
         <template v-else>
-          <router-link :to="{ name: 'profile', params: { uid: user.uid } }">Profile</router-link>
-          <router-link :to="{ name: 'questionnaire', params: {uid: user.uid} }">Questionnaire</router-link>
+          <router-link :to="{ name: 'profile' }">Profile</router-link>
+          <router-link :to="{ name: 'questionnaire' }">Questionnaire</router-link>
           <button 
             @click="handleLogout"
             type="button">
