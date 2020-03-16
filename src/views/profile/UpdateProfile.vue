@@ -87,6 +87,7 @@
     </div>
 
     <router-link
+    tag="button"
      :to="{ name: 'user-info', params: { uid: user.uid } }">
       Back To Profile
     </router-link> 
