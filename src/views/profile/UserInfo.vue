@@ -6,7 +6,7 @@
         <p><strong>Country:</strong> {{ user.profile.country }}</p>
         <p><strong>Current Visa:</strong> {{ user.profile.currentVisa }}</p>
         <p><strong>Dependants:</strong> {{ user.profile.dependants }}</p>
-        <div v-if="results">
+        <div v-if="mostRecentResult">
           <p><strong>Questionnaire Result:</strong> {{ mostRecentResult.recommendedVisa }}</p>
           <div v-if=" mostRecentResult.messages">
             <p><strong>Messages:</strong></p>
