@@ -1,29 +1,35 @@
 <template>
   <section>
- 
-    <button 
-      v-if="introStage"
-      @click="startQuestionnaire">
-      Start Questionnaire
-    </button>
+    <!-- If user has updates profile info -->
+    <div v-if="user.profile.age">
+      <button 
+        v-if="introStage"
+        @click="startQuestionnaire">
+        Start Questionnaire
+      </button>
 
-    <div v-if="questionsStage">
-      <div 
-        class="question">
-        <h1>Finding your visa...</h1>
-        <question 
-          :question="questions[currentQuestion]"
-          :questions="questions"
-          :currentQuestion="currentQuestion"
-          @submitAnswer="submitAnswer"
-          @previousQuestion="previousQuestion" />
+      <div v-if="questionsStage">
+        <div 
+          class="question">
+          <h1>Finding your visa...</h1>
+          <question 
+            :question="questions[currentQuestion]"
+            :questions="questions"
+            :currentQuestion="currentQuestion"
+            @submitAnswer="submitAnswer"
+            @previousQuestion="previousQuestion" />
+        </div>
+      </div>
+
+      <div v-if="resultsStage">
+        <results />
       </div>
     </div>
-
-    <div v-if="resultsStage">
-      <results />
+    <!-- If not, user must do that first -->
+    <div v-else>
+      <p>Please update your profile information to continue. The results are dependant on your current visa.</p>
+      <router-link :to="{ name: 'profile' }">Click here to update profile</router-link>
     </div>
-
   </section>
 </template>
 
