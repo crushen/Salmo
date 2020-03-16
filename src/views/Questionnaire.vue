@@ -19,6 +19,13 @@
             @submitAnswer="submitAnswer"
             @previousQuestion="previousQuestion" />
         </div>
+
+        <p>Progress..</p>
+        <div class="progress-bar">
+          <div
+            :style="{ width: `${progress}%` }" 
+            class="progress-bar-inner"></div>
+        </div>
       </div>
 
       <div v-if="resultsStage">
@@ -98,6 +105,11 @@ export default {
       ]
     }
   },
+  computed: {
+    progress() {
+      return this.currentQuestion*100/this.questions.length;
+    }
+  },
   methods: {
     startQuestionnaire() {
       this.getQuestions();
@@ -127,12 +139,19 @@ export default {
       this.currentQuestion = lastQuestion;
     },
     finishQuestionnaire(answer) {
+      const progBar = document.querySelector('.progress-bar-inner');
+      progBar.style.width = '100%';
       this.result.recommendedVisa = answer;
       this.$store.dispatch('questions/getResults', this.result);
       this.introStage = false;
-      this.questionsStage = false;
-      this.resultsStage = true;
+      this.showResults();
     },
+    showResults() { 
+      setTimeout(() => {
+        this.questionsStage = false;
+        this.resultsStage = true;
+      }, 2000);
+    } 
   },
   beforeRouteLeave(to, from, next) {
     if(this.questionsStage) {
@@ -156,5 +175,22 @@ section {
   width: 50%;
   margin: 60px auto 0 auto;
   padding: 20px;
+}
+
+.progress-bar,
+.progress-bar-inner {
+  width: 80%;
+  height: 40px;
+  margin: auto;
+  transition: width 500ms;
+}
+
+.progress-bar {
+  background-color: #eee;
+}
+
+.progress-bar-inner {
+  background-color: pink; 
+  margin: 0;
 }
 </style>
