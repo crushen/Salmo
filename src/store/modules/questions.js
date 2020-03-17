@@ -467,6 +467,296 @@ const questions = [
         ]
       }
     ]
+  },
+  // NO VISA
+  {
+    visa: 'None', // Need to add whole list of visas
+    questions: [
+      {
+        question: 'Will you be over 18 at the time of application?', // Need to figure out how to skip this is over 18
+        number: 0,
+        answers: [
+          {
+            text: 'Yes',
+            value: 3
+          },
+          {
+            text: 'No',
+            value: 1
+          }
+        ]
+      },
+      // CHILD
+      {
+        question: 'Why do you want to live in the UK?',
+        number: 1,
+        answers: [
+          {
+            text: 'Study',
+            value: 'Tier 4 Child Student Visa'
+          },
+          {
+            text: 'Family',
+            value: 2
+          }
+        ]
+      },
+      {
+        question: 'Do either of your parents have IDL or PR?',
+        number: 2,
+        answers: [
+          {
+            text: 'Yes',
+            value: 'Apply as your parents dependant - Dependant Visa'
+          },
+          {
+            text: 'No',
+            value: 'Family Visa'
+          }
+        ]
+      },
+      // ADULT
+      {
+        question: 'Why do you want to live in the UK?',
+        number: 3,
+        answers: [
+          {
+            text: 'Work',
+            value: 4
+          },
+          {
+            text: 'Business',
+            value: 9
+          },
+          {
+            text: 'Family',
+            value: 11
+          },
+          {
+            text: 'Study',
+            value: 15
+          }
+        ]
+      },
+      // WORK
+      {
+        question: 'Does your job relate to sport or religion?',
+        number: 4,
+        answers: [
+          {
+            text: 'Sports',
+            value: ['Tier 2 Sportsperson Visa', 'Tier 5 Creative and Sporting Visa']
+          },
+          {
+            text: 'Religion',
+            value: ['Tier 2 Minister of Religion Visa', 'Tier 5 Religious Worker Visa']
+          },
+          {
+            text: 'No',
+            value: 5
+          }
+        ]
+      },
+      {
+        question: 'Is your job part of an approved government authorised exchange scheme?',
+        number: 5,
+        answers: [
+          {
+            text: 'Yes',
+            value: 'Tier 5 GOV Authorised Exchange Visa'
+          },
+          {
+            text: 'No',
+            value: 6
+          }
+        ]
+      },
+      {
+        question: 'Has your international employer offered you in a position in the UK branch of your workplace?',
+        number: 6,
+        answers: [
+          {
+            text: 'Yes',
+            value: 7
+          },
+          {
+            text: 'No',
+            value: 8
+          }
+        ]
+      },
+      {
+        question: 'Are you a recent graduate?',
+        number: 7,
+        answers: [
+          {
+            text: 'Yes',
+            value: 'Tier 2 Intra-company Transfer Graduate Trainee Visa'
+          },
+          {
+            text: 'No',
+            value: 'Tier 2 Intra-company Transfer Long-term Staff Visa'
+          }
+        ]
+      },
+      {
+        question: 'Which one of these best describes your work?',
+        number: 8,
+        answers: [
+          {
+            text: 'Charity',
+            value: 'Tier 5 Charity Worker Visa'
+          },
+          {
+            text: 'Sporty / Creative',
+            value: 'Tier 5 Creative and Sporting Visa'
+          },
+          {
+            text: 'Seasonal',
+            value: 'Tier 5 Seasonal Worker Visa'
+          },
+          {
+            text: 'Other',
+            value: ['Tier 2 General Work Visa']
+          }
+        ]
+      },
+      // BUSINESS
+      {
+        question: 'Which one of these best describes your future business plans?',
+        number: 9,
+        answers: [
+          {
+            text: 'Start a business',
+            value: ['Startup Visa', 'Innovator Visa']
+          },
+          {
+            text: 'Invest in a business',
+            value: 10
+          },
+          {
+            text: 'Endorsed as an exceptional talent / top of your field?',
+            value: 'Global Talent Visa'
+          }
+        ]
+      },
+      {
+        question: 'How much money can you invest?',
+        number: 10,
+        answers: [
+          {
+            text: '2 million +',
+            value: 'Tier 1 Investor Visa - 5 years for PR'
+          },
+          {
+            text: '5 million +',
+            value: 'Tier 1 Investor Visa - 3 years for PR'
+          },
+          {
+            text: '10 million +',
+            value: 'Tier 1 Investor Visa - 2 years for PR'
+          }
+        ]
+      },
+      // FAMILY
+      {
+        question: 'Which of the following best describes your situation?',
+        number: 11,
+        answers: [
+          {
+            text: 'Getting married but not living in the UK',
+            value: 'Marriage Visa'
+          },
+          {
+            text: 'Visiting family in the UK',
+            value: 12
+          },
+          {
+            text: 'Going to live with family in the UK',
+            value: 13
+          }
+        ]
+      },
+      {
+        question: 'Which of the following best describes your situation?',
+        number: 12,
+        answers: [
+          {
+            text: 'Coming to visit partner/family',
+            value: 'Standard Visitor Visa'
+          },
+          {
+            text: 'Visiting your child who is studying in the UK',
+            value: 'Parent of Tier 4 Child Visa'
+          }
+        ]
+      },
+      {
+        question: 'Do you have a partner/family member that is British or ILR/PR',
+        number: 13,
+        answers: [
+          {
+            text: 'Yes',
+            value: 14
+          },
+          {
+            text: 'No',
+            value: "You can't apply for a Family Visa"
+          },
+          {
+            text: "It's complicated",
+            value: 'Family Visa - Apply on the basis of your private life'
+          }
+        ]
+      },
+      {
+        question: 'Which of the following best describes your situation?',
+        number: 14,
+        answers: [
+          {
+            text: 'Coming as an adults to be cared for by a relative',
+            value: 'Family Visa - Coming as an adult to be cared for by a relative route'
+          },
+          {
+            text: 'Coming as a parent to join your child',
+            value: 'Family Visa - Coming as a parent to join your child route'
+          },
+          {
+            text: 'Coming to join your partner/spouse',
+            value: 'Family Visa - Coming to join your partner/spouse route'
+          }
+        ]
+      },
+      // STUDY
+      {
+        question: 'How long is your course?',
+        number: 15,
+        answers: [
+          {
+            text: '6 months or less',
+            value: 'Tier 4 Short Term Study Visa'
+          },
+          {
+            text: 'More than 6 months',
+            value: 16
+          }
+        ]
+      },
+      {
+        question: 'Are you studying an English Language course?',
+        number: 16,
+        answers: [
+          {
+            text: 'Yes',
+            value: ['Tier 4 Short Term Study Visa', 'Tier 4 General Student Visa']
+          },
+          {
+            text: 'No',
+            value: 'Tier 4 General Student Visa'
+          }
+        ]
+      }
+    ]
   }
 ]
 

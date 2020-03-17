@@ -90,7 +90,7 @@ export default {
         'Marriage Visa',
         'Standard Visitor Visa',
         'Parent of Tier 4 Child Visa',
-        "None - You can't apply for a Family Visa",
+        "You can't apply for a Family Visa",
         'Family Visa - Apply on the basis of your private life',
         'Family Visa - Coming as an adult to be cared for by a relative route',
         'Family Visa - Coming as a parent to join your child route',
@@ -106,7 +106,10 @@ export default {
         'T5 Temporary Worker - Government Authorised Exchange Visa',
         'Tier 2 General Work Visa',
         'Take customer to page describing the scheme',
-        'Tier 4 General Student Visa'
+        'Tier 4 General Student Visa',
+        'Apply as your parents dependant - Dependant Visa',
+        'Family Visa',
+        'Global Talent Visa'
       ]
     }
   },
@@ -133,6 +136,10 @@ export default {
           this.finishQuestionnaire(answer);
         }
       })
+      // If answer is array, make both answers the reccomended visas
+      if(Array.isArray(answer)) {
+        this.finishQuestionnaire(answer);
+      }
       // If questions leads to number, go to this index in questions
       if(Number.isInteger(answer)) {
         this.lastQuestionIndexes.push(this.currentQuestion);
@@ -146,6 +153,14 @@ export default {
     finishQuestionnaire(answer) {
       const progBar = document.querySelector('.progress-bar-inner');
       progBar.style.width = '100%';
+      // Check if answer is array
+      if(Array.isArray(answer)) {
+        this.result.recommendedVisa = [];
+        answer.forEach(visa => {
+          this.result.recommendedVisa.push(visa);
+        })
+      }
+      // If not, continue with single answer
       this.result.recommendedVisa = answer;
       this.$store.dispatch('questions/getResults', this.result);
       this.introStage = false;

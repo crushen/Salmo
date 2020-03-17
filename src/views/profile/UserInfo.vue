@@ -25,7 +25,16 @@
     <div 
       v-if="mostRecentResult"
       class="results">
-      <p><strong>Most recent questionnaire result:</strong> {{ mostRecentResult.recommendedVisa }}</p>
+      <div v-if="Array.isArray(mostRecentResult.recommendedVisa)">
+        <p><strong>Most recent questionnaire results:</strong></p>
+        <p v-for="visa in mostRecentResult.recommendedVisa"
+          :key="visa">
+          {{ visa }}
+        </p>
+      </div>
+
+      <p v-else><strong>Most recent questionnaire result:</strong> {{ mostRecentResult.recommendedVisa }}</p>
+
       <p v-if="messages.switch">{{ messages.switch }}</p>
       <p v-if="messages.dependant">{{ messages.dependant }}</p>
       <p v-if="mostRecentResult.youthMobility">Youth Mobility Visa</p>
