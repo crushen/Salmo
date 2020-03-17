@@ -468,9 +468,20 @@ const questions = [
       }
     ]
   },
-  // NO VISA
+  // NON-SPECIFIC QUESTIONS
   {
-    visa: 'None', // Need to add whole list of visas
+    visa: [
+      'None', 
+      'Tier 4 Short Term Study Visa',
+      'Tier 5 GOV Authorised Exchange Visa',
+      'Tier 5 Creative and Sporting Visa',
+      'Tier 5 Charity Worker Visa',
+      'Tier 5 Seasonal Worker Visa',
+      'Tier 5 Religious Worker Visa',
+      'Tier 5 International Agreement Visa',
+      'Tier 5 Youth Mobility Scheme',
+      'Standard Visitor Visa'
+    ],
     questions: [
       {
         question: 'Will you be over 18 at the time of application?', // Need to figure out how to skip this is over 18
@@ -804,6 +815,12 @@ export default {
       questions.forEach(set => {
         if(set.visa === userCurrentVisa) {
           state.items = set.questions;
+        } else if(Array.isArray(set.visa)) {
+          set.visa.forEach((visa) => {
+            if(visa === userCurrentVisa) {
+              state.items = set.questions;
+            }
+          })
         }
       })
     },

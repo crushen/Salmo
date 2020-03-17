@@ -75,6 +75,7 @@ export default {
         'Tier 5 Creative and Sporting Visa',
         'Tier 5 Religious Worker Visa',
         'Tier 5 Seasonal Worker Visa',
+        'Tier 5 International Agreement Visa',
         'Tier 2 Sportsperson Visa',
         'Tier 2 Minister of Religion Visa',
         'Tier 2 Intra-company Transfer Graduate Trainee Visa',
