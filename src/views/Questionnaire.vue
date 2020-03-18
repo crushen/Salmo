@@ -129,6 +129,11 @@ export default {
     getQuestions() {
       this.$store.dispatch('questions/getQuestions');
       this.questions = this.$store.state.questions.items;
+      // If user is 18 or over, don't ask this question
+      if(this.user.profile.age >= 18 && this.questions[0].question === 'Will you be over 18 at the time of application?') {
+        const adultQuestions = this.questions.slice(3, this.questions.length);
+        this.questions = adultQuestions;
+      }
     },
     submitAnswer(answer) {
       // If question leads to visa, finish questionnaire and reccommend this visa

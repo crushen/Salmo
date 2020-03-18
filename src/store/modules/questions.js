@@ -484,7 +484,7 @@ const questions = [
     ],
     questions: [
       {
-        question: 'Will you be over 18 at the time of application?', // Need to figure out how to skip this is over 18
+        question: 'Will you be over 18 at the time of application?',
         number: 0,
         answers: [
           {
