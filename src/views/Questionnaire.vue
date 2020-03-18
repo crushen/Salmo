@@ -62,6 +62,7 @@ export default {
       questions: [],
       answers: [],
       currentQuestion: 0,
+      progress: 0,
       lastQuestionIndexes: [],
       result: {
         recommendedVisa: ''
@@ -115,9 +116,9 @@ export default {
     }
   },
   computed: {
-    progress() {
-      return this.currentQuestion*100/this.questions.length;
-    }
+    // progress() {
+    //   return this.currentQuestion*100/this.questions.length;
+    // }
   },
   methods: {
     startQuestionnaire() {
@@ -131,11 +132,11 @@ export default {
       this.questions = this.$store.state.questions.items;
       // If user is 18 or over, don't ask this question
       if(this.user.profile.age >= 18 && this.questions[0].question === 'Will you be over 18 at the time of application?') {
-        const adultQuestions = this.questions.slice(3, this.questions.length);
-        this.questions = adultQuestions;
+        this.currentQuestion = 3;
       }
     },
     submitAnswer(answer) {
+      this.progress += 20;
       // If question leads to visa, finish questionnaire and reccommend this visa
       this.visaList.forEach(visa => {
         if(answer === visa) {
@@ -153,12 +154,14 @@ export default {
       }
     },
     previousQuestion() {
+      this.progress -= 20;
       const lastQuestion = this.lastQuestionIndexes.pop();
       this.currentQuestion = lastQuestion;
     },
     finishQuestionnaire(answer) {
-      const progBar = document.querySelector('.progress-bar-inner');
-      progBar.style.width = '100%';
+      // const progBar = document.querySelector('.progress-bar-inner');
+      // progBar.style.width = '100%';
+      this.progress = 100;
       // Check if answer is array
       if(Array.isArray(answer)) {
         this.result.recommendedVisa = [];
