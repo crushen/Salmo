@@ -13,6 +13,7 @@
         <template v-else>
           <router-link :to="{ name: 'profile' }">Profile</router-link>
           <router-link :to="{ name: 'questionnaire' }">Questionnaire</router-link>
+          <router-link :to="{ name: 'visa-info' }">Visa Info</router-link>
           <button 
             @click="handleLogout"
             type="button">
