@@ -6,7 +6,9 @@ import Signup from '@/views/Signup';
 import Profile from '@/views/profile/Profile';
 import UserInfo from '@/views/profile/UserInfo';
 import UpdateProfile from '@/views/profile/UpdateProfile';
-import Questionnaire from '@/views/Questionnaire'
+import Questionnaire from '@/views/Questionnaire';
+import VisaInfo from '@/views/visa/VisaInfo';
+import VisaPage from '@/views/visa/VisaPage';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -45,6 +47,18 @@ const routes = [
     path: '/questionnaire', 
     name: 'questionnaire', 
     component: Questionnaire,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/visa-info', 
+    name: 'visa-info', 
+    component: VisaInfo,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/visa-info/:slug', 
+    name: 'visa-page', 
+    component: VisaPage,
     meta: { onlyAuthUser: true } 
   }
 ]
