@@ -33,7 +33,13 @@
         </p>
       </div>
 
-      <p v-else><strong>Most recent questionnaire result:</strong> {{ mostRecentResult.recommendedVisa }}</p>
+      <div v-else>
+        <p><strong>Most recent questionnaire result:</strong></p> 
+        <router-link 
+          :to="{ name: 'visa-page', params: { slug: visaInfo.slug } }">
+          {{ mostRecentResult.recommendedVisa }}
+        </router-link>
+      </div>
 
       <p v-if="messages.switch">{{ messages.switch }}</p>
       <p v-if="messages.dependant">{{ messages.dependant }}</p>
@@ -43,6 +49,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
@@ -58,7 +66,11 @@ export default {
   },
   computed: {
     mostRecentResult() {
-      return this.results.slice(-1)[0];
+      return this.results.slice(-1)[0]; 
+    },
+    ...mapState('visas', ['visaList']),
+    visaInfo() {
+      return this.visaList.find(item => item.name === this.mostRecentResult.recommendedVisa);
     }
   },
  created() {
