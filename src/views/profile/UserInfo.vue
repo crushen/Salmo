@@ -25,20 +25,21 @@
     <div 
       v-if="mostRecentResult"
       class="results">
-      <div v-if="Array.isArray(mostRecentResult.recommendedVisa)">
+      <!-- <div v-if="Array.isArray(mostRecentResult.recommendedVisa)">
         <p><strong>Most recent questionnaire results:</strong></p>
         <p v-for="visa in mostRecentResult.recommendedVisa"
           :key="visa">
           {{ visa }}
         </p>
-      </div>
+      </div> -->
 
-      <div v-else>
-        <p><strong>Most recent questionnaire result:</strong></p> 
-        <router-link 
+      <div v-for="result in mostRecentResult.recommendedVisa" :key="result">
+        <p><strong>Questionnaire results:</strong></p> 
+        <!-- <router-link 
           :to="{ name: 'visa-page', params: { slug: visaInfo.slug } }">
-          {{ mostRecentResult.recommendedVisa }}
-        </router-link>
+          {{ result }}
+        </router-link> -->
+        {{ result }}
       </div>
 
       <p v-if="messages.switch">{{ messages.switch }}</p>
@@ -68,12 +69,12 @@ export default {
     mostRecentResult() {
       return this.results.slice(-1)[0]; 
     },
-    ...mapState('visas', ['visaList']),
-    visaInfo() {
-      return this.visaList.find(item => item.name === this.mostRecentResult.recommendedVisa);
-    }
+    // ...mapState('visas', ['visaList']),
+    // visaInfo() {
+    //   return this.visaList.find(item => item.name === this.mostRecentResult.recommendedVisa);
+    // }
   },
- created() {
+  created() {
     // Check if they can switch from current visa
     // CHILD
     if(this.mostRecentResult.recommendedVisa === 'Tier 4 Child Student Visa') {

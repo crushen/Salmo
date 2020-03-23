@@ -777,7 +777,7 @@ export default {
     items: [],
     result: {
       user: '',
-      recommendedVisa: '',
+      recommendedVisa: [], // Need to make this array of objects, with visa name and slug
       messages: {},
       youthMobility: false
     }
@@ -787,8 +787,8 @@ export default {
       const userCurrentVisa = context.rootState.auth.user.profile.currentVisa;
       context.commit('setQuestions', userCurrentVisa);
     },
-    getResults(context, result) {
-      context.commit('setResults', result);
+    getResults(context, results) {
+      context.commit('setResults', results);
     },
     sendDbResults(context, {messages, youthMobility}) {
       context.commit('setMessages', messages);
@@ -824,12 +824,12 @@ export default {
         }
       })
     },
-    setResults(state, result) {
-      state.result.recommendedVisa = result.recommendedVisa;
-      if(Array.isArray(result)) {
-        state.result.recommendedVisa = [];
-        state.result.recommendedVisa = result.recommendedVisa;
-      }
+    setResults(state, results) {
+      state.result.recommendedVisa = results.recommendedVisa;
+      // if(Array.isArray(result)) {
+      //   state.result.recommendedVisa = [];
+      //   state.result.recommendedVisa = result.recommendedVisa;
+      // }
     },
     setMessages(state, messages) {
       state.result.messages = {};

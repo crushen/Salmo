@@ -15,7 +15,7 @@
 export default {
   data() {
     return {
-      visas : this.$store.state.visas.visaList
+      visas: this.$store.state.visas.visaList
     }
   }
 }

@@ -65,7 +65,7 @@ export default {
       progress: 0,
       lastQuestionIndexes: [],
       result: {
-        recommendedVisa: ''
+        recommendedVisa: []
       },
       visaList: [
         'Tier 4 Child Student Visa', 
@@ -164,13 +164,10 @@ export default {
       this.progress = 100;
       // Check if answer is array
       if(Array.isArray(answer)) {
-        this.result.recommendedVisa = [];
-        answer.forEach(visa => {
-          this.result.recommendedVisa.push(visa);
-        })
+        this.result.recommendedVisa = answer;
+      } else {
+        this.result.recommendedVisa.push(answer);
       }
-      // If not, continue with single answer
-      this.result.recommendedVisa = answer;
       this.$store.dispatch('questions/getResults', this.result);
       this.introStage = false;
       this.showResults();
