@@ -115,11 +115,6 @@ export default {
       ]
     }
   },
-  computed: {
-    // progress() {
-    //   return this.currentQuestion*100/this.questions.length;
-    // }
-  },
   methods: {
     startQuestionnaire() {
       this.getQuestions();
@@ -159,8 +154,6 @@ export default {
       this.currentQuestion = lastQuestion;
     },
     finishQuestionnaire(answer) {
-      // const progBar = document.querySelector('.progress-bar-inner');
-      // progBar.style.width = '100%';
       this.progress = 100;
       // Check if answer is array
       if(Array.isArray(answer)) {

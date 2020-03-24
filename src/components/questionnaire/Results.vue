@@ -1,23 +1,24 @@
 <template>
   <div>
     <h1>Quiz done</h1>
-    <!-- <div v-if="Array.isArray(result)">
-      <p>Your options are:</p>
-      <p
-        v-for="visa in result"
-        :key="visa">
-        {{ visa }}
-      </p>
-    </div> -->
-    <p v-for="result in results" :key="result">{{ result }}</p>
-    <p v-if="messages.switch">{{ messages.switch }}</p>
-    <p v-if="messages.dependant">{{ messages.dependant }}</p>
 
-    <p v-if="youthMobility">Youth Mobility Visa</p>
+    <div class="results">
+      <router-link 
+        v-for="visa in visaInfo"
+        :key="visa.name"
+        :to="{ name: 'visa-page', params: { slug: visa.slug } }">
+        {{ visa.name }}
+      </router-link>
+      <!-- <p v-if="messages.switch">{{ messages.switch }}</p>
+      <p v-if="messages.dependant">{{ messages.dependant }}</p>
+      <p v-if="youthMobility">Youth Mobility Visa</p> -->
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
@@ -31,6 +32,13 @@ export default {
         dependant: null
       },
       youthMobility: false
+    }
+  },
+  computed: {
+    ...mapState('visas', ['visaList']),
+
+    visaInfo() {
+      return this.visaList.filter(item => this.results.includes(item.name));
     }
   },
   methods: {
@@ -193,3 +201,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.results {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+</style>

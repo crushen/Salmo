@@ -14,6 +14,14 @@ const visas = [
   {
     name: 'Family Visa - Apply on the basis of your private life',
     slug: 'family-visa'
+  },
+  {
+    name: 'Tier 2 Sportsperson Visa',
+    slug: 'T2-sportsperson'
+  },
+  {
+    name: 'Tier 5 Creative and Sporting Visa',
+    slug: 'T5-creative-and-sporting'
   }
 ]
 
