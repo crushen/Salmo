@@ -1,5 +1,20 @@
 const visas = [
   {
+    name: 'Tier 5 Creative and Sporting Visa',
+    category: 'work',
+    slug: 'T5-creative-and-sporting'
+  },
+  {
+    name: 'Tier 5 Government Authorised Exchange Visa',
+    category: 'work',
+    slug: 'T5-gov-authorised-exchange'
+  },
+  {
+    name: 'Tier 2 Intra-company Transfer Visa',
+    category: 'work',
+    slug: 'T2-intra-company-transfer'
+  },
+  {
     name: 'Family Visa (needs expanding)',
     category: 'family',
     slug: 'family-visa'
@@ -30,16 +45,6 @@ const visas = [
     slug: 'T2-general-work'
   },
   {
-    name: 'Tier 2 Intra-company Transfer Graduate Trainee Visa',
-    category: 'work',
-    slug: 'T2-intra-company-transfer-graduate'
-  },
-  {
-    name: 'Tier 2 Intra-company Transfer Long-term Staff Visa',
-    category: 'work',
-    slug: 'T2-intra-company-transfer'
-  },
-  {
     name: 'Tier 2 Minister of Religion Visa',
     category: 'work',
     slug: 'T2-minister-of-religion'
@@ -63,16 +68,6 @@ const visas = [
     name: 'Tier 5 Charity Worker Visa',
     category: 'work',
     slug: 'T5-charity-worker'
-  },
-  {
-    name: 'Tier 5 Creative and Sporting Visa',
-    category: 'work',
-    slug: 'T5-creative-and-sporting'
-  },
-  {
-    name: 'Tier 5 Government Authorised Exchange Visa',
-    category: 'work',
-    slug: 'T5-gov-authorised-exchange'
   },
   {
     name: 'Tier 5 International Agreement Visa',
