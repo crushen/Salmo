@@ -102,23 +102,35 @@ export default {
       return this.results.slice(-1)[0]; 
     },
     topResult() {
-      return this.visaList.filter(item => this.mostRecentResult.recommendedVisa.includes(item.name));
+      if(this.mostRecentResult) {
+        return this.visaList.filter(item => this.mostRecentResult.recommendedVisa.includes(item.name));
+      } else {
+        return false;
+      }
     },
     switchVisas() {
-      // Filter visa list for user's switch options
-      const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name));
-      // Get all visas in same category
-      const sameCategory = switchOptions.filter(item => item.category === this.topResult[0].category);
-      // Remove visa(s) that appear in top result
-      return sameCategory.filter(item => !this.topResult.includes(item));
+      if(this.mostRecentResult) {
+        // Filter visa list for user's switch options
+        const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name));
+        // Get all visas in same category
+        const sameCategory = switchOptions.filter(item => item.category === this.topResult[0].category);
+        // Remove visa(s) that appear in top result
+        return sameCategory.filter(item => !this.topResult.includes(item));
+      } else {
+        return false;
+      }
     },
     otherVisas() {
-      // Filter visa list for visas in same category as top result
-      const sameCategory = this.visaList.filter(item => item.category === this.topResult[0].category);
-      // Remove visa(s) that appear in top result
-      const removeDup = sameCategory.filter(item => !this.topResult.includes(item));
-      // Remove visa(s) that appear in switch visas
-      return removeDup.filter(item => !this.switchVisas.includes(item));
+      if(this.mostRecentResult) {
+        // Filter visa list for visas in same category as top result
+        const sameCategory = this.visaList.filter(item => item.category === this.topResult[0].category);
+        // Remove visa(s) that appear in top result
+        const removeDup = sameCategory.filter(item => !this.topResult.includes(item));
+        // Remove visa(s) that appear in switch visas
+        return removeDup.filter(item => !this.switchVisas.includes(item));
+      } else {
+        return false;
+      }
     }
   },
   methods: {
@@ -130,9 +142,11 @@ export default {
       }
       // For now, will only be testing Student specific questionnaires, so all top results will be switchable
       // However, this will change when other current visas are options
-      this.topResult.forEach(visa => {
-        visa.switch = true;
-      })
+      if(this.topResult) {
+        this.topResult.forEach(visa => {
+          visa.switch = true;
+        })
+      }
     },
     checkYouthMobility() {
       const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)'];
