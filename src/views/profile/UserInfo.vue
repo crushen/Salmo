@@ -124,7 +124,7 @@ export default {
   methods: {
     checkSwitch() {  
       if(this.currentVisa === 'Tier 4 General Student Visa') {
-        this.switchOptions = ['Startup Visa', 'Tier 1 Investor Visa - 5 years for PR', 'Tier 1 Investor Visa - 3 years for PR', 'Tier 1 Investor Visa - 2 years for PR', 'Tier 2 General Work Visa', 'Tier 2 Sportsperson Visa', 'Tier 2 Minister of Religion Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Family Visa (needs expanding)']
+        this.switchOptions = ['Startup Visa', 'Tier 1 Investor Visa', 'Tier 2 General Work Visa', 'Tier 2 Sportsperson Visa', 'Tier 2 Minister of Religion Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Family Visa (needs expanding)']
       } else if(this.currentVisa === 'Tier 4 Child Student Visa') {
         this.switchOptions = ['Tier 2 General Work Visa', 'Tier 2 Sportsperson Visa', 'Tier 2 Minister of Religion Visa', 'Tier 4 General Student Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Family Visa (needs expanding)']
       }
