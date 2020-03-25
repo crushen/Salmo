@@ -777,9 +777,7 @@ export default {
     items: [],
     result: {
       user: '',
-      recommendedVisa: [], // Need to make this array of objects, with visa name and slug
-      messages: {},
-      youthMobility: false
+      recommendedVisa: []
     }
   },
   actions: {
@@ -790,15 +788,10 @@ export default {
     getResults(context, results) {
       context.commit('setResults', results);
     },
-    sendDbResults(context, {messages, youthMobility}) {
-      context.commit('setMessages', messages);
-      context.commit('setYouthMobility', youthMobility);
+    sendDbResults(context) {
       context.state.result.user = db.collection('profiles').doc(context.rootState.auth.user.uid);
       // If messages is empty object, don't send it to database
       const result = context.state.result;
-      if(_.isEmpty(result.messages)) {
-        delete result.messages;
-      }
       // Add results to database
       return db.collection('questionnaireResults')
         .add(result)
@@ -826,20 +819,6 @@ export default {
     },
     setResults(state, results) {
       state.result.recommendedVisa = results.recommendedVisa;
-      // if(Array.isArray(result)) {
-      //   state.result.recommendedVisa = [];
-      //   state.result.recommendedVisa = result.recommendedVisa;
-      // }
-    },
-    setMessages(state, messages) {
-      state.result.messages = {};
-      for(const prop in messages) {
-        if(messages[prop] !== null)
-        state.result.messages[prop] = messages[prop];
-      }
-    },
-    setYouthMobility(state, youthMobility) {
-      state.result.youthMobility = youthMobility;
     }
   }
 }

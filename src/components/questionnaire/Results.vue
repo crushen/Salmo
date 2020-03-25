@@ -88,18 +88,18 @@ export default {
     }
   },
   methods: {
-    checkYouthMobility() {
-      const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)'];
+    // checkYouthMobility() {
+    //   const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)'];
 
-      YMcountries.forEach(country => {
-        if(this.userCountry === country &&
-           this.userAge >= 18 && 
-           this.userAge <= 30 &&
-           this.dependants === 'None') {
-           this.youthMobility = true;
-        }
-      });
-    },
+    //   YMcountries.forEach(country => {
+    //     if(this.userCountry === country &&
+    //        this.userAge >= 18 && 
+    //        this.userAge <= 30 &&
+    //        this.dependants === 'None') {
+    //        this.youthMobility = true;
+    //     }
+    //   });
+    // },
     checkSwitch() {  
       if(this.currentVisa === 'Tier 4 General Student Visa') {
         this.switchOptions = ['Startup Visa', 'Tier 1 Investor Visa - 5 years for PR', 'Tier 1 Investor Visa - 3 years for PR', 'Tier 1 Investor Visa - 2 years for PR', 'Tier 2 General Work Visa', 'Tier 2 Sportsperson Visa', 'Tier 2 Minister of Religion Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Family Visa (needs expanding)']
@@ -115,13 +115,11 @@ export default {
   },
   created() {
     // Check if user is eligable for Youth Mobility Visa
-    this.checkYouthMobility();
+
+    // this.checkYouthMobility();
     this.checkSwitch();
     // Set messages in state, and then push to db
-    this.$store.dispatch('questions/sendDbResults', { // Need to work on this - redundant logic with new flow
-      messages: this.messages,
-      youthMobility: this.youthMobility
-    });
+    this.$store.dispatch('questions/sendDbResults');
   }
 }
 </script>
