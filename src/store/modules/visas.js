@@ -55,6 +55,11 @@ const visas = [
     name: 'Global Talent Visa',
     category: 'business',
     slug: 'global-talent-visa'
+  },
+  {
+    name: 'Youth Mobility Scheme',
+    category: 'youth-mobility',
+    slug: 'youth-mobility-scheme'
   }
 
   // {
