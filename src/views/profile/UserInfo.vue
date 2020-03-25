@@ -59,10 +59,10 @@
         </router-link>
       </div>
 
-      <div v-if="otherVisas[0] || youthMobility[0]">
+      <div v-if="numberOfOtherVisas[0] || youthMobility[0]">
         <p><strong>Visas in the {{ topResult[0].category }} category you can apply for, but you would need to leave the UK before applying:</strong></p>
         <router-link 
-          v-for="visa in otherVisas"
+          v-for="visa in numberOfOtherVisas"
           :key="visa.name"
           tag="div"
           class="result-link"
@@ -77,6 +77,17 @@
           :to="{ name: 'visa-page', params: { slug: youthMobility[0].slug } }">
           <p>{{ youthMobility[0].name }}</p>
         </router-link>
+
+        <button 
+          v-if="numberOfOtherVisas.length !== allOtherVisas.length"
+          @click="numberOfVisas += allOtherVisas.length">
+          Show All
+        </button>
+        <button
+          v-else
+          @click="numberOfVisas = 3">
+          Show Less
+        </button>
       </div>
     </div>
   </section>
@@ -92,6 +103,7 @@ export default {
       results: this.$store.state.auth.user.profile.questionnaireResults,
       currentVisa: this.$store.state.auth.user.profile.currentVisa,
       dependants: this.$store.state.auth.user.profile.dependants,
+      numberOfVisas: 3,
       switchOptions: [],
       youthMobility: []
     }
@@ -120,17 +132,21 @@ export default {
         return false;
       }
     },
-    otherVisas() {
+    allOtherVisas() {
       if(this.mostRecentResult) {
         // Filter visa list for visas in same category as top result
         const sameCategory = this.visaList.filter(item => item.category === this.topResult[0].category);
         // Remove visa(s) that appear in top result
-        const removeDup = sameCategory.filter(item => !this.topResult.includes(item));
+        const removeTop = sameCategory.filter(item => !this.topResult.includes(item));
         // Remove visa(s) that appear in switch visas
-        return removeDup.filter(item => !this.switchVisas.includes(item));
+        const removeSwitch = removeTop.filter(item => !this.switchVisas.includes(item));
+        return removeSwitch;
       } else {
         return false;
       }
+    },
+    numberOfOtherVisas() {
+      return this.allOtherVisas.slice(0, this.numberOfVisas);
     }
   },
   methods: {
