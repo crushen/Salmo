@@ -41,22 +41,7 @@ const visas = [
     slug: 'T5-gov-authorised-exchange'
   },
   {
-    name: 'Family Visa - Apply on the basis of your private life',
-    category: 'family',
-    slug: 'family-visa'
-  },
-  {
-    name: 'Family Visa - Coming as an adult to be cared for by a relative route',
-    category: 'family',
-    slug: 'family-visa'
-  },
-  {
-    name: 'Family Visa - Coming as a parent to join your child route',
-    category: 'family',
-    slug: 'family-visa'
-  },
-  {
-    name: 'Family Visa - Coming to join your partner/spouse route',
+    name: 'Family Visa (needs expanding)',
     category: 'family',
     slug: 'family-visa'
   },
@@ -72,7 +57,21 @@ const visas = [
     slug: 'global-talent-visa'
   }
 
-
+  // {
+  //   name: 'Family Visa - Coming as an adult to be cared for by a relative route',
+  //   category: 'family',
+  //   slug: 'family-visa'
+  // },
+  // {
+  //   name: 'Family Visa - Coming as a parent to join your child route',
+  //   category: 'family',
+  //   slug: 'family-visa'
+  // },
+  // {
+  //   name: 'Family Visa - Coming to join your partner/spouse route',
+  //   category: 'family',
+  //   slug: 'family-visa'
+  // },
   // {
   //   name: 'Tier 4 General Student Visa',
   //   slug: 'T4-general-student'
