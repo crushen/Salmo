@@ -2,7 +2,7 @@
   <div>
     <h1>Quiz done</h1>
     <div class="results">
-      <p><strong>Top result:</strong></p>
+      <p><strong>You can switch to this visa for the easiest way to remain in the UK:</strong></p>
       <router-link 
         v-for="visa in topResult"
         :key="visa.name"
@@ -26,7 +26,7 @@
       </div>
 
       <div v-if="otherVisas[0] || youthMobility[0]">
-        <p><strong>Visas in the {{ topResult[0].category }} category you can't switch to:</strong></p>
+        <p><strong>Visas in the {{ topResult[0].category }} category you can apply for, but you would need to leave the UK before applying:</strong></p>
         <router-link 
           v-for="visa in otherVisas"
           :key="visa.name"
