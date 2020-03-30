@@ -183,7 +183,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+$pink: pink;
+
 .take-quiz {
   margin-top: 100px;
 }
@@ -195,7 +197,7 @@ export default {
 }
 
 .result-link {
-  border: 1px solid pink;
+  border: 1px solid $pink;
   padding: 10px;
   margin-bottom: 15px;
   cursor: pointer;
