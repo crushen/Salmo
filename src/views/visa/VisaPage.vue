@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <section class="content">
     <h1>{{ visa.name }}</h1>
     <router-link
       :to="{ name: 'visa-info' }"
       tag="button">
       Back to Visa Info
     </router-link>
-  </div>
+  </section>
 </template>
 
 <script>

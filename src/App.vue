@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <app-header />
+    <app-navigation />
     <router-view/>
   </div>
 </template>
 
 <script>
-import AppHeader from '@/components/Header';
+import AppNavigation from '@/components/Navigation';
 
 export default {
   components: {
-    AppHeader
+    AppNavigation
   }
 }
 </script>
@@ -19,19 +19,14 @@ export default {
 @import '@/assets/styles/variables.scss';
 @import '@/assets/styles/main.scss';
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #app {
-  font-family: 'sofia-pro', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  font-family: $sans-serif;
   color: $dark-font;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a.router-link-active {
-  font-style: italic;
 }
 </style>

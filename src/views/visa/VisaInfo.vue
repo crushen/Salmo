@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <section class="content">
     <h1>Visa Info</h1>
     <div 
       v-for="visa in visas"
       :key="visa.name">
       <router-link :to="{ name: 'visa-page', params: { slug: visa.slug } }">{{ visa.name }}</router-link>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

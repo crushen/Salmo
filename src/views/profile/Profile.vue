@@ -30,10 +30,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.content {
-  width: 80%;
-  margin: auto;
-  text-align: left;
-}
-</style>

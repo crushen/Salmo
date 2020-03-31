@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="content">
     <!-- If user has updates profile info -->
     <div v-if="user.profile.age">
       <div v-if="introStage">
