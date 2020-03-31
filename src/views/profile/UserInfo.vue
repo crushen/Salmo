@@ -184,7 +184,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-$pink: pink;
+@import '@/assets/styles/variables.scss';
 
 .take-quiz {
   margin-top: 100px;
@@ -197,7 +197,7 @@ $pink: pink;
 }
 
 .result-link {
-  border: 1px solid $pink;
+  border: 2px solid $secondary-pink;
   padding: 10px;
   margin-bottom: 15px;
   cursor: pointer;

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AppHeader from '@/components/Header'
+import AppHeader from '@/components/Header';
 
 export default {
   components: {
@@ -15,25 +15,23 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '@/assets/styles/variables.scss';
+@import '@/assets/styles/main.scss';
+
 #app {
-  font-family: 'Muli', Helvetica, Arial, sans-serif;
+  font-family: 'sofia-pro', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: $dark-font;
 }
 
 #nav {
   padding: 30px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
 #nav a.router-link-active {
-  color: #42b983;
+  font-style: italic;
 }
 </style>

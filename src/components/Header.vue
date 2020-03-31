@@ -63,15 +63,4 @@ nav, .nav-links {
 nav.flex-end {
   justify-content: flex-end;
 }
-
-button {
-  border: none;
-  background: #2c3e50;
-  color: white;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  font-weight: bold;
-  font-size: 14px;
-  padding: 10px;
-  border-radius: 8px;
-}
 </style>
