@@ -4,9 +4,12 @@
   font-weight: $weight;
 }
 
+h1.logo-text { @include font(60px, 900) }
 h1 { @include font(40px, 900) }
+h2.header { @include font(40px, 900) }
 h2 { @include font(20px, 600) }
-h3, .label { 
+h3 { @include font(18px, 600) }
+h4, .label { 
   @include font(20px, 400);
   font-family: 'mrs-eaves-roman-all-small-ca', $serif;
 }
@@ -21,7 +24,6 @@ a:hover {
   font-style: italic;
 }
 
-.logo-text { @include font(60px, 900) }
 .emphasis { font-style: italic; }
 .quote { font-family: $serif; }
 .caption { 
@@ -49,6 +51,10 @@ button:hover {
 .content {
   width: 85%;
   margin: auto;
+}
+
+.section-margin {
+  margin-top: $spacing*8;
 }
 
 .placeholder-image {

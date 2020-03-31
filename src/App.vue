@@ -28,5 +28,6 @@ export default {
 #app {
   font-family: $sans-serif;
   color: $dark-font;
+  padding-bottom: 76px;
 }
 </style>

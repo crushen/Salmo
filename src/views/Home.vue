@@ -3,21 +3,28 @@
     <header>
       <div class="logo">
         <div class="circle"></div>
-        <p class="logo-text">Salmo</p>
+        <h1 class="logo-text">Salmo</h1>
       </div>
       <h2 class="caption">The ultimate visa organisation tool.</h2>
     </header>
 
     <section class="welcome">
-      <h1>Welcome back, {{ user.profile.firstName }}.</h1>
+      <h2 class="header">Welcome back, {{ user.profile.firstName }}.</h2>
       <div class="placeholder-image"></div>
     </section>
+
+    <news />
 
   </section>
 </template>
 
 <script>
+import news from '@/components/news/News';
+
 export default {
+  components: {
+    news
+  },
   data() {
     return {
       user: this.$store.state.auth.user
@@ -53,7 +60,7 @@ header {
 .welcome {
   margin-top: $spacing*5;
 
-  & h1 {
+  & h2 {
     margin-bottom: $spacing*3;
   }
 }
