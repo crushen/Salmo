@@ -84,7 +84,7 @@
           Show All
         </button>
         <button
-          v-else
+          v-else-if="allOtherVisas.length > 3"
           @click="numberOfVisas = 3">
           Show Less
         </button>
