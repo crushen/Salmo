@@ -62,32 +62,32 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 header {
-  width: 80%;
+  width: 100%;
   margin: auto;
   text-align: center;
   padding-top: $top-padding;
 }
 
 .logo {
-  width: 250px;
-  margin: 0 auto $spacing*4 auto;
+  margin: 0 auto 9vw auto;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
 
   & .circle {
-    width: $spacing*6;
-    height: $spacing*6;
+    width: 13vw;
+    height: 13vw;
     background: $light-grey;
+    margin-right: $spacing;
     border-radius: 100px;
   }
 }
 
 .welcome {
-  margin-top: $spacing*6;
+  margin-top: 16vw;
 
   & h2 {
-    margin-bottom: $spacing*3;
+    margin-bottom: 7vw;
   }
 }
 </style>

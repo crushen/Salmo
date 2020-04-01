@@ -5,11 +5,11 @@
 }
 
 h1.logo-text { 
-  @include font(60px, 900);
+  @include font(16vw, 900);
   line-height: 0;
 }
 h1 { @include font(40px, 900) }
-h2.header { @include font(40px, 900) }
+h2.header { @include font(10vw, 900) }
 h2 { @include font(20px, 600) }
 h3 { @include font(18px, 600) }
 h4, .label { 
@@ -30,7 +30,7 @@ a:hover {
 .emphasis { font-style: italic; }
 .quote { font-family: $serif; }
 .caption { 
-  @include font(25px, 400);
+  @include font(6.5vw, 400);
   font-family: 'essonnes-text', $serif;
 }
 
@@ -68,8 +68,8 @@ button:hover {
 }
 
 .placeholder-image {
-  width: 80%;
-  height: 25vh;
+  width: 60vw;
+  height: 40vw;
   margin: auto;
   background: $light-grey;
 }
