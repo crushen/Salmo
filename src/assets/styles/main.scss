@@ -48,6 +48,10 @@ button:hover {
 }
 
 // Page
+.top-padding {
+  padding-top: $spacing*5;
+}
+
 .content {
   width: 85%;
   margin: auto;

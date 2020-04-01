@@ -1,5 +1,5 @@
 <template>
-  <section class="content">
+  <section class="content top-padding">
     <header>
       <div class="logo">
         <div class="circle"></div>
@@ -24,8 +24,6 @@
         :text="card.text"
         :pageTitle="card.pageTitle" />
     </section>
-
-
   </section>
 </template>
 
@@ -65,7 +63,7 @@ export default {
 
 header {
   width: 80%;
-  margin: $spacing*5 auto 0 auto;
+  margin: auto;
   text-align: center;
 }
 
