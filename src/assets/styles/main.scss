@@ -14,9 +14,9 @@ h4, .label {
   font-family: 'mrs-eaves-roman-all-small-ca', $serif;
 }
 
-p { @include font(18px, 400) }
+p { @include font(16px, 400) }
 a { 
-  @include font(18px, 600);
+  @include font(16px, 600);
   text-decoration: none;
   color: $dark-font;
 }
@@ -54,7 +54,7 @@ button:hover {
 }
 
 .section-margin {
-  margin-top: $spacing*8;
+  margin-top: $spacing*10;
 }
 
 .placeholder-image {
