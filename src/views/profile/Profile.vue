@@ -2,7 +2,6 @@
   <section class="content">
     <!-- If user has verified email -->
     <section v-if="user.emailVerified">
-      <h1>{{ user.profile.firstName }} {{ user.profile.lastName }}</h1>
       <router-view :key="$route.path" />
     </section>
 
@@ -30,3 +29,10 @@ export default {
 }
 </script>
 
+<style scoped lang="scss">
+@import '@/assets/styles/variables.scss';
+
+.content {
+  padding-top: $top-padding;
+}
+</style>
