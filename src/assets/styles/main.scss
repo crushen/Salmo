@@ -4,7 +4,10 @@
   font-weight: $weight;
 }
 
-h1.logo-text { @include font(60px, 900) }
+h1.logo-text { 
+  @include font(60px, 900);
+  line-height: 0;
+}
 h1 { @include font(40px, 900) }
 h2.header { @include font(40px, 900) }
 h2 { @include font(20px, 600) }
@@ -49,7 +52,7 @@ button:hover {
 
 // Page
 .top-padding {
-  padding-top: $spacing*5;
+  padding-top: $spacing*6;
 }
 
 .content {

@@ -69,7 +69,7 @@ header {
 
 .logo {
   width: 250px;
-  margin: 0 auto $spacing*2 auto;
+  margin: 0 auto $spacing*4 auto;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -83,7 +83,7 @@ header {
 }
 
 .welcome {
-  margin-top: $spacing*5;
+  margin-top: $spacing*6;
 
   & h2 {
     margin-bottom: $spacing*3;
