@@ -34,7 +34,7 @@ export default {
   }
 
   & .icon {
-    width: 40%;
+    width: 34vw;
     max-width: 120px;
     display: flex;
     align-items: flex-end;
