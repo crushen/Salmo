@@ -344,7 +344,7 @@ const questions = [
         answers: [
           {
             text: 'Here for family. This applies to you if you wish to stay with a partner or family after your studies.',
-            value: 'Family Visa (needs expanding)'
+            value: 'Family (needs expanding)'
           },
           {
             text: 'Here for business. This applies to you if you will be starting a business or investing after your studies.',
@@ -362,11 +362,11 @@ const questions = [
         answers: [
           {
             text: 'Invest',
-            value: 'Tier 1 Investor Visa'
+            value: 'Tier 1 Investor'
           },
           {
             text: 'Start my own',
-            value: 'Startup Visa'
+            value: 'Startup'
           }
         ]
       },
@@ -376,11 +376,11 @@ const questions = [
         answers: [
           {
             text: 'Sports',
-            value: 'Tier 2 Sportsperson Visa'
+            value: 'Tier 2 Sportsperson'
           },
           {
             text: 'Religion',
-            value: 'Tier 2 Minister of Religion Visa'
+            value: 'Tier 2 Minister of Religion'
           },
           {
             text: 'Neither',
@@ -394,11 +394,11 @@ const questions = [
         answers: [
           {
             text: 'Yes',
-            value: 'Tier 5 Government Authorised Exchange Visa'
+            value: 'Tier 5 Government Authorised Exchange'
           },
           {
             text: 'No',
-            value: 'Tier 2 General Work Visa'
+            value: 'Tier 2 General Work'
           }
           // {
           //   text: 'Not sure',
@@ -410,7 +410,7 @@ const questions = [
   },
   // CHILD STUDENT
   {
-    visa: 'Tier 4 Child Student Visa',
+    visa: 'Tier 4 Child Student',
     questions: [
       {
         question: 'Which best describes why you would like to remain in the UK?',
@@ -418,11 +418,11 @@ const questions = [
         answers: [
           {
             text: 'Here for family. This applies to you if you wish to stay with a partner or family after your studies.',
-            value: 'Family Visa (needs expanding)'
+            value: 'Family (needs expanding)'
           },
           {
             text: 'Here for study. This applies to you if you will be going from GCSE to higher education or university.',
-            value: 'Tier 4 General Student Visa'
+            value: 'Tier 4 General Student'
           },
           {
             text: 'Here for work. This applies to you if you will be employed by someone else after your studies.',
@@ -436,11 +436,11 @@ const questions = [
         answers: [
           {
             text: 'Sports',
-            value: 'Tier 2 Sportsperson Visa'
+            value: 'Tier 2 Sportsperson'
           },
           {
             text: 'Religion',
-            value: 'Tier 2 Minister of Religion Visa'
+            value: 'Tier 2 Minister of Religion'
           },
           {
             text: 'Neither',
@@ -454,11 +454,11 @@ const questions = [
         answers: [
           {
             text: 'Yes',
-            value: 'Tier 5 Government Authorised Exchange Visa'
+            value: 'Tier 5 Government Authorised Exchange'
           },
           {
             text: 'No',
-            value: 'Tier 2 General Work Visa'
+            value: 'Tier 2 General Work'
           }
           // {
           //   text: 'Not sure',

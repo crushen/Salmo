@@ -1,86 +1,86 @@
 const visas = [
   {
-    name: 'Tier 5 Creative and Sporting Visa',
+    name: 'Tier 5 Creative and Sporting',
     category: 'work',
     slug: 'T5-creative-and-sporting'
   },
   {
-    name: 'Tier 5 Government Authorised Exchange Visa',
+    name: 'Tier 5 Government Authorised Exchange',
     category: 'work',
     slug: 'T5-gov-authorised-exchange'
   },
   {
-    name: 'Tier 2 Intra-company Transfer Visa',
+    name: 'Tier 2 Intra-company Transfer',
     category: 'work',
     slug: 'T2-intra-company-transfer'
   },
   {
-    name: 'Family Visa (needs expanding)',
+    name: 'Family (needs expanding)',
     category: 'family',
-    slug: 'family-visa'
+    slug: 'family'
   },
   {
-    name: 'Global Talent Visa',
+    name: 'Global Talent',
     category: 'business',
-    slug: 'global-talent-visa'
+    slug: 'global-talent'
   },
   {
-    name: 'Innovator Visa',
+    name: 'Innovator',
     category: 'business',
-    slug: 'innovator-visa'
+    slug: 'innovator'
   },
   {
-    name: 'Startup Visa',
+    name: 'Startup',
     category: 'business',
-    slug: 'startup-visa'
+    slug: 'startup'
   },
   {
-    name: 'Tier 1 Investor Visa',
+    name: 'Tier 1 Investor',
     category: 'business',
     slug: 'T1-investor'
   },
   {
-    name: 'Tier 2 General Work Visa',
+    name: 'Tier 2 General Work',
     category: 'work',
     slug: 'T2-general-work'
   },
   {
-    name: 'Tier 2 Minister of Religion Visa',
+    name: 'Tier 2 Minister of Religion',
     category: 'work',
     slug: 'T2-minister-of-religion'
   },
   {
-    name: 'Tier 2 Sportsperson Visa',
+    name: 'Tier 2 Sportsperson',
     category: 'work',
     slug: 'T2-sportsperson'
   },
   {
-    name: 'Tier 4 General Student Visa',
+    name: 'Tier 4 General Student',
     category: 'study',
     slug: 'T4-general-student'
   },
   {
-    name: 'Tier 4 Short Term Study Visa',
+    name: 'Tier 4 Short Term Study',
     category: 'study',
     slug: 'T4-short-term-study'
   },
   {
-    name: 'Tier 5 Charity Worker Visa',
+    name: 'Tier 5 Charity Worker',
     category: 'work',
     slug: 'T5-charity-worker'
   },
   {
-    name: 'Tier 5 International Agreement Visa',
+    name: 'Tier 5 International Agreement',
     category: 'work',
     slug: 'T5-international-agreement'
   },
   {
-    name: 'Tier 5 Religious Worker Visa',
+    name: 'Tier 5 Religious Worker',
     category: 'work',
     slug: 'T5-religious-worker'
   },
   {
-    name: 'Tier 5 Seasonal Worker Visa',
+    name: 'Tier 5 Seasonal Worker',
     category: 'work',
     slug: 'T5-seasonal-worker'
   },
