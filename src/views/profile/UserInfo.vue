@@ -25,7 +25,7 @@
 
     <div 
       v-if="!topResult"
-      class="take-quiz">
+      class="take-quiz section-margin">
       <p>To find out your easiest way to stay in the UK, take our visa quiz!</p>
       <router-link
         :to="{ name: 'questionnaire' }"
@@ -36,19 +36,16 @@
 
     <div 
       v-else
-      class="results">
-      <p><strong>You can switch to this visa for the easiest way to remain in the UK:</strong></p>
-      <router-link 
+      class="results section-margin">
+      <h3>The top result of your latest quiz</h3>
+      <visa-card 
         v-for="visa in topResult"
         :key="visa.name"
-        tag="div"
-        class="result-link"
-        :to="{ name: 'visa-page', params: { slug: visa.slug } }">
-        <p>{{ visa.name }}</p>
-        <p>Switch: {{ visa.switch }}</p>
-      </router-link>
+        :visa="visa"/>
 
-      <div v-if="switchVisas[0]">
+
+
+      <!-- <div v-if="switchVisas[0]">
         <p><strong>Other {{ topResult[0].category }} visas you can switch to:</strong></p>
         <router-link 
           v-for="visa in switchVisas"
@@ -89,7 +86,7 @@
           @click="numberOfVisas = 3">
           Show Less
         </button>
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
@@ -97,10 +94,12 @@
 <script>
 import { mapState } from 'vuex';
 import profileCard from '@/components/ProfileCard';
+import visaCard from '@/components/VisaCard';
 
 export default {
   components: {
-    profileCard
+    profileCard,
+    visaCard
   },
   data() {
     return {
@@ -207,20 +206,10 @@ export default {
   text-decoration: underline;
 }
 
-.take-quiz {
-  margin-top: 100px;
-}
-
-.results {
-  margin-top: 100px;
-  display: flex;
-  flex-direction: column;
-}
-
-.result-link {
-  border: 2px solid $secondary-pink;
-  padding: 10px;
-  margin-bottom: 15px;
-  cursor: pointer;
-}
+// .result-link {
+//   border: 2px solid $secondary-pink;
+//   padding: 10px;
+//   margin-bottom: 15px;
+//   cursor: pointer;
+// }
 </style>
