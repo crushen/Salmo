@@ -56,8 +56,8 @@ export default {
   min-height: 260px;
   background: $dark-grey;
   color: $light-font;
-  padding: $spacing;
-  margin: $spacing*3 auto 0 auto;
+  padding: 10px;
+  margin: $spacing*4 auto 0 auto;
   border-radius: $border-radius;
   @include grid(repeat(2, 1fr), 2fr 1fr 1fr, 10px);
 

@@ -206,6 +206,12 @@ export default {
   text-decoration: underline;
 }
 
+.results {
+  & h3 {
+    margin-bottom: $spacing*4;
+  }
+}
+
 // .result-link {
 //   border: 2px solid $secondary-pink;
 //   padding: 10px;
