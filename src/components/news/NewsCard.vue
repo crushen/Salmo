@@ -24,7 +24,7 @@ export default {
 
 .card {
   margin-bottom: $spacing*3;
-  padding: 150px $spacing $spacing;
+  padding: 35vw $spacing $spacing;
   background: $light-grey;
   border-radius: $border-radius;
 }
