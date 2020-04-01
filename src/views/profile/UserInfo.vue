@@ -7,18 +7,21 @@
       v-if="user.profile.age"
       :user="user" />
 
-    <router-link 
-      v-if="user.profile.age"
-      tag="button"
-      :to="{ name: 'update-profile', params: { uid: user.uid } }">
-      Update Profile
-    </router-link>
-    <router-link 
-      v-else
-      tag="button"
-      :to="{ name: 'update-profile', params: { uid: user.uid } }">
-      Create Profile
-    </router-link>
+    <div class="edit-button">
+      <router-link 
+        v-if="user.profile.age"
+        :to="{ name: 'update-profile', params: { uid: user.uid } }"
+        class="edit-button">
+        Edit Profile
+      </router-link>
+
+      <router-link 
+        v-else
+        tag="button"
+        :to="{ name: 'update-profile', params: { uid: user.uid } }">
+        Create Profile
+      </router-link>
+    </div>
 
     <div 
       v-if="!topResult"
@@ -196,6 +199,13 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/variables.scss';
+
+.edit-button {
+  width: 100%;
+  text-align: center;
+  margin-top: $spacing*2;
+  text-decoration: underline;
+}
 
 .take-quiz {
   margin-top: 100px;
