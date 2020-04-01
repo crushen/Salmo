@@ -1,5 +1,5 @@
 <template>
-  <section class="content top-padding">
+  <section class="content">
     <header>
       <div class="logo">
         <div class="circle"></div>
@@ -65,6 +65,7 @@ header {
   width: 80%;
   margin: auto;
   text-align: center;
+  padding-top: $top-padding;
 }
 
 .logo {
