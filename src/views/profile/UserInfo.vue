@@ -1,13 +1,11 @@
 <template>
   <section>
-    <div class="profile-details">
-      <div v-if="user.profile.age">
-        <p><strong>Age:</strong> {{ user.profile.age }}</p>
-        <p><strong>Country:</strong> {{ user.profile.country }}</p>
-        <p><strong>Current Visa:</strong> {{ user.profile.currentVisa }}</p>
-        <p><strong>Dependants:</strong> {{ user.profile.dependants }}</p>
-      </div>
-    </div>
+    <!-- <button @click="handleLogout" type="button">Log Out</button> -->
+    <h1>All about you.</h1>
+
+    <profile-card 
+      v-if="user.profile.age"
+      :user="user" />
 
     <router-link 
       v-if="user.profile.age"
@@ -95,8 +93,12 @@
 
 <script>
 import { mapState } from 'vuex';
+import profileCard from '@/components/ProfileCard';
 
 export default {
+  components: {
+    profileCard
+  },
   data() {
     return {
       user: this.$store.state.auth.user,
@@ -150,6 +152,15 @@ export default {
     }
   },
   methods: {
+    // handleLogout() {
+    //   this.$store.dispatch('auth/logOut')
+    //   .then(() => {
+    //     if(this.$route.path !== '/') {
+    //       this.$router.push('/')
+    //     }
+    //     alert('You have been logged out')
+    //   })
+    // },
     checkSwitch() {  
       if(this.currentVisa === 'Tier 4 General Student Visa') {
         this.switchOptions = ['Startup Visa', 'Tier 1 Investor Visa', 'Tier 2 General Work Visa', 'Tier 2 Sportsperson Visa', 'Tier 2 Minister of Religion Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Family Visa (needs expanding)']

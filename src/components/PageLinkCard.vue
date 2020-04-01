@@ -39,7 +39,7 @@ export default {
     display: flex;
     align-items: flex-end;
     padding: $spacing;
-    border-radius: 10px;
+    border-radius: $border-radius;
     background: $dark-font;
     color: $light-font;
   }

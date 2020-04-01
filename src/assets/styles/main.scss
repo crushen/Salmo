@@ -51,6 +51,13 @@ button:hover {
 }
 
 // Page
+@mixin grid($col, $row, $gap) {
+  display: grid;
+  grid-template-columns: $col;
+  grid-template-rows: $row;
+  grid-gap: $gap;
+}
+
 .content {
   width: 85%;
   margin: auto;

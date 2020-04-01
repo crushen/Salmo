@@ -26,6 +26,6 @@ export default {
   margin-bottom: $spacing*3;
   padding: 150px $spacing $spacing;
   background: $light-grey;
-  border-radius: 10px;
+  border-radius: $border-radius;
 }
 </style>
