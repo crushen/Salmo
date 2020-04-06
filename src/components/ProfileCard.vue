@@ -8,7 +8,7 @@
     <div class="child two">
       <div>
         <p class="label">Username</p> 
-        <p>{{ user.profile.firstName }}</p>
+        <p>{{ user.profile.username }}</p>
       </div>
       <div>
         <p class="label">Date of birth</p> 

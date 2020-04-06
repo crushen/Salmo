@@ -6,7 +6,8 @@
         <input 
           v-model.trim="form.firstName"
           type="text"
-          placeholder="First Name">
+          placeholder="First Name"
+          autocomplete="given-name">
         <div v-if="$v.form.firstName.$error">
           <span v-if="!$v.form.firstName.required">
             First name is required
@@ -18,10 +19,34 @@
         <input 
           v-model.trim="form.lastName"
           type="text"
-          placeholder="Last Name">
+          placeholder="Last Name"
+          autocomplete="family-name">
         <div v-if="$v.form.lastName.$error">
           <span v-if="!$v.form.lastName.required">
             Last name is required
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <input 
+          v-model.trim="form.username"
+          type="text"
+          placeholder="Username"
+          autocomplete="username">
+        <div v-if="$v.form.username.$error">
+          <span v-if="!$v.form.username.required">
+            Username is required
+          </span>
+          <span 
+            v-if="!$v.form.username.minLength"
+            class="help is-danger">
+            Password should be at least 6 characters
+          </span>
+          <span 
+            v-if="!$v.form.username.maxLength"
+            class="help is-danger">
+            User should be no more than 10 characters
           </span>
         </div>
       </div>
@@ -86,7 +111,7 @@
 </template>
 
 <script>
-import { required, email, minLength, sameAs } from 'vuelidate/lib/validators';
+import { required, email, minLength, maxLength, sameAs } from 'vuelidate/lib/validators';
 
 export default {
   data() {
@@ -94,6 +119,7 @@ export default {
       form: {
         firstName: '',
         lastName: '',
+        username: '',
         email: '',
         password: '',
         confirmPassword: ''
@@ -113,6 +139,11 @@ export default {
       },
       lastName: {
         required
+      },
+      username: {
+        required,
+        minLength: minLength(6),
+        maxLength: maxLength(10)
       },
       password: {
         required,
@@ -139,6 +170,7 @@ export default {
             userProfile: {
               firstName: this.form.firstName,
               lastName: this.form.lastName,
+              username: this.form.username,
               user: user.uid,
               questionnaireResults: []
             }
