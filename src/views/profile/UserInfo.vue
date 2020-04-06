@@ -41,7 +41,11 @@
       <visa-card 
         v-for="visa in topResult"
         :key="visa.name"
-        :visa="visa"/>
+        :visa="visa">
+        <template #quickTip>
+          <quick-tip />
+        </template>
+      </visa-card>
 
 
 
@@ -95,11 +99,13 @@
 import { mapState } from 'vuex';
 import profileCard from '@/components/ProfileCard';
 import visaCard from '@/components/VisaCard';
+import quickTip from '@/components/QuickTip';
 
 export default {
   components: {
     profileCard,
-    visaCard
+    visaCard,
+    quickTip
   },
   data() {
     return {

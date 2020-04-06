@@ -1,9 +1,10 @@
 <template>
   <div>
-
-
     <div class="card">
       <div class="title">
+        <slot 
+          v-if="$slots.quickTip"
+          name="quickTip"/>
         <h3>{{ visa.name }}</h3>
       </div>
       <div class="body">
@@ -33,6 +34,7 @@ export default {
   background: $dark-grey;
   color: $light-font;
   border-radius: $border-radius;
+  position: relative;
 
   & .title {
     background: $grey;
