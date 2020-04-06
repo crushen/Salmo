@@ -39,8 +39,8 @@ const routes = [
     component: Profile,
     meta: { onlyAuthUser: true },
     children: [
-      { path: ':uid', name: 'user-info', component: UserInfo },
-      { path: ':uid/update-profile', name: 'update-profile', component: UpdateProfile }
+      { path: ':username', name: 'user-info', component: UserInfo },
+      { path: ':username/update-profile', name: 'update-profile', component: UpdateProfile }
     ]
   },
   { 

@@ -32,12 +32,25 @@ const visas = [
   {
     name: 'Startup',
     category: 'business',
-    slug: 'startup'
+    slug: 'startup',
+    card: {
+      subTitle: 'Great for individuals who wish to start their own business in the UK.'
+    }
   },
   {
     name: 'Tier 1 Investor',
     category: 'business',
-    slug: 'T1-investor'
+    slug: 'T1-investor',
+    card: {
+      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      checklist: {
+        ilr: true,
+        work: true,
+        dependants: true,
+        extend: true,
+        study: 'maybe'
+      }
+    }
   },
   {
     name: 'Tier 2 General Work',
