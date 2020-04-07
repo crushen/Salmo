@@ -42,7 +42,8 @@
         v-for="visa in topResult"
         :key="visa.name"
         :visa="visa"
-        :currentVisa="currentVisa">
+        :currentVisa="currentVisa"
+        :switchOptions="switchOptions">
         <template #quickTip>
           <quick-tip />
         </template>
