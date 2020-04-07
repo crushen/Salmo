@@ -171,13 +171,6 @@ export default {
       } else if(this.currentVisa === 'Tier 4 Child Student') {
         this.switchOptions = ['Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 4 General Student', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']
       }
-      // For now, will only be testing Student specific questionnaires, so all top results will be switchable
-      // However, this will change when other current visas are options
-      if(this.topResult) {
-        this.topResult.forEach(visa => {
-          visa.switch = true;
-        })
-      }
     },
     checkYouthMobility() {
       const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)'];
@@ -213,11 +206,4 @@ export default {
     margin-bottom: $spacing*4;
   }
 }
-
-// .result-link {
-//   border: 2px solid $secondary-pink;
-//   padding: 10px;
-//   margin-bottom: 15px;
-//   cursor: pointer;
-// }
 </style>
