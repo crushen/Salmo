@@ -12,8 +12,7 @@
 
         <div class="checklist">
           <div class="item">
-            <!-- Need to do switch logic -->
-            <img :src="check" alt="tick" class="icon">
+            <img :src="this.switch ? check : cross" alt="tick" class="icon">
             <p class="label">Switch</p>
           </div>
           <div
@@ -44,11 +43,14 @@ import question from '@/assets/question-solid.svg';
 
 export default {
   props: {
-    visa: { required: true, type: Object }
+    visa: { required: true, type: Object },
+    currentVisa: { required: true, type: String }
   },
   data() {
     return {
       checklist: this.visa.card.checklist,
+      switchOptions: [],
+      switch: null,
       check,
       cross,
       question
@@ -65,10 +67,25 @@ export default {
           item.icon = this.cross;
         }
       });
-    }
+    },
+    checkSwitch() {  
+      if(this.currentVisa === 'Tier 4 General Student') {
+        this.switchOptions = ['Startup', 'Tier 1 Investor', 'Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']
+      } else if(this.currentVisa === 'Tier 4 Child Student') {
+        this.switchOptions = ['Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 4 General Student', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']
+      }
+      // For now, will only be testing Student specific questionnaires, so all top results will be switchable
+      // However, this will change when other current visas are options
+      this.switchOptions.forEach(switchVisa => {
+        if(switchVisa === this.visa.name) {
+          this.switch = true;
+        }
+      })
+    },
   },
   created() {
     this.getIcon();
+    this.checkSwitch();
   }
 }
 </script>

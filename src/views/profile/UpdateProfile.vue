@@ -343,8 +343,8 @@ export default {
         // 'Tier 2 Intra-company Transfer Long-term Staff Visa',
         // 'Tier 2 Minister of Religion Visa',
         // 'Tier 2 Sportsperson Visa',
-        'Tier 4 Child Student Visa',
-        'Tier 4 General Student Visa'
+        'Tier 4 Child Student',
+        'Tier 4 General Student'
         // 'Tier 4 Short Term Study Visa',
         // 'Tier 5 Charity Worker Visa', 
         // 'Tier 5 Creative and Sporting Visa',

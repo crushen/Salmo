@@ -41,7 +41,8 @@
       <visa-card 
         v-for="visa in topResult"
         :key="visa.name"
-        :visa="visa">
+        :visa="visa"
+        :currentVisa="currentVisa">
         <template #quickTip>
           <quick-tip />
         </template>
