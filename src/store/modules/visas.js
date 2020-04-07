@@ -50,6 +50,12 @@ const visas = [
     slug: 'T1-investor',
     card: {
       subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      quickTip: `
+        <p>The more you can invest in the UK, the quicker you can achieve permenant residency:<br><br>
+        with £2 million, you will gain permenant residency in 5 years<br><br>
+        with £5 million, you will gain permenant residency in 3 years<br><br>
+        with £10 million, you will gain permenant residency in 2 years</p>
+      `,
       checklist: [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },

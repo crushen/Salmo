@@ -45,7 +45,7 @@
         :currentVisa="currentVisa"
         :switchOptions="switchOptions">
         <template #quickTip>
-          <quick-tip />
+          <quick-tip :visa="visa"/>
         </template>
       </visa-card>
 
