@@ -57,21 +57,7 @@
           :currentVisa="currentVisa" />
       </div> -->
 
-
-
-      <!-- <div v-if="switchVisas[0]">
-        <p><strong>Other {{ topResult[0].category }} visas you can switch to:</strong></p>
-        <router-link 
-          v-for="visa in switchVisas"
-          :key="visa.name"
-          tag="div"
-          class="result-link"
-          :to="{ name: 'visa-page', params: { slug: visa.slug } }">
-          <p>{{ visa.name }}</p>
-        </router-link>
-      </div>
-
-      <div v-if="numberOfOtherVisas[0] || youthMobility[0]">
+      <!-- <div v-if="numberOfOtherVisas[0] || youthMobility[0]">
         <p><strong>Visas in the {{ topResult[0].category }} category you can apply for, but you would need to leave the UK before applying:</strong></p>
         <router-link 
           v-for="visa in numberOfOtherVisas"
