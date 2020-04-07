@@ -34,7 +34,14 @@ const visas = [
     category: 'business',
     slug: 'startup',
     card: {
-      subTitle: 'Great for individuals who wish to start their own business in the UK.'
+      subTitle: 'Great for individuals who wish to start their own business in the UK.',
+      checklist: [
+        { name: 'ILR', status: false },
+        { name: 'Work', status: true },
+        { name: 'Dependants', status: true },
+        { name: 'Extend', status: false },
+        { name: 'Study', status: 'maybe' }
+      ]
     }
   },
   {

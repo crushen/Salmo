@@ -48,6 +48,15 @@
         </template>
       </visa-card>
 
+      <!-- <div v-if="switchVisas[0]">
+        <h3>Other {{ topResult[0].category }} visas you can switch to</h3>
+        <visa-card 
+          v-for="visa in switchVisas"
+          :key="visa.name"
+          :visa="visa"
+          :currentVisa="currentVisa" />
+      </div> -->
+
 
 
       <!-- <div v-if="switchVisas[0]">
@@ -171,10 +180,10 @@ export default {
     //   })
     // },
     checkSwitch() {  
-      if(this.currentVisa === 'Tier 4 General Student Visa') {
-        this.switchOptions = ['Startup Visa', 'Tier 1 Investor Visa', 'Tier 2 General Work Visa', 'Tier 2 Sportsperson Visa', 'Tier 2 Minister of Religion Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Family Visa (needs expanding)']
-      } else if(this.currentVisa === 'Tier 4 Child Student Visa') {
-        this.switchOptions = ['Tier 2 General Work Visa', 'Tier 2 Sportsperson Visa', 'Tier 2 Minister of Religion Visa', 'Tier 4 General Student Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Family Visa (needs expanding)']
+      if(this.currentVisa === 'Tier 4 General Student') {
+        this.switchOptions = ['Startup', 'Tier 1 Investor', 'Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']
+      } else if(this.currentVisa === 'Tier 4 Child Student') {
+        this.switchOptions = ['Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 4 General Student', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']
       }
       // For now, will only be testing Student specific questionnaires, so all top results will be switchable
       // However, this will change when other current visas are options
