@@ -44,10 +44,10 @@ button {
   padding: 10px 15px;
   border-radius: 100px;
   outline: none;
-}
 
-button:hover {
-  font-style: italic;
+  &:hover {
+    font-style: italic;
+  }
 }
 
 // Page

@@ -43,13 +43,13 @@ const visas = [
     slug: 'T1-investor',
     card: {
       subTitle: 'Awesome for individuals who wish to invest in UK business.',
-      checklist: {
-        ilr: true,
-        work: true,
-        dependants: true,
-        extend: true,
-        study: 'maybe'
-      }
+      checklist: [
+        { name: 'ILR', status: true },
+        { name: 'Work', status: true },
+        { name: 'Dependants', status: false }, // actually true, this is just for testing
+        { name: 'Extend', status: true },
+        { name: 'Study', status: 'maybe' }
+      ]
     }
   },
   {
