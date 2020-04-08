@@ -36,7 +36,7 @@ a:hover {
 
 // Buttons
 button {
-  @include font(14px, 600);
+  @include font(16px, 600);
   background: $primary-yellow;
   color: $dark-font;
   font-family: $sans-serif;
