@@ -88,7 +88,7 @@
 
     <router-link
     tag="button"
-     :to="{ name: 'user-info', params: { uid: user.uid } }">
+     :to="{ name: 'profile', params: { username: user.profile.username } }">
       Back To Profile
     </router-link> 
   </section>
@@ -392,7 +392,7 @@ export default {
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
         .then(() => {
           this.finished = true;
-          this.$router.push({ name: 'user-info', params: { uid: this.user.uid } });
+          this.$router.push({ name: 'profile', params: { username: this.user.profile.username } });
         })
     }
   },

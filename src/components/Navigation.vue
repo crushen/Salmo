@@ -17,7 +17,7 @@
           </router-link>
         </template>
         <template v-else>
-          <router-link :to="{ name: 'profile' }">
+          <router-link :to="{ name: 'profile', params: { username: user.profile.username } }">
             <div class="icon"></div>
             Profile
           </router-link>

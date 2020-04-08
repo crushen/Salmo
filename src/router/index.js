@@ -34,14 +34,16 @@ const routes = [
     meta: { onlyGuestUser: true }
   },
   { 
-    path: '/profile', 
+    path: '/:username', 
     name: 'profile',
     component: Profile,
-    meta: { onlyAuthUser: true },
-    children: [
-      { path: ':username', name: 'user-info', component: UserInfo },
-      { path: ':username/update-profile', name: 'update-profile', component: UpdateProfile }
-    ]
+    meta: { onlyAuthUser: true }
+  },
+  { 
+    path: '/:username/update-profile', 
+    name: 'update-profile',
+    component: UpdateProfile,
+    meta: { onlyAuthUser: true }
   },
   { 
     path: '/questionnaire', 
