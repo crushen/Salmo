@@ -1,53 +1,77 @@
 <template>
   <section>
     <!-- <button @click="handleLogout" type="button">Log Out</button> -->
-    <h1>All about you.</h1>
+    <section>
+      <h1>All about you.</h1>
 
-    <profile-card 
-      v-if="user.profile.age"
-      :user="user" />
-
-    <div class="edit-button">
-      <router-link 
+      <profile-card 
         v-if="user.profile.age"
-        :to="{ name: 'update-profile', params: { uid: user.uid } }"
-        class="edit-button">
-        Edit Profile
-      </router-link>
+        :user="user" />
 
-      <router-link 
+      <div class="edit-button">
+        <router-link 
+          v-if="user.profile.age"
+          :to="{ name: 'update-profile', params: { uid: user.uid } }"
+          class="edit-button">
+          Edit Profile
+        </router-link>
+
+        <router-link 
+          v-else
+          tag="button"
+          :to="{ name: 'update-profile', params: { uid: user.uid } }">
+          Create Profile
+        </router-link>
+      </div>
+    </section>
+
+    <section class="section-margin">
+      <div 
+        v-if="!topResult"
+        class="take-quiz">
+        <p>To find out your easiest way to stay in the UK, take our visa quiz!</p>
+        <router-link
+          :to="{ name: 'questionnaire' }"
+          tag="button">
+          Take the quiz!
+        </router-link>
+      </div>
+
+      <div 
         v-else
-        tag="button"
-        :to="{ name: 'update-profile', params: { uid: user.uid } }">
-        Create Profile
-      </router-link>
-    </div>
+        class="results">
+        <h3>The top result of your latest quiz</h3>
+        <visa-card 
+          v-for="visa in topResult"
+          :key="visa.name"
+          :visa="visa"
+          :currentVisa="currentVisa"
+          :switchOptions="switchOptions">
+          <template #quickTip>
+            <quick-tip :visa="visa"/>
+          </template>
+        </visa-card>
 
-    <div 
-      v-if="!topResult"
-      class="take-quiz section-margin">
-      <p>To find out your easiest way to stay in the UK, take our visa quiz!</p>
-      <router-link
-        :to="{ name: 'questionnaire' }"
-        tag="button">
-        Take the quiz!
-      </router-link>
-    </div>
+        <div class="results-button">
+          <p>You can see the rest of your results below!</p>
+          <button>Quiz Results</button>
+        </div>
+      </div>
+    </section>
 
-    <div 
-      v-else
-      class="results section-margin">
-      <h3>The top result of your latest quiz</h3>
-      <visa-card 
-        v-for="visa in topResult"
-        :key="visa.name"
-        :visa="visa"
-        :currentVisa="currentVisa"
-        :switchOptions="switchOptions">
-        <template #quickTip>
-          <quick-tip :visa="visa"/>
-        </template>
-      </visa-card>
+
+    <section class="section-margin">
+      <page-link-card
+        v-for="card in pageLinks"
+        :key="card.pageTitle"
+        :text="card.text"
+        :pageTitle="card.pageTitle" />
+    </section>
+
+    <section class="section-margin settings">
+      <p>Change how we get in touch below</p>
+      <button>Notification Settings</button>
+    </section>
 
       <!-- <div v-if="switchVisas[0]">
         <h3>Other {{ topResult[0].category }} visas you can switch to</h3>
@@ -88,7 +112,6 @@
           Show Less
         </button>
       </div> -->
-    </div>
   </section>
 </template>
 
@@ -97,12 +120,14 @@ import { mapState } from 'vuex';
 import profileCard from '@/components/ProfileCard';
 import visaCard from '@/components/VisaCard';
 import quickTip from '@/components/QuickTip';
+import pageLinkCard from '@/components/PageLinkCard';
 
 export default {
   components: {
     profileCard,
     visaCard,
-    quickTip
+    quickTip,
+    pageLinkCard
   },
   data() {
     return {
@@ -112,7 +137,21 @@ export default {
       dependants: this.$store.state.auth.user.profile.dependants,
       numberOfVisas: 3,
       switchOptions: [],
-      youthMobility: []
+      youthMobility: [],
+      pageLinks: [
+        {
+          text: 'Head over to your stats page to see an overview of your document checklist, important dates and travel history.',
+          pageTitle: 'Visa Stats<br>and Facts'
+          //link: ''
+          //icon: ''
+        },
+        {
+          text: 'For more general advice or help on the UK aplication process, take a look through our Help Centre.',
+          pageTitle: 'Help<br>Centre'
+          //link: ''
+          //icon: ''
+        }
+      ] 
     }
   },
   computed: {
@@ -205,6 +244,24 @@ export default {
 .results {
   & h3 {
     margin-bottom: $spacing*4;
+  }
+}
+
+.results-button {
+  width: 190px;
+  margin: $spacing*4 auto 0 auto;
+  text-align: center;
+
+  button {
+    margin-top: $spacing*2;
+  }
+}
+
+.settings {
+  text-align: center;
+
+  button {
+    margin-top: $spacing*2;
   }
 }
 </style>

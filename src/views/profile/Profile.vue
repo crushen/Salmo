@@ -33,6 +33,6 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .content {
-  padding-top: $top-padding;
+  padding: $top-padding 0;
 }
 </style>
