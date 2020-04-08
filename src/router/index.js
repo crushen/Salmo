@@ -4,7 +4,6 @@ import Home from '@/views/Home';
 import Login from '@/views/Login';
 import Signup from '@/views/Signup';
 import Profile from '@/views/profile/Profile';
-import UserInfo from '@/views/profile/UserInfo';
 import UpdateProfile from '@/views/profile/UpdateProfile';
 import Questionnaire from '@/views/Questionnaire';
 import VisaInfo from '@/views/visa/VisaInfo';
