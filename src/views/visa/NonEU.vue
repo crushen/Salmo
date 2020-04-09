@@ -8,12 +8,12 @@
     <section class="buttons">
       <router-link
       class="button"
-        v-for="button in buttons"
-        :key="button.text"
-        :to="button.link">
+        v-for="page in categories"
+        :key="page.text"
+        :to="{ name: 'non-eu-category', params: { category: page.text } }">
         <div>
-          <img :src="button.icon" class="icon">
-          <h3>{{ button.text }}</h3>
+          <img :src="page.icon" class="icon">
+          <h3>{{ page.text }}</h3>
         </div>
       </router-link>
     </section>
@@ -35,27 +35,24 @@ import heart from '@/assets/heart-solid.svg';
 export default {
   data() {
     return {
+      visas: this.$store.state.visas.visaList,
       arrow,
-      buttons: [
+      categories: [
         {
           icon: book,
-          text: 'Study',
-          link: { name: 'non-eu-study' }
+          text: 'study'
         },
         {
           icon: briefcase,
-          text: 'Work',
-          link: { name: 'non-eu-work' }
+          text: 'work'
         },
         {
           icon: coins,
-          text: 'Business',
-          link: { name: 'non-eu-business' }
+          text: 'business'
         },
         {
           icon: heart,
-          text: 'Family',
-          link: { name: 'non-eu-family' }
+          text: 'family'
         }
       ]
     }
@@ -95,6 +92,7 @@ export default {
     border-radius: $border-radius;
     background: $dark-font;
     color: $light-font;
+    text-transform: capitalize;
 
     div {
       display: flex;
