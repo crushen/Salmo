@@ -10,9 +10,13 @@
     <h1>Looking for an overview of all UK visas?</h1>
 
     <div class="buttons">
-      <p>To start, let us know where you are from.</p>
+      <h2>To start, let us know where you are from below:</h2>
       <div class="container">
-        <button>Non - EU</button>
+        <router-link 
+          :to="{name: 'non-eu'}"
+          tag="button">
+          Non - EU
+        </router-link>
         <button>EU</button>
         <button>Help Centre</button>
       </div>

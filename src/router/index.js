@@ -7,6 +7,7 @@ import Profile from '@/views/profile/Profile';
 import UpdateProfile from '@/views/profile/UpdateProfile';
 import Questionnaire from '@/views/Questionnaire';
 import VisaInfo from '@/views/visa/VisaInfo';
+import NonEU from '@/views/visa/NonEU';
 import VisaPage from '@/views/visa/VisaPage';
 
 import firebase from 'firebase/app';
@@ -33,13 +34,13 @@ const routes = [
     meta: { onlyGuestUser: true }
   },
   { 
-    path: '/:username', 
+    path: '/profile/:username', 
     name: 'profile',
     component: Profile,
     meta: { onlyAuthUser: true }
   },
   { 
-    path: '/:username/update-profile', 
+    path: '/profile/:username/update', 
     name: 'update-profile',
     component: UpdateProfile,
     meta: { onlyAuthUser: true }
@@ -54,6 +55,12 @@ const routes = [
     path: '/visa-info', 
     name: 'visa-info', 
     component: VisaInfo,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/visa-info/non-eu', 
+    name: 'non-eu', 
+    component: NonEU,
     meta: { onlyAuthUser: true } 
   },
   { 
