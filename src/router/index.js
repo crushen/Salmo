@@ -8,6 +8,10 @@ import UpdateProfile from '@/views/profile/UpdateProfile';
 import Questionnaire from '@/views/Questionnaire';
 import VisaInfo from '@/views/visa/VisaInfo';
 import NonEU from '@/views/visa/NonEU';
+import Study from '@/views/visa/Study';
+import Work from '@/views/visa/Work';
+import Business from '@/views/visa/Business';
+import Family from '@/views/visa/Family';
 import VisaPage from '@/views/visa/VisaPage';
 
 import firebase from 'firebase/app';
@@ -61,6 +65,30 @@ const routes = [
     path: '/visa-info/non-eu', 
     name: 'non-eu', 
     component: NonEU,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/visa-info/non-eu/study', 
+    name: 'non-eu-study', 
+    component: Study,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/visa-info/non-eu/work', 
+    name: 'non-eu-work', 
+    component: Work,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/visa-info/non-eu/business', 
+    name: 'non-eu-business', 
+    component: Business,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/visa-info/non-eu/family', 
+    name: 'non-eu-family', 
+    component: Family,
     meta: { onlyAuthUser: true } 
   },
   { 

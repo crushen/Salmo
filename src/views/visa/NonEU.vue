@@ -40,22 +40,22 @@ export default {
         {
           icon: book,
           text: 'Study',
-          link: ''
+          link: { name: 'non-eu-study' }
         },
         {
           icon: briefcase,
           text: 'Work',
-          link: ''
+          link: { name: 'non-eu-work' }
         },
         {
           icon: coins,
           text: 'Business',
-          link: ''
+          link: { name: 'non-eu-business' }
         },
         {
           icon: heart,
           text: 'Family',
-          link: ''
+          link: { name: 'non-eu-family' }
         }
       ]
     }
