@@ -5,7 +5,7 @@
 }
 
 h1.logo-text { 
-  @include font(16vw, 900);
+  @include font(14vw, 900);
   line-height: 0;
 }
 h1 { @include font(10vw, 900) }
@@ -17,21 +17,21 @@ h4, .label {
   font-family: 'mrs-eaves-roman-all-small-ca', $serif;
 }
 
-p { @include font(16px, 400) }
+p { @include font(16px, 300) }
 a { 
   @include font(16px, 600);
   text-decoration: none;
   color: $dark-font;
-}
-a:hover {
-  font-style: italic;
+
+  &:hover {
+    font-style: italic;
+  }
 }
 
 .emphasis { font-style: italic; }
 .quote { font-family: $serif; }
 .caption { 
-  @include font(6.5vw, 400);
-  font-family: 'essonnes-text', $serif;
+  @include font(4vw, 300);
 }
 
 // Buttons
@@ -59,17 +59,10 @@ button {
 }
 
 .content {
-  width: 85%;
+  width: 80%;
   margin: auto;
 }
 
 .section-margin {
   margin-top: $spacing*10;
-}
-
-.placeholder-image {
-  width: 60vw;
-  height: 40vw;
-  margin: auto;
-  background: $light-grey;
 }
