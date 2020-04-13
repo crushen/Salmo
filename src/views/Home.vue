@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="home">
     <header :style="{ backgroundImage: `url(${background})` }">
       <div class="content">
         <div class="logo">
@@ -17,9 +17,11 @@
       </div>
     </section>
 
-    <news />
+    <section class="news content">
+      <news />
+    </section>
 
-    <section class="section-margin">
+    <section class="page-links content section-margin">
       <page-link-card
         v-for="card in pageLinks"
         :key="card.pageTitle"
@@ -100,7 +102,16 @@ header {
   }
 
   h2 {
-    margin-top: 4vw;
+    margin-top: 6vw;
   }
+}
+
+.news {
+  transform: translateY(-20vw);
+  margin-top: 14vw;
+}
+
+.page-links {
+  transform: translateY(-20vw);
 }
 </style>

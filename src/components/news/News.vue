@@ -1,5 +1,5 @@
 <template>
-  <section class="section-margin">
+  <section>
     <h2>Latest UK visa news</h2>
 
     <news-card 

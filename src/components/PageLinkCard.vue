@@ -27,13 +27,16 @@ export default {
   max-height: 120px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: $spacing*8;
+  
+  &:not(:last-of-type) {
+    margin-bottom: $spacing*8;
+  }
 
-  & .text {
+  .text {
     width: 55%;
   }
 
-  & .icon {
+  .icon {
     width: 34vw;
     max-width: 120px;
     display: flex;
