@@ -1,47 +1,82 @@
 <template>
   <section>
-    <nav id="nav">
-      <div class="nav-links">
-        <router-link :to="{ name: 'home' }" exact>
-          <div class="icon"></div>
-          Home
-        </router-link>
-        <template v-if="!isAuthenticated">
-          <router-link :to="{ name: 'login' }">
-            <div class="icon"></div>
-            Login
-          </router-link>
-          <router-link :to="{ name: 'signup' }">
-            <div class="icon"></div>
-            Signup
-          </router-link>
-        </template>
-        <template v-else>
-          <router-link :to="{ name: 'profile', params: { username: user.profile.username } }">
-            <div class="icon"></div>
-            Profile
-          </router-link>
-          <router-link :to="{ name: 'questionnaire' }">
-            <div class="icon"></div>
-            Quiz
-          </router-link>
-          <router-link :to="{ name: 'visa-info' }">
-            <div class="icon"></div>
-            Visa Info
-          </router-link>
-          <!-- <button 
-            @click="handleLogout"
-            type="button">
-            Log Out
-          </button> -->
-        </template>
+    <div 
+      :class="this.open ? 'open' : ''"
+      id="nav">
+      <div class="nav-content">
+        <transition 
+          mode="out-in"
+          name="fade">
+          <button
+            v-if="!open"
+            @click="open = true">
+            <div class="open">
+              <div class="line"></div>
+              <div class="line"></div>
+              <div class="line"></div>
+            </div>
+          </button>
+
+          <nav v-else>
+            <router-link 
+              @click.native="open = false"
+              :to="{ name: 'home' }" exact>
+              <div class="icon"></div>
+              Home
+            </router-link>
+            <template v-if="!isAuthenticated">
+              <router-link 
+                @click.native="open = false"
+                :to="{ name: 'login' }">
+                <div class="icon"></div>
+                Login
+              </router-link>
+              <router-link 
+                @click.native="open = false"
+                :to="{ name: 'signup' }">
+                <div class="icon"></div>
+                Signup
+              </router-link>
+            </template>
+            <template v-else>
+              <router-link 
+                @click.native="open = false"
+                :to="{ name: 'profile', params: { username: user.profile.username } }">
+                <div class="icon"></div>
+                Profile
+              </router-link>
+              <router-link 
+                @click.native="open = false"
+                :to="{ name: 'questionnaire' }">
+                <div class="icon"></div>
+                Quiz
+              </router-link>
+              <router-link 
+                @click.native="open = false"
+                :to="{ name: 'visa-info' }">
+                <div class="icon"></div>
+                Visas
+              </router-link>
+              <!-- <button 
+                @click="handleLogout"
+                type="button">
+                Log Out
+              </button> -->
+            </template>
+          </nav>
+        </transition>
       </div>
-    </nav>
+    </div>
   </section>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      open: false
+    }
+  },
   computed: {
     user() {
       return this.$store.state.auth.user;
@@ -67,43 +102,82 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/styles/variables.scss';
 
-nav {
-  width: 100%;
-  position: fixed;
-  z-index: 20;
-  bottom: 0;
-  padding: $spacing*2 0;
-  background: $light-grey;
+.fade-enter-active {
+  transition: 0.3s;
+  transition-delay: 0.3s;
 }
 
-.nav-links {
-  width: 100%;
+.fade-enter, 
+.fade-leave-to {
+  opacity: 0;
+}
+
+#nav {
+  width: 120px;
+  height: 120px;
+  background: $primary-blue;
+  border-radius: 100px;
+  position: fixed;
+  z-index: 20;
+  bottom: -50px;
+  right: -50px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+  transition: 0.3s;
+
+  &.open {
+    width: calc(100% + 50px);
+  }
+
+  button {
+    width: 120px;
+    height: 120px;
+    padding: 0 26px;
+    background: none;
+    border-radius: 100px;
+
+    .line {
+      transform: translateY(-20px);
+      width: 28px;
+      height: 3px;
+      background: $light-font;
+    }
+    
+    .line:not(:last-of-type) {
+      margin-bottom: 4px;
+    }
+  }
+}
+
+nav {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  width: 100%;
+  padding: 0 10vw;
+  transform: translate3d(-20px, 15px, 0);
 
-  & a {
+  a {
     font-size: 14px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: $light-font;
+    color: $light-grey;
   }
 
-  & .icon {
+  .icon {
     width: $spacing*3;
     height: $spacing*3;
-    background: $light-font;
+    background: $light-grey;
     border-radius: 100px;
   }
 
 }
 
 a.router-link-active { 
-  color: $dark-font;
+  color: $light-font;
 
-  & .icon {
-    background: $dark-font;
+  .icon {
+    background: $light-font;
   }
 }
 </style>
