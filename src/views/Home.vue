@@ -110,7 +110,7 @@ header {
 .page-links {
   .bottom {
     background: $background;
-    padding: $spacing*6 0 $spacing*10 0;
+    padding: $spacing*6 0 $bottom-padding 0;
     position: relative;
 
     .placeholder-image-1 {

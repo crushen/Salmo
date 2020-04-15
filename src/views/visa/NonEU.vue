@@ -1,9 +1,12 @@
 <template>
-  <section class="content">
+  <section id="non-eu">
     <router-link :to="{ name: 'visa-info' }">
       <img :src="arrow" class="arrow">
     </router-link>
-    <h1>What is your main reason to stay in the UK?</h1>
+
+    <div class="content">
+      <h1>What is your main reason to stay in the UK?</h1>
+    </div>
 
     <section class="buttons">
       <router-link
@@ -19,8 +22,11 @@
     </section>
 
     <section class="child-options">
-      <p>All options above are for individuals aged 17+. Follow the link below to check out your options if you're younger than 17.</p>
-      <button>Child Visa Options</button>
+      <div class="content">
+        <p>All options above are for individuals aged 17+. Follow the link below to check out your options if you're younger than 17.</p>
+        <button class="secondary">Child Visa Options</button>
+      </div>
+      <div class="placeholder-image"></div>
     </section>
   </section>
 </template>
@@ -63,8 +69,8 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.content {
-  padding: 70px 0 $top-padding 0;
+#non-eu {
+  padding: $spacing*10 0 0;
 }
 
 .arrow {
@@ -107,14 +113,29 @@ export default {
 }
 
 .child-options {
-  margin-top: $spacing*6;
-  display: flex;
-  flex-direction: column;
+  margin-top: $spacing*4;
+  padding: $spacing*4 0 $bottom-padding 0;
+  background: $background;
+  position: relative;
 
+  .content {
+    display: flex;
+    flex-direction: column;
+  }
+    
   button {
     width: 180px;
-    margin-top: $spacing*4;
+    margin: $spacing*4 0;
     align-self: center;
+  }
+
+  .placeholder-image {
+    position: absolute;
+    background: $light-grey;
+    width: 60px;
+    height: 75px;
+    bottom: 3vw;
+    left: calc(50vw - 30px);
   }
 }
 </style>
