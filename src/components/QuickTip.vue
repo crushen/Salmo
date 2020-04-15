@@ -1,10 +1,29 @@
 <template>
   <div>
-    <button @click="openModal">
-      <img :src="lightbulb" class="icon">
-    </button>
-
     <div 
+      class="modal"
+      :class="open ? 'open' : ''">
+      <button 
+        v-if="!open"
+        @click="openModal">
+        <img :src="lightbulb" class="icon">
+      </button>
+      <button 
+        v-else
+        @click="closeModal">
+        <img :src="cross" class="icon">
+      </button>
+
+      <div 
+        class="inner"
+        :class="open ? 'open' : ''">
+        <p>hello</p>
+      </div>
+    </div>
+
+
+
+    <!-- <div 
       v-if="open"
       class="modal">
       <article>
@@ -12,16 +31,19 @@
         <div 
           v-html="visa.card.quickTip"
           class="text"></div>
-        <div 
+        <button 
           @click="closeModal"
-          class="back">Back to Results</div>
+          class="close">Close
+        </button>
       </article>
-    </div>
+    </div> -->
+
   </div>
 </template>
 
 <script>
 import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
+import cross from '@/assets/icons/white/times-solid.svg';
 
 export default {
   props: {
@@ -30,7 +52,8 @@ export default {
   data() {
     return {
       open: false,
-      lightbulb
+      lightbulb,
+      cross
     }
   },
   methods: {
@@ -51,56 +74,85 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-button {
+.modal {
   width: 52px;
   height: 52px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   position: absolute;
+  z-index: 40;
   top: -22px;
   right: -10px;
   background: $primary-yellow;
   color: $light-font;
-  
-  img {
-    width: 24px;
-  }
-}
+  border-radius: 50px;
+  transition: 0.4s;
 
-.modal {
-  width: 90%;
-  position: fixed;
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%);
-  z-index: 40;
-  padding: $spacing*3;
-  background: $background;
-  color: $dark-font;
-  text-align: left;
-  border-radius: $border-radius;
+  button {
+    background: transparent;
+    box-shadow: none;
+    width: 52px;
+    height: 52px;
+    padding: 0;
+    position: absolute;
+    z-index: 50;
+    top: 2px;
+    right: 0;
 
-  h2 {
-    margin-bottom: 8vw;
-    color: #222;
-
-    span {
-      color: $grey;
+    img {
+      width: 24px;
     }
   }
 
-  .text p:not(:last-of-type) {
-    margin-bottom: $spacing*2;
+  &.open {
+    width: 89vw;
+    height: 300px;
+    border-radius: $border-radius;
   }
 
-  .back {
-    margin-top: 8vw;
-    color: #222;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: right;
+  .inner {
+    width: 96%;
+    height: 96%;
+    background: white;
+    margin-left: 2%;
+    margin-top: 1.8%;
+    border-radius: 8px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    transition-delay: 0.5s;
+
+    &.open {
+      visibility: visible;
+      opacity: 1;
+    }
   }
+
+
 }
+
+// .modal {
+//   width: 90%;
+//   position: fixed;
+//   top: 50%; 
+//   left: 50%; 
+//   transform: translate(-50%, -50%);
+//   z-index: 40;
+//   padding: $spacing*3;
+//   background: $background;
+//   color: $dark-font;
+//   text-align: left;
+//   border-radius: $border-radius;
+
+//   h2 {
+//     margin-bottom: 8vw;
+//     color: #222;
+
+//     span {
+//       color: $grey;
+//     }
+//   }
+
+//   .text p:not(:last-of-type) {
+//     margin-bottom: $spacing*2;
+//   }
+// }
 </style>
