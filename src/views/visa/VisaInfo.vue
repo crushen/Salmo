@@ -14,6 +14,8 @@
         <button>Help Centre</button>
       </div>
     </div>
+
+    <div class="placeholder-image"></div>
   </section>
 </template>
 
@@ -25,16 +27,28 @@
 }
 
 .buttons {
-  margin-top: 14vw;
+  margin-top: 12vw;
 
   .container {
     text-align: center;
   }
 
   button {
-    width: 125px;
-    margin: $spacing*4 $spacing 0;
+    width: 35vw;
+    margin: 10vw $spacing 0;
+
+    &:last-of-type {
+      width: 40vw;
+    }
   }
 }
 
+.placeholder-image {
+  width: 25vw;
+  height: 35vw;
+  background: $light-grey;
+  position: absolute;
+  bottom: 0;
+  left: 5vw;
+}
 </style>

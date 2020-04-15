@@ -41,6 +41,12 @@
             <template v-else>
               <router-link 
                 @click.native="open = false"
+                :to="{ name: 'visa-info' }">
+                <div class="icon"></div>
+                Visas
+              </router-link>
+              <router-link 
+                @click.native="open = false"
                 :to="{ name: 'profile', params: { username: user.profile.username } }">
                 <div class="icon"></div>
                 Profile
@@ -49,13 +55,7 @@
                 @click.native="open = false"
                 :to="{ name: 'questionnaire' }">
                 <div class="icon"></div>
-                Quiz
-              </router-link>
-              <router-link 
-                @click.native="open = false"
-                :to="{ name: 'visa-info' }">
-                <div class="icon"></div>
-                Visas
+                About
               </router-link>
               <!-- <button 
                 @click="handleLogout"
