@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div class="overlay"></div>
+    <div v-if="$route.path !== '/'" class="small-logo"></div>
     <app-navigation />
     <router-view/>
   </div>
@@ -41,5 +42,15 @@ export default {
   bottom: 0;
   left: 0;
   background: rgba($color: $dark-grey, $alpha: 0.8);
+}
+
+.small-logo {
+  width: 35px;
+  height: 35px;
+  background: $light-grey;
+  border-radius: 50px;
+  position: absolute;
+  top: 24px;
+  right: 6vw;
 }
 </style>
