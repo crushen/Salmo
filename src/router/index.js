@@ -9,6 +9,7 @@ import Questionnaire from '@/views/Questionnaire';
 import VisaInfo from '@/views/visa/VisaInfo';
 import NonEU from '@/views/visa/NonEU';
 import CategoryPage from '@/views/visa/CategoryPage';
+import VisaPage from '@/views/visa/VisaPage';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -67,6 +68,12 @@ const routes = [
     path: '/visa-info/non-eu/:category', 
     name: 'non-eu-category', 
     component: CategoryPage,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/visa-info/:slug', 
+    name: 'visa-page', 
+    component: VisaPage,
     meta: { onlyAuthUser: true } 
   }
 ]

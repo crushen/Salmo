@@ -83,12 +83,44 @@ const visas = [
   {
     name: 'Tier 4 General Student',
     category: 'study',
-    slug: 'T4-general-student'
+    slug: 'T4-general-student',
+    card: {
+      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      quickTip: `
+        <p>The more you can invest in the UK, the quicker you can achieve permenant residency:<br><br>
+        with £2 million, you will gain permenant residency in 5 years<br><br>
+        with £5 million, you will gain permenant residency in 3 years<br><br>
+        with £10 million, you will gain permenant residency in 2 years</p>
+      `,
+      checklist: [
+        { name: 'ILR', status: true },
+        { name: 'Work', status: true },
+        { name: 'Dependants', status: false }, // actually true, this is just for testing
+        { name: 'Extend', status: true },
+        { name: 'Study', status: true }
+      ]
+    }
   },
   {
     name: 'Tier 4 Short Term Study',
     category: 'study',
-    slug: 'T4-short-term-study'
+    slug: 'T4-short-term-study',
+    card: {
+      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      quickTip: `
+        <p>The more you can invest in the UK, the quicker you can achieve permenant residency:<br><br>
+        with £2 million, you will gain permenant residency in 5 years<br><br>
+        with £5 million, you will gain permenant residency in 3 years<br><br>
+        with £10 million, you will gain permenant residency in 2 years</p>
+      `,
+      checklist: [
+        { name: 'ILR', status: true },
+        { name: 'Work', status: true },
+        { name: 'Dependants', status: false }, // actually true, this is just for testing
+        { name: 'Extend', status: true },
+        { name: 'Study', status: true }
+      ]
+    }
   },
   {
     name: 'Tier 5 Charity Worker',

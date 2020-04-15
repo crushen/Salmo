@@ -182,7 +182,7 @@ export default {
   }
 
   .visa-icon {
-    width: 11vw;
+    width: 32px;
     position: absolute;
     bottom: 6px;
     left: 6px;
