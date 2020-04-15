@@ -99,6 +99,7 @@ export default {
     background: $dark-font;
     color: $light-font;
     text-transform: capitalize;
+    box-shadow: $shadow;
 
     div {
       display: flex;
