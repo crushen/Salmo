@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click="openModal">
-      <h3>Quick<br>Tip</h3>
+      <img :src="lightbulb" class="icon">
     </button>
 
     <div 
@@ -21,13 +21,16 @@
 </template>
 
 <script>
+import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
+
 export default {
   props: {
     visa: { required: true, type: Object }
   },
   data() {
     return {
-      open: false
+      open: false,
+      lightbulb
     }
   },
   methods: {
@@ -49,22 +52,20 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 button {
-  width: 62px;
-  height: 62px;
+  width: 52px;
+  height: 52px;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: -30px;
+  top: -22px;
   right: -10px;
-  background: $dark-grey;
+  background: $primary-yellow;
   color: $light-font;
-  border: 2px solid $light-font;
   
-  & h3 {
-    font-size: 17px;
-    line-height: 18px;
+  img {
+    width: 24px;
   }
 }
 
