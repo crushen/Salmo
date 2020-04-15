@@ -50,6 +50,6 @@
   background: $light-grey;
   position: absolute;
   bottom: 0;
-  left: 5vw;
+  left: 7.5vw;
 }
 </style>

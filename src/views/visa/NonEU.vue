@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import arrow from '@/assets/chevron-left-solid.svg';
-import book from '@/assets/book-solid.svg';
-import briefcase from '@/assets/briefcase-solid.svg';
-import coins from '@/assets/coins-solid.svg';
-import heart from '@/assets/heart-solid.svg';
+import arrow from '@/assets/icons/chevron-left-solid.svg';
+import book from '@/assets/icons/white/book-solid.svg';
+import briefcase from '@/assets/icons/white/briefcase-solid.svg';
+import coins from '@/assets/icons/white/coins-solid.svg';
+import heart from '@/assets/icons/white/heart-solid.svg';
 
 export default {
   data() {

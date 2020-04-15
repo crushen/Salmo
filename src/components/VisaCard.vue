@@ -8,38 +8,51 @@
         <h3>{{ visa.name }}</h3>
       </div>
       <div class="body">
-        <p class="emphasis">{{ visa.card.subTitle }}</p>
+        <p>{{ visa.card.subTitle }}</p>
 
         <div class="checklist">
           <div class="item">
-            <img :src="this.switch ? check : cross" alt="tick" class="icon">
-            <p class="label">Switch</p>
+            <div 
+              class="inner"
+              :style="this.switch ? {opacity: 1} : {opacity: 0.5}">
+              <img :src="this.switch ? check : cross" alt="tick" class="icon">
+              <p>Switch</p>
+            </div>
           </div>
           <div
             v-for="item in checklist"
             :key="item.name" 
-            class="item">
-            <img 
-              :src="item.icon"
-              class="icon">
-            <p class="label">{{ item.name }}</p>
+            class="item"
+            :style="item.icon === check ? {opacity: 1} : {opacity: 0.5}">
+            <div class="inner">
+              <img 
+                :src="item.icon"
+                class="icon">
+              <p>{{ item.name }}</p>
+            </div>
           </div>
         </div>
 
         <router-link
           tag="button"
           :to="{ name: 'visa-page', params: { slug: visa.slug } }">
-          More...
+          Tell Me More!
         </router-link>
+
+        <img :src="visa.icon" class="visa-icon">
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import check from '@/assets/check-solid.svg';
-import cross from '@/assets/times-solid.svg';
-import question from '@/assets/question-solid.svg';
+import check from '@/assets/icons/pink/check-solid.svg';
+import cross from '@/assets/icons/pink/times-solid.svg';
+import question from '@/assets/icons/pink/question-solid.svg';
+import book from '@/assets/icons/pink/book-solid.svg';
+import briefcase from '@/assets/icons/pink/briefcase-solid.svg';
+import coins from '@/assets/icons/pink/coins-solid.svg';
+import heart from '@/assets/icons/pink/heart-solid.svg';
 
 export default {
   props: {
@@ -53,7 +66,11 @@ export default {
       switch: null,
       check,
       cross,
-      question
+      question,
+      book,
+      briefcase,
+      coins,
+      heart
     }
   },
   methods: {
@@ -67,6 +84,21 @@ export default {
           item.icon = this.cross;
         }
       });
+
+      switch(this.visa.category) {
+        case 'business':
+          this.visa.icon = this.coins;
+          break;
+        case 'study':
+          this.visa.icon = this.book;
+          break;
+        case 'work':
+          this.visa.icon = this.briefcase;
+          break;
+        case 'family':
+          this.visa.icon = this.heart;
+          break;
+      }
     },
     checkSwitch() {
       this.switchOptions.forEach(switchVisa => {
@@ -88,24 +120,29 @@ export default {
 @import '@/assets/styles/main.scss';
 
 .card {
-  background: $dark-grey;
-  color: $light-font;
+  background: white;
+  border: 4px solid $primary-pink;
+  color: $primary-pink;
   border-radius: $border-radius;
   position: relative;
+  box-shadow: $shadow;
 
   .title {
-    background: $grey;
-    border-top-left-radius: $border-radius;
-    border-top-right-radius: $border-radius;
+    background: $primary-pink;
+    color: white;
     text-align: center;
     padding: $spacing;
   }
 
   .body {
-    padding: $spacing*2 $spacing*3;
+    padding: $spacing*2 $spacing*4 $spacing*4;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    p {
+      font-weight: 500;
+    }
 
     .checklist {
       width: 100%;
@@ -117,19 +154,38 @@ export default {
       display: flex;
       align-items: center;
       justify-content: flex-start;
+
+      .inner {
+        padding: 4px 8px;
+        background: $lightest-grey;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        border-radius: 4px;
+      }
+
+      p {
+        font-size: 15px;
+        font-weight: 600;
+      }
     }
 
     .icon {
-      width: 20px;
-      margin-right: $spacing;
+      width: 14px;
+      margin-right: 4px;
     }
   }
 
   button {
     padding: 10px 24px;
-    margin-top: $spacing*3;
-    background: $light-font;
-    color: $dark-font;
+    margin-top: $spacing*4;
+  }
+
+  .visa-icon {
+    width: 11vw;
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
   }
 }
 </style>
