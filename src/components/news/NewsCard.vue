@@ -27,5 +27,6 @@ export default {
   padding: 35vw $spacing $spacing;
   background: $light-grey;
   border-radius: $border-radius;
+  box-shadow: $shadow;
 }
 </style>
