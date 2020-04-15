@@ -46,6 +46,18 @@ button {
   outline: none;
   box-shadow: $shadow;
 
+  &.secondary {
+    background: white;
+    border: 3px solid $primary-pink;
+    color: $primary-pink;
+    font-weight: bold;
+  }
+
+  &.pink {
+    background: $primary-pink;
+    color: $light-font;
+  }
+
   &:hover {
     font-style: italic;
   }
@@ -60,7 +72,7 @@ button {
 }
 
 .content {
-  width: 80%;
+  width: 85%;
   margin: auto;
 }
 
