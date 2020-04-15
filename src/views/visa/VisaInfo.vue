@@ -7,11 +7,12 @@
       <div class="container">
         <router-link 
           :to="{name: 'non-eu'}"
-          tag="button">
+          tag="button"
+          class="pink">
           Non - EU
         </router-link>
-        <button>EU</button>
-        <button>Help Centre</button>
+        <button class="pink">EU</button>
+        <button class="secondary">Help Centre</button>
       </div>
     </div>
 
@@ -38,7 +39,7 @@
     margin: 10vw $spacing 0;
 
     &:last-of-type {
-      width: 40vw;
+      width: 41vw;
     }
   }
 }
