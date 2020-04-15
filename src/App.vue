@@ -29,7 +29,6 @@ export default {
 #app {
   font-family: $sans-serif;
   color: $dark-font;
-  padding-bottom: $spacing*4;
 }
 
 .overlay {

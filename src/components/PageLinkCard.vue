@@ -1,12 +1,7 @@
 <template>
-  <div class="card">
-    <div class="text">
-      <p>{{ text }}</p>
-    </div>
-    <div class="icon">
-      <!-- <img src="icon" alt=""> -->
-      <h3 v-html="pageTitle" />
-    </div>
+  <div>
+    <p>{{ text }}</p>
+    <button>{{ pageTitle }}</button>
   </div>
 </template>
 
@@ -22,29 +17,19 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.card {
-  height: 34vw;
-  max-height: 120px;
-  display: flex;
-  justify-content: space-between;
-  
+div {
+  text-align: center;
+
+  p {
+    text-align: left;
+  }
+
+  button {
+    margin-top: $spacing*3;
+  }
+
   &:not(:last-of-type) {
-    margin-bottom: $spacing*8;
-  }
-
-  .text {
-    width: 55%;
-  }
-
-  .icon {
-    width: 34vw;
-    max-width: 120px;
-    display: flex;
-    align-items: flex-end;
-    padding: $spacing;
-    border-radius: $border-radius;
-    background: $dark-font;
-    color: $light-font;
+    margin-bottom: $spacing*10;
   }
 }
 </style>

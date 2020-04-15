@@ -21,12 +21,20 @@
       <news />
     </section>
 
-    <section class="page-links content section-margin">
+    <section class="page-links section-margin">
       <page-link-card
-        v-for="card in pageLinks"
-        :key="card.pageTitle"
-        :text="card.text"
-        :pageTitle="card.pageTitle" />
+        text="Head over to your results page to see and overview of which visa suits you best."
+        pageTitle="Quiz Results"
+        class="content" />
+
+      <div class="bottom">
+        <div class="placeholder-image-1"></div>
+        <div class="placeholder-image-2"></div>
+        <page-link-card
+          text="For more general advice or help on the UK aplication process, take a look through our Help Centre."
+          pageTitle="Help Centre"
+          class="content" />
+      </div>
     </section>
   </section>
 </template>
@@ -44,21 +52,7 @@ export default {
   data() {
     return {
       user: this.$store.state.auth.user,
-      background,
-      pageLinks: [
-        {
-          text: 'Head over to your results page to see and overview of which visa suits you best.',
-          pageTitle: 'Quiz<br>Results'
-          //link: ''
-          //icon: ''
-        },
-        {
-          text: 'For more general advice or help on the UK aplication process, take a look through our Help Centre.',
-          pageTitle: 'Help<br>Centre'
-          //link: ''
-          //icon: ''
-        }
-      ] 
+      background
     }
   }
 }
@@ -93,12 +87,15 @@ header {
 }
 
 .welcome {
-  transform: translateY(-20vw);
+  position: relative;
+  margin-top: 40vw;
 
   .placeholder-image {
     width: 40vw;
     height: 55vw;
     background: $light-grey;
+    position: absolute;
+    top: -60vw;
   }
 
   h2 {
@@ -107,11 +104,32 @@ header {
 }
 
 .news {
-  transform: translateY(-20vw);
   margin-top: 14vw;
 }
 
 .page-links {
-  transform: translateY(-20vw);
+  .bottom {
+    background: $background;
+    padding: $spacing*6 0 $spacing*10 0;
+    position: relative;
+
+    .placeholder-image-1 {
+      width: 20vw;
+      height: 25vw;
+      background: $light-grey;
+      position: absolute;
+      top: -19vw;
+      right: 5vw;
+    }
+
+    .placeholder-image-2 {
+      width: 20vw;
+      height: 25vw;
+      background: $light-grey;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+    }
+  }
 }
 </style>
