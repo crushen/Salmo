@@ -24,7 +24,7 @@
 @import '@/assets/styles/variables.scss';
 
 .content {
-  padding: $spacing*10 0;
+  padding: $top-padding 0;
 }
 
 .buttons {

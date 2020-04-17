@@ -1,7 +1,11 @@
 <template>
   <div id="app">
+<<<<<<< HEAD
     <div id="overlay"></div>
     <div v-if="$route.path !== '/'" class="small-logo"></div>
+=======
+    <div class="overlay"></div>
+>>>>>>> parent of 33f1bf5... Added logo to top of page when not on home page
     <app-navigation />
     <router-view/>
   </div>
@@ -65,6 +69,7 @@ export default {
     transition-delay: 0.45s;
   }
 }
+<<<<<<< HEAD
 
 
 
@@ -77,4 +82,6 @@ export default {
   top: 24px;
   right: 6vw;
 }
+=======
+>>>>>>> parent of 33f1bf5... Added logo to top of page when not on home page
 </style>
