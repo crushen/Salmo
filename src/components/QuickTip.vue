@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <div 
+    <div 
       class="modal">
       <button 
         @click="toggleModal">
@@ -15,7 +15,7 @@
           <div v-html="visa.card.quickTip" class="text"></div>
         </article>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -129,25 +129,6 @@ export default {
     transition: 0.2s;
     transition-delay: 0.9s;
   }
-
-  article {
-    opacity: 1;
-    // transition: 0.5s;
-    // transition-delay: 2s;
-
-    // &.open {
-    //   opacity: 1;
-    // }
-  }
-
-  // h2 {
-  //   margin-bottom: 8vw;
-  //   color: #222;
-
-  //   span {
-  //     color: $grey;
-  //   }
-  // }
 
   .text p:not(:last-of-type) {
     margin-bottom: $spacing*2;

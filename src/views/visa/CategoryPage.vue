@@ -16,9 +16,9 @@
         :currentVisa="currentVisa"
         :switchOptions="switchOptions"
         class="visa-card">
-        <!-- <template #quickTip>
+        <template #quickTip>
           <quick-tip :visa="visa"/>
-        </template> -->
+        </template>
       </visa-card>
     </div>
   </section>
@@ -33,7 +33,7 @@ import { mapState } from 'vuex';
 export default {
   components: {
     visaCard,
-    //quickTip
+    quickTip
   },
   data() {
     return {
