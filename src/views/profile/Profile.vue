@@ -49,9 +49,9 @@
             :visa="visa"
             :currentVisa="currentVisa"
             :switchOptions="switchOptions">
-            <template #quickTip>
+            <!-- <template #quickTip>
               <quick-tip :visa="visa"/>
-            </template>
+            </template> -->
           </visa-card>
 
           <div class="results-button">
@@ -136,7 +136,7 @@ export default {
   components: {
     profileCard,
     visaCard,
-    quickTip,
+    //quickTip,
     pageLinkCard
   },
   data() {
