@@ -17,7 +17,8 @@ h4, .label {
   font-family: 'mrs-eaves-roman-all-small-ca', $serif;
 }
 
-p { @include font(16px, 300) }
+p,
+li { @include font(16px, 300) }
 a { 
   @include font(16px, 600);
   text-decoration: none;

@@ -56,15 +56,19 @@ export default {
   bottom: 0;
   right: 0;
   width: 100%;
-  transition: 0.2s;
-  transition-delay: 1s;
-  z-index: -10;
+  //transition: 0.2s;
+  //transition-delay: 1s;
+  z-index: 30;
 
-  &.is-active {
-    background: rgba($color: $dark-grey, $alpha: 0.8);
-    pointer-events: all;
-    transition-delay: 0.45s;
-  }
+  display: none;
+  background: rgba($color: $dark-grey, $alpha: 0.6);
+  pointer-events: all;
+
+  // &.is-active {
+  //   background: rgba($color: $dark-grey, $alpha: 0.8);
+  //   pointer-events: all;
+  //   transition-delay: 0.45s;
+  // }
 }
 
 .small-logo {
