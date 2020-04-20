@@ -15,6 +15,7 @@
         :visa="visa"
         :currentVisa="currentVisa"
         :switchOptions="switchOptions"
+        :category="category"
         class="visa-card">
         <template #quickTip>
           <quick-tip :visa="visa"/>

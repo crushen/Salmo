@@ -61,7 +61,7 @@ const visas = [
       checklist: [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
-        { name: 'Dependants', status: false }, // actually true, this is just for testing
+        { name: 'Dependants', status: true },
         { name: 'Extend', status: true },
         { name: 'Study', status: 'maybe' }
       ]
@@ -99,7 +99,7 @@ const visas = [
       checklist: [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
-        { name: 'Dependants', status: false }, // actually true, this is just for testing
+        { name: 'Dependants', status: false },
         { name: 'Extend', status: true },
         { name: 'Study', status: true }
       ]
@@ -122,7 +122,7 @@ const visas = [
       checklist: [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
-        { name: 'Dependants', status: false }, // actually true, this is just for testing
+        { name: 'Dependants', status: false },
         { name: 'Extend', status: true },
         { name: 'Study', status: true }
       ]

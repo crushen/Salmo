@@ -46,6 +46,7 @@ button {
   border-radius: 100px;
   outline: none;
   box-shadow: $shadow;
+  cursor: pointer;
 
   &.secondary {
     background: white;
