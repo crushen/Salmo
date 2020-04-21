@@ -1,6 +1,7 @@
 <template>
   <section>
-    <div 
+    <div
+      v-on-clickaway="close"
       :class="this.open ? 'open' : ''"
       id="nav">
       <div class="nav-content">
@@ -71,7 +72,10 @@
 </template>
 
 <script>
+import { mixin as clickaway } from 'vue-clickaway';
+
 export default {
+  mixins: [ clickaway ],
   data() {
     return {
       open: false
@@ -86,6 +90,9 @@ export default {
     }
   },
   methods: {
+    close() {
+      this.open = false;
+    },
     handleLogout() {
       this.$store.dispatch('auth/logOut')
       .then(() => {
