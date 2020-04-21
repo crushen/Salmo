@@ -11,7 +11,12 @@
           class="pink">
           Non - EU
         </router-link>
-        <button class="pink">EU</button>
+        <router-link 
+          :to="{name: 'visa-info-eu'}"
+          tag="button"
+          class="pink">
+          EU
+        </router-link>
         <button class="secondary">Help Centre</button>
       </div>
     </div>

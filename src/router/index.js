@@ -10,6 +10,7 @@ import VisaInfo from '@/views/visa/VisaInfo';
 import NonEU from '@/views/visa/NonEU';
 import CategoryPage from '@/views/visa/CategoryPage';
 import VisaPage from '@/views/visa/VisaPage';
+import VisaInfoEU from '@/views/visa/EU';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -74,6 +75,12 @@ const routes = [
     path: '/visa-info/:slug', 
     name: 'visa-page', 
     component: VisaPage,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/visa-info/eu', 
+    name: 'visa-info-eu', 
+    component: VisaInfoEU,
     meta: { onlyAuthUser: true } 
   }
 ]
