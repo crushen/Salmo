@@ -66,6 +66,12 @@ const routes = [
     meta: { onlyAuthUser: true } 
   },
   { 
+    path: '/visa-info/eu', 
+    name: 'visa-info-eu', 
+    component: VisaInfoEU,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
     path: '/visa-info/non-eu/:category', 
     name: 'non-eu-category', 
     component: CategoryPage,
@@ -77,12 +83,6 @@ const routes = [
     component: VisaPage,
     meta: { onlyAuthUser: true } 
   },
-  { 
-    path: '/visa-info/eu', 
-    name: 'visa-info-eu', 
-    component: VisaInfoEU,
-    meta: { onlyAuthUser: true } 
-  }
 ]
 
 const router = new VueRouter({
