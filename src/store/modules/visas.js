@@ -152,6 +152,29 @@ const visas = [
     name: 'Tier 5 Youth Mobility Scheme',
     category: 'youth-mobility',
     slug: 'youth-mobility-scheme'
+  },
+  {
+    name: 'Tier 4 Child Student',
+    category: 'child',
+    slug: 'T4-child-student',
+    card: {
+      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      quickTip: {
+        header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
+        list: [
+          'with £2 million, you will gain permanent residency in 5 years', 
+          'with £5 million, you will gain permanent residency in 3 years', 
+          'with £10 million, you will gain permanent residency in 2 years'
+        ]
+      },
+      checklist: [
+        { name: 'ILR', status: true },
+        { name: 'Work', status: true },
+        { name: 'Dependants', status: false },
+        { name: 'Extend', status: true },
+        { name: 'Study', status: true }
+      ]
+    }
   }
 ]
 

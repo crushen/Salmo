@@ -24,7 +24,12 @@
     <section class="child-options">
       <div class="content">
         <p>All options above are for individuals aged 17+. Follow the link below to check out your options if you're younger than 17.</p>
-        <button class="secondary">Child Visa Options</button>
+        <router-link
+          tag="button"
+          :to="{ name: 'non-eu-category', params: { category: 'child' } }"
+          class="secondary">
+          Child Visa Options
+        </router-link>
       </div>
       <div class="placeholder-image"></div>
     </section>
