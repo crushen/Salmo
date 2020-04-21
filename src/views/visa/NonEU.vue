@@ -86,11 +86,12 @@ export default {
 }
 
 .buttons {
+  max-width: 300px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin-top: $spacing*4;
+  margin: $spacing*4 auto auto;
 
   .button {
     width: 110px;
