@@ -35,13 +35,37 @@
 
           <div class="three">
             <div class="inner">
-              <p>January</p>
-              <p>February</p>
+              <p 
+                v-for="month in months"
+                :key="month">
+                {{ month }}
+              </p>
             </div>
           </div>
 
           <div class="four">
-            <div class="inner"></div>
+            <div class="inner">
+              <p>July</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="events">
+          <div 
+            v-for="(event, index) in events"
+            :key="index"
+            class="event">
+            <div class="line"></div>
+            <div
+              @click="open(index)"
+              :class="{'open': index === selectedTab}" 
+              class="tab">
+              <p v-if="!openTab || index !== selectedTab">{{ event.date }}</p>
+              <div v-else-if="openTab && index === selectedTab">
+                <p>{{ event.date }}</p>
+                <p class="text">{{ event.text }}</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -54,6 +78,29 @@
 export default {
   data() {
     return {
+      openTab: false,
+      selectedTab: null,
+      months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+      events: [
+        {
+          date: '23 Jun',
+          text: 'UK votes to leave the European Union.'
+        },
+        {
+          date: '31 Jan',
+          text: 'UK votes to leave the European Union.'
+        },
+        {
+          date: '1 Mar',
+          text: 'UK votes to leave the European Union.'
+        }
+      ]
+    }
+  },
+  methods: {
+    open(index) {
+      this.selectedTab = index;
+      this.openTab = true;
     }
   }
 }
@@ -66,11 +113,16 @@ export default {
   overflow-x: scroll;
   overflow-y: hidden;
   white-space: nowrap;
+  padding-top: 20px;
+
+  p {
+    font-weight: 500;
+  }
 }
 
 .timeline {
   height: 180px;
-  width: 1200px;
+  width: 1580px;
   background: white;
   .top,
   .middle {
@@ -80,7 +132,6 @@ export default {
 
   .bottom {
     height: 24%;
-    background: lighten($light-grey, 3%);
   }
 }
 
@@ -104,7 +155,7 @@ export default {
   }
 
   .three {
-    margin-right: 620px;
+    margin-right: 964px;
     color: darken($light-grey, 5%);
   }
 
@@ -127,7 +178,7 @@ export default {
 
     p {
       font-size: 35px;
-      transform: translateY(-40px);
+      transform: translateY(-39px);
     }
   }
 
@@ -145,10 +196,6 @@ export default {
   display: flex;
   height: 100%;
   transform: translateY(-86px);
-
-  p {
-    font-weight: 500;
-  }
 
   .one {
     background: lighten($light-grey, 3%);
@@ -181,34 +228,98 @@ export default {
 
   .three {
     background: darken($light-grey, 13%);
-    width: 750px;
+    width: 1060px;
 
     .inner {
       height: 100%;
-      padding: 8px 0 0 30px;
+      padding: 8px 0 0 32px;
       display: flex;
       background: darken($light-grey, 5%);
       border-bottom-right-radius: 25px;
     }
 
-    p {
-      &:nth-of-type(2) {
-        margin-left: 60px;
-      }
-    }
+    p:not(:first-of-type) {
+      margin-left: 32px;
+    } 
+    
   }
 
 
   .four {
-    background: lighten($light-grey, 3%);
-    width: 120px;
+    background: darken($light-grey, 13%);
+    width: 200px;
 
     .inner {
       height: 100%;
-      padding-top: 8px;
+      padding: 8px 0 0 72px;
       background: darken($light-grey, 13%);
       border-bottom-right-radius: 25px;
     }
+  }
+}
+
+.events {
+  transform: translateY(-210px);
+  display: flex;
+
+  .event {
+    position: absolute;
+    width: 60px;
+
+    &:nth-of-type(even) {
+      .tab {
+        &.open {
+          bottom: -30px;
+        }
+      }
+    }
+  }
+
+  .tab {
+    background: $secondary-blue;
+    color: $light-font;
+    border-radius: 4px;
+    padding: 3px 6px;
+    white-space: normal;
+    transition: 0.2s;
+    position: absolute;
+    z-index: 5;
+
+    &.open {
+      width: 150px;
+      left: -75%;
+    }
+
+    .text {
+      font-weight: 300;
+    }
+  }
+
+  .line {
+    width: 3px;
+    height: 81px;
+    background: $secondary-blue;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: calc(50% - 3px);
+  }
+
+  .event:nth-of-type(odd) {
+    top: -69px;
+    margin-left: 58px;
+
+    .line {
+      height: 150px;
+    }
+  }
+
+  .event:nth-of-type(2) {
+    margin-left: 350px;
+  }
+
+  .event:nth-of-type(3) {
+    margin-left: 530px;
   }
 }
 </style>
