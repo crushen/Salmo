@@ -64,6 +64,17 @@ export default {
     }
   },
   methods: {
+    getIcon() {
+      this.checklist.forEach(item => {
+        if(item.status === 'maybe') {
+          item.icon = this.question;
+        } else if(item.status) {
+          item.icon = this.check;
+        } else {
+          item.icon = this.cross;
+        }
+      });
+    },
     checkSwitch() {
       this.switchOptions.forEach(switchVisa => {
         if(switchVisa === this.visa.name) {
@@ -73,6 +84,7 @@ export default {
     },
   },
   created() {
+    this.getIcon();
     this.checkSwitch();
   }
 }
@@ -142,6 +154,13 @@ export default {
   button {
     padding: 10px 24px;
     margin-top: $spacing*4;
+  }
+
+  .visa-icon {
+    width: 32px;
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
   }
 }
 </style>
