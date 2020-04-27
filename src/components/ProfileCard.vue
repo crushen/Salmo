@@ -64,7 +64,7 @@ export default {
   max-width: 400px;
   min-height: 260px;
   padding-bottom: $spacing;
-  margin: $spacing*4 auto 0 auto;
+  margin: $spacing*5 auto 0 auto;
   border: 4px solid $secondary-light-blue;
   border-radius: $border-radius;
   box-shadow: $shadow;
@@ -80,7 +80,7 @@ export default {
     &.user-info {
       background: $lightest-grey;
       padding: 3px 6px;
-      border-radius: 3px;
+      border-radius: 4px;
     }
   }
 

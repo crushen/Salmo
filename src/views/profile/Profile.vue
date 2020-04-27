@@ -3,8 +3,9 @@
     <!-- If user has verified email -->
     <section v-if="user.emailVerified">
       <!-- <button @click="handleLogout" type="button">Log Out</button> -->
-      <section>
+      <section class="user-info">
         <h1>Your current plan.</h1>
+        <h2>Here's where you're at right now with your visa and living situation in the UK.</h2>
 
         <profile-card 
           v-if="user.profile.age"
@@ -27,7 +28,14 @@
         </div>
       </section>
 
-      <section class="section-margin">
+      <section class="visa-tools">
+        <p>Make sure your profile is accurate to help you calculate your future plans.</p>
+        <p>Below are seom features which should help you work through your current visa.</p>
+
+        <visa-dates-card />
+      </section>
+
+      <!-- <section>
         <div 
           v-if="!topResult"
           class="take-quiz">
@@ -59,10 +67,10 @@
             <button>Quiz Results</button>
           </div>
         </div>
-      </section>
+      </section> -->
 
 
-      <section class="section-margin">
+      <!-- <section class="section-margin">
         <page-link-card
           v-for="card in pageLinks"
           :key="card.pageTitle"
@@ -73,7 +81,7 @@
       <section class="section-margin settings">
         <p>Change how we get in touch below</p>
         <button>Notification Settings</button>
-      </section>
+      </section> -->
 
         <!-- <div v-if="switchVisas[0]">
           <h3>Other {{ topResult[0].category }} visas you can switch to</h3>
@@ -128,16 +136,18 @@
 <script>
 import { mapState } from 'vuex';
 import profileCard from '@/components/ProfileCard';
-import visaCard from '@/components/VisaCard';
-import quickTip from '@/components/QuickTip';
-import pageLinkCard from '@/components/PageLinkCard';
+import visaDatesCard from '@/components/VisaDatesCard';
+// import visaCard from '@/components/VisaCard';
+// import quickTip from '@/components/QuickTip';
+// import pageLinkCard from '@/components/PageLinkCard';
 
 export default {
   components: {
     profileCard,
-    visaCard,
-    quickTip,
-    pageLinkCard
+    visaDatesCard
+    // visaCard,
+    // quickTip,
+    // pageLinkCard
   },
   data() {
     return {
@@ -248,38 +258,56 @@ export default {
   padding: $spacing*10 0;
 }
 
-.content {
-  padding: $top-padding 0;
+h1 {
+  margin-bottom: $spacing*2;
 }
 
-.edit-button {
-  width: 100%;
-  text-align: center;
-  margin-top: $spacing*2;
-  text-decoration: underline;
-}
+.user-info {
+  margin-bottom: $spacing*5;
 
-.results {
-  & h3 {
-    margin-bottom: $spacing*4;
-  }
-}
-
-.results-button {
-  width: 190px;
-  margin: $spacing*4 auto 0 auto;
-  text-align: center;
-
-  button {
+  .edit-button {
+    width: 100%;
+    text-align: center;
     margin-top: $spacing*2;
+    text-decoration: underline;
   }
 }
 
-.settings {
-  text-align: center;
+.visa-tools {
+  p:first-of-type {
+    margin-bottom: $spacing*3;
+  }
 
-  button {
-    margin-top: $spacing*2;
+  p:last-of-type {
+    margin-bottom: $spacing*5;
   }
 }
+
+
+
+
+
+// .results {
+//   & h3 {
+//     margin-bottom: $spacing*4;
+//   }
+// }
+
+// .results-button {
+//   width: 190px;
+//   margin: $spacing*4 auto 0 auto;
+//   text-align: center;
+
+//   button {
+//     margin-top: $spacing*2;
+//   }
+// }
+
+// .settings {
+//   text-align: center;
+
+//   button {
+//     margin-top: $spacing*2;
+//   }
+// }
 </style>
