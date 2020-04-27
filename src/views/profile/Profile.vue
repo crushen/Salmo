@@ -1,9 +1,9 @@
 <template>
-  <section id="profile" class="content">
+  <section id="profile">
     <!-- If user has verified email -->
     <section v-if="user.emailVerified">
       <!-- <button @click="handleLogout" type="button">Log Out</button> -->
-      <section class="user-info">
+      <section class="user-info content">
         <h1>Your current plan.</h1>
         <h2>Here's where you're at right now with your visa and living situation in the UK.</h2>
 
@@ -28,13 +28,43 @@
         </div>
       </section>
 
-      <section class="visa-tools">
+      <section class="visa-tools content">
         <p>Make sure your profile is accurate to help you calculate your future plans.</p>
         <p>Below are seom features which should help you work through your current visa.</p>
 
         <visa-dates-card class="dates-card" />
 
         <pr-calculator />
+      </section>
+
+      <section class="content">
+        <div class="next-step section-margin">
+          <div class="text">
+            <h3>Your next step...</h3>
+            <p>When you're dont calculating everything and want to figure out your next step, do through to your visa planner!</p>
+          </div>
+          <div class="placeholder-img"></div>
+          <div class="button">
+            <button class="pink">Visa Planner</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz-results content">
+        <p>The results of your latest quiz are saved for you below.</p>
+        <button class="secondary">Quiz Results</button>
+      </section>
+
+      <section class="help">
+        <div class="content">
+          <p>For more general advice or help on the UK application process, take a look through our Help Centre.</p>
+          <div class="button">
+            <button>Help Centre</button>
+          </div>
+          <div class="notificaitons">
+            <p>You can also change how we get in touch on our <button class="tertiary">Notificaiton Settings</button> page.</p>
+          </div>
+        </div>
       </section>
 
       <!-- <section>
@@ -259,7 +289,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 #profile {
-  padding: $spacing*10 0;
+  padding: $spacing*10 0 0;
 }
 
 h1 {
@@ -267,7 +297,7 @@ h1 {
 }
 
 .user-info {
-  margin-bottom: $spacing*5;
+  margin-bottom: $spacing*6;
 
   .edit-button {
     width: 100%;
@@ -291,7 +321,62 @@ h1 {
   }
 }
 
+.next-step {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
 
+  h3 {
+    margin-bottom: $spacing;
+  }
+
+  .text {
+    width: 60%;
+  }
+
+  .placeholder-img {
+    width: 120px;
+    height: 120px;
+    background: $light-grey;
+    border-radius: 200px;
+  }
+
+  .button {
+    width: 100%;
+    text-align: center;
+    margin-top: $spacing*4;
+  }
+}
+
+.quiz-results {
+  width: 60%;
+  margin: auto;
+  margin-top: $spacing*8;
+  text-align: center;
+
+  button {
+    margin-top: $spacing*2;
+  }
+}
+
+.help {
+  background: $background;
+  margin-top: $spacing*8;
+  padding: $spacing*8 0 $spacing*10 0;
+
+  .button {
+    margin-top: $spacing*2;
+    text-align: center;
+  }
+
+  .notificaitons {
+    background: $light-grey;
+    padding: $spacing*2 $spacing;
+    border-radius: 4px;
+    margin-top: $spacing*6;
+  }
+}
 
 
 
