@@ -33,7 +33,7 @@
   }
 
   .body {
-    padding: $spacing*2 $spacing*4;
+    padding: $spacing*3 $spacing*2;
 
     div:first-of-type {
       margin-bottom: $spacing*4;

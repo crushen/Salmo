@@ -32,7 +32,9 @@
         <p>Make sure your profile is accurate to help you calculate your future plans.</p>
         <p>Below are seom features which should help you work through your current visa.</p>
 
-        <visa-dates-card />
+        <visa-dates-card class="dates-card" />
+
+        <pr-calculator />
       </section>
 
       <!-- <section>
@@ -137,6 +139,7 @@
 import { mapState } from 'vuex';
 import profileCard from '@/components/profile/ProfileCard';
 import visaDatesCard from '@/components/profile/VisaDatesCard';
+import prCalculator from '@/components/profile/PrCalculator';
 // import visaCard from '@/components/VisaCard';
 // import quickTip from '@/components/QuickTip';
 // import pageLinkCard from '@/components/PageLinkCard';
@@ -144,7 +147,8 @@ import visaDatesCard from '@/components/profile/VisaDatesCard';
 export default {
   components: {
     profileCard,
-    visaDatesCard
+    visaDatesCard,
+    prCalculator
     // visaCard,
     // quickTip,
     // pageLinkCard
@@ -279,6 +283,10 @@ h1 {
   }
 
   p:last-of-type {
+    margin-bottom: $spacing*5;
+  }
+
+  .dates-card {
     margin-bottom: $spacing*5;
   }
 }
