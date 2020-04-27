@@ -38,8 +38,6 @@
           :to="{ name: 'visa-page', params: { slug: visa.slug } }">
           Tell Me More!
         </router-link>
-
-        <img :src="visa.icon" class="visa-icon">
       </div>
     </div>
   </div>
@@ -49,10 +47,6 @@
 import check from '@/assets/icons/pink/check-solid.svg';
 import cross from '@/assets/icons/pink/times-solid.svg';
 import question from '@/assets/icons/pink/question-solid.svg';
-import book from '@/assets/icons/pink/book-solid.svg';
-import briefcase from '@/assets/icons/pink/briefcase-solid.svg';
-import coins from '@/assets/icons/pink/coins-solid.svg';
-import heart from '@/assets/icons/pink/heart-solid.svg';
 
 export default {
   props: {
@@ -66,40 +60,10 @@ export default {
       switch: null,
       check,
       cross,
-      question,
-      book,
-      briefcase,
-      coins,
-      heart
+      question
     }
   },
   methods: {
-    getIcon() {
-      this.checklist.forEach(item => {
-        if(item.status === 'maybe') {
-          item.icon = this.question;
-        } else if(item.status) {
-          item.icon = this.check;
-        } else {
-          item.icon = this.cross;
-        }
-      });
-
-      switch(this.visa.category) {
-        case 'business':
-          this.visa.icon = this.coins;
-          break;
-        case 'study':
-          this.visa.icon = this.book;
-          break;
-        case 'work':
-          this.visa.icon = this.briefcase;
-          break;
-        case 'family':
-          this.visa.icon = this.heart;
-          break;
-      }
-    },
     checkSwitch() {
       this.switchOptions.forEach(switchVisa => {
         if(switchVisa === this.visa.name) {
@@ -109,7 +73,6 @@ export default {
     },
   },
   created() {
-    this.getIcon();
     this.checkSwitch();
   }
 }
@@ -179,13 +142,6 @@ export default {
   button {
     padding: 10px 24px;
     margin-top: $spacing*4;
-  }
-
-  .visa-icon {
-    width: 32px;
-    position: absolute;
-    bottom: 6px;
-    left: 6px;
   }
 }
 </style>
