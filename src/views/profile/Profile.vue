@@ -135,8 +135,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import profileCard from '@/components/ProfileCard';
-import visaDatesCard from '@/components/VisaDatesCard';
+import profileCard from '@/components/profile/ProfileCard';
+import visaDatesCard from '@/components/profile/VisaDatesCard';
 // import visaCard from '@/components/VisaCard';
 // import quickTip from '@/components/QuickTip';
 // import pageLinkCard from '@/components/PageLinkCard';
