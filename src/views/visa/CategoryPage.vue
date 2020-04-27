@@ -27,8 +27,8 @@
 
 <script>
 import arrow from '@/assets/icons/chevron-left-solid.svg';
-import visaCard from '@/components/VisaCard';
-import quickTip from '@/components/QuickTip';
+import visaCard from '@/components/visa/VisaCard';
+import quickTip from '@/components/visa/QuickTip';
 import { mapState } from 'vuex';
 
 export default {
