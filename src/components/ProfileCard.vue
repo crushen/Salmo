@@ -8,32 +8,32 @@
     <div class="child two">
       <div>
         <p class="label">Username</p> 
-        <p>{{ user.profile.username }}</p>
+        <p class="user-info">{{ user.profile.username }}</p>
       </div>
       <div>
         <p class="label">Date of birth</p> 
-        <p>{{ user.profile.age }}</p>
+        <p class="user-info">{{ birthday }}</p>
       </div>
     </div>
 
     <div class="child three">
       <div>
         <p class="label">Nationality</p> 
-        <p>{{ user.profile.country }}</p>
+        <p class="user-info">{{ user.profile.country }}</p>
       </div>
     </div>
 
     <div class="child four">
       <div>
         <p class="label">Dependants</p> 
-        <p>{{ user.profile.dependants }}</p>
+        <p class="user-info">{{ user.profile.dependants }}</p>
       </div>
     </div>
 
     <div class="child five">
       <div>
         <p class="label">Current Visa</p> 
-        <p>{{ user.profile.currentVisa }}</p>
+        <p class="user-info">{{ user.profile.currentVisa }}</p>
       </div>
     </div>
   </div>
@@ -43,6 +43,15 @@
 export default {
   props: {
     user: { required: true, type: Object }
+  },
+  computed: {
+    birthday() {
+      const date = new Date(this.user.profile.birthday.seconds * 1000);
+      const year = date.getFullYear();
+      const month = (1 + date.getMonth()).toString().padStart(2, '0');
+      let day = date.getDate().toString().padStart(2, '0');
+      return day + '/' + month + '/' + year;
+    }
   }
 }
 </script>
@@ -54,28 +63,57 @@ export default {
 .profile-card {
   max-width: 400px;
   min-height: 260px;
-  background: $dark-grey;
-  color: $light-font;
-  padding: 10px;
+  padding-bottom: $spacing;
   margin: $spacing*4 auto 0 auto;
+  border: 4px solid $secondary-light-blue;
   border-radius: $border-radius;
+  box-shadow: $shadow;
   @include grid(repeat(2, 1fr), 2fr 1fr 1fr, 10px);
+  align-items: center;
 
-  & .picture {
-    width: 35vw;
-    height: 35vw;
-    background: $light-grey;
-    border-radius: $border-radius;
+  p {
+  
+    &.label {
+      color: $secondary-blue;
+    }
+
+    &.user-info {
+      background: $lightest-grey;
+      padding: 3px 6px;
+      border-radius: 3px;
+    }
   }
 
-  & .two {
+  .one {
+    height: 120px;
+    background: $secondary-light-blue;
+    border-bottom-right-radius: $border-radius;
+    justify-self: stretch;
+  }
+
+  .two {
+    align-self: end;
+    padding-right: $spacing;
     @include grid(1fr, repeat(2, 1fr), 10px);
   }
 
-  & .five {
+  .three {
+    padding-left: $spacing;
+  }
+
+  .four {
+    padding-right: $spacing;
+  }
+
+  .five {
     grid-column: 1 /  3;
     grid-row: 3 / 4;
     display: flex;
+    padding: 0 $spacing;
+
+    div {
+      width: 100%;
+    }
   }
 }
 </style>

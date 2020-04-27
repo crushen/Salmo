@@ -1,10 +1,10 @@
 <template>
-  <section class="content">
+  <section id="profile" class="content">
     <!-- If user has verified email -->
     <section v-if="user.emailVerified">
       <!-- <button @click="handleLogout" type="button">Log Out</button> -->
       <section>
-        <h1>All about you.</h1>
+        <h1>Your current plan.</h1>
 
         <profile-card 
           v-if="user.profile.age"
@@ -243,6 +243,10 @@ export default {
 
 <style scoped lang="scss">
 @import '@/assets/styles/variables.scss';
+
+#profile {
+  padding: $spacing*10 0;
+}
 
 .content {
   padding: $top-padding 0;
