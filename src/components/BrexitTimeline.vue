@@ -93,6 +93,22 @@ export default {
         {
           date: '1 Mar',
           text: 'UK votes to leave the European Union.'
+        },
+        {
+          date: '1 June',
+          text: 'UK votes to leave the European Union.'
+        },
+        {
+          date: '1 July',
+          text: 'UK votes to leave the European Union.'
+        },
+        {
+          date: '26 Nov',
+          text: 'UK votes to leave the European Union.'
+        },
+        {
+          date: '31 Dec',
+          text: 'UK votes to leave the European Union.'
         }
       ]
     }
@@ -320,6 +336,18 @@ export default {
 
   .event:nth-of-type(3) {
     margin-left: 530px;
+  }
+
+  .event:nth-of-type(4) {
+    margin-left: 720px;
+  }
+
+  .event:nth-of-type(5) {
+    margin-left: 810px;
+  }
+
+  .event:nth-of-type(6) {
+    margin-left: 1170px;
   }
 }
 </style>
