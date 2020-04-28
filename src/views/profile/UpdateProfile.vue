@@ -1,108 +1,95 @@
 <template>
-  <section>
-    <div v-if="questionNumber === 1">
-      <label>What is your country of origin?</label> 
-      <select 
-        v-model="profileToUpdate.country"
-        name="Country">
-        <option
-          v-for="country in countries"
-          :key="country"
-          :value="country">
-          {{ country }}
-        </option>
-      </select>
-      <button
-        @click="next">
-        Next
-      </button> 
-    </div>
+  <section id="update-profile">
+    <router-link :to="{ name: 'profile', params: { username: user.profile.username } }">
+      <img :src="arrow" class="arrow">
+    </router-link>
+    <div class="content">
+      <h1>Edit profile.</h1>
 
-    <div v-if="questionNumber === 2">
-      <label>What is your date of birth?</label> 
-      <div class="date-picker">
-        <v-date-picker
-          :max-date="maxDate"
-          v-model="date" />
+      <div class="container">
+        <input 
+          v-model.trim="form.username"
+          type="text"
+          placeholder="Username"
+          autocomplete="username"
+          class="form">
+          <div v-if="$v.form.username.$error">
+            <span 
+              v-if="!$v.form.username.minLength"
+              class="help is-danger">
+              Username should be at least 6 characters
+            </span>
+            <span 
+              v-if="!$v.form.username.maxLength"
+              class="help is-danger">
+              Username should be no more than 10 characters
+            </span>
+          </div>
+
+        <input 
+          v-model="birthday"
+          type="date" 
+          class="form unstyled"
+          required>
+
+        <select 
+          v-model="profileToUpdate.dependants"
+          name="Dependants"
+          class="form">
+          <option
+            v-for="dependant in dependants"
+            :key="dependant"
+            :value="dependant">
+            {{ dependant }}
+          </option>
+        </select>
+
+        <select 
+          class="form"
+          v-model="profileToUpdate.country"
+          name="Country">
+          <option
+            v-for="country in countries"
+            :key="country"
+            :value="country">
+            {{ country }}
+          </option>
+        </select>
+
+        <select
+          class="form" 
+          v-model="profileToUpdate.currentVisa"
+          name="Current Visa">
+          <option
+            v-for="visa in visas"
+            :key="visa"
+            :value="visa">
+            {{ visa }}
+          </option>
+        </select>
+        
+        <div class="save-changes">
+          <button
+            @click="onSubmit"
+            class="pink">
+            Save Changes
+          </button> 
+        </div>
       </div>
-      <button
-        @click="prev">
-        Previous
-      </button> 
-      <button
-        @click="next">
-        Next
-      </button> 
     </div>
-
-    <div v-if="questionNumber === 3">
-      <label>Do you currently have a UK visa?</label> 
-      <select 
-        v-model="profileToUpdate.currentVisa"
-        name="Current Visa">
-        <option
-          v-for="visa in visas"
-          :key="visa"
-          :value="visa">
-          {{ visa }}
-        </option>
-      </select>
-      <button
-        @click="prev">
-        Previous
-      </button>
-      <!-- If user is 18 or over, go to Dependants question. Else, sumbit profile -->
-      <button
-        v-if="age >= 18"
-        @click="next">
-        Next
-      </button>
-      <button
-        v-else
-        @click="submitProfile">
-        Update Profile
-      </button> 
-    </div>
-
-    <div v-if="age >= 18 && questionNumber === 4">
-      <label>Do you have any dependants?</label> 
-      <select 
-        v-model="profileToUpdate.dependants"
-        name="Dependants">
-        <option
-          v-for="dependant in dependants"
-          :key="dependant"
-          :value="dependant">
-          {{ dependant }}
-        </option>
-      </select>
-      <button
-        @click="prev">
-        Previous
-      </button> 
-      <button
-        @click="submitProfile">
-        Update Profile
-      </button> 
-    </div>
-
-    <router-link
-    tag="button"
-     :to="{ name: 'profile', params: { username: user.profile.username } }">
-      Back To Profile
-    </router-link> 
   </section>
 </template>
 
 <script>
+import arrow from '@/assets/icons/chevron-left-solid.svg';
+import { minLength, maxLength } from 'vuelidate/lib/validators';
 
 export default {
   data() {
     return {
+      arrow,
       user: this.$store.state.auth.user,
-      questionNumber: 1,
-      date: new Date(),
-      age: null,
+      birthday: this.$store.state.auth.user.profile.birthday,
       finished: false,
       countries: [
         "Afghanistan",
@@ -359,26 +346,28 @@ export default {
         'Child / Children', 
         'Partner / Spouse', 
         'Elderly person'
-      ]
+      ],
+      form: {
+        username: this.$store.state.auth.user.profile.username
+      },
+      errorMsg: '',
+      error: false
+    } 
+  },
+  validations: {
+    form: {
+      username: {
+        minLength: minLength(6),
+        maxLength: maxLength(10)
+      }
     }
   },
   computed: {
     profileToUpdate() { 
       return {...this.user.profile} 
-    },
-    maxDate() {
-      const underFourYears = new Date();
-      underFourYears.setFullYear(underFourYears.getFullYear() - 4);
-      return underFourYears;
     }
   },
   methods: {
-    next() {
-      this.questionNumber++;
-    },
-    prev() {
-      this.questionNumber--;
-    },
     calculateAge(date) {
       let today = new Date(),
           birthDate = new Date(date),
@@ -387,6 +376,12 @@ export default {
       if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
       this.age = age;
       return age;
+    },
+    onSubmit() {
+      this.$v.form.$touch();
+      if(!this.$v.form.$invalid) {
+        this.submitProfile();
+      }
     },
     submitProfile() {
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
@@ -397,14 +392,12 @@ export default {
     }
   },
   watch: {
-    date(newDate, oldDate) {
-      this.profileToUpdate.age = this.calculateAge(newDate);
-      this.profileToUpdate.birthday = newDate;
+    birthday(date) {
+      const birthday = new Date(date);
+      this.profileToUpdate.age = this.calculateAge(birthday);
     },
-    age(age) {
-      if(age < 18) {
-        this.profileToUpdate.dependants = 'None';
-      }
+    'form.username'(username) {
+      this.profileToUpdate.username = username;
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -419,3 +412,31 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
+.arrow {
+  width: 22px;
+  position: absolute;
+  top: 24px;
+  left: 6vw;
+}
+
+#update-profile {
+  padding: $spacing*10 0 $spacing*6;
+}
+
+.container {
+  margin-top: $spacing*5;
+}
+
+.form {
+  margin-top: $spacing*3;
+}
+
+.save-changes {
+  margin-top: $spacing*5;
+  text-align: center;
+}
+</style>

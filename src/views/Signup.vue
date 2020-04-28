@@ -41,12 +41,12 @@
           <span 
             v-if="!$v.form.username.minLength"
             class="help is-danger">
-            Password should be at least 6 characters
+            Username should be at least 6 characters
           </span>
           <span 
             v-if="!$v.form.username.maxLength"
             class="help is-danger">
-            User should be no more than 10 characters
+            Username should be no more than 10 characters
           </span>
         </div>
       </div>

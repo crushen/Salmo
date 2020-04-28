@@ -377,30 +377,4 @@ h1 {
     margin-top: $spacing*6;
   }
 }
-
-
-
-// .results {
-//   & h3 {
-//     margin-bottom: $spacing*4;
-//   }
-// }
-
-// .results-button {
-//   width: 190px;
-//   margin: $spacing*4 auto 0 auto;
-//   text-align: center;
-
-//   button {
-//     margin-top: $spacing*2;
-//   }
-// }
-
-// .settings {
-//   text-align: center;
-
-//   button {
-//     margin-top: $spacing*2;
-//   }
-// }
 </style>
