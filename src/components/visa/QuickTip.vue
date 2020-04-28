@@ -1,23 +1,8 @@
 <template>
   <div>
-    <!-- <div 
-      class="modal">
-      <button 
-        @click="toggleModal">
-        <img :src="lightbulb" class="icon">
-      </button>
-
-      <div 
-        class="inner"
-        :class="open ? 'open' : ''">
-        <article :class="open ? 'open' : ''">
-          <h2><span>QUICK TIP</span> {{ visa.name }}</h2>
-          <div v-html="visa.card.quickTip" class="text"></div>
-        </article>
-      </div>
-    </div> -->
-
-    <button @click="openModal">
+    <button 
+      class="open"
+      @click="openModal">
       <img :src="lightbulb" class="icon">
     </button>
 
@@ -40,9 +25,14 @@
             </li>
           </ul>
         </div>
-        <div 
-          @click="closeModal"
-          class="back">Close</div>
+
+        <div class="close">
+          <button 
+            @click="closeModal"
+            class="tertiary">
+            Close
+          </button>
+        </div>
       </article>
     </div>
   </div>
@@ -76,32 +66,6 @@ export default {
       document.querySelector('#overlay').style.display = 'none';
       document.querySelector('body').style.overflow = 'auto';
     }
-    // toggleModal(event) {
-    //   let modal;
-    //   const nav = document.querySelector('#nav'),
-    //         overlay = document.querySelector('#overlay'),
-    //         body = document.querySelector('body');
-
-    //   if(event.target.tagName === 'IMG') {
-    //     modal = event.target.parentElement.parentElement;
-    //   } else if(event.target.tagName === 'BUTTON') {
-    //     modal = event.target.parentElement;
-    //   }
-
-    //   if(!this.open) {
-    //     this.open = true;
-    //     modal.classList.remove('close');
-    //     modal.classList.add('open');
-    //     overlay.classList.add('is-active');
-    //     overlay.style.zIndex = '30';
-    //   } else {
-    //     this.open = false;
-    //     modal.classList.remove('open');
-    //     modal.classList.add('close');
-    //     overlay.classList.remove('is-active');
-    //     overlay.style.zIndex = '-10';
-    //   }
-    // }
   }
 }
 </script>
@@ -109,7 +73,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-button {
+.open {
   width: 50px;
   height: 50px;
   padding: 0;
@@ -192,85 +156,17 @@ button {
       width: 10px;
     }
   }
-  
-  .back {
-    width: 70px;
-    margin: 8vw auto 0 auto;
-    color: $primary-pink;
-    font-weight: bold;
-    font-size: 18px;
-    text-decoration: underline;
+
+  .close {
+    margin-top: 8vw;
+    text-align: center;
+
+    button {
+      color: $primary-pink;
+      font-size: 18px;
+    }
   }
 }
-
-
-
-// .modal {
-//   width: 52px;
-//   height: 52px;
-//   position: absolute;
-//   z-index: 0;
-//   top: -22px;
-//   right: -10px;
-//   background: $primary-yellow;
-//   color: $light-font;
-//   border-radius: 50px;
-
-//   button {
-//     background: transparent;
-//     box-shadow: none;
-//     width: 52px;
-//     height: 52px;
-//     padding: 0;
-//     position: absolute;
-//     top: 2px;
-//     right: 0;
-
-//     img {
-//       width: 24px;
-//     }
-//   }
-
-//   &.open {
-//     animation-name: open;
-//     animation-duration: 0.9s;
-//     animation-timing-function: ease-in-out;
-//     animation-fill-mode: forwards;
-//   }
-
-//   &.close {
-//     animation-name: close;
-//     animation-duration: 0.9s;
-//     animation-timing-function: ease-in-out;
-//     animation-fill-mode: forwards;
-//   }
-// }
-
-// .inner {
-//   width: 96%;
-//   height: 96%;
-//   background: white;
-//   color: $dark-font;
-//   margin-left: 2%;
-//   margin-top: 1.8%;
-//   //padding: 40px 0;
-//   border-radius: 8px;
-//   visibility: hidden;
-//   opacity: 0;
-//   transition: 0.2s;
-//   transition-delay: 0.45s;
-
-//   &.open {
-//     visibility: visible;
-//     opacity: 1;
-//     transition: 0.2s;
-//     transition-delay: 0.9s;
-//   }
-
-//   .text p:not(:last-of-type) {
-//     margin-bottom: $spacing*2;
-//   }
-// }
 
 // @keyframes open {
 //   0% {
