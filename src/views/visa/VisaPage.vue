@@ -28,6 +28,7 @@
               <p><span>Remember!</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.</p>
             </div>
             <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?</p>
+            <!-- Need to make this into forward and back arrows instead of text -->
             <div 
               @click="next"
               class="next-button"
