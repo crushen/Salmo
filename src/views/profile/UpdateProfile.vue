@@ -392,9 +392,9 @@ export default {
     }
   },
   watch: {
-    birthday(date) {
-      const birthday = new Date(date);
-      this.profileToUpdate.age = this.calculateAge(birthday);
+    birthday(date) { 
+      this.profileToUpdate.age = this.calculateAge(new Date(date));
+      this.profileToUpdate.birthday = date;
     },
     'form.username'(username) {
       this.profileToUpdate.username = username;
