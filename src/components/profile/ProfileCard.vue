@@ -46,11 +46,8 @@ export default {
   },
   computed: {
     birthday() {
-      const date = new Date(this.user.profile.birthday.seconds * 1000);
-      const year = date.getFullYear();
-      const month = (1 + date.getMonth()).toString().padStart(2, '0');
-      let day = date.getDate().toString().padStart(2, '0');
-      return day + '/' + month + '/' + year;
+      const date = this.user.profile.birthday.split('-');
+      return date.reverse().join('/');
     }
   }
 }
