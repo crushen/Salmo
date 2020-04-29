@@ -11,7 +11,7 @@
     </header>
 
     <logged-in 
-      v-if="!user" 
+      v-if="user" 
       :user="user"/>
 
     <logged-out v-else/>

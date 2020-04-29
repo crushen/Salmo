@@ -2,7 +2,7 @@
   <section id="profile">
     <!-- If user has verified email -->
     <section v-if="user.emailVerified">
-      <!-- <button @click="handleLogout" type="button">Log Out</button> -->
+      <button @click="handleLogout" type="button">Log Out</button>
       <section class="user-info content">
         <h1>Your current plan.</h1>
         <h2>Here's where you're at right now with your visa and living situation in the UK.</h2>
@@ -250,15 +250,15 @@ export default {
     }
   },
   methods: {
-    // handleLogout() {
-    //   this.$store.dispatch('auth/logOut')
-    //   .then(() => {
-    //     if(this.$route.path !== '/') {
-    //       this.$router.push('/')
-    //     }
-    //     alert('You have been logged out')
-    //   })
-    // },
+    handleLogout() {
+      this.$store.dispatch('auth/logOut')
+      .then(() => {
+        if(this.$route.path !== '/') {
+          this.$router.push('/')
+        }
+        alert('You have been logged out')
+      })
+    },
     checkSwitch() {  
       if(this.currentVisa === 'Tier 4 General Student') {
         this.switchOptions = ['Startup', 'Tier 1 Investor', 'Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']

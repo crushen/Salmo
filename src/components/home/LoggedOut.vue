@@ -16,15 +16,19 @@
         :title="card.title"
         :subTitle="card.subTitle" />
     </section>
+
+    <sign-up />
   </div>
 </template>
 
 <script>
 import contentCard from '@/components/home/ContentCard';
+import signUp from '@/components/home/SignUp';
 
 export default {
   components: {
-    contentCard
+    contentCard,
+    signUp
   },
   data() {
     return {
