@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home';
 import Login from '@/views/Login';
 import Signup from '@/views/Signup';
+import ForgotPassword from '@/views/ForgotPassword';
 import Profile from '@/views/profile/Profile';
 import UpdateProfile from '@/views/profile/UpdateProfile';
 import Questionnaire from '@/views/Questionnaire';
@@ -33,6 +34,12 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: Signup,
+    meta: { onlyGuestUser: true }
+  },
+  {
+    path: '/login/forgot-password',
+    name: 'forgot-password',
+    component: ForgotPassword,
     meta: { onlyGuestUser: true }
   },
   { 

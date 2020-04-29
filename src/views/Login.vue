@@ -38,9 +38,12 @@
       </div>
 
       <div class="forgot-password">
-        <button class="tertiary">
+        <router-link
+          :to="{ name: 'forgot-password' }"
+          tag="button"
+          class="tertiary">
           Forgot Password?
-        </button>
+        </router-link>
       </div>
 
       <div class="button">
