@@ -12,6 +12,7 @@ import NonEU from '@/views/visa/NonEU';
 import CategoryPage from '@/views/visa/CategoryPage';
 import VisaPage from '@/views/visa/VisaPage';
 import VisaInfoEU from '@/views/visa/EU';
+import NotFound from '@/views/NotFound';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -85,6 +86,14 @@ const routes = [
     name: 'visa-page', 
     component: VisaPage
   },
+  { path: '/404',
+    name: 'not-found',
+    component: NotFound 
+  },  
+  { 
+    path: '*', 
+    redirect: '/404' 
+  }, 
 ]
 
 const router = new VueRouter({

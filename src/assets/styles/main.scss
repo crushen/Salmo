@@ -93,3 +93,10 @@ button {
 .section-margin {
   margin-top: $spacing*10;
 }
+
+.single-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
