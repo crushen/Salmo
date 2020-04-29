@@ -102,7 +102,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .content {
-  padding: $spacing*10 0 $spacing*6;
+  padding: $spacing*12 0 $spacing*6;
 }
 
 .arrow {
@@ -113,7 +113,7 @@ export default {
 }
 
 h1 {
-  margin-bottom: $spacing*4;
+  margin-bottom: $spacing*5;
 }
 
 .container {
