@@ -25,7 +25,7 @@ section {
 .placeholder-img {
   width: 48vw;
   height: 48vw;
-  margin: 10vw auto 0 auto;
+  margin: 8vw auto 0 auto;
   background: $light-grey;
   border-radius: 200px;
 }
@@ -39,7 +39,7 @@ section {
 
   .button {
     text-align: center;
-    margin-top: 10vw;
+    margin-top: 8vw;
   }
 }
 </style>
