@@ -11,7 +11,7 @@
     </header>
 
     <logged-in 
-      v-if="user" 
+      v-if="isAuthenticated" 
       :user="user"/>
 
     <logged-out v-else/>
@@ -37,6 +37,9 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user;
+    },
+    isAuthenticated() {
+      return this.$store.getters['auth/isAuthenticated'];
     }
   }
 }
