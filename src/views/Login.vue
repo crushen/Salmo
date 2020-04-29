@@ -1,13 +1,14 @@
 <template>
-  <section id="register">
-    <h1>Log In</h1>
+  <section class="content">
+    <h1>Great to see you!</h1>
     <form>
       <div class="field">
         <input 
           v-model.trim="form.email"
           type="email"
           placeholder="Email"
-          autocomplete="email">
+          autocomplete="email"
+          class="form">
         <div v-if="$v.form.email.$error">
           <span v-if="!$v.form.email.required">
             Email is required
@@ -23,7 +24,8 @@
           v-model.trim="form.password"
           type="password"
           placeholder="Password"
-          autocomplete="current-password">
+          autocomplete="current-password"
+          class="form">
         <div v-if="$v.form.password.$error">
           <span v-if="!$v.form.password.required">
             Password is required
@@ -35,17 +37,40 @@
         {{ errorMsg }}
       </div>
 
-      <button 
-        @click="onLogin"
-        type="button">
-        Log In
-      </button>
+      <div class="forgot-password">
+        <button class="tertiary">
+          Forgot Password?
+        </button>
+      </div>
+
+      <div class="button">
+        <button 
+          @click="onLogin"
+          type="button" 
+          class="pink">
+          Log In
+        </button>
+      </div>
     </form>
+
+    <div class="sign-up">
+      <p>Don't have an account?</p>
+      <router-link
+        :to="{ name: 'signup' }"
+        tag="button"
+        class="tertiary">
+        Sign up here!
+      </router-link>
+    </div>
+
+    <div class="placeholder-img"></div>
   </section>
 </template>
 
 <script>
 import { required, email } from 'vuelidate/lib/validators';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default {
   data() {
@@ -79,8 +104,9 @@ export default {
     handleLogin() {
       this.$store.dispatch('auth/logIn', this.form)
         .then(() => {
-          this.$router.push('/')
-          alert('You have logged in')
+          const user = firebase.auth().currentUser;
+          this.$router.push(`profile/${user.profile.username}`);
+          alert('You have logged in');
         })
         .catch(errorMessage => {
           this.errorMsg = errorMessage;
@@ -94,18 +120,53 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
+section {
+  padding: 30vw 0 0;
+}
+
 form {
-  width: 300px;
-  margin: auto;
+  margin-top: $spacing*4;
 }
 
-.field {
-  width: 90%;
-  margin: auto;
+.form {
+  margin-top: $spacing*3;
 }
 
-input {
-  width: 100%;
+.forgot-password {
+  margin-top: $spacing*3;
+  text-align: center;
+}
+
+.button {
+  margin-top: $spacing*5;
+  text-align: center;
+
+  button {
+    width: 120px;
+  }
+}
+
+.sign-up {
+  position: absolute;
+  bottom: 20vw;
+  width: 85vw;
+  text-align: center;
+
+  .tertiary {
+    bottom: 0;
+    color: $primary-pink;
+  }
+}
+
+.placeholder-img {
+  width: 20vw;
+  height: 25vw;
+  position: absolute;
+  bottom: 0;
+  left: 12px;
+  background: $light-grey;
 }
 </style>
