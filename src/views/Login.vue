@@ -56,7 +56,7 @@
     <div class="sign-up">
       <p>Don't have an account?</p>
       <router-link
-        :to="{ name: 'signup' }"
+        :to="{ name: 'home' }"
         tag="button"
         class="tertiary">
         Sign up here!
