@@ -11,14 +11,14 @@
         <p>{{ visa.card.subTitle }}</p>
 
         <div class="checklist">
-          <div class="item">
+          <!-- <div class="item">
             <div 
               class="inner"
               :style="this.switch ? {opacity: 1} : {opacity: 0.5}">
               <img :src="this.switch ? check : cross" alt="tick" class="icon">
               <p>Switch</p>
             </div>
-          </div>
+          </div> -->
           <div
             v-for="item in checklist"
             :key="item.name" 
@@ -50,14 +50,11 @@ import question from '@/assets/icons/pink/question-solid.svg';
 
 export default {
   props: {
-    visa: { required: true, type: Object },
-    currentVisa: { required: true, type: String },
-    switchOptions: { required: true, type: Array }
+    visa: { required: true, type: Object }
   },
   data() {
     return {
       checklist: this.visa.card.checklist,
-      switch: null,
       check,
       cross,
       question
@@ -74,18 +71,17 @@ export default {
           item.icon = this.cross;
         }
       });
-    },
-    checkSwitch() {
-      this.switchOptions.forEach(switchVisa => {
-        if(switchVisa === this.visa.name) {
-          this.switch = true;
-        }
-      })
-    },
+    }
+    // checkSwitch() {
+    //   this.switchOptions.forEach(switchVisa => {
+    //     if(switchVisa === this.visa.name) {
+    //       this.switch = true;
+    //     }
+    //   })
+    // }
   },
   created() {
     this.getIcon();
-    this.checkSwitch();
   }
 }
 </script>

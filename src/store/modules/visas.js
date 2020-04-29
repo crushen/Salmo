@@ -36,6 +36,7 @@ const visas = [
     card: {
       subTitle: 'Great for individuals who wish to start their own business in the UK.',
       checklist: [
+        { name: 'Switch', status: false },
         { name: 'ILR', status: false },
         { name: 'Work', status: true },
         { name: 'Dependants', status: true },
@@ -59,6 +60,7 @@ const visas = [
         ]
       },
       checklist: [
+        { name: 'Switch', status: false },
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Dependants', status: true },
@@ -97,6 +99,7 @@ const visas = [
         ]
       },
       checklist: [
+        { name: 'Switch', status: false },
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Dependants', status: false },
@@ -120,6 +123,7 @@ const visas = [
         ]
       },
       checklist: [
+        { name: 'Switch', status: false },
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Dependants', status: false },
@@ -168,6 +172,7 @@ const visas = [
         ]
       },
       checklist: [
+        { name: 'Switch', status: false },
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Dependants', status: false },

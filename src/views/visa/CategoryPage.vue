@@ -13,8 +13,6 @@
         v-for="visa in visas"
         :key="visa.name"
         :visa="visa"
-        :currentVisa="currentVisa"
-        :switchOptions="switchOptions"
         :category="category"
         class="visa-card">
         <template #quickTip>
@@ -40,31 +38,30 @@ export default {
     return {
       arrow,
       category: this.$route.params.category,
-      currentVisa: this.$store.state.auth.user.profile.currentVisa,
-      results: this.$store.state.auth.user.profile.questionnaireResults,
-      switchOptions: []
+      // currentVisa: this.$store.state.auth.user.profile.currentVisa,
+      // results: this.$store.state.auth.user.profile.questionnaireResults
     }
   },
   computed: {
     ...mapState('visas', ['visaList']),
     visas() {
       return this.visaList.filter(item => item.category === this.category);
-    },
-    mostRecentResult() {
-      return this.results.slice(-1)[0]; 
-    },
-    switchVisas() {
-      if(this.mostRecentResult) {
-        // Filter visa list for user's switch options
-        const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name));
-        // Get all visas in same category
-        const sameCategory = switchOptions.filter(item => item.category === this.topResult[0].category);
-        // Remove visa(s) that appear in top result
-        return sameCategory.filter(item => !this.topResult.includes(item));
-      } else {
-        return false;
-      }
-    },
+    }
+    // mostRecentResult() {
+    //   return this.results.slice(-1)[0]; 
+    // },
+    // switchVisas() {
+    //   if(this.mostRecentResult) {
+    //     // Filter visa list for user's switch options
+    //     const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name));
+    //     // Get all visas in same category
+    //     const sameCategory = switchOptions.filter(item => item.category === this.topResult[0].category);
+    //     // Remove visa(s) that appear in top result
+    //     return sameCategory.filter(item => !this.topResult.includes(item));
+    //   } else {
+    //     return false;
+    //   }
+    // }
   }
 }
 </script>
