@@ -23,8 +23,9 @@ export default {
           return Promise.reject(message);
         })
     },
-    logIn(context, {email, password}) {
+    logIn({dispatch}, {email, password}) {
       return firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(() => dispatch('storeAuthUser', firebase.auth().currentUser))
         .catch(error => Promise.reject(error.message))
     },
     logOut({commit}) {

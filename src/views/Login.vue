@@ -109,16 +109,16 @@ export default {
     handleLogin() {
       this.$store.dispatch('auth/logIn', this.form)
         .then(() => {
-          const user = firebase.auth().currentUser;
-          this.$router.push(`profile/${user.profile.username}`);
+          const user = this.$store.state.auth.user;
+          this.$router.push({name: 'profile', params: {username: user.profile.username}});
           alert('You have logged in');
         })
         .catch(errorMessage => {
           this.errorMsg = errorMessage;
           this.error = true;
-          setTimeout(() => {
-            this.error = false;
-          }, 3000);
+          // setTimeout(() => {
+          //   this.error = false;
+          // }, 3000);
         })
     }
   }
