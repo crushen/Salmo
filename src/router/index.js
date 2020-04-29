@@ -63,32 +63,27 @@ const routes = [
   { 
     path: '/visa-info', 
     name: 'visa-info', 
-    component: VisaInfo,
-    meta: { onlyAuthUser: true } 
+    component: VisaInfo
   },
   { 
     path: '/visa-info/non-eu', 
     name: 'non-eu', 
-    component: NonEU,
-    meta: { onlyAuthUser: true } 
+    component: NonEU
   },
   { 
     path: '/visa-info/eu', 
     name: 'visa-info-eu', 
-    component: VisaInfoEU,
-    meta: { onlyAuthUser: true } 
+    component: VisaInfoEU
   },
   { 
     path: '/visa-info/non-eu/:category', 
     name: 'non-eu-category', 
-    component: CategoryPage,
-    meta: { onlyAuthUser: true } 
+    component: CategoryPage
   },
   { 
     path: '/visa-info/:slug', 
     name: 'visa-page', 
-    component: VisaPage,
-    meta: { onlyAuthUser: true } 
+    component: VisaPage
   },
 ]
 
