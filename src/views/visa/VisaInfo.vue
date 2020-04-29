@@ -1,5 +1,5 @@
 <template>
-  <section class="content">
+  <section class="content single-page">
     <h1>Looking for an overview of all UK visas?</h1>
 
     <div class="buttons">
@@ -29,7 +29,7 @@
 @import '@/assets/styles/variables.scss';
 
 .content {
-  padding: $spacing*10 0;
+  padding: $spacing*10 0 $spacing*15;
 }
 
 .buttons {
@@ -51,7 +51,7 @@
 
 .placeholder-image {
   width: 25vw;
-  height: 35vw;
+  height: 30vw;
   background: $light-grey;
   position: absolute;
   bottom: 0;

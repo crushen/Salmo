@@ -70,12 +70,12 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 #category-page {
-  padding: $spacing*10 0 $spacing*6;
+  padding: $spacing*12 0 $spacing*6;
 }
 
 h1 {
   text-transform: capitalize;
-  margin-bottom: $spacing*4;
+  margin-bottom: $spacing*5;
 }
 
 .arrow {

@@ -75,7 +75,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 #non-eu {
-  padding: $spacing*10 0 0;
+  padding: $spacing*12 0 0;
 }
 
 .arrow {
@@ -120,8 +120,8 @@ export default {
 }
 
 .child-options {
-  margin-top: $spacing*4;
-  padding: $spacing*4 0 $bottom-padding 0;
+  margin-top: $spacing*6;
+  padding: $spacing*6 0 $bottom-padding 0;
   background: $background;
   position: relative;
 
@@ -132,7 +132,7 @@ export default {
     
   button {
     width: 180px;
-    margin: $spacing*4 0;
+    margin: $spacing*4 0 $spacing*6 0;
     align-self: center;
   }
 
