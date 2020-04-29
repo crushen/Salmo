@@ -28,15 +28,21 @@
             <template v-if="!isAuthenticated">
               <router-link 
                 @click.native="open = false"
+                :to="{ name: 'visa-info' }">
+                <div class="icon"></div>
+                Visas
+              </router-link>
+              <router-link 
+                @click.native="open = false"
                 :to="{ name: 'login' }">
                 <div class="icon"></div>
                 Login
               </router-link>
               <router-link 
                 @click.native="open = false"
-                :to="{ name: 'signup' }">
+                :to="{ name: 'questionnaire' }">
                 <div class="icon"></div>
-                Signup
+                About
               </router-link>
             </template>
             <template v-else>
