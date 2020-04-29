@@ -1,8 +1,14 @@
 <template>
   <section id="profile">
+    <button @click="handleLogout" type="button">Log Out</button>
+    <!-- If user hasn't verified email -->
+    <div 
+      v-if="!user.emailVerified"
+      class="content">
+      <p>We've sent a link to <strong>{{ user.email }}</strong> to verify your email address. Please refresh the page once you've verified your email address.</p>
+    </div>
     <!-- If user has verified email -->
-    <section v-if="user.emailVerified">
-      <button @click="handleLogout" type="button">Log Out</button>
+    <div v-else>
       <section class="user-info content">
         <h1>Your current plan.</h1>
         <h2>Here's where you're at right now with your visa and living situation in the UK.</h2>
@@ -154,14 +160,7 @@
             Show Less
           </button>
         </div> -->
-    </section>
-
-    <!-- If user hasn't verified email -->
-    <section v-else>
-      <div>
-        <p>We've sent a link to <strong>{{ user.email }}</strong> to verify your email address.</p>
-      </div>
-    </section>
+    </div>
   </section>
 </template>
 

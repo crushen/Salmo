@@ -164,7 +164,7 @@ export default {
               questionnaireResults: []
             }
           })
-          this.$router.push('/')
+          this.$router.push(`/profile/${this.form.username}`)
           this.$store.dispatch('auth/sendEmailVerification')
         })
         .catch(errorMessage => {
