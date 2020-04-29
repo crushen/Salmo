@@ -38,12 +38,6 @@
                 <div class="icon"></div>
                 Login
               </router-link>
-              <router-link 
-                @click.native="open = false"
-                :to="{ name: 'questionnaire' }">
-                <div class="icon"></div>
-                About
-              </router-link>
             </template>
             <template v-else>
               <router-link 
@@ -58,18 +52,13 @@
                 <div class="icon"></div>
                 Profile
               </router-link>
-              <router-link 
-                @click.native="open = false"
-                :to="{ name: 'questionnaire' }">
-                <div class="icon"></div>
-                About
-              </router-link>
-              <!-- <button 
-                @click="handleLogout"
-                type="button">
-                Log Out
-              </button> -->
             </template>
+            <router-link 
+              @click.native="open = false"
+              :to="{ name: 'about' }">
+              <div class="icon"></div>
+              About
+            </router-link>
           </nav>
         </transition>
       </div>
@@ -98,15 +87,6 @@ export default {
   methods: {
     close() {
       this.open = false;
-    },
-    handleLogout() {
-      this.$store.dispatch('auth/logOut')
-      .then(() => {
-        if(this.$route.path !== '/') {
-          this.$router.push('/')
-        }
-        alert('You have been logged out')
-      })
     }
   }
 }
