@@ -29,7 +29,7 @@
 @import '@/assets/styles/variables.scss';
 
 .content {
-  padding: $spacing*10 0 $spacing*15;
+  padding: $spacing*10 0 $spacing*18;
 }
 
 .buttons {
