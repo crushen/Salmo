@@ -42,6 +42,6 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 h2 {
-  margin-bottom: $spacing*2;
+  margin-bottom: $spacing*4;
 }
 </style>

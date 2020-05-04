@@ -23,7 +23,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .card {
-  margin-bottom: $spacing*3;
+  margin-bottom: $spacing*4;
   padding: 35vw $spacing $spacing;
   background: $light-grey;
   border-radius: $border-radius;

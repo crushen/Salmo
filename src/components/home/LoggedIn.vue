@@ -65,13 +65,13 @@ export default {
 }
 
 .news {
-  margin-top: 14vw;
+  margin-top: 20vw;
 }
 
 .page-links {
   .bottom {
     background: $background;
-    padding: $spacing*6 0 $bottom-padding 0;
+    padding: $spacing*8 0 $bottom-padding 0;
     position: relative;
 
     .placeholder-image-1 {

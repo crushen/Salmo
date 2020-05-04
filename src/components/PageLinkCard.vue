@@ -29,7 +29,7 @@ div {
   }
 
   &:not(:last-of-type) {
-    margin-bottom: $spacing*10;
+    margin-bottom: $spacing*8;
   }
 }
 </style>
