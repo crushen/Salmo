@@ -2,7 +2,7 @@
   <div id="app">
     <app-navigation />
     <div id="overlay"></div>
-    <div v-if="$route.path !== '/'" class="small-logo"></div>
+    <div v-if="$route.path !== '/about' && $route.path !== '/'" class="small-logo"></div>
     <router-view/>
   </div>
 </template>
