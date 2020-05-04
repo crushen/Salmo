@@ -161,7 +161,8 @@ export default {
               name: this.form.name,
               username: this.form.username,
               user: user.uid,
-              questionnaireResults: []
+              questionnaireResults: [],
+              currentVisa: {}
             }
           })
           this.$router.push(`/profile/${this.form.username}`)

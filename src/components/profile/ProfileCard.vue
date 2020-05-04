@@ -19,7 +19,7 @@
     <div class="child three">
       <div>
         <p class="label">Nationality</p> 
-        <p class="user-info">{{ user.profile.country }}</p>
+        <p class="user-info">{{ user.profile.nationality }}</p>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
     <div class="child five">
       <div>
         <p class="label">Current Visa</p> 
-        <p class="user-info">{{ user.profile.currentVisa }}</p>
+        <p class="user-info">{{ user.profile.currentVisa.name }}</p>
       </div>
     </div>
   </div>

@@ -94,4 +94,10 @@ select.form:not([multiple]) {
 select.form:not([multiple]):focus {
   box-shadow: 0 0 0 3px $primary-yellow !important;
 }
+
+label {
+  line-height: 26px;
+  color: $grey;
+  font-weight: 500;
+}
 </style>

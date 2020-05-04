@@ -46,8 +46,8 @@
 
         <select 
           class="form"
-          v-model="profileToUpdate.country"
-          name="Country">
+          v-model="profileToUpdate.nationality"
+          name="Nationality">
           <option
             v-for="country in countries"
             :key="country"
