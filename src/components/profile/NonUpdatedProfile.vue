@@ -5,7 +5,7 @@
       <h3>Before you can take your first quiz, you'll need to complete your profile.</h3>
 
       <form 
-        @submit.prevent="onSubmit"
+        @submit.prevent="submitProfile"
         class="container">
         <div class="field">
           <label for="dob" class="form-label">Birthday</label>
@@ -16,11 +16,6 @@
             id="dob"
             class="form unstyled"
             required>
-          <div v-if="$v.form.birthday.$error">
-            <span v-if="!$v.form.birthday.required">
-              Birthday is required
-            </span>
-          </div>
         </div>
 
         <div class="field">
@@ -29,7 +24,8 @@
             v-model="form.dependants"
             name="Dependants"
             id="dependants"
-            class="form">
+            class="form"
+            required>
             <option
               v-for="dependant in dependantsList"
               :key="dependant"
@@ -37,11 +33,6 @@
               {{ dependant }}
             </option>
           </select>
-          <div v-if="$v.form.dependants.$error">
-            <span v-if="!$v.form.dependants.required">
-              Dependants is required
-            </span>
-          </div>
         </div>
 
         <div class="field">
@@ -50,7 +41,8 @@
             class="form"
             v-model="form.nationality"
             name="Nationality"
-            id="nationality">
+            id="nationality"
+            required>
             <option
               v-for="country in countries"
               :key="country"
@@ -58,11 +50,6 @@
               {{ country }}
             </option>
           </select>
-          <div v-if="$v.form.nationality.$error">
-            <span v-if="!$v.form.nationality.required">
-              Nationality is required
-            </span>
-          </div>
         </div>
 
         <div class="field current-visa">
@@ -71,7 +58,8 @@
             class="form" 
             v-model="form.currentVisa.name"
             name="Current Visa"
-            id="current-visa">
+            id="current-visa"
+            required>
             <option
               v-for="visa in visas"
               :key="visa"
@@ -79,11 +67,6 @@
               {{ visa }}
             </option>
           </select>
-          <div v-if="$v.form.currentVisa.name.$error">
-            <span v-if="!$v.form.currentVisa.name.required">
-              Current Visa is required
-            </span>
-          </div>
         </div>
 
         <div class="field visa-dates">
@@ -95,11 +78,6 @@
               id="current-start"
               class="form unstyled"
               required>
-            <div v-if="$v.form.currentVisa.start.$error">
-              <span v-if="!$v.form.currentVisa.start.required">
-                Start date is required
-              </span>
-            </div>
           </div>
 
           <div>
@@ -110,29 +88,72 @@
               id="current-end"
               class="form unstyled"
               required>
-            <div v-if="$v.form.currentVisa.end.$error">
-              <span v-if="!$v.form.currentVisa.end.required">
-                End date is required
-              </span>
+          </div>
+        </div>
+
+        <div
+          v-for="(visa, index) in form.pastVisas"
+          :key="index">
+          <div class="field past-visa">
+            <label :for="`past-visa-${index}`">Past visa</label>
+            <select
+              class="form" 
+              v-model="visa.name"
+              name="Current Visa"
+              :id="`past-visa-${index}`"
+              required>
+              <option
+                v-for="item in visas"
+                :key="item"
+                :value="item">
+                {{ item }}
+              </option>
+            </select>
+          </div>
+
+          <div class="field visa-dates">
+            <div>
+              <label :for="`past-start-${index}`" class="form-label">Start date</label>
+              <input 
+                v-model="visa.start"
+                type="date"
+                :id="`past-start-${index}`"
+                class="form unstyled"
+                required>
+            </div>
+
+            <div>
+              <label :for="`current-end-${index}`" class="form-label">End date</label>
+              <input
+                v-model="visa.end"
+                type="date"
+                :id="`current-end-${index}`"
+                class="form unstyled"
+                required>
             </div>
           </div>
         </div>
+
+        <button 
+          @click="addPastVisa"
+          class="tertiary">
+          + Add Past Visa
+        </button>
 
         <div class="save-changes">
           <input 
             type="submit" 
             value="Save Changes"
             class="pink">
-        
-          <p>Once you've completed your profile, you'll also gain access to other features such as your personalised quiz and your own Visa Stats and Facts page.</p>
         </div>
       </form>
+
+      <p class="text">Once you've completed your profile, you'll also gain access to other features such as your personalised quiz and your own Visa Stats and Facts page.</p>
     </section>
   </div>
 </template>
 
 <script>
-import { required } from 'vuelidate/lib/validators';
 import arrow from '@/assets/icons/chevron-left-solid.svg';
 
 export default {
@@ -149,7 +170,8 @@ export default {
           name: null,
           start: null,
           end: null
-        }
+        },
+        pastVisas: []
       },
       countries: [
         "Afghanistan",
@@ -406,34 +428,8 @@ export default {
         'Child / Children', 
         'Partner / Spouse', 
         'Elderly person'
-      ],
-      errorMsg: '',
-      error: false
+      ]
     } 
-  },
-  validations: {
-    form: {
-      birthday: {
-        required
-      },
-      dependants: {
-        required
-      },
-      nationality: {
-        required
-      },
-      currentVisa: {
-        name: {
-          required
-        },
-        start: {
-          required
-        },
-        end: {
-          required
-        }
-      }
-    }
   },
   computed: {
     profileToUpdate() { 
@@ -450,21 +446,21 @@ export default {
       this.age = age;
       return age;
     },
-    onSubmit() {
-      this.$v.form.$touch();
-      if(!this.$v.form.$invalid) {
-        this.submitProfile();
-      }
-    },
     submitProfile() {
       this.profileToUpdate.age = this.form.age;
       this.profileToUpdate.birthday = this.form.birthday;
       this.profileToUpdate.nationality = this.form.nationality;
       this.profileToUpdate.dependants = this.form.dependants;
       this.profileToUpdate.currentVisa = this.form.currentVisa;
+      if(this.form.pastVisas !== []) {
+        this.profileToUpdate.pastVisas = this.form.pastVisas;
+      }
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate);
       window.scrollTo(0, 0);
       // Need to figure out how to wait to scroll until profile has been updated
+    },
+    addPastVisa() {
+      this.form.pastVisas.push({name: '', start: '', end: ''});
     }
   },
   watch: {
@@ -501,13 +497,21 @@ h3 {
   justify-content: space-between;
 }
 
+.past-visa {
+  margin-top: $spacing*7;
+}
+
 .save-changes {
   margin-top: $spacing*5;
   text-align: center;
+}
 
-  p {
-    text-align: left;
-    margin-top: $spacing*5;
-  }
+.text {
+  margin-top: $spacing*5;
+}
+
+.tertiary {
+  font-size: 18px;
+  margin-top: $spacing*3;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <section id="profile">
-    <button @click="handleLogout" type="button">Log Out</button>
+    <!-- <button @click="handleLogout" type="button">Log Out</button> -->
     <!-- If user hasn't verified email -->
     <div 
       v-if="!user.emailVerified"
