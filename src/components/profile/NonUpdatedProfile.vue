@@ -8,35 +8,45 @@
         <div class="field">
           <label for="dob" class="form-label">Birthday</label>
           <input 
-            v-model="birthday"
+            v-model="form.birthday"
             type="date" 
             placeholder="Birthday"
             id="dob"
             class="form unstyled"
             required>
+          <div v-if="$v.form.birthday.$error">
+            <span v-if="!$v.form.birthday.required">
+              Birthday is required
+            </span>
+          </div>
         </div>
 
         <div class="field">
           <label for="dependants">Dependants</label>
           <select 
-            v-model="profileToUpdate.dependants"
+            v-model="form.dependants"
             name="Dependants"
             id="dependants"
             class="form">
             <option
-              v-for="dependant in dependants"
+              v-for="dependant in dependantsList"
               :key="dependant"
               :value="dependant">
               {{ dependant }}
             </option>
           </select>
+          <div v-if="$v.form.dependants.$error">
+            <span v-if="!$v.form.dependants.required">
+              Dependants is required
+            </span>
+          </div>
         </div>
 
         <div class="field">
           <label for="nationality">Nationality</label>
           <select 
             class="form"
-            v-model="profileToUpdate.nationality"
+            v-model="form.nationality"
             name="Nationality"
             id="nationality">
             <option
@@ -46,13 +56,18 @@
               {{ country }}
             </option>
           </select>
+          <div v-if="$v.form.nationality.$error">
+            <span v-if="!$v.form.nationality.required">
+              Nationality is required
+            </span>
+          </div>
         </div>
 
         <div class="field current-visa">
           <label for="current-visa">Current visa</label>
           <select
             class="form" 
-            v-model="profileToUpdate.currentVisa.name"
+            v-model="form.currentVisa.name"
             name="Current Visa"
             id="current-visa">
             <option
@@ -62,33 +77,48 @@
               {{ visa }}
             </option>
           </select>
+          <div v-if="$v.form.currentVisa.name.$error">
+            <span v-if="!$v.form.currentVisa.name.required">
+              Current Visa is required
+            </span>
+          </div>
         </div>
 
         <div class="field visa-dates">
           <div>
             <label for="current-start" class="form-label">Start date</label>
             <input 
-              v-model="profileToUpdate.currentVisa.start"
+              v-model="form.currentVisa.start"
               type="date"
               id="current-start"
               class="form unstyled"
               required>
+            <div v-if="$v.form.currentVisa.start.$error">
+              <span v-if="!$v.form.currentVisa.start.required">
+                Start date is required
+              </span>
+            </div>
           </div>
 
           <div>
             <label for="current-end" class="form-label">End date</label>
             <input 
-              v-model="profileToUpdate.currentVisa.end"
+              v-model="form.currentVisa.end"
               type="date"
               id="current-end"
               class="form unstyled"
               required>
+            <div v-if="$v.form.currentVisa.end.$error">
+              <span v-if="!$v.form.currentVisa.end.required">
+                End date is required
+              </span>
+            </div>
           </div>
         </div>
 
         <div class="save-changes">
           <button
-            @click="submitProfile"
+            @click="onSubmit"
             class="pink">
             Save Changes
           </button> 
@@ -101,6 +131,7 @@
 </template>
 
 <script>
+import { required } from 'vuelidate/lib/validators';
 import arrow from '@/assets/icons/chevron-left-solid.svg';
 
 export default {
@@ -108,7 +139,17 @@ export default {
     return {
       arrow,
       user: this.$store.state.auth.user,
-      birthday: null,
+      form: {
+        birthday: null,
+        age: null,
+        nationality: null,
+        dependants: null,
+        currentVisa: {
+          name: null,
+          start: null,
+          end: null
+        }
+      },
       countries: [
         "Afghanistan",
         "Albania",
@@ -359,7 +400,7 @@ export default {
         // 'Tier 5 Seasonal Worker Visa',
         // 'Tier 5 Youth Mobility Scheme'     
       ],
-      dependants: [
+      dependantsList: [
         'None', 
         'Child / Children', 
         'Partner / Spouse', 
@@ -368,6 +409,30 @@ export default {
       errorMsg: '',
       error: false
     } 
+  },
+  validations: {
+    form: {
+      birthday: {
+        required
+      },
+      dependants: {
+        required
+      },
+      nationality: {
+        required
+      },
+      currentVisa: {
+        name: {
+          required
+        },
+        start: {
+          required
+        },
+        end: {
+          required
+        }
+      }
+    }
   },
   computed: {
     profileToUpdate() { 
@@ -384,17 +449,25 @@ export default {
       this.age = age;
       return age;
     },
+    onSubmit() {
+      this.$v.form.$touch();
+      if(!this.$v.form.$invalid) {
+        this.submitProfile();
+      }
+    },
     submitProfile() {
-      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
-        .then(() => {
-          window.scrollTo(0, 0);
-        })
+      this.profileToUpdate.age = this.form.age;
+      this.profileToUpdate.birthday = this.form.birthday;
+      this.profileToUpdate.nationality = this.form.nationality;
+      this.profileToUpdate.dependants = this.form.dependants;
+      this.profileToUpdate.currentVisa = this.form.currentVisa;
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate);
+      window.scrollTo(0, 0);
     }
   },
   watch: {
-    birthday(date) { 
-      this.profileToUpdate.age = this.calculateAge(new Date(date));
-      this.profileToUpdate.birthday = date;
+    'form.birthday'(date) { 
+      this.form.age = this.calculateAge(new Date(date));
     }
   }
 }

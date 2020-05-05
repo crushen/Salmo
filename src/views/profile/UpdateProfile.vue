@@ -58,7 +58,7 @@
 
         <select
           class="form" 
-          v-model="profileToUpdate.currentVisa"
+          v-model="profileToUpdate.currentVisa.name"
           name="Current Visa">
           <option
             v-for="visa in visas"
