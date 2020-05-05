@@ -7,92 +7,92 @@
       </div>
 
       <div class="container">
-        <div class="field">
-          <input 
-            v-model.trim="form.name"
-            type="text"
-            placeholder="Name"
-            autocomplete="name"
-            class="form">
-          <div v-if="$v.form.name.$error">
-            <span v-if="!$v.form.name.required">
-              Name is required
-            </span>
+        <form @submit.prevent="onSignup">
+          <div class="field">
+            <input 
+              v-model.trim="form.name"
+              type="text"
+              placeholder="Name"
+              autocomplete="name"
+              class="form">
+            <div v-if="$v.form.name.$error">
+              <span v-if="!$v.form.name.required">
+                Name is required
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <input 
-            v-model.trim="form.username"
-            type="text"
-            placeholder="Username"
-            autocomplete="username"
-            class="form">
-          <div v-if="$v.form.username.$error">
-            <span v-if="!$v.form.username.required">
-              Username is required
-            </span>
-            <span 
-              v-if="!$v.form.username.minLength"
-              class="help is-danger">
-              Username should be at least 6 characters
-            </span>
-            <span 
-              v-if="!$v.form.username.maxLength"
-              class="help is-danger">
-              Username should be no more than 10 characters
-            </span>
+          <div class="field">
+            <input 
+              v-model.trim="form.username"
+              type="text"
+              placeholder="Username"
+              autocomplete="username"
+              class="form">
+            <div v-if="$v.form.username.$error">
+              <span v-if="!$v.form.username.required">
+                Username is required
+              </span>
+              <span 
+                v-if="!$v.form.username.minLength"
+                class="help is-danger">
+                Username should be at least 6 characters
+              </span>
+              <span 
+                v-if="!$v.form.username.maxLength"
+                class="help is-danger">
+                Username should be no more than 10 characters
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <input 
-            v-model.trim="form.email"
-            type="email"
-            placeholder="Email"
-            autocomplete="email"
-            class="form">
-          <div v-if="$v.form.email.$error">
-            <span v-if="!$v.form.email.required">
-              Email is required
-            </span>
-            <span v-if="!$v.form.email.email">
-              Email address is not valid
-            </span>
+          <div class="field">
+            <input 
+              v-model.trim="form.email"
+              type="email"
+              placeholder="Email"
+              autocomplete="email"
+              class="form">
+            <div v-if="$v.form.email.$error">
+              <span v-if="!$v.form.email.required">
+                Email is required
+              </span>
+              <span v-if="!$v.form.email.email">
+                Email address is not valid
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div class="field">
-          <input 
-            v-model.trim="form.password"
-            type="password"
-            placeholder="Password"
-            autocomplete="current-password"
-            class="form">
-          <div v-if="$v.form.password.$error">
-            <span v-if="!$v.form.password.required">
-              Password is required
-            </span>
-            <span 
-              v-if="!$v.form.password.minLength"
-              class="help is-danger">
-              Password should be at least 6 characters
-            </span>
+          <div class="field">
+            <input 
+              v-model.trim="form.password"
+              type="password"
+              placeholder="Password"
+              autocomplete="current-password"
+              class="form">
+            <div v-if="$v.form.password.$error">
+              <span v-if="!$v.form.password.required">
+                Password is required
+              </span>
+              <span 
+                v-if="!$v.form.password.minLength"
+                class="help is-danger">
+                Password should be at least 6 characters
+              </span>
+            </div>
           </div>
-        </div>
 
-        <div v-if="error">
-          {{ errorMsg }}
-        </div>
+          <div v-if="error">
+            {{ errorMsg }}
+          </div>
 
-        <div class="button">
-          <button 
-            @click="onSignup"
-            type="button"
-            class="pink">
-            Sign Me Up!
-          </button>
-        </div>
+          <div class="button">
+            <input 
+              type="submit" 
+              value="Sign Me Up!"
+              class="pink">
+          </div>
+        </form>
 
         <div class="log-in">
           <p>Already have an account?</p>

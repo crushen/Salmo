@@ -6,7 +6,9 @@
     <div class="content">
       <h1>Edit profile.</h1>
 
-      <div class="container">
+      <form
+        @submit.prevent="onSubmit" 
+        class="container">
         <input 
           v-model.trim="form.username"
           type="text"
@@ -69,13 +71,12 @@
         </select>
         
         <div class="save-changes">
-          <button
-            @click="onSubmit"
+          <input 
+            type="submit"
+            value="Save Changes"
             class="pink">
-            Save Changes
-          </button> 
         </div>
-      </div>
+      </form>
     </div>
   </section>
 </template>

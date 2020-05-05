@@ -2,7 +2,7 @@
   <section class="content single-page">
     <div>
       <h1>Great to see you!</h1>
-      <form>
+      <form @submit.prevent="onLogin">
         <div class="field">
           <input 
             v-model.trim="form.email"
@@ -48,12 +48,10 @@
         </div>
 
         <div class="button">
-          <button 
-            @click="onLogin"
-            type="button" 
+          <input 
+            type="submit"
+            value="Log In"
             class="pink">
-            Log In
-          </button>
         </div>
       </form>
     </div>
@@ -145,7 +143,7 @@ form {
   margin-top: $spacing*5;
   text-align: center;
 
-  button {
+  input {
     width: 120px;
   }
 }
