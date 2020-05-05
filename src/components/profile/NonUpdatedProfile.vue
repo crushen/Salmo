@@ -4,7 +4,9 @@
       <h1>Complete profile.</h1>
       <h3>Before you can take your first quiz, you'll need to complete your profile.</h3>
 
-      <div class="container">
+      <form 
+        @submit.prevent="onSubmit"
+        class="container">
         <div class="field">
           <label for="dob" class="form-label">Birthday</label>
           <input 
@@ -117,15 +119,14 @@
         </div>
 
         <div class="save-changes">
-          <button
-            @click="onSubmit"
+          <input 
+            type="submit" 
+            value="Save Changes"
             class="pink">
-            Save Changes
-          </button> 
         
           <p>Once you've completed your profile, you'll also gain access to other features such as your personalised quiz and your own Visa Stats and Facts page.</p>
         </div>
-      </div>
+      </form>
     </section>
   </div>
 </template>
@@ -463,6 +464,7 @@ export default {
       this.profileToUpdate.currentVisa = this.form.currentVisa;
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate);
       window.scrollTo(0, 0);
+      // Need to figure out how to wait to scroll until profile has been updated
     }
   },
   watch: {

@@ -36,7 +36,8 @@ a {
 }
 
 // Buttons
-button {
+button,
+input[type="submit"] {
   @include font(16px, 600);
   background: $primary-yellow;
   color: $dark-font;
