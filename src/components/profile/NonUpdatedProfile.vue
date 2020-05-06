@@ -154,12 +154,10 @@
 </template>
 
 <script>
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 
 export default {
   data() {
     return {
-      arrow,
       user: this.$store.state.auth.user,
       form: {
         birthday: null,
@@ -566,10 +564,6 @@ export default {
 
 h3 {
   margin-top: 4vw;
-}
-
-.error {
-  color: red;
 }
 
 .field {

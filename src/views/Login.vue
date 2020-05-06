@@ -11,12 +11,8 @@
             autocomplete="email"
             class="form">
           <div v-if="$v.form.email.$error">
-            <span v-if="!$v.form.email.required">
-              Email is required
-            </span>
-            <span v-if="!$v.form.email.email">
-              Email address is not valid
-            </span>
+            <p v-if="!$v.form.email.required" class="error">Email is required</p>
+            <p v-if="!$v.form.email.email" class="error">Email address is not valid</p>
           </div>
         </div>
 
@@ -28,15 +24,11 @@
             autocomplete="current-password"
             class="form">
           <div v-if="$v.form.password.$error">
-            <span v-if="!$v.form.password.required">
-              Password is required
-            </span>
+            <p v-if="!$v.form.password.required" class="error">Password is required</p>
           </div>
         </div>
 
-        <div v-if="error">
-          {{ errorMsg }}
-        </div>
+        <p v-if="error" class="error">{{ error }}</p>
 
         <div class="forgot-password">
           <router-link
@@ -82,8 +74,7 @@ export default {
         email: '',
         password: ''
       },
-      errorMsg: '',
-      error: false
+      error: '',
     }
   },
   validations: {
@@ -105,18 +96,15 @@ export default {
       }
     },
     handleLogin() {
+      this.error = '';
       this.$store.dispatch('auth/logIn', this.form)
         .then(() => {
           const user = this.$store.state.auth.user;
           this.$router.push({name: 'profile', params: {username: user.profile.username}});
           alert('You have logged in');
         })
-        .catch(errorMessage => {
-          this.errorMsg = errorMessage;
-          this.error = true;
-          // setTimeout(() => {
-          //   this.error = false;
-          // }, 3000);
+        .catch(() => {
+          this.error = 'Invalid email address or password';
         })
     }
   }

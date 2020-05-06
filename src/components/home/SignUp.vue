@@ -16,9 +16,7 @@
               autocomplete="name"
               class="form">
             <div v-if="$v.form.name.$error">
-              <span v-if="!$v.form.name.required">
-                Name is required
-              </span>
+              <p v-if="!$v.form.name.required" class="error">Name is required</p>
             </div>
           </div>
 
@@ -30,19 +28,9 @@
               autocomplete="username"
               class="form">
             <div v-if="$v.form.username.$error">
-              <span v-if="!$v.form.username.required">
-                Username is required
-              </span>
-              <span 
-                v-if="!$v.form.username.minLength"
-                class="help is-danger">
-                Username should be at least 6 characters
-              </span>
-              <span 
-                v-if="!$v.form.username.maxLength"
-                class="help is-danger">
-                Username should be no more than 10 characters
-              </span>
+              <p v-if="!$v.form.username.required" class="error">Username is required</p>
+              <p v-if="!$v.form.username.minLength" class="error">Username should be at least 6 characters</p>
+              <p v-if="!$v.form.username.maxLength" class="error">Username should be no more than 10 characters</p>
             </div>
           </div>
 
@@ -54,12 +42,8 @@
               autocomplete="email"
               class="form">
             <div v-if="$v.form.email.$error">
-              <span v-if="!$v.form.email.required">
-                Email is required
-              </span>
-              <span v-if="!$v.form.email.email">
-                Email address is not valid
-              </span>
+              <p v-if="!$v.form.email.required" class="error">Email is required</p>
+              <p v-if="!$v.form.email.email" class="error">Email address is not valid</p>
             </div>
           </div>
 
@@ -71,20 +55,12 @@
               autocomplete="current-password"
               class="form">
             <div v-if="$v.form.password.$error">
-              <span v-if="!$v.form.password.required">
-                Password is required
-              </span>
-              <span 
-                v-if="!$v.form.password.minLength"
-                class="help is-danger">
-                Password should be at least 6 characters
-              </span>
+              <p v-if="!$v.form.password.required" class="error">Password is required</p>
+              <p v-if="!$v.form.password.minLength" class="error">Password should be at least 6 characters</p>
             </div>
           </div>
 
-          <div v-if="error">
-            {{ errorMsg }}
-          </div>
+          <p v-if="error" class="error">{{ error }}</p>
 
           <div class="button">
             <input 
@@ -120,8 +96,7 @@ export default {
         email: '',
         password: ''
       },
-      errorMsg: '',
-      error: false
+      error: ''
     }
   },
   validations: {
@@ -152,6 +127,7 @@ export default {
       }
     },
     handleSignup() {
+      this.error = '';
       this.$store.dispatch('auth/signUp', this.form)
         .then(async user => {
           // waits for user profile to be created before  executing the rest of the function
@@ -169,11 +145,7 @@ export default {
           this.$store.dispatch('auth/sendEmailVerification')
         })
         .catch(errorMessage => {
-          this.errorMsg = errorMessage;
-          this.error = true;
-          setTimeout(() => {
-            this.error = false;
-          }, 3000);
+          this.error = errorMessage;
         })
     }
   }

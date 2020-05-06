@@ -1,97 +1,198 @@
 <template>
-  <section id="update-profile">
-    <router-link :to="{ name: 'profile', params: { username: user.profile.username } }">
-      <img :src="arrow" class="arrow">
-    </router-link>
-    <div class="content">
+  <div>
+    <section class="content">
+      <router-link :to="{ name: 'profile', params: { username: user.username } }">
+        <img :src="arrow" class="arrow">
+      </router-link>
+
       <h1>Edit profile.</h1>
 
-      <form
-        @submit.prevent="onSubmit" 
+      <form 
+        @submit.prevent="validateForm"
         class="container">
-        <input 
-          v-model.trim="form.username"
-          type="text"
-          placeholder="Username"
-          autocomplete="username"
-          class="form">
-          <div v-if="$v.form.username.$error">
-            <span 
-              v-if="!$v.form.username.minLength"
-              class="help is-danger">
-              Username should be at least 6 characters
-            </span>
-            <span 
-              v-if="!$v.form.username.maxLength"
-              class="help is-danger">
-              Username should be no more than 10 characters
-            </span>
+
+        <div class="field">
+          <label for="dob" class="form-label">Username</label>
+          <input 
+            v-model.trim="user.username"
+            type="text"
+            placeholder="Username"
+            autocomplete="username"
+            class="form">
+          <div v-if="$v.user.username.$error">
+            <p v-if="!$v.user.username.required" class="error">Username is required</p>
+            <p v-if="!$v.user.username.minLength" class="error">Username should be at least 6 characters</p>
+            <p v-if="!$v.user.username.maxLength" class="error">Username should be no more than 10 characters</p>
+          </div>
+        </div>
+
+
+        <div class="field">
+          <label for="dob" class="form-label">Birthday</label>
+          <input 
+            v-model="user.birthday"
+            type="date" 
+            placeholder="Birthday"
+            id="dob"
+            class="form unstyled">
+            <p v-if="errors.birthday" class="error">Birthday is required</p>
+        </div>
+
+        <div class="field">
+          <label for="dependants">Dependants</label>
+          <select 
+            v-model="user.dependants"
+            name="Dependants"
+            id="dependants"
+            class="form">
+            <option
+              v-for="dependant in dependantsList"
+              :key="dependant"
+              :value="dependant">
+              {{ dependant }}
+            </option>
+          </select>
+          <p v-if="errors.dependants" class="error">Dependants is required</p>
+        </div>
+
+        <div class="field">
+          <label for="nationality">Nationality</label>
+          <select 
+            class="form"
+            v-model="user.nationality"
+            name="Nationality"
+            id="nationality">
+            <option
+              v-for="country in countries"
+              :key="country"
+              :value="country">
+              {{ country }}
+            </option>
+          </select>
+          <p v-if="errors.nationality" class="error">Nationality is required</p>
+        </div>
+
+        <div class="field current-visa">
+          <label for="current-visa">Current visa</label>
+          <select
+            class="form" 
+            v-model="user.currentVisa.name"
+            name="Current Visa"
+            id="current-visa">
+            <option
+              v-for="visa in visas"
+              :key="visa"
+              :value="visa">
+              {{ visa }}
+            </option>
+          </select>
+        </div>
+
+        <div class="field visa-dates">
+          <div>
+            <label for="current-start" class="form-label">Start date</label>
+            <input 
+              v-model="user.currentVisa.start"
+              type="date"
+              id="current-start"
+              class="form unstyled">
           </div>
 
-        <input 
-          v-model="birthday"
-          type="date" 
-          class="form unstyled"
-          required>
+          <div>
+            <label for="current-end" class="form-label">End date</label>
+            <input 
+              v-model="user.currentVisa.end"
+              type="date"
+              id="current-end"
+              class="form unstyled">
+          </div>
+        </div>
+        <p v-if="errors.currentVisa.required" class="error">Current visa name and dates are required</p>
+        <p v-if="errors.currentVisa.dates" class="error">Current visa start date can't be after end date</p>
 
-        <select 
-          v-model="profileToUpdate.dependants"
-          name="Dependants"
-          class="form">
-          <option
-            v-for="dependant in dependants"
-            :key="dependant"
-            :value="dependant">
-            {{ dependant }}
-          </option>
-        </select>
+        <!-- <div
+          v-for="(visa, index) in form.pastVisas"
+          :key="index">
+          <div class="field past-visa">
+            <label :for="`past-visa-${index}`">Past visa</label>
+            <select
+              class="form" 
+              v-model="visa.name"
+              name="Current Visa"
+              :id="`past-visa-${index}`">
+              <option
+                v-for="item in visas"
+                :key="item"
+                :value="item">
+                {{ item }}
+              </option>
+            </select>
+          </div>
 
-        <select 
-          class="form"
-          v-model="profileToUpdate.nationality"
-          name="Nationality">
-          <option
-            v-for="country in countries"
-            :key="country"
-            :value="country">
-            {{ country }}
-          </option>
-        </select>
+          <div class="field visa-dates">
+            <div>
+              <label :for="`past-start-${index}`" class="form-label">Start date</label>
+              <input 
+                v-model="visa.start"
+                type="date"
+                :id="`past-start-${index}`"
+                class="form unstyled">
+            </div>
 
-        <select
-          class="form" 
-          v-model="profileToUpdate.currentVisa.name"
-          name="Current Visa">
-          <option
-            v-for="visa in visas"
-            :key="visa"
-            :value="visa">
-            {{ visa }}
-          </option>
-        </select>
-        
+            <div>
+              <label :for="`current-end-${index}`" class="form-label">End date</label>
+              <input
+                v-model="visa.end"
+                type="date"
+                :id="`current-end-${index}`"
+                class="form unstyled">
+            </div>
+          </div>
+        </div>
+        <p v-if="errors.pastVisas.required" class="error">Past visa name and dates are required</p>
+        <p v-if="errors.pastVisas.dates" class="error">Past visa start date can't be after end date</p>
+
+        <button 
+          @click="addPastVisa"
+          class="tertiary"
+          type="button">
+          + Add Past Visa
+        </button> -->
+
         <div class="save-changes">
           <input 
-            type="submit"
+            type="submit" 
             value="Save Changes"
             class="pink">
         </div>
       </form>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
 import arrow from '@/assets/icons/chevron-left-solid.svg';
-import { minLength, maxLength } from 'vuelidate/lib/validators';
+import { required, email, minLength, maxLength } from 'vuelidate/lib/validators';
 
 export default {
   data() {
     return {
       arrow,
-      user: this.$store.state.auth.user,
-      birthday: this.$store.state.auth.user.profile.birthday,
+      user: this.$store.state.auth.user.profile,
       finished: false,
+      errors: {
+        birthday: false,
+        nationality: false,
+        dependants: false,
+        currentVisa: {
+          required: false,
+          dates: false,
+        },
+        pastVisas: {
+          required: false,
+          dates: false
+        } 
+      },
       countries: [
         "Afghanistan",
         "Albania",
@@ -342,22 +443,18 @@ export default {
         // 'Tier 5 Seasonal Worker Visa',
         // 'Tier 5 Youth Mobility Scheme'     
       ],
-      dependants: [
+      dependantsList: [
         'None', 
         'Child / Children', 
         'Partner / Spouse', 
         'Elderly person'
-      ],
-      form: {
-        username: this.$store.state.auth.user.profile.username
-      },
-      errorMsg: '',
-      error: false
+      ]
     } 
   },
   validations: {
-    form: {
+    user: {
       username: {
+        required,
         minLength: minLength(6),
         maxLength: maxLength(10)
       }
@@ -365,10 +462,96 @@ export default {
   },
   computed: {
     profileToUpdate() { 
-      return {...this.user.profile} 
+      return {...this.user} 
+    },
+    currentVisaDatesError() {
+      if(this.user.currentVisa.end < this.user.currentVisa.start) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    pastVisaDatesError() {
+      const errors = [];
+      const dates = this.user.pastVisas.map(({ end, start }) => [end, start]);
+      // Loop through past visas array
+      dates.forEach(date => {
+        // If any start date is larger than end date, error is true and pushed to array
+        if(date[0] < date[1]) {
+          errors.push(true);
+        }
+      })
+      // If there are any errors, return true
+      if(errors.includes(true)) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   methods: {
+    validateForm() {
+      this.resetErrors();
+      this.$v.user.$touch();
+      // Add errors for invalid fields
+      if(!this.user.birthday) {
+        this.errors.birthday = true;
+      }
+      if(!this.user.nationality) {
+        this.errors.nationality = true;
+      }
+      if(!this.user.dependants) {
+        this.errors.dependants = true;
+      }
+      if(Object.values(this.user.currentVisa).some(val => (val === null || val === ''))) {
+        this.errors.currentVisa.required = true;
+      }
+      if(this.currentVisaDatesError) {
+        this.errors.currentVisa.dates = true;
+      }
+      if(this.user.pastVisas.length) {
+        const array = this.user.pastVisas.flatMap(({ name, start, end }) => [name, start, end]);
+        if(array.some(val => (val === null || val === ''))) {
+          this.errors.pastVisas.required = true;
+        }
+        if(this.pastVisaDatesError) {
+          this.errors.pastVisas.dates = true;
+        }
+      }
+      // If there's no past visa added and other fields complete - submit form
+      if(this.user.birthday && this.user.age && this.user.nationality && this.user.dependants && !Object.values(this.user.currentVisa).some(val => (val === null || val === '')) && !this.errors.currentVisa.dates) {
+        if(!this.user.pastVisas.length) {
+          if(!this.$v.user.$invalid) {
+            this.submitProfile();
+          }
+        } else {
+          // If there is past visa(s) added, check that all fields are complete
+          const array = this.user.pastVisas.flatMap(({ name, start, end }) => [name, start, end]);
+          if(!array.some(val => (val === null || val === '')) && !this.errors.pastVisas.dates) {
+            if(!this.$v.user.$invalid) {
+              this.submitProfile();
+            }
+          }
+        }
+      }
+    },
+    submitProfile() {
+      this.finished = true;
+      this.$store.dispatch('auth/updateProfile', this.user);
+      this.$router.push({ name: 'profile', params: { username: this.user.username }});
+    },
+    resetErrors() {
+      this.errors.birthday = false;
+      this.errors.nationality = false;
+      this.errors.dependants = false;
+      this.errors.currentVisa.required = false;
+      this.errors.currentVisa.dates = false;
+      this.errors.pastVisas.required = false;
+      this.errors.pastVisas.dates = false;
+    },
+    addPastVisa() {
+      this.form.pastVisas.push({name: null, start: null, end: null});
+    },
     calculateAge(date) {
       let today = new Date(),
           birthDate = new Date(date),
@@ -377,28 +560,11 @@ export default {
       if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
       this.age = age;
       return age;
-    },
-    onSubmit() {
-      this.$v.form.$touch();
-      if(!this.$v.form.$invalid) {
-        this.submitProfile();
-      }
-    },
-    submitProfile() {
-      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
-        .then(() => {
-          this.finished = true;
-          this.$router.push({ name: 'profile', params: { username: this.user.profile.username } });
-        })
     }
   },
   watch: {
-    birthday(date) { 
-      this.profileToUpdate.age = this.calculateAge(new Date(date));
-      this.profileToUpdate.birthday = date;
-    },
-    'form.username'(username) {
-      this.profileToUpdate.username = username;
+    'user.birthday'(date) { 
+      this.user.age = this.calculateAge(new Date(date));
     }
   },
   beforeRouteLeave(to, from, next) {
@@ -417,27 +583,48 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.arrow {
-  width: 22px;
-  position: absolute;
-  top: 24px;
-  left: 6vw;
-}
-
-#update-profile {
-  padding: $spacing*10 0 $spacing*6;
+.content {
+  padding: $spacing*12 0;
 }
 
 .container {
   margin-top: $spacing*5;
 }
 
-.form {
-  margin-top: $spacing*3;
+h3 {
+  margin-top: 4vw;
+}
+
+.field {
+  &:not(:first-of-type) {
+    padding-top: $spacing*2;
+  }
+
+  &.current-visa {
+    padding-top: $spacing*7;
+  }
+}
+
+.visa-dates {
+  display: flex;
+  justify-content: space-between;
+}
+
+.past-visa {
+  margin-top: $spacing*7;
 }
 
 .save-changes {
   margin-top: $spacing*5;
   text-align: center;
+}
+
+.text {
+  margin-top: $spacing*5;
+}
+
+.tertiary {
+  font-size: 18px;
+  margin-top: $spacing*3;
 }
 </style>
