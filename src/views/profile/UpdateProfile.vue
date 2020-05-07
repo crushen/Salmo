@@ -14,15 +14,15 @@
         <div class="field">
           <label for="dob" class="form-label">Username</label>
           <input 
-            v-model.trim="user.username"
+            v-model.trim="profileToUpdate.username"
             type="text"
             placeholder="Username"
             autocomplete="username"
             class="form">
-          <div v-if="$v.user.username.$error">
-            <p v-if="!$v.user.username.required" class="error">Username is required</p>
-            <p v-if="!$v.user.username.minLength" class="error">Username should be at least 6 characters</p>
-            <p v-if="!$v.user.username.maxLength" class="error">Username should be no more than 10 characters</p>
+          <div v-if="$v.profileToUpdate.username.$error">
+            <p v-if="!$v.profileToUpdate.username.required" class="error">Username is required</p>
+            <p v-if="!$v.profileToUpdate.username.minLength" class="error">Username should be at least 6 characters</p>
+            <p v-if="!$v.profileToUpdate.username.maxLength" class="error">Username should be no more than 10 characters</p>
           </div>
         </div>
 
@@ -30,7 +30,7 @@
         <div class="field">
           <label for="dob" class="form-label">Birthday</label>
           <input 
-            v-model="user.birthday"
+            v-model="profileToUpdate.birthday"
             type="date" 
             placeholder="Birthday"
             id="dob"
@@ -41,7 +41,7 @@
         <div class="field">
           <label for="dependants">Dependants</label>
           <select 
-            v-model="user.dependants"
+            v-model="profileToUpdate.dependants"
             name="Dependants"
             id="dependants"
             class="form">
@@ -59,7 +59,7 @@
           <label for="nationality">Nationality</label>
           <select 
             class="form"
-            v-model="user.nationality"
+            v-model="profileToUpdate.nationality"
             name="Nationality"
             id="nationality">
             <option
@@ -76,7 +76,7 @@
           <label for="current-visa">Current visa</label>
           <select
             class="form" 
-            v-model="user.currentVisa.name"
+            v-model="profileToUpdate.currentVisa.name"
             name="Current Visa"
             id="current-visa">
             <option
@@ -92,7 +92,7 @@
           <div>
             <label for="current-start" class="form-label">Start date</label>
             <input 
-              v-model="user.currentVisa.start"
+              v-model="profileToUpdate.currentVisa.start"
               type="date"
               id="current-start"
               class="form unstyled">
@@ -101,7 +101,7 @@
           <div>
             <label for="current-end" class="form-label">End date</label>
             <input 
-              v-model="user.currentVisa.end"
+              v-model="profileToUpdate.currentVisa.end"
               type="date"
               id="current-end"
               class="form unstyled">
@@ -110,8 +110,8 @@
         <p v-if="errors.currentVisa.required" class="error">Current visa name and dates are required</p>
         <p v-if="errors.currentVisa.dates" class="error">Current visa start date can't be after end date</p>
 
-        <!-- <div
-          v-for="(visa, index) in form.pastVisas"
+        <div
+          v-for="(visa, index) in profileToUpdate.pastVisas"
           :key="index">
           <div class="field past-visa">
             <label :for="`past-visa-${index}`">Past visa</label>
@@ -157,7 +157,7 @@
           class="tertiary"
           type="button">
           + Add Past Visa
-        </button> -->
+        </button>
 
         <div class="save-changes">
           <input 
@@ -180,6 +180,7 @@ export default {
       arrow,
       user: this.$store.state.auth.user.profile,
       finished: false,
+      newVisaAdded: false,
       errors: {
         birthday: false,
         nationality: false,
@@ -452,7 +453,7 @@ export default {
     } 
   },
   validations: {
-    user: {
+    profileToUpdate: {
       username: {
         required,
         minLength: minLength(6),
@@ -465,7 +466,7 @@ export default {
       return {...this.user} 
     },
     currentVisaDatesError() {
-      if(this.user.currentVisa.end < this.user.currentVisa.start) {
+      if(this.profileToUpdate.currentVisa.end < this.profileToUpdate.currentVisa.start) {
         return true;
       } else {
         return false;
@@ -473,7 +474,7 @@ export default {
     },
     pastVisaDatesError() {
       const errors = [];
-      const dates = this.user.pastVisas.map(({ end, start }) => [end, start]);
+      const dates = this.profileToUpdate.pastVisas.map(({ end, start }) => [end, start]);
       // Loop through past visas array
       dates.forEach(date => {
         // If any start date is larger than end date, error is true and pushed to array
@@ -492,25 +493,25 @@ export default {
   methods: {
     validateForm() {
       this.resetErrors();
-      this.$v.user.$touch();
+      this.$v.profileToUpdate.$touch();
       // Add errors for invalid fields
-      if(!this.user.birthday) {
+      if(!this.profileToUpdate.birthday) {
         this.errors.birthday = true;
       }
-      if(!this.user.nationality) {
+      if(!this.profileToUpdate.nationality) {
         this.errors.nationality = true;
       }
-      if(!this.user.dependants) {
+      if(!this.profileToUpdate.dependants) {
         this.errors.dependants = true;
       }
-      if(Object.values(this.user.currentVisa).some(val => (val === null || val === ''))) {
+      if(Object.values(this.profileToUpdate.currentVisa).some(val => (val === null || val === ''))) {
         this.errors.currentVisa.required = true;
       }
       if(this.currentVisaDatesError) {
         this.errors.currentVisa.dates = true;
       }
-      if(this.user.pastVisas.length) {
-        const array = this.user.pastVisas.flatMap(({ name, start, end }) => [name, start, end]);
+      if(this.profileToUpdate.pastVisas.length) {
+        const array = this.profileToUpdate.pastVisas.flatMap(({ name, start, end }) => [name, start, end]);
         if(array.some(val => (val === null || val === ''))) {
           this.errors.pastVisas.required = true;
         }
@@ -519,16 +520,16 @@ export default {
         }
       }
       // If there's no past visa added and other fields complete - submit form
-      if(this.user.birthday && this.user.age && this.user.nationality && this.user.dependants && !Object.values(this.user.currentVisa).some(val => (val === null || val === '')) && !this.errors.currentVisa.dates) {
-        if(!this.user.pastVisas.length) {
-          if(!this.$v.user.$invalid) {
+      if(this.profileToUpdate.birthday && this.profileToUpdate.age && this.profileToUpdate.nationality && this.profileToUpdate.dependants && !Object.values(this.profileToUpdate.currentVisa).some(val => (val === null || val === '')) && !this.errors.currentVisa.dates) {
+        if(!this.profileToUpdate.pastVisas.length) {
+          if(!this.$v.profileToUpdate.$invalid) {
             this.submitProfile();
           }
         } else {
           // If there is past visa(s) added, check that all fields are complete
-          const array = this.user.pastVisas.flatMap(({ name, start, end }) => [name, start, end]);
+          const array = this.profileToUpdate.pastVisas.flatMap(({ name, start, end }) => [name, start, end]);
           if(!array.some(val => (val === null || val === '')) && !this.errors.pastVisas.dates) {
-            if(!this.$v.user.$invalid) {
+            if(!this.$v.profileToUpdate.$invalid) {
               this.submitProfile();
             }
           }
@@ -537,8 +538,8 @@ export default {
     },
     submitProfile() {
       this.finished = true;
-      this.$store.dispatch('auth/updateProfile', this.user);
-      this.$router.push({ name: 'profile', params: { username: this.user.username }});
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate);
+      this.$router.push({ name: 'profile', params: { username: this.profileToUpdate.username }});
     },
     resetErrors() {
       this.errors.birthday = false;
@@ -550,7 +551,11 @@ export default {
       this.errors.pastVisas.dates = false;
     },
     addPastVisa() {
-      this.form.pastVisas.push({name: null, start: null, end: null});
+      this.newVisaAdded = true;
+      // Get number of orig past visas
+      // If page leave whilst newVisaAdded = true, remove any new visas added
+      // Change newVisasAdded to fase on submit
+      this.profileToUpdate.pastVisas.push({name: null, start: null, end: null});
     },
     calculateAge(date) {
       let today = new Date(),
@@ -563,8 +568,8 @@ export default {
     }
   },
   watch: {
-    'user.birthday'(date) { 
-      this.user.age = this.calculateAge(new Date(date));
+    'profileToUpdate.birthday'(date) { 
+      this.profileToUpdate.age = this.calculateAge(new Date(date));
     }
   },
   beforeRouteLeave(to, from, next) {
