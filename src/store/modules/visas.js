@@ -60,12 +60,13 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'Switch', status: false },
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
+        { name: 'Study', status: 'maybe' },
         { name: 'Dependants', status: true },
-        { name: 'Extend', status: true },
-        { name: 'Study', status: 'maybe' }
+        { name: 'Switch', status: true },
+        { name: 'Extend', status: true }
+        
       ]
     }
   },
@@ -99,12 +100,12 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'Switch', status: false },
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
-        { name: 'Dependants', status: false },
-        { name: 'Extend', status: true },
-        { name: 'Study', status: true }
+        { name: 'Study', status: 'maybe' },
+        { name: 'Dependants', status: true },
+        { name: 'Switch', status: false },
+        { name: 'Extend', status: true }
       ]
     }
   },
@@ -123,12 +124,12 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'Switch', status: false },
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
-        { name: 'Dependants', status: false },
-        { name: 'Extend', status: true },
-        { name: 'Study', status: true }
+        { name: 'Study', status: 'maybe' },
+        { name: 'Dependants', status: true },
+        { name: 'Switch', status: false },
+        { name: 'Extend', status: true }
       ]
     }
   },
@@ -172,12 +173,12 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'Switch', status: false },
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
-        { name: 'Dependants', status: false },
-        { name: 'Extend', status: true },
-        { name: 'Study', status: true }
+        { name: 'Study', status: 'maybe' },
+        { name: 'Dependants', status: true },
+        { name: 'Switch', status: false },
+        { name: 'Extend', status: true }
       ]
     }
   }

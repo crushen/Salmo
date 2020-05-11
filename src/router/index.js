@@ -6,6 +6,7 @@ import Signup from '@/views/Signup';
 import ForgotPassword from '@/views/ForgotPassword';
 import Profile from '@/views/profile/Profile';
 import UpdateProfile from '@/views/profile/UpdateProfile';
+import VisaPlanner from '@/views/profile/VisaPlanner';
 import Questionnaire from '@/views/Questionnaire';
 import VisaInfo from '@/views/visa/VisaInfo';
 import NonEU from '@/views/visa/NonEU';
@@ -54,6 +55,12 @@ const routes = [
     path: '/profile/:username/update', 
     name: 'update-profile',
     component: UpdateProfile,
+    meta: { onlyAuthUser: true }
+  },
+  { 
+    path: '/profile/:username/visa-planner', 
+    name: 'visa-planner',
+    component: VisaPlanner,
     meta: { onlyAuthUser: true }
   },
   { 

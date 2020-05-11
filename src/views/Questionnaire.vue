@@ -4,7 +4,7 @@
     <div v-if="user.profile.age">
       <div v-if="introStage">
         <div v-if="this.user.profile.currentVisa !== 'None'">
-          <p>This questionnaire will be specific to your current visa - <strong>{{ this.user.profile.currentVisa }}</strong></p>
+          <p>This questionnaire will be specific to your current visa - <strong>{{ this.user.profile.currentVisa.name }}</strong></p>
           <p>Click the button to continue, or <router-link :to="{name: 'profile'}">update current visa here.</router-link></p>
         </div>
         <button @click="startQuestionnaire">

@@ -40,7 +40,12 @@
         </div>
         <div class="placeholder-img"></div>
         <div class="button">
-          <button class="pink">Visa Planner</button>
+          <router-link
+            :to="{name: 'visa-planner', params: {username: user.profile.username}}"
+            tag="button"
+            class="pink">
+            Visa Planner
+          </router-link>
         </div>
       </div>
     </section>

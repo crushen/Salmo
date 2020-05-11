@@ -336,7 +336,7 @@ var _ = require('lodash');
 const questions = [
   // GENERAL STUDENT
   {
-    visa: 'Tier 4 General Student Visa',
+    visa: 'Tier 4 General Student',
     questions: [
       {
         question: 'Which best describes why you would like to remain in the UK?',
@@ -782,7 +782,7 @@ export default {
   },
   actions: {
     getQuestions(context) {
-      const userCurrentVisa = context.rootState.auth.user.profile.currentVisa;
+      const userCurrentVisa = context.rootState.auth.user.profile.currentVisa.name;
       context.commit('setQuestions', userCurrentVisa);
     },
     getResults(context, results) {

@@ -1,44 +1,42 @@
 <template>
-  <div>
-    <div class="card">
-      <div class="title">
-        <slot 
-          v-if="$slots.quickTip"
-          name="quickTip"/>
-        <h3>{{ visa.name }}</h3>
-      </div>
-      <div class="body">
-        <p>{{ visa.card.subTitle }}</p>
+  <div class="card">
+    <div class="title">
+      <slot 
+        v-if="$slots.quickTip"
+        name="quickTip"/>
+      <h3>{{ visa.name }}</h3>
+    </div>
+    <div class="body">
+      <p>{{ visa.card.subTitle }}</p>
 
-        <div class="checklist">
-          <!-- <div class="item">
-            <div 
-              class="inner"
-              :style="this.switch ? {opacity: 1} : {opacity: 0.5}">
-              <img :src="this.switch ? check : cross" alt="tick" class="icon">
-              <p>Switch</p>
-            </div>
-          </div> -->
-          <div
-            v-for="item in checklist"
-            :key="item.name" 
-            class="item"
-            :style="item.icon === check ? {opacity: 1} : {opacity: 0.5}">
-            <div class="inner">
-              <img 
-                :src="item.icon"
-                class="icon">
-              <p>{{ item.name }}</p>
-            </div>
+      <div class="checklist">
+        <!-- <div class="item">
+          <div 
+            class="inner"
+            :style="this.switch ? {opacity: 1} : {opacity: 0.5}">
+            <img :src="this.switch ? check : cross" alt="tick" class="icon">
+            <p>Switch</p>
+          </div>
+        </div> -->
+        <div
+          v-for="item in checklist"
+          :key="item.name" 
+          class="item"
+          :style="item.icon === check ? {opacity: 1} : {opacity: 0.5}">
+          <div class="inner">
+            <img 
+              :src="item.icon"
+              class="icon">
+            <p>{{ item.name }}</p>
           </div>
         </div>
-
-        <router-link
-          tag="button"
-          :to="{ name: 'visa-page', params: { slug: visa.slug } }">
-          Tell Me More!
-        </router-link>
       </div>
+
+      <router-link
+        tag="button"
+        :to="{ name: 'visa-page', params: { slug: visa.slug } }">
+        Tell Me More!
+      </router-link>
     </div>
   </div>
 </template>
