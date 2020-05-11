@@ -11,6 +11,7 @@
       <div>
         <p>It's best to start preparing from</p>
         <p class="date">{{ prepDate }}</p>
+        
       </div>
     </div>
   </div>
