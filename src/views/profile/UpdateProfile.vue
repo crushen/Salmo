@@ -181,6 +181,7 @@ export default {
       user: this.$store.state.auth.user.profile,
       finished: false,
       newVisaAdded: false,
+      currentPastVisas: null,
       errors: {
         birthday: false,
         nationality: false,
@@ -537,6 +538,7 @@ export default {
       }
     },
     submitProfile() {
+      this.newVisaAdded = false;
       this.finished = true;
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate);
       this.$router.push({ name: 'profile', params: { username: this.profileToUpdate.username }});
@@ -552,9 +554,6 @@ export default {
     },
     addPastVisa() {
       this.newVisaAdded = true;
-      // Get number of orig past visas
-      // If page leave whilst newVisaAdded = true, remove any new visas added
-      // Change newVisasAdded to fase on submit
       this.profileToUpdate.pastVisas.push({name: null, start: null, end: null});
     },
     calculateAge(date) {
@@ -572,13 +571,28 @@ export default {
       this.profileToUpdate.age = this.calculateAge(new Date(date));
     }
   },
+  mounted() {
+    this.currentPastVisas = this.profileToUpdate.pastVisas.length;
+  },
   beforeRouteLeave(to, from, next) {
     if(this.finished) {
       next();
     } else {
-      const confirmLeave = confirm('Are you sure? Your progress will be lost');
-      if(confirmLeave) {
-        next();
+      // If new visas added but not submitted, remove from state
+      if(this.newVisaAdded) {
+        const removeNumber = this.profileToUpdate.pastVisas.length - this.currentPastVisas;
+        for(let i = 0; i < removeNumber; i++) {
+          this.profileToUpdate.pastVisas.pop();
+        }
+        const confirmLeave = confirm('Are you sure? Your progress will be lost');
+        if(confirmLeave) {
+          next();
+        }
+      } else {
+        const confirmLeave = confirm('Are you sure? Your progress will be lost');
+        if(confirmLeave) {
+          next();
+        }
       }
     }
   }
