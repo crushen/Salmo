@@ -3,7 +3,7 @@
     <section class="welcome">
       <div class="content">
         <div class="placeholder-image"></div>
-        <h2 class="header">Welcome back, {{ user.profile.firstName }}.</h2>
+        <h2 class="header">Welcome back, {{ user.profile.name.split(' ')[0] }}.</h2>
       </div>
     </section>
 
