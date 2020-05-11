@@ -27,7 +27,7 @@
       <p>Make sure your profile is accurate to help you calculate your future plans.</p>
       <p>Below are seom features which should help you work through your current visa.</p>
 
-      <visa-dates-card class="dates-card" />
+      <visa-dates-card class="dates-card" :user="user" />
 
       <pr-calculator />
     </section>
