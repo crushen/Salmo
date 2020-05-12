@@ -9,11 +9,15 @@ exports.addResultsToProfile = functions.firestore
   .document('questionnaireResults/{resultsId}')
   .onCreate((change, context) => {
     const addedResults = change.data(); // change.data() = access data from the questionnaireResults
-    const result = {...addedResults}
+    const result = {...addedResults};
+    const checklist = docChecklist.filter(item => item.name === result.recommendedVisa[0]);
     result.id = context.params.resultsId;
     db.collection('profiles')
       .doc(addedResults.user.id)
       .update({
-        questionnaireResults: admin.firestore.FieldValue.arrayUnion(result)
+        questionnaireResults: admin.firestore.FieldValue.arrayUnion(result),
+        favoriteVisa: {
+          name: result.recommendedVisa[0]
+        }
       })
   })
