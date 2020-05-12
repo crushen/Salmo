@@ -185,40 +185,40 @@ const visas = [
 ]
 
 const documentChecklist = [
- {
-   name: 'Tier 1 Investor',
-   checklist: [
-    { 
-      label: 'Current passport (or travel documentation with blank page)',
-      checked: false
-    },
-    { 
-      label: 'TB test results',
-      checked: false
-    },
-    { 
-      label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-      checked: false
-    }
-  ]
- },
- {
-  name: 'Tier 4 Child Student',
-  checklist: [
-   { 
-     label: 'Current passport (or travel documentation with blank page)',
-     checked: false
-   },
-   { 
-     label: 'TB test results',
-     checked: false
-   },
-   { 
-     label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-     checked: false
-   }
- ]
-}
+  {
+    name: 'Tier 1 Investor',
+    checklist: [
+      { 
+        label: 'Current passport (or travel documentation with blank page)',
+        checked: false
+      },
+      { 
+        label: 'TB test results',
+        checked: false
+      },
+      { 
+        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+        checked: false
+      }
+    ]
+  },
+  {
+    name: 'Tier 4 Child Student',
+    checklist: [
+      { 
+        label: 'Current passport (or travel documentation with blank page)',
+        checked: false
+      },
+      { 
+        label: 'TB test results',
+        checked: false
+      },
+      { 
+        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+        checked: false
+      }
+    ]
+  }
 ]
 
 export default {
