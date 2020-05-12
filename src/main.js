@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import Vuelidate from 'vuelidate';
 import VCalendar from 'v-calendar';
+import PrettyCheckbox from 'pretty-checkbox-vue';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -11,6 +12,7 @@ import 'firebase/auth';
 Vue.config.productionTip = false;
 Vue.use(Vuelidate);
 Vue.use(VCalendar);
+Vue.use(PrettyCheckbox);
 
 let app;
 firebase.auth().onAuthStateChanged(async user => {
