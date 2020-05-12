@@ -27,25 +27,21 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import prettyCheck from 'pretty-checkbox-vue/check';
 
 export default {
   props: {
-    visa: { required: true, type: Object }
+    visa: { required: true, type: Object },
+    docChecklist: { required: true, type: Object }
   },
   components: {
     prettyCheck
   },
   computed: {
-    ...mapState('visas', ['documentChecklist']),
-    docChecklist() {
-      if(this.visa) {
-        return this.documentChecklist.filter(item => item.name === this.visa.name)[0];
-      } else {
-        return false;
-      }
-    }
+
+  },
+  mounted() {
+
   }
 }
 </script>

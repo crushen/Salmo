@@ -10,11 +10,9 @@
       <section class="results">
         <p class="title">Here's your favourite visa:</p>
 
-        <visa-card
-          :key="topResult.name"
-          :visa="topResult">
+        <visa-card :visa="faveVisa">
           <template #quickTip>
-            <quick-tip :visa="topResult"/>
+            <quick-tip :visa="faveVisa"/>
           </template>
         </visa-card>
 
@@ -32,13 +30,15 @@
         <p class="emphasis">These tools are based off your current favourite visa, so be sure to keep it up to date!</p>
 
         <doc-checklist 
-          :visa="topResult"/>
+          :visa="faveVisa"
+          :docChecklist="user.favoriteVisa"/>
       </section>
     </section>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import arrow from '@/assets/icons/chevron-left-solid.svg';
 import visaCard from '@/components/visa/VisaCard';
 import quickTip from '@/components/visa/QuickTip';
@@ -59,16 +59,18 @@ export default {
     }
   },
   computed: {
-    mostRecentResult() {
-      return this.results.slice(-1)[0]; 
-    },
-    topResult() {
-      if(this.mostRecentResult) {
-        return this.visaList.filter(item => this.mostRecentResult.recommendedVisa.includes(item.name))[0];
+    faveVisa() {
+      if(this.user.favoriteVisa) {
+        return this.visaList.filter(item => item.name === this.user.favoriteVisa.name)[0];
       } else {
         return false;
       }
     }
+  },
+  // Update documentChecklist in database before route leave
+  beforeRouteLeave(to, from, next) {
+    this.$store.dispatch('auth/updateProfile', this.user)
+      .then(next());
   }
 }
 </script>
