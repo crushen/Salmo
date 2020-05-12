@@ -146,7 +146,6 @@ export default {
   }
 
   button {
-    padding: 10px 24px;
     margin-top: $spacing*4;
   }
 

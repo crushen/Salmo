@@ -7,14 +7,19 @@
     </div>
     <div class="body">
       <div class="check-list">
-        <div class="field">
-          <input 
-            id="check"
-            class="form" 
-            type="checkbox">
-          <label for="check">
-            Current passport (or travel documentation with blank page)
-          </label>
+        <div 
+          v-for="(item, index) in docChecklist.checklist"
+          :key="index"
+          class="field">
+          <label class="container" :for="`check-${index}`">{{item.label}}</label>
+
+          <pretty-check 
+            v-model="item.checked"
+            :id="`check-${index}`"
+            class="p-icon p-smooth" 
+            color="danger">
+            <i slot="extra" class="icon fa fa-check"></i>
+          </pretty-check>
         </div>
       </div>
     </div>
@@ -22,15 +27,32 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import prettyCheck from 'pretty-checkbox-vue/check';
+
 export default {
   props: {
     visa: { required: true, type: Object }
+  },
+  components: {
+    prettyCheck
+  },
+  computed: {
+    ...mapState('visas', ['documentChecklist']),
+    docChecklist() {
+      if(this.visa) {
+        return this.documentChecklist.filter(item => item.name === this.visa.name)[0];
+      } else {
+        return false;
+      }
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
+@import '@/assets/styles/main.scss';
 
 .card {
   background: white;
@@ -63,17 +85,27 @@ export default {
   }
 }
 
-.check-list {
-  .field {
-    width: 100%;
-    background: $background;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: $spacing;
+  font-size: 20px;
+  background: $background;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
 
   label {
-    width: 90%;
+    @include font(16px, 300);
+    color: $dark-font;
+    width: 100%;
+  }
+
+  &:not(:first-of-type) {
+    margin-top: $spacing*2;
   }
 }
 </style>

@@ -6,10 +6,9 @@
       </router-link>
 
       <h1>Your next step.</h1>
-      <h3>Here is everything you need to work out your next step with your visa!</h3>
 
-      <div class="results">
-        <p>Top results of latest quiz:</p>
+      <section class="results">
+        <p class="title">Here's your favourite visa:</p>
 
         <visa-card
           :key="topResult.name"
@@ -19,20 +18,22 @@
           </template>
         </visa-card>
 
-        <section class="button">
+        <section class="buttons">
+          <button class="tertiary">Change Favourite Visa</button>
           <p>The rest of your quiz results are saved here:</p>
           <button class="secondary">
             Quiz Results
           </button>
         </section>
+      </section>
 
-        <section class="documentation section-margin">
-          <p>Once you've decided on a visa the below can help you keep track of what documentation you need and the process overall.</p>
+      <section class="documentation section-margin">
+        <p>The below can help you keep track of what dpcumentation you need and the overall process.</p>
+        <p class="emphasis">These tools are based off your current favourite visa, so be sure to keep it up to date!</p>
 
-          <doc-checklist 
-            :visa="topResult"/>
-        </section>
-      </div>
+        <doc-checklist 
+          :visa="topResult"/>
+      </section>
     </section>
   </div>
 </template>
@@ -88,12 +89,25 @@ h3 {
 
   p {
     margin-bottom: $spacing*3;
+
+    &.title {
+      font-weight: 600;
+    }
   }
 
-  .button {
-    margin: $spacing*5 auto auto;
+  .buttons {
+    margin: $spacing*3 auto auto;
     width: 220px;
     text-align: center;
+
+    p {
+      margin-top: $spacing*5;
+    }
   }
+}
+
+.emphasis {
+  font-weight: 600;
+  margin: $spacing*3 0;
 }
 </style>
