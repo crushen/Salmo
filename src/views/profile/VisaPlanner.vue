@@ -33,6 +33,8 @@
           :visa="faveVisa"
           :docChecklist="user.favoriteVisa"/>
       </section>
+
+      <timeline />
     </section>
   </div>
 </template>
@@ -43,12 +45,14 @@ import arrow from '@/assets/icons/chevron-left-solid.svg';
 import visaCard from '@/components/visa/VisaCard';
 import quickTip from '@/components/visa/QuickTip';
 import docChecklist from '@/components/profile/DocumentChecklist';
+import timeline from '@/components/profile/ApplicationTimeline';
 
 export default {
   components: {
     visaCard,
     quickTip,
-    docChecklist
+    docChecklist,
+    timeline
   },
   data() {
     return {
@@ -110,6 +114,6 @@ h3 {
 
 .emphasis {
   font-weight: 600;
-  margin: $spacing*3 0;
+  margin: $spacing*3 0 $spacing*5 0;
 }
 </style>

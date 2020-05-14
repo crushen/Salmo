@@ -10,14 +10,6 @@
       <p>{{ visa.card.subTitle }}</p>
 
       <div class="checklist">
-        <!-- <div class="item">
-          <div 
-            class="inner"
-            :style="this.switch ? {opacity: 1} : {opacity: 0.5}">
-            <img :src="this.switch ? check : cross" alt="tick" class="icon">
-            <p>Switch</p>
-          </div>
-        </div> -->
         <div
           v-for="item in checklist"
           :key="item.name" 
@@ -52,6 +44,7 @@ export default {
   },
   data() {
     return {
+      user: this.$store.state.auth.user.profile,
       checklist: this.visa.card.checklist,
       check,
       cross,
@@ -70,13 +63,6 @@ export default {
         }
       });
     }
-    // checkSwitch() {
-    //   this.switchOptions.forEach(switchVisa => {
-    //     if(switchVisa === this.visa.name) {
-    //       this.switch = true;
-    //     }
-    //   })
-    // }
   },
   created() {
     this.getIcon();
