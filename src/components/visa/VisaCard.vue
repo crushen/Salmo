@@ -29,6 +29,17 @@
         :to="{ name: 'visa-page', params: { slug: visa.slug } }">
         Tell Me More!
       </router-link>
+
+      <img 
+        @click="makeFavorite"
+        :src="heart" 
+        class="heart">
+
+      <confirm-favorite 
+        v-if="confirmChange"
+        :visa="visa"
+        :user="user"
+        @closeModal="closeModal" />
     </div>
   </div>
 </template>
@@ -37,10 +48,16 @@
 import check from '@/assets/icons/pink/check-solid.svg';
 import cross from '@/assets/icons/pink/times-solid.svg';
 import question from '@/assets/icons/pink/question-solid.svg';
+import pinkHeart from '@/assets/icons/pink/heart-solid.svg';
+import greyHeart from '@/assets/icons/heart-solid.svg';
+import confirmFavorite from '@/components/visa/ConfirmFavorite';
 
 export default {
   props: {
     visa: { required: true, type: Object }
+  },
+  components: {
+    confirmFavorite
   },
   data() {
     return {
@@ -48,7 +65,11 @@ export default {
       checklist: this.visa.card.checklist,
       check,
       cross,
-      question
+      question,
+      heart: null,
+      pinkHeart,
+      greyHeart,
+      confirmChange: false
     }
   },
   methods: {
@@ -62,10 +83,33 @@ export default {
           item.icon = this.cross;
         }
       });
+    },
+    checkFavorite() {
+      if(this.visa.name === this.user.favoriteVisa.name) {
+        this.heart = this.pinkHeart;
+      } else {
+        this.heart = this.greyHeart;
+      }
+    },
+    makeFavorite() {
+      if(this.heart === this.pinkHeart) {
+        return
+      } else {
+        this.confirmChange = true;
+        document.querySelector('#overlay').style.display = 'block';
+        document.querySelector('body').style.overflow = 'hidden';
+      }
+    },
+    closeModal() {
+      document.querySelector('#overlay').style.display = 'none';
+      document.querySelector('body').style.overflow = 'auto';
+      this.confirmChange = false;
+      this.checkFavorite();
     }
   },
-  created() {
+  mounted() {
     this.getIcon();
+    this.checkFavorite();
   }
 }
 </script>
@@ -140,6 +184,13 @@ export default {
     position: absolute;
     bottom: 6px;
     left: 6px;
+  }
+
+  .heart {
+    width: 34px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
   }
 }
 </style>
