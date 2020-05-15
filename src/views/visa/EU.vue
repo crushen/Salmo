@@ -13,7 +13,12 @@
 
     <div class="content section-margin explore">
       <h2>Check out which pathway is best for you:</h2>
-      <button class="pink">Explore My Options</button>
+      <router-link
+        :to="{ name: 'eu-options' }"
+        tag="button"
+        class="pink">
+        Explore My Options
+      </router-link>
     </div>
     
     <div class="placeholder-img"></div>

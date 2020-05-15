@@ -13,6 +13,7 @@ import NonEU from '@/views/visa/NonEU';
 import CategoryPage from '@/views/visa/CategoryPage';
 import VisaPage from '@/views/visa/VisaPage';
 import VisaInfoEU from '@/views/visa/EU';
+import EuOptions from '@/views/visa/EuOptions';
 import About from '@/views/About';
 import NotFound from '@/views/NotFound';
 
@@ -88,6 +89,11 @@ const routes = [
     path: '/visa-info/non-eu/:category', 
     name: 'non-eu-category', 
     component: CategoryPage
+  },
+  { 
+    path: '/visa-info/eu/options', 
+    name: 'eu-options', 
+    component: EuOptions
   },
   { 
     path: '/visa-info/:slug', 
