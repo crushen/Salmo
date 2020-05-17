@@ -1,16 +1,14 @@
 <template>
   <section class="content">
-    <!-- If user has updates profile info -->
+    <router-link :to="{ name: 'profile', params: {username: user.profile.username} }">
+      <img :src="arrow" class="arrow">
+    </router-link>
+    <!-- If user has updated profile info -->
     <div v-if="user.profile.age">
-      <div v-if="introStage">
-        <div v-if="this.user.profile.currentVisa !== 'None'">
-          <p>This questionnaire will be specific to your current visa - <strong>{{ this.user.profile.currentVisa.name }}</strong></p>
-          <p>Click the button to continue, or <router-link :to="{name: 'profile'}">update current visa here.</router-link></p>
-        </div>
-        <button @click="startQuestionnaire">
-          Start Questionnaire
-        </button>
-      </div>
+      <intro 
+        v-if="introStage"
+        :user="user"
+        @startQuestionnaire="startQuestionnaire" />
 
       <div v-if="questionsStage">
         <div 
@@ -45,16 +43,20 @@
 </template>
 
 <script>
+import arrow from '@/assets/icons/chevron-left-solid.svg';
+import intro from '@/components/questionnaire/Intro';
 import question from '@/components/questionnaire/Question';
 import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
+    intro,
     question,
     results
   },
   data() {
     return {
+      arrow,
       user: this.$store.state.auth.user,
       introStage: true,
       questionsStage: false,
@@ -167,9 +169,18 @@ export default {
 }
 </script>
 
-<style scoped>
-section {
-  margin-top: 60px;
+<style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
+.content {
+  padding: $spacing*12 0 $spacing*10;
+}
+
+.arrow {
+  width: 22px;
+  position: absolute;
+  top: 24px;
+  left: 6vw;
 }
 
 .question {
