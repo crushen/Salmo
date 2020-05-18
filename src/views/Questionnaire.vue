@@ -1,5 +1,5 @@
 <template>
-  <section class="content">
+  <section>
     <router-link :to="{ name: 'profile', params: {username: user.profile.username} }">
       <img :src="arrow" class="arrow">
     </router-link>
