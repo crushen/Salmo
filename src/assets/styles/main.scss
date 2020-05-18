@@ -116,3 +116,11 @@ input[type="submit"] {
   top: 24px;
   left: 6vw;
 }
+
+.pretty .state label:before, .pretty .state label:after {
+  top: 4px;
+}
+
+.pretty .state label {
+  margin: 0 0 0 8px;
+}

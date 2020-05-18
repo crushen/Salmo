@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h3>{{ question.question }}</h3>
 
     <div v-if="currentQuestion === 0">
@@ -16,17 +16,16 @@
         </div>
     </div>
 
-    <div v-else class="margin">
-      <div
+    <div v-else class="radio-buttons">
+      <pretty-radio
+        v-model="selected"
         v-for="(answer, index) in question.answers"
-        :key="index">
-        <input 
-          v-model="selected"
-          type="radio"
-          :value="answer.value"
-          class="margin">
-          {{ answer.text }}
-      </div>
+        :key="index"
+        :value="answer.value"
+        class="p-smooth p-default p-round radio"
+        color="primary-o">
+        {{ answer.text }}
+      </pretty-radio>
     </div>
 
     <div class="nav">
@@ -48,11 +47,16 @@
 </template>
 
 <script>
+import prettyRadio from 'pretty-checkbox-vue/radio';
+
 export default {
   props: {
     question: { type: Object, required: true },
     questions: { type: Array, required: true },
     currentQuestion: { type: Number, required: true }
+  },
+  components: {
+    prettyRadio
   },
   data () {
     return {
@@ -75,8 +79,13 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-h3 {
-  margin-top: $spacing*5;
+.container {
+  width: 100%;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
 }
 
 .buttons {
@@ -86,7 +95,7 @@ h3 {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: $spacing*4 auto auto;
+  margin: auto;
 
   .button {
     width: 120px;
@@ -122,7 +131,6 @@ h3 {
 
 .nav {
   width: 100%;
-  margin-top: $spacing*4;
   display: flex;
   justify-content: space-between;
 
@@ -149,7 +157,7 @@ h3 {
       transform: rotate(180deg);
       font-size: 45px;
       line-height: 0;
-      padding: 0 0 6px 6px;
+      padding: 0 0 8px 6px;
     }
   }
 
@@ -159,6 +167,16 @@ h3 {
     line-height: 0;
     padding: 20px $spacing*3;
     outline: none;
+  }
+}
+
+.radio-buttons {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+
+  .radio:not(:first-of-type) {
+    margin-top: $spacing*6;
   }
 }
 </style>
