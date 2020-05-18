@@ -343,16 +343,20 @@ const questions = [
         number: 0,
         answers: [
           {
-            text: 'Here for family. This applies to you if you wish to stay with a partner or family after your studies.',
-            value: 'Family (needs expanding)'
+            text: 'Study',
+            value: 'Tier 4 General Student'
           },
           {
-            text: 'Here for business. This applies to you if you will be starting a business or investing after your studies.',
+            text: 'Work',
+            value: 2
+          },
+          {
+            text: 'Business',
             value: 1
           },
           {
-            text: 'Here for work. This applies to you if you will be employed by someone else after your studies.',
-            value: 2
+            text: 'Family',
+            value: 'Family (needs expanding)'
           }
         ]
       },
@@ -417,15 +421,15 @@ const questions = [
         number: 0,
         answers: [
           {
-            text: 'Here for family. This applies to you if you wish to stay with a partner or family after your studies.',
+            text: 'Family',
             value: 'Family (needs expanding)'
           },
           {
-            text: 'Here for study. This applies to you if you will be going from GCSE to higher education or university.',
+            text: 'Study',
             value: 'Tier 4 General Student'
           },
           {
-            text: 'Here for work. This applies to you if you will be employed by someone else after your studies.',
+            text: 'Work',
             value: 1
           }
         ]

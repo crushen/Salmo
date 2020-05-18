@@ -10,23 +10,22 @@
         :user="user"
         @startQuestionnaire="startQuestionnaire" />
 
-      <div v-if="questionsStage">
-        <div 
-          class="question">
-          <h1>Finding your visa...</h1>
+      <div 
+        v-if="questionsStage"
+        class="content">
+        <div class="progress-bar">
+          <div
+            :style="{ width: `${progress}%` }" 
+            class="progress-bar-inner"></div>
+        </div>
+
+        <div class="question">
           <question 
             :question="questions[currentQuestion]"
             :questions="questions"
             :currentQuestion="currentQuestion"
             @submitAnswer="submitAnswer"
             @previousQuestion="previousQuestion" />
-        </div>
-
-        <p>Progress..</p>
-        <div class="progress-bar">
-          <div
-            :style="{ width: `${progress}%` }" 
-            class="progress-bar-inner"></div>
         </div>
       </div>
 
@@ -115,21 +114,23 @@ export default {
       }
     },
     submitAnswer(answer) {
-      this.progress += 20;
-      // If question leads to visa, finish questionnaire and reccommend this visa
-      this.visaList.forEach(visa => {
-        if(answer === visa) {
+      if(answer) {
+        this.progress += 20;
+        // If question leads to visa, finish questionnaire and reccommend this visa
+        this.visaList.forEach(visa => {
+          if(answer === visa) {
+            this.finishQuestionnaire(answer);
+          }
+        })
+        // If answer is array, make both answers the reccomended visas
+        if(Array.isArray(answer)) {
           this.finishQuestionnaire(answer);
         }
-      })
-      // If answer is array, make both answers the reccomended visas
-      if(Array.isArray(answer)) {
-        this.finishQuestionnaire(answer);
-      }
-      // If questions leads to number, go to this index in questions
-      if(Number.isInteger(answer)) {
-        this.lastQuestionIndexes.push(this.currentQuestion);
-        this.currentQuestion = answer;
+        // If questions leads to number, go to this index in questions
+        if(Number.isInteger(answer)) {
+          this.lastQuestionIndexes.push(this.currentQuestion);
+          this.currentQuestion = answer;
+        }
       }
     },
     previousQuestion() {
@@ -183,16 +184,11 @@ export default {
   left: 6vw;
 }
 
-.question {
-  width: 50%;
-  margin: 60px auto 0 auto;
-  padding: 20px;
-}
-
 .progress-bar,
 .progress-bar-inner {
-  width: 80%;
-  height: 40px;
+  width: 100%;
+  height: 12px;
+  border-radius: 100px;
   margin: auto;
   transition: width 500ms;
 }
@@ -202,7 +198,7 @@ export default {
 }
 
 .progress-bar-inner {
-  background-color: pink; 
+  background-color: $primary-yellow; 
   margin: 0;
 }
 </style>

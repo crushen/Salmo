@@ -86,6 +86,7 @@ export default {
 }
 
 .buttons {
+  width: 100%;
   max-width: 300px;
   display: flex;
   flex-wrap: wrap;
@@ -94,8 +95,8 @@ export default {
   margin: $spacing*4 auto auto;
 
   .button {
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 120px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
