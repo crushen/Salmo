@@ -1,17 +1,28 @@
 <template>
-  <div>
-    <h1>Quiz done</h1>
-    <div class="results">
-      <p><strong>You can switch to this visa for the easiest way to remain in the UK:</strong></p>
-      <router-link 
+  <div class="content">
+    <h1>Well done!</h1>
+    <div class="placholder-img"></div>
+    <h3>Congratulations on completing the quiz, your results are below.</h3>
+
+    <div class="results section-margin">
+      <p>Your best option to remain in the UK is by <strong>switching</strong> to:</p>
+      <!-- <router-link 
         v-for="visa in topResult"
         :key="visa.name"
         tag="div"
         class="result-link"
         :to="{ name: 'visa-page', params: { slug: visa.slug } }">
         <p>{{ visa.name }}</p>
-        <p>Switch: {{ visa.switch }}</p>
-      </router-link>
+      </router-link> -->
+      <visa-card
+        v-for="visa in topResult"
+        :key="visa.name"
+        :visa="visa"
+        class="top-result">
+        <template #quickTip>
+          <quick-tip :visa="visa"/>
+        </template>
+      </visa-card>
 
       <div v-if="switchVisas[0]">
         <p><strong>Other {{ topResult[0].category }} visas you can switch to:</strong></p>
@@ -50,8 +61,14 @@
 
 <script>
 import { mapState } from 'vuex';
+import visaCard from '@/components/visa/VisaCard';
+import quickTip from '@/components/visa/QuickTip';
 
 export default {
+  components: {
+    visaCard,
+    quickTip
+  },
   data() {
     return {
       userAge: this.$store.state.auth.user.profile.age,
@@ -113,23 +130,28 @@ export default {
   created() {
     this.checkSwitch();
     this.checkYouthMobility();
-    this.$store.dispatch('questions/sendDbResults');
   }
 }
 </script>
 
-<style scoped>
-.results {
-  display: flex;
-  flex-direction: column;
-  width: 60%;
-  margin: 30px auto 0 auto;
+<style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
+.placholder-img {
+  width: 90%;
+  height: 150px;
+  margin: $spacing*4 auto;
+  background: $light-grey;
 }
 
-.result-link {
-  border: 1px solid pink;
-  padding: 10px;
-  margin-bottom: 15px;
-  cursor: pointer;
+strong {
+  font-weight: 600;
+}
+
+.results {
+
+  .top-result {
+    margin: $spacing*4 0;
+  }
 }
 </style>

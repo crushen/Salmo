@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import arrow from '@/assets/icons/chevron-left-solid.svg';
 import intro from '@/components/questionnaire/Intro';
 import question from '@/components/questionnaire/Question';
@@ -98,6 +99,12 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapState('visas', ['documentChecklist']),
+    newVisa() {
+      return this.documentChecklist.find(item => item.name === this.visa.name);
+    }
+  },
   methods: {
     startQuestionnaire() {
       this.getQuestions();
@@ -146,7 +153,10 @@ export default {
       } else {
         this.result.recommendedVisa.push(answer);
       }
+      const faveVisa = this.documentChecklist.find(item => item.name === this.result.recommendedVisa[0]);
+      this.$store.commit('auth/addFavoriteToUser', {...faveVisa});
       this.$store.dispatch('questions/getResults', this.result);
+      this.$store.dispatch('questions/sendDbResults');
       this.introStage = false;
       this.showResults();
     },
