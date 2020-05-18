@@ -34,10 +34,13 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+p {
+  margin-top: $spacing*2;
 
-p:first-of-type {
-  font-weight: 600;
-  margin-top: 15vw;
+  &:first-of-type {
+    font-weight: 600;
+    margin-top: 10vw;
+  }
 }
 
 .bold {
