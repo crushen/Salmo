@@ -197,14 +197,23 @@ const visas = [
     category: 'work',
     slug: 'T2-general-work',
     card: {
-      subTitle: 'Great for individuals who wish to start their own business in the UK.',
+      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      quickTip: {
+        header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
+        list: [
+          'with £2 million, you will gain permanent residency in 5 years', 
+          'with £5 million, you will gain permanent residency in 3 years', 
+          'with £10 million, you will gain permanent residency in 2 years'
+        ]
+      },
       checklist: [
-        { name: 'Switch', status: false },
-        { name: 'ILR', status: false },
+        { name: 'ILR', status: true },
         { name: 'Work', status: true },
+        { name: 'Study', status: 'maybe' },
         { name: 'Dependants', status: true },
-        { name: 'Extend', status: false },
-        { name: 'Study', status: 'maybe' }
+        { name: 'Switch', status: true },
+        { name: 'Extend', status: true }
+        
       ]
     }
   },
@@ -213,14 +222,23 @@ const visas = [
     category: 'work',
     slug: 'T2-minister-of-religion',
     card: {
-      subTitle: 'Great for individuals who wish to start their own business in the UK.',
+      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      quickTip: {
+        header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
+        list: [
+          'with £2 million, you will gain permanent residency in 5 years', 
+          'with £5 million, you will gain permanent residency in 3 years', 
+          'with £10 million, you will gain permanent residency in 2 years'
+        ]
+      },
       checklist: [
-        { name: 'Switch', status: false },
-        { name: 'ILR', status: false },
+        { name: 'ILR', status: true },
         { name: 'Work', status: true },
+        { name: 'Study', status: 'maybe' },
         { name: 'Dependants', status: true },
-        { name: 'Extend', status: false },
-        { name: 'Study', status: 'maybe' }
+        { name: 'Switch', status: true },
+        { name: 'Extend', status: true }
+        
       ]
     }
   },
@@ -229,14 +247,23 @@ const visas = [
     category: 'work',
     slug: 'T2-sportsperson',
     card: {
-      subTitle: 'Great for individuals who wish to start their own business in the UK.',
+      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      quickTip: {
+        header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
+        list: [
+          'with £2 million, you will gain permanent residency in 5 years', 
+          'with £5 million, you will gain permanent residency in 3 years', 
+          'with £10 million, you will gain permanent residency in 2 years'
+        ]
+      },
       checklist: [
-        { name: 'Switch', status: false },
-        { name: 'ILR', status: false },
+        { name: 'ILR', status: true },
         { name: 'Work', status: true },
+        { name: 'Study', status: 'maybe' },
         { name: 'Dependants', status: true },
-        { name: 'Extend', status: false },
-        { name: 'Study', status: 'maybe' }
+        { name: 'Switch', status: true },
+        { name: 'Extend', status: true }
+        
       ]
     }
   },
