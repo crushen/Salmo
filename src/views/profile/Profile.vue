@@ -1,6 +1,5 @@
 <template>
   <section id="profile">
-    <!-- <button @click="handleLogout" type="button">Log Out</button> -->
     <!-- If user hasn't verified email -->
     <div 
       v-if="!user.emailVerified"
@@ -23,98 +22,19 @@
             <button>Help Centre</button>
           </div>
           <div class="notificaitons">
-            <p>You can also change how we get in touch on our <button class="tertiary">Notificaiton Settings</button> page.</p>
+            <p>You can also change your preferences and how we get in touch in your <button class="tertiary">Settings</button>.</p>
+          </div>
+          <div class="button log-out">
+            <button 
+              @click="handleLogout" 
+              type="button"
+              class="secondary">
+              Log Out
+            </button>
           </div>
         </div>
       </section>
     </div>
-      <!-- <section>
-        <div 
-          v-if="!topResult"
-          class="take-quiz">
-          <p>To find out your easiest way to stay in the UK, take our visa quiz!</p>
-          <router-link
-            :to="{ name: 'questionnaire' }"
-            tag="button">
-            Take the quiz!
-          </router-link>
-        </div>
-
-        <div 
-          v-else
-          class="results">
-          <h3>The top result of your latest quiz</h3>
-          <visa-card 
-            v-for="visa in topResult"
-            :key="visa.name"
-            :visa="visa"
-            :currentVisa="currentVisa"
-            :switchOptions="switchOptions">
-            <template #quickTip>
-              <quick-tip :visa="visa"/>
-            </template>
-          </visa-card>
-
-          <div class="results-button">
-            <p>You can see the rest of your results below!</p>
-            <button>Quiz Results</button>
-          </div>
-        </div>
-      </section> -->
-
-
-      <!-- <section class="section-margin">
-        <page-link-card
-          v-for="card in pageLinks"
-          :key="card.pageTitle"
-          :text="card.text"
-          :pageTitle="card.pageTitle" />
-      </section>
-
-      <section class="section-margin settings">
-        <p>Change how we get in touch below</p>
-        <button>Notification Settings</button>
-      </section> -->
-
-        <!-- <div v-if="switchVisas[0]">
-          <h3>Other {{ topResult[0].category }} visas you can switch to</h3>
-          <visa-card 
-            v-for="visa in switchVisas"
-            :key="visa.name"
-            :visa="visa"
-            :currentVisa="currentVisa" />
-        </div> -->
-
-        <!-- <div v-if="numberOfOtherVisas[0] || youthMobility[0]">
-          <p><strong>Visas in the {{ topResult[0].category }} category you can apply for, but you would need to leave the UK before applying:</strong></p>
-          <router-link 
-            v-for="visa in numberOfOtherVisas"
-            :key="visa.name"
-            tag="div"
-            class="result-link"
-            :to="{ name: 'visa-page', params: { slug: visa.slug } }">
-            <p>{{ visa.name }}</p>
-          </router-link>
-
-          <router-link
-            v-if="youthMobility[0]"
-            tag="div"
-            class="result-link"
-            :to="{ name: 'visa-page', params: { slug: youthMobility[0].slug } }">
-            <p>{{ youthMobility[0].name }}</p>
-          </router-link>
-
-          <button 
-            v-if="numberOfOtherVisas.length !== allOtherVisas.length"
-            @click="numberOfVisas += allOtherVisas.length">
-            Show All
-          </button>
-          <button
-            v-else-if="allOtherVisas.length > 3"
-            @click="numberOfVisas = 3">
-            Show Less
-          </button>
-        </div> -->
   </section>
 </template>
 
@@ -231,6 +151,14 @@ export default {
   .button {
     margin-top: $spacing*2;
     text-align: center;
+
+    &.log-out {
+      margin-top: $spacing*8;
+      
+      button {
+        width: 120px;
+      }
+    }
   }
 
   .notificaitons {
