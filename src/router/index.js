@@ -8,6 +8,7 @@ import Profile from '@/views/profile/Profile';
 import UpdateProfile from '@/views/profile/UpdateProfile';
 import VisaPlanner from '@/views/profile/VisaPlanner';
 import Questionnaire from '@/views/Questionnaire';
+import Results from '@/views/Results';
 import VisaInfo from '@/views/visa/VisaInfo';
 import NonEU from '@/views/visa/NonEU';
 import CategoryPage from '@/views/visa/CategoryPage';
@@ -68,6 +69,12 @@ const routes = [
     path: '/questionnaire', 
     name: 'questionnaire', 
     component: Questionnaire,
+    meta: { onlyAuthUser: true } 
+  },
+  { 
+    path: '/questionnaire/results', 
+    name: 'results', 
+    component: Results,
     meta: { onlyAuthUser: true } 
   },
   { 

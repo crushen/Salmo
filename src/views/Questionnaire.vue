@@ -29,9 +29,9 @@
         </div>
       </div>
 
-      <div v-if="resultsStage">
+      <!-- <div v-if="resultsStage">
         <results />
-      </div>
+      </div> -->
     </div>
     <!-- If not, user must do that first -->
     <div v-else>
@@ -46,13 +46,13 @@ import { mapState } from 'vuex';
 import arrow from '@/assets/icons/chevron-left-solid.svg';
 import intro from '@/components/questionnaire/Intro';
 import question from '@/components/questionnaire/Question';
-import results from '@/components/questionnaire/Results';
+// import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
     intro,
-    question,
-    results
+    question
+    // results
   },
   data() {
     return {
@@ -163,7 +163,8 @@ export default {
     showResults() { 
       setTimeout(() => {
         this.questionsStage = false;
-        this.resultsStage = true;
+        this.$router.push({name: 'results'});
+        //this.resultsStage = true;
       }, 2000);
     } 
   },
