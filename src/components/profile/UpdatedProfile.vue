@@ -8,57 +8,70 @@
 
       <div class="edit-button">
         <router-link 
-          v-if="user.profile.age"
           :to="{ name: 'update-profile'}"
           class="edit-button">
           Edit Profile
         </router-link>
+      </div>
+    </section>
 
-        <router-link 
-          v-else
+    <div 
+      v-if="!user.profile.questionnaireResults.length"
+      class="content no-quiz">
+      <h3>When you complete your first quiz, the results will appear below!</h3>
+
+      <p>Once you’ve completed the quiz, you’ll also gain access to other features such as your own Visa Stats and Facts page.</p>
+
+      <div class="button">
+        <router-link
+          :to="{ name: 'questionnaire' }"
           tag="button"
-          :to="{ name: 'update-profile'}">
-          Create Profile
+          class="pink">
+          Take Quiz!
         </router-link>
       </div>
-    </section>
+    </div>
 
-    <section class="visa-tools content">
-      <p>Make sure your profile is accurate to help you calculate your future plans.</p>
-      <p>Below are seom features which should help you work through your current visa.</p>
+    <div v-else>
+      <section class="visa-tools content">
+        <p>Make sure your profile is accurate to help you calculate your future plans.</p>
+        <p>Below are seom features which should help you work through your current visa.</p>
 
-      <visa-dates-card class="dates-card" :user="user" />
+        <visa-dates-card class="dates-card" :user="user" />
 
-      <pr-calculator />
-    </section>
+        <pr-calculator />
+      </section>
 
-    <section class="content">
-      <div class="next-step section-margin">
-        <div class="text">
-          <h3>Your next step...</h3>
-          <p>When you're dont calculating everything and want to figure out your next step, do through to your visa planner!</p>
+      <section class="content">
+        <div class="next-step section-margin">
+          <div class="text">
+            <h3>Your next step...</h3>
+            <p>When you're dont calculating everything and want to figure out your next step, do through to your visa planner!</p>
+          </div>
+          <div class="placeholder-img"></div>
+          <div class="button">
+            <router-link
+              :to="{name: 'visa-planner', params: {username: user.profile.username}}"
+              tag="button"
+              class="pink">
+              Visa Planner
+            </router-link>
+          </div>
         </div>
-        <div class="placeholder-img"></div>
-        <div class="button">
-          <router-link
-            :to="{name: 'visa-planner', params: {username: user.profile.username}}"
-            tag="button"
-            class="pink">
-            Visa Planner
-          </router-link>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="quiz-results content">
-      <p>The results of your latest quiz are saved for you below.</p>
-      <router-link
-        :to=" {name: 'results' }"
-        tag="button"
-        class="secondary">
-        Quiz results
-      </router-link>
-    </section>
+      <section class="quiz-results content">
+        <p>The results of your latest quiz are saved for you below.</p>
+        <router-link
+          :to=" {name: 'results' }"
+          tag="button"
+          class="secondary">
+          Quiz results
+        </router-link>
+      </section>
+    </div>
+
+
   </div>
 </template>
 
@@ -94,6 +107,17 @@ h1 {
     text-align: center;
     margin-top: $spacing*2;
     text-decoration: underline;
+  }
+}
+
+.no-quiz {
+  h3 {
+    margin-bottom: $spacing*3;
+  }
+
+  .button {
+    margin-top: $spacing*5;
+    text-align: center;
   }
 }
 
