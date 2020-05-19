@@ -22,17 +22,15 @@
           <p>Switching is the most cost effective, and least personally disruptive way to remain in the UK.</p>
         </div>
 
-        <!-- <div v-if="switchVisas[0]">
+        <div v-if="switchVisas[0]" class="switch">
           <p class="card-title">There are other visas in the same catagory that you could <strong>switch</strong> to:</p>
-          <router-link 
+
+          <small-card 
             v-for="visa in switchVisas"
             :key="visa.name"
-            tag="div"
-            class="result-link"
-            :to="{ name: 'visa-page', params: { slug: visa.slug } }">
-            <p>{{ visa.name }}</p>
-          </router-link>
-        </div> -->
+            :visa="visa"
+            :name="`${visa.name}`"/>
+        </div>
 
         <div 
           v-if="otherVisas[0] || youthMobility[0]" 
@@ -155,18 +153,15 @@ export default {
     }
   },
   methods: {
-    // checkSwitch() {  
-    //   if(this.currentVisa === 'Tier 4 General Student Visa') {
-    //     this.switchOptions = ['Startup Visa', 'Tier 1 Investor Visa', 'Tier 2 General Work Visa', 'Tier 2 Sportsperson Visa', 'Tier 2 Minister of Religion Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Family Visa (needs expanding)']
-    //   } else if(this.currentVisa === 'Tier 4 Child Student Visa') {
-    //     this.switchOptions = ['Tier 2 General Work Visa', 'Tier 2 Sportsperson Visa', 'Tier 2 Minister of Religion Visa', 'Tier 4 General Student Visa', 'Tier 5 GOV Authorised Exchange Visa', 'Family Visa (needs expanding)']
-    //   }
-    //   // For now, will only be testing Student specific questionnaires, so all top results will be switchable
-    //   // However, this will change when other current visas are options
-    //   this.topResult.forEach(visa => {
-    //     visa.switch = true;
-    //   })
-    // },
+    checkSwitch() {  
+      // For now, will only be testing Student specific questionnaires, so all top results will be switchable
+      // However, this will change when other current visas are options
+      if(this.currentVisa.name === 'Tier 4 General Student') {
+        this.switchOptions = ['Startup', 'Tier 1 Investor', 'Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']
+      } else if(this.currentVisa === 'Tier 4 Child Student') {
+        this.switchOptions = ['Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 4 General Student', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']
+      }
+    },
     checkYouthMobility() {
       const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)'];
       YMcountries.forEach(country => {
@@ -180,7 +175,7 @@ export default {
     }
   },
   created() {
-    //this.checkSwitch();
+    this.checkSwitch();
     this.checkYouthMobility();
   }
 }
@@ -215,6 +210,14 @@ strong {
   }
 }
 
+.switch {
+  margin-bottom: $spacing*8;
+
+  p {
+    margin-bottom: $spacing*4;
+  }
+}
+
 .other {
   .title {
     margin-bottom: $spacing*4;
@@ -226,6 +229,7 @@ strong {
   background: $primary-yellow;
   position: relative;
   border-radius: 4px;
+  margin-bottom: $spacing*4;
 
   p {
     position: relative;
