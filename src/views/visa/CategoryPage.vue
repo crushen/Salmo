@@ -1,9 +1,5 @@
 <template>
   <section id="category-page">
-    <router-link :to="{ name: 'non-eu' }">
-      <img :src="arrow" class="arrow">
-    </router-link>
-
     <div class="content">
       <h1>{{ category }} Visas</h1>
     </div>
@@ -24,7 +20,6 @@
 </template>
 
 <script>
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 import visaCard from '@/components/visa/VisaCard';
 import quickTip from '@/components/visa/QuickTip';
 import { mapState } from 'vuex';
@@ -36,10 +31,7 @@ export default {
   },
   data() {
     return {
-      arrow,
       category: this.$route.params.category,
-      // currentVisa: this.$store.state.auth.user.profile.currentVisa,
-      // results: this.$store.state.auth.user.profile.questionnaireResults
     }
   },
   computed: {
@@ -47,21 +39,6 @@ export default {
     visas() {
       return this.visaList.filter(item => item.category === this.category);
     }
-    // mostRecentResult() {
-    //   return this.results.slice(-1)[0]; 
-    // },
-    // switchVisas() {
-    //   if(this.mostRecentResult) {
-    //     // Filter visa list for user's switch options
-    //     const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name));
-    //     // Get all visas in same category
-    //     const sameCategory = switchOptions.filter(item => item.category === this.topResult[0].category);
-    //     // Remove visa(s) that appear in top result
-    //     return sameCategory.filter(item => !this.topResult.includes(item));
-    //   } else {
-    //     return false;
-    //   }
-    // }
   }
 }
 </script>

@@ -1,10 +1,6 @@
 <template>
   <div>
     <section class="content">
-      <router-link :to="{ name: 'profile', params: { username: user.username } }">
-        <img :src="arrow" class="arrow">
-      </router-link>
-
       <h1>Your next step.</h1>
 
       <section class="results">
@@ -44,7 +40,6 @@
 
 <script>
 import { mapState } from 'vuex';
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 import visaCard from '@/components/visa/VisaCard';
 import quickTip from '@/components/visa/QuickTip';
 import docChecklist from '@/components/profile/DocumentChecklist';
@@ -59,7 +54,6 @@ export default {
   },
   data() {
     return {
-      arrow,
       user: this.$store.state.auth.user.profile,
       visaList: this.$store.state.visas.visaList,
       results: this.$store.state.auth.user.profile.questionnaireResults,

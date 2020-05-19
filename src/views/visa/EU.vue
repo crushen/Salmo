@@ -1,9 +1,5 @@
 <template>
   <section id="eu">
-    <router-link :to="{ name: 'visa-info' }">
-      <img :src="arrow" class="arrow">
-    </router-link>
-
     <div class="content">
       <h1>Brexit. We know why you're here!</h1>
       <p>We've got a timeline below where you can keep up to date with important Brexit events and dates.</p>
@@ -26,17 +22,11 @@
 </template>
 
 <script>
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 import brexitTimeline from '@/components/BrexitTimeline';
 
 export default {
   components: {
     brexitTimeline
-  },
-  data() {
-    return {
-      arrow
-    }
   }
 }
 </script>

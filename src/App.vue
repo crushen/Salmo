@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <a v-if="arrowPage" @click="$router.go(-1)">
+      <img :src="arrow" class="arrow">
+    </a>
     <app-navigation />
     <div id="overlay"></div>
     <div v-if="$route.path !== '/about' && $route.path !== '/'" class="small-logo"></div>
@@ -9,10 +12,42 @@
 
 <script>
 import AppNavigation from '@/components/Navigation';
+import arrow from '@/assets/icons/chevron-left-solid.svg';
 
 export default {
   components: {
     AppNavigation
+  },
+  data () {
+    return {
+      arrow
+    }
+  },
+  computed: {
+    arrowPage() {
+      switch(this.$route.name) {
+        case 'questionnaire':
+          return true;
+        case 'results':
+          return true;
+        case 'update-profile':
+          return true;
+        case 'visa-planner':
+          return true;
+        case 'non-eu-category':
+          return true;
+        case 'visa-info-eu':
+          return true;
+        case 'eu-options':
+          return true;
+        case 'non-eu':
+          return true;
+        case 'visa-page':
+          return true;
+        default:
+          return false;
+      }
+    }
   }
 }
 </script>

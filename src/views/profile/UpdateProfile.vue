@@ -1,10 +1,6 @@
 <template>
   <div>
     <section class="content">
-      <router-link :to="{ name: 'profile', params: { username: user.username } }">
-        <img :src="arrow" class="arrow">
-      </router-link>
-
       <h1>Edit profile.</h1>
 
       <form 
@@ -171,13 +167,11 @@
 </template>
 
 <script>
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 import { required, email, minLength, maxLength } from 'vuelidate/lib/validators';
 
 export default {
   data() {
     return {
-      arrow,
       user: this.$store.state.auth.user.profile,
       finished: false,
       newVisaAdded: false,

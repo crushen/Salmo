@@ -1,8 +1,5 @@
 <template>
   <section>
-    <router-link :to="{ name: 'profile', params: {username: user.profile.username} }">
-      <img :src="arrow" class="arrow">
-    </router-link>
     <!-- If user has updated profile info -->
     <div v-if="user.profile.age">
       <intro 
@@ -28,35 +25,22 @@
             @previousQuestion="previousQuestion" />
         </div>
       </div>
-
-      <!-- <div v-if="resultsStage">
-        <results />
-      </div> -->
-    </div>
-    <!-- If not, user must do that first -->
-    <div v-else>
-      <p>Please update your profile information to continue. The results are dependant on your current visa.</p>
-      <router-link :to="{ name: 'profile' }">Click here to update profile</router-link>
     </div>
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 import intro from '@/components/questionnaire/Intro';
 import question from '@/components/questionnaire/Question';
-// import results from '@/components/questionnaire/Results';
 
 export default {
   components: {
     intro,
     question
-    // results
   },
   data() {
     return {
-      arrow,
       user: this.$store.state.auth.user,
       introStage: true,
       questionsStage: false,

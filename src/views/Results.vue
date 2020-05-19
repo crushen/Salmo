@@ -1,10 +1,6 @@
 <template>
   <div id="results">
     <section class="content">
-      <router-link :to="{ name: 'questionnaire' }">
-        <img :src="arrow" class="arrow">
-      </router-link>
-
       <h1>Well Done!</h1>
       <div class="placholder-img"></div>
       <h3>Congratulations on completing the quiz, your results are below.</h3>
@@ -106,7 +102,6 @@
 
 <script>
 import { mapState } from 'vuex';
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 import visaCard from '@/components/visa/VisaCard';
 import quickTip from '@/components/visa/QuickTip';
 import smallCard from '@/components/visa/SmallCard';
@@ -120,7 +115,6 @@ export default {
   },
   data() {
     return {
-      arrow,
       lightbulb,
       user: this.$store.state.auth.user.profile,
       userAge: this.$store.state.auth.user.profile.age,

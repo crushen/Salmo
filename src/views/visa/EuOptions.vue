@@ -1,9 +1,5 @@
 <template>
   <section class="content">
-    <router-link :to="{ name: 'visa-info-eu' }">
-      <img :src="arrow" class="arrow">
-    </router-link>
-
     <h1>Options for EU individulas.</h1>
 
     <div class="container">
@@ -76,14 +72,12 @@
 </template>
 
 <script>
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
 import { mapState } from 'vuex';
 
 export default {
   data() {
     return {
-      arrow,
       lightbulb,
       selectedTab: 1,
       card: {

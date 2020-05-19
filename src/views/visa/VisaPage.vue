@@ -1,9 +1,5 @@
 <template>
   <section class="content">
-    <router-link :to="{ name: 'non-eu-category', params: { category: visa.category } }">
-      <img :src="arrow" class="arrow">
-    </router-link>
-
     <h1>{{ visa.name }}</h1>
 
     <div class="container">
@@ -44,7 +40,6 @@
 </template>
 
 <script>
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
 import { mapState } from 'vuex';
 
@@ -52,7 +47,6 @@ export default {
   data() {
     return {
       slug: this.$route.params.slug,
-      arrow,
       lightbulb,
       selectedTab: 1,
       card: {

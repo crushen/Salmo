@@ -1,9 +1,5 @@
 <template>
   <section id="non-eu">
-    <router-link :to="{ name: 'visa-info' }">
-      <img :src="arrow" class="arrow">
-    </router-link>
-
     <div class="content">
       <h1>What is your main reason to stay in the UK?</h1>
     </div>
@@ -37,7 +33,6 @@
 </template>
 
 <script>
-import arrow from '@/assets/icons/chevron-left-solid.svg';
 import book from '@/assets/icons/white/book-solid.svg';
 import briefcase from '@/assets/icons/white/briefcase-solid.svg';
 import coins from '@/assets/icons/white/coins-solid.svg';
@@ -47,7 +42,6 @@ export default {
   data() {
     return {
       visas: this.$store.state.visas.visaList,
-      arrow,
       categories: [
         {
           icon: book,
