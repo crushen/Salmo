@@ -2,7 +2,7 @@
   <div>
     <section class="user-info content">
       <h1>Your current plan.</h1>
-      <h2>Here's where you're at right now with your visa and living situation in the UK.</h2>
+      <h3>Here's where you're at right now with your visa and living situation in the UK.</h3>
 
       <profile-card :user="user" />
 
@@ -52,7 +52,12 @@
 
     <section class="quiz-results content">
       <p>The results of your latest quiz are saved for you below.</p>
-      <button class="secondary">Quiz Results</button>
+      <router-link
+        :to=" {name: 'results' }"
+        tag="button"
+        class="secondary">
+        Quiz results
+      </router-link>
     </section>
   </div>
 </template>
@@ -78,7 +83,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 h1 {
-  margin-bottom: $spacing*2;
+  margin-bottom: $spacing*4;
 }
 
 .user-info {

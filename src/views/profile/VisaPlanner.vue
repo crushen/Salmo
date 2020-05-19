@@ -19,9 +19,12 @@
         <section class="buttons">
           <button class="tertiary">Change Favourite Visa</button>
           <p>The rest of your quiz results are saved here:</p>
-          <button class="secondary">
-            Quiz Results
-          </button>
+          <router-link
+            :to=" {name: 'results' }"
+            tag="button"
+            class="secondary">
+            Quiz results
+          </router-link>
         </section>
       </section>
 
