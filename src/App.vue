@@ -46,6 +46,8 @@ export default {
           return true;
         case 'settings':
           return true;
+        case 'delete-account':
+          return true;
         default:
           return false;
       }
@@ -109,14 +111,16 @@ p {
     -webkit-appearance: none;
 }
 
-input.form {
+input.form,
+textarea.form {
   border: none !important;
   background: $lightest-grey !important;
   border-radius: 4px !important;
   padding: 14px $spacing !important;
 }
 
-input.form:focus {
+input.form:focus,
+textarea.form:focus {
   box-shadow: 0 0 0 3px $primary-yellow !important;
 }
 

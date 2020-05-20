@@ -7,6 +7,7 @@ import ForgotPassword from '@/views/ForgotPassword';
 import Profile from '@/views/profile/Profile';
 import UpdateProfile from '@/views/profile/UpdateProfile';
 import Settings from '@/views/profile/Settings';
+import DeleteAccount from '@/views/profile/DeleteAccount';
 import VisaPlanner from '@/views/profile/VisaPlanner';
 import Questionnaire from '@/views/Questionnaire';
 import Results from '@/views/Results';
@@ -64,6 +65,12 @@ const routes = [
     path: '/profile/:username/settings', 
     name: 'settings',
     component: Settings,
+    meta: { onlyAuthUser: true }
+  },
+  { 
+    path: '/profile/:username/settings/delete-account', 
+    name: 'delete-account',
+    component: DeleteAccount,
     meta: { onlyAuthUser: true }
   },
   { 

@@ -42,14 +42,23 @@
     <section class="delete section">
       <h3>Delete Account</h3>
 
-      <p>If you're having issues with any aspect of our service, please do <a>get in touch</a> with us now and we will do our best to help!</p>
-
+      <p>If you're having issues with any aspect of our service, please do 
+        <router-link
+          :to="{ name: 'about' }"
+          tag="button"
+          class="tertiary">
+          get in touch 
+        </router-link> 
+      with us now and we will do our best to help!</p>
       <p class="warning">THIS ACTION IS IRREVERSIBLE</p>
 
       <div class="button">
-        <button class="tertiary">
-          Delete Account
-        </button>
+        <router-link
+          :to="{ name: 'delete-account' }"
+          tag="button"
+          class="tertiary">
+          Delete Account 
+        </router-link> 
       </div>
     </section>
   </section>
@@ -95,10 +104,6 @@ export default {
 .delete {
   h3 {
     margin-bottom: $spacing*3;
-  }
-
-  a {
-    text-decoration: underline;
   }
 
   .warning {
