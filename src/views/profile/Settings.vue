@@ -6,18 +6,51 @@
       <h3>Notifications</h3>
 
       <div class="switches">
-        <pretty-check class="p-switch p-fill">Notify you.</pretty-check>
-        <!-- <pretty-check class="p-switch p-fill">Notify you about important dates by email.</pretty-check>
-        <pretty-check class="p-switch p-fill">Notify you about important dates by email.</pretty-check> -->
+        <div class="switch">
+          <pretty-check class="p-switch p-fill"></pretty-check>
+          <p>Notify you about important dates by email.</p>
+        </div>
+
+        <div class="switch">
+          <pretty-check class="p-switch p-fill"></pretty-check>
+          <p>Notify you about important dates by email.</p>
+        </div>
+  
+        <div class="switch">
+          <pretty-check class="p-switch p-fill"></pretty-check>
+          <p>Notify you about important dates by email.</p>
+        </div>
       </div>
     </section>
 
     <section class="privacy section">
       <h3>Privacy</h3>
+
+      <div class="switches">
+        <div class="switch">
+          <pretty-check class="p-switch p-fill"></pretty-check>
+          <p>Notify you about important dates by email.</p>
+        </div>
+
+        <div class="switch">
+          <pretty-check class="p-switch p-fill"></pretty-check>
+          <p>Notify you about important dates by email.</p>
+        </div>
+      </div>
     </section>
 
     <section class="delete section">
       <h3>Delete Account</h3>
+
+      <p>If you're having issues with any aspect of our service, please do <a>get in touch</a> with us now and we will do our best to help!</p>
+
+      <p class="warning">THIS ACTION IS IRREVERSIBLE</p>
+
+      <div class="button">
+        <button class="tertiary">
+          Delete Account
+        </button>
+      </div>
     </section>
   </section>
 </template>
@@ -41,5 +74,48 @@ export default {
 
 .section {
   margin-top: $spacing*5;
+}
+
+.switches {
+  display: flex;
+  flex-direction: column;
+  padding: 0 $spacing;
+}
+
+.switch {
+  margin-top: $spacing*3;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+
+  p {
+    margin-left: $spacing*2;
+  }
+}
+.delete {
+  h3 {
+    margin-bottom: $spacing*3;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  .warning {
+    background: $light-grey;
+    padding: $spacing;
+    text-align: center;
+    margin: $spacing*4 0 $spacing*6 0;
+  }
+
+  .button {
+    text-align: center;
+
+    button {
+      color: $primary-pink;
+      font-size: 18px;
+      font-weight: 700;
+    }
+  }
 }
 </style>
