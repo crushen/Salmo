@@ -4,20 +4,36 @@
 
     <div class="placeholder-img"></div>
 
-    <stage-one v-if="stage === 1" />
+    <stage-one 
+      v-if="stage === 1"
+      @nextStage="nextStage" />
 
+    <stage-two v-if="stage === 2" />
+
+    <stage-three v-if="stage === 3" />
   </section>
 </template>
 
 <script>
 import stageOne from '@/components/profile/delete-account/StageOne.vue';
+import stageTwo from '@/components/profile/delete-account/StageTwo.vue';
+import stageThree from '@/components/profile/delete-account/StageThree.vue';
+
 export default {
   components: {
-    stageOne
+    stageOne,
+    stageTwo,
+    stageThree
   },
   data() {
     return {
       stage: 1
+    }
+  },
+  methods: {
+    nextStage() {
+      this.stage++;
+      window.scrollTo(0, 0);
     }
   }
 }
@@ -42,5 +58,6 @@ h1 {
   background: $light-grey;
   border-radius: 100px;
   margin: $spacing*6 auto 0 auto;
+  margin-bottom: $spacing*6;
 }
 </style>

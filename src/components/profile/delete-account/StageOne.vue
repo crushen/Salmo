@@ -1,6 +1,6 @@
 <template>
   <section>
-    <form @submit.prevent="submitFeedback">
+    <form @submit.prevent="nextStage">
       <p>Before you go, please let us know why you're leaving us today:</p>
 
       <div class="check-boxes">
@@ -45,7 +45,9 @@
     </form>
 
     <div class="skip">
-      <button class="tertiary"> 
+      <button 
+        @click="nextStage"
+        class="tertiary"> 
         <p>Skip</p>
         <span>&#8227;</span>
       </button>
@@ -63,6 +65,9 @@ export default {
   methods: {
     submitFeedback() {
       console.log('submit');
+    },
+    nextStage() {
+      this.$emit('nextStage');
     }
   }
 }
@@ -72,8 +77,6 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 form {
-  margin-top: $spacing*6;
-
   .check-boxes {
     margin-top: $spacing*6;
   }
