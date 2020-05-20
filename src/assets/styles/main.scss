@@ -118,10 +118,12 @@ input[type="submit"] {
   left: 6vw;
 }
 
-.pretty .state label:before, .pretty .state label:after {
-  top: 4px;
-}
+.radio-buttons {
+  .pretty .state label:before, .pretty .state label:after {
+    top: 4px;
+  }
 
-.pretty .state label {
-  margin: 0 0 0 8px;
+  .pretty .state label {
+    margin: 0 0 0 8px;
+  }
 }

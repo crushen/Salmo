@@ -44,6 +44,8 @@ export default {
           return true;
         case 'visa-page':
           return true;
+        case 'settings':
+          return true;
         default:
           return false;
       }

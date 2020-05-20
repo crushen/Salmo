@@ -147,6 +147,7 @@ export default {
 
   .tertiary {
     padding: 0;
+    text-decoration: none;
 
     &.disabled {
       color: $grey;
