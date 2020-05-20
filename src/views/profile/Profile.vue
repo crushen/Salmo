@@ -1,57 +1,58 @@
 <template>
   <section id="profile">
-    <!-- If user hasn't verified email -->
-    <div 
-      v-if="!user.emailVerified"
-      class="content">
-      <p>We've sent a link to <strong>{{ user.email }}</strong> to verify your email address. Please refresh the page once you've verified your email address.</p>
-    </div>
-    <!-- If user has verified email -->
+    <!-- Check if user has verified email -->
+    <verify-email 
+      v-if="!user.emailVerified" 
+      :user="user"/>
+
     <div v-else>
-      <!-- If user has filled in their info -->
+      <!-- Check if user has filled out profile info -->
       <updated-profile 
         v-if="user.profile.age"
         :user="user" />
-      <!-- If user hasn't filled in their info -->
-      <non-updated-profile v-else/>
 
-      <section class="help">
-        <div class="content">
-          <p>For more general advice or help on the UK application process, take a look through our Help Centre.</p>
-          <div class="button">
-            <button>Help Centre</button>
-          </div>
-          <div class="notificaitons">
-            <p>You can also change your preferences and how we get in touch on your 
-              <router-link 
-                :to="{ name: 'settings' }"
-                tag="button"
-                class="tertiary">
-                Settings
-              </router-link>
-              page.</p>
-          </div>
-          <div class="button log-out">
-            <button 
-              @click="handleLogout" 
-              type="button"
-              class="secondary">
-              Log Out
-            </button>
-          </div>
-        </div>
-      </section>
+      <non-updated-profile v-else/>
     </div>
+
+    <!-- Links to help center and settings & log out button -->
+    <section class="help">
+      <div class="content">
+        <p>For more general advice or help on the UK application process, take a look through our Help Centre.</p>
+        <div class="button">
+          <button>Help Centre</button>
+        </div>
+        <div class="notificaitons">
+          <p>You can also change your preferences and how we get in touch on your 
+            <router-link 
+              :to="{ name: 'settings' }"
+              tag="button"
+              class="tertiary">
+              Settings
+            </router-link>
+            page.</p>
+        </div>
+        <div class="button log-out">
+          <button 
+            @click="handleLogout" 
+            type="button"
+            class="secondary">
+            Log Out
+          </button>
+        </div>
+      </div>
+    </section>
   </section>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import verifyEmail from '@/components/profile/VerifyEmail';
 import updatedProfile from '@/components/profile/UpdatedProfile';
 import nonUpdatedProfile from '@/components/profile/NonUpdatedProfile';
 
 export default {
   components: {
+    verifyEmail,
     updatedProfile,
     nonUpdatedProfile
   },
