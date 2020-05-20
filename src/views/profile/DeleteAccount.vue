@@ -9,21 +9,17 @@
       @nextStage="nextStage" />
 
     <stage-two v-if="stage === 2" />
-
-    <stage-three v-if="stage === 3" />
   </section>
 </template>
 
 <script>
 import stageOne from '@/components/profile/delete-account/StageOne.vue';
 import stageTwo from '@/components/profile/delete-account/StageTwo.vue';
-import stageThree from '@/components/profile/delete-account/StageThree.vue';
 
 export default {
   components: {
     stageOne,
-    stageTwo,
-    stageThree
+    stageTwo
   },
   data() {
     return {
