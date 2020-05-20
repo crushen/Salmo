@@ -42,7 +42,7 @@
 
         <div class="button" key="button">
           <button 
-            @click="deleteAccount"
+            @click="handleDelete"
             class="secondary">
             Delete Account
           </button>
@@ -54,10 +54,13 @@
 
 <script>
 import { required, email } from 'vuelidate/lib/validators';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 export default {
   data() {
     return {
+      user: this.$store.state.auth.user,
       open: false,
       form: {
         email: '',
@@ -78,16 +81,39 @@ export default {
     }
   },
   methods: {
-    deleteAccount() {
+    handleDelete() {
       if(!this.open) {
         this.open = true;
       } else {
         this.$v.form.$touch();
         if(!this.$v.form.$invalid) {
-          console.log('delete');
+          // First reauthenticate account - check password is correct
+          const user = firebase.auth().currentUser;
+          const credential = firebase.auth.EmailAuthProvider.credential(
+            user.email, 
+            this.form.password
+          );
+
+          user.reauthenticateWithCredential(credential)
+            // If correct password, delete account
+            .then(() => {
+              this.deleteAccount(user);
+            })
+            // If incorrect password, show error
+            .catch(error => {
+              this.error = error.message;
+            })
         }
       }
     },
+    deleteAccount(user) {
+      user.delete().then(() => {
+        this.$store.state.auth.user = null;
+        this.$router.push('/');
+      }).catch(error => {
+        this.error = error.message;
+      });
+    }
   }
 }
 </script>
