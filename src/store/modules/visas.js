@@ -4,7 +4,7 @@ const visas = [
     category: 'work',
     slug: 'T5-creative-and-sporting',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Great for individuals with a temporary job in a creative or sporting field.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -14,9 +14,9 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
+        { name: 'ILR', status: false },
         { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
+        { name: 'Study', status: true },
         { name: 'Dependants', status: true },
         { name: 'Switch', status: false },
         { name: 'Extend', status: true }
@@ -28,7 +28,7 @@ const visas = [
     category: 'work',
     slug: 'T5-gov-authorised-exchange',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Perfect for individuals coming to the UK as part of their work experience.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -38,11 +38,11 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
+        { name: 'ILR', status: false },
         { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
+        { name: 'Study', status: true },
         { name: 'Dependants', status: true },
-        { name: 'Switch', status: false },
+        { name: 'Switch', status: true },
         { name: 'Extend', status: true }
       ]
     }
@@ -52,7 +52,7 @@ const visas = [
     category: 'work',
     slug: 'T2-intra-company-transfer',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Awesome for individuals who are being transferred to a UK branch.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -66,7 +66,7 @@ const visas = [
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
         { name: 'Dependants', status: true },
-        { name: 'Switch', status: false },
+        { name: 'Switch', status: true },
         { name: 'Extend', status: true }
       ]
     }
@@ -76,7 +76,7 @@ const visas = [
     category: 'family',
     slug: 'family',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Needs expanding.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -100,7 +100,7 @@ const visas = [
     category: 'business',
     slug: 'global-talent',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Great for individuals who are top in their field of work.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -114,7 +114,7 @@ const visas = [
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
         { name: 'Dependants', status: true },
-        { name: 'Switch', status: false },
+        { name: 'Switch', status: true },
         { name: 'Extend', status: true }
       ]
     }
@@ -124,7 +124,7 @@ const visas = [
     category: 'business',
     slug: 'innovator',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Amazing for individuals looking to bring a new business concept to the UK.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -138,7 +138,7 @@ const visas = [
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
         { name: 'Dependants', status: true },
-        { name: 'Switch', status: false },
+        { name: 'Switch', status: true },
         { name: 'Extend', status: true }
       ]
     }
@@ -148,7 +148,7 @@ const visas = [
     category: 'business',
     slug: 'startup',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Perfect for individuals looking to start a UK based business.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -158,12 +158,12 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
+        { name: 'ILR', status: false },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
         { name: 'Dependants', status: true },
-        { name: 'Switch', status: false },
-        { name: 'Extend', status: true }
+        { name: 'Switch', status: true },
+        { name: 'Extend', status: false }
       ]
     }
   },
@@ -172,7 +172,7 @@ const visas = [
     category: 'business',
     slug: 'T1-investor',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Awesome for individuals looking to invest in UK business.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -197,7 +197,7 @@ const visas = [
     category: 'work',
     slug: 'T2-general-work',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Great for individuals with a job offer in the UK.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -222,7 +222,7 @@ const visas = [
     category: 'work',
     slug: 'T2-minister-of-religion',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Amazing for individuals who want to work in their religion.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -247,7 +247,7 @@ const visas = [
     category: 'work',
     slug: 'T2-sportsperson',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Perfect for individuals looking to work in a sports based career.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -272,7 +272,7 @@ const visas = [
     category: 'study',
     slug: 'T4-general-student',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Perfect for individuals looking to study a subject.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -282,11 +282,11 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
-        { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
-        { name: 'Switch', status: false },
+        { name: 'ILR', status: false },
+        { name: 'Work', status: 'maybe' },
+        { name: 'Study', status: true },
+        { name: 'Dependants', status: 'maybe' },
+        { name: 'Switch', status: true },
         { name: 'Extend', status: true }
       ]
     }
@@ -296,7 +296,7 @@ const visas = [
     category: 'study',
     slug: 'T4-short-term-study',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Great for individuals looking to take part in a short course.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -306,11 +306,11 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
-        { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
-        { name: 'Switch', status: false },
+        { name: 'ILR', status: false },
+        { name: 'Work', status: 'maybe' },
+        { name: 'Study', status: true },
+        { name: 'Dependants', status: false },
+        { name: 'Switch', status: true },
         { name: 'Extend', status: true }
       ]
     }
@@ -320,7 +320,7 @@ const visas = [
     category: 'work',
     slug: 'T5-charity-worker',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Great for individuals coming to take part in charity work from the UK.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -330,9 +330,9 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
-        { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
+        { name: 'ILR', status: false },
+        { name: 'Work', status: false },
+        { name: 'Study', status: true },
         { name: 'Dependants', status: true },
         { name: 'Switch', status: false },
         { name: 'Extend', status: true }
@@ -344,7 +344,7 @@ const visas = [
     category: 'work',
     slug: 'T5-international-agreement',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Amazing for individuals coming to the UK for government based work.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -356,7 +356,7 @@ const visas = [
       checklist: [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
+        { name: 'Study', status: true },
         { name: 'Dependants', status: true },
         { name: 'Switch', status: false },
         { name: 'Extend', status: true }
@@ -368,7 +368,7 @@ const visas = [
     category: 'work',
     slug: 'T5-religious-worker',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Awesome for individuals looking to work in their religion in the UK.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -378,9 +378,9 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
+        { name: 'ILR', status: false },
         { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
+        { name: 'Study', status: true },
         { name: 'Dependants', status: true },
         { name: 'Switch', status: false },
         { name: 'Extend', status: true }
@@ -392,7 +392,7 @@ const visas = [
     category: 'work',
     slug: 'T5-seasonal-worker',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Perfect for individuals who are here to work in a temporary seasonal job.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -402,12 +402,12 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
+        { name: 'ILR', status: false },
         { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Study', status: false },
+        { name: 'Dependants', status: false },
         { name: 'Switch', status: false },
-        { name: 'Extend', status: true }
+        { name: 'Extend', status: false }
       ]
     }
   },
@@ -416,7 +416,7 @@ const visas = [
     category: 'youth-mobility',
     slug: 'youth-mobility-scheme',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Awesome for individuals who wish to experience UK life.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -426,12 +426,12 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
+        { name: 'ILR', status: false },
         { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Study', status: true },
+        { name: 'Dependants', status: false },
         { name: 'Switch', status: false },
-        { name: 'Extend', status: true }
+        { name: 'Extend', status: false }
       ]
     }
   },
@@ -440,7 +440,7 @@ const visas = [
     category: 'child',
     slug: 'T4-child-student',
     card: {
-      subTitle: 'Awesome for individuals who wish to invest in UK business.',
+      subTitle: 'Amazing for individuals under 18 to study in the UK.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
@@ -450,11 +450,11 @@ const visas = [
         ]
       },
       checklist: [
-        { name: 'ILR', status: true },
-        { name: 'Work', status: true },
-        { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
-        { name: 'Switch', status: false },
+        { name: 'ILR', status: false },
+        { name: 'Work', status: 'maybe' },
+        { name: 'Study', status: true },
+        { name: 'Dependants', status: false },
+        { name: 'Switch', status: true },
         { name: 'Extend', status: true }
       ]
     }
