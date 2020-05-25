@@ -131,6 +131,7 @@ export default {
 
   &.disabled {
     color: $light-grey;
+    pointer-events: none;
 
     button {
       background: $light-grey;
