@@ -39,7 +39,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 #delete-account {
-  padding: $spacing*10 0 $spacing*12 0;
+  padding: $spacing*12 0;
 }
 
 h1 {

@@ -78,7 +78,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 #settings {
-  padding: $spacing*10 0;
+  padding: $spacing*12 0;
 }
 
 .section {

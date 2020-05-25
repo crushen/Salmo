@@ -135,7 +135,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 #help-centre {
-  padding: $spacing*10 0 0;
+  padding: $spacing*12 0 0;
 }
 
 .questions {
