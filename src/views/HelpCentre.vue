@@ -1,8 +1,10 @@
 <template>
-  <section class="content">
-    <h1>Confused?<br> Need more info?</h1>
+  <section id="help-centre">
+    <div class="content">
+      <h1>Confused?<br> Need more info?</h1>
+    </div>
 
-    <section class="questions">
+    <section class="questions content">
       <div 
         v-for="(question, index) in questions"
         :key="index"
@@ -18,6 +20,39 @@
         <div class="text">
           <h3>{{ question.title }}</h3>
           <p v-if="selected === index">{{ question.text }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-margin content">
+      <h2>All you need to know about...</h2>
+
+      <div class="buttons">
+        <router-link
+        class="button"
+          v-for="page in helpPages"
+          :key="page.title"
+          :to="{ name: 'help-centre-page', params: { page: page.slug } }">
+          <div>
+            <h3>{{ page.title }}</h3>
+            <!-- <img :src="page.icon" class="icon"> -->
+          </div>
+        </router-link>
+      </div>
+    </section>
+
+    <section class="bottom">
+      <div class="content">
+        <h2>Need to talk to us?</h2>
+
+        <div class="contact-buttons">
+          <button class="secondary">Call Us</button>
+          <button class="secondary">Email Us</button>
+        </div>
+
+        <div class="disclaimer">
+          <p class="title">Disclaimer</p>
+          <p>We are a team of enthusiastic individuals with the aim of conveying exsisting visa information in a more digestable format. Please do not get in touch for legal advice as we are not qualified to give this at the moment.</p>
         </div>
       </div>
     </section>
@@ -55,6 +90,24 @@ export default {
           title: "Why should I use Salmo?",
           text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates velit dolorem expedita, placeat ratione.'
         }
+      ],
+      helpPages: [
+        {
+          title: 'Biometric Residence Permit',
+          slug: 'biometric-residence-permit'
+        },
+        {
+          title: 'Applying with Dependants',
+          slug: 'applying-with-dependants'
+        },
+        {
+          title: 'Switch VS Extend',
+          slug: 'switch-vs-extend'
+        },
+        {
+          title: 'Indefinite Leave to Remain',
+          slug: 'indefinite-leave-to-remain'
+        }
       ]
     }
   },
@@ -81,8 +134,8 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.content {
-  padding: $spacing*10 0;
+#help-centre {
+  padding: $spacing*10 0 0;
 }
 
 .questions {
@@ -120,7 +173,6 @@ export default {
     }
   }
 
-
   &.selected {
     background: $primary-yellow;
 
@@ -145,6 +197,68 @@ export default {
 
     p {
       margin-top: $spacing*2;
+    }
+  }
+}
+
+.buttons {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin: $spacing*4 auto auto;
+
+  .button {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: $spacing;
+    padding: $spacing;
+    border-radius: $border-radius;
+    background: $dark-font;
+    color: $light-font;
+    box-shadow: $shadow;
+
+    h3 {
+      text-align: center;
+      font-size: 16px;
+    }
+
+    // .icon {
+    //   width: 16px;
+    // }
+  }
+}
+
+.bottom {
+  background: $background;
+  margin-top: $spacing*8;
+  padding: $spacing*8 0 $spacing*10 0;
+
+  .contact-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: $spacing*4;
+
+    button {
+      min-width: 45%;
+    }
+  }
+
+  .disclaimer {
+    background: $light-grey;
+    padding: 10px $spacing;
+    border-radius: 4px;
+    margin-top: $spacing*6;
+
+    .title {
+      font-weight: 600;
+      margin-bottom: $spacing*2;
     }
   }
 }

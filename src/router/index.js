@@ -19,6 +19,7 @@ import VisaInfoEU from '@/views/visa/EU';
 import EuOptions from '@/views/visa/EuOptions';
 import About from '@/views/About';
 import HelpCentre from '@/views/HelpCentre';
+import HelpCentrePage from '@/views/HelpCentrePage';
 import NotFound from '@/views/NotFound';
 
 import firebase from 'firebase/app';
@@ -131,6 +132,11 @@ const routes = [
     path: '/help-centre', 
     name: 'help-centre', 
     component: HelpCentre
+  },
+  { 
+    path: '/help-centre/:page', 
+    name: 'help-centre-page', 
+    component: HelpCentrePage
   },
   { path: '/404',
     name: 'not-found',
