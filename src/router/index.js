@@ -134,7 +134,7 @@ const routes = [
     component: HelpCentre
   },
   { 
-    path: '/help-centre/:page', 
+    path: '/help-centre/:slug', 
     name: 'help-centre-page', 
     component: HelpCentrePage
   },

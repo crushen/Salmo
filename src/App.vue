@@ -52,6 +52,8 @@ export default {
           return true;
         case 'help-centre':
           return true;
+        case 'help-centre-page':
+          return true;
         default:
           return false;
       }

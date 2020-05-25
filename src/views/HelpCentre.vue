@@ -32,7 +32,7 @@
         class="button"
           v-for="page in helpPages"
           :key="page.title"
-          :to="{ name: 'help-centre-page', params: { page: page.slug } }">
+          :to="{ name: 'help-centre-page', params: { slug: page.slug } }">
           <div>
             <h3>{{ page.title }}</h3>
             <!-- <img :src="page.icon" class="icon"> -->
