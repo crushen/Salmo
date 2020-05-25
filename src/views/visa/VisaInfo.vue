@@ -17,7 +17,12 @@
           class="pink">
           EU
         </router-link>
-        <button class="secondary">Help Centre</button>
+        <router-link 
+          :to="{name: 'help-centre'}"
+          tag="button"
+          class="secondary">
+          Help Centre
+        </router-link>
       </div>
     </div>
 

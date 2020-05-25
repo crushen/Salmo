@@ -50,6 +50,8 @@ export default {
           return true;
         case 'forgot-password':
           return true;
+        case 'help-centre':
+          return true;
         default:
           return false;
       }

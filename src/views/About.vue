@@ -19,7 +19,11 @@
       <div class="content">
         <p>For more general advice or help on the UK application process, take a look through our Help Centre.</p>
         <div class="button">
-          <button>Help Centre</button>
+          <router-link 
+            :to="{name: 'help-centre'}"
+            tag="button">
+            Help Centre
+          </router-link>
         </div>
       </div>
     </div>
