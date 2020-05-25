@@ -48,6 +48,8 @@ export default {
           return true;
         case 'delete-account':
           return true;
+        case 'forgot-password':
+          return true;
         default:
           return false;
       }
