@@ -9,7 +9,11 @@
       <h3>We're sorry that page you wanted cannot be found!</h3>
       <p>Let's try again, you can visit home, UK visa information, your profile and the about pages from the blue button, or click below to go to our help centre.</p>
       <div class="button">
-        <button>Help Centre</button>
+        <router-link 
+          :to="{name: 'help-centre'}"
+          tag="button">
+          Help Centre
+        </router-link>
       </div>
     </div>
   </section>
