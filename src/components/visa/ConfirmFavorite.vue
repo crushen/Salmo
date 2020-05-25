@@ -1,8 +1,14 @@
 <template>
   <div class="modal">
-    <p>This will change your favorite visa from <span>{{ user.favoriteVisa.name }}</span> to <span>{{ visa.name }}</span>.</p>
-    <p>Changing your favorite visa will also change your documentation list, and any changes you've made to it will be lost</p>
-    <p><span>Are you sure you want to change your favorite visa?</span></p>
+    <div v-if="user.favoriteVisa">
+      <p>This will change your favorite visa from <span>{{ user.favoriteVisa.name }}</span> to <span>{{ visa.name }}</span>.</p>
+      <p>Changing your favorite visa will also change your documentation list, and any changes you've made to it will be lost</p>
+      <p><span>Are you sure you want to change your favorite visa?</span></p>
+    </div>
+
+    <div v-else>
+      <p>Do you wish to make <span>{{ visa.name }}</span> your favourite visa?</p>
+    </div>
 
     <div class="buttons">
       <button @click="handleConfirm" class="secondary">No Thanks</button>

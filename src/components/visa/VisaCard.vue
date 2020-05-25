@@ -85,7 +85,7 @@ export default {
       });
     },
     checkFavorite() {
-      if(this.visa.name === this.user.favoriteVisa.name) {
+      if(this.user.favoriteVisa && this.visa.name === this.user.favoriteVisa.name) {
         this.heart = this.pinkHeart;
       } else {
         this.heart = this.greyHeart;
@@ -132,6 +132,11 @@ export default {
     color: white;
     text-align: center;
     padding: $spacing;
+
+    h3 {
+      max-width: 75%;
+      margin: auto;
+    }
   }
 
   .body {
