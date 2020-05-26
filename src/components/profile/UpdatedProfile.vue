@@ -48,7 +48,7 @@
             <h3>Your next step...</h3>
             <p>When you're dont calculating everything and want to figure out your next step, do through to your visa planner!</p>
           </div>
-          <div class="placeholder-img"></div>
+          <img :src="visaPlannerImg" class="placeholder-img">
           <div class="button">
             <router-link
               :to="{name: 'visa-planner', params: {username: user.profile.username}}"
@@ -79,6 +79,7 @@
 import profileCard from '@/components/profile/ProfileCard';
 import visaDatesCard from '@/components/profile/VisaDatesCard';
 import prCalculator from '@/components/profile/PrCalculator';
+import visaPlannerImg from '@/assets/illustrations/visa-planner.svg';
 
 export default {
   props: {
@@ -88,6 +89,11 @@ export default {
     profileCard,
     visaDatesCard,
     prCalculator
+  },
+  data() {
+    return {
+      visaPlannerImg
+    }
   }
 }
 </script>
@@ -151,9 +157,6 @@ h1 {
 
   .placeholder-img {
     width: 120px;
-    height: 120px;
-    background: $light-grey;
-    border-radius: 200px;
   }
 
   .button {
