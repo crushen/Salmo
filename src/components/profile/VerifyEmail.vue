@@ -1,26 +1,78 @@
 <template>
   <section class="content">
-    <h1>Verify your email.</h1>
-    <h3>We've sent you an email to {{ user.email }} to verify your address.</h3>
-    <p>Please click on the link in your email to begin setting up your account. Don't forget to check your junk/spam folders!</p>
-    <p>If you've clicked the link and still see this message, try refreshing the page.</p>
+    <div v-if="terms.show">
+      <h1>Just one more thing...</h1>
 
-    <div class="placeholder-img"></div>
+      <p>Please accpet our terms and conditions to continue.</p>
 
-    <p>Once you've completed your profile, you'll also gain access to other features such as your personalised quiz and your own Visa Stats and Facts page.</p>
+      <terms-and-conditions />
+
+      <div class="field">
+        <label class="container" for="terms">I accept the terms and conditions listed above.</label>
+
+        <pretty-check 
+          v-model="terms.accepted"
+          id="terms"
+          class="p-icon p-smooth" 
+          color="danger">
+          <i slot="extra" class="icon fa fa-check"></i>
+        </pretty-check>
+      </div>
+
+      <div class="button">
+        <button 
+          @click="acceptTerms"
+          :class="terms.accepted ? 'pink' : 'disabled'">
+          Continue
+        </button>
+      </div>
+    </div>
+
+    <div v-else>
+      <h1>Verify your email.</h1>
+      <h3>We've sent you an email to {{ user.email }} to verify your address.</h3>
+      <p>Please click on the link in your email to begin setting up your account. Don't forget to check your junk/spam folders!</p>
+      <p>If you've clicked the link and still see this message, try refreshing the page.</p>
+
+      <div class="placeholder-img"></div>
+
+      <p>Once you've completed your profile, you'll also gain access to other features such as your personalised quiz and your own Visa Stats and Facts page.</p>
+    </div>
   </section>
 </template>
 
 <script>
+import termsAndConditions from '@/components/profile/TermsAndConditions';
+import prettyCheck from 'pretty-checkbox-vue/check';
+
 export default {
   props: {
     user: { required: true, type: Object }
+  },
+  components: {
+    termsAndConditions,
+    prettyCheck
+  },
+  data() {
+    return {
+      terms: {
+        show: true,
+        accepted: false
+      }
+    }
+  },
+  methods: {
+    acceptTerms() {
+      this.terms.show = false;
+      window.scrollTo(0,0);
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
+@import '@/assets/styles/main.scss';
 
 h1 {
   margin-bottom: $spacing*4;
@@ -38,4 +90,35 @@ h3, p {
   margin: $spacing*8 auto;
 }
 
+.field {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  padding: $spacing;
+  font-size: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+
+  label {
+    @include font(16px, 300);
+    color: $dark-font;
+    width: 100%;
+  }
+
+  &:not(:first-of-type) {
+    margin-top: $spacing*2;
+  }
+}
+
+.button {
+  margin-top: $spacing*4;
+  text-align: center;
+  
+  button {
+    transition: 0.3s;
+  }
+}
 </style>

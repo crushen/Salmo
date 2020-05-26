@@ -1,6 +1,6 @@
 <template>
   <section id="profile">
-    <!-- Check if user has verified email -->
+    <!-- Check if user has verified email and accepted T&C's -->
     <verify-email 
       v-if="!user.emailVerified" 
       :user="user"/>

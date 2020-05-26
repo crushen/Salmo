@@ -80,6 +80,12 @@ input[type="submit"] {
     background: $primary-pink;
     color: $light-font;
   }
+
+  &.disabled {
+    background: $light-grey;
+    color: white;
+    pointer-events: none;
+  }
 }
 
 // Page
