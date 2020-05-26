@@ -30,16 +30,18 @@
         Tell Me More!
       </router-link>
 
-      <img 
-        @click="makeFavorite"
-        :src="heart" 
-        class="heart">
+      <div v-if="user">
+        <img 
+          @click="makeFavorite"
+          :src="heart" 
+          class="heart">
 
-      <confirm-favorite 
-        v-if="confirmChange"
-        :visa="visa"
-        :user="user"
-        @closeModal="closeModal" />
+        <confirm-favorite 
+          v-if="confirmChange"
+          :visa="visa"
+          :user="user.profile"
+          @closeModal="closeModal" />
+      </div>
     </div>
   </div>
 </template>
@@ -61,7 +63,7 @@ export default {
   },
   data() {
     return {
-      user: this.$store.state.auth.user.profile,
+      user: this.$store.state.auth.user,
       checklist: this.visa.card.checklist,
       check,
       cross,
@@ -85,10 +87,12 @@ export default {
       });
     },
     checkFavorite() {
-      if(this.user.favoriteVisa && this.visa.name === this.user.favoriteVisa.name) {
-        this.heart = this.pinkHeart;
-      } else {
-        this.heart = this.greyHeart;
+      if(this.user) {
+         if(this.user.profile.favoriteVisa && this.visa.name === this.user.profile.favoriteVisa.name) {
+          this.heart = this.pinkHeart;
+        } else {
+          this.heart = this.greyHeart;
+        }       
       }
     },
     makeFavorite() {
