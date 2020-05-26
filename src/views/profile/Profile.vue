@@ -12,39 +12,39 @@
         :user="user" />
 
       <non-updated-profile v-else/>
-    </div>
 
-    <!-- Links to help center and settings & log out button -->
-    <section class="help">
-      <div class="content">
-        <p>For more general advice or help on the UK application process, take a look through our Help Centre.</p>
-        <div class="button">
-          <router-link 
-            :to="{name: 'help-centre'}"
-            tag="button">
-            Help Centre
-          </router-link>
-        </div>
-        <div class="notificaitons">
-          <p>You can also change your preferences and how we get in touch on your 
+      <!-- Links to help center and settings & log out button -->
+      <section class="help">
+        <div class="content">
+          <p>For more general advice or help on the UK application process, take a look through our Help Centre.</p>
+          <div class="button">
             <router-link 
-              :to="{ name: 'settings' }"
-              tag="button"
-              class="tertiary">
-              Settings
+              :to="{name: 'help-centre'}"
+              tag="button">
+              Help Centre
             </router-link>
-            page.</p>
+          </div>
+          <div class="notificaitons">
+            <p>You can also change your preferences and how we get in touch on your 
+              <router-link 
+                :to="{ name: 'settings' }"
+                tag="button"
+                class="tertiary">
+                Settings
+              </router-link>
+              page.</p>
+          </div>
+          <div class="button log-out">
+            <button 
+              @click="handleLogout" 
+              type="button"
+              class="secondary">
+              Log Out
+            </button>
+          </div>
         </div>
-        <div class="button log-out">
-          <button 
-            @click="handleLogout" 
-            type="button"
-            class="secondary">
-            Log Out
-          </button>
-        </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </section>
 </template>
 

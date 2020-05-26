@@ -3,7 +3,7 @@
     <div v-if="terms.show">
       <h1>Just one more thing...</h1>
 
-      <p>Please accpet our terms and conditions to continue.</p>
+      <p>Please accept our terms and conditions to continue.</p>
 
       <terms-and-conditions />
 
@@ -73,6 +73,10 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 @import '@/assets/styles/main.scss';
+
+.content {
+  padding-bottom: $spacing*10;
+}
 
 h1 {
   margin-bottom: $spacing*4;
