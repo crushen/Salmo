@@ -88,6 +88,11 @@ export default {
       }
       window.scrollTo(0, 0);
     }
+  },
+  mounted() {
+    if(!this.visas) {
+      this.$router.push({name: 'not-found'});
+    }
   }
 }
 </script>

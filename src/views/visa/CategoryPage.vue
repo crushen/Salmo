@@ -39,6 +39,11 @@ export default {
     visas() {
       return this.visaList.filter(item => item.category === this.category);
     }
+  },
+  mounted() {
+    if(!this.visas.length) {
+      this.$router.push({name: 'not-found'});
+    }
   }
 }
 </script>

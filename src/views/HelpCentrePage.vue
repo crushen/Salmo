@@ -84,6 +84,11 @@ export default {
     currentPage() {
       return this.pages.find(page => page.slug === this.slug);
     }
+  },
+  mounted() {
+    if(!this.currentPage) {
+      this.$router.push({name: 'not-found'});
+    }
   }
 }
 </script>
