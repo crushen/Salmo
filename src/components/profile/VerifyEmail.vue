@@ -1,6 +1,6 @@
 <template>
-  <section class="content">
-    <div v-if="terms.show">
+  <section>
+    <div class="content terms" v-if="terms.show">
       <h1>Just one more thing...</h1>
 
       <p>Please accept our terms and conditions to continue.</p>
@@ -29,14 +29,18 @@
     </div>
 
     <div v-else>
-      <h1>Verify your email.</h1>
-      <h3>We've sent you an email to {{ user.email }} to verify your address.</h3>
-      <p>Please click on the link in your email to begin setting up your account. Don't forget to check your junk/spam folders!</p>
-      <p>If you've clicked the link and still see this message, try refreshing the page.</p>
+      <div class="content">
+        <h1>Verify your email.</h1>
+        <h3>We've sent you an email to {{ user.email }} to verify your address.</h3>
+        <p>Please click on the link in your email to begin setting up your account. Don't forget to check your junk/spam folders!</p>
+        <p>If you've clicked the link and still see this message, try refreshing the page.</p>
 
-      <div class="placeholder-img"></div>
+        <div class="placeholder-img"></div>
 
-      <p>Once you've completed your profile, you'll also gain access to other features such as your personalised quiz and your own Visa Stats and Facts page.</p>
+        <p>Once you've completed your profile, you'll also gain access to other features such as your personalised quiz and your own Visa Stats and Facts page.</p>
+      </div>
+
+      <settings />
     </div>
   </section>
 </template>
@@ -44,6 +48,7 @@
 <script>
 import termsAndConditions from '@/components/profile/TermsAndConditions';
 import prettyCheck from 'pretty-checkbox-vue/check';
+import settings from '@/components/profile/Settings';
 
 export default {
   props: {
@@ -51,7 +56,8 @@ export default {
   },
   components: {
     termsAndConditions,
-    prettyCheck
+    prettyCheck,
+    settings
   },
   data() {
     return {
@@ -74,7 +80,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 @import '@/assets/styles/main.scss';
 
-.content {
+.terms {
   padding-bottom: $spacing*10;
 }
 
