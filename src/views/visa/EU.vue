@@ -10,7 +10,7 @@
 
     <brexit-timeline />
 
-    <div class="section-margin explore">
+    <div class="explore">
       <div class="content">
         <h3>All EU individuals currently living in the UK have two options to choose from:</h3>
 
@@ -67,6 +67,7 @@ h3 {
 }
 
 .explore {
+  margin-top: $spacing*3;
   padding: $spacing*6 0 $spacing*12 0;
   background: $background;
 
