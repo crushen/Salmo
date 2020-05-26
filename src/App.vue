@@ -26,36 +26,18 @@ export default {
   computed: {
     arrowPage() {
       switch(this.$route.name) {
-        case 'questionnaire':
-          return true;
-        case 'results':
-          return true;
-        case 'update-profile':
-          return true;
-        case 'visa-planner':
-          return true;
-        case 'non-eu-category':
-          return true;
-        case 'visa-info-eu':
-          return true;
-        case 'eu-options':
-          return true;
-        case 'non-eu':
-          return true;
-        case 'visa-page':
-          return true;
-        case 'settings':
-          return true;
-        case 'delete-account':
-          return true;
-        case 'forgot-password':
-          return true;
-        case 'help-centre':
-          return true;
-        case 'help-centre-page':
-          return true;
-        default:
+        case 'home':
           return false;
+        case 'profile':
+          return false;
+        case 'about':
+          return false;
+        case 'visa-info':
+          return false;
+        case 'results':
+          return false;
+        default:
+          return true;
       }
     }
   }
