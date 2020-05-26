@@ -1,23 +1,36 @@
 <template>
   <section id="eu">
     <div class="content">
-      <h1>Brexit. We know why you're here!</h1>
-      <p>We've got a timeline below where you can keep up to date with important Brexit events and dates.</p>
+      <h1>Help with Brexit.</h1>
+
+      <p> We know why you’re here! Brexit has everyone worried, but here we will give you all the information so you can make your next step fully informed.</p>
+
+      <h3>Check this timeline for all the important Brexit dates.</h3>
     </div>
 
     <brexit-timeline />
 
-    <div class="content section-margin explore">
-      <h2>Check out which pathway is best for you:</h2>
-      <router-link
-        :to="{ name: 'eu-options' }"
-        tag="button"
-        class="pink">
-        Explore My Options
-      </router-link>
+    <div class="section-margin explore">
+      <div class="content">
+        <h3>All EU individuals currently living in the UK have two options to choose from:</h3>
+
+        <div class="buttons">
+          <router-link
+            :to="{ name: 'eu-settled' }"
+            tag="button"
+            class="pink">
+            Settled
+          </router-link>
+
+          <router-link
+            :to="{ name: 'eu-pre-settled' }"
+            tag="button"
+            class="pink">
+            Pre-Settled
+          </router-link>
+        </div>
+      </div>
     </div>
-    
-    <div class="placeholder-img"></div>
   </section>
 </template>
 
@@ -49,21 +62,23 @@ h1 {
   margin-bottom: $spacing*3;
 }
 
-.explore {
-  display: flex;
-  flex-direction: column;
-
-  button {
-    margin-top: $spacing*3;
-    align-self: center;
-  }
+h3 {
+  margin-top: $spacing*3;
 }
 
-.placeholder-img {
-  width: 25vw;
-  height: 30vw;
-  background: $light-grey;
-  margin-top: $spacing*4;
-  margin-left: calc(50% - 12.5vw);
+.explore {
+  padding: $spacing*6 0 $spacing*12 0;
+  background: $background;
+
+  .buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: $spacing*6;
+
+    button {
+      width: 45%;
+    }
+  }
 }
 </style>

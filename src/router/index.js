@@ -16,7 +16,8 @@ import NonEU from '@/views/visa/NonEU';
 import CategoryPage from '@/views/visa/CategoryPage';
 import VisaPage from '@/views/visa/VisaPage';
 import VisaInfoEU from '@/views/visa/EU';
-import EuOptions from '@/views/visa/EuOptions';
+import Settled from '@/views/visa/Settled';
+import PreSettled from '@/views/visa/PreSettled';
 import About from '@/views/About';
 import HelpCentre from '@/views/HelpCentre';
 import HelpCentrePage from '@/views/HelpCentrePage';
@@ -114,9 +115,14 @@ const routes = [
     component: CategoryPage
   },
   { 
-    path: '/visa-info/eu/options', 
-    name: 'eu-options', 
-    component: EuOptions
+    path: '/visa-info/eu/settled', 
+    name: 'eu-settled', 
+    component: Settled
+  },
+  { 
+    path: '/visa-info/eu/pre-settled', 
+    name: 'eu-pre-settled', 
+    component: PreSettled
   },
   { 
     path: '/visa-info/:slug', 
