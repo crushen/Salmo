@@ -138,6 +138,7 @@ export default {
               username: this.form.username,
               user: user.uid,
               questionnaireResults: [],
+              pastVisas: [],
               currentVisa: {}
             }
           })

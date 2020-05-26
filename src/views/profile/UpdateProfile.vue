@@ -566,7 +566,11 @@ export default {
     }
   },
   mounted() {
-    this.currentPastVisas = this.profileToUpdate.pastVisas.length;
+    if(this.profileToUpdate.pastVisas) {
+      this.currentPastVisas = this.profileToUpdate.pastVisas.length;
+    } else {
+      this.currentPastVisas = 0;
+    }
   },
   beforeRouteLeave(to, from, next) {
     if(this.finished) {
