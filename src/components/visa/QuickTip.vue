@@ -41,7 +41,6 @@
 <script>
 import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
 import lightbulbYellow from '@/assets/icons/lightbulb-yellow.svg';
-import cross from '@/assets/icons/white/times-solid.svg';
 
 export default {
   props: {
@@ -51,8 +50,7 @@ export default {
     return {
       open: false,
       lightbulb,
-      lightbulbYellow,
-      cross
+      lightbulbYellow
     }
   },
   methods: {
@@ -167,69 +165,4 @@ export default {
     }
   }
 }
-
-// @keyframes open {
-//   0% {
-//     z-index: 40;
-//     width: 52px;
-//     height: 52px;
-//   }
-//   25% {
-//     z-index: 40;
-//     width: 52px;
-//     height: 52px;
-//     border-radius: $border-radius;
-//   }
-//   50% {
-//     z-index: 40;
-//     width: 52px;
-//     height: 52px;
-//     border-radius: $border-radius;
-//   }
-//   75% {
-//     z-index: 40;
-//     width: 89vw;
-//     height: 120%;
-//     border-radius: $border-radius;
-//   }
-//   100% {
-//     z-index: 40;
-//     width: 89vw;
-//     height: 120%;
-//     border-radius: $border-radius;
-//   }
-// }
-
-// @keyframes close {
-//   0% {
-//     z-index: 40;
-//     width: 89vw;
-//     height: 120%;
-//     border-radius: $border-radius;
-//   }
-//   25% {
-//     z-index: 40;
-//     width: 89vw;
-//     height: 120%;
-//     border-radius: $border-radius;
-//   }
-//   50% {
-//     z-index: 40;
-//     width: 89vw;
-//     height: 120%;
-//     border-radius: $border-radius;
-//   }
-//   75% {
-//     z-index: 40;
-//     width: 52px;
-//     height: 52px;
-//     border-radius: $border-radius;
-//   }
-//   100% {
-//     z-index: 0;
-//     width: 52px;
-//     height: 52px;
-//     border-radius: 50px;
-//   }
-// }
 </style>
