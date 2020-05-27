@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+
 import Home from '@/views/Home';
 import Login from '@/views/Login';
-import Signup from '@/views/Signup';
 import ForgotPassword from '@/views/ForgotPassword';
 import Profile from '@/views/profile/Profile';
 import UpdateProfile from '@/views/profile/UpdateProfile';
@@ -38,12 +38,6 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login,
-    meta: { onlyGuestUser: true }
-  },
-  {
-    path: '/signup',
-    name: 'signup',
-    component: Signup,
     meta: { onlyGuestUser: true }
   },
   {
