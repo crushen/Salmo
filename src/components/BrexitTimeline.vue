@@ -1,29 +1,42 @@
 <template>
-  <ul class="horizontal-scroll-container section-margin">
+  <div class="horizontal-scroll-container section-margin">
     <div class="line"></div>
-    <li 
-      v-for="(event, index) in events"
-      :key="event.title"
-      @click="selected = index"
-      :class="{'selected': selected === index}"
-      class="card">
-      <p class="date">{{ event.date }}</p>
-      <p class="title">{{ event.title }}</p>
+    <ul>
+      <li 
+        v-for="(event, index) in events"
+        :key="event.title"
+        @click="selectItem(index)"
+        :class="{'selected': selected === index}"
+        class="card">
+        <p class="date">{{ event.date }}</p>
 
-      <p 
-        v-if="selected === index"
-        class="text">
-        {{ event.text }}
-      </p>
-    </li>
-  </ul>
+        <transition-group name="fade" tag="div">
+          <p 
+            key="title"
+            v-if="selected !== index"
+            class="title">
+            {{ event.title }}
+          </p>
+
+          <p 
+            key="text"
+            v-else
+            class="text">
+            {{ event.text }}
+          </p>     
+        </transition-group>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
+import icon from '@/assets/icons/nav/visa.svg';
 
 export default {
   data() {
     return {
+      icon,
       selected: 0,
       events: [
         {
@@ -64,7 +77,7 @@ export default {
         {
           date: '12 Dec 2019',
           title: 'Yet another election',
-          text: 'After months of deadlock, Johnson calls for an election to increase his power in parliament. He is successful and his deal brought in.Boris Johnson takes over as PM as May departs Number 10 on the 24 June.'
+          text: 'Johnson calls for an election to increase his power in parliament. He is successful and his deal brought in. May departs Number 10 on the 24 June.'
         },
         {
           date: '31 Jan 2020',
@@ -88,6 +101,11 @@ export default {
         }
       ]
     }
+  },
+  methods: {
+    selectItem(index) {
+      this.selected = index;
+    }
   }
 }
 </script>
@@ -95,14 +113,28 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+.fade-enter-active {
+  transition: 0.3s;
+  transition-delay: 0.3s;
+}
+
+.fade-enter, 
+.fade-leave-to {
+  opacity: 0;
+}
+
 .horizontal-scroll-container {
   overflow-x: scroll;
   overflow-y: hidden;
-  display: flex;
-  align-items: flex-start;
   height: 250px;
   padding: 0 7.5%;
   position: relative;
+}
+
+ul {
+  width: 1900px;
+  display: flex;
+  align-items: flex-start;
 }
 
 .line {
@@ -117,40 +149,15 @@ export default {
 
 .card {
   list-style: none;
-  min-height: 35%;
+  width: 120px;
+  height: 100px;
   background: $secondary-blue;
   border-radius: $border-radius;
-  min-width: 115px;
   padding: $spacing*2 $spacing;
   margin-right: 40px;
   position: relative;
   z-index: 10;
-
-  &.selected {
-    background: $primary-blue;
-    min-width: 180px;
-  }
-
-  &:nth-of-type(5),
-  &:nth-of-type(12),
-  &:nth-of-type(13) {
-    background: $secondary-pink;
-
-    &.selected {
-      background: $primary-pink;
-      min-width: 180px;
-    }
-  }
-
-  // To add margin to end of timeline
-  &:last-child:after {
-    content: "";
-    width: 40px;
-    height: 1px;
-    position: absolute;
-    left: 100%;
-    top: 0px;
-  }
+  transition: 0.4s;
 
   p {
     color: white;
@@ -165,6 +172,32 @@ export default {
     &.text {
       margin-top: $spacing;
     }
+  }
+
+  &.selected {
+    background: $primary-blue;
+    width: 180px;
+    height: 200px;
+  }
+
+  &:nth-of-type(5),
+  &:nth-of-type(12),
+  &:nth-of-type(13) {
+    background: $secondary-pink;
+
+    &.selected {
+      background: $primary-pink;
+    }
+  }
+
+  // To add margin to end of timeline
+  &:last-child:after {
+    content: "";
+    width: 40px;
+    height: 1px;
+    position: absolute;
+    left: 100%;
+    top: 0px;
   }
 }
 </style>
