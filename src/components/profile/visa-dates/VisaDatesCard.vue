@@ -1,6 +1,7 @@
 <template>
   <div class="card">
     <div class="title">
+      <dates-info />
       <h3>Key visa application dates</h3>
     </div>
     <div class="body">
@@ -17,9 +18,14 @@
 </template>
 
 <script>
+import datesInfo from '@/components/profile/visa-dates/Info';
+
 export default {
   props: {
     user: { required: true, type: Object }
+  },
+  components: {
+    datesInfo
   },
   computed: {
     endDate() {

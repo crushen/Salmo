@@ -77,7 +77,7 @@
 
 <script>
 import profileCard from '@/components/profile/ProfileCard';
-import visaDatesCard from '@/components/profile/VisaDatesCard';
+import visaDatesCard from '@/components/profile/visa-dates/VisaDatesCard';
 import prCalculator from '@/components/profile/PrCalculator';
 import visaPlannerImg from '@/assets/illustrations/visa-planner.svg';
 
