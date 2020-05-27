@@ -62,7 +62,8 @@ export default {
   min-height: 260px;
   padding-bottom: $spacing;
   margin: $spacing*5 auto 0 auto;
-  border: 4px solid $secondary-light-blue;
+  background: $secondary-light-blue;
+  // border: 4px solid $secondary-light-blue;
   border-radius: $border-radius;
   box-shadow: $shadow;
   @include grid(repeat(2, 1fr), 2fr 1fr 1fr, 10px);
@@ -71,11 +72,11 @@ export default {
   p {
   
     &.label {
-      color: $secondary-blue;
+      color: $primary-blue;
     }
 
     &.user-info {
-      background: $lightest-grey;
+      background: white;
       padding: 3px 6px;
       border-radius: 4px;
     }
@@ -83,9 +84,14 @@ export default {
 
   .one {
     height: 120px;
-    background: $secondary-light-blue;
-    border-bottom-right-radius: $border-radius;
-    justify-self: stretch;
+    padding: 12px 0 0 $spacing;
+
+    .picture {
+      width: 100%;
+      height: 100%;
+      background: white;
+      border-radius: 4px;
+    }
   }
 
   .two {
