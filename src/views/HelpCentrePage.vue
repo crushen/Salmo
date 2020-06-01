@@ -4,7 +4,7 @@
       <h1>{{ currentPage.title }}</h1>
       <h3>{{ currentPage.subTitle }}</h3>
 
-      <div class="placeholder-img"></div>
+      <img :src="currentPage.img.url" :alt="currentPage.img.alt">
 
       <div class="text">
         <p 
@@ -32,6 +32,11 @@
 </template>
 
 <script>
+import brpImg from '@/assets/illustrations/about/BRP Guide.svg';
+import ilrImg from '@/assets/illustrations/about/ILR Guide.svg';
+import switchImg from '@/assets/illustrations/about/Switch or Extend.svg';
+import dependantsImg from '@/assets/illustrations/about/Applying with Dependants.svg';
+
 export default {
   data() {
     return {
@@ -45,7 +50,11 @@ export default {
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?',
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?',
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
-          ]
+          ],
+          img: {
+            url: brpImg,
+            alt: 'An illustration of a person holding their Biometric Residence Permit'
+          }
         },
         {
           title: 'Applying with Dependants',
@@ -55,7 +64,11 @@ export default {
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?',
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?',
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
-          ]
+          ],
+          img: {
+            url: dependantsImg,
+            alt: 'An illustration of a father and daughter holding hands'
+          }
         },
         {
           title: 'Switch VS Extend',
@@ -65,7 +78,11 @@ export default {
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?',
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?',
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
-          ]
+          ],
+          img: {
+            url: switchImg,
+            alt: 'An illustration of a person thinking'
+          }
         },
         {
           title: 'Indefinite Leave to Remain',
@@ -75,7 +92,11 @@ export default {
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?',
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?',
             'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
-          ]
+          ],
+          img: {
+            url: ilrImg,
+            alt: 'An illustration of a person holding their passport with excitement'
+          }
         }
       ]
     }
@@ -104,11 +125,9 @@ h3 {
   margin-top: $spacing*3;
 }
 
-.placeholder-img {
-  width: 50vw;
-  height: 50vw;
-  background: $light-grey;
-  border-radius: 100px;
+img {
+  display: block;
+  width: 45vw;
   margin: $spacing*6 auto;
 }
 
