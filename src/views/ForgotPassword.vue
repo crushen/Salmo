@@ -45,7 +45,9 @@
         <p>If you don't receive the email, <button @click="linkSent = false" class="tertiary">click here</button> to resend it.</p>
 
         <div class="img-container">
-          <div class="placeholder-img"></div>
+          <img 
+            src="@/assets/illustrations/alternateStates/Man with Email 1.svg" 
+            alt="An illustration of a person holding an envelope">
         </div>
       </div>
     </section>
@@ -103,7 +105,7 @@ export default {
   }
 
   &.sent {
-    margin-top: 0;
+    margin: 0 0 20vh 0;
   }
 }
 
@@ -120,12 +122,14 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10vh;
 
-  div {
-    width: 25vw;
-    height: 35vw;
-    background: $light-grey;
+  img {
+    width: 35vw;
+    position: absolute;
+    bottom: 0;
+    left: 30vw;
+    object-fit: cover;
+    object-position: 0 12vw;
   }
 }
 </style>
