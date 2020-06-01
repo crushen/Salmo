@@ -2,7 +2,7 @@
   <div class="card">
     <div class="header">
       <h3>{{ number }}. {{ title }}</h3>
-      <div class="img"></div>
+      <img :src="img" alt="">
     </div>
     <p v-html="text"></p>
   </div>
@@ -13,7 +13,8 @@ export default {
   props: {
     number: { required: true, type: Number },
     title: { required: true, type: String },
-    text: { required: true, type: String }
+    text: { required: true, type: String },
+    img: { required: true, type: String }
   }
 }
 </script>
@@ -36,10 +37,8 @@ export default {
     margin-bottom: $spacing;
   }
 
-  .img {
+  img {
     width: 110px;
-    height: 110px;
-    background: $light-grey;
     border-radius: 100px;
   }
 }

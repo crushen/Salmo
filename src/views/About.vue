@@ -14,7 +14,8 @@
         :key="index"
         :number="index + 1"
         :title="card.title"
-        :text="card.text"/>
+        :text="card.text"
+        :img="card.img"/>
     </div>
 
     <div class="help">
@@ -34,6 +35,9 @@
 
 <script>
 import aboutCard from '@/components/AboutCard';
+import imgOne from '@/assets/illustrations/about/Salmo Goals 1.svg';
+import imgTwo from '@/assets/illustrations/about/Salmo goals 2.svg';
+import imgThree from '@/assets/illustrations/about/Salmo goals 3.svg';
 
 export default {
   components: {
@@ -44,15 +48,18 @@ export default {
       cards: [
         {
           title: 'Offer a better service for immigrants to apply for a UK visa.',
-          text: 'Applying a visa is like setting your foot into a ruthless maze, with a confusing map in your hand. You may get stuck, lose resources, feel helplessly stressed and much more.<br><br>While we don’t have the power to change the entire visa system (because we’re not the Home Office), we can turn this labyrinth into a highway, so you can can retrieve the control to your path.'
+          text: 'Applying a visa is like setting your foot into a ruthless maze, with a confusing map in your hand. You may get stuck, lose resources, feel helplessly stressed and much more.<br><br>While we don’t have the power to change the entire visa system (because we’re not the Home Office), we can turn this labyrinth into a highway, so you can can retrieve the control to your path.',
+          img: imgOne
         },
         {
           title: 'Core changes at Home Office with the way that visa’s are processed.',
-          text: 'Although we’re not the Home Office, we do have a grand ambition to become the first bottom-up consultancy for them, where we could represent the voice of UK immigrants and help to reshape a better visa system.'
+          text: 'Although we’re not the Home Office, we do have a grand ambition to become the first bottom-up consultancy for them, where we could represent the voice of UK immigrants and help to reshape a better visa system.',
+          img: imgTwo
         },
         {
           title: "Change the way the British public sees immigrants.",
-          text: 'In order to build a harmonic society, we must learn to understand each other’s viewpoint. We aim to create a community that encourages locals and immigrants to share their thoughts on each other, and to defeat immigrants myths together.'
+          text: 'In order to build a harmonic society, we must learn to understand each other’s viewpoint. We aim to create a community that encourages locals and immigrants to share their thoughts on each other, and to defeat immigrants myths together.',
+          img: imgThree
         }
       ]
     }
