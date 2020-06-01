@@ -14,7 +14,9 @@
       <p>This quiz will take<br> 2-5 minutes to complete.</p>
     </div>
 
-    <div class="placeholder-img"></div>
+    <img 
+      src="@/assets/illustrations/quiz/Quiz Begin.svg" 
+      alt="An illustration of a person with their thumb up">
   </section>
 </template>
 
@@ -61,12 +63,13 @@ a {
   }
 }
 
-.placeholder-img {
-  width: 18vw;
-  height: 22vw;
+img {
+  width: 30vw;
+  height: 30vw;
   position: absolute;
   bottom: 0;
-  left: 20px;
-  background: $light-grey;
+  left: 0;
+  object-fit: cover;
+  object-position: 0 0;
 }
 </style>

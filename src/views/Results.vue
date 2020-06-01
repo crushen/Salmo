@@ -1,11 +1,18 @@
 <template>
   <div id="results">
     <section class="content">
-      <h1>Well Done!</h1>
-      <div class="placholder-img"></div>
-      <h3>Congratulations on completing the quiz, your results are below.</h3>
+      <div class="title">
+        <h1>Complete!</h1>
+        <h3>Here are the results of your quiz...</h3>
+      </div>
 
-      <div class="results section-margin">
+
+      <img 
+        class="hero"
+        src="@/assets/illustrations/quiz/Quiz Complete.svg" 
+        alt="">
+
+      <div class="results">
         <div class="top">
           <p>Your best option to remain in the UK is by <strong>switching</strong> to:</p>
 
@@ -188,11 +195,20 @@ export default {
   padding: $spacing*12 0 0;
 }
 
-.placholder-img {
-  width: 90%;
-  height: 150px;
-  margin: $spacing*4 auto;
-  background: $light-grey;
+.title {
+  text-align: center;
+
+  h1 {
+    margin-bottom: $spacing*2;
+  }
+}
+
+img {
+  &.hero {
+    display: block;
+    width: 60%;
+    margin: $spacing*7 auto;
+  }
 }
 
 strong {
