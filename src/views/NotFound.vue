@@ -2,7 +2,10 @@
   <section class="content single-page">
     <header>
       <h1>404 Uh-Oh!</h1>
-      <div class="placeholder-img"></div>
+
+      <img 
+        src="@/assets/illustrations/alternateStates/404.svg" 
+        alt="An illustration of a a confused person">
     </header>
 
     <div class="body">
@@ -26,12 +29,10 @@ section {
   text-align: center;
 }
 
-.placeholder-img {
+img {
+  display: block;
   width: 48vw;
-  height: 48vw;
   margin: 8vw auto 0 auto;
-  background: $light-grey;
-  border-radius: 200px;
 }
 
 .body {
