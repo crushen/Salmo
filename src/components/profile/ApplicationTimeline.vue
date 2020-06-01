@@ -30,11 +30,23 @@
         </div>
       </div>
       <div class="bottom">
-        <p>Prepare yourself for your new life in the uk!</p>
-        <p>Be sure not to arrive before your new visa starts.</p>
-        <p>Collect your BRP within 10 days of when you said you would arrive.</p>
+        <transition name="slide" mode="out-in">
+          <div v-if="selectedTab === 1" key="1">
+            <p>Prepare yourself for your new life in the UK!</p>
+            <p>Be sure not to arrive before your new visa starts.</p>
+            <p>Collect your BRP within 10 days of when you said you would arrive.</p>
 
-        <div class="placeholder-img"></div>
+            <img src="@/assets/illustrations/profilePages/Application success.svg" alt="">
+          </div>
+
+          <div v-else key="2">
+            <p>Prepare yourself for your new life in the UK!</p>
+            <p>Be sure not to arrive before your new visa starts.</p>
+            <p>Collect your BRP within 10 days of when you said you would arrive.</p>
+
+            <img src="@/assets/illustrations/profilePages/Application fail.svg" alt="">
+          </div>
+        </transition>
       </div>
     </div>
   </div>
@@ -164,12 +176,21 @@ export default {
     margin-top: $spacing*2;
   }
 
-  .placeholder-img {
+  img {
+    display: block;
     height: 150px;
-    width: 150px;
-    border-radius: 100px;
-    background: $background;
     margin: $spacing*6 auto $spacing*3 auto;
   }
+}
+
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: 0.6s;
+  transition-timing-function: cubic-bezier(0,1.15,1,.99);
 }
 </style>
