@@ -26,7 +26,12 @@
       </div>
     </div>
 
-    <div class="placeholder-image"></div>
+
+      <img 
+        src="@/assets/illustrations/visaPages/Laptop Person.svg" 
+        alt="An illustration of a person using their laptop">
+
+
   </section>
 </template>
 
@@ -54,12 +59,13 @@
   }
 }
 
-.placeholder-image {
-  width: 25vw;
-  height: 30vw;
-  background: $light-grey;
+img {
+  width: 40vw;
+  height: 40vw;
   position: absolute;
   bottom: 0;
-  left: 7.5vw;
+  left: 0;
+  object-fit: cover;
+  object-position: -3vw 0;
 }
 </style>

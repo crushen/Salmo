@@ -27,7 +27,10 @@
           Child Visa Options
         </router-link>
       </div>
-      <div class="placeholder-image"></div>
+
+      <img 
+        src="@/assets/illustrations/visaPages/Child 1.svg" 
+        alt="An illustration of a person using their laptop">
     </section>
   </section>
 </template>
@@ -116,7 +119,7 @@ export default {
 
 .child-options {
   margin-top: $spacing*6;
-  padding: $spacing*6 0 $bottom-padding 0;
+  padding: $spacing*6 0 $spacing*12 0;
   background: $background;
   position: relative;
 
@@ -131,13 +134,14 @@ export default {
     align-self: center;
   }
 
-  .placeholder-image {
+  img {
+    width: 30vw;
+    height: 33vw;
     position: absolute;
-    background: $light-grey;
-    width: 60px;
-    height: 75px;
-    bottom: 3vw;
-    left: calc(50vw - 30px);
+    bottom: 0;
+    left: 32vw;
+    object-fit: cover;
+    object-position: 0 2vw;
   }
 }
 </style>
