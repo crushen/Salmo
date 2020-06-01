@@ -129,12 +129,12 @@ const routes = [
     component: About
   },
   { 
-    path: '/help-centre', 
+    path: '/about/help-centre', 
     name: 'help-centre', 
     component: HelpCentre
   },
   { 
-    path: '/help-centre/:slug', 
+    path: '/about/help-centre/:slug', 
     name: 'help-centre-page', 
     component: HelpCentrePage
   },
