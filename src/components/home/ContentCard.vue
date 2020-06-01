@@ -29,7 +29,7 @@ export default {
 
   .text {
     h3 {
-      margin-bottom: $spacing;
+      margin-bottom: $spacing*2;
     }
   }
 

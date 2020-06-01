@@ -59,6 +59,10 @@
     </div>
 
     <div class="placeholder-img"></div>
+
+    <img 
+      src="@/assets/illustrations/alternateStates/Sign up 1.svg" 
+      alt="An illustration of a person pointing to the log in button">
   </section>
 </template>
 
@@ -144,12 +148,13 @@ form {
   }
 }
 
-.placeholder-img {
-  width: 20vw;
-  height: 25vw;
+img {
+  width: 40vw;
+  height: 40vw;
   position: absolute;
   bottom: 0;
-  left: 12px;
-  background: $light-grey;
+  left: 0;
+  object-fit: cover;
+  object-position: -8vw 6vw;
 }
 </style>
