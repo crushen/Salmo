@@ -90,7 +90,7 @@ export default {
     }
   },
   mounted() {
-    if(!this.visas) {
+    if(!this.visa) {
       this.$router.push({name: 'not-found'});
     }
   }
