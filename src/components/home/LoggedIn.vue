@@ -18,8 +18,16 @@
         class="content" />
 
       <div class="bottom">
-        <div class="placeholder-image-1"></div>
-        <div class="placeholder-image-2"></div>
+        <img 
+          src="@/assets/illustrations/homePage/Home 2.svg" 
+          alt="An illustration of a person sat on the floor using their mobile phone" 
+          class="image-1">
+
+        <img 
+          src="@/assets/illustrations/homePage/Home 1.svg" 
+          alt="An illustration of a person sat on the floor using their mobile phone" 
+          class="image-2">
+
         <page-link-card
           text="For more general advice or help on the UK aplication process, take a look through our Help Centre."
           pageTitle="Help Centre"
@@ -71,25 +79,21 @@ export default {
 .page-links {
   .bottom {
     background: $background;
-    padding: $spacing*8 0 $bottom-padding 0;
+    padding: $spacing*8 0 $spacing*12 0;
     position: relative;
 
-    .placeholder-image-1 {
-      width: 20vw;
-      height: 25vw;
-      background: $light-grey;
+    .image-1 {
+      width: 35vw;
       position: absolute;
-      top: -19vw;
-      right: 5vw;
+      top: -25vw;
+      right: 3vw;
     }
 
-    .placeholder-image-2 {
+    .image-2 {
       width: 20vw;
-      height: 25vw;
-      background: $light-grey;
       position: absolute;
       bottom: 0;
-      left: 0;
+      left: 3vw;
     }
   }
 }
