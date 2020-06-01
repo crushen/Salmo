@@ -3,7 +3,6 @@
     <header :style="{ backgroundImage: `url(${background})` }">
       <div class="content">
         <div class="logo">
-          <div class="circle"></div>
           <h1 class="logo-text">Salmo</h1>
         </div>
         <h2 class="caption">The ultimate visa organisation tool.</h2>
@@ -50,26 +49,30 @@ export default {
 
 header {
   width: 100%;
-  height: 80vw;
+  height: 60vh;
   margin: auto;
   text-align: center;
   padding-top: $top-padding;
   background-size: cover;
-  background-position: 50% 0%;
+  background-position: 50% 0;
 }
 
 .logo {
+  color: $light-font;
   margin: 0 auto 4vw auto;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  .circle {
-    width: 12vw;
-    height: 12vw;
-    background: $light-grey;
-    margin-right: 4px;
-    border-radius: 100px;
+  h1 {
+    font-size: 20vw;
+    line-height: 0;
   }
+}
+
+h2 {
+  color: $light-font;
+  font-weight: 500;
+  margin-top: $spacing*6;
 }
 </style>

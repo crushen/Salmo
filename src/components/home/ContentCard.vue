@@ -1,5 +1,6 @@
 <template>
   <div class="card">
+    <img :src="img" alt="">
     <div class="text">
       <h3>{{ title }}</h3>
       <p>{{ subTitle }}</p>
@@ -11,8 +12,8 @@
 export default {
   props: {
     title: { required: true, type: String },
-    subTitle: { required: true, type: String }
-    //image: { required: true, type: String }
+    subTitle: { required: true, type: String },
+    img: { required: true, type: String }
   }
 }
 </script>
@@ -22,21 +23,26 @@ export default {
 
 .card {
   width: 100%;
-  height: 60vw;
   display: flex;
-  align-items: flex-end;
-  margin-bottom: $spacing*3;
-  background: $light-grey;
-  border-radius: $border-radius;
-  box-shadow: $shadow;
+  align-items: center;
+  margin-bottom: $spacing*8;
 
   .text {
-    background: rgba($color: #FFF, $alpha: 0.5);
-    padding: $spacing 12px;
-    border-radius: $border-radius;
-
     h3 {
       margin-bottom: $spacing;
+    }
+  }
+
+  img {
+    width: 35%;
+    margin: 0 $spacing*2 0 0;
+  }
+
+  &:nth-of-type(2) {
+    flex-direction: row-reverse;
+
+    img {
+      margin: 0 0 0 $spacing*2;
     }
   }
 }
