@@ -1,5 +1,10 @@
 <template>
   <section class="help">
+    <img 
+      v-if="!user.emailVerified || !user.profile.questionnaireResults.length"
+      src="@/assets/illustrations/alternateStates/Profile before sign in etc.svg" 
+      alt="An illustration of a person thinking">
+
     <div class="content">
       <p>For more general advice or help on the UK application process, take a look through our Help Centre.</p>
       <div class="button">
@@ -33,6 +38,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      user: this.$store.state.auth.user
+    }
+  },
   methods: {
     handleLogout() {
       this.$store.dispatch('auth/logOut')
@@ -52,8 +62,9 @@ export default {
 
 .help {
   background: $background;
-  margin-top: $spacing*8;
+  margin-top: $spacing*12;
   padding: $spacing*8 0 $spacing*10 0;
+  position: relative;
 
   .button {
     margin-top: $spacing*2;
@@ -74,5 +85,12 @@ export default {
     border-radius: 4px;
     margin-top: $spacing*6;
   }
+}
+
+img {
+  width: 25vw;
+  position: absolute;
+  right: 0;
+  top: -23vw;
 }
 </style>

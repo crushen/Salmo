@@ -35,7 +35,9 @@
         <p>Please click on the link in your email to begin setting up your account. Don't forget to check your junk/spam folders!</p>
         <p>If you've clicked the link and still see this message, try refreshing the page.</p>
 
-        <div class="placeholder-img"></div>
+        <img 
+          src="@/assets/illustrations/alternateStates/verify your email.svg" 
+          alt="an illustration of a person getting a notification on their phone">
 
         <p>Once you've completed your profile, you'll also gain access to other features such as your personalised quiz and your own Visa Stats and Facts page.</p>
       </div>
@@ -92,12 +94,10 @@ h3, p {
   margin-bottom: $spacing*2;
 }
 
-.placeholder-img {
-  width: 170px;
-  height: 170px;
-  background: $light-grey;
-  border-radius: 100px;
-  margin: $spacing*8 auto;
+img {
+  display: block;
+  width: 45vw;
+  margin: $spacing*6 auto;
 }
 
 .field {
