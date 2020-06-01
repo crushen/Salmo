@@ -2,7 +2,9 @@
   <section id="about">
     <div class="content">
       <div class="logo">
-        <div class="img"></div>
+        <img
+          src="@/assets/illustrations/symbols/Salmo Logo.svg" 
+          alt="Salmo logo">
         <h1>Salmo</h1>
       </div>
       <h2>Out future goals for the UK visa industry.</h2>
@@ -41,16 +43,16 @@ export default {
     return {
       cards: [
         {
-          title: 'Change the way the British public sees immigrants.',
-          text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt cumque excepturi ratione deleniti suscipit quia similique inventore. Non, officia. Consequatur et veritatis eum laborum saepe, illum consectetur impedit quis alias.'
+          title: 'Offer a better service for immigrants to apply for a UK visa.',
+          text: 'Applying a visa is like setting your foot into a ruthless maze, with a confusing map in your hand. You may get stuck, lose resources, feel helplessly stressed and much more.<br><br>While we don’t have the power to change the entire visa system (because we’re not the Home Office), we can turn this labyrinth into a highway, so you can can retrieve the control to your path.'
         },
         {
-          title: 'Offer a better service for immigrants to aply for a UK visa.',
-          text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt cumque excepturi ratione deleniti suscipit quia similique inventore. Non, officia. Consequatur et veritatis eum laborum saepe, illum consectetur impedit quis alias.'
+          title: 'Core changes at Home Office with the way that visa’s are processed.',
+          text: 'Although we’re not the Home Office, we do have a grand ambition to become the first bottom-up consultancy for them, where we could represent the voice of UK immigrants and help to reshape a better visa system.'
         },
         {
-          title: "Core changes at Home Office with the way that visa's are processed.",
-          text: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt cumque excepturi ratione deleniti suscipit quia similique inventore. Non, officia. Consequatur et veritatis eum laborum saepe, illum consectetur impedit quis alias.'
+          title: "Change the way the British public sees immigrants.",
+          text: 'In order to build a harmonic society, we must learn to understand each other’s viewpoint. We aim to create a community that encourages locals and immigrants to share their thoughts on each other, and to defeat immigrants myths together.'
         }
       ]
     }
@@ -69,10 +71,9 @@ export default {
   display: flex;
   align-items: center;
 
-  .img {
+  img {
     width: 12vw;
     height: 12vw;
-    background: $light-grey;
     border-radius: 100px;
     margin-right: 2vw;
   }

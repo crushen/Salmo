@@ -4,7 +4,7 @@
       <h3>{{ number }}. {{ title }}</h3>
       <div class="img"></div>
     </div>
-    <p>{{ text }}</p>
+    <p v-html="text"></p>
   </div>
 </template>
 
