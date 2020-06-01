@@ -5,7 +5,11 @@
     </a>
     <app-navigation />
     <div id="overlay"></div>
-    <div v-if="$route.path !== '/about' && $route.path !== '/'" class="small-logo"></div>
+    <img 
+      v-if="$route.path !== '/about' && $route.path !== '/'"
+      src="@/assets/illustrations/symbols/Salmo Logo.svg" 
+      alt="Salmo logo"
+      class="small-logo">
     <router-view/>
   </div>
 </template>
@@ -76,9 +80,7 @@ export default {
 
 .small-logo {
   width: 35px;
-  height: 35px;
-  background: $light-grey;
-  border-radius: 50px;
+  opacity: 0.8;
   position: absolute;
   top: 24px;
   right: 6vw;
