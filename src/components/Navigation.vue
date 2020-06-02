@@ -112,7 +112,7 @@ export default {
     nextPage() {
       setTimeout(() => {
         this.open = false;
-      }, 400);
+      }, 300);
     }
   }
 }
@@ -134,7 +134,7 @@ export default {
 #nav {
   width: 120px;
   height: 120px;
-  background: $primary-blue;
+  background: $secondary-blue;
   border-radius: 100px;
   position: fixed;
   z-index: 20;
@@ -200,7 +200,7 @@ nav {
 
 a.router-link-active {
   .background {
-    fill: #77b3c4;
+    fill: $primary-blue;
   }
 }
 </style>
