@@ -32,7 +32,7 @@
       <button
         @click="previousQuestion"
         class="tertiary"
-        :class="{ 'disabled': currentQuestion === 0 }">
+        :class="{ 'inactive': currentQuestion === 0 }">
         <span>&#8227;</span> 
         <p>Previous</p>
       </button>
@@ -149,7 +149,7 @@ export default {
     padding: 0;
     text-decoration: none;
 
-    &.disabled {
+    &.inactive {
       color: $grey;
       pointer-events: none;
     }

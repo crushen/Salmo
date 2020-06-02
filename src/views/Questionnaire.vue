@@ -1,5 +1,14 @@
 <template>
   <section>
+    <transition name="alert" mode="out-in">
+      <alert 
+        v-if="showAlert"
+        alert="Progress will be lost"
+        text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
+        @closePage="showAlert = false, to = null, $router.go(1)"
+        @leavePage="showAlert = false, $router.push(to)" />
+    </transition>
+
     <!-- If user has updated profile info -->
     <div v-if="user.profile.age">
       <intro 
@@ -33,14 +42,18 @@
 import { mapState } from 'vuex';
 import intro from '@/components/questionnaire/Intro';
 import question from '@/components/questionnaire/Question';
+import alert from '@/components/Alert';
 
 export default {
   components: {
     intro,
-    question
+    question,
+    alert
   },
   data() {
     return {
+      showAlert: false,
+      to: null,
       user: this.$store.state.auth.user,
       introStage: true,
       questionsStage: false,
@@ -152,11 +165,26 @@ export default {
       }, 2000);
     } 
   },
+  // beforeRouteLeave(to, from, next) {
+  //   if(this.questionsStage) {
+  //     const confirmLeave = confirm('Are you sure? Your progress will be lost');
+  //     if(confirmLeave) {
+  //       next();
+  //     }
+  //   } else {
+  //     next();
+  //   }
+  // },
   beforeRouteLeave(to, from, next) {
     if(this.questionsStage) {
-      const confirmLeave = confirm('Are you sure? Your progress will be lost');
-      if(confirmLeave) {
+      if (this.to) {
         next();
+      } else {
+        document.querySelector('#overlay').style.opacity = 1;
+        document.querySelector('#overlay').style.visibility = 'visible';
+        document.querySelector('body').style.overflow = 'hidden';
+        this.to = to;
+        this.showAlert = true;
       }
     } else {
       next();
