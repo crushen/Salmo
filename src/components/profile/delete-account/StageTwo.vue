@@ -109,6 +109,7 @@ export default {
     deleteAccount(user) {
       user.delete().then(() => {
         this.$store.state.auth.user = null;
+        this.$store. commit('auth/setUserDeleted')
         this.$router.push('/');
       }).catch(error => {
         this.error = error.message;

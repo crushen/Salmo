@@ -1,11 +1,20 @@
 <template>
   <section id="home">
+    <!-- Logged out alert -->
     <transition name="alert" mode="out-in">
       <alert 
         v-if="loggedOut"
         alert="Logged Out"
         text="You’re now logged out. See you again soon!"
         @closePage="loggedOut = false, delete $store.state.auth.loggedOut" />
+    </transition>
+    <!-- Deleted account alert -->
+    <transition name="alert" mode="out-in">
+      <alert 
+        v-if="userDeleted"
+        alert="Account Deleted"
+        text="Thanks for your time with Salmo, if you need us again, we’ll be here!"
+        @closePage="userDeleted = false, delete $store.state.auth.userDeleted" />
     </transition>
 
     <header :style="{ backgroundImage: `url(${background})` }">
@@ -40,7 +49,8 @@ export default {
   data() {
     return {
       background,
-      loggedOut: false
+      loggedOut: false,
+      userDeleted: false
     }
   },
   computed: {
@@ -55,6 +65,12 @@ export default {
     if(this.$store.state.auth.loggedOut) {
       setTimeout(() => {
         this.loggedOut = true;
+      }, 500)
+    }
+
+    if(this.$store.state.auth.userDeleted) {
+      setTimeout(() => {
+        this.userDeleted = true;
       }, 500)
     }
   }

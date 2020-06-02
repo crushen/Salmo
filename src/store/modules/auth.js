@@ -85,6 +85,9 @@ export default {
     },
     addFavoriteToUser(state, visa) {
       state.user.profile.favoriteVisa = visa;
+    },
+    setUserDeleted(state) {
+      state.userDeleted = true;
     }
   }
 }
