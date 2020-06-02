@@ -5,7 +5,7 @@
         v-if="loggedOut"
         alert="Logged Out"
         text="You’re now logged out. See you again soon!"
-        @closePage="loggedOut = false" />
+        @closePage="loggedOut = false, delete $store.state.auth.loggedOut" />
     </transition>
 
     <header :style="{ backgroundImage: `url(${background})` }">
