@@ -1,12 +1,15 @@
 <template>
   <div>
     <section class="content">
-      <alert 
-        v-if="showAlert"
-        alert="Progress will be lost"
-        text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
-        @close="showAlert = false, to = null, $router.go(1)"
-        @leavePage="showAlert = false, $router.push(to)" />
+      <transition name="alert" mode="out-in">
+        <alert 
+          v-if="showAlert"
+          alert="Progress will be lost"
+          text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
+          @closePage="showAlert = false, to = null, $router.go(1)"
+          @leavePage="showAlert = false, $router.push(to)" />
+      </transition>
+
 
       <h1>Edit profile.</h1>
 
@@ -589,6 +592,9 @@ export default {
     if (this.to) {
       next();
     } else {
+      document.querySelector('#overlay').style.opacity = 1;
+      document.querySelector('#overlay').style.visibility = 'visible';
+      document.querySelector('body').style.overflow = 'hidden';
       this.to = to;
       this.showAlert = true;
     }

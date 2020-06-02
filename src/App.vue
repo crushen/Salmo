@@ -73,9 +73,11 @@ export default {
   right: 0;
   width: 100%;
   z-index: 30;
-  display: none;
-  background: rgba($color: $dark-grey, $alpha: 0.6);
+  opacity: 0;
+  visibility: hidden;
+  background: rgba($color: $dark-grey, $alpha: 0.5);
   pointer-events: all;
+  transition: 0.4s;
 }
 
 .small-logo {
@@ -89,6 +91,22 @@ export default {
 p {
   margin: 0;
   padding: 0;
+}
+
+// Alert transitions
+.alert-enter,
+.alert-leave-to {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+.alert-enter-active,
+.alert-leave-active {
+  transition: 0.6s;
+  transition-timing-function: cubic-bezier(0,1.15,1,.99);
+}
+
+.alert-enter-active {
+  transition-delay: 0.2s;
 }
 
 // For date picker

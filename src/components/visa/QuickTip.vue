@@ -56,12 +56,16 @@ export default {
   methods: {
     openModal() {
       this.open = true;
-      document.querySelector('#overlay').style.display = 'block';
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 1;
+      overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
     },
     closeModal() {
       this.open = false;
-      document.querySelector('#overlay').style.display = 'none';
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 0;
+      overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
     }
   }

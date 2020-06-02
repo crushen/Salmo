@@ -1,6 +1,6 @@
 <template>
   <div class="alert">
-    <a v-if="buttons" @click="$emit('close')">
+    <a v-if="buttons" @click="close">
       <img :src="cross">
     </a>
 
@@ -11,12 +11,12 @@
       v-if="!buttons" 
       class="buttons">
       <button 
-        @click="$emit('leavePage')"
+        @click="leave"
         class="tertiary">
         Leave Page
       </button>
 
-      <button @click="$emit('close')">
+      <button @click="close">
         Stay On Page
       </button>
     </div>
@@ -35,6 +35,22 @@ export default {
   data() {
     return {
       cross
+    }
+  },
+  methods: {
+    close() {
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 0;
+      overlay.style.visibility = 'hidden';
+      document.querySelector('body').style.overflow = 'auto';
+      this.$emit('closePage');
+    },
+    leave() {
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 0;
+      overlay.style.visibility = 'hidden';
+      document.querySelector('body').style.overflow = 'auto';
+      this.$emit('leavePage');
     }
   }
 }
@@ -59,7 +75,7 @@ a {
   position: fixed;
   top: 2.5vw;
   left: 2.5vw;
-  z-index: 10;
+  z-index: 40;
 
   p:first-of-type {
     font-weight: 600;
