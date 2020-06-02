@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import brpImg from '@/assets/illustrations/about/BRP Guide.svg';
-import ilrImg from '@/assets/illustrations/about/ILR Guide.svg';
-import switchImg from '@/assets/illustrations/about/Switch or Extend.svg';
+import brpImg from '@/assets/illustrations/about/BRP-guide.svg';
+import ilrImg from '@/assets/illustrations/about/ILR-Guide.svg';
+import switchImg from '@/assets/illustrations/about/Switch-Extend.svg';
 import dependantsImg from '@/assets/illustrations/about/Applying with Dependants.svg';
 
 export default {
