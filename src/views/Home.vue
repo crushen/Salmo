@@ -1,5 +1,13 @@
 <template>
   <section id="home">
+    <transition name="alert" mode="out-in">
+      <alert 
+        v-if="loggedOut"
+        alert="Logged Out"
+        text="You’re now logged out. See you again soon!"
+        @closePage="loggedOut = false" />
+    </transition>
+
     <header :style="{ backgroundImage: `url(${background})` }">
       <div class="content">
         <div class="logo">
@@ -21,16 +29,18 @@
 import background from '@/assets/home-background.svg';
 import loggedIn from '@/components/home/LoggedIn';
 import loggedOut from '@/components/home/LoggedOut';
-
+import alert from '@/components/Alert';
 
 export default {
   components: {
     loggedIn,
-    loggedOut
+    loggedOut,
+    alert
   },
   data() {
     return {
-      background
+      background,
+      loggedOut: false
     }
   },
   computed: {
@@ -39,6 +49,13 @@ export default {
     },
     isAuthenticated() {
       return this.$store.getters['auth/isAuthenticated'];
+    }
+  },
+  mounted() {
+    if(this.$store.state.auth.loggedOut) {
+      setTimeout(() => {
+        this.loggedOut = true;
+      }, 500)
     }
   }
 }

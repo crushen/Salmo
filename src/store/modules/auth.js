@@ -68,6 +68,14 @@ export default {
     setAuthUser(state, user) {
       state.user = user;
     },
+    setLoggedOut(state) {
+      state.loggedOut = true;
+    },
+    setLoggedIn(state) {
+      if(state.loggedOut) {
+        delete state.loggedOut;
+      }
+    },
     setUserProfile(state, profile) {
       // state.user.profile = profile
       Vue.set(state.user, 'profile', profile)

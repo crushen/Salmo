@@ -51,10 +51,10 @@ export default {
     handleLogout() {
       this.$store.dispatch('auth/logOut')
       .then(() => {
+        this.$store. commit('auth/setLoggedOut')
         if(this.$route.path !== '/') {
           this.$router.push('/')
         }
-        alert('You have been logged out')
       })
     }
   }

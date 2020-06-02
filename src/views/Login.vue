@@ -105,7 +105,7 @@ export default {
         .then(() => {
           const user = this.$store.state.auth.user;
           this.$router.push({name: 'profile', params: {username: user.profile.username}});
-          alert('You have logged in');
+          this.$store.commit('auth/setLoggedIn')
         })
         .catch(() => {
           this.error = 'Invalid email address or password';
