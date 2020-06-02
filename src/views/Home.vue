@@ -26,7 +26,11 @@
         <div class="logo">
           <h1 class="logo-text">Salmo</h1>
         </div>
-        <h2 class="caption">The ultimate visa organisation tool.</h2>
+        <div class="sub-title">
+          <h2 class="caption">The ultimate visa organisation tool.</h2>
+          <img src="@/assets/Home-underline.svg" alt="">
+        </div>
+        
       </div>
     </header>
 
@@ -100,7 +104,7 @@ header {
   justify-content: center;
 
   h1 {
-    font-size: 20vw;
+    font-size: 23vw;
     line-height: 0;
   }
 }
@@ -114,7 +118,14 @@ header {
 
 h2 {
   color: $light-font;
-  font-weight: 500;
+  font-weight: 600;
   margin-top: $spacing*6;
+}
+
+.sub-title {
+  img {
+    width: 35vw;
+    transform: translate3d(8vw, -1.5vw, 0)
+  }
 }
 </style>
