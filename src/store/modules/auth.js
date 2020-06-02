@@ -72,7 +72,7 @@ export default {
       // state.user.profile = profile
       Vue.set(state.user, 'profile', profile)
     },
-    addResultsToUser(state, results, faveVisa) {
+    addResultsToUser(state, results) {
       state.user.profile.questionnaireResults.push(results);
     },
     addFavoriteToUser(state, visa) {
