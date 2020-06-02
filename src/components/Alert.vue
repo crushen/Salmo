@@ -11,12 +11,12 @@
       v-if="!buttons" 
       class="buttons">
       <button 
-        @click="$emit('leave')"
+        @click="$emit('leavePage')"
         class="tertiary">
         Leave Page
       </button>
 
-      <button @click="$emit('stay')">
+      <button @click="$emit('close')">
         Stay On Page
       </button>
     </div>

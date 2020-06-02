@@ -2,10 +2,11 @@
   <div>
     <section class="content">
       <alert 
-        v-if="!showAlert"
+        v-if="showAlert"
         alert="Progress will be lost"
         text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
-        @close="showAlert = true" />
+        @close="showAlert = false, to = null, $router.go(1)"
+        @leavePage="showAlert = false, $router.push(to)" />
 
       <h1>Edit profile.</h1>
 
@@ -183,6 +184,7 @@ export default {
   data() {
     return {
       showAlert: false,
+      to: null,
       user: this.$store.state.auth.user.profile,
       finished: false,
       newVisaAdded: false,
@@ -584,25 +586,11 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    if(this.finished) {
+    if (this.to) {
       next();
     } else {
-      // If new visas added but not submitted, remove from state
-      if(this.newVisaAdded) {
-        const removeNumber = this.profileToUpdate.pastVisas.length - this.currentPastVisas;
-        for(let i = 0; i < removeNumber; i++) {
-          this.profileToUpdate.pastVisas.pop();
-        }
-        const confirmLeave = confirm('Are you sure? Your progress will be lost');
-        if(confirmLeave) {
-          next();
-        }
-      } else {
-        const confirmLeave = confirm('Are you sure? Your progress will be lost');
-        if(confirmLeave) {
-          next();
-        }
-      }
+      this.to = to;
+      this.showAlert = true;
     }
   }
 }
