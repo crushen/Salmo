@@ -5,6 +5,7 @@
         v-if="showAlert"
         alert="Progress will be lost"
         text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
+        :buttons="true"
         @closePage="showAlert = false, to = null, $router.go(1)"
         @leavePage="showAlert = false, $router.push(to)" />
     </transition>

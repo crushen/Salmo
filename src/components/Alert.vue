@@ -1,6 +1,6 @@
 <template>
   <div class="alert">
-    <a v-if="buttons" @click="close">
+    <a v-if="!buttons" @click="close">
       <img :src="cross">
     </a>
 
@@ -8,7 +8,7 @@
     <p>{{ text }}</p>
 
     <div
-      v-if="!buttons" 
+      v-if="buttons" 
       class="buttons">
       <button 
         @click="leave"
