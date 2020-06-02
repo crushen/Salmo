@@ -2,8 +2,7 @@
   <div>
     <section class="welcome">
       <div class="content">
-        <div class="placeholder-image"></div>
-        <h2 class="header">Welcome back, {{ user.profile.name.split(' ')[0] }}.</h2>
+        <h2 class="header">Let's find your next step.</h2>
       </div>
     </section>
 
@@ -12,9 +11,19 @@
     </section>
 
     <section class="page-links section-margin">
+      <!-- If user has taken quiz, link to results page -->
       <page-link-card
+        v-if="user.profile.questionnaireResults.length"
         text="Head over to your results page to see and overview of which visa suits you best."
         pageTitle="Quiz Results"
+        link="results"
+        class="content" />
+      <!-- If not, link to quiz page -->
+      <page-link-card
+        v-else
+        text="A great place to start is by taking your first quiz. The results will give you a good guide to what visa suits you best."
+        pageTitle="Take Quiz"
+        link="questionnaire"
         class="content" />
 
       <div class="bottom">
@@ -31,6 +40,7 @@
         <page-link-card
           text="For more general advice or help on the UK aplication process, take a look through our Help Centre."
           pageTitle="Help Centre"
+          link="help-centre"
           class="content" />
       </div>
     </section>
@@ -57,15 +67,6 @@ export default {
 
 .welcome {
   position: relative;
-  margin-top: 40vw;
-
-  .placeholder-image {
-    width: 40vw;
-    height: 55vw;
-    background: $light-grey;
-    position: absolute;
-    top: -60vw;
-  }
 
   h2 {
     margin-top: 6vw;
@@ -73,7 +74,7 @@ export default {
 }
 
 .news {
-  margin-top: 20vw;
+  margin-top: 18vw;
 }
 
 .page-links {

@@ -1,7 +1,11 @@
 <template>
   <div>
     <p>{{ text }}</p>
-    <button>{{ pageTitle }}</button>
+    <router-link
+      :to="{name: link}"
+      tag="button">
+      {{ pageTitle }}
+    </router-link>
   </div>
 </template>
 
@@ -9,7 +13,8 @@
 export default {
   props: {
     text: { required: true, type: String },
-    pageTitle: { required: true, type: String }
+    pageTitle: { required: true, type: String },
+    link: { required: true, type: String }
   }
 }
 </script>

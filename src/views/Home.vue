@@ -19,6 +19,10 @@
 
     <header :style="{ backgroundImage: `url(${background})` }">
       <div class="content">
+        <img 
+          src="@/assets/illustrations/symbols/Salmo Logo outline.svg" 
+          alt="Salmo logo outline"
+          class="logo-img">
         <div class="logo">
           <h1 class="logo-text">Salmo</h1>
         </div>
@@ -35,7 +39,7 @@
 </template>
 
 <script>
-import background from '@/assets/home-background.svg';
+import background from '@/assets/Home-vector.svg';
 import loggedIn from '@/components/home/LoggedIn';
 import loggedOut from '@/components/home/LoggedOut';
 import alert from '@/components/Alert';
@@ -82,17 +86,15 @@ export default {
 
 header {
   width: 100%;
-  height: 60vh;
-  margin: auto;
+  height: 70vh;
   text-align: center;
-  padding-top: $top-padding;
+  padding-top: 28vh;
   background-size: cover;
   background-position: 50% 0;
 }
 
 .logo {
   color: $light-font;
-  margin: 0 auto 4vw auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -101,6 +103,13 @@ header {
     font-size: 20vw;
     line-height: 0;
   }
+}
+
+.logo-img {
+  width: 30vw;
+  position: absolute;
+  top: 8vw;
+  right: 8vw;
 }
 
 h2 {
