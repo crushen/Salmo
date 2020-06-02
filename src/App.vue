@@ -16,7 +16,7 @@
 
 <script>
 import AppNavigation from '@/components/Navigation';
-import arrow from '@/assets/icons/chevron-left-solid.svg';
+import arrow from '@/assets/icons/back.svg';
 
 export default {
   components: {
