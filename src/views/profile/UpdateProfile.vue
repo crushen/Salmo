@@ -1,6 +1,12 @@
 <template>
   <div>
     <section class="content">
+      <alert 
+        v-if="!showAlert"
+        alert="Progress will be lost"
+        text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
+        @close="showAlert = true" />
+
       <h1>Edit profile.</h1>
 
       <form 
@@ -168,10 +174,15 @@
 
 <script>
 import { required, email, minLength, maxLength } from 'vuelidate/lib/validators';
+import alert from '@/components/Alert';
 
 export default {
+  components: {
+    alert
+  },
   data() {
     return {
+      showAlert: false,
       user: this.$store.state.auth.user.profile,
       finished: false,
       newVisaAdded: false,
