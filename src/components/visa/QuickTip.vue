@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
-import lightbulbYellow from '@/assets/icons/quick-tip/lightbulb.svg';
+import lightbulb from '@/assets/icons/lightbulbs/button-yellow.svg';
+import lightbulbYellow from '@/assets/icons/lightbulbs/quick-tip.svg';
 
 export default {
   props: {
@@ -89,7 +89,7 @@ export default {
   color: $light-font;
 
   .icon {
-    width: 22px;
+    width: 28px;
   }
 }
 

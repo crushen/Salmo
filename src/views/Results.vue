@@ -122,7 +122,7 @@ import { mapState } from 'vuex';
 import visaCard from '@/components/visa/VisaCard';
 import quickTip from '@/components/visa/QuickTip';
 import smallCard from '@/components/visa/SmallCard';
-import lightbulb from '@/assets/icons/quick-tip/lightbulb.svg';
+import lightbulb from '@/assets/icons/lightbulbs/tip.svg';
 
 export default {
   components: {
@@ -277,10 +277,9 @@ strong {
   }
 
   img {
-    width: 38px;
+    width: 32px;
     position: absolute;
     z-index: 0;
-    opacity: 0.3;
 
     &:nth-of-type(1) {
       top: 8px;

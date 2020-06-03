@@ -27,8 +27,7 @@
 </template>
 
 <script>
-import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
-import lightbulbYellow from '@/assets/icons/lightbulb-yellow.svg';
+import lightbulb from '@/assets/icons/lightbulbs/button-pink.svg';
 
 export default {
   data() {
@@ -40,12 +39,16 @@ export default {
   methods: {
     openModal() {
       this.open = true;
-      document.querySelector('#overlay').style.display = 'block';
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 1;
+      overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
     },
     closeModal() {
       this.open = false;
-      document.querySelector('#overlay').style.display = 'none';
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 0;
+      overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
     }
   }
@@ -69,7 +72,7 @@ export default {
   color: $light-font;
 
   .icon {
-    width: 22px;
+    width: 28px;
   }
 }
 
