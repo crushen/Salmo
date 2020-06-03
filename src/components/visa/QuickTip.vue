@@ -40,7 +40,7 @@
 
 <script>
 import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
-import lightbulbYellow from '@/assets/icons/lightbulb-yellow.svg';
+import lightbulbYellow from '@/assets/icons/lightbulb-quick-tip.svg';
 
 export default {
   props: {
@@ -110,7 +110,6 @@ export default {
   .lightbulb-yellow {
     width: 9vw;
     position: absolute;
-    opacity: 0.3;
 
     &:nth-of-type(1) {
       top: 10px;
