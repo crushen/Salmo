@@ -1,5 +1,15 @@
 <template>
   <section class="help">
+    <transition name="alert" mode="out-in">
+      <alert 
+        v-if="showAlert"
+        alert="Are you sure you want to log out?"
+        text="You can always log back in at any time."
+        :buttons="['Cancel', 'Log out']"
+        @cancel="showAlert = false"
+        @confirm="handleLogout" />
+    </transition>
+
     <img 
       v-if="!user.emailVerified || !user.profile.questionnaireResults.length"
       src="@/assets/illustrations/alternateStates/Profile before sign in etc.svg" 
@@ -27,7 +37,7 @@
       </div>
       <div class="button log-out">
         <button 
-          @click="handleLogout" 
+          @click="logOut" 
           type="button"
           class="secondary">
           Log Out
@@ -38,14 +48,26 @@
 </template>
 
 <script>
+import alert from '@/components/Alert';
 
 export default {
+  components: {
+    alert
+  },
   data() {
     return {
+      showAlert: false,
       user: this.$store.state.auth.user
     }
   },
   methods: {
+    logOut() {
+      this.showAlert = true;
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 1;
+      overlay.style.visibility = 'visible';
+      document.querySelector('body').style.overflow = 'hidden';
+    },
     handleLogout() {
       this.$store.dispatch('auth/logOut')
       .then(() => {
