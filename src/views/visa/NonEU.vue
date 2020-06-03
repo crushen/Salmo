@@ -9,11 +9,10 @@
       class="button"
         v-for="page in categories"
         :key="page.text"
-        :to="{ name: 'non-eu-category', params: { category: page.text } }">
-        <div>
-          <img :src="page.icon" class="icon">
-          <h3>{{ page.text }}</h3>
-        </div>
+        :to="{ name: 'non-eu-category', params: { category: page.text } }"
+        :style="{ backgroundImage: `url(${page.bg})` }">
+        <h3>{{ page.text }}</h3>
+        <img :src="page.icon" class="icon">
       </router-link>
     </section>
 
@@ -36,10 +35,15 @@
 </template>
 
 <script>
-import book from '@/assets/icons/white/book-solid.svg';
-import briefcase from '@/assets/icons/white/briefcase-solid.svg';
-import coins from '@/assets/icons/white/coins-solid.svg';
-import heart from '@/assets/icons/white/heart-solid.svg';
+import study from '@/assets/icons/visa-buttons/study.svg';
+import work from '@/assets/icons/visa-buttons/work.svg';
+import business from '@/assets/icons/visa-buttons/business.svg';
+import family from '@/assets/icons/visa-buttons/family.svg';
+
+import wave from '@/assets/patterns/wave-2.svg';
+import line from '@/assets/patterns/line.svg';
+import dashed from '@/assets/patterns/dashed-line.svg';
+import confetti from '@/assets/patterns/confetti.svg';
 
 export default {
   data() {
@@ -47,19 +51,23 @@ export default {
       visas: this.$store.state.visas.visaList,
       categories: [
         {
-          icon: book,
+          icon: study,
+          bg: wave,
           text: 'study'
         },
         {
-          icon: briefcase,
+          icon: work,
+          bg: line,
           text: 'work'
         },
         {
-          icon: coins,
+          icon: business,
+          bg: dashed,
           text: 'business'
         },
         {
-          icon: heart,
+          icon: family,
+          bg: confetti,
           text: 'family'
         }
       ]
@@ -95,24 +103,37 @@ export default {
     width: 120px;
     height: 120px;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: $spacing;
-    padding: $spacing;
+    padding-top: 12px;
     border-radius: $border-radius;
-    background: $dark-font;
+    background: $primary-blue;
     color: $light-font;
     text-transform: capitalize;
     box-shadow: $shadow;
+    background-position: center;
 
-    div {
-      display: flex;
-      align-items: center;
+    &:nth-of-type(1) {
+      background-size: 240px;
+      
+    }
+
+    &:nth-of-type(2) {
+      background-size: 140px;
+    }
+
+    &:nth-of-type(3) {
+      background-size: 180px;
+    }
+
+    h3 {
+      transform: translateY(4px);
     }
 
     .icon {
-      width: 16px;
-      margin-right: 4px;
+      width: 55px;
     }
   }
 }
