@@ -9,14 +9,14 @@
           :to="{name: 'non-eu'}"
           tag="button"
           class="pink"
-          :style="{backgroundImage: `url(${waveH})`}">
+          :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
           Non - EU
         </router-link>
         <router-link 
           :to="{name: 'visa-info-eu'}"
           tag="button"
           class="pink"
-          :style="{backgroundImage: `url(${waveV})`}">
+          :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
           EU
         </router-link>
         <router-link 
@@ -65,7 +65,6 @@ export default {
   button {
     width: 35vw;
     margin: 10vw $spacing 0;
-    background-size: 100%;
 
     &:last-of-type {
       width: 41vw;

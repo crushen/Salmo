@@ -18,14 +18,16 @@
           <router-link
             :to="{ name: 'eu-settled' }"
             tag="button"
-            class="pink">
+            class="pink"
+            :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
             Settled
           </router-link>
 
           <router-link
             :to="{ name: 'eu-pre-settled' }"
             tag="button"
-            class="pink">
+            class="pink"
+            :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
             Pre-Settled
           </router-link>
         </div>
@@ -36,10 +38,18 @@
 
 <script>
 import brexitTimeline from '@/components/BrexitTimeline';
+import waveH from '@/assets/patterns/wave-horizontal.svg';
+import waveV from '@/assets/patterns/wave-verticle.svg';
 
 export default {
   components: {
     brexitTimeline
+  },
+  data() {
+    return {
+      waveH,
+      waveV
+    }
   }
 }
 </script>

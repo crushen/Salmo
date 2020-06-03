@@ -3,18 +3,26 @@
     <p>{{ text }}</p>
     <router-link
       :to="{name: link.name, params: {username: link.username}}"
-      tag="button">
+      tag="button"
+      :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
       {{ pageTitle }}
     </router-link>
   </div>
 </template>
 
 <script>
+import dots from '@/assets/patterns/dots.svg';
+
 export default {
   props: {
     text: { required: true, type: String },
     pageTitle: { required: true, type: String },
     link: { required: true, type: Object }
+  },
+  data() {
+    return {
+      dots
+    }
   }
 }
 </script>

@@ -24,7 +24,8 @@
         <div class="button">
           <router-link 
             :to="{name: 'help-centre'}"
-            tag="button">
+            tag="button"
+            :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
             Help Centre
           </router-link>
         </div>
@@ -38,6 +39,7 @@ import aboutCard from '@/components/AboutCard';
 import imgOne from '@/assets/illustrations/about/Salmo Goals 1.svg';
 import imgTwo from '@/assets/illustrations/about/Salmo goals 2.svg';
 import imgThree from '@/assets/illustrations/about/Salmo goals 3.svg';
+import dots from '@/assets/patterns/dots.svg';
 
 export default {
   components: {
@@ -45,6 +47,7 @@ export default {
   },
   data() {
     return {
+      dots,
       cards: [
         {
           title: 'Offer a better service for immigrants to apply for a UK visa.',

@@ -26,7 +26,8 @@
 
       <router-link
         tag="button"
-        :to="{ name: 'visa-page', params: { slug: visa.slug } }">
+        :to="{ name: 'visa-page', params: { slug: visa.slug } }"
+        :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
         Tell Me More!
       </router-link>
 
@@ -53,6 +54,7 @@ import question from '@/assets/icons/pink/question-solid.svg';
 import pinkHeart from '@/assets/icons/pink/heart-solid.svg';
 import greyHeart from '@/assets/icons/heart-solid.svg';
 import confirmFavorite from '@/components/visa/ConfirmFavorite';
+import dots from '@/assets/patterns/dots.svg';
 
 export default {
   props: {
@@ -65,6 +67,7 @@ export default {
     return {
       user: this.$store.state.auth.user,
       checklist: this.visa.card.checklist,
+      dots,
       check,
       cross,
       question,

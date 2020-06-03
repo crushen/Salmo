@@ -43,7 +43,8 @@
           <input 
             type="submit"
             value="Log In"
-            class="pink">
+            class="pink"
+            :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
         </div>
       </form>
     </div>
@@ -68,6 +69,7 @@
 
 <script>
 import { required, email } from 'vuelidate/lib/validators';
+import waveH from '@/assets/patterns/wave-horizontal.svg';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -79,6 +81,7 @@ export default {
         password: ''
       },
       error: '',
+      waveH
     }
   },
   validations: {

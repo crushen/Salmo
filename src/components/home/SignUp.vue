@@ -66,7 +66,8 @@
             <input 
               type="submit" 
               value="Sign Me Up!"
-              class="pink">
+              class="pink"
+              :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
           </div>
         </form>
 
@@ -86,6 +87,7 @@
 
 <script>
 import { required, email, minLength, maxLength } from 'vuelidate/lib/validators';
+import waveH from '@/assets/patterns/wave-horizontal.svg';
 
 export default {
   data() {
@@ -96,7 +98,8 @@ export default {
         email: '',
         password: ''
       },
-      error: ''
+      error: '',
+      waveH
     }
   },
   validations: {
