@@ -8,13 +8,15 @@
         <router-link 
           :to="{name: 'non-eu'}"
           tag="button"
-          class="pink">
+          class="pink"
+          :style="{backgroundImage: `url(${waveH})`}">
           Non - EU
         </router-link>
         <router-link 
           :to="{name: 'visa-info-eu'}"
           tag="button"
-          class="pink">
+          class="pink"
+          :style="{backgroundImage: `url(${waveV})`}">
           EU
         </router-link>
         <router-link 
@@ -26,14 +28,25 @@
       </div>
     </div>
 
-
-      <img 
-        src="@/assets/illustrations/visaPages/Laptop Person.svg" 
-        alt="An illustration of a person using their laptop">
-
-
+    <img 
+      src="@/assets/illustrations/visaPages/Laptop Person.svg" 
+      alt="An illustration of a person using their laptop">
   </section>
 </template>
+
+<script>
+import waveH from '@/assets/patterns/wave-horizontal.svg';
+import waveV from '@/assets/patterns/wave-verticle.svg';
+
+export default {
+  data() {
+    return {
+      waveH,
+      waveV
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
@@ -52,6 +65,7 @@
   button {
     width: 35vw;
     margin: 10vw $spacing 0;
+    background-size: 100%;
 
     &:last-of-type {
       width: 41vw;
