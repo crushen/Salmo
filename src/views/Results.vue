@@ -6,7 +6,6 @@
         <h3>Here are the results of your quiz...</h3>
       </div>
 
-
       <img 
         class="hero"
         src="@/assets/illustrations/quiz/Quiz Complete.svg" 
@@ -14,8 +13,11 @@
 
       <div class="results">
         <div class="top">
-          <p>Your best option to remain in the UK is by <strong>switching</strong> to:</p>
-
+          <div class="sub-title">
+            <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
+            <p>Your best option to remain in the UK is by switching to:</p>
+          </div>
+          
           <visa-card
             v-for="visa in topResult"
             :key="visa.name"
@@ -30,7 +32,10 @@
         </div>
 
         <div v-if="switchVisas[0]" class="switch">
-          <p class="card-title">There are other visas in the same catagory that you could <strong>switch</strong> to:</p>
+          <div class="sub-title">
+            <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
+            <p class="card-title">There are other visas in the same catagory that you could switch to:</p>
+          </div>
 
           <small-card 
             v-for="visa in switchVisas"
@@ -42,7 +47,11 @@
         <div 
           v-if="otherVisas[0] || youthMobility[0]" 
           class="other">
-          <p class="title">Other visas in the <strong>{{ topResult[0].category }}</strong> catagory that you may be able to <strong>apply</strong> to:</p>
+          <div class="sub-title">
+            <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
+            <p>Other visas in the {{ topResult[0].category }} catagory that you may be able to apply to:</p>
+          </div>
+
 
           <div class="tip">
             <img 
@@ -67,7 +76,10 @@
         <div 
           v-if="currentVisaObj.card.checklist[5].status === true" 
           class="extend">
-          <p>Don't forget abot possibly extending your current visa!</p>
+          <div class="sub-title">
+            <img src="@/assets/icons/results/extend.svg" alt="" class="icon">
+            <p>Don't forget abot possibly extending your current visa!</p>
+          </div>
 
           <small-card 
             :visa="currentVisaObj"
@@ -110,7 +122,7 @@ import { mapState } from 'vuex';
 import visaCard from '@/components/visa/VisaCard';
 import quickTip from '@/components/visa/QuickTip';
 import smallCard from '@/components/visa/SmallCard';
-import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
+import lightbulb from '@/assets/icons/lightbulb.svg';
 
 export default {
   components: {
@@ -215,8 +227,24 @@ strong {
   font-weight: 600;
 }
 
-.results {
+.sub-title {
+  position: relative;
 
+  img {
+    width: 70px;
+    position: absolute;
+    top: -15px;
+    left: -5px;
+  }
+
+  p {
+    margin-left: 70px;
+    font-weight: 600;
+  }
+}
+
+
+.results {
   .top {
     margin-bottom: $spacing*8;
   }
@@ -228,14 +256,10 @@ strong {
 
 .switch {
   margin-bottom: $spacing*8;
-
-  p {
-    margin-bottom: $spacing*4;
-  }
 }
 
 .other {
-  .title {
+  .sub-title {
     margin-bottom: $spacing*4;
   }
 }
@@ -253,7 +277,7 @@ strong {
   }
 
   img {
-    width: 24px;
+    width: 38px;
     position: absolute;
     z-index: 0;
     opacity: 0.3;
