@@ -31,12 +31,11 @@
 </template>
 
 <script>
-import icon from '@/assets/icons/nav/visa.svg';
+
 
 export default {
   data() {
     return {
-      icon,
       selected: 0,
       events: [
         {

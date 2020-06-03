@@ -40,7 +40,7 @@
 
 <script>
 import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
-import lightbulbYellow from '@/assets/icons/lightbulb-quick-tip.svg';
+import lightbulbYellow from '@/assets/icons/quick-tip/lightbulb.svg';
 
 export default {
   props: {
