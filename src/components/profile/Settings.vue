@@ -10,8 +10,8 @@
       <div class="button">
         <router-link 
           :to="{name: 'help-centre'}"
-          tag="button"
-          :style="{backgroundImage: `url(${dots})`, backgroundSize: '60px 60px'}">
+          tag="button">
+          <!-- :style="{backgroundImage: `url(${dots})`, backgroundSize: '60px 60px'}" -->
           Help Centre
         </router-link>
       </div>
@@ -38,13 +38,11 @@
 </template>
 
 <script>
-import dots from '@/assets/illustrations/patterns/dots.svg';
 
 export default {
   data() {
     return {
-      user: this.$store.state.auth.user,
-      dots
+      user: this.$store.state.auth.user
     }
   },
   methods: {
