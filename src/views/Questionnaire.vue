@@ -5,9 +5,9 @@
         v-if="showAlert"
         alert="Progress will be lost"
         text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
-        :buttons="true"
-        @closePage="showAlert = false, to = null, $router.go(1)"
-        @leavePage="showAlert = false, $router.push(to)" />
+        :buttons="['Leave page', 'Stay on page']"
+        @cancel="showAlert = false, $router.push(to)"
+        @confirm="showAlert = false, to = null, $router.go(1)" />
     </transition>
 
     <!-- If user has updated profile info -->
@@ -181,8 +181,9 @@ export default {
       if (this.to) {
         next();
       } else {
-        document.querySelector('#overlay').style.opacity = 1;
-        document.querySelector('#overlay').style.visibility = 'visible';
+        const overlay = document.querySelector('#overlay');
+        overlay.style.opacity = 1;
+        overlay.style.visibility = 'visible';
         document.querySelector('body').style.overflow = 'hidden';
         this.to = to;
         this.showAlert = true;

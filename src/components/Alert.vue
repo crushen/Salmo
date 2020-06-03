@@ -1,6 +1,6 @@
 <template>
   <div class="alert">
-    <a v-if="!buttons" @click="close">
+    <a v-if="!buttons" @click="confirm">
       <img :src="cross">
     </a>
 
@@ -11,13 +11,13 @@
       v-if="buttons" 
       class="buttons">
       <button 
-        @click="leave"
+        @click="cancel"
         class="tertiary">
-        Leave Page
+        {{ buttons[0] }}
       </button>
 
-      <button @click="close">
-        Stay On Page
+      <button @click="confirm">
+        {{ buttons[1] }}
       </button>
     </div>
   </div>
@@ -30,7 +30,7 @@ export default {
   props: {
     alert: { required: true, type: String },
     text: { required: true, type: String },
-    buttons: { required: false, type: Boolean }
+    buttons: { required: false, type: Array }
   },
   data() {
     return {
@@ -38,19 +38,19 @@ export default {
     }
   },
   methods: {
-    close() {
+    cancel() {
       const overlay = document.querySelector('#overlay');
       overlay.style.opacity = 0;
       overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
-      this.$emit('closePage');
+      this.$emit('cancel');
     },
-    leave() {
+    confirm() {
       const overlay = document.querySelector('#overlay');
       overlay.style.opacity = 0;
       overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
-      this.$emit('leavePage');
+      this.$emit('confirm');
     }
   }
 }
