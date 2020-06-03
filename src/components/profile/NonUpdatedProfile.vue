@@ -144,7 +144,8 @@
           <input 
             type="submit" 
             value="Save Changes"
-            class="pink">
+            class="pink"
+            :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
         </div>
       </form>
 
@@ -154,10 +155,12 @@
 </template>
 
 <script>
+import waveH from '@/assets/patterns/wave-horizontal.svg';
 
 export default {
   data() {
     return {
+      waveH,
       user: this.$store.state.auth.user,
       form: {
         birthday: null,

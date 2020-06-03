@@ -53,7 +53,8 @@
             <router-link
               :to="{name: 'visa-planner', params: {username: user.profile.username}}"
               tag="button"
-              class="pink">
+              class="pink"
+              :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
               Visa Planner
             </router-link>
           </div>
@@ -80,6 +81,7 @@ import profileCard from '@/components/profile/ProfileCard';
 import visaDatesCard from '@/components/profile/visa-dates/VisaDatesCard';
 import prCalculator from '@/components/profile/PrCalculator';
 import visaPlannerImg from '@/assets/illustrations/visa-planner.svg';
+import waveH from '@/assets/patterns/wave-horizontal.svg';
 
 export default {
   props: {
@@ -92,7 +94,8 @@ export default {
   },
   data() {
     return {
-      visaPlannerImg
+      visaPlannerImg,
+      waveH
     }
   }
 }

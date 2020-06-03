@@ -169,7 +169,8 @@
           <input 
             type="submit" 
             value="Save Changes"
-            class="pink">
+            class="pink"
+            :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
         </div>
       </form>
     </section>
@@ -179,6 +180,7 @@
 <script>
 import { required, email, minLength, maxLength } from 'vuelidate/lib/validators';
 import alert from '@/components/Alert';
+import waveV from '@/assets/patterns/wave-verticle.svg';
 
 export default {
   components: {
@@ -186,6 +188,7 @@ export default {
   },
   data() {
     return {
+      waveV,
       showAlert: false,
       to: null,
       user: this.$store.state.auth.user.profile,

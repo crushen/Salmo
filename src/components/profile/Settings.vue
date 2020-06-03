@@ -20,8 +20,8 @@
       <div class="button">
         <router-link 
           :to="{name: 'help-centre'}"
-          tag="button">
-          <!-- :style="{backgroundImage: `url(${dots})`, backgroundSize: '60px 60px'}" -->
+          tag="button"
+          :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
           Help Centre
         </router-link>
       </div>
@@ -49,6 +49,7 @@
 
 <script>
 import alert from '@/components/Alert';
+import dots from '@/assets/patterns/dots.svg';
 
 export default {
   components: {
@@ -57,6 +58,7 @@ export default {
   data() {
     return {
       showAlert: false,
+      dots,
       user: this.$store.state.auth.user
     }
   },

@@ -15,7 +15,11 @@
           <p class="dates">24/02/18 - 2/03/18</p>
         </div>
         <div class="add-holiday">
-          <button class="pink">Add Holiday</button>
+          <button 
+            class="pink"
+            :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
+            Add Holiday
+          </button>
         </div>
       </div>
     </div>
@@ -28,6 +32,18 @@
     </div>
   </div>
 </template>
+
+<script>
+import waveV from '@/assets/patterns/wave-verticle.svg';
+
+export default {
+  data() {
+    return {
+      waveV
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
