@@ -2,7 +2,7 @@
   <div>
     <p>{{ text }}</p>
     <router-link
-      :to="{name: link}"
+      :to="{name: link.name, params: {username: link.username}}"
       tag="button">
       {{ pageTitle }}
     </router-link>
@@ -14,7 +14,7 @@ export default {
   props: {
     text: { required: true, type: String },
     pageTitle: { required: true, type: String },
-    link: { required: true, type: String }
+    link: { required: true, type: Object }
   }
 }
 </script>

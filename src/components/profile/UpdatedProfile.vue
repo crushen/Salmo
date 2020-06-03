@@ -24,7 +24,7 @@
 
       <div class="button">
         <router-link
-          :to="{ name: 'questionnaire' }"
+          :to="{name: 'questionnaire', params: {username: user.profile.username}}"
           tag="button"
           class="pink">
           Take Quiz!
@@ -63,7 +63,7 @@
       <section class="quiz-results content">
         <p>The results of your latest quiz are saved for you below.</p>
         <router-link
-          :to=" {name: 'results' }"
+          :to="{name: 'results', params: {username: user.profile.username}}"
           tag="button"
           class="secondary">
           Quiz results

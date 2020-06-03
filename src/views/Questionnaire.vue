@@ -161,7 +161,7 @@ export default {
     showResults() { 
       setTimeout(() => {
         this.questionsStage = false;
-        this.$router.push({name: 'results'});
+        this.$router.push({name: 'results', params: {username: this.user.profile.username}});
         //this.resultsStage = true;
       }, 2000);
     } 

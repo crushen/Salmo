@@ -16,14 +16,14 @@
         v-if="user.profile.questionnaireResults.length"
         text="Head over to your results page to see and overview of which visa suits you best."
         pageTitle="Quiz Results"
-        link="results"
+        :link="{name: 'results', username: user.profile.username}"
         class="content" />
       <!-- If not, link to quiz page -->
       <page-link-card
         v-else
         text="A great place to start is by taking your first quiz. The results will give you a good guide to what visa suits you best."
         pageTitle="Take Quiz"
-        link="questionnaire"
+        :link="{name: 'questionnaire', username: user.profile.username}"
         class="content" />
 
       <div class="bottom">
@@ -40,7 +40,7 @@
         <page-link-card
           text="For more general advice or help on the UK aplication process, take a look through our Help Centre."
           pageTitle="Help Centre"
-          link="help-centre"
+          :link="{name: 'help-centre'}"
           class="content" />
       </div>
     </section>

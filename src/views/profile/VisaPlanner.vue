@@ -16,7 +16,7 @@
           <button class="tertiary">Change Favourite Visa</button>
           <p>The rest of your quiz results are saved here:</p>
           <router-link
-            :to=" {name: 'results' }"
+            :to=" {name: 'results', params: {username: user.username} }"
             tag="button"
             class="secondary">
             Quiz results

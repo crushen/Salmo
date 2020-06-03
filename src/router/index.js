@@ -77,13 +77,13 @@ const routes = [
     meta: { onlyAuthUser: true }
   },
   { 
-    path: '/questionnaire', 
+    path: '/profile/:username/questionnaire', 
     name: 'questionnaire', 
     component: Questionnaire,
     meta: { onlyAuthUser: true } 
   },
   { 
-    path: '/questionnaire/results', 
+    path: '/profile/:username/questionnaire/results', 
     name: 'results', 
     component: Results,
     meta: { onlyAuthUser: true } 

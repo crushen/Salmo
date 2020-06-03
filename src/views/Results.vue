@@ -105,7 +105,7 @@
 
           <div class="button">
             <router-link
-              :to="{name: 'questionnaire'}"
+              :to="{name: 'questionnaire', params: {username: user.username}}"
               tag="button"
               class="tertiary">
               Take Quiz Again
