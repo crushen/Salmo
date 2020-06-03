@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import lightbulb from '@/assets/icons/white/lightbulb-solid.svg';
+import lightbulb from '@/assets/icons/lightbulbs/tip.svg';
 import { mapState } from 'vuex';
 
 export default {
@@ -216,10 +216,9 @@ h1 {
     }
 
     img {
-      width: 24px;
+      width: 26px;
       position: absolute;
       z-index: 0;
-      opacity: 0.3;
 
       &:nth-of-type(1) {
         top: 8px;
