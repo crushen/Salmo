@@ -95,7 +95,8 @@
         <div class="button">
           <router-link
             :to="{ name: 'profile', params: {username: user.username} }"
-            tag="button">
+            tag="button"
+            :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
             Go to profile
           </router-link>
         </div>
@@ -123,6 +124,7 @@ import visaCard from '@/components/visa/VisaCard';
 import quickTip from '@/components/visa/QuickTip';
 import smallCard from '@/components/visa/SmallCard';
 import lightbulb from '@/assets/icons/lightbulbs/tip.svg';
+import dots from '@/assets/patterns/dots.svg';
 
 export default {
   components: {
@@ -133,6 +135,7 @@ export default {
   data() {
     return {
       lightbulb,
+      dots,
       user: this.$store.state.auth.user.profile,
       userAge: this.$store.state.auth.user.profile.age,
       userCountry: this.$store.state.auth.user.profile.nationality,

@@ -8,7 +8,8 @@
 
       <router-link
         tag="button"
-        :to="{ name: 'visa-page', params: { slug: visa.slug } }">
+        :to="{ name: 'visa-page', params: { slug: visa.slug } }"
+        :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
         Tell Me More!
       </router-link>
     </div>
@@ -16,10 +17,17 @@
 </template>
 
 <script>
+import dots from '@/assets/patterns/dots.svg';
+
 export default {
   props: {
     visa: { required: true, type: Object },
     name: { required: true, type: String }
+  },
+  data() {
+    return {
+      dots
+    }
   }
 }
 </script>
