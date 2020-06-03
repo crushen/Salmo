@@ -6,7 +6,7 @@
 
     <section class="buttons">
       <router-link
-      class="button"
+        class="button"
         v-for="page in categories"
         :key="page.text"
         :to="{ name: 'non-eu-category', params: { category: page.text } }"

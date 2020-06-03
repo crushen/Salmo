@@ -8,10 +8,10 @@
             class="button"
             v-for="(answer, index) in question.answers"
             :key="index"
-            @click="selected = answer.value">
-            <div class="inner">
-              <p>{{ answer.text }}</p>
-            </div>
+            @click="selected = answer.value"
+            :style="{ backgroundImage: `url(${answer.bg})` }">
+            <p>{{ answer.text }}</p>
+            <img :src="answer.icon" class="icon">
           </button>
         </div>
     </div>
@@ -49,6 +49,16 @@
 <script>
 import prettyRadio from 'pretty-checkbox-vue/radio';
 
+import study from '@/assets/icons/visa-buttons/study.svg';
+import work from '@/assets/icons/visa-buttons/work.svg';
+import business from '@/assets/icons/visa-buttons/business.svg';
+import family from '@/assets/icons/visa-buttons/family.svg';
+
+import wave from '@/assets/patterns/wave-2.svg';
+import line from '@/assets/patterns/line.svg';
+import dashed from '@/assets/patterns/dashed-line.svg';
+import confetti from '@/assets/patterns/confetti.svg';
+
 export default {
   props: {
     question: { type: Object, required: true },
@@ -60,7 +70,15 @@ export default {
   },
   data () {
     return {
-      selected: null
+      selected: null,
+      study,
+      work,
+      business,
+      family,
+      wave,
+      line,
+      dashed,
+      confetti
     }
   },
   methods: {
@@ -71,7 +89,34 @@ export default {
     previousQuestion() {
       this.$emit('previousQuestion');
       this.selected = null;
+    },
+    getButtonStyles() {
+      if(this.currentQuestion === 0) {
+        this.question.answers.forEach(answer => {
+          switch(this.question.answers.indexOf(answer)) {
+            case 0:
+              answer.icon = this.study;
+              answer.bg = this.wave;
+              break;
+            case 1:
+              answer.icon = this.work;
+              answer.bg = this.line;
+              break;
+            case 2:
+              answer.icon = this.business;
+              answer.bg = this.dashed;
+              break;
+            case 3:
+              answer.icon = this.family;
+              answer.bg = this.confetti;
+              break;
+          }
+        });
+      }
     }
+  },
+  mounted() {
+    this.getButtonStyles();
   }
 }
 </script>
@@ -100,28 +145,42 @@ export default {
   .button {
     width: 120px;
     height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     margin: $spacing;
-    padding: 0;
-    border: 3px solid $primary-blue;
+    padding: 12px 0 0 0;
     border-radius: $border-radius;
-    background: $light-grey;
+    background: $primary-blue;
     color: $light-font;
     text-transform: capitalize;
     box-shadow: $shadow;
-    position: relative;
+    background-position: center;
 
-    .inner {
-      width: 100%;
-      padding: 6px;
-      background: $primary-blue;
-      position: absolute;
-      bottom: 0;
-
-      p {
-        font-weight: 600;
-      }
+    &:nth-of-type(1) {
+      background-size: 240px;
+      
     }
-  
+
+    &:nth-of-type(2) {
+      background-size: 140px;
+    }
+
+    &:nth-of-type(3) {
+      background-size: 180px;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 600;
+      transform: translateY(4px);
+    }
+
+    .icon {
+      width: 55px;
+    }
+
     &:focus {
       outline: none;
       box-shadow: 0px 0px 0px 4px $primary-yellow;
