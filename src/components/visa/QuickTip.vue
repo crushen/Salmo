@@ -6,35 +6,37 @@
       <img :src="lightbulb" class="icon">
     </button>
 
-    <div 
-      v-if="open"
-      class="modal">
-      <article>
-        <img :src="lightbulbYellow" class="lightbulb-yellow">
-        <img :src="lightbulbYellow" class="lightbulb-yellow">
-        <img :src="lightbulbYellow" class="lightbulb-yellow">
-        <img :src="lightbulbYellow" class="lightbulb-yellow">
-        <h2><span>Quick Tip</span> {{ visa.name }}</h2>
-        <div class="text">
-          <p>{{ visa.card.quickTip.header }}</p>
-          <ul>
-            <li
-              v-for="item in visa.card.quickTip.list"
-              :key="item">
-              {{ item }}
-            </li>
-          </ul>
-        </div>
+    <transition name="modal" mode="out-in">
+      <div 
+        v-if="open"
+        class="modal">
+        <article>
+          <img :src="lightbulbYellow" class="lightbulb-yellow">
+          <img :src="lightbulbYellow" class="lightbulb-yellow">
+          <img :src="lightbulbYellow" class="lightbulb-yellow">
+          <img :src="lightbulbYellow" class="lightbulb-yellow">
+          <h2><span>Quick Tip</span> {{ visa.name }}</h2>
+          <div class="text">
+            <p>{{ visa.card.quickTip.header }}</p>
+            <ul>
+              <li
+                v-for="item in visa.card.quickTip.list"
+                :key="item">
+                {{ item }}
+              </li>
+            </ul>
+          </div>
 
-        <div class="close">
-          <button 
-            @click="closeModal"
-            class="tertiary">
-            Close
-          </button>
-        </div>
-      </article>
-    </div>
+          <div class="close">
+            <button 
+              @click="closeModal"
+              class="tertiary">
+              Close
+            </button>
+          </div>
+        </article>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -167,5 +169,16 @@ export default {
       font-size: 18px;
     }
   }
+}
+
+.modal-enter,
+.modal-leave-to {
+  transform: translate(-50%, -55%);
+  opacity: 0;
+}
+.modal-enter-active,
+.modal-leave-active {
+  transition: 0.6s;
+  transition-timing-function: cubic-bezier(0,1.15,1,.99);
 }
 </style>

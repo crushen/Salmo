@@ -6,23 +6,25 @@
       <img :src="lightbulb" class="icon">
     </button>
 
-    <div 
-      v-if="open"
-      class="modal">
-      <article>
-        <h3>How application guidlines are calculated.</h3>
+    <transition name="modal" mode="out-in">
+      <div 
+        v-if="open"
+        class="modal">
+        <article>
+          <h3>How application guidlines are calculated.</h3>
 
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda similique debitis mollitia corrupti beatae ad necessitatibus incidunt sed inventore. Omnis doloribus quis nostrum nam magni odit debitis, soluta quia sit.</p>
+          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda similique debitis mollitia corrupti beatae ad necessitatibus incidunt sed inventore. Omnis doloribus quis nostrum nam magni odit debitis, soluta quia sit.</p>
 
-        <div class="close">
-          <button 
-            @click="closeModal"
-            class="tertiary">
-            Close
-          </button>
-        </div>
-      </article>
-    </div>
+          <div class="close">
+            <button 
+              @click="closeModal"
+              class="tertiary">
+              Close
+            </button>
+          </div>
+        </article>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -102,5 +104,16 @@ export default {
       font-size: 18px;
     }
   }
+}
+
+.modal-enter,
+.modal-leave-to {
+  transform: translate(-50%, -55%);
+  opacity: 0;
+}
+.modal-enter-active,
+.modal-leave-active {
+  transition: 0.6s;
+  transition-timing-function: cubic-bezier(0,1.15,1,.99);
 }
 </style>
