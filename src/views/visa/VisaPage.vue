@@ -16,13 +16,9 @@
           <div class="inner">
             <h2>Why this visa?</h2>
             <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?</p>
-            <div class="tip">
-              <img 
-                v-for="i in 4"
-                :key="i"
-                :src="lightbulb">
-              <p><span>Remember!</span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.</p>
-            </div>
+
+            <tip :text="tipText" />
+
             <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?</p>
             <!-- Need to make this into forward and back arrows instead of text -->
             <div 
@@ -40,18 +36,21 @@
 </template>
 
 <script>
-import lightbulb from '@/assets/icons/lightbulbs/tip.svg';
+import tip from '@/components/Tip';
 import { mapState } from 'vuex';
 
 export default {
+  components: {
+    tip
+  },
   data() {
     return {
       slug: this.$route.params.slug,
-      lightbulb,
       selectedTab: 1,
       card: {
         background: '#C93A22'
-      }
+      },
+      tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
     }
   },
   computed: {
@@ -199,47 +198,6 @@ h1 {
 
   .text {
     margin: $spacing*2 0;
-  }
-
-  .tip {
-    background: $primary-yellow;
-    padding: $spacing*2 0;
-    position: relative;
-
-    p {
-      position: relative;
-      z-index: 2;
-    }
-
-    span {
-      font-weight: 600;
-    }
-
-    img {
-      width: 26px;
-      position: absolute;
-      z-index: 0;
-
-      &:nth-of-type(1) {
-        top: 8px;
-        left: 8px;
-      }
-
-      &:nth-of-type(2) {
-        top: 8px;
-        right: 8px;
-      }
-
-      &:nth-of-type(3) {
-        bottom: 8px;
-        left: 8px;
-      }
-
-      &:nth-of-type(4) {
-        bottom: 8px;
-        right: 8px;
-      }
-    }
   }
 
   .next-button {
