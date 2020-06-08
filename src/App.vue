@@ -102,7 +102,6 @@ p {
 .alert-enter-active,
 .alert-leave-active {
   transition: 0.6s;
-  transition-timing-function: cubic-bezier(0,1.15,1,.99);
 }
 
 .alert-enter-active {

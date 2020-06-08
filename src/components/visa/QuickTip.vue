@@ -179,6 +179,5 @@ export default {
 .modal-enter-active,
 .modal-leave-active {
   transition: 0.6s;
-  transition-timing-function: cubic-bezier(0,1.15,1,.99);
 }
 </style>
