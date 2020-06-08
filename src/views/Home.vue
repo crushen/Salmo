@@ -20,7 +20,7 @@
     <header :style="{ backgroundImage: `url(${background})` }">
       <div class="content">
         <img 
-          src="@/assets/illustrations/symbols/Salmo Logo outline.svg" 
+          src="@/assets/logo/outline.svg"
           alt="Salmo logo outline"
           class="logo-img">
         <div class="logo">

@@ -7,7 +7,7 @@
     <div id="overlay"></div>
     <img 
       v-if="$route.path !== '/about' && $route.path !== '/'"
-      src="@/assets/illustrations/symbols/Salmo Logo.svg" 
+      src="@/assets/logo/colour.svg" 
       alt="Salmo logo"
       class="small-logo">
     <router-view/>

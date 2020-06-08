@@ -3,7 +3,7 @@
     <div class="content">
       <div class="logo">
         <img
-          src="@/assets/illustrations/symbols/Salmo Logo.svg" 
+          src="@/assets/logo/colour.svg" 
           alt="Salmo logo">
         <h1>Salmo</h1>
       </div>
