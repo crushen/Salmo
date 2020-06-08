@@ -9,37 +9,33 @@
         class="tab" />
     </div>
     <div class="outer">
-      <div class="card" :style="{'background': cardBackground}">
+      <article class="card" :style="{'background': cardBackground}">
         <div class="inner">
-          <h2>Why this visa?</h2>
-          <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?</p>
-
-          <tip :text="tipText" />
-
-          <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?</p>
-          <!-- Need to make this into forward and back arrows instead of text -->
-          <div 
-            @click="next"
-            class="next-button"
-            :class="selectedTab === 5 ? 'disabled' : ''">
-            <p>Next Section</p>
-            <span>&#8227;</span>
-          </div>
+          <section v-for="(page, index) in card.pages" :key="index">
+            <transition name="slide" mode="out-in">
+              <inner 
+                :selectedTab="selectedTab"
+                :index="index"
+                :sections="page.sections"
+                @next="next" />
+            </transition>
+          </section>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </template>
 
 <script>
-import tip from '@/components/Tip';
+import inner from '@/components/tabbed-card/Inner';
+
 
 export default {
   props: {
-    tipText: { required: true, type: String }
+    card: { required: true, type: Object }
   },
   components: {
-    tip
+    inner
   },
   data() {
     return {
@@ -73,8 +69,8 @@ export default {
     next() {
       if(this.selectedTab < 5) {
         this.selectedTab++;
+        window.scrollTo(0, 0);
       }
-      window.scrollTo(0, 0);
     }
   }
 }
@@ -155,42 +151,15 @@ export default {
     border-radius: $border-radius;
     padding: $spacing*3 0;
   }
+}
 
-  h2 {
-    color: $primary-pink;
-    padding: 0 $spacing*2;
-  }
-
-  p {
-    padding: 0 $spacing*2;
-  }
-
-  .text {
-    margin: $spacing*2 0;
-  }
-
-  .next-button {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    margin: $spacing*4 $spacing*2 0;
-    transition: 0.2s;
-
-    p {
-      text-decoration: underline;
-      font-weight: 600;
-      padding: 0;
-    }
-
-    span {
-      font-size: 55px;
-      line-height: 0;
-      padding: 0 0 6px 6px;
-    }
-
-    &.disabled {
-      color: $light-grey;
-    }
-  }
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: 0.6s;
 }
 </style>

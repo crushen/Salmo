@@ -2,12 +2,12 @@
   <section class="content">
     <h1>Pre-Settled Status</h1>
 
-    <tabbed-card :tipText="tipText" />
+    <tabbed-card :card="card" />
   </section>
 </template>
 
 <script>
-import tabbedCard from '@/components/TabbedCard';
+import tabbedCard from '@/components/tabbed-card/Card';
 
 export default {
   components: {
@@ -15,7 +15,75 @@ export default {
   },
   data() {
     return {
-      tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
+      card: {
+        pages: [
+          {
+            sections: [
+              {
+                title: 'Why this visa?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
+                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
+              },
+              {
+                title: 'Is this visa right for me?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
+              }
+            ]
+          },
+          {
+            sections: [
+              {
+                title: 'How long is the visa?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
+              },
+              {
+                title: 'When can I apply?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
+                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
+              }
+            ]
+          },
+          {
+            sections: [
+              {
+                title: 'Why this visa?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
+                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
+              },
+              {
+                title: 'Is this visa right for me?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
+              }
+            ]
+          },
+          {
+            sections: [
+              {
+                title: 'How long is the visa?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
+              },
+              {
+                title: 'When can I apply?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
+                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
+              }
+            ]
+          },
+          {
+            sections: [
+              {
+                title: 'Why this visa?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
+                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
+              },
+              {
+                title: 'Is this visa right for me?',
+                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
+              }
+            ]
+          }
+        ]
+      }
     }
   }
 }
