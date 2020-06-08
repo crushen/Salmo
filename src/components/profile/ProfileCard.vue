@@ -2,7 +2,7 @@
   <div
     class="profile-card">
     <div class="child one">
-      <div class="picture"></div>
+      <img :src="profilePictures[Math.floor(Math.random()*3) + 1]" class="profile-pic" alt="Randomised profile picture">
     </div>
 
     <div class="child two">
@@ -40,9 +40,19 @@
 </template>
 
 <script>
+import img1 from '@/assets/illustrations/profilePages/Profile 1.svg';
+import img2 from '@/assets/illustrations/profilePages/Profile 2.svg';
+import img3 from '@/assets/illustrations/profilePages/Profile 3.svg';
+import img4 from '@/assets/illustrations/profilePages/Profile 4.svg';
+
 export default {
   props: {
     user: { required: true, type: Object }
+  },
+  data() {
+    return {
+      profilePictures: [img1, img2, img3, img4]
+    }
   },
   computed: {
     birthday() {
@@ -86,9 +96,9 @@ export default {
     height: 120px;
     padding: 12px 0 0 $spacing;
 
-    .picture {
+    img {
       width: 100%;
-      height: 100%;
+      height: 120px;
       background: white;
       border-radius: 4px;
     }
