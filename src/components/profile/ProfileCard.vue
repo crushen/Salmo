@@ -73,7 +73,6 @@ export default {
   padding-bottom: $spacing;
   margin: $spacing*5 auto 0 auto;
   background: $secondary-light-blue;
-  // border: 4px solid $secondary-light-blue;
   border-radius: $border-radius;
   box-shadow: $shadow;
   @include grid(repeat(2, 1fr), 2fr 1fr 1fr, 10px);
