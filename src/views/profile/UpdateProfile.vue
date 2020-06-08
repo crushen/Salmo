@@ -592,15 +592,19 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
-    if (this.to) {
-      next();
+    if(!this.finished) {
+      if (this.to) {
+        next();
+      } else {
+        const overlay = document.querySelector('#overlay');
+        overlay.style.opacity = 1;
+        overlay.style.visibility = 'visible';
+        document.querySelector('body').style.overflow = 'hidden';
+        this.to = to;
+        this.showAlert = true;
+      }
     } else {
-      const overlay = document.querySelector('#overlay');
-      overlay.style.opacity = 1;
-      overlay.style.visibility = 'visible';
-      document.querySelector('body').style.overflow = 'hidden';
-      this.to = to;
-      this.showAlert = true;
+      next();
     }
   }
 }
