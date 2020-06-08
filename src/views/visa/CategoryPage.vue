@@ -60,13 +60,6 @@ h1 {
   margin-bottom: $spacing*5;
 }
 
-.arrow {
-  width: 22px;
-  position: absolute;
-  top: 24px;
-  left: 6vw;
-}
-
 .visa-card {
   margin-bottom: $spacing*4;
 }

@@ -47,9 +47,6 @@ export default {
     return {
       slug: this.$route.params.slug,
       selectedTab: 1,
-      card: {
-        background: '#C93A22'
-      },
       tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
     }
   },
@@ -101,13 +98,6 @@ export default {
 
 .content {
   padding: $spacing*12 0 $spacing*6;
-}
-
-.arrow {
-  width: 22px;
-  position: absolute;
-  top: 24px;
-  left: 6vw;
 }
 
 h1 {

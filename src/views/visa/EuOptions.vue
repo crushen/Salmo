@@ -128,13 +128,6 @@ export default {
   padding: $spacing*12 0 $spacing*10;
 }
 
-.arrow {
-  width: 22px;
-  position: absolute;
-  top: 24px;
-  left: 6vw;
-}
-
 h1 {
   margin-bottom: $spacing*5;
 }

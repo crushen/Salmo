@@ -83,13 +83,6 @@ export default {
   padding: $spacing*12 0 0;
 }
 
-.arrow {
-  width: 22px;
-  position: absolute;
-  top: 24px;
-  left: 6vw;
-}
-
 .buttons {
   width: 100%;
   max-width: 300px;
