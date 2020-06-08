@@ -32,10 +32,10 @@
         class="button"
           v-for="page in helpPages"
           :key="page.title"
-          :to="{ name: 'help-centre-page', params: { slug: page.slug } }">
+          :to="{ name: 'help-centre-page', params: { slug: page.slug } }"
+          :style="{ backgroundImage: `url(${page.bg})` }">
           <div>
             <h3>{{ page.title }}</h3>
-            <!-- <img :src="page.icon" class="icon"> -->
           </div>
         </router-link>
       </div>
@@ -63,6 +63,11 @@
 import arrow from '@/assets/icons/chevron-down-solid.svg';
 import cross from '@/assets/icons/white/times-solid.svg';
 
+import wave from '@/assets/patterns/wave-2.svg';
+import line from '@/assets/patterns/line.svg';
+import dashed from '@/assets/patterns/dashed-line.svg';
+import confetti from '@/assets/patterns/confetti.svg';
+
 export default {
   data() {
     return {
@@ -72,7 +77,7 @@ export default {
       questions: [
         {
           title: 'Do I need to submit documents to use Salmo?',
-          text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates velit dolorem expedita, placeat ratione.'
+          text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates velit dolorem expedita, placeat ratione.',
         },
         {
           title: "How much can I trust Salmo's information?",
@@ -94,19 +99,23 @@ export default {
       helpPages: [
         {
           title: 'Biometric Residence Permit',
-          slug: 'biometric-residence-permit'
+          slug: 'biometric-residence-permit',
+          bg: dashed
         },
         {
           title: 'Applying with Dependants',
-          slug: 'applying-with-dependants'
+          slug: 'applying-with-dependants',
+          bg: confetti
         },
         {
           title: 'Switch VS Extend',
-          slug: 'switch-vs-extend'
+          slug: 'switch-vs-extend',
+          bg: wave
         },
         {
           title: 'Indefinite Leave to Remain',
-          slug: 'indefinite-leave-to-remain'
+          slug: 'indefinite-leave-to-remain',
+          bg: line
         }
       ]
     }
@@ -219,18 +228,28 @@ export default {
     margin: $spacing;
     padding: $spacing;
     border-radius: $border-radius;
-    background: $dark-font;
+    background: $primary-blue;
     color: $light-font;
     box-shadow: $shadow;
+    background-position: center;
+
+    &:nth-of-type(1) {
+      background-size: 180px;
+    }
+
+    &:nth-of-type(3) {
+      background-size: 240px;
+      
+    }
+
+    &:nth-of-type(4) {
+      background-size: 140px;
+    }
 
     h3 {
       text-align: center;
       font-size: 16px;
     }
-
-    // .icon {
-    //   width: 16px;
-    // }
   }
 }
 
