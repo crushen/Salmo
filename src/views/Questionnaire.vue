@@ -202,13 +202,6 @@ export default {
   padding: $spacing*12 0 $spacing*10;
 }
 
-.arrow {
-  width: 22px;
-  position: absolute;
-  top: 24px;
-  left: 6vw;
-}
-
 .progress-bar,
 .progress-bar-inner {
   width: 100%;
