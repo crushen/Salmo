@@ -53,6 +53,23 @@
         <div class="disclaimer">
           <p class="title">Disclaimer</p>
           <p>We are a team of enthusiastic individuals with the aim of conveying exsisting visa information in a more digestable format. Please do not get in touch for legal advice as we are not qualified to give this at the moment.</p>
+          <p>For a full list of our T&C's or Privacy Policy, please see below.</p>
+        </div>
+
+        <div class="terms-buttons">
+          <router-link 
+            :to="{ name: 'terms' }"
+            tag="button"
+            class="tertiary">
+            Terms & Conditions
+          </router-link>
+
+          <router-link 
+            :to="{ name: 'privacy' }"
+            tag="button"
+            class="tertiary">
+            Privacy Policy
+          </router-link>
         </div>
       </div>
     </section>
@@ -279,6 +296,22 @@ export default {
       font-weight: 600;
       margin-bottom: $spacing*2;
     }
+
+    p {
+      &:last-of-type {
+        margin-top: $spacing*2;
+      }
+    }
+  }
+}
+
+.terms-buttons {
+  display: flex;
+  flex-direction: column;
+  margin-top: $spacing*6;
+
+  button:last-of-type {
+    margin-top: $spacing*3;
   }
 }
 </style>

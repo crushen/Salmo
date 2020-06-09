@@ -22,6 +22,8 @@ import About from '@/views/About';
 import HelpCentre from '@/views/HelpCentre';
 import HelpCentrePage from '@/views/HelpCentrePage';
 import NotFound from '@/views/NotFound';
+import Privacy from '@/views/Privacy';
+import Terms from '@/views/Terms';
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -137,6 +139,16 @@ const routes = [
     path: '/about/help-centre/:slug', 
     name: 'help-centre-page', 
     component: HelpCentrePage
+  },
+  { 
+    path: '/about/privacy', 
+    name: 'privacy', 
+    component: Privacy
+  },
+  { 
+    path: '/about/terms-and-conditions', 
+    name: 'terms', 
+    component: Terms
   },
   { path: '/404',
     name: 'not-found',
