@@ -1,5 +1,5 @@
 <template>
-  <article class="scroll-container">
+  <div>
     <section>
       <h1>These terms and conditions using your Salmo account</h1>
       <p>These legal terms (English law applies and disputes will be settled by English courts) are between you and Salmo Visa Limited (Salmo/us/we) and you agree to them by using the Salmo web app. Your Salmo account is a personal identity account and you mustn’t use it for business purposes.</p>
@@ -94,7 +94,7 @@
       <h1>How to make a complaint</h1>
       <p>If you have a complaint, please contact us and we’ll do our best to fix the problem.</p>
 
-      <p class="margin">If you’re still not happy, you can refer your complaint to the Office of the Immigration Services Commissioner. For more details you can visit their website at https://www.gov.uk/government/organisations/office-of-the-immigration-services-commissioner</p>
+      <p class="margin">If you’re still not happy, you can refer your complaint to the Office of the Immigration Services Commissioner. For more details you can visit their <a href="https://www.gov.uk/government/organisations/office-of-the-immigration-services-commissioner" target="_blank">website</a>.</p>
     </section>
 
     <section>
@@ -120,22 +120,11 @@
     <section>
       <p class="address">Salmo Visa Limited. Registered in England. Registered No. 12482305. Registered Office: Studio 4, Replica House, 37 Bavaria Road, London, N19 4EU.</p>
     </section>
-  </article>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
-
-.scroll-container {
-  overflow: scroll;
-  background: $background;
-  padding: $spacing*2;
-  border: 3px solid $light-grey;
-  border-radius: 4px;
-  width: 100%;
-  height: 40vh; 
-  margin: $spacing*4 0;
-}
 
 section:not(:last-of-type) {
   margin-bottom: $spacing*3;
@@ -154,6 +143,10 @@ p, li {
 ul {
   margin-bottom: $spacing;
   list-style-position: inside;
+}
+
+a {
+  font-weight: 400;
 }
 
 .margin {

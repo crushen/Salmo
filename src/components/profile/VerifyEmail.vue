@@ -5,7 +5,9 @@
 
       <p>Please accept our terms and conditions to continue.</p>
 
-      <terms-and-conditions />
+      <section class="scroll-container">
+        <terms-and-conditions />
+      </section>
 
       <div class="field">
         <label class="container" for="terms">I accept the terms and conditions listed above.</label>
@@ -84,6 +86,17 @@ export default {
 
 .terms {
   padding-bottom: $spacing*10;
+
+  .scroll-container {
+    overflow: scroll;
+    background: $background;
+    padding: $spacing*2;
+    border: 3px solid $light-grey;
+    border-radius: 4px;
+    width: 100%;
+    height: 40vh; 
+    margin: $spacing*4 0;
+  }
 }
 
 h1 {
