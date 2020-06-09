@@ -1,8 +1,10 @@
 <template>
   <section id="terms" class="content">
     <h1>Terms & Conditions</h1>
-
-    <terms />
+    
+    <section class="text">
+      <terms />
+    </section>
   </section>
 </template>
 
@@ -21,5 +23,9 @@ export default {
 
 #terms {
   padding: $spacing*12 0;
+}
+
+.text {
+  margin-top: $spacing*4;
 }
 </style>
