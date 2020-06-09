@@ -1,7 +1,7 @@
 <template>
   <div>
     <section class="content">
-      <h2>All you need for your next UK Visa, right here.</h2>
+      <h2 class="header">All you need for your next UK Visa, right here.</h2>
 
       <content-card
         v-for="card in cards"
@@ -56,6 +56,5 @@ export default {
 
 h2 {
   margin: 0 0 $spacing*9 0;
-  font-size: 8vw;
 }
 </style>

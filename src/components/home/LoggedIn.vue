@@ -2,7 +2,7 @@
   <div>
     <section class="welcome">
       <div class="content">
-        <h2 class="header">Let's find your next step.</h2>
+        <h2 class="header">All you need for your next UK Visa, right here.</h2>
       </div>
     </section>
 
@@ -64,14 +64,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
-
-.welcome {
-  position: relative;
-
-  h2 {
-    margin-top: 6vw;
-  }
-}
 
 .news {
   margin-top: 18vw;
