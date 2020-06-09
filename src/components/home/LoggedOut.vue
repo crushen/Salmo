@@ -1,7 +1,7 @@
 <template>
   <div>
-    <section class="content content-cards section-margin">
-      <h2>Sign up now to get exclusive content.</h2>
+    <section class="content">
+      <h2>All you need for your next UK Visa, right here.</h2>
 
       <content-card
         v-for="card in cards"
@@ -55,8 +55,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 h2 {
-  margin-bottom: $spacing*8;
+  margin: 0 0 $spacing*8 0;
   font-size: 8vw;
-  text-align: center;
 }
 </style>

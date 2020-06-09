@@ -27,7 +27,7 @@
           <h1 class="logo-text">Salmo</h1>
         </div>
         <div class="sub-title">
-          <h2 class="caption">The ultimate visa organisation tool.</h2>
+          <h2 class="caption">A personalised visa experience</h2>
           <img src="@/assets/Home-underline.svg" alt="">
         </div>
         
@@ -90,11 +90,11 @@ export default {
 
 header {
   width: 100%;
-  height: 70vh;
+  min-height: 430px;
+  height: 120vw;
   text-align: center;
-  padding-top: 28vh;
+  background-repeat: no-repeat;
   background-size: cover;
-  background-position: 50% 0;
 }
 
 .logo {
@@ -102,6 +102,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 55vw;
 
   h1 {
     font-size: 23vw;
@@ -124,8 +125,8 @@ h2 {
 
 .sub-title {
   img {
-    width: 35vw;
-    transform: translate3d(8vw, -1.5vw, 0)
+    width: 25vw;
+    transform: translate3d(-13vw, -1.5vw, 0)
   }
 }
 </style>
