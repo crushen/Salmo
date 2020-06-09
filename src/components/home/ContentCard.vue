@@ -1,8 +1,8 @@
 <template>
   <div class="card">
-    <img :src="img" alt="">
-    <div class="text">
-      <h3>{{ title }}</h3>
+    <h3>{{ title }}</h3>
+    <div class="inner">
+      <img :src="img" alt="">
       <p>{{ subTitle }}</p>
     </div>
   </div>
@@ -23,26 +23,30 @@ export default {
 
 .card {
   width: 100%;
-  display: flex;
-  align-items: center;
   margin-bottom: $spacing*8;
 
-  .text {
-    h3 {
-      margin-bottom: $spacing*2;
+  h3 {
+    margin-bottom: $spacing*2;
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    img {
+      width: 32%;
+      margin: 0 4vw 0 0;
     }
   }
 
-  img {
-    width: 35%;
-    margin: 0 $spacing*2 0 0;
-  }
-
   &:nth-of-type(2) {
-    flex-direction: row-reverse;
+    .inner {
+      flex-direction: row-reverse;
 
-    img {
-      margin: 0 0 0 $spacing*2;
+      img {
+        margin: 0 0 0 4vw;
+      }
     }
   }
 }

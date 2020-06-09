@@ -31,18 +31,18 @@ export default {
     return {
       cards: [
         {
-          title: 'A quiz created just for you.',
-          subTitle: 'Enter in your current visa and we’ll help you find your next step.',
+          title: 'Not sure what your next step is? Overwhelmed by choices?',
+          subTitle: 'Your personalised quiz can help. Answer a series of quick questions and we can suggest which visas will suit you best.',
           img: imgOne
         },
         {
-          title: 'Overview of your visa history.',
-          subTitle: 'Your ultimate organiser tool for tracking all aspects of your visa.',
+          title: 'Struggling to keep organised? Don’t know where to start?',
+          subTitle: 'Your visa planner can help. Track and keep note of past visas, your route to Permenant Residency and any documentation you need to collect.',
           img: imgTwo
         },
         {
-          title: 'Detailed visa suggestions.',
-          subTitle: "We’ll provide you a list of personalised visas to help narrow down your choices.",
+          title: "Find info elsewhere confusing? Not sure what's relevant to you?",
+          subTitle: "All results are personalised for you, so you see the info you need. Visas are broken down into more consise and managable sections, giving you back the power.",
           img: imgThree
         }
       ]
@@ -55,7 +55,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 h2 {
-  margin: 0 0 $spacing*8 0;
+  margin: 0 0 $spacing*9 0;
   font-size: 8vw;
 }
 </style>
