@@ -1,5 +1,7 @@
 <template>
-  <div class="alert">
+  <div 
+    class="alert"
+    :class="!buttons ? 'top' : 'bottom'">
     <a v-if="!buttons" @click="confirm">
       <img :src="cross">
     </a>
@@ -73,9 +75,16 @@ a {
   background: $primary-pink;
   color: $light-font;
   position: fixed;
-  top: 2.5vw;
   left: 2.5vw;
   z-index: 40;
+
+  &.top {
+    top: 2.5vw;
+  }
+
+  &.bottom {
+    top: 60vh;
+  }
 
   p:first-of-type {
     font-weight: 600;
