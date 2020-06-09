@@ -13,7 +13,12 @@
         </visa-card>
 
         <section class="buttons">
-          <button class="tertiary">Change Favourite Visa</button>
+          <router-link
+            :to="{ name: 'non-eu' }"
+            tag="button"
+            class="tertiary">
+            Change Favourite Visa
+          </router-link>
           <p>The rest of your quiz results are saved here:</p>
           <router-link
             :to=" {name: 'results', params: {username: user.username} }"
