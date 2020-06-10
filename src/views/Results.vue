@@ -34,7 +34,7 @@
         <div v-if="switchVisas[0]" class="switch">
           <div class="sub-title">
             <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
-            <p class="card-title">There are other visas in the same catagory that you could switch to:</p>
+            <p class="card-title">There are other visas in the {{ topResult[0].category }} catagory that you could switch to:</p>
           </div>
 
           <small-card 
@@ -78,7 +78,7 @@
           class="extend">
           <div class="sub-title">
             <img src="@/assets/icons/results/extend.svg" alt="" class="icon">
-            <p>Don't forget abot possibly extending your current visa!</p>
+            <p>Don't forget about possibly extending your current visa!</p>
           </div>
 
           <small-card 
