@@ -1,6 +1,6 @@
 <template>
   <section id="help-center-page">
-    <section class="content">
+    <article class="content">
       <h1>{{ currentPage.title }}</h1>
       <h3>{{ currentPage.subTitle }}</h3>
 
@@ -14,7 +14,7 @@
         </p>
       </div>
        
-    </section> 
+    </article> 
 
     <section class="bottom">
       <div class="content">
