@@ -38,12 +38,13 @@
       <div>
         <h1>On it's way!</h1>
         <h3>The email containing a link to reset your password has been sent.</h3>
+        <div class="margin">
+          <p>You should receive this email in within a few minutes, and it's valid for 1 hour.</p>
+          <p>If you don't receive the email, <button @click="linkSent = false" class="tertiary">click here</button> to resend it.</p>
+        </div>
       </div>
 
       <div class="text sent">
-        <p>You should receive this email in within a few minutes, and it's valid for 1 hour.</p>
-        <p>If you don't receive the email, <button @click="linkSent = false" class="tertiary">click here</button> to resend it.</p>
-
         <div class="img-container">
           <img 
             src="@/assets/illustrations/alternateStates/Man with Email 1.svg" 
@@ -116,6 +117,10 @@ export default {
 
 h3 {
   margin-top: 6vw;
+}
+
+.margin {
+  margin-top: 10vw;
 }
 
 .img-container {

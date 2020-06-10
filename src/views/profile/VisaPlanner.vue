@@ -30,7 +30,7 @@
       </section>
 
       <section class="documentation section-margin">
-        <p>The below can help you keep track of what dpcumentation you need and the overall process.</p>
+        <p>The below can help you keep track of what documentation you need and the overall process.</p>
         <p class="emphasis">These tools are based off your current favourite visa, so be sure to keep it up to date!</p>
 
         <doc-checklist 
