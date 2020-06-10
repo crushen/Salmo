@@ -106,7 +106,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .content {
-  padding: $spacing*12 0 $spacing*6;
+  padding: $spacing*12 0;
 }
 
 h1 {

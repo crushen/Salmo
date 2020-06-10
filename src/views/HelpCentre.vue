@@ -273,7 +273,7 @@ export default {
 .bottom {
   background: $background;
   margin-top: $spacing*8;
-  padding: $spacing*8 0 $spacing*10 0;
+  padding: $spacing*8 0 $spacing*12 0;
 
   .contact-buttons {
     display: flex;

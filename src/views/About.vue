@@ -100,7 +100,7 @@ h2 {
 
 .help {
   background: $background;
-  padding: $spacing*8 0;
+  padding: $spacing*8 0 $spacing*12 0;
   margin-top: $spacing*8;
 
   .button {
