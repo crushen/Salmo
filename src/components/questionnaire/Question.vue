@@ -9,9 +9,10 @@
             v-for="(answer, index) in question.answers"
             :key="index"
             @click="selected = answer.value"
-            :style="{ backgroundImage: `url(${answer.bg})` }">
+            :style="{ backgroundImage: buttonBackground(index) }">
+            <div v-if="answer.value !== selected && selected !== null" class="btn-overlay"></div>
             <p>{{ answer.text }}</p>
-            <img :src="answer.icon" class="icon">
+            <img :src="buttonIcon(index)" class="icon">
           </button>
         </div>
     </div>
@@ -23,6 +24,7 @@
         :key="index"
         :value="answer.value"
         class="p-smooth p-default p-round radio"
+        :class="{'un-checked': answer.value !== selected && selected !== null}"
         color="primary-o">
         {{ answer.text }}
       </pretty-radio>
@@ -39,6 +41,7 @@
 
       <button
         @click="submitAnswer"
+        :class="{'inactive': !selected}"
         class="secondary">
         Next <span>&#8227;</span>
       </button>
@@ -90,33 +93,34 @@ export default {
       this.$emit('previousQuestion');
       this.selected = null;
     },
-    getButtonStyles() {
-      if(this.currentQuestion === 0) {
-        this.question.answers.forEach(answer => {
-          switch(this.question.answers.indexOf(answer)) {
-            case 0:
-              answer.icon = this.study;
-              answer.bg = this.wave;
-              break;
-            case 1:
-              answer.icon = this.work;
-              answer.bg = this.line;
-              break;
-            case 2:
-              answer.icon = this.business;
-              answer.bg = this.dashed;
-              break;
-            case 3:
-              answer.icon = this.family;
-              answer.bg = this.confetti;
-              break;
-          }
-        });
+    buttonBackground(index) {
+      switch(index) {
+        case 0:
+          return `url(${this.wave})`;
+        case 1:
+          return `url(${this.line})`;
+        case 2:
+          return `url(${this.dashed})`;
+        case 3:
+          return `url(${this.confetti})`;
+        default:
+          return `url(${this.wave})`;
+      }
+    },
+    buttonIcon(index) {
+      switch(index) {
+        case 0:
+          return this.study;
+        case 1:
+          return this.work;
+        case 2:
+          return this.business;
+        case 3:
+          return this.family;
+        default:
+          return this.study;
       }
     }
-  },
-  mounted() {
-    this.getButtonStyles();
   }
 }
 </script>
@@ -143,6 +147,7 @@ export default {
   margin: auto;
 
   .button {
+    position: relative;
     width: 120px;
     height: 120px;
     display: flex;
@@ -152,11 +157,22 @@ export default {
     margin: $spacing;
     padding: 12px 0 0 0;
     border-radius: $border-radius;
-    background: $primary-blue;
+    background-color: $primary-blue;
     color: $light-font;
     text-transform: capitalize;
     box-shadow: $shadow;
     background-position: center;
+
+    .btn-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba($color: $dark-font, $alpha: 0.6);
+      border-radius: $border-radius;
+      z-index: 2;
+    }
 
     &:nth-of-type(1) {
       background-size: 240px;
@@ -175,6 +191,8 @@ export default {
       font-size: 18px;
       font-weight: 600;
       transform: translateY(4px);
+      position: relative;
+      z-index: 0;
     }
 
     .icon {
@@ -188,6 +206,10 @@ export default {
   }
 }
 
+.un-checked {
+  opacity: 0.6;
+}
+
 .nav {
   width: 100%;
   display: flex;
@@ -196,6 +218,12 @@ export default {
   .secondary {
     border: 3px solid $primary-yellow;
     color: $primary-yellow;
+
+    &.inactive {
+      border: 3px solid $light-grey;
+      color: $light-grey;
+      pointer-events: none;
+    }
 
     span {
       font-size: 45px;
@@ -209,7 +237,7 @@ export default {
     text-decoration: none;
 
     &.inactive {
-      color: $grey;
+      color: $light-grey;
       pointer-events: none;
     }
 
