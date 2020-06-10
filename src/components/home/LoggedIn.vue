@@ -38,7 +38,7 @@
           class="image-2">
 
         <page-link-card
-          text="For more general advice or help on the UK aplication process, take a look through our Help Centre."
+          text="If you’ve got a specific question about a visa related topic, our Help Centre has lots of helpful guides to all things visa!"
           pageTitle="Help Centre"
           :link="{name: 'help-centre'}"
           class="content" />

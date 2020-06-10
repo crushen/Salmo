@@ -16,7 +16,7 @@
       alt="An illustration of a person thinking">
 
     <div class="content">
-      <p>For more general advice or help on the UK application process, take a look through our Help Centre.</p>
+      <p>If you’ve got a specific question about a visa related topic, our Help Centre has lots of helpful guides to all things visa!</p>
       <div class="button">
         <router-link 
           :to="{name: 'help-centre'}"
