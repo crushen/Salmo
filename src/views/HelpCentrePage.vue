@@ -24,7 +24,7 @@
           :to="{name: 'help-centre'}"
           tag="button"
           class="secondary">
-          Back to Help Centre
+          Back To Help Centre
         </router-link>
       </div>
     </section>  

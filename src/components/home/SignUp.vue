@@ -77,7 +77,7 @@
             :to="{ name: 'login' }"
             tag="button"
             class="tertiary">
-            Log in here
+            Log In Here
           </router-link>
         </div>
       </div>
