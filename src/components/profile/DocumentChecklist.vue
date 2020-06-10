@@ -10,6 +10,7 @@
         <div 
           v-for="(item, index) in docChecklist.checklist"
           :key="index"
+          :class="docChecklist.checklist[index].checked ? 'checked' : ''"
           class="field">
           <label class="container" :for="`check-${index}`">{{item.label}}</label>
 
@@ -93,6 +94,11 @@ export default {
   align-items: center;
   justify-content: space-between;
   position: relative;
+  transition: 0.3s;
+
+  &.checked {
+    background: transparent;
+  }
 
   label {
     @include font(16px, 300);
