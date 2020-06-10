@@ -2,6 +2,7 @@
   <div>
     <section class="user-info content">
       <h1>Your current plan.</h1>
+      <h3 v-if="user.profile.questionnaireResults.length">Here you can keep up to date on all things relating to your current and future visas.</h3>
 
       <profile-card :user="user" />
 
@@ -36,8 +37,8 @@
 
     <div v-else>
       <section class="visa-tools content">
-        <p>Make sure your profile is accurate to help you calculate your future plans.</p>
-        <p>Below are seom features which should help you work through your current visa.</p>
+        <p>Our tools rely on your profile being accurate to work properly. Be sure to keep everything up to date to get the most use out of everything!</p>
+        <p>Below you can find all the tools you’ll need to keep track, edit and document everything visa related.</p>
 
         <visa-dates-card class="dates-card" :user="user" />
 
@@ -64,13 +65,24 @@
       </section>
 
       <section class="quiz-results content">
-        <p>The results of your latest quiz are saved for you below.</p>
-        <router-link
-          :to="{name: 'results', params: {username: user.profile.username}}"
-          tag="button"
-          class="secondary">
-          Quiz results
-        </router-link>
+        <p>You can also check out your latest quiz results, or take the quiz again.</p>
+        <p>Remember each time you take the quiz, your last results will be lost.</p>
+
+        <div class="buttons">
+          <router-link
+            :to="{name: 'questionnaire', params: {username: user.profile.username}}"
+            tag="button"
+            class="tertiary">
+            Re-Take Quiz
+          </router-link>
+
+          <router-link
+            :to="{name: 'results', params: {username: user.profile.username}}"
+            tag="button"
+            class="secondary">
+            Quiz results
+          </router-link>
+        </div>
       </section>
     </div>
 
@@ -178,13 +190,21 @@ h1 {
 }
 
 .quiz-results {
-  width: 60%;
-  margin: auto;
   margin-top: $spacing*8;
-  text-align: center;
 
-  button {
-    margin-top: $spacing*2;
+  p:last-of-type {
+    margin-top: $spacing*3;
+  }
+
+  .buttons {
+    margin-top: $spacing*5;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .tertiary {
+      color: $primary-pink;
+    }
   }
 }
 </style>
