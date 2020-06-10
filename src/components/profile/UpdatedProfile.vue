@@ -47,8 +47,8 @@
       <section class="content">
         <div class="next-step section-margin">
           <div class="text">
-            <h3>Your next step...</h3>
-            <p>When you're done calculating everything and want to figure out your next step, go through to your visa planner!</p>
+            <h3>What's next?</h3>
+            <p>Once you’re done calculating your current visa, have a look at what your next step could be by checking out the Visa Planner!</p>
           </div>
           <img :src="visaPlannerImg" class="placeholder-img">
           <div class="button">
