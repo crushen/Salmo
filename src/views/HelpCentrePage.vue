@@ -20,6 +20,8 @@
       <div class="content">
         <h3>Was this article helpful?</h3>
 
+        <help-centre-feedback />
+
         <router-link 
           :to="{name: 'help-centre'}"
           tag="button"
@@ -36,8 +38,12 @@ import brpImg from '@/assets/illustrations/about/BRP-guide.svg';
 import ilrImg from '@/assets/illustrations/about/ILR-Guide.svg';
 import switchImg from '@/assets/illustrations/about/Switch-Extend.svg';
 import dependantsImg from '@/assets/illustrations/about/Applying with Dependants.svg';
+import helpCentreFeedback from '@/components/HelpCentreFeedback';
 
 export default {
+  components: {
+    helpCentreFeedback
+  },
   data() {
     return {
       slug: this.$route.params.slug,

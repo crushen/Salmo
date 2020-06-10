@@ -77,7 +77,7 @@
 </template>
 
 <script>
-import arrow from '@/assets/icons/chevron-down-solid.svg';
+import arrow from '@/assets/icons/white/down-arrow.svg';
 import cross from '@/assets/icons/white/times-solid.svg';
 
 import wave from '@/assets/patterns/wave-2.svg';
@@ -190,7 +190,7 @@ export default {
     outline: none;
 
     img {
-      width: 24px;
+      width: 28px;
       margin-top: 4px;
 
       &.cross {

@@ -69,6 +69,7 @@ a {
 }
 
 .alert {
+  text-align: left;
   width: 95%;
   padding: $spacing*2 $spacing;
   border-radius: 4px;
