@@ -41,7 +41,7 @@
           src="@/assets/illustrations/alternateStates/verify your email.svg" 
           alt="an illustration of a person getting a notification on their phone">
 
-        <p>Once you've completed your profile, you'll also gain access to other features such as your personalised quiz and your own Visa Stats and Facts page.</p>
+        <p>Once you’ve completed your profile, you’ll unlock new features such as the Permanent Residency helper and Doucmentaion Checklist.</p>
       </div>
 
       <settings />

@@ -2,7 +2,6 @@
   <div>
     <section class="user-info content">
       <h1>Your current plan.</h1>
-      <h3>Here's where you're at right now with your visa and living situation in the UK.</h3>
 
       <profile-card :user="user" />
 
@@ -18,13 +17,16 @@
     <div 
       v-if="!user.profile.questionnaireResults.length"
       class="content no-quiz">
-      <h3>When you complete your first quiz, the results will appear below!</h3>
+      <h3>Now you’ve completed your profile, it’s time to take a quiz and begin your visa journey.</h3>
 
-      <p>Once you’ve completed the quiz, you’ll also gain access to other features such as your own Visa Stats and Facts page.</p>
+      <p>Completing a quiz is the last step in setting up your profile. You’ll unlock new features such as the Permanent Residency helper and Doucmentaion Checklist.</p>
+
+      <p class="margin">These features will appear here on your profile so be sure to check back once you’ve completed your first quiz!</p>
 
       <div class="button">
         <router-link
           :to="{name: 'questionnaire', params: {username: user.profile.username}}"
+          :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}"
           tag="button"
           class="pink">
           Take Quiz!
@@ -82,6 +84,7 @@ import visaDatesCard from '@/components/profile/visa-dates/VisaDatesCard';
 import prCalculator from '@/components/profile/PrCalculator';
 import visaPlannerImg from '@/assets/illustrations/visa-planner.svg';
 import waveH from '@/assets/patterns/wave-horizontal.svg';
+import waveV from '@/assets/patterns/wave-verticle.svg';
 
 export default {
   props: {
@@ -95,7 +98,8 @@ export default {
   data() {
     return {
       visaPlannerImg,
-      waveH
+      waveH,
+      waveV
     }
   }
 }
@@ -127,6 +131,10 @@ h1 {
   .button {
     margin-top: $spacing*5;
     text-align: center;
+  }
+
+  .margin {
+    margin-top: $spacing*3;
   }
 }
 
