@@ -132,6 +132,22 @@ h2 {
 
 // Tablet
 @media screen and (min-width: 420px) {
+  .logo {
+    h1 {
+      font-size: 90px;
+      line-height: 0;
+    }
+  }
+
+  .sub-title {
+    img {
+      width: 135px;
+      transform: translate3d(-65px, -8px, 0)
+    }
+  }
+}
+
+@media screen and (min-width: 600px) {
   header {
     min-height: 500px;
     height: 500px;
@@ -140,22 +156,10 @@ h2 {
 
   .logo {
     padding-top: 150px;
-
-    h1 {
-      font-size: 90px;
-      line-height: 0;
-    }
   }
 
   .logo-img {
     display: none;
-  }
-
-  .sub-title {
-    img {
-      width: 135px;
-      transform: translate3d(-65px, -8px, 0)
-    }
   }
 }
 </style>

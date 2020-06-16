@@ -52,7 +52,7 @@ export default {
 }
 
 // Tablet
-@media screen and (min-width: 420px) {
+@media screen and (min-width: 600px) {
   .card {
     margin-bottom: $spacing*12;
 

@@ -203,7 +203,7 @@ input.form:focus {
 }
 
 // Tablet
-@media screen and (min-width: 420px) {
+@media screen and (min-width: 600px) {
   .content {
     width: 50%;
   }
