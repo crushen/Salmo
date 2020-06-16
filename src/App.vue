@@ -3,27 +3,35 @@
     <a v-if="arrowPage" @click="$router.go(-1)">
       <img :src="arrow" class="arrow">
     </a>
-    <app-navigation />
+
+    <mobile-nav v-if="innerWidth < 420" />
+    <sidebar-nav v-else />
+
     <div id="overlay"></div>
+
     <img 
       v-if="$route.path !== '/about' && $route.path !== '/'"
       src="@/assets/logo/colour.svg" 
       alt="Salmo logo"
       class="small-logo">
+
     <router-view/>
   </div>
 </template>
 
 <script>
-import AppNavigation from '@/components/Navigation';
+import mobileNav from '@/components/nav/MobileNav';
+import sidebarNav from '@/components/nav/SidebarNav';
 import arrow from '@/assets/icons/back.svg';
 
 export default {
   components: {
-    AppNavigation
+    mobileNav,
+    sidebarNav
   },
   data () {
     return {
+      innerWidth: null,
       arrow
     }
   },
@@ -44,6 +52,12 @@ export default {
           return true;
       }
     }
+  },
+  mounted() {
+    this.innerWidth = window.innerWidth;
+    window.addEventListener('resize', () => {
+      this.innerWidth = window.innerWidth;
+    })
   }
 }
 </script>

@@ -132,6 +132,15 @@ h2 {
 
 // Tablet
 @media screen and (min-width: 420px) {
+  header {
+    width: 100%;
+    min-height: 430px;
+    height: 120vw;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
   .logo {
     color: $light-font;
     display: flex;
@@ -143,6 +152,10 @@ h2 {
       font-size: 90px;
       line-height: 0;
     }
+  }
+
+  .logo-img {
+    display: none;
   }
 }
 </style>
