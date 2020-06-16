@@ -137,7 +137,7 @@ input[type="submit"] {
   }
 }
 
-// Tablet
+// Tablet font
 @media screen and (min-width: 420px) {
   // Headings and Text
   h1 { @include font(40px, 900) }

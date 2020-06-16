@@ -4,7 +4,7 @@
       <img :src="arrow" class="arrow">
     </a>
 
-    <mobile-nav v-if="innerWidth < 420" />
+    <mobile-nav v-if="innerWidth < 600" />
     <sidebar-nav v-else />
 
     <div id="overlay"></div>
@@ -166,7 +166,7 @@ label {
 }
 
 // Tablet
-@media screen and (min-width: 420px) {
+@media screen and (min-width: 600px) {
   .content-wrapper {
     margin-left: 100px;
   }
