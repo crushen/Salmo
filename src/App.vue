@@ -15,7 +15,9 @@
       alt="Salmo logo"
       class="small-logo">
 
-    <router-view/>
+    <div class="content-wrapper">
+      <router-view/>
+    </div>
   </div>
 </template>
 
@@ -161,5 +163,12 @@ label {
   line-height: 26px;
   color: $grey;
   font-weight: 500;
+}
+
+// Tablet
+@media screen and (min-width: 420px) {
+  .content-wrapper {
+    margin-left: 100px;
+  }
 }
 </style>
