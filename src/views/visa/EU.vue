@@ -10,7 +10,7 @@
 
     <div class="explore">
       <div class="content">
-        <h3>All EU individuals currently living in the UK have two options to choose from:</h3>
+        <h3>So if you’re an EU citizen, either thinking of living, previously lived or are currently living in the UK, you’ll fit into one of these catagories:</h3>
 
         <div class="buttons">
           <router-link
@@ -30,6 +30,11 @@
           </router-link>
         </div>
       </div>
+    </div>
+    
+    <div class="tablet-imgs">
+      <img src="@/assets/illustrations/visaPages/Family Person.svg" alt="">
+      <img src="@/assets/illustrations/visaPages/Study Person.svg" alt="">
     </div>
   </section>
 </template>
@@ -83,6 +88,10 @@ h3 {
   }
 }
 
+.tablet-imgs {
+  display: none;
+}
+
 @media screen and (min-width: 600px) {
   #eu {
     padding: $spacing*15 0 0;
@@ -94,7 +103,33 @@ h3 {
 
   .explore {
     margin-top: $spacing*3;
-    padding: $spacing*6 0 $spacing*15 0;
+    padding: $spacing*6 0 0 0;
+
+    .content {
+      width: 60%;
+      margin: auto;
+    }
+  }
+
+  .tablet-imgs {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    img {
+      width: 16%;
+
+      &:first-of-type {
+        transform: scaleX(-1);
+        margin-left: $spacing*3;
+      }
+
+      &:last-of-type {
+        width: 25%;
+        margin-right: $spacing*3;
+      }
+    }
   }
 }
 </style>
