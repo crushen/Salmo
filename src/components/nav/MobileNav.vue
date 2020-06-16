@@ -199,6 +199,8 @@ nav {
 }
 
 a.router-link-active {
+  text-decoration: none;
+  
   .background {
     fill: $primary-blue;
   }
