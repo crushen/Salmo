@@ -133,20 +133,13 @@ h2 {
 // Tablet
 @media screen and (min-width: 420px) {
   header {
-    width: 100%;
-    min-height: 430px;
-    height: 120vw;
-    text-align: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+    min-height: 500px;
+    height: 500px;
+    background-position: 0 80%;
   }
 
   .logo {
-    color: $light-font;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 55vw;
+    padding-top: 150px;
 
     h1 {
       font-size: 90px;
@@ -156,6 +149,13 @@ h2 {
 
   .logo-img {
     display: none;
+  }
+
+  .sub-title {
+    img {
+      width: 135px;
+      transform: translate3d(-65px, -8px, 0)
+    }
   }
 }
 </style>
