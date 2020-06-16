@@ -56,7 +56,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 #eu {
-  padding: $spacing*15 0 0;
+  padding: $spacing*12 0 0;
 }
 
 h1 {
@@ -69,7 +69,7 @@ h3 {
 
 .explore {
   margin-top: $spacing*3;
-  padding: $spacing*6 0 $spacing*15 0;
+  padding: $spacing*6 0 $spacing*12 0;
 
   .buttons {
     display: flex;
@@ -85,10 +85,16 @@ h3 {
 
 @media screen and (min-width: 600px) {
   #eu {
+    padding: $spacing*15 0 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+  }
+
+  .explore {
+    margin-top: $spacing*3;
+    padding: $spacing*6 0 $spacing*15 0;
   }
 }
 </style>
