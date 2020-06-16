@@ -139,10 +139,17 @@ input[type="submit"] {
 
 // Tablet
 @media screen and (min-width: 420px) {
+  // Headings and Text
   h1 { @include font(40px, 900) }
   h2.header { @include font(40px, 900) }
 
   .caption { 
     @include font(20px, 300);
+  }
+
+  // Page
+  .content {
+    width: 75%;
+    margin: auto;
   }
 }
