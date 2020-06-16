@@ -147,7 +147,7 @@ export default {
   }
 
   .body {
-    padding: $spacing*2 $spacing*4 $spacing*4;
+    padding: $spacing*3 $spacing*4;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -192,18 +192,34 @@ export default {
     margin-top: $spacing*4;
   }
 
-  .visa-icon {
-    width: 32px;
-    position: absolute;
-    bottom: 6px;
-    left: 6px;
-  }
-
   .heart {
     width: 34px;
     position: absolute;
     bottom: 10px;
     left: 10px;
+  }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .card {
+    width: 90%;
+    margin: auto;
+
+    .body {
+      .checklist {
+        margin-top: $spacing*5;
+        @include grid(repeat(3, 1fr), repeat(2, 1fr), $spacing*2);
+      }
+
+      .item {
+        justify-content: center;
+      }
+
+      button {
+        margin-top: $spacing*6;
+      }
+    }
   }
 }
 </style>

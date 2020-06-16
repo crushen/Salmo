@@ -52,7 +52,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 #category-page {
-  padding: $spacing*12 0 $spacing*6;
+  padding: $spacing*12 0 $spacing*8;
 }
 
 h1 {
@@ -62,5 +62,12 @@ h1 {
 
 .visa-card {
   margin-bottom: $spacing*4;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  #category-page {
+    padding: $spacing*15 0 $spacing*8;
+  }
 }
 </style>
