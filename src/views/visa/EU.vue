@@ -4,8 +4,6 @@
       <h1>Help with Brexit.</h1>
 
       <p> We know why you’re here! Brexit has everyone worried, but here we will give you all the information so you can make your next step fully informed.</p>
-
-      <h3>Check this timeline for all the important Brexit dates.</h3>
     </div>
 
     <brexit-timeline />
@@ -58,7 +56,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 #eu {
-  padding: $spacing*12 0 0;
+  padding: $spacing*15 0 0;
 }
 
 h1 {
@@ -71,8 +69,7 @@ h3 {
 
 .explore {
   margin-top: $spacing*3;
-  padding: $spacing*6 0 $spacing*12 0;
-  background: $background;
+  padding: $spacing*6 0 $spacing*15 0;
 
   .buttons {
     display: flex;
@@ -83,6 +80,15 @@ h3 {
     button {
       width: 45%;
     }
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #eu {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
 }
 </style>

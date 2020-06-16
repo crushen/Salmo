@@ -1,32 +1,36 @@
 <template>
-  <div class="horizontal-scroll-container section-margin">
-    <div class="line"></div>
-    <ul>
-      <li 
-        v-for="(event, index) in events"
-        :key="event.title"
-        @click="selectItem(index)"
-        :class="{'selected': selected === index}"
-        class="card">
-        <p class="date">{{ event.date }}</p>
+  <div class="container">
+    <h3 class="content">Check this timeline for all the important Brexit dates.</h3>
 
-        <transition-group name="fade" tag="div">
-          <p 
-            key="title"
-            v-if="selected !== index"
-            class="title">
-            {{ event.title }}
-          </p>
+    <div class="horizontal-scroll-container">
+      <div class="line"></div>
+      <ul>
+        <li 
+          v-for="(event, index) in events"
+          :key="event.title"
+          @click="selectItem(index)"
+          :class="{'selected': selected === index}"
+          class="card">
+          <p class="date">{{ event.date }}</p>
 
-          <p 
-            key="text"
-            v-else
-            class="text">
-            {{ event.text }}
-          </p>     
-        </transition-group>
-      </li>
-    </ul>
+          <transition-group name="fade" tag="div">
+            <p 
+              key="title"
+              v-if="selected !== index"
+              class="title">
+              {{ event.title }}
+            </p>
+
+            <p 
+              key="text"
+              v-else
+              class="text">
+              {{ event.text }}
+            </p>     
+          </transition-group>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -122,11 +126,18 @@ export default {
   opacity: 0;
 }
 
+.container {
+  background: $background;
+  margin-top: $spacing*8;
+  padding-top: $spacing*8;
+}
+
 .horizontal-scroll-container {
   overflow-x: scroll;
   overflow-y: hidden;
-  height: 250px;
+  height: 300px;
   padding: 0 7.5%;
+  margin-top: $spacing*8;
   position: relative;
 }
 

@@ -153,3 +153,10 @@ input[type="submit"] {
     margin: auto;
   }
 }
+// Tablet
+@media screen and (min-width: 420px) {
+  .arrow {
+    top: 24px;
+    left: calc(100px + 7.5%)
+  }
+}
