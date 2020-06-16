@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
 header {
@@ -127,6 +127,22 @@ h2 {
   img {
     width: 25vw;
     transform: translate3d(-13vw, -1.5vw, 0)
+  }
+}
+
+// Tablet
+@media screen and (min-width: 420px) {
+  .logo {
+    color: $light-font;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 55vw;
+
+    h1 {
+      font-size: 90px;
+      line-height: 0;
+    }
   }
 }
 </style>

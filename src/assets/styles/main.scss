@@ -6,7 +6,7 @@
   font-weight: $weight;
 }
 
-h1 { @include font(10vw, 900); }
+h1 { @include font(10vw, 900) }
 h2.header { @include font(10vw, 900) }
 h2 { @include font(20px, 600) }
 h3 { @include font(18px, 600) }
@@ -134,5 +134,15 @@ input[type="submit"] {
   .pretty.p-switch.p-fill input:checked ~ .state:before {
     border-color: #FFD275;
     background-color: #FFD275 !important;
+  }
+}
+
+// Tablet
+@media screen and (min-width: 420px) {
+  h1 { @include font(40px, 900) }
+  h2.header { @include font(40px, 900) }
+
+  .caption { 
+    @include font(20px, 300);
   }
 }

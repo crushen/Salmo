@@ -1,7 +1,7 @@
 <template>
   <section id="about">
     <div class="content">
-      <div class="logo">
+      <div class="logo-about">
         <img
           src="@/assets/logo/colour.svg" 
           alt="Salmo logo">
@@ -70,14 +70,14 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
 #about {
   padding: $spacing*10 0 0;
 }
 
-.logo {
+.logo-about {
   display: flex;
   align-items: center;
 
@@ -106,6 +106,14 @@ h2 {
   .button {
     text-align: center;
     margin-top: $spacing*3;
+  }
+}
+
+// Tablet
+@media screen and (min-width: 420px) {
+  h2 {
+    font-size: 40px;
+    margin-top: 40px;
   }
 }
 </style>

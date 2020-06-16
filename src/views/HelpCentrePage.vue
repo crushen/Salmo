@@ -13,7 +13,6 @@
           {{ p }}
         </p>
       </div>
-       
     </article> 
 
     <section class="bottom">
