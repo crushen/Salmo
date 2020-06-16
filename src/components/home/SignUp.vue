@@ -162,7 +162,7 @@ export default {
 
 #sign-up {
   background: $primary-yellow;
-  padding: $spacing*8 0;
+  padding: $spacing*10 0;
   margin-top: $spacing*10;
 }
 
@@ -200,5 +200,12 @@ input.form {
 
 input.form:focus {
   box-shadow: 0 0 0 3px $primary-yellow !important;
+}
+
+// Tablet
+@media screen and (min-width: 420px) {
+  .content {
+    width: 50%;
+  }
 }
 </style>
