@@ -151,11 +151,34 @@ export default {
   img {
     width: 30vw;
     height: 33vw;
+    max-width: 133px;
+    max-height: 146px;
     position: absolute;
     bottom: 0;
     left: 32vw;
     object-fit: cover;
     object-position: 0 2vw;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  #non-eu {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  .buttons {
+    max-width: none;
+  }
+
+  .child-options {
+    padding: $spacing*6 0 $spacing*15 0;
+
+    img {
+      object-position: 0 0vw;
+    }
   }
 }
 </style>

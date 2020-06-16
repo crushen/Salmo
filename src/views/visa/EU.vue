@@ -102,7 +102,6 @@ h3 {
   }
 
   .explore {
-    margin-top: $spacing*3;
     padding: $spacing*6 0 0 0;
 
     .content {
