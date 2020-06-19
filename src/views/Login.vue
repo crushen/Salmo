@@ -1,6 +1,8 @@
 <template>
   <section class="content single-page">
-    <div>
+    <blob v-if="innerWidth > 600" />
+
+    <div class="login-content">
       <h1>Great to see you!</h1>
       <form @submit.prevent="onLogin">
         <div class="field">
@@ -59,9 +61,8 @@
       </router-link>
     </div>
 
-    <div class="placeholder-img"></div>
-
     <img 
+      v-if="innerWidth < 600"
       src="@/assets/illustrations/alternateStates/Sign up 1.svg" 
       alt="An illustration of a person pointing to the log in button">
   </section>
@@ -70,10 +71,12 @@
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 import waveH from '@/assets/patterns/wave-horizontal.svg';
-import firebase from 'firebase/app';
-import 'firebase/auth';
+import blob from '@/components/Blob';
 
 export default {
+  components: {
+    blob
+  },
   data() {
     return {
       form: {
@@ -81,7 +84,8 @@ export default {
         password: ''
       },
       error: '',
-      waveH
+      waveH,
+      innerWidth: null
     }
   },
   validations: {
@@ -114,12 +118,23 @@ export default {
           this.error = 'Invalid email address or password';
         })
     }
+  },
+  mounted() {
+    this.innerWidth = window.innerWidth;
+    window.addEventListener('resize', () => {
+      this.innerWidth = window.innerWidth;
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
+.login-content,
+.sign-up {
+  position: relative;
+  z-index: 2;
+}
 
 form {
   margin-top: 12vw;
@@ -159,5 +174,32 @@ img {
   left: 0;
   object-fit: cover;
   object-position: -8vw 6vw;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .content {
+    width: 50%;
+  }
+
+  .single-page {
+    justify-content: center;
+  }
+
+  h1, a, p, button {
+    color: $light-font;
+  }
+
+  form {
+    margin-top: $spacing*5;
+  }
+
+  .sign-up {
+    margin-top: $spacing*5;
+
+    .tertiary {
+      color: $primary-yellow;
+    }
+  }
 }
 </style>

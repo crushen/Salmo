@@ -1,11 +1,29 @@
 <template>
   <div class='box'>
-    <div class='wave -one'></div>
-    <div class='wave -two'></div>
-    <div class='wave -three'></div>
-    <div class='wave -four'></div>
+    <div class='wave -one' :style="{'background': background}"></div>
+    <div class='wave -two' :style="{'background': background}"></div>
+    <div class='wave -three' :style="{'background': background}"></div>
+    <div class='wave -four' :style="{'background': background}"></div>
 	</div>
 </template>
+
+<script>
+export default {
+  computed: {
+    background() {
+      let colour;
+
+      if(this.$route.name === 'login') {
+        colour = '#077594';
+      } else if(this.$route.name === 'visa-info') {
+        colour = '#FFD275';
+      }
+
+      return colour;
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
@@ -22,7 +40,6 @@
   z-index: 1;
   top: 3%;
   left: 10%;
-  background: $primary-yellow;
   width: 580px;
   height: 580px;
   margin-left: -150px;
@@ -35,20 +52,17 @@
 .wave.-two {
   animation: drift 9s infinite linear;
 	position: fixed;
-	background-color: $primary-yellow;
   border-radius: 60%;
 }
 
 .wave.-three {
   animation: drift 6s infinite linear;
-  background: $primary-yellow;
 	position: fixed;
   border-radius: 80%;
 }
 
 .wave.-four {
   animation: drift 3s infinite linear;
-  background: $primary-yellow;
 	position: fixed;
   border-radius: 100%;
 }

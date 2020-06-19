@@ -1,6 +1,7 @@
 <template>
   <section class="content single-page">
     <blob v-if="innerWidth > 600" />
+
     <div class="visa-info">
       <h1>Browse all visa options that the UK offers!</h1>
 
