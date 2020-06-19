@@ -111,6 +111,7 @@ export default {
 
   .lightbulb-yellow {
     width: 9vw;
+    max-width: 40px;
     position: absolute;
 
     &:nth-of-type(1) {
@@ -179,5 +180,21 @@ export default {
 .modal-enter-active,
 .modal-leave-active {
   transition: 0.6s;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .modal {
+    width: 75%;
+    margin-left: 50px;
+    padding: $spacing*3 $spacing*6;
+
+    .lightbulb-yellow {
+      &:nth-of-type(3),
+      &:nth-of-type(4) {
+        display: none;
+      }
+    }
+  }
 }
 </style>

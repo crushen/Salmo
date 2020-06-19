@@ -106,10 +106,17 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .content {
-  padding: $spacing*12 0;
+  padding: $spacing*15 0;
 }
 
 h1 {
   margin-bottom: $spacing*5;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  h1 {
+    margin-bottom: $spacing*8;
+  }
 }
 </style>

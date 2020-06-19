@@ -43,6 +43,7 @@ export default {
 h2 {
   color: $primary-pink;
   padding: 0 $spacing*2;
+  margin: $spacing*2 0;
 }
 
 p {

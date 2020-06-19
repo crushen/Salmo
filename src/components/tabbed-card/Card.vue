@@ -149,7 +149,7 @@ export default {
   .inner {
     background: white;
     border-radius: $border-radius;
-    padding: $spacing*3 0;
+    padding: $spacing*3 0 $spacing*4 0;
   }
 }
 

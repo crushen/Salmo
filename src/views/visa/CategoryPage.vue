@@ -69,5 +69,13 @@ h1 {
   #category-page {
     padding: $spacing*15 0 $spacing*8;
   }
+
+  h1 {
+    margin-bottom: $spacing*8;
+  }
+
+  .visa-card {
+    margin-bottom: $spacing*6;
+  }
 }
 </style>

@@ -32,8 +32,12 @@ export default {
 
 .tip {
   background: $primary-yellow;
-  padding: 7vw 0;
   position: relative;
+  height: 18vh;
+  max-height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   .inner {
     width: 90%;
@@ -50,7 +54,8 @@ export default {
   }
 
   img {
-    width: 8vw;
+    width: 7vw;
+    max-width: 30px;
     position: absolute;
     z-index: 0;
 
