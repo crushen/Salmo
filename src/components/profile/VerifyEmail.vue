@@ -84,6 +84,11 @@ export default {
 @import '@/assets/styles/variables.scss';
 @import '@/assets/styles/main.scss';
 
+section {
+  position: relative;
+  z-index: 5;
+}
+
 .terms {
   padding-bottom: $spacing*10;
 
@@ -142,6 +147,19 @@ img {
   
   button {
     transition: 0.3s;
+  }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .content {
+    margin-top: $spacing*20;
+  }
+
+  .terms {
+    .scroll-container {
+      height: 25vh; 
+    }
   }
 }
 </style>

@@ -1,5 +1,13 @@
 <template>
   <section id="profile">
+    <img
+      v-if="!user.emailVerified"
+      src="@/assets/grey-background.png" alt=""
+      class="background-1">
+    <img 
+      v-if="!user.emailVerified"
+      src="@/assets/grey-background-bottom.png" alt=""
+      class="background-2">
     <!-- Check if user has verified email and accepted T&C's -->
     <verify-email 
       v-if="!user.emailVerified" 
@@ -46,5 +54,42 @@ export default {
 
 #profile {
   padding: $spacing*12 0 0;
+  position: relative;
+}
+
+.background-1,
+.background-2 {
+  display: none;
+  position: relative;
+  z-index: 1;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  #profile {
+    padding: $spacing*15 0 0;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .background-1 {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: -30px;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+  }
+
+  .background-2 {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -30px;
+    width: 100%;
+    height: 270px;
+    overflow: hidden;
+  }
 }
 </style>
