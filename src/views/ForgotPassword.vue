@@ -1,5 +1,14 @@
 <template>
   <section class="content">
+    <img 
+      v-if="!linkSent"
+      src="@/assets/grey-background.png" alt=""
+      class="background-1">
+    <img 
+      v-if="!linkSent"
+      src="@/assets/grey-background-bottom.png" alt=""
+      class="background-2">
+
     <section v-if="!linkSent" class="single-page">
       <div>
         <h1>Forgot password.</h1>
@@ -40,7 +49,7 @@
         <h3>The email containing a link to reset your password has been sent.</h3>
         <div class="margin">
           <p>You should receive this email in within a few minutes, and it's valid for 1 hour.</p>
-          <p>If you don't receive the email, <button @click="linkSent = false" class="tertiary">click here</button> to resend it.</p>
+          <p class="margin">If you don't receive the email, <button @click="linkSent = false" class="tertiary">click here</button> to resend it.</p>
         </div>
       </div>
 
@@ -106,7 +115,7 @@ export default {
   }
 
   &.sent {
-    margin: 0 0 20vh 0;
+    margin: 0;
   }
 }
 
@@ -130,11 +139,77 @@ h3 {
 
   img {
     width: 35vw;
+    max-width: 220px;
     position: absolute;
     bottom: 0;
     left: 30vw;
     object-fit: cover;
     object-position: 0 12vw;
+  }
+}
+
+.background-1,
+.background-2 {
+  display: none;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .background-1 {
+    display: block;
+    position: absolute;
+    left: 100px;
+    width: calc(100% - 100px);
+    height: 250px;
+  }
+
+  .background-2 {
+    display: block;
+    position: absolute;
+    left: 90px;
+    bottom: 0;
+    width: calc(100% - 90px);
+    height: 270px;
+  }
+
+  .single-page {
+    justify-content: center;
+  }
+
+  form {
+    margin-top: $spacing*6;
+  }
+
+  .text {
+    margin-top: $spacing*10;
+
+    p:first-of-type {
+      margin-bottom: $spacing*6;
+    }
+
+    &.sent {
+      margin: 0 0 20vh 0;
+    }
+  }
+
+  .button {
+    margin-top: $spacing*8;
+    text-align: center;
+  }
+
+  h3 {
+    margin-top: $spacing*6;
+  }
+
+  .margin {
+    margin-top: $spacing*6;
+  }
+
+  .img-container {
+    img {
+      left: calc(35vw + 50px);
+      object-position: 0 70px;
+    }
   }
 }
 </style>
