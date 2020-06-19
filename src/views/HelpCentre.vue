@@ -24,7 +24,7 @@
       </div>
     </section>
 
-    <section class="section-margin content">
+    <section class="content section-margin">
       <h2>All you need to know about...</h2>
 
       <div class="buttons">
@@ -288,7 +288,7 @@ export default {
 
   .disclaimer {
     background: $light-grey;
-    padding: 10px $spacing;
+    padding: 10px;
     border-radius: 4px;
     margin-top: $spacing*6;
 
@@ -312,6 +312,40 @@ export default {
 
   button:last-of-type {
     margin-top: $spacing*3;
+  }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  #help-centre {
+    padding: $spacing*15 0 0;
+  }
+
+  .questions {
+    margin-top: $spacing*10;
+  }
+
+  .buttons {
+    max-width: none;
+    justify-content: space-between;
+
+    .button {
+      width: 100px;
+      height: 100px;
+    }
+  }
+
+  .section-margin {
+    margin-top: $spacing*10;
+  }
+
+  .bottom {
+    margin-top: $spacing*10;
+    padding: $spacing*10 0 $spacing*15 0;
+
+    .disclaimer {
+      padding: $spacing*2;
+    }
   }
 }
 </style>
