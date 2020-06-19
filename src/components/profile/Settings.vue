@@ -16,32 +16,37 @@
       alt="An illustration of a person thinking">
 
     <div class="content">
-      <p>If you’ve got a specific question about a visa related topic, our Help Centre has lots of helpful guides to all things visa!</p>
-      <div class="button">
-        <router-link 
-          :to="{name: 'help-centre'}"
-          tag="button"
-          :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
-          Help Centre
-        </router-link>
-      </div>
-      <div class="notificaitons">
-        <p>You can also change your preferences and how we get in touch on your 
+      <div class="col">
+        <p class="help-text">If you’ve got a specific question about a visa related topic, our Help Centre has lots of helpful guides to all things visa!</p>
+        <div class="button">
           <router-link 
-            :to="{ name: 'settings' }"
+            :to="{name: 'help-centre'}"
             tag="button"
-            class="tertiary">
-            Settings
+            :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
+            Help Centre
           </router-link>
-          page.</p>
+        </div>
       </div>
-      <div class="button log-out">
-        <button 
-          @click="logOut" 
-          type="button"
-          class="secondary">
-          Log Out
-        </button>
+
+      <div class="col">
+        <div class="notificaitons">
+          <p>You can also change your preferences and how we get in touch on your 
+            <router-link 
+              :to="{ name: 'settings' }"
+              tag="button"
+              class="tertiary">
+              Settings
+            </router-link>
+            page.</p>
+        </div>
+        <div class="button log-out">
+          <button 
+            @click="logOut" 
+            type="button"
+            class="secondary">
+            Log Out
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -118,5 +123,49 @@ img {
   position: absolute;
   right: 0;
   top: -23vw;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  img {
+    width: 120px;
+    position: absolute;
+    right: 10px;
+    top: -115px;
+  }
+
+  .content {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 90%;
+
+    .col {
+      width: 49%;
+    }
+  }
+
+  .help {
+    margin-top: $spacing*12;
+    padding: $spacing*12 0 $spacing*15 0;
+
+    .help-text {
+      padding: $spacing*2;
+      min-height: 112px;
+    }
+
+    .notificaitons {
+      margin-top: 0;
+      min-height: 112px;
+    }
+
+    .button {
+      margin-top: $spacing*4;
+
+      &.log-out {
+        margin-top: $spacing*4;
+      }
+    }
+  }
 }
 </style>

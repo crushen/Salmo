@@ -38,7 +38,7 @@
         <p>If you've clicked the link and still see this message, try refreshing the page.</p>
 
         <img 
-          src="@/assets/illustrations/alternateStates/verify your email.svg" 
+          src="@/assets/illustrations/alternateStates/phone.svg" 
           alt="an illustration of a person getting a notification on their phone">
 
         <p>Once you’ve completed your profile, you’ll unlock new features such as the Permanent Residency helper and Doucmentaion Checklist.</p>
@@ -115,6 +115,7 @@ h3, p {
 img {
   display: block;
   width: 45vw;
+  max-width: 250px;
   margin: $spacing*6 auto;
 }
 

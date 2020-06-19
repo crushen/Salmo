@@ -68,7 +68,7 @@ export default {
 @media screen and (min-width: 600px) {
   #profile {
     padding: $spacing*15 0 0;
-    height: 100vh;
+    min-height: 100vh;
     overflow: hidden;
   }
 
