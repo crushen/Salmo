@@ -133,6 +133,7 @@ h3 {
 img {
   display: block;
   width: 45vw;
+  max-width: 250px;
   margin: $spacing*6 auto;
 }
 
@@ -150,6 +151,23 @@ img {
 
   button {
     margin-top: $spacing*6;
+  }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  #help-center-page {
+    padding: $spacing*15 0 0;
+  }
+
+  .bottom {
+    margin-top: $spacing*10;
+    padding: $spacing*10 0 $spacing*15 0;
+    text-align: center;
+
+    button {
+      margin-top: $spacing*6;
+    }
   }
 }
 </style>
