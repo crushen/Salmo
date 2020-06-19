@@ -1,10 +1,13 @@
 <template>
-  <div class='box'>
-    <div class='wave -one' :style="{'background': background}"></div>
-    <div class='wave -two' :style="{'background': background}"></div>
-    <div class='wave -three' :style="{'background': background}"></div>
-    <div class='wave -four' :style="{'background': background}"></div>
-	</div>
+  <div class="container">
+    <div class='box'>
+      <div class='wave -one' :style="{'background': background}"></div>
+      <div class='wave -two' :style="{'background': background}"></div>
+      <div class='wave -three' :style="{'background': background}"></div>
+      <div class='wave -four' :style="{'background': background}"></div>
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -28,22 +31,28 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .box {
-	position: fixed;
-	top: 33%;
-  left: 56.5%;
-	transform: rotate(80deg);
+	position: relative;
 }
 
 .wave {
   position: absolute;
   z-index: 1;
-  top: 3%;
-  left: 10%;
   width: 580px;
   height: 580px;
-  margin-left: -150px;
-  margin-top: -250px;
+  margin-left: -240px;
+  margin-top: -280px;
   transform-origin: 50% 48%;
   border-radius: 50%;
   animation: drift 12s infinite linear;
