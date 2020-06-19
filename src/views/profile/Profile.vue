@@ -1,17 +1,18 @@
 <template>
   <section id="profile">
     <img
-      v-if="!user.emailVerified"
+      v-if="!user.emailVerified && !hideBackground"
       src="@/assets/grey-background.png" alt=""
       class="background-1">
     <img 
-      v-if="!user.emailVerified"
+      v-if="!user.emailVerified && !hideBackground"
       src="@/assets/grey-background-bottom.png" alt=""
       class="background-2">
     <!-- Check if user has verified email and accepted T&C's -->
     <verify-email 
       v-if="!user.emailVerified" 
-      :user="user"/>
+      :user="user"
+      @acceptTerms="hideBackground = true" />
 
     <div v-else>
       <!-- Check if user has filled out profile info -->
@@ -43,7 +44,8 @@ export default {
   },
   data() {
     return {
-      user: this.$store.state.auth.user
+      user: this.$store.state.auth.user,
+      hideBackground: false
     }
   }
 }

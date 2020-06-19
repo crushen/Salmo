@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="verify">
     <div class="content terms" v-if="terms.show">
       <h1>Just one more thing...</h1>
 
@@ -74,6 +74,7 @@ export default {
   methods: {
     acceptTerms() {
       this.terms.show = false;
+      this.$emit('acceptTerms');
       window.scrollTo(0,0);
     }
   }
@@ -84,13 +85,14 @@ export default {
 @import '@/assets/styles/variables.scss';
 @import '@/assets/styles/main.scss';
 
-section {
+#verify {
   position: relative;
-  z-index: 5;
 }
 
 .terms {
   padding-bottom: $spacing*10;
+  position: relative;
+  z-index: 5;
 
   .scroll-container {
     overflow: scroll;
