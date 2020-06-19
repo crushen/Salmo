@@ -134,6 +134,8 @@ export default {
 .sign-up {
   position: relative;
   z-index: 2;
+  max-width: 330px;
+  margin: 0 auto;
 }
 
 form {

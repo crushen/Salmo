@@ -106,9 +106,13 @@ img {
 
 // Tablet
 @media screen and (min-width: 600px) {
+  .single-page {
+    justify-content: center;
+  }
+
   .visa-info {
     max-width: 500px;
-    margin: 8vw auto 0 auto;
+    margin: $spacing*10 auto 0 auto;
   }
 
   h1 {

@@ -44,6 +44,8 @@ export default {
           return false;
         case 'profile':
           return false;
+        case 'login':
+          return false;
         case 'about':
           return false;
         case 'visa-info':
