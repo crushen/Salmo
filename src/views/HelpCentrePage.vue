@@ -160,6 +160,10 @@ img {
     padding: $spacing*15 0 0;
   }
 
+  img {
+    margin: $spacing*8 auto;
+  }
+
   .bottom {
     margin-top: $spacing*10;
     padding: $spacing*10 0 $spacing*15 0;
