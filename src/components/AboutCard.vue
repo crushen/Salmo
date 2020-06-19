@@ -28,18 +28,23 @@ export default {
 
 .header {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
-  margin-bottom: $spacing*2;
+  margin-bottom: $spacing*3;
 
   h3 {
     width: 65%;
-    margin-bottom: $spacing;
   }
 
   img {
     width: 110px;
-    border-radius: 100px;
   }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .card {
+    margin-top: $spacing*10;
+  } 
 }
 </style>

@@ -84,7 +84,6 @@ export default {
   img {
     width: 12vw;
     height: 12vw;
-    border-radius: 100px;
     margin-right: 2vw;
   }
 
@@ -110,10 +109,38 @@ h2 {
 }
 
 // Tablet
-@media screen and (min-width: 420px) {
+@media screen and (min-width: 600px) {
+  .logo-about {
+    img {
+      width: 90px;
+      height: auto;
+      margin-right: $spacing*2;
+    }
+
+    h1 {
+      font-size: 90px;
+    }
+  }
+
   h2 {
     font-size: 40px;
     margin-top: 40px;
+  }
+
+  .help {
+    background: $background;
+    padding: $spacing*10 0;
+    margin-top: $spacing*10;
+
+    .content {
+      width: 45%;
+      margin: auto;
+      text-align: center;
+    }
+
+    .button {
+      margin-top: $spacing*6;
+    }
   }
 }
 </style>
