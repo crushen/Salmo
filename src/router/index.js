@@ -55,12 +55,6 @@ const routes = [
     meta: { onlyAuthUser: true }
   },
   { 
-    path: '/profile/:username/update', 
-    name: 'update-profile',
-    component: UpdateProfile,
-    meta: { onlyAuthUser: true }
-  },
-  { 
     path: '/profile/:username/settings', 
     name: 'settings',
     component: Settings,
@@ -73,22 +67,28 @@ const routes = [
     meta: { onlyAuthUser: true }
   },
   { 
+    path: '/profile/:username/update', 
+    name: 'update-profile',
+    component: UpdateProfile,
+    meta: { onlyVerifiedUser: true }
+  },
+  { 
     path: '/profile/:username/visa-planner', 
     name: 'visa-planner',
     component: VisaPlanner,
-    meta: { onlyAuthUser: true }
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/questionnaire', 
     name: 'questionnaire', 
     component: Questionnaire,
-    meta: { onlyAuthUser: true } 
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/questionnaire/results', 
     name: 'results', 
     component: Results,
-    meta: { onlyAuthUser: true } 
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/visa-info', 
@@ -176,11 +176,21 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const authenticatedUser = firebase.auth().currentUser;
+  let verifiedUser;
+  if(authenticatedUser) {
+    verifiedUser = firebase.auth().currentUser.emailVerified;
+  }
   if(to.meta.onlyAuthUser) {
     if(authenticatedUser) {
       next();
     } else {
-      next({name: 'login'})
+      next({name: 'login'});
+    }
+  } else if(to.meta.onlyVerifiedUser) {
+    if(authenticatedUser && verifiedUser) {
+      next();
+    } else {
+      next({name: 'profile', params: {username: authenticatedUser.profile.username}});
     }
   } else if(to.meta.onlyGuestUser) {
     if(authenticatedUser) {
