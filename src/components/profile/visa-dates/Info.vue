@@ -115,4 +115,13 @@ export default {
 .modal-leave-active {
   transition: 0.6s;
 }
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .modal {
+    width: 75%;
+    margin-left: 50px;
+    padding: $spacing*4 $spacing*6;
+  }
+}
 </style>
