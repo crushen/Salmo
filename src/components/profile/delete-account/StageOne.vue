@@ -121,4 +121,20 @@ form {
     }
   }
 }
+
+// Tablet
+@media screen and (min-width: 600px) {
+  form {
+    width: 80%;
+    margin: auto;
+
+    textarea {
+      margin-top: $spacing*8;
+    }
+
+    .submit {
+      margin-top: $spacing*8;
+    }
+  }
+}
 </style>

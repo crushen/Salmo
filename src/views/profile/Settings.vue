@@ -101,6 +101,7 @@ export default {
     margin-left: $spacing*2;
   }
 }
+
 .delete {
   h3 {
     margin-bottom: $spacing*3;
@@ -120,6 +121,25 @@ export default {
       color: $primary-pink;
       font-size: 18px;
       font-weight: 700;
+    }
+  }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  #settings {
+    padding: $spacing*15 0;
+  }
+
+  .section {
+    margin-top: $spacing*8;
+  }
+
+  .switch {
+    margin-top: $spacing*5;
+
+    p {
+      margin-left: $spacing*3;
     }
   }
 }

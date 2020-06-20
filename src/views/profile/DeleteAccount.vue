@@ -62,6 +62,7 @@ export default {
 h1 {
   text-align: center;
   width: 80%;
+  max-width: 320px;
   margin: auto;
 }
 
@@ -77,13 +78,15 @@ h1 {
 .img-one {
   display: block;
   width: 45vw;
-  margin: $spacing*6 auto 0 auto;
-  margin-bottom: $spacing*6;
+  max-width: 230px;
+  margin: $spacing*6 auto;
 }
 
 .img-two {
   width: 40vw;
   height: 40vw;
+  max-width: 250px;
+  max-height: 250px;
   position: absolute;
   bottom: 0;
   left: -12vw;
@@ -91,4 +94,18 @@ h1 {
   object-position: -5vw 5vw;
 }
 
+// Tablet
+@media screen and (min-width: 600px) {
+  #delete-account {
+    padding: $spacing*15 0 0 0;
+  }
+
+  .content {
+    padding-bottom: $spacing*18;
+  }
+
+  .img-one {
+    margin: $spacing*8 auto;
+  }
+}
 </style>

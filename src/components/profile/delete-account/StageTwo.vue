@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section id="container">
     <p>If you wish to have your account deleted, including all personal details wiped from our system, please click below.</p>
 
     <p class="warning">THIS ACTION IS IRREVERSIBLE</p>
@@ -163,5 +163,21 @@ form {
 
 .fade-leave-active {
   position: absolute;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  #container {
+    width: 80%;
+    margin: auto;
+  }
+
+  form {
+    margin-top: $spacing*6;
+  }
+
+  .button {
+    margin-top: $spacing*6;
+  }
 }
 </style>
