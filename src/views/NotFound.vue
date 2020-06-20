@@ -60,6 +60,11 @@ section {
   z-index: 1;
 }
 
+.content {
+  position: relative;
+  z-index: 2;
+}
+
 .main-img {
   display: block;
   width: 48vw;
