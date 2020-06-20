@@ -28,4 +28,11 @@ export default {
 .text {
   margin-top: $spacing*4;
 }
+
+// Tablet
+@media screen and (min-width: 600px) {
+  #terms {
+    padding: $spacing*15 0;
+  }
+}
 </style>

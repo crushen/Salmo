@@ -10,4 +10,11 @@
 #privacy {
   padding: $spacing*12 0;
 }
+
+// Tablet
+@media screen and (min-width: 600px) {
+  #privacy {
+    padding: $spacing*15 0;
+  }
+}
 </style>
