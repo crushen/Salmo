@@ -595,8 +595,16 @@ export default {
     }
   },
   beforeRouteLeave(to, from, next) {
+    // If new visas added but not submitted, remove from state
+    if(this.newVisaAdded) {
+      const removeNumber = this.profileToUpdate.pastVisas.length - this.currentPastVisas;
+      for(let i = 0; i < removeNumber; i++) {
+        this.profileToUpdate.pastVisas.pop();
+      }
+    }
+
     if(!this.finished) {
-      if (this.to) {
+      if(this.to) {
         next();
       } else {
         const overlay = document.querySelector('#overlay');
