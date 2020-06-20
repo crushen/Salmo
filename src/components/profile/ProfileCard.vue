@@ -2,7 +2,7 @@
   <div
     class="profile-card">
     <div class="child one">
-      <img :src="profilePictures[Math.floor(Math.random()*3) + 1]" class="profile-pic" alt="Randomised profile picture">
+      <img :src="profilePictures[Math.floor(Math.random()*10) + 1]" class="profile-pic" alt="Randomised profile picture">
     </div>
 
     <div class="child two">
@@ -40,10 +40,16 @@
 </template>
 
 <script>
-import img1 from '@/assets/illustrations/profilePages/Profile 1.svg';
-import img2 from '@/assets/illustrations/profilePages/Profile 2.svg';
-import img3 from '@/assets/illustrations/profilePages/Profile 3.svg';
-import img4 from '@/assets/illustrations/profilePages/Profile 4.svg';
+import img1 from '@/assets/illustrations/profilePages/profilePictures/Profile 1.svg';
+import img2 from '@/assets/illustrations/profilePages/profilePictures/Profile 2.svg';
+import img3 from '@/assets/illustrations/profilePages/profilePictures/Profile 3.svg';
+import img4 from '@/assets/illustrations/profilePages/profilePictures/Profile 4.svg';
+import img5 from '@/assets/illustrations/profilePages/profilePictures/Profile 5.svg';
+import img6 from '@/assets/illustrations/profilePages/profilePictures/Profile 6.svg';
+import img7 from '@/assets/illustrations/profilePages/profilePictures/Profile 7.svg';
+import img8 from '@/assets/illustrations/profilePages/profilePictures/Profile 8.svg';
+import img9 from '@/assets/illustrations/profilePages/profilePictures/Profile 9.svg';
+import img10 from '@/assets/illustrations/profilePages/profilePictures/Profile 10.svg';
 
 export default {
   props: {
@@ -51,7 +57,7 @@ export default {
   },
   data() {
     return {
-      profilePictures: [img1, img2, img3, img4]
+      profilePictures: [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10]
     }
   },
   computed: {
@@ -68,7 +74,7 @@ export default {
 @import '@/assets/styles/main.scss';
 
 .profile-card {
-  max-width: 400px;
+  max-width: 320px;
   min-height: 260px;
   padding-bottom: $spacing;
   margin: $spacing*5 auto 0 auto;
@@ -94,10 +100,11 @@ export default {
   .one {
     height: 120px;
     padding: 12px 0 0 $spacing;
+    align-self: end;
 
     img {
       width: 100%;
-      height: 120px;
+      height: 110px;
       background: white;
       border-radius: 4px;
     }
