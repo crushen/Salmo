@@ -11,7 +11,7 @@
         :img="card.img" />
     </section>
 
-    <sign-up />
+    <sign-up v-if="!user" />
   </div>
 </template>
 
@@ -23,6 +23,9 @@ import imgTwo from '@/assets/illustrations/alternateStates/Logged out home 2.svg
 import imgThree from '@/assets/illustrations/alternateStates/Logged out home 3.svg';
 
 export default {
+  props: {
+    user: { required: false, type: Object }
+  },
   components: {
     contentCard,
     signUp

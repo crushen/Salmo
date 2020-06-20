@@ -35,10 +35,12 @@
     </header>
 
     <logged-in 
-      v-if="isAuthenticated" 
+      v-if="isAuthenticated && user.emailVerified"
       :user="user"/>
 
-    <logged-out v-else/>
+    <logged-out 
+      v-else
+      :user="user" />
   </section>
 </template>
 
