@@ -78,39 +78,41 @@
           <p v-if="errors.nationality" class="error">Nationality is required</p>
         </div>
 
-        <div class="field current-visa">
-          <label for="current-visa">Current visa</label>
-          <select
-            class="form" 
-            v-model="profileToUpdate.currentVisa.name"
-            name="Current Visa"
-            id="current-visa">
-            <option
-              v-for="visa in visas"
-              :key="visa"
-              :value="visa">
-              {{ visa }}
-            </option>
-          </select>
-        </div>
-
-        <div class="field visa-dates">
-          <div>
-            <label for="current-start" class="form-label">Start date</label>
-            <input 
-              v-model="profileToUpdate.currentVisa.start"
-              type="date"
-              id="current-start"
-              class="form unstyled">
+        <div class="row">
+          <div class="field current-visa">
+            <label for="current-visa">Current visa</label>
+            <select
+              class="form" 
+              v-model="profileToUpdate.currentVisa.name"
+              name="Current Visa"
+              id="current-visa">
+              <option
+                v-for="visa in visas"
+                :key="visa"
+                :value="visa">
+                {{ visa }}
+              </option>
+            </select>
           </div>
 
-          <div>
-            <label for="current-end" class="form-label">End date</label>
-            <input 
-              v-model="profileToUpdate.currentVisa.end"
-              type="date"
-              id="current-end"
-              class="form unstyled">
+          <div class="field visa-dates">
+            <div>
+              <label for="current-start" class="form-label">Start date</label>
+              <input 
+                v-model="profileToUpdate.currentVisa.start"
+                type="date"
+                id="current-start"
+                class="form unstyled">
+            </div>
+
+            <div>
+              <label for="current-end" class="form-label">End date</label>
+              <input 
+                v-model="profileToUpdate.currentVisa.end"
+                type="date"
+                id="current-end"
+                class="form unstyled">
+            </div>
           </div>
         </div>
         <p v-if="errors.currentVisa.required" class="error">Current visa name and dates are required</p>
@@ -118,7 +120,8 @@
 
         <div
           v-for="(visa, index) in profileToUpdate.pastVisas"
-          :key="index">
+          :key="index"
+          class="row">
           <div class="field past-visa">
             <label :for="`past-visa-${index}`">Past visa</label>
             <select
@@ -656,5 +659,50 @@ h3 {
 .tertiary {
   font-size: 18px;
   margin-top: $spacing*3;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .content {
+    padding: $spacing*15 0;
+  }
+  .subtitle {
+    margin-top: $spacing*5;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+  }
+
+  .field {
+    &:not(:first-of-type) {
+      padding-top: $spacing*2;
+    }
+
+    &.current-visa {
+      padding-top: $spacing*7;
+      margin-right: $spacing*2;
+      width: 49%;
+    }
+
+    &.past-visa {
+      width: 49%;
+      margin-right: $spacing*2;
+    }
+
+    &.visa-dates {
+      padding-top: $spacing*7;
+      width: 51%;
+
+      div {
+        width: 50%;
+      }
+
+      div:first-of-type {
+        margin-right: $spacing;
+      }
+    }
+  }
 }
 </style>
