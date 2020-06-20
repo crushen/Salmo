@@ -108,4 +108,19 @@ a {
     }
   }
 }
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .alert {
+    padding: $spacing*2;
+
+    &.bottom {
+      top: 2.5vw;
+    } 
+  }
+
+  .buttons {
+    margin-top: $spacing*3;
+  }
+}
 </style>
