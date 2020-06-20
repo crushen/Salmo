@@ -19,7 +19,7 @@
             class="tertiary">
             Change Favourite Visa
           </router-link>
-          <p>The rest of your quiz results are saved here:</p>
+          <p>The below can help you keep track of what documentation you need and the process overall. You can also revisit your Quiz Results if you want to see more options.</p>
           <router-link
             :to=" {name: 'results', params: {username: user.username} }"
             tag="button"
@@ -30,15 +30,21 @@
       </section>
 
       <section class="documentation section-margin">
-        <p>The below can help you keep track of what documentation you need and the overall process.</p>
         <p class="emphasis">These tools are based off your current favourite visa, so be sure to keep it up to date!</p>
 
-        <doc-checklist 
-          :visa="faveVisa"
-          :docChecklist="user.favoriteVisa"/>
-      </section>
+        <div class="row">
+          <doc-checklist 
+            :visa="faveVisa"
+            :docChecklist="user.favoriteVisa"
+            class="col" />
 
-      <timeline />
+          <timeline class="col" />
+
+          <img 
+            src="@/assets/illustrations/profilePages/visa-planner-2.svg" 
+            alt="Illustrations of a woman having an idea">
+        </div>
+      </section>
     </section>
   </div>
 </template>
@@ -105,11 +111,15 @@ h3 {
 
   .buttons {
     margin: $spacing*3 auto auto;
-    width: 220px;
     text-align: center;
 
+    .secondary {
+      margin-top: $spacing*2;
+    }
+
     p {
-      margin-top: $spacing*5;
+      text-align: left;
+      margin-top: $spacing*10;
     }
   }
 }
@@ -117,5 +127,51 @@ h3 {
 .emphasis {
   font-weight: 600;
   margin: $spacing*3 0 $spacing*5 0;
+}
+
+.row {
+  img {
+    display: none;
+  }
+}
+
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .content {
+    padding: $spacing*15 0;
+    width: 90%;
+  }
+
+  .results {
+    margin-top: $spacing*5;
+
+    p {
+      margin-bottom: $spacing*3;
+
+      &.title {
+        margin: $spacing*6 0 $spacing*4;
+      }
+    }
+  }
+
+  .row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+
+    .col {
+      width: 48%;
+    }
+
+    img {
+      display: block;
+      width: 40%;
+      position: absolute;
+      bottom: $spacing*8;
+      left: 0;
+    }
+  }
 }
 </style>

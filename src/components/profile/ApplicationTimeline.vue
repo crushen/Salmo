@@ -190,4 +190,11 @@ export default {
 .slide-enter-active {
   transition: 0.6s;
 }
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .card {
+    margin-top: 0;
+  }
+}
 </style>
