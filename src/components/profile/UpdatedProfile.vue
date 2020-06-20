@@ -2,7 +2,6 @@
   <div>
     <div class="content">
       <h1>Your current plan.</h1>
-      <h3 v-if="user.profile.questionnaireResults.length">Here you can keep up to date on all things relating to your current and future visas.</h3>
     </div>
 
     <section class="content">
@@ -31,8 +30,11 @@
 
         <div 
           v-else
-          class="text">
+          class="text col">
+          <h3>Here you can keep up to date on all things relating to your current and future visas.</h3>
+
           <p>Our tools rely on your profile being accurate to work properly. Be sure to keep everything up to date to get the most use out of everything!</p>
+
           <p class="margin">Below you can find all the tools you’ll need to keep track, edit and document everything visa related.</p>
         </div>
       </div>
@@ -73,7 +75,11 @@
         <section class="visa-tools">
           <visa-dates-card class="dates-card" :user="user" />
 
-          <pr-calculator />
+          <pr-calculator class="pr-calc" />
+
+          <img 
+            src="@/assets/illustrations/visaPages/Laptop Person.svg" 
+            alt="An illustrations of a girl using a laptop">
         </section>
 
         <section class="">
@@ -186,6 +192,10 @@ h1 {
 
   .dates-card {
     margin-bottom: $spacing*5;
+  }
+
+  img {
+    display: none;
   }
 }
 
@@ -313,6 +323,67 @@ h1 {
 
   .moving-btn {
     display: flex;
+  }
+
+  .visa-tools {
+    margin-top: $spacing*10;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    position: relative;
+
+    .dates-card {
+      margin-bottom: 0;
+      width: 48%;
+    }
+
+    .pr-calc {
+      width: 48%;
+    }
+
+    img {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 28%;
+    }
+  }
+
+  .next-step {
+    border: 3px solid $primary-yellow;
+    border-radius: $border-radius;
+    padding: 0 8% $spacing*4;
+    align-items: flex-end;
+
+    h3 {
+      margin-bottom: $spacing*2;
+    }
+
+    .text {
+      width: 55%;
+    }
+
+    .placeholder-img {
+      width: 160px;
+      transform: translateY(30%);
+    }
+
+    .button {
+      width: 50%;
+    }
+  }
+
+  .quiz-results {
+    margin-top: $spacing*12;
+
+    p {
+      text-align: center;
+    }
+
+    .buttons {
+      margin-top: $spacing*6;
+    }
   }
 }
 </style>
