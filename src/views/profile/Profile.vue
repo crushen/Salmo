@@ -1,7 +1,7 @@
 <template>
   <section id="profile">
     <img
-      v-if="!user.emailVerified && !hideBackground"
+      v-if="!user.emailVerified"
       src="@/assets/grey-background.png" alt=""
       class="background-1">
     <img 
