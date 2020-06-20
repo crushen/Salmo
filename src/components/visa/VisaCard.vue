@@ -37,11 +37,13 @@
           :src="heart" 
           class="heart">
 
-        <confirm-favorite 
-          v-if="confirmChange"
-          :visa="visa"
-          :user="user.profile"
-          @closeModal="closeModal" />
+        <transition name="modal" mode="out-in">
+          <confirm-favorite 
+            v-if="confirmChange"
+            :visa="visa"
+            :user="user.profile"
+            @closeModal="closeModal" />
+        </transition>
       </div>
     </div>
   </div>
@@ -99,16 +101,20 @@ export default {
       }
     },
     makeFavorite() {
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 1;
+      overlay.style.visibility = 'visible';
+      document.querySelector('body').style.overflow = 'hidden';
       if(this.heart === this.pinkHeart) {
         return
       } else {
         this.confirmChange = true;
-        document.querySelector('#overlay').style.display = 'block';
-        document.querySelector('body').style.overflow = 'hidden';
       }
     },
     closeModal() {
-      document.querySelector('#overlay').style.display = 'none';
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 0;
+      overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
       this.confirmChange = false;
       this.checkFavorite();
@@ -198,6 +204,16 @@ export default {
     bottom: 10px;
     left: 10px;
   }
+}
+
+.modal-enter,
+.modal-leave-to {
+  transform: translate(-50%, -55%);
+  opacity: 0;
+}
+.modal-enter-active,
+.modal-leave-active {
+  transition: 0.6s;
 }
 
 // Tablet
