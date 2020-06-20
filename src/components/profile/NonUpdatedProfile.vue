@@ -2,7 +2,7 @@
   <div>
     <section class="content">
       <h1>Complete profile.</h1>
-      <h3>Before you can take your first quiz, you'll need to complete your profile.</h3>
+      <p class="subtitle">Once you’ve completed your profile, you’ll also gain access to other features such as your personalised quiz and your own Visa Planner.</p>
 
       <form 
         @submit.prevent="validateForm"
@@ -53,39 +53,41 @@
           <p v-if="errors.nationality" class="error">Nationality is required</p>
         </div>
 
-        <div class="field current-visa">
-          <label for="current-visa">Current visa</label>
-          <select
-            class="form" 
-            v-model="form.currentVisa.name"
-            name="Current Visa"
-            id="current-visa">
-            <option
-              v-for="visa in visas"
-              :key="visa"
-              :value="visa">
-              {{ visa }}
-            </option>
-          </select>
-        </div>
-
-        <div class="field visa-dates">
-          <div>
-            <label for="current-start" class="form-label">Start date</label>
-            <input 
-              v-model="form.currentVisa.start"
-              type="date"
-              id="current-start"
-              class="form unstyled">
+        <div class="row">
+          <div class="field current-visa">
+            <label for="current-visa">Current visa</label>
+            <select
+              class="form" 
+              v-model="form.currentVisa.name"
+              name="Current Visa"
+              id="current-visa">
+              <option
+                v-for="visa in visas"
+                :key="visa"
+                :value="visa">
+                {{ visa }}
+              </option>
+            </select>
           </div>
 
-          <div>
-            <label for="current-end" class="form-label">End date</label>
-            <input 
-              v-model="form.currentVisa.end"
-              type="date"
-              id="current-end"
-              class="form unstyled">
+          <div class="field visa-dates">
+            <div>
+              <label for="current-start" class="form-label">Start date</label>
+              <input 
+                v-model="form.currentVisa.start"
+                type="date"
+                id="current-start"
+                class="form unstyled">
+            </div>
+
+            <div>
+              <label for="current-end" class="form-label">End date</label>
+              <input 
+                v-model="form.currentVisa.end"
+                type="date"
+                id="current-end"
+                class="form unstyled">
+            </div>
           </div>
         </div>
         <p v-if="errors.currentVisa.required" class="error">Current visa name and dates are required</p>
@@ -93,7 +95,8 @@
 
         <div
           v-for="(visa, index) in form.pastVisas"
-          :key="index">
+          :key="index"
+          class="row">
           <div class="field past-visa">
             <label :for="`past-visa-${index}`">Past visa</label>
             <select
@@ -148,8 +151,6 @@
             :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
         </div>
       </form>
-
-      <p class="text">Once you’ve completed your profile, you’ll unlock new features such as the Permanent Residency helper and Doucmentaion Checklist.</p>
     </section>
   </div>
 </template>
@@ -565,8 +566,8 @@ export default {
   margin-top: $spacing*5;
 }
 
-h3 {
-  margin-top: 4vw;
+.subtitle {
+  margin-top: 5vw;
 }
 
 .field {
@@ -600,5 +601,47 @@ h3 {
 .tertiary {
   font-size: 18px;
   margin-top: $spacing*3;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .subtitle {
+    margin-top: $spacing*5;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+  }
+
+  .field {
+    &:not(:first-of-type) {
+      padding-top: $spacing*2;
+    }
+
+    &.current-visa {
+      padding-top: $spacing*7;
+      margin-right: $spacing*2;
+      width: 49%;
+    }
+
+    &.past-visa {
+      width: 49%;
+      margin-right: $spacing*2;
+    }
+
+    &.visa-dates {
+      padding-top: $spacing*7;
+      width: 51%;
+
+      div {
+        width: 50%;
+      }
+
+      div:first-of-type {
+        margin-right: $spacing;
+      }
+    }
+  }
 }
 </style>
