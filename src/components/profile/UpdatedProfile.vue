@@ -1,92 +1,122 @@
 <template>
   <div>
-    <section class="user-info content">
+    <div class="content">
       <h1>Your current plan.</h1>
       <h3 v-if="user.profile.questionnaireResults.length">Here you can keep up to date on all things relating to your current and future visas.</h3>
-
-      <profile-card :user="user" />
-
-      <div class="edit-button">
-        <router-link 
-          :to="{ name: 'update-profile'}"
-          class="edit-button">
-          Edit Profile
-        </router-link>
-      </div>
-    </section>
-
-    <div 
-      v-if="!user.profile.questionnaireResults.length"
-      class="content no-quiz">
-      <h3>Now you’ve completed your profile, it’s time to take a quiz and begin your visa journey.</h3>
-
-      <p>Completing a quiz is the last step in setting up your profile. You’ll unlock new features such as the Permanent Residency helper and Doucmentaion Checklist.</p>
-
-      <p class="margin">These features will appear here on your profile so be sure to check back once you’ve completed your first quiz!</p>
-
-      <div class="button">
-        <router-link
-          :to="{name: 'questionnaire', params: {username: user.profile.username}}"
-          :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}"
-          tag="button"
-          class="pink">
-          Take Quiz!
-        </router-link>
-      </div>
     </div>
 
-    <div v-else>
-      <section class="visa-tools content">
-        <p>Our tools rely on your profile being accurate to work properly. Be sure to keep everything up to date to get the most use out of everything!</p>
-        <p>Below you can find all the tools you’ll need to keep track, edit and document everything visa related.</p>
+    <section class="content">
+      <div class="row">
+        <div class="col">
+          <profile-card :user="user" />
 
-        <visa-dates-card class="dates-card" :user="user" />
-
-        <pr-calculator />
-      </section>
-
-      <section class="content">
-        <div class="next-step section-margin">
-          <div class="text">
-            <h3>What's next?</h3>
-            <p>Once you’re done calculating your current visa, have a look at what your next step could be by checking out the Visa Planner!</p>
-          </div>
-          <img :src="visaPlannerImg" class="placeholder-img">
-          <div class="button">
-            <router-link
-              :to="{name: 'visa-planner', params: {username: user.profile.username}}"
-              tag="button"
-              class="pink"
-              :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
-              Visa Planner
-            </router-link>
+          <div class="edit-button">
+            <router-link 
+              :to="{ name: 'update-profile'}"
+              class="edit-button">
+              Edit Profile
+            </router-link> 
           </div>
         </div>
-      </section>
 
-      <section class="quiz-results content">
-        <p>You can also check out your latest quiz results, or take the quiz again.</p>
-        <p>Remember each time you take the quiz, your last results will be lost.</p>
+        <div 
+          v-if="!user.profile.questionnaireResults.length"
+          class="text col">
+          <h3>Now you’ve completed your profile, it’s time to take a quiz and begin your visa journey.</h3>
 
-        <div class="buttons">
+          <p>Completing a quiz is the last step in setting up your profile. You’ll unlock new features such as the Permanent Residency helper and Doucmentaion Checklist.</p>
+
+          <p class="margin">These features will appear here on your profile so be sure to check back once you’ve completed your first quiz!</p>
+        </div>
+
+        <div 
+          v-else
+          class="text">
+          <p>Our tools rely on your profile being accurate to work properly. Be sure to keep everything up to date to get the most use out of everything!</p>
+          <p class="margin">Below you can find all the tools you’ll need to keep track, edit and document everything visa related.</p>
+        </div>
+      </div>
+
+      <!-- If user hasn't completed quiz -->
+      <div 
+        v-if="!user.profile.questionnaireResults.length"
+        class="no-quiz">
+
+        <!-- Will show on mobile -->
+        <div class="button">
           <router-link
             :to="{name: 'questionnaire', params: {username: user.profile.username}}"
+            :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}"
             tag="button"
-            class="tertiary">
-            Re-Take Quiz
-          </router-link>
-
-          <router-link
-            :to="{name: 'results', params: {username: user.profile.username}}"
-            tag="button"
-            class="secondary">
-            Quiz results
+            class="pink">
+            Take First Quiz!
           </router-link>
         </div>
-      </section>
-    </div>
 
+        <!-- Will show on tablet+ -->
+        <div class="moving-btn">
+          <router-link :to="{name: 'questionnaire', params: {username: user.profile.username}}">
+            <div class="container"> 
+              <p>Take First Quiz!</p> 
 
+              <div class='wave one'></div>
+              <div class='wave two'></div>
+              <div class='wave three'></div>
+              <div class='wave four'></div>
+            </div>
+          </router-link>
+        </div>
+      </div>
+
+      <!-- If user has completed quiz -->
+      <div v-else>
+        <section class="visa-tools">
+          <visa-dates-card class="dates-card" :user="user" />
+
+          <pr-calculator />
+        </section>
+
+        <section class="">
+          <div class="next-step section-margin">
+            <div class="text">
+              <h3>What's next?</h3>
+              <p>Once you’re done calculating your current visa, have a look at what your next step could be by checking out the Visa Planner!</p>
+            </div>
+            <img :src="visaPlannerImg" class="placeholder-img">
+            <div class="button">
+              <router-link
+                :to="{name: 'visa-planner', params: {username: user.profile.username}}"
+                tag="button"
+                class="pink"
+                :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
+                Visa Planner
+              </router-link>
+            </div>
+          </div>
+        </section>
+
+        <section class="quiz-results">
+          <p>You can also check out your latest quiz results, or take the quiz again.</p>
+          <p>Remember each time you take the quiz, your last results will be lost.</p>
+
+          <div class="buttons">
+            <router-link
+              :to="{name: 'questionnaire', params: {username: user.profile.username}}"
+              tag="button"
+              class="tertiary">
+              Re-Take Quiz
+            </router-link>
+
+            <router-link
+              :to="{name: 'results', params: {username: user.profile.username}}"
+              tag="button"
+              class="secondary">
+              Quiz results
+            </router-link>
+          </div>
+        </section>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -124,25 +154,18 @@ h1 {
   margin-bottom: $spacing*4;
 }
 
-.user-info {
-  margin-bottom: $spacing*6;
-
-  .edit-button {
-    width: 100%;
-    text-align: center;
-    margin-top: $spacing*2;
-    text-decoration: underline;
-  }
+.edit-button {
+  width: 100%;
+  text-align: center;
+  margin-top: $spacing*2;
+  text-decoration: underline;
 }
 
-.no-quiz {
+.text {
+  margin-top: $spacing*6;
+
   h3 {
     margin-bottom: $spacing*3;
-  }
-
-  .button {
-    margin-top: $spacing*5;
-    text-align: center;
   }
 
   .margin {
@@ -150,14 +173,16 @@ h1 {
   }
 }
 
-.visa-tools {
-  p:first-of-type {
-    margin-bottom: $spacing*3;
-  }
+.no-quiz {
+  margin-top: $spacing*6;
 
-  p:last-of-type {
-    margin-bottom: $spacing*5;
+  .button {
+    text-align: center;
   }
+}
+
+.visa-tools {
+  margin-top: $spacing*6;
 
   .dates-card {
     margin-bottom: $spacing*5;
@@ -205,6 +230,89 @@ h1 {
     .tertiary {
       color: $primary-pink;
     }
+  }
+}
+
+.moving-btn {
+  width: 100%;
+  // Set as flex for tablet+
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  .container {
+    width: 300px;
+    height: 300px;
+    position: relative;
+
+    p {
+      position: absolute;
+      z-index: 1;
+      font-size: 32px;
+      line-height: 0;
+      font-weight: 700;
+      color: $light-font;
+      top: 48%;
+      left: 12%;
+    }
+
+    .wave {
+      position: absolute;
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      background: $primary-pink;
+      border-radius: 50%;
+      animation: rotate 12s infinite linear;
+      transform-origin: 50% 48%;
+
+      &.two {
+        animation: rotate 9s infinite linear;
+      }
+
+      &.three {
+        animation: rotate 6s infinite linear;
+      }
+
+      &.four {
+        animation: rotate 3s infinite linear;
+      }
+    }
+  }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .content {
+    width: 90%;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    .col.text {
+      width: 45%;
+    }
+  }
+
+  .no-quiz {
+    margin-top: $spacing*8;
+
+    .button {
+      display: none;
+    }
+  }
+
+  .moving-btn {
+    display: flex;
   }
 }
 </style>

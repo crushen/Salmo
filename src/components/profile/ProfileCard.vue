@@ -74,7 +74,7 @@ export default {
 @import '@/assets/styles/main.scss';
 
 .profile-card {
-  max-width: 320px;
+  max-width: 300px;
   min-height: 260px;
   padding-bottom: $spacing;
   margin: $spacing*5 auto 0 auto;
