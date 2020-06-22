@@ -2,13 +2,14 @@
   <section>
     <h2>Latest UK visa news</h2>
 
-    <news-card 
-      v-for="card in news"
-      :key="card.title"
-      :title="card.title"
-      :subTitle="card.subTitle"
-      :source="card.source"/>
-
+    <div class="cards">
+      <news-card 
+        v-for="card in news"
+        :key="card.title"
+        :title="card.title"
+        :subTitle="card.subTitle"
+        :source="card.source"/>
+    </div>
   </section>
 </template>
 
@@ -43,5 +44,13 @@ export default {
 
 h2 {
   margin-bottom: $spacing*4;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .cards {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 </style>

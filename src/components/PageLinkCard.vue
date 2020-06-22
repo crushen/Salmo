@@ -45,4 +45,20 @@ div {
     margin-bottom: $spacing*8;
   }
 }
+
+// Tablet
+@media screen and (min-width: 600px) {
+  div {
+    margin: 0;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    
+    &:not(:last-of-type) {
+      margin: 0;
+    }
+  }
+}
 </style>
