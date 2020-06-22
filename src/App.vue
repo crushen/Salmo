@@ -172,5 +172,9 @@ label {
   .content-wrapper {
     margin-left: 100px;
   }
+
+  .small-logo {
+    display: none;
+  }
 }
 </style>

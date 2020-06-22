@@ -1,52 +1,62 @@
 <template>
-  <div class="container">
-    <h3>{{ question.question }}</h3>
+  <section>
+    <img 
+      src="@/assets/grey-background.png" alt=""
+      class="background-1">
+    <img 
+      src="@/assets/grey-background-bottom.png" alt=""
+      class="background-2">
 
-    <div v-if="currentQuestion === 0">
-        <div class="buttons">
-          <button
-            class="button"
-            v-for="(answer, index) in question.answers"
-            :key="index"
-            @click="selected = answer.value"
-            :style="{ backgroundImage: buttonBackground(index) }">
-            <div v-if="answer.value !== selected && selected !== null" class="btn-overlay"></div>
-            <p>{{ answer.text }}</p>
-            <img :src="buttonIcon(index)" class="icon">
-          </button>
-        </div>
+    <div class="container">
+      <h3>{{ question.question }}</h3>
+
+      <div v-if="currentQuestion === 0">
+          <div class="buttons">
+            <button
+              class="button"
+              v-for="(answer, index) in question.answers"
+              :key="index"
+              @click="selected = answer.value"
+              :style="{ backgroundImage: buttonBackground(index) }">
+              <div v-if="answer.value !== selected && selected !== null" class="btn-overlay"></div>
+              <p>{{ answer.text }}</p>
+              <img :src="buttonIcon(index)" class="icon">
+            </button>
+          </div>
+      </div>
+
+      <div v-else class="radio-buttons">
+        <pretty-radio
+          v-model="selected"
+          v-for="(answer, index) in question.answers"
+          :key="index"
+          :value="answer.value"
+          class="p-smooth p-default p-round radio"
+          :class="{'un-checked': answer.value !== selected && selected !== null}"
+          color="primary-o">
+          {{ answer.text }}
+        </pretty-radio>
+      </div>
+
+      <div class="nav">
+        <button
+          @click="previousQuestion"
+          class="tertiary"
+          :class="{ 'inactive': currentQuestion === 0 }">
+          <span>&#8227;</span> 
+          <p>Previous</p>
+        </button>
+
+        <button
+          @click="submitAnswer"
+          :class="{'inactive': !selected}"
+          class="secondary">
+          Next <span>&#8227;</span>
+        </button>
+      </div>
     </div>
+  </section>
 
-    <div v-else class="radio-buttons">
-      <pretty-radio
-        v-model="selected"
-        v-for="(answer, index) in question.answers"
-        :key="index"
-        :value="answer.value"
-        class="p-smooth p-default p-round radio"
-        :class="{'un-checked': answer.value !== selected && selected !== null}"
-        color="primary-o">
-        {{ answer.text }}
-      </pretty-radio>
-    </div>
-
-    <div class="nav">
-      <button
-        @click="previousQuestion"
-        class="tertiary"
-        :class="{ 'inactive': currentQuestion === 0 }">
-        <span>&#8227;</span> 
-        <p>Previous</p>
-      </button>
-
-      <button
-        @click="submitAnswer"
-        :class="{'inactive': !selected}"
-        class="secondary">
-        Next <span>&#8227;</span>
-      </button>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -134,7 +144,13 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  position: relative;
+  z-index: 2;
+}
 
+.background-1,
+.background-2 {
+  display: none;
 }
 
 .buttons {
@@ -265,6 +281,45 @@ export default {
 
   .radio:not(:first-of-type) {
     margin-top: $spacing*6;
+  }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  h3 {
+    font-size: 30px;
+  }
+
+  .container {
+    min-height: 60vh;
+    margin-top: $spacing*12;
+  }
+
+  .background-1 {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 100px;
+    width: calc(100% - 100px);
+    height: 220px;
+  }
+
+  .background-2 {
+    display: block;
+    position: absolute;
+    left: 90px;
+    bottom: 0;
+    width: calc(100% - 90px);
+    height: 270px;
+  }
+
+  .buttons {
+    max-width: none;
+    justify-content: space-between;
+
+    .button {
+      margin: 0;
+    }
   }
 }
 </style>

@@ -19,7 +19,7 @@
 
       <div 
         v-if="questionsStage"
-        class="content">
+        class="content questions-stage">
         <div class="progress-bar">
           <div
             :style="{ width: `${progress}%` }" 
@@ -218,5 +218,31 @@ export default {
 .progress-bar-inner {
   background-color: $primary-yellow; 
   margin: 0;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .content {
+    &.questions-stage {
+      width: 85%;
+    }
+  }
+
+  .progress-bar {
+    width: 65%;
+    position: absolute;
+    z-index: 2;
+    top: 40px;
+    right: 7%;
+    background: white;
+  }
+
+  .progress-bar-inner {
+    width: 65%;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+  }
 }
 </style>
