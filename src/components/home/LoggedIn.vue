@@ -136,7 +136,7 @@ h3 {
 
   h3 {
     display: block;
-    margin: $spacing*15 auto $spacing*3 auto;
+    margin: $spacing*8 auto $spacing*3 auto;
 
     &.content {
       width: 90%;
