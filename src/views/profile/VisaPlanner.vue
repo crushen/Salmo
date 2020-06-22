@@ -6,7 +6,9 @@
       <section class="results">
         <p class="title">Here's your favourite visa:</p>
 
-        <visa-card :visa="faveVisa">
+        <visa-card 
+          :visa="faveVisa"
+          :favouriteVisa="user.favoriteVisa.name">
           <template #quickTip>
             <quick-tip :visa="faveVisa"/>
           </template>

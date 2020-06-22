@@ -60,7 +60,8 @@ import dots from '@/assets/patterns/dots.svg';
 
 export default {
   props: {
-    visa: { required: true, type: Object }
+    visa: { required: true, type: Object },
+    favouriteVisa: { required:false, type: String }
   },
   components: {
     confirmFavorite
@@ -73,10 +74,19 @@ export default {
       check,
       cross,
       question,
-      heart: null,
+      favourite: null,
       pinkHeart,
       greyHeart,
       confirmChange: false
+    }
+  },
+  computed: {
+    heart() {
+      if(this.favouriteVisa === this.visa.name) {
+        return this.pinkHeart;
+      } else {
+        return this.greyHeart;
+      }
     }
   },
   methods: {
@@ -91,25 +101,13 @@ export default {
         }
       });
     },
-    checkFavorite() {
-      if(this.user) {
-         if(this.user.profile.favoriteVisa && this.visa.name === this.user.profile.favoriteVisa.name) {
-          this.heart = this.pinkHeart;
-        } else {
-          this.heart = this.greyHeart;
-        }       
-      }
-    },
     makeFavorite() {
       const overlay = document.querySelector('#overlay');
       overlay.style.opacity = 1;
       overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
-      if(this.heart === this.pinkHeart) {
-        return
-      } else {
-        this.confirmChange = true;
-      }
+      this.favourite = true;
+      this.confirmChange = true;
     },
     closeModal() {
       const overlay = document.querySelector('#overlay');
@@ -117,13 +115,11 @@ export default {
       overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
       this.confirmChange = false;
-      this.checkFavorite();
     }
   },
   mounted() {
     this.$forceUpdate();
     this.getIcon();
-    this.checkFavorite();
   }
 }
 </script>

@@ -22,6 +22,7 @@
             v-for="visa in topResult"
             :key="visa.name"
             :visa="visa"
+            :favouriteVisa="user.favoriteVisa.name"
             class="top-card">
             <template #quickTip>
               <quick-tip :visa="visa"/>

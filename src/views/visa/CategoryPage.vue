@@ -10,6 +10,7 @@
         :key="visa.name"
         :visa="visa"
         :category="category"
+        :favouriteVisa="favouriteVisa"
         class="visa-card">
         <template #quickTip>
           <quick-tip :visa="visa"/>
@@ -31,6 +32,7 @@ export default {
   },
   data() {
     return {
+      user: this.$store.state.auth.user,
       category: this.$route.params.category,
     }
   },
@@ -38,6 +40,13 @@ export default {
     ...mapState('visas', ['visaList']),
     visas() {
       return this.visaList.filter(item => item.category === this.category);
+    },
+    favouriteVisa() {
+      if(this.user) {
+        return this.user.profile.favoriteVisa.name;
+      } else {
+        return 'none';
+      }
     }
   },
   mounted() {
