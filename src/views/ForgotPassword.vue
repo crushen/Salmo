@@ -9,58 +9,61 @@
       src="@/assets/grey-background-bottom.png" alt=""
       class="background-2">
 
-    <section v-if="!linkSent" class="single-page">
-      <div>
-        <h1>Forgot password.</h1>
-        <div class="text">
-          <p>Enter the address you used to sign up with, and we will send a handy link to reset your password.</p>
-          <p>Please check your junk/spam folders as the email can sometimes end up there.</p>
+    <div class="z-index">
+      <section v-if="!linkSent" class="single-page">
+        <div>
+          <h1>Forgot password.</h1>
+          <div class="text">
+            <p>Enter the address you used to sign up with, and we will send a handy link to reset your password.</p>
+            <p>Please check your junk/spam folders as the email can sometimes end up there.</p>
+          </div>
         </div>
-      </div>
 
-      <form @submit.prevent="handleReset">
-        <div class="field">
-          <input 
-            v-model.trim="form.email"
-            type="email"
-            placeholder="Email"
-            autocomplete="email"
-            class="form">
-          <div v-if="$v.form.email.$error">
-            <p v-if="!$v.form.email.required" class="error">Email is required</p>
-            <p v-if="!$v.form.email.email" class="error">Email address is not valid</p>
+        <form @submit.prevent="handleReset">
+          <div class="field">
+            <input 
+              v-model.trim="form.email"
+              type="email"
+              placeholder="Email"
+              autocomplete="email"
+              class="form">
+            <div v-if="$v.form.email.$error">
+              <p v-if="!$v.form.email.required" class="error">Email is required</p>
+              <p v-if="!$v.form.email.email" class="error">Email address is not valid</p>
+            </div>
+
+            <p v-if="error" class="error">{{ error }}</p>
           </div>
 
-          <p v-if="error" class="error">{{ error }}</p>
+          <div class="button">
+            <input 
+              type="submit" 
+              value="Send Reset Link"
+              class="pink">
+          </div>
+        </form>     
+      </section>
+
+      <section v-else class="single-page">
+        <div>
+          <h1>On it's way!</h1>
+          <h3>The email containing a link to reset your password has been sent.</h3>
+          <div class="margin">
+            <p>You should receive this email in within a few minutes, and it's valid for 1 hour.</p>
+            <p class="margin">If you don't receive the email, <button @click="linkSent = false" class="tertiary">click here</button> to resend it.</p>
+          </div>
         </div>
 
-        <div class="button">
-          <input 
-            type="submit" 
-            value="Send Reset Link"
-            class="pink">
+        <div class="text sent">
+          <div class="img-container">
+            <img 
+              src="@/assets/illustrations/alternateStates/Man with Email 1.svg" 
+              alt="An illustration of a person holding an envelope">
+          </div>
         </div>
-      </form>     
-    </section>
+      </section>
+    </div>
 
-    <section v-else class="single-page">
-      <div>
-        <h1>On it's way!</h1>
-        <h3>The email containing a link to reset your password has been sent.</h3>
-        <div class="margin">
-          <p>You should receive this email in within a few minutes, and it's valid for 1 hour.</p>
-          <p class="margin">If you don't receive the email, <button @click="linkSent = false" class="tertiary">click here</button> to resend it.</p>
-        </div>
-      </div>
-
-      <div class="text sent">
-        <div class="img-container">
-          <img 
-            src="@/assets/illustrations/alternateStates/Man with Email 1.svg" 
-            alt="An illustration of a person holding an envelope">
-        </div>
-      </div>
-    </section>
   </section>
 </template>
 
@@ -161,6 +164,7 @@ h3 {
     left: 100px;
     width: calc(100% - 100px);
     height: 250px;
+    z-index: 0;
   }
 
   .background-2 {
@@ -170,6 +174,12 @@ h3 {
     bottom: 0;
     width: calc(100% - 90px);
     height: 270px;
+    z-index: 0;
+  }
+
+  .z-index {
+    position: relative;
+    z-index: 2;
   }
 
   .single-page {
@@ -210,6 +220,22 @@ h3 {
       left: calc(35vw + 50px);
       object-position: 0 70px;
     }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .background-1 {
+    height: 200px;
+  }
+
+  .background-2 {
+    height: 200px;
+  }
+
+  form {
+    width: 500px;
+    margin: $spacing*6 auto 0;
   }
 }
 </style>
