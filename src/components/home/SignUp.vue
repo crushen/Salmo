@@ -204,8 +204,25 @@ input.form:focus {
 
 // Tablet
 @media screen and (min-width: 600px) {
+  #sign-up {
+    padding: $spacing*15 0;
+    margin-top: $spacing*15;
+  }
+
   .content {
     width: 50%;
+    max-width: 450px;
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  #sign-up {
+    margin-top: $spacing*20;
+  }
+
+  input.form {
+    margin-top: $spacing*3;
   }
 }
 </style>

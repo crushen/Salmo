@@ -3,12 +3,14 @@
     <section class="content">
       <h2 class="header">All you need for your next UK Visa, right here.</h2>
 
-      <content-card
-        v-for="card in cards"
-        :key="card.title"
-        :title="card.title"
-        :subTitle="card.subTitle"
-        :img="card.img" />
+      <div class="cards">
+        <content-card
+          v-for="card in cards"
+          :key="card.title"
+          :title="card.title"
+          :subTitle="card.subTitle"
+          :img="card.img" />
+      </div>
     </section>
 
     <sign-up v-if="!user" />
@@ -59,5 +61,22 @@ export default {
 
 h2 {
   margin: 0 0 $spacing*10 0;
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .content {
+    margin-top: 0;
+    max-width: 700px;
+  }
+
+  h2 {
+    margin: 0 0 $spacing*15 0;
+  }
+
+  .cards {
+    width: 60%;
+    margin: auto;
+  }
 }
 </style>

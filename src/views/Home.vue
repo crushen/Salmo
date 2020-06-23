@@ -17,7 +17,9 @@
         @confirm="userDeleted = false, delete $store.state.auth.userDeleted" />
     </transition>
 
-    <header :style="{ backgroundImage: `url(${background})` }">
+    <header 
+      v-if="innerWidth < 1100"
+      :style="{ backgroundImage: `url(${background})` }">
       <div class="content">
         <img 
           src="@/assets/logo/outline.svg"
@@ -31,6 +33,25 @@
           <img src="@/assets/Home-underline.svg" alt="">
         </div>
         
+      </div>
+    </header>
+
+    <header v-else>
+      <img 
+        src="@/assets/Home-desktop.png" alt=""
+        class="desktop-header">
+
+      <div class="desktop-logo">
+        <img 
+          src="@/assets/logo/outline.svg"
+          alt="Salmo logo outline"
+          class="outline">
+        <div class="logo-text-container">
+          <h1 class="logo-text">Salmo</h1>
+          <h2>A personalised visa experience</h2>
+        </div>
+
+        <img src="@/assets/Home-underline.svg" alt="" class="line">
       </div>
     </header>
 
@@ -60,7 +81,8 @@ export default {
     return {
       background,
       loggedOut: false,
-      userDeleted: false
+      userDeleted: false,
+      innerWidth: null
     }
   },
   computed: {
@@ -83,6 +105,11 @@ export default {
         this.userDeleted = true;
       }, 500)
     }
+
+    this.innerWidth = window.innerWidth;
+    window.addEventListener('resize', () => {
+      this.innerWidth = window.innerWidth;
+    })
   }
 }
 </script>
@@ -162,6 +189,57 @@ h2 {
 
   .logo-img {
     display: none;
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  header {
+    min-height: 450px;
+    height: 450px;
+    background-position: 0 80%;
+    text-align: left;
+  }
+
+  .desktop-header {
+    position: absolute;
+    top: 0;
+    left: -10%;
+    width: 90%;
+    height: 900px;
+    z-index: 0;
+  }
+
+  .desktop-logo {
+    position: relative;
+    z-index: 10;
+    padding: 150px 0 0 230px;
+
+    .logo-text-container {
+      text-align: center;
+      width: 300px;
+    }
+
+    .logo-text {
+      color: $light-font;
+      font-size: 90px;
+      line-height: 0;
+    }
+
+    h2 {
+      font-size: 18px;
+    }
+
+    .outline {
+      position: absolute;
+      width: 95px;
+      top: 120px;
+      margin-left: 310px;
+    }
+
+    .line {
+      transform: translate(30px, -5px);
+    }
   }
 }
 </style>

@@ -36,6 +36,7 @@ export default {
 
     img {
       width: 32%;
+      max-width: 200px;
       margin: 0 4vw 0 0;
     }
   }
@@ -54,7 +55,7 @@ export default {
 // Tablet
 @media screen and (min-width: 600px) {
   .card {
-    margin-bottom: $spacing*12;
+    margin: 0 auto $spacing*12 auto;
 
     h3 {
       margin: 0 0 $spacing*2 35%;
@@ -89,6 +90,48 @@ export default {
 
         img {
           margin: 0;
+        }
+      }
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .card {
+    margin: 0 auto $spacing*15 auto;
+
+    h3 {
+      margin: 0 0 $spacing*2 30%;
+      width: 70%;
+    }
+
+    .inner {
+      p {
+        width: 70%;
+        margin: 0 0 0 30%;
+      }
+
+      img {
+        transform: translate(-150px, -30px);
+      }
+    }
+
+    &:nth-of-type(2) {
+      h3 {
+        margin: 0 30% $spacing*2 0;
+      }
+
+      .inner {
+        flex-direction: row-reverse;
+
+        p {
+          margin: 0 30% 0 0;
+        }
+
+        img {
+          margin: 0;
+          transform: translate(150px, -30px);
         }
       }
     }
