@@ -1,5 +1,5 @@
 <template>
-  <section class="single-page">
+  <section>
     <img
       src="@/assets/grey-background.png" alt=""
       class="background-1">
@@ -8,27 +8,28 @@
       class="background-2">
 
     <div class="content">
-      <header>
-        <h1>404 Uh-Oh!</h1>
+      <section class="single-page">
+        <header>
+          <h1>404 Uh-Oh!</h1>
+          <img 
+            src="@/assets/illustrations/alternateStates/404.svg" 
+            alt="An illustration of a a confused person"
+            class="main-img">
+        </header>
 
-        <img 
-          src="@/assets/illustrations/alternateStates/404.svg" 
-          alt="An illustration of a a confused person"
-          class="main-img">
-      </header>
-
-      <div class="body">
-        <h3>We're sorry that page you wanted cannot be found!</h3>
-        <p>Let's try again, you can visit home, UK visa information, your profile and the about pages from the blue button, or click below to go to our help centre.</p>
-        <div class="button">
-          <router-link 
-            :to="{name: 'help-centre'}"
-            :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}"
-            tag="button">
-            Help Centre
-          </router-link>
+        <div class="body">
+          <h3>We're sorry that page you wanted cannot be found!</h3>
+          <p>Let's try again, you can visit home, UK visa information, your profile and the about pages from the blue button, or click below to go to our help centre.</p>
+          <div class="button">
+            <router-link 
+              :to="{name: 'help-centre'}"
+              :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}"
+              tag="button">
+              Help Centre
+            </router-link>
+          </div>
         </div>
-      </div>
+      </section>  
     </div>
   </section>
 </template>
@@ -48,7 +49,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-section {
+.single-page {
   text-align: center;
   position: absolute;
 }
@@ -117,6 +118,13 @@ section {
     bottom: 0;
     width: 100%;
     height: 270px;
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .content {
+    max-width: 600px;
   }
 }
 </style>
