@@ -119,7 +119,7 @@ h3, p {
 img {
   display: block;
   width: 45vw;
-  max-width: 250px;
+  max-width: 200px;
   margin: $spacing*6 auto;
 }
 
