@@ -1,7 +1,7 @@
 <template>
   <section id="profile">
     <img
-      v-if="!user.emailVerified"
+      v-if="!user.emailVerified && !hideBackground"
       src="@/assets/grey-background.png" alt=""
       class="background-1">
     <img 
@@ -93,5 +93,10 @@ export default {
     height: 270px;
     overflow: hidden;
   }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+
 }
 </style>

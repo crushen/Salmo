@@ -31,17 +31,19 @@
     </div>
 
     <div v-else>
-      <div class="content">
-        <h1>Verify your email.</h1>
-        <h3>We've sent you an email to {{ user.email }} to verify your address.</h3>
-        <p>Please click on the link in your email to begin setting up your account. Don't forget to check your junk/spam folders!</p>
-        <p>If you've clicked the link and still see this message, try refreshing the page.</p>
+      <div class="content step-two">
+        <div class="text">
+          <h1>Verify your email.</h1>
+          <h3>We've sent you an email to {{ user.email }} to verify your address.</h3>
+          <p>Please click on the link in your email to begin setting up your account. Don't forget to check your junk/spam folders!</p>
+          <p>If you've clicked the link and still see this message, try refreshing the page.</p>
 
-        <img 
-          src="@/assets/illustrations/alternateStates/phone.svg" 
-          alt="an illustration of a person getting a notification on their phone">
+          <img 
+            src="@/assets/illustrations/alternateStates/phone.svg" 
+            alt="an illustration of a person getting a notification on their phone">
+        </div>
 
-        <p>Once you’ve completed your profile, you’ll unlock new features such as the Permanent Residency helper and Doucmentaion Checklist.</p>
+        <p class="margin">Once you’ve completed your profile, you’ll unlock new features such as the Permanent Residency helper and Doucmentaion Checklist.</p>
       </div>
 
       <settings />
@@ -155,13 +157,64 @@ img {
 
 // Tablet
 @media screen and (min-width: 600px) {
+  .terms {
+    .content {
+      max-width: 700px;
+      margin: 12vh auto;
+    }
+
+    .scroll-container {
+      height: 25vh; 
+    }
+  }
+
+  .step-two {
+    &.content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+  }
+
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
   .content {
-    margin-top: $spacing*20;
+    margin-top: 8vh;
   }
 
   .terms {
     .scroll-container {
-      height: 25vh; 
+      height: 30vh; 
+    }
+  }
+
+  .step-two {
+    &.content {
+      max-width: 800px;
+    }
+    .text {
+      width: 70%;
+      position: relative;
+
+      h1 {
+        margin-bottom: $spacing*6;
+      }
+
+      h3 {
+        margin-bottom: $spacing*4;
+      }
+    }
+
+    img {
+      position: absolute;
+      top: 0;
+      right: -60%;
+    }
+
+    .margin {
+      margin: $spacing*15 0 0 22%;
+      transform: translateY(20px);
     }
   }
 }

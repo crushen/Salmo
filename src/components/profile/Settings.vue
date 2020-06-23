@@ -168,4 +168,23 @@ img {
     }
   }
 }
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  img {
+    left: 20%;
+    top: -115px;
+    transform: scaleX(-1);
+  }
+
+  .help {
+    .button {
+      margin-top: $spacing*6;
+
+      &.log-out {
+        margin-top: $spacing*6;
+      }
+    }
+  }
+}
 </style>
