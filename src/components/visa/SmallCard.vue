@@ -70,4 +70,29 @@ export default {
     margin-top: $spacing*2;
   }
 }
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .card {
+    &:not(:first-of-type) {
+      margin-top: $spacing*4;
+    }
+
+    margin-top: $spacing*4;
+
+    .title {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .body {
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
 </style>

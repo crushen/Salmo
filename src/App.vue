@@ -50,8 +50,8 @@ export default {
           return false;
         case 'visa-info':
           return false;
-        case 'results':
-          return false;
+        // case 'results':
+        //   return false;
         default:
           return true;
       }

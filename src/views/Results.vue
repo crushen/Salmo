@@ -1,15 +1,17 @@
 <template>
   <div id="results">
     <section class="content">
-      <div class="title">
-        <h1>Complete!</h1>
-        <h3>Here are the results of your quiz...</h3>
-      </div>
+      <div class="page-header">
+        <div class="title">
+          <h1>Complete!</h1>
+          <h3>Here are the results of your quiz...</h3>
+        </div>
 
-      <img 
-        class="hero"
-        src="@/assets/illustrations/quiz/Quiz Complete.svg" 
-        alt="">
+        <img 
+          class="hero"
+          src="@/assets/illustrations/quiz/Quiz Complete.svg" 
+          alt="">
+      </div>
 
       <div class="results">
         <div class="top">
@@ -38,11 +40,14 @@
             <p class="card-title">There are other visas in the {{ topResult[0].category }} catagory that you could switch to:</p>
           </div>
 
-          <small-card 
-            v-for="visa in switchVisas"
-            :key="visa.name"
-            :visa="visa"
-            :name="`${visa.name}`"/>
+          <div class="small-cards">
+            <small-card 
+              v-for="visa in switchVisas"
+              :key="visa.name"
+              :visa="visa"
+              :name="`${visa.name}`"
+              class="card" />
+          </div>
         </div>
 
         <div 
@@ -62,16 +67,20 @@
             <p>Be aware! All the visas below are great options <strong>however</strong> you'll need to leave the UK and <strong>apply from your home country</strong> to be considered for them.</p>
           </div>
 
-          <small-card 
-            v-for="visa in otherVisas"
-            :key="visa.name"
-            :visa="visa"
-            :name="visa.name"/>
+          <div class="small-cards">
+            <small-card 
+              v-for="visa in otherVisas"
+              :key="visa.name"
+              :visa="visa"
+              :name="visa.name"
+              class="card" />
 
-          <small-card 
-            v-if="youthMobility[0]"
-            :visa="youthMobility[0]"
-            :name="`${youthMobility[0].name}`"/>
+            <small-card 
+              v-if="youthMobility[0]"
+              :visa="youthMobility[0]"
+              :name="`${youthMobility[0].name}`"
+              class="card" />
+          </div>
         </div>
 
         <div 
@@ -82,27 +91,34 @@
             <p>Don't forget about possibly extending your current visa!</p>
           </div>
 
-          <small-card 
-            :visa="currentVisaObj"
-            :name="`${currentVisaObj.name} (Extend)`"/>
+          <div class="small-cards">
+            <small-card 
+              :visa="currentVisaObj"
+              :name="`${currentVisaObj.name} (Extend)`"
+              class="card" />
+          </div>
         </div>
       </div>
     </section>
 
     <section class="bottom">
       <div class="content">
-        <p>Take your time and have a look over your options above. When you're done don't worry abou losing your results, they are all saved to your profile page!</p>
+        <div class="col">
+          <p class="margin">Thanks for taking our quiz!</p>
 
-        <div class="button">
-          <router-link
-            :to="{ name: 'profile', params: {username: user.username} }"
-            tag="button"
-            :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
-            Go To Profile
-          </router-link>
+          <p>Please do take your time and look over your options. When you’re done your results will stay here and you can always re-visit them from your profile page.</p>
+
+          <div class="button">
+            <router-link
+              :to="{ name: 'profile', params: {username: user.username} }"
+              tag="button"
+              :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
+              Go To Profile
+            </router-link>
+          </div>
         </div>
 
-        <div class="retake-quiz">
+        <div class="retake-quiz col">
           <p>You can also retake this quiz as many times as you'd like. But remember that taking the quiz again will clear your current options above.</p>
 
           <div class="button">
@@ -281,7 +297,7 @@ strong {
   }
 
   img {
-    width: 32px;
+    width: 30px;
     position: absolute;
     z-index: 0;
 
@@ -334,6 +350,109 @@ strong {
 
   .button {
     margin-top: $spacing*3;
+  }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  #results {
+    padding: $spacing*15 0 0;
+  }
+
+  .content {
+    width: 85%;
+  }
+
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing*10;
+
+    .title {
+      text-align: left;
+    }
+
+    img {
+      width: 38%;
+      max-width: 200px;
+      margin: 0;
+    }
+  }
+
+  .results {
+    .top {
+      margin-bottom: $spacing*10;
+    }
+
+    .top-card {
+      margin: $spacing*6 0;
+    }
+  }
+
+  .small-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .card {
+      width: 48%;
+    }
+  }
+
+  .switch {
+    .card-title {
+      margin-bottom: $spacing*2;
+    }
+    margin-bottom: $spacing*10;
+  }
+
+  .other {
+    .sub-title {
+      margin-bottom: $spacing*6;
+    }
+  }
+
+  .tip {
+    margin-bottom: 0;
+    padding: $spacing*3 $spacing*2;
+  }
+
+  .extend {
+    margin-top: $spacing*10;
+
+    p {
+      margin-bottom: $spacing*2;
+    }
+  }
+
+  .bottom {
+    padding: $spacing*8 0 $spacing*15 0;
+    margin-top: $spacing*8;
+
+    .content {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .col {
+      width: 48%;
+
+      .margin {
+        margin-bottom: $spacing*2;
+      }
+    }
+  }
+
+  .retake-quiz {
+    background: $light-grey;
+    padding: $spacing*2;
+    border-radius: 4px;
+    margin-top: 0;
+
+    .button {
+      margin-top: $spacing*3;
+    }
   }
 }
 </style>
