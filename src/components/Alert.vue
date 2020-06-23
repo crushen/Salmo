@@ -113,6 +113,8 @@ a {
 @media screen and (min-width: 600px) {
   .alert {
     padding: $spacing*2;
+    width: calc(90% - 100px);
+    left: calc(5vw + 100px);
 
     &.bottom {
       top: 2.5vw;
