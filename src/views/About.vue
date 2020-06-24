@@ -1,5 +1,7 @@
 <template>
   <section id="about">
+    <desktop-header v-if="innerWidth > 1100" />
+
     <div class="content">
       <div class="logo-about">
         <img
@@ -40,13 +42,16 @@ import imgOne from '@/assets/illustrations/about/Salmo Goals 1.svg';
 import imgTwo from '@/assets/illustrations/about/Salmo goals 2.svg';
 import imgThree from '@/assets/illustrations/about/Salmo goals 3.svg';
 import dots from '@/assets/patterns/dots.svg';
+import desktopHeader from '@/components/DesktopHeader';
 
 export default {
   components: {
-    aboutCard
+    aboutCard,
+    desktopHeader
   },
   data() {
     return {
+      innerWidth: null,
       dots,
       cards: [
         {
@@ -66,6 +71,12 @@ export default {
         }
       ]
     }
+  },
+  mounted() {
+    this.innerWidth = window.innerWidth;
+    window.addEventListener('resize', () => {
+      this.innerWidth = window.innerWidth;
+    })
   }
 }
 </script>
@@ -141,6 +152,40 @@ h2 {
     .button {
       margin-top: $spacing*6;
     }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  #about {
+    padding: $spacing*50 0 0;
+  }
+
+  .logo-about {
+    justify-content: center;
+
+    img {
+      width: 55px;
+      height: auto;
+      margin-right: $spacing*2;
+    }
+
+    h1 {
+      font-size: 60px;
+    }
+  }
+
+  h2 {
+    position: absolute;
+    top: 75px;
+    left: 300px;
+    color: $light-font;
+    width: 400px;
+  }
+
+  .help {
+    padding: $spacing*15 0;
+    margin-top: $spacing*15;
   }
 }
 </style>

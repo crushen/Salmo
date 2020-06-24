@@ -4,7 +4,9 @@
       <h3>{{ number }}. {{ title }}</h3>
       <img :src="img" alt="">
     </div>
-    <p v-html="text"></p>
+    <div class="text">
+      <p v-html="text"></p>
+    </div>
   </div>
 </template>
 
@@ -45,6 +47,46 @@ export default {
 @media screen and (min-width: 600px) {
   .card {
     margin-top: $spacing*10;
+  } 
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .card {
+    margin-top: $spacing*15;
+
+      .header {
+        position: relative;
+        width: 65%;
+
+        img {
+          position: absolute;
+          right: -50%;
+          top: 0;
+          width: 200px;
+        }
+      }
+
+      .text {
+        width: 65%;
+      }
+
+    &:nth-of-type(3) {
+      .header {
+        margin-left: 35%;
+
+        img {
+          position: absolute;
+          left: -52%;
+          top: 0;
+          width: 200px;
+        }
+      }
+
+      .text {
+        margin-left: 35%;
+      }
+    }
   } 
 }
 </style>
