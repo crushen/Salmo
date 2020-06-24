@@ -145,7 +145,7 @@ export default {
   }
   
   ul {
-    margin-top: $spacing*2;
+    margin-top: $spacing*4;
     list-style-position: inside;
     list-style: none;
 
@@ -188,6 +188,22 @@ export default {
     width: 75%;
     margin-left: 50px;
     padding: $spacing*3 $spacing*6;
+
+    .lightbulb-yellow {
+      &:nth-of-type(3),
+      &:nth-of-type(4) {
+        display: none;
+      }
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .modal {
+    width: 60%;
+    margin-left: 50px;
+    padding: $spacing*3 $spacing*10;
 
     .lightbulb-yellow {
       &:nth-of-type(3),

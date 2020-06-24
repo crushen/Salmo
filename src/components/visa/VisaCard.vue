@@ -234,4 +234,12 @@ export default {
     }
   }
 }
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .card {
+    width: 75%;
+    margin: auto;
+  }
+}
 </style>

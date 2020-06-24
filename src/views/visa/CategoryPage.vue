@@ -87,4 +87,15 @@ h1 {
     margin-bottom: $spacing*6;
   }
 }
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  h1 {
+    margin-bottom: $spacing*10;
+  }
+
+  .visa-card {
+    margin-bottom: $spacing*8;
+  }
+}
 </style>
