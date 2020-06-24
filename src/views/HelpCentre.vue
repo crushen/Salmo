@@ -1,7 +1,7 @@
 <template>
   <section id="help-centre">
     <div class="content">
-      <h1>Confused?<br> Need more info?</h1>
+      <h1>Confused?<br class="break"> Need more info?</h1>
     </div>
 
     <section class="questions content">
@@ -169,8 +169,8 @@ export default {
 }
 
 .container {
-  margin-top: $spacing*5;
-  padding: $spacing;
+  margin-top: $spacing*6;
+  //padding: $spacing;
   border-radius: 4px;
   position: relative;
 
@@ -345,6 +345,61 @@ export default {
 
     .disclaimer {
       padding: $spacing*2;
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .break {
+    display: none;
+  }
+
+  .questions {
+    max-width: 600px;
+    margin: $spacing*15 auto 0 auto;
+  }
+
+  .section-margin {
+    margin-top: $spacing*15;
+  }
+
+  .buttons {
+    .button {
+      width: 140px;
+      height: 140px;
+    }
+  }
+
+  .bottom {
+    margin-top: $spacing*15;
+    padding: $spacing*15 0 $spacing*15 0;
+
+    .content {
+      max-width: 600px;
+    }
+
+    .contact-buttons {
+      margin-top: $spacing*6;
+    }
+
+    .disclaimer {
+      margin-top: $spacing*8;
+      p {
+        &:last-of-type {
+          margin-top: $spacing*4;
+        }
+      }
+    }
+  }
+
+  .terms-buttons {
+    flex-direction: row;
+    margin-top: $spacing*6;
+    justify-content: center;
+
+    button:last-of-type {
+      margin: 0 0 0 $spacing*4;
     }
   }
 }
