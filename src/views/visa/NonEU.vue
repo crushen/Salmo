@@ -14,6 +14,11 @@
         <h3>{{ page.text }}</h3>
         <img :src="page.icon" class="icon">
       </router-link>
+
+      <img 
+        src="@/assets/illustrations/visaPages/Work Person.svg" 
+        alt="An illustrations of a person holding a briefcase"
+        class="deskptop-img">
     </section>
 
     <section class="child-options">
@@ -161,6 +166,10 @@ export default {
   }
 }
 
+.deskptop-img {
+  display: none;
+}
+
 @media screen and (min-width: 600px) {
   #non-eu {
     min-height: 100vh;
@@ -174,10 +183,35 @@ export default {
   }
 
   .child-options {
-    padding: $spacing*6 0 $spacing*15 0;
+    padding: $spacing*10 0 $spacing*15 0;
 
     img {
       object-position: 0 0vw;
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .buttons {
+    position: relative;
+  }
+
+  .deskptop-img {
+    display: block;
+    width: 12vw;
+    position: absolute;
+    left: 10%;
+    bottom: -50%;
+  }
+
+  .child-options {
+    padding: $spacing*10 0 $spacing*10 0;
+
+    img {
+      max-width: 100px;
+      max-height: 110px;
+      left: 43vw;
     }
   }
 }
