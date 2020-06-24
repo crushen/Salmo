@@ -37,9 +37,7 @@
     </header>
 
     <header v-else>
-      <img 
-        src="@/assets/Home-desktop.png" alt=""
-        class="desktop-header">
+      <desktop-header />
 
       <div class="desktop-logo">
         <img 
@@ -70,12 +68,14 @@ import background from '@/assets/Home-vector.svg';
 import loggedIn from '@/components/home/LoggedIn';
 import loggedOut from '@/components/home/LoggedOut';
 import alert from '@/components/Alert';
+import desktopHeader from '@/components/DesktopHeader';
 
 export default {
   components: {
     loggedIn,
     loggedOut,
-    alert
+    alert,
+    desktopHeader
   },
   data() {
     return {
@@ -199,15 +199,6 @@ h2 {
     height: 450px;
     background-position: 0 80%;
     text-align: left;
-  }
-
-  .desktop-header {
-    position: absolute;
-    top: 0;
-    left: -10%;
-    width: 90%;
-    height: 900px;
-    z-index: 0;
   }
 
   .desktop-logo {
