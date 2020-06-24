@@ -2,16 +2,19 @@
   <section id="help-center-page">
     <article class="content">
       <h1>{{ currentPage.title }}</h1>
-      <h3>{{ currentPage.subTitle }}</h3>
 
-      <img :src="currentPage.img.url" :alt="currentPage.img.alt">
+      <div class="body">
+        <h3>{{ currentPage.subTitle }}</h3>
 
-      <div class="text">
-        <p 
-          v-for="(p, index) in currentPage.text"
-          :key="index">
-          {{ p }}
-        </p>
+        <img :src="currentPage.img.url" :alt="currentPage.img.alt">
+
+        <div class="text">
+          <p 
+            v-for="(p, index) in currentPage.text"
+            :key="index">
+            {{ p }}
+          </p>
+        </div>
       </div>
     </article> 
 
@@ -167,6 +170,24 @@ img {
   .bottom {
     margin-top: $spacing*10;
     padding: $spacing*10 0 $spacing*15 0;
+    text-align: center;
+
+    button {
+      margin-top: $spacing*6;
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .body {
+    max-width: 600px;
+    margin: $spacing*10 auto 0 auto;
+  }
+
+  .bottom {
+    margin-top: $spacing*15;
+    padding: $spacing*15 0 $spacing*15 0;
     text-align: center;
 
     button {
