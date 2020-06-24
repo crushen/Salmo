@@ -2,7 +2,9 @@
   <section class="content">
     <h1>Settled Status</h1>
 
-    <tabbed-card :card="card" />
+    <tabbed-card 
+      :card="card"
+      class="card" />
   </section>
 </template>
 
@@ -98,5 +100,24 @@ export default {
 
 h1 {
   margin-bottom: $spacing*5;
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  h1 {
+    margin-bottom: $spacing*8;
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  h1 {
+    margin-bottom: $spacing*10;
+  }
+  
+  .card {
+    width: 75%;
+    margin: auto;
+  }
 }
 </style>

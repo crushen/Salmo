@@ -92,6 +92,7 @@ h3 {
   display: none;
 }
 
+// Tablet
 @media screen and (min-width: 600px) {
   #eu {
     padding: $spacing*15 0 0;
@@ -101,11 +102,16 @@ h3 {
     justify-content: space-around;
   }
 
+  h1 {
+    margin-bottom: $spacing*4;
+  }
+
   .explore {
     padding: $spacing*6 0 0 0;
 
     .content {
       width: 60%;
+      max-width: 600px;
       margin: auto;
     }
   }
@@ -118,15 +124,37 @@ h3 {
 
     img {
       width: 16%;
+      max-width: 140px;
 
       &:first-of-type {
         transform: scaleX(-1);
-        margin-left: $spacing*3;
+        margin-left: 4vw;
       }
 
       &:last-of-type {
         width: 25%;
-        margin-right: $spacing*3;
+        max-width: 220px;
+        margin-right: 4vw;
+      }
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  h1 {
+    margin-bottom: $spacing*6;
+  }
+
+  .explore {
+    padding: $spacing*6 0 $spacing*5 0;
+
+    .buttons {
+      justify-content: space-around;
+      margin-top: $spacing*8;
+
+      button {
+        width: 35%;
       }
     }
   }
