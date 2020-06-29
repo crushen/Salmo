@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <section class="content">
-      <h1>Complete profile.</h1>
+  <section class="content">
+    <h1>Complete profile.</h1>
+    <div class="wrapper">
       <p class="subtitle">Once you’ve completed your profile, you’ll also gain access to other features such as your personalised quiz and your own Visa Planner.</p>
 
       <form 
@@ -151,8 +151,8 @@
             :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
         </div>
       </form>
-    </section>
-  </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -642,6 +642,14 @@ export default {
         margin-right: $spacing;
       }
     }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .wrapper {
+    max-width: 650px;
+    margin: $spacing*8 auto 0 auto;
   }
 }
 </style>
