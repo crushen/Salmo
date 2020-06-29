@@ -137,4 +137,13 @@ form {
     }
   }
 }
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  form {
+    .check-boxes {
+      margin: $spacing*6;
+    }
+  }
+}
 </style>

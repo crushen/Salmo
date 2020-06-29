@@ -2,65 +2,67 @@
   <section id="settings" class="content">
     <h1>Settings</h1>
 
-    <section class="notifications section">
-      <h3>Notifications</h3>
+    <div class="wrapper">
+      <section class="notifications section">
+        <h3>Notifications</h3>
 
-      <div class="switches">
-        <div class="switch">
-          <pretty-check class="p-switch p-fill"></pretty-check>
-          <p>Notify you about important dates by email.</p>
+        <div class="switches">
+          <div class="switch">
+            <pretty-check class="p-switch p-fill"></pretty-check>
+            <p>Notify you about important dates by email.</p>
+          </div>
+
+          <div class="switch">
+            <pretty-check class="p-switch p-fill"></pretty-check>
+            <p>Notify you about important dates by email.</p>
+          </div>
+    
+          <div class="switch">
+            <pretty-check class="p-switch p-fill"></pretty-check>
+            <p>Notify you about important dates by email.</p>
+          </div>
         </div>
+      </section>
 
-        <div class="switch">
-          <pretty-check class="p-switch p-fill"></pretty-check>
-          <p>Notify you about important dates by email.</p>
+      <section class="privacy section">
+        <h3>Privacy</h3>
+
+        <div class="switches">
+          <div class="switch">
+            <pretty-check class="p-switch p-fill"></pretty-check>
+            <p>Notify you about important dates by email.</p>
+          </div>
+
+          <div class="switch">
+            <pretty-check class="p-switch p-fill"></pretty-check>
+            <p>Notify you about important dates by email.</p>
+          </div>
         </div>
-  
-        <div class="switch">
-          <pretty-check class="p-switch p-fill"></pretty-check>
-          <p>Notify you about important dates by email.</p>
+      </section>
+
+      <section class="delete section">
+        <h3>Delete Account</h3>
+
+        <p>If you're having issues with any aspect of our service, please do 
+          <router-link
+            :to="{ name: 'about' }"
+            tag="button"
+            class="tertiary">
+            get in touch 
+          </router-link> 
+        with us now and we will do our best to help!</p>
+        <p class="warning">THIS ACTION IS IRREVERSIBLE</p>
+
+        <div class="button">
+          <router-link
+            :to="{ name: 'delete-account' }"
+            tag="button"
+            class="tertiary">
+            Delete Account 
+          </router-link> 
         </div>
-      </div>
-    </section>
-
-    <section class="privacy section">
-      <h3>Privacy</h3>
-
-      <div class="switches">
-        <div class="switch">
-          <pretty-check class="p-switch p-fill"></pretty-check>
-          <p>Notify you about important dates by email.</p>
-        </div>
-
-        <div class="switch">
-          <pretty-check class="p-switch p-fill"></pretty-check>
-          <p>Notify you about important dates by email.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="delete section">
-      <h3>Delete Account</h3>
-
-      <p>If you're having issues with any aspect of our service, please do 
-        <router-link
-          :to="{ name: 'about' }"
-          tag="button"
-          class="tertiary">
-          get in touch 
-        </router-link> 
-      with us now and we will do our best to help!</p>
-      <p class="warning">THIS ACTION IS IRREVERSIBLE</p>
-
-      <div class="button">
-        <router-link
-          :to="{ name: 'delete-account' }"
-          tag="button"
-          class="tertiary">
-          Delete Account 
-        </router-link> 
-      </div>
-    </section>
+      </section>
+    </div>
   </section>
 </template>
 
@@ -141,6 +143,14 @@ export default {
     p {
       margin-left: $spacing*3;
     }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .wrapper {
+    max-width: 700px;
+    margin: auto;
   }
 }
 </style>
