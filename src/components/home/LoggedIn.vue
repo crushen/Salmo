@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="grid-container">
     <section class="welcome">
       <div class="content">
         <h2 class="header">All you need for your next UK Visa, right here.</h2>
@@ -71,6 +71,7 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
+@import '@/assets/styles/main.scss';
 
 .header-img {
   display: none;
@@ -111,6 +112,7 @@ h3 {
   .welcome {
     .content {
       position: relative;
+      max-width: 500px;
     }
   }
 
@@ -124,6 +126,7 @@ h3 {
     bottom: -30%;
     right: 0;
     width: 40%;
+    max-width: 220px;
   }
 
   .news {
@@ -170,6 +173,69 @@ h3 {
       }
     }
   }
+}
 
+// Desktop
+@media screen and (min-width: 1100px) {
+  .grid-container {
+    @include grid(1.3fr 0.7fr, 0.3fr 0.5fr, 5%);
+    width: 80%;
+    max-width: 1100px;
+    margin: $spacing*8 auto $spacing*15 auto;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .section-margin {
+    max-width: 600px;
+    margin: $spacing*4 auto 0 auto;
+    align-self: center;
+  }
+
+  .welcome {
+    .content {
+      max-width: 560px;
+      margin: auto;
+    }
+  }
+
+  h2 {
+    width: 60%;
+  }
+
+  .header-img {
+    right: 5%;
+  }
+
+  h3 {
+    display: block;
+    margin: 0;
+
+    &.content {
+      width: 100%;
+    }
+  }
+
+  .page-links {
+    padding-bottom: 0;
+    margin-top: $spacing*3;
+    width: 100%;
+
+    .content {
+      width: 43%;
+    }
+  }
+
+  .news {
+    margin-top: 0;
+    grid-column: 2 /  3;
+    grid-row: 1 / 3;
+
+    &.content {
+      width: 100%;
+    }
+  }
 }
 </style>

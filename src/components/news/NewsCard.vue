@@ -50,4 +50,18 @@ export default {
     width: 48%;
   }
 }
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .card {
+    padding: 0 0;
+    width: 100%;
+    height: 20vw;
+    max-height: 290px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-bottom: $spacing*6;
+  }
+}
 </style>
