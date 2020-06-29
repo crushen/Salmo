@@ -211,6 +211,12 @@ export default {
         display: none;
       }
     }
+
+    .text {
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
   }
 }
 </style>
