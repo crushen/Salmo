@@ -4,7 +4,7 @@
       <h1>Your current plan.</h1>
     </div>
 
-    <section class="content">
+    <section class="content wrapper">
       <div class="row">
         <div class="col">
           <profile-card :user="user" />
@@ -79,7 +79,13 @@
 
           <img 
             src="@/assets/illustrations/visaPages/Laptop Person.svg" 
-            alt="An illustrations of a girl using a laptop">
+            alt="An illustrations of a girl using a laptop"
+            class="tablet">
+
+          <img 
+            src="@/assets/illustrations/profilePages/guy-laptop.svg" 
+            alt="An illustrations of a man using a laptop"
+            class="desktop">
         </section>
 
         <section class="">
@@ -341,12 +347,13 @@ h1 {
       width: 48%;
     }
 
-    img {
+    img.tablet {
       display: block;
       position: absolute;
       bottom: 0;
       left: 0;
       width: 28%;
+      max-width: 168px;
     }
   }
 
@@ -383,6 +390,32 @@ h1 {
 
     .buttons {
       margin-top: $spacing*6;
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .wrapper {
+    max-width: 700px;
+    margin: $spacing*8 auto 0 auto;
+  }
+
+  .moving-btn {
+    margin-top: $spacing*12;
+  }
+
+  .visa-tools {
+    img.tablet {
+      display: none;
+    }
+
+    img.desktop {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 48%;
     }
   }
 }
