@@ -713,4 +713,12 @@ h3 {
     }
   }
 }
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  form {
+    max-width: 600px;
+    margin: $spacing*15 auto 0 auto;
+  }
+}
 </style>
