@@ -4,75 +4,84 @@
       <h1>Confused?<br class="break"> Need more info?</h1>
     </div>
 
-    <section class="questions content">
-      <div 
-        v-for="(question, index) in questions"
-        :key="index"
-        class="container"
-        :class="{'selected': index === selected, 'disabled': index !== selected && selected !== null}">
-        <div class="button">
-          <button @click="toggleSelected(index, $event)">
-            <img v-if="selected !== index" :src="arrow" class="icon">
-            <img v-if="selected === index" :src="cross" class="icon cross">
-          </button>
-        </div>
-        
-        <div class="text">
-          <h3>{{ question.title }}</h3>
-          <p v-if="selected === index">{{ question.text }}</p>
-        </div>
-      </div>
-    </section>
+    <transition-group name="slide" tag="ul">
+      <section class="questions content slide-item" key="dynamic">
+        <transition-group name="slide" tag="ul">
+          <li 
+            v-for="(question, index) in questions"
+            :key="index"
+            @click="selected = selected === index ? null : index"
+            class="slide-item">
+            <div class="title">
+              <img 
+                src="@/assets/icons/pink/down.svg" 
+                alt=""
+                :class="selected === index ? 'active' : ''" 
+                class="icon">
+              <h3>{{ question.title }}</h3>
+            </div>
 
-    <section class="content section-margin">
-      <h2>All you need to know about...</h2>
+            <div 
+              :class="selected === index ? 'active' : ''"
+              class="text">
+              <p>{{ question.text }}</p>
+            </div>
+          </li>
+        </transition-group>
+      </section>
 
-      <div class="buttons">
-        <router-link
-        class="button"
-          v-for="page in helpPages"
-          :key="page.title"
-          :to="{ name: 'help-centre-page', params: { slug: page.slug } }"
-          :style="{ backgroundImage: `url(${page.bg})` }">
-          <div>
-            <h3>{{ page.title }}</h3>
+      <div class="slide-item" key="static">
+        <section class="content section-margin">
+          <h2>All you need to know about...</h2>
+
+          <div class="buttons">
+            <router-link
+            class="button"
+              v-for="page in helpPages"
+              :key="page.title"
+              :to="{ name: 'help-centre-page', params: { slug: page.slug } }"
+              :style="{ backgroundImage: `url(${page.bg})` }">
+              <div>
+                <h3>{{ page.title }}</h3>
+              </div>
+            </router-link>
           </div>
-        </router-link>
+        </section>
+
+        <section class="bottom">
+          <div class="content">
+            <h2>Need to talk to us?</h2>
+
+            <div class="contact-buttons">
+              <button class="secondary">Call Us</button>
+              <button class="secondary">Email Us</button>
+            </div>
+
+            <div class="disclaimer">
+              <p class="title">Disclaimer</p>
+              <p>We are a team of enthusiastic individuals with the aim of conveying exsisting visa information in a more digestable format. Please do not get in touch for legal advice as we are not qualified to give this at the moment.</p>
+              <p>For a full list of our T&C's or Privacy Policy, please see below.</p>
+            </div>
+
+            <div class="terms-buttons">
+              <router-link 
+                :to="{ name: 'terms' }"
+                tag="button"
+                class="tertiary">
+                Terms & Conditions
+              </router-link>
+
+              <router-link 
+                :to="{ name: 'privacy' }"
+                tag="button"
+                class="tertiary">
+                Privacy Policy
+              </router-link>
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
-
-    <section class="bottom">
-      <div class="content">
-        <h2>Need to talk to us?</h2>
-
-        <div class="contact-buttons">
-          <button class="secondary">Call Us</button>
-          <button class="secondary">Email Us</button>
-        </div>
-
-        <div class="disclaimer">
-          <p class="title">Disclaimer</p>
-          <p>We are a team of enthusiastic individuals with the aim of conveying exsisting visa information in a more digestable format. Please do not get in touch for legal advice as we are not qualified to give this at the moment.</p>
-          <p>For a full list of our T&C's or Privacy Policy, please see below.</p>
-        </div>
-
-        <div class="terms-buttons">
-          <router-link 
-            :to="{ name: 'terms' }"
-            tag="button"
-            class="tertiary">
-            Terms & Conditions
-          </router-link>
-
-          <router-link 
-            :to="{ name: 'privacy' }"
-            tag="button"
-            class="tertiary">
-            Privacy Policy
-          </router-link>
-        </div>
-      </div>
-    </section>
+    </transition-group>
   </section>
 </template>
 
@@ -160,69 +169,62 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+// Slide transition group
+.slide-item {
+  transition: 0.4s;
+}
+
+.slide-leave-active {
+  position: absolute;
+}
+
+// Mobile
 #help-centre {
   padding: $spacing*12 0 0;
+  position: relative;
 }
 
 .questions {
   margin-top: $spacing*8;
-}
 
-.container {
-  margin-top: $spacing*6;
-  //padding: $spacing;
-  border-radius: 4px;
-  position: relative;
+  ul {
+    list-style: none;
 
-  .button {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+    li {
+      position: relative;
 
-  button {
-    padding: 0;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    outline: none;
-
-    img {
-      width: 28px;
-      margin-top: 4px;
-
-      &.cross {
-        width: 20px;
+      &:not(:first-of-type) {
+        margin-top: $spacing*5;
       }
     }
   }
-
-  &.selected {
-    background: $primary-yellow;
-
-    button {
-      box-shadow: none;
-    }
+  
+  .title {
+    display: flex;
+    align-items: center;
   }
 
-  &.disabled {
-    color: $light-grey;
-    pointer-events: none;
+  .icon {
+    width: 28px;
+    margin-right: $spacing*3;
+    transition: 0.4s;
 
-    button {
-      background: $light-grey;
+    &.active {
+      transform: rotate(-180deg);
     }
   }
 
   .text {
-    h3 {
-      width: 80%; 
-    }
+    margin: $spacing*2 0 0 52px;
+    position: absolute;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: 0.4s;
 
-    p {
-      margin-top: $spacing*2;
+    &.active {
+      position: relative;
+      transform: translateY(0);
+      opacity: 1;
     }
   }
 }
