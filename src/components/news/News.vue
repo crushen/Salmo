@@ -51,14 +51,7 @@ h2 {
   .cards {
     display: flex;
     justify-content: space-between;
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  .cards {
-    flex-direction: column;
-    width: 100%;
+    flex-wrap: wrap;
   }
 }
 </style>

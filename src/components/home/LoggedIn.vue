@@ -112,7 +112,6 @@ h3 {
   .welcome {
     .content {
       position: relative;
-      max-width: 500px;
     }
   }
 
@@ -152,6 +151,7 @@ h3 {
     align-items: center;
     padding-bottom: $spacing*15;
     width: 90%;
+    max-width: 800px;
     margin: 0 auto auto;
     
     .content {
@@ -171,70 +171,6 @@ h3 {
       .image-2 {
         display: none;
       }
-    }
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  .grid-container {
-    @include grid(1.3fr 0.7fr, 0.3fr 0.5fr, 5%);
-    width: 80%;
-    max-width: 1100px;
-    margin: $spacing*8 auto $spacing*15 auto;
-  }
-
-  .content {
-    width: 100%;
-  }
-
-  .section-margin {
-    max-width: 600px;
-    margin: $spacing*4 auto 0 auto;
-    align-self: center;
-  }
-
-  .welcome {
-    .content {
-      max-width: 560px;
-      margin: auto;
-    }
-  }
-
-  h2 {
-    width: 60%;
-  }
-
-  .header-img {
-    right: 5%;
-  }
-
-  h3 {
-    display: block;
-    margin: 0;
-
-    &.content {
-      width: 100%;
-    }
-  }
-
-  .page-links {
-    padding-bottom: 0;
-    margin-top: $spacing*3;
-    width: 100%;
-
-    .content {
-      width: 43%;
-    }
-  }
-
-  .news {
-    margin-top: 0;
-    grid-column: 2 /  3;
-    grid-row: 1 / 3;
-
-    &.content {
-      width: 100%;
     }
   }
 }

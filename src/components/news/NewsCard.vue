@@ -24,8 +24,12 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .card {
+  height: 35vh;
+  max-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   margin-bottom: $spacing*4;
-  padding: 35vw 0 0;
   background: $light-grey;
   border-radius: $border-radius;
   box-shadow: $shadow;
@@ -46,7 +50,6 @@ export default {
 // Tablet
 @media screen and (min-width: 600px) {
   .card {
-    padding: 18vw 0 0;
     width: 48%;
   }
 }
@@ -55,7 +58,6 @@ export default {
 @media screen and (min-width: 1100px) {
   .card {
     padding: 0 0;
-    width: 100%;
     height: 20vw;
     max-height: 290px;
     display: flex;
