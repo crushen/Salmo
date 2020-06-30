@@ -265,6 +265,9 @@ strong {
 
 
 .results {
+  max-width: 600px;
+  margin: auto;
+
   .top {
     margin-bottom: $spacing*8;
   }
@@ -366,8 +369,8 @@ strong {
   .page-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin-bottom: $spacing*10;
+    justify-content: center;
+    margin: 0 auto $spacing*10 auto;
 
     .title {
       text-align: left;
@@ -376,7 +379,7 @@ strong {
     img {
       width: 38%;
       max-width: 200px;
-      margin: 0;
+      margin: 0 0 0 15%;
     }
   }
 
@@ -452,6 +455,15 @@ strong {
 
     .button {
       margin-top: $spacing*3;
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .page-header {
+    h3 {
+      transform: translateX(8%);
     }
   }
 }

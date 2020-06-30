@@ -225,6 +225,7 @@ export default {
   .content {
     &.questions-stage {
       width: 85%;
+      max-width: 650px;
     }
   }
 
@@ -243,6 +244,17 @@ export default {
     z-index: 2;
     top: 0;
     left: 0;
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .progress-bar {
+    width: 75%;
+  }
+
+  .progress-bar-inner {
+    width: 75%;
   }
 }
 </style>

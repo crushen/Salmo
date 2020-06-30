@@ -21,6 +21,7 @@ a {
   @include font(16px, 600);
   text-decoration: none;
   color: $dark-font;
+  cursor: pointer;
 
   &:hover {
     text-decoration: none;

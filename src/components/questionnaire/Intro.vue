@@ -3,8 +3,10 @@
     <div>
       <h1>Let us help you find the perfect visa.</h1>
 
-      <p class="subtitle">This quiz will work our your best options to remain in the UK.</p>
-      <p class="text">The following questions are based off your <span class="bold">current visa</span>, so please ensure that your current visa is up to date in <router-link :to="{name: 'profile', params: {username: user.profile.username}}">your profile.</router-link></p>
+      <div class="text-wrapper">
+        <p class="subtitle">This quiz will work our your best options to remain in the UK.</p>
+        <p class="text">The following questions are based off your <span class="bold">current visa</span>, so please ensure that your current visa is up to date in <router-link :to="{name: 'profile', params: {username: user.profile.username}}">your profile.</router-link></p>
+      </div>
     </div>
 
     <div class="button">
@@ -157,6 +159,19 @@ img {
     left: 90px;
     object-fit: cover;
     object-position: 0 0;
+    max-width: 300px;
+    max-height: 300px;
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .text-wrapper {
+    transform: translateY(-6vh);
+  }
+
+  img {
+    left: 180px;
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <a v-if="arrowPage" @click="$router.go(-1)" class="arrow-btn">
+    <a v-if="arrowPage && innerWidth < 1100" @click="$router.go(-1)" class="arrow-btn">
       <img :src="arrow" class="arrow">
     </a>
 
