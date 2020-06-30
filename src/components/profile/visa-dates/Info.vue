@@ -122,6 +122,31 @@ export default {
     width: 75%;
     margin-left: 50px;
     padding: $spacing*4 $spacing*6;
+
+    h3 {
+      margin-bottom: $spacing*6;
+    }
+  
+    .close {
+      margin-top: $spacing*6;
+    }
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .modal {
+    width: 60%;
+    margin-left: 50px;
+    padding: $spacing*3 $spacing*10;
+
+    h3 {
+      margin-bottom: $spacing*8;
+    }
+  
+    .close {
+      margin-top: $spacing*8;
+    }
   }
 }
 </style>
