@@ -2,8 +2,8 @@
   <div class="modal">
     <div v-if="user.favoriteVisa">
       <p>This will change your favorite visa from <span>{{ user.favoriteVisa.name }}</span> to <span>{{ visa.name }}</span>.</p>
-      <p>Changing your favorite visa will also change your documentation list, and any changes you've made to it will be lost</p>
-      <p><span>Are you sure you want to change your favorite visa?</span></p>
+      <p>Changing your favorite visa will also change your documentation checklist, and any changes you've made to it will be lost.</p>
+      <p class="center"><span>Are you sure you want to change your favorite visa?</span></p>
     </div>
 
     <div v-else>
@@ -79,17 +79,49 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: $spacing*4;
+  margin: $spacing*4 auto 0 auto;
+  max-width: 320px;
 
   button {
     width: 50%;
     max-width: 140px;
-    font-size: 4.5vw;
+    //font-size: 4.5vw;
 
     &:nth-of-type(2) {
       width: 42%;
       max-width: 116px;
     }
+  }
+}
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .modal {
+    width: 75%;
+    margin-left: 50px;
+    padding: $spacing*3 $spacing*6;
+
+    p:not(:first-of-type) {
+      margin-top: $spacing*4;
+    }
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .buttons {
+    margin: $spacing*6 auto 0 auto;
+  }
+}
+
+// Desktop
+@media screen and (min-width: 1100px) {
+  .modal {
+    width: 60%;
+    margin-left: 50px;
+    padding: $spacing*3 $spacing*10;
+
   }
 }
 </style>

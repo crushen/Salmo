@@ -102,12 +102,14 @@ export default {
       });
     },
     makeFavorite() {
-      const overlay = document.querySelector('#overlay');
-      overlay.style.opacity = 1;
-      overlay.style.visibility = 'visible';
-      document.querySelector('body').style.overflow = 'hidden';
-      this.favourite = true;
-      this.confirmChange = true;
+      if(this.favouriteVisa !== this.visa.name) {
+        const overlay = document.querySelector('#overlay');
+        overlay.style.opacity = 1;
+        overlay.style.visibility = 'visible';
+        document.querySelector('body').style.overflow = 'hidden';
+        this.favourite = true;
+        this.confirmChange = true;
+      }
     },
     closeModal() {
       const overlay = document.querySelector('#overlay');
@@ -199,6 +201,7 @@ export default {
     position: absolute;
     bottom: 10px;
     left: 10px;
+    cursor: pointer;
   }
 }
 
