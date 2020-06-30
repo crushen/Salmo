@@ -2,7 +2,7 @@
   <div
     class="profile-card">
     <div class="child one">
-      <img :src="profilePictures[Math.floor(Math.random()*10) + 1]" class="profile-pic" alt="Randomised profile picture">
+      <img :src="profilePicture" class="profile-pic" alt="Randomised profile picture">
     </div>
 
     <div class="child two">
@@ -61,6 +61,9 @@ export default {
     }
   },
   computed: {
+    profilePicture() {
+      return this.profilePictures[Math.floor(Math.random()*10) + 1];
+    },
     birthday() {
       const date = this.user.profile.birthday.split('-');
       return date.reverse().join('/');
