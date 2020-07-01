@@ -202,6 +202,7 @@ export default {
   .title {
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
 
   .icon {
@@ -217,7 +218,7 @@ export default {
   .text {
     margin: $spacing*2 0 0 52px;
     position: absolute;
-    transform: translateY(-20px);
+    transform: translateY(-10px);
     opacity: 0;
     transition: 0.4s;
 
