@@ -45,7 +45,7 @@
 
         <p>If you're having issues with any aspect of our service, please do 
           <router-link
-            :to="{ name: 'about' }"
+            :to="{ name: 'help-centre' }"
             tag="button"
             class="tertiary">
             get in touch 
