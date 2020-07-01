@@ -1,18 +1,9 @@
 <template>
   <section id="profile">
-    <img
-      v-if="!user.emailVerified && !hideBackground"
-      src="@/assets/grey-background.png" alt=""
-      class="background-1">
-    <img 
-      v-if="!user.emailVerified && !hideBackground"
-      src="@/assets/grey-background-bottom.png" alt=""
-      class="background-2">
     <!-- Check if user has verified email and accepted T&C's -->
     <verify-email 
       v-if="!user.emailVerified" 
-      :user="user"
-      @acceptTerms="hideBackground = true" />
+      :user="user" />
 
     <div v-else>
       <!-- Check if user has filled out profile info -->
@@ -45,7 +36,6 @@ export default {
   data() {
     return {
       user: this.$store.state.auth.user,
-      hideBackground: false
     }
   }
 }
@@ -59,38 +49,11 @@ export default {
   position: relative;
 }
 
-.background-1,
-.background-2 {
-  display: none;
-  position: relative;
-  z-index: 1;
-}
-
 // Tablet
 @media screen and (min-width: 600px) {
   #profile {
     padding: $spacing*15 0 0;
     min-height: 100vh;
-    overflow: hidden;
-  }
-
-  .background-1 {
-    display: block;
-    position: absolute;
-    left: 0;
-    top: -30px;
-    width: 100%;
-    height: 250px;
-    overflow: hidden;
-  }
-
-  .background-2 {
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: -30px;
-    width: 100%;
-    height: 270px;
     overflow: hidden;
   }
 }

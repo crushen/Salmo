@@ -76,7 +76,6 @@ export default {
   methods: {
     acceptTerms() {
       this.terms.show = false;
-      this.$emit('acceptTerms');
       window.scrollTo(0,0);
     }
   }
