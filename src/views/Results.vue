@@ -466,5 +466,12 @@ strong {
       transform: translateX(8%);
     }
   }
+
+  .results {
+
+    .top-card {
+      margin: $spacing*6 auto;
+    }
+  }
 }
 </style>
