@@ -105,7 +105,7 @@
               name="Current Visa"
               :id="`past-visa-${index}`">
               <option
-                v-for="item in visas"
+                v-for="item in pastVisas"
                 :key="item"
                 :value="item">
                 {{ item }}
@@ -437,6 +437,35 @@ export default {
         // 'Tier 5 Religious Worker Visa',
         // 'Tier 5 Seasonal Worker Visa',
         // 'Tier 5 Youth Mobility Scheme'     
+      ],
+      pastVisas: [
+        "Dependent on someone else's visa",
+        'Family Visa',
+        'Global Talent Visa',
+        'Innovator Visa',
+        'Marriage Visa',
+        'Parent of Tier 4 Child Visa',
+        'Standard Visitor Visa',
+        'Startup Visa',
+        'Tier 1 Entrepreneur Visa',
+        'Tier 1 Exceptional Talent Visa',
+        'Tier 1 Graduate Entrepreneur Visa',
+        'Tier 1 Investor Visa',
+        'Tier 2 General Work Visa',
+        'Tier 2 Intra-company Transfer Graduate Trainee Visa',
+        'Tier 2 Intra-company Transfer Long-term Staff Visa',
+        'Tier 2 Minister of Religion Visa',
+        'Tier 2 Sportsperson Visa',
+        'Tier 4 Child Student',
+        'Tier 4 General Student',
+        'Tier 4 Short Term Study Visa',
+        'Tier 5 Charity Worker Visa', 
+        'Tier 5 Creative and Sporting Visa',
+        'Tier 5 GOV Authorised Exchange Visa',
+        'Tier 5 International Agreement Visa',
+        'Tier 5 Religious Worker Visa',
+        'Tier 5 Seasonal Worker Visa',
+        'Tier 5 Youth Mobility Scheme'     
       ],
       dependantsList: [
         'None', 
