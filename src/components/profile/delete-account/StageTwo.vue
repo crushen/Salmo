@@ -11,11 +11,13 @@
             <p>Please enter your email and password to complete the deletion of your account.</p>
 
             <div class="field">
+              <label for="email" class="form-label">Email</label>
               <input 
                 v-model.trim="form.email"
                 type="email"
-                placeholder="Email"
+                placeholder="example@mail.com"
                 autocomplete="email"
+                id="email"
                 class="form">
               <div v-if="$v.form.email.$error">
                 <p v-if="!$v.form.email.required" class="error">Email is required</p>
@@ -24,11 +26,13 @@
             </div>
 
             <div class="field">
+              <label for="password" class="form-label">Passowrd</label>
               <input 
                 v-model.trim="form.password"
                 type="password"
-                placeholder="Password"
+                placeholder="Your password"
                 autocomplete="current-password"
+                id="password"
                 class="form">
               <div v-if="$v.form.password.$error">
                 <p v-if="!$v.form.password.required" class="error">Password is required</p>
@@ -131,10 +135,18 @@ export default {
 
 form {
   margin-top: $spacing*4;
+}
 
-  .form {
-    margin-top: $spacing*3;
+.field {
+  padding-top: $spacing;
+
+  &:first-of-type {
+    padding-top: $spacing*4;
   }
+}
+
+input.form {
+  margin-top: 4px;
 }
 
 .button {
