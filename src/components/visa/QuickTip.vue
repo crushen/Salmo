@@ -195,6 +195,14 @@ export default {
         display: none;
       }
     }
+
+    h2 {
+      margin-bottom: $spacing*8;
+    }
+
+    .close {
+      margin-top: $spacing*8;
+    }
   }
 }
 
