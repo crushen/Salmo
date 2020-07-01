@@ -2,7 +2,10 @@
   <div class="container">
     <h3 class="content">Check this timeline for all the important Brexit dates.</h3>
 
-    <div class="horizontal-scroll-container">
+    <div 
+      @mousedown="startDrag" 
+      @mousemove="doDrag"
+      class="horizontal-scroll-container">
       <div class="line"></div>
       <ul>
         <li 
@@ -40,6 +43,9 @@
 export default {
   data() {
     return {
+      dragging: false,
+      startX: null,
+      scrollLeft: null,
       selected: 0,
       events: [
         {
@@ -106,9 +112,31 @@ export default {
     }
   },
   methods: {
+    startDrag(event) {
+      const slider = document.querySelector('.horizontal-scroll-container');
+      this.dragging = true;
+      this.startX = event.pageX - slider.offsetLeft;
+      this.scrollLeft = slider.scrollLeft;
+    },
+    doDrag(event) {
+      const slider = document.querySelector('.horizontal-scroll-container');
+      if(this.dragging) {
+        event.preventDefault();
+        const x = event.pageX - slider.offsetLeft;
+        const slide = (x - this.startX) * 2; //scroll-fast
+        slider.scrollLeft = this.scrollLeft - slide;
+      }
+    },
     selectItem(index) {
       this.selected = index;
     }
+  },
+  mounted() {
+    window.addEventListener('mouseup', () => {
+      this.dragging = false;
+      this.startX = null;
+      this.scrollLeft = null;
+    });
   }
 }
 </script>
