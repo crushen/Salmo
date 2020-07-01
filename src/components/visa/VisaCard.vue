@@ -161,7 +161,7 @@ export default {
     }
 
     .checklist {
-      width: 100%;
+      //width: 100%;
       margin-top: $spacing*4;
       @include grid(repeat(2, 1fr), repeat(3, 1fr), $spacing*2);
     }
@@ -223,14 +223,10 @@ export default {
 
     .body {
       .checklist {
-        margin-top: $spacing*5;
-        @include grid(repeat(3, 1fr), repeat(2, 1fr), $spacing*2);
+        margin: $spacing*5 auto 0 auto;
+        @include grid(repeat(3, 120px), repeat(2, 1fr), $spacing*2);
       }
-
-      .item {
-        justify-content: center;
-      }
-
+      
       button {
         margin-top: $spacing*6;
       }

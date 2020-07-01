@@ -17,9 +17,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: true },
         { name: 'Study', status: true },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: false },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -41,9 +41,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: true },
         { name: 'Study', status: true },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -65,9 +65,9 @@ const visas = [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -89,9 +89,9 @@ const visas = [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: false },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -113,9 +113,9 @@ const visas = [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -137,9 +137,9 @@ const visas = [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -161,9 +161,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: false },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: false }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -185,10 +185,9 @@ const visas = [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
-        
+        { name: 'Dependants', status: true } 
       ]
     }
   },
@@ -210,10 +209,9 @@ const visas = [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
-        
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -235,10 +233,9 @@ const visas = [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
-        
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -260,10 +257,9 @@ const visas = [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Study', status: 'maybe' },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
-        
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -285,9 +281,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: 'maybe' },
         { name: 'Study', status: true },
-        { name: 'Dependants', status: 'maybe' },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: 'maybe' }
       ]
     }
   },
@@ -309,9 +305,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: 'maybe' },
         { name: 'Study', status: true },
-        { name: 'Dependants', status: false },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: false }
       ]
     }
   },
@@ -333,9 +329,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: false },
         { name: 'Study', status: true },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: false },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -357,9 +353,9 @@ const visas = [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
         { name: 'Study', status: true },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: false },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -381,9 +377,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: true },
         { name: 'Study', status: true },
-        { name: 'Dependants', status: true },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: false },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: true }
       ]
     }
   },
@@ -405,9 +401,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: true },
         { name: 'Study', status: false },
-        { name: 'Dependants', status: false },
+        { name: 'Extend', status: false },
         { name: 'Switch', status: false },
-        { name: 'Extend', status: false }
+        { name: 'Dependants', status: false }
       ]
     }
   },
@@ -429,9 +425,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: true },
         { name: 'Study', status: true },
-        { name: 'Dependants', status: false },
+        { name: 'Extend', status: false },
         { name: 'Switch', status: false },
-        { name: 'Extend', status: false }
+        { name: 'Dependants', status: false }
       ]
     }
   },
@@ -453,9 +449,9 @@ const visas = [
         { name: 'ILR', status: false },
         { name: 'Work', status: 'maybe' },
         { name: 'Study', status: true },
-        { name: 'Dependants', status: false },
+        { name: 'Extend', status: true },
         { name: 'Switch', status: true },
-        { name: 'Extend', status: true }
+        { name: 'Dependants', status: false }
       ]
     }
   }
