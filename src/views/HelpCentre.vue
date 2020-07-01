@@ -4,7 +4,7 @@
       <h1>Confused?<br class="break"> Need more info?</h1>
     </div>
 
-    <transition-group name="slide" tag="ul">
+    <transition-group name="slide" tag="div">
       <section class="questions content slide-item" key="dynamic">
         <transition-group name="slide" tag="ul">
           <li 
