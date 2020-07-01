@@ -30,14 +30,16 @@
 
       <div class="col">
         <div class="notificaitons">
-          <p>You can also change your preferences and how we get in touch on your 
-            <router-link 
-              :to="{ name: 'settings' }"
-              tag="button"
-              class="tertiary">
-              Settings
-            </router-link>
-            page.</p>
+          <div class="inner">
+            <p>You can also change your preferences and how we get in touch on your 
+              <router-link 
+                :to="{ name: 'settings' }"
+                tag="button"
+                class="tertiary">
+                Settings
+              </router-link>
+              page.</p>
+          </div>
         </div>
         <div class="button log-out">
           <button 
@@ -111,10 +113,13 @@ export default {
   }
 
   .notificaitons {
-    background: $light-grey;
-    padding: $spacing*2;
-    border-radius: 4px;
     margin-top: $spacing*6;
+
+    .inner {
+      background: $light-grey;
+      padding: $spacing*2;
+      border-radius: 4px;
+    }
   }
 }
 
