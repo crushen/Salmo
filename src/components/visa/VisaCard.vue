@@ -31,7 +31,7 @@
         Tell Me More!
       </router-link>
 
-      <div v-if="user">
+      <div v-if="user && favouriteVisa !== 'none'">
         <img 
           @click="makeFavorite"
           :src="heart" 

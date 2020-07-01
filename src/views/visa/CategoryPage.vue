@@ -42,7 +42,7 @@ export default {
       return this.visaList.filter(item => item.category === this.category);
     },
     favouriteVisa() {
-      if(this.user) {
+      if(this.user && this.user.profile.favoriteVisa) {
         return this.user.profile.favoriteVisa.name;
       } else {
         return 'none';
