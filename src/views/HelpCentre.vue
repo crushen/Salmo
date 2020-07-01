@@ -31,21 +31,55 @@
       </section>
 
       <div class="slide-item" key="static">
-        <section class="content section-margin">
-          <h2>All you need to know about...</h2>
+        <section class="content buttons-content section-margin">
+          <h2>Need more in-depth information? Check out our help centre articles!</h2>
 
-          <div class="buttons">
+          <div class="field">
+            <label for="search" class="form-label">Search</label>
+            <input
+            v-model="search"
+              type="search"
+              placeholder="Try visa, dependants, country.."
+              id="search"
+              class="form">
+          </div>
+
+          <div 
+            :class="{'search': search}"
+            class="buttons">
             <router-link
             class="button"
-              v-for="page in helpPages"
+              v-for="page in filteredPages"
               :key="page.title"
               :to="{ name: 'help-centre-page', params: { slug: page.slug } }"
-              :style="{ backgroundImage: `url(${page.bg})` }">
+              :style="{ 
+                backgroundImage: getBackground(page.bg),
+                backgroundSize: getSize(page.bg) 
+              }">
               <div>
                 <h3>{{ page.title }}</h3>
               </div>
             </router-link>
           </div>
+
+          <div 
+            v-if="!search"
+            class="see-more">
+            <button 
+              v-if="!showMore"
+              @click="showMore = true"
+              class="tertiary">
+              Show More
+            </button>
+
+            <button 
+              v-else
+              @click="showMore = false"
+              class="tertiary">
+              Show Less
+            </button>
+          </div>
+
         </section>
 
         <section class="bottom">
@@ -94,6 +128,8 @@ import line from '@/assets/patterns/line.svg';
 import dashed from '@/assets/patterns/dashed-line.svg';
 import confetti from '@/assets/patterns/confetti.svg';
 
+import { mapState } from 'vuex';
+
 export default {
   data() {
     return {
@@ -122,28 +158,28 @@ export default {
           text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates velit dolorem expedita, placeat ratione.'
         }
       ],
-      helpPages: [
-        {
-          title: 'Biometric Residence Permit',
-          slug: 'biometric-residence-permit',
-          bg: dashed
-        },
-        {
-          title: 'Applying with Dependants',
-          slug: 'applying-with-dependants',
-          bg: confetti
-        },
-        {
-          title: 'Switch VS Extend',
-          slug: 'switch-vs-extend',
-          bg: wave
-        },
-        {
-          title: 'Indefinite Leave to Remain',
-          slug: 'indefinite-leave-to-remain',
-          bg: line
+      search: null,
+      showMore: false,
+      wave,
+      line,
+      dashed,
+      confetti
+    }
+  },
+  computed: {
+    ...mapState('helpCentre', ['helpPages']),
+    filteredPages() {
+      let pages = this.helpPages;
+
+      if(this.search) {
+        return pages.filter(page => page.title.toLowerCase().includes(this.search.toLowerCase()));
+      } else {
+        if(!this.showMore) {
+          return pages.slice(0, 4);
+        } else {
+          return pages;
         }
-      ]
+      }
     }
   },
   methods: {
@@ -160,6 +196,30 @@ export default {
         } else {
           this.selected = index;
         } 
+      }
+    },
+    getBackground(bg) {
+      switch(bg) {
+        case 'dashed':
+          return `url(${this.dashed})`;
+        case 'confetti':
+          return `url(${this.confetti})`;
+        case 'wave':
+          return `url(${this.wave})`;
+       default:
+          return `url(${this.line})`;
+      }
+    },
+    getSize(bg) {
+      switch(bg) {
+        case 'dashed':
+          return '180px';
+        case 'wave':
+          return '240px';
+        case 'line': 
+          return '140px;';
+       default:
+          return 'auto';
       }
     }
   }
@@ -230,6 +290,19 @@ export default {
   }
 }
 
+.buttons-content {
+  h2 {
+    margin-bottom: $spacing*4;
+  }
+
+  .see-more {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: $spacing*4;
+  }
+}
+
 .buttons {
   width: 100%;
   max-width: 300px;
@@ -238,6 +311,10 @@ export default {
   align-items: center;
   justify-content: center;
   margin: $spacing*4 auto auto;
+
+  &.search {
+    justify-content: flex-start;
+  }
 
   .button {
     width: 120px;
@@ -252,19 +329,6 @@ export default {
     color: $light-font;
     box-shadow: $shadow;
     background-position: center;
-
-    &:nth-of-type(1) {
-      background-size: 180px;
-    }
-
-    &:nth-of-type(3) {
-      background-size: 240px;
-      
-    }
-
-    &:nth-of-type(4) {
-      background-size: 140px;
-    }
 
     h3 {
       text-align: center;
@@ -328,14 +392,14 @@ export default {
     margin-top: $spacing*10;
   }
 
+  .buttons-content {
+    width: 90%;
+    max-width: 600px;
+  }
+
   .buttons {
     max-width: none;
     justify-content: space-between;
-
-    .button {
-      width: 100px;
-      height: 100px;
-    }
   }
 
   .section-margin {
@@ -365,13 +429,6 @@ export default {
 
   .section-margin {
     margin-top: $spacing*15;
-  }
-
-  .buttons {
-    .button {
-      width: 140px;
-      height: 140px;
-    }
   }
 
   .bottom {
