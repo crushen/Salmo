@@ -9,11 +9,13 @@
       <div class="container">
         <form @submit.prevent="onSignup">
           <div class="field">
+            <label for="name" class="form-label">Name</label>
             <input 
               v-model.trim="form.name"
               type="text"
-              placeholder="Name"
+              placeholder="First and Last name"
               autocomplete="name"
+              id="name"
               class="form">
             <div v-if="$v.form.name.$error">
               <p v-if="!$v.form.name.required" class="error">Name is required</p>
@@ -21,11 +23,13 @@
           </div>
 
           <div class="field">
+            <label for="username" class="form-label">Username</label>
             <input 
               v-model.trim="form.username"
               type="text"
-              placeholder="Username"
+              placeholder="Be imaginitive!"
               autocomplete="username"
+              id="username"
               class="form">
             <div v-if="$v.form.username.$error">
               <p v-if="!$v.form.username.required" class="error">Username is required</p>
@@ -35,11 +39,13 @@
           </div>
 
           <div class="field">
+            <label for="email" class="form-label">Email</label>
             <input 
               v-model.trim="form.email"
               type="email"
-              placeholder="Email"
+              placeholder="example@mail.com"
               autocomplete="email"
+              id="email"
               class="form">
             <div v-if="$v.form.email.$error">
               <p v-if="!$v.form.email.required" class="error">Email is required</p>
@@ -48,11 +54,13 @@
           </div>
 
           <div class="field">
+            <label for="password" class="form-label">Password</label>
             <input 
               v-model.trim="form.password"
               type="password"
-              placeholder="Password"
+              placeholder="Anything but 'password'"
               autocomplete="current-password"
+              id="password"
               class="form">
             <div v-if="$v.form.password.$error">
               <p v-if="!$v.form.password.required" class="error">Password is required</p>
@@ -193,9 +201,19 @@ export default {
   text-align: center;
 }
 
+.field {
+  &:not(:first-of-type) {
+    padding-top: $spacing;
+  }
+}
+
+.form-label {
+  color: lighten($color: $dark-font, $amount: 10%);
+}
+
 input.form {
   background: white !important;
-  margin-top: $spacing*2;
+  margin-top: 4px;
 }
 
 input.form:focus {
@@ -219,10 +237,6 @@ input.form:focus {
 @media screen and (min-width: 1100px) {
   #sign-up {
     margin-top: $spacing*20;
-  }
-
-  input.form {
-    margin-top: $spacing*3;
   }
 }
 </style>

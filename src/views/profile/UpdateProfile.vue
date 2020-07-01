@@ -18,12 +18,13 @@
         class="container">
 
         <div class="field">
-          <label for="dob" class="form-label">Username</label>
+          <label for="username" class="form-label">Username</label>
           <input 
             v-model.trim="profileToUpdate.username"
             type="text"
             placeholder="Username"
             autocomplete="username"
+            id="username"
             class="form">
           <div v-if="$v.profileToUpdate.username.$error">
             <p v-if="!$v.profileToUpdate.username.required" class="error">Username is required</p>

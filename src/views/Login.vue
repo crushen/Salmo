@@ -6,11 +6,13 @@
       <h1>Great to see you!</h1>
       <form @submit.prevent="onLogin">
         <div class="field">
+          <label for="email" class="form-label">Email</label>
           <input 
             v-model.trim="form.email"
             type="email"
-            placeholder="Email"
+            placeholder="example@mail.com"
             autocomplete="email"
+            id="email"
             class="form">
           <div v-if="$v.form.email.$error">
             <p v-if="!$v.form.email.required" class="error">Email is required</p>
@@ -19,11 +21,13 @@
         </div>
 
         <div class="field">
+          <label for="password" class="form-label">Password</label>
           <input 
             v-model.trim="form.password"
             type="password"
-            placeholder="Password"
+            placeholder="Your password"
             autocomplete="current-password"
+            id="password"
             class="form">
           <div v-if="$v.form.password.$error">
             <p v-if="!$v.form.password.required" class="error">Password is required</p>
@@ -146,6 +150,16 @@ form {
   margin-top: $spacing*3;
 }
 
+.field {
+  &:not(:first-of-type) {
+    padding-top: $spacing;
+  }
+}
+
+input.form {
+  margin-top: 4px;
+}
+
 .forgot-password {
   margin-top: $spacing*3;
   text-align: center;
@@ -194,6 +208,10 @@ img {
 
   form {
     margin-top: $spacing*5;
+  }
+
+  .form-label {
+    color: $light-font;
   }
 
   .sign-up {
