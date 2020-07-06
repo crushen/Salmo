@@ -55,13 +55,26 @@
 
           <div class="field">
             <label for="password" class="form-label">Password</label>
-            <input 
-              v-model.trim="form.password"
-              type="password"
-              placeholder="Anything but 'password'"
-              autocomplete="current-password"
-              id="password"
-              class="form">
+            <div class="password-field">
+              <input 
+                v-model.trim="form.password"
+                type="password"
+                placeholder="Anything but 'password'"
+                autocomplete="current-password"
+                id="password"
+                class="form">
+              <span class="icon" @click="togglePassword">
+                <img 
+                  v-if="!showPassword"
+                  src="@/assets/icons/password/eye.svg" 
+                  alt="">
+
+                  <img
+                    v-else
+                    src="@/assets/icons/password/eye-slash.svg" 
+                    alt="">
+              </span>
+            </div>
             <div v-if="$v.form.password.$error">
               <p v-if="!$v.form.password.required" class="error">Password is required</p>
               <p v-if="!$v.form.password.minLength" class="error">Password should be at least 6 characters</p>
@@ -107,7 +120,8 @@ export default {
         password: ''
       },
       error: '',
-      waveH
+      waveH,
+      showPassword: false
     }
   },
   validations: {
@@ -159,6 +173,16 @@ export default {
         .catch(errorMessage => {
           this.error = errorMessage;
         })
+    },
+    togglePassword(event) {
+      this.showPassword = !this.showPassword;
+      const field = document.querySelector('#password');
+      
+      if(this.showPassword) {
+        field.type = 'input';
+      } else {
+        field.type = 'password';
+      }
     }
   }
 }
@@ -218,6 +242,25 @@ input.form {
 
 input.form:focus {
   box-shadow: 0 0 0 3px $primary-yellow !important;
+}
+
+.password-field {
+  position: relative;
+
+  .icon {
+    height: 100%;
+    width: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+
+    img {
+      position: absolute;
+      width: 26px;
+      top: 25%;
+    }
+  }
 }
 
 // Tablet

@@ -22,13 +22,26 @@
 
         <div class="field">
           <label for="password" class="form-label">Password</label>
-          <input 
-            v-model.trim="form.password"
-            type="password"
-            placeholder="Your password"
-            autocomplete="current-password"
-            id="password"
-            class="form">
+            <div class="password-field">
+              <input 
+                v-model.trim="form.password"
+                type="password"
+                placeholder="Anything but 'password'"
+                autocomplete="current-password"
+                id="password"
+                class="form">
+              <span class="icon" @click="togglePassword">
+                <img 
+                  v-if="!showPassword"
+                  src="@/assets/icons/password/eye.svg" 
+                  alt="">
+
+                  <img
+                    v-else
+                    src="@/assets/icons/password/eye-slash.svg" 
+                    alt="">
+              </span>
+            </div>
           <div v-if="$v.form.password.$error">
             <p v-if="!$v.form.password.required" class="error">Password is required</p>
           </div>
@@ -68,7 +81,8 @@
     <img 
       v-if="innerWidth < 600"
       src="@/assets/illustrations/alternateStates/Sign up 1.svg" 
-      alt="An illustration of a person pointing to the log in button">
+      alt="An illustration of a person pointing to the log in button"
+      class="bottom-img">
   </section>
 </template>
 
@@ -89,7 +103,8 @@ export default {
       },
       error: '',
       waveH,
-      innerWidth: null
+      innerWidth: null,
+      showPassword: false
     }
   },
   validations: {
@@ -121,6 +136,16 @@ export default {
         .catch(() => {
           this.error = 'Invalid email address or password';
         })
+    },
+    togglePassword(event) {
+      this.showPassword = !this.showPassword;
+      const field = document.querySelector('#password');
+      
+      if(this.showPassword) {
+        field.type = 'input';
+      } else {
+        field.type = 'password';
+      }
     }
   },
   mounted() {
@@ -182,7 +207,7 @@ input.form {
   }
 }
 
-img {
+.bottom-img {
   width: 40vw;
   height: 40vw;
   position: absolute;
@@ -190,6 +215,25 @@ img {
   left: 0;
   object-fit: cover;
   object-position: -8vw 6vw;
+}
+
+.password-field {
+  position: relative;
+
+  .icon {
+    height: 100%;
+    width: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+
+    img {
+      position: absolute;
+      width: 26px;
+      top: 25%;
+    }
+  }
 }
 
 // Tablet
