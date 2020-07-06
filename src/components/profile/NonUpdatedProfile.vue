@@ -95,43 +95,53 @@
 
         <div
           v-for="(visa, index) in form.pastVisas"
-          :key="index"
-          class="row">
-          <div class="field past-visa">
-            <label :for="`past-visa-${index}`">Past visa</label>
-            <select
-              class="form" 
-              v-model="visa.name"
-              name="Current Visa"
-              :id="`past-visa-${index}`">
-              <option
-                v-for="item in pastVisas"
-                :key="item"
-                :value="item">
-                {{ item }}
-              </option>
-            </select>
-          </div>
-
-          <div class="field visa-dates">
-            <div>
-              <label :for="`past-start-${index}`" class="form-label">Start date</label>
-              <input 
-                v-model="visa.start"
-                type="date"
-                :id="`past-start-${index}`"
-                class="form unstyled">
+          :key="index">
+          <div class="row">
+            <div class="field past-visa">
+              <label :for="`past-visa-${index}`">Past visa</label>
+              <select
+                class="form" 
+                v-model="visa.name"
+                name="Current Visa"
+                :id="`past-visa-${index}`">
+                <option
+                  v-for="item in pastVisas"
+                  :key="item"
+                  :value="item">
+                  {{ item }}
+                </option>
+              </select>
             </div>
 
-            <div>
-              <label :for="`current-end-${index}`" class="form-label">End date</label>
-              <input
-                v-model="visa.end"
-                type="date"
-                :id="`current-end-${index}`"
-                class="form unstyled">
+            <div class="field visa-dates">
+              <div>
+                <label :for="`past-start-${index}`" class="form-label">Start date</label>
+                <input 
+                  v-model="visa.start"
+                  type="date"
+                  :id="`past-start-${index}`"
+                  class="form unstyled">
+              </div>
+
+              <div>
+                <label :for="`current-end-${index}`" class="form-label">End date</label>
+                <input
+                  v-model="visa.end"
+                  type="date"
+                  :id="`current-end-${index}`"
+                  class="form unstyled">
+              </div>
             </div>
           </div>
+
+          <button
+            v-if="form.pastVisas.length"
+            @click="removePastVisa(index)"
+            :class="{ last: index === form.pastVisas.length - 1 }"
+            class="tertiary remove"
+            type="button">
+            Remove this visa
+          </button>
         </div>
         <p v-if="errors.pastVisas.required" class="error">Past visa name and dates are required</p>
         <p v-if="errors.pastVisas.dates" class="error">Past visa start date can't be after end date</p>
@@ -570,6 +580,9 @@ export default {
     addPastVisa() {
       this.form.pastVisas.push({name: null, start: null, end: null});
     },
+    removePastVisa(index) {
+      this.form.pastVisas.splice(index, 1);
+    },
     calculateAge(date) {
       let today = new Date(),
           birthDate = new Date(date),
@@ -630,6 +643,17 @@ export default {
 .tertiary {
   font-size: 18px;
   margin-top: $spacing*3;
+  display: block;
+
+  &.remove {
+    margin-top: $spacing;
+    color: $primary-pink;
+    font-size: 16px;
+
+    &.last {
+      margin: $spacing 0 $spacing*7 0;
+    }
+  }
 }
 
 // Tablet
