@@ -43,7 +43,7 @@
             alt="an illustration of a person getting a notification on their phone">
         </div>
 
-        <p class="margin">Once you’ve completed your profile, you’ll unlock new features such as the Permanent Residency helper and Doucmentaion Checklist.</p>
+        <p class="margin">Once you’ve completed your profile, you’ll unlock new features such as the Permanent Residency helper and Documentation Checklist.</p>
       </div>
 
       <settings />
