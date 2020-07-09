@@ -388,7 +388,7 @@ const visas = [
     category: 'work',
     slug: 'T5-seasonal-worker',
     card: {
-      subTitle: 'Perfect for individuals who are here to work in a temporary seasonal job.',
+      subTitle: 'Perfect for individuals who are here to work in a temporary seasonal job in horticulture.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
