@@ -353,7 +353,7 @@ h1 {
       bottom: 0;
       left: 0;
       width: 28%;
-      max-width: 168px;
+      max-width: 155px;
     }
   }
 

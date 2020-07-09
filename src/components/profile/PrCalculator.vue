@@ -110,4 +110,13 @@ export default {
     font-weight: 600;
   }
 }
+
+// Tablet
+@media screen and (min-width: 600px) {
+  .card {
+    .result {
+      min-height: 215px;
+    }
+  }
+}
 </style>
