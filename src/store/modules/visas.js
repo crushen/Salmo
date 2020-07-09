@@ -340,7 +340,7 @@ const visas = [
     category: 'work',
     slug: 'T5-international-agreement',
     card: {
-      subTitle: 'Amazing for individuals coming to the UK for government based work.',
+      subTitle: 'Amazing for individuals coming to the UK to provide a service under international law.',
       quickTip: {
         header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
         list: [
