@@ -37,18 +37,21 @@
           <div class="field">
             <label for="search" class="form-label">Search</label>
             <input
-            v-model="search"
+              v-model="search"
               type="search"
               placeholder="Try visa, dependants, country.."
               id="search"
-              class="form">
+              class="form"
+              autocomplete="off">
           </div>
 
-          <div 
-            :class="{'search': search}"
-            class="buttons">
+          <div v-if="!filteredPages.length" class="no-results">
+            <p>No results found.</p>
+          </div>
+
+          <transition-group class="projects buttons" name="buttons">
             <router-link
-            class="button"
+              class="button buttons-item"
               v-for="page in filteredPages"
               :key="page.title"
               :to="{ name: 'help-centre-page', params: { slug: page.slug } }"
@@ -60,7 +63,7 @@
                 <h3>{{ page.title }}</h3>
               </div>
             </router-link>
-          </div>
+          </transition-group>
 
           <div 
             v-if="!search"
@@ -238,6 +241,20 @@ export default {
   position: absolute;
 }
 
+.buttons-enter, .buttons-leave-to {
+	transform: scale(0.5) translateY(-80px);
+	opacity: 0;
+}
+
+.buttons-leave-to {
+	transform: translateY(30px);
+	opacity: 0;
+}
+
+.buttons-leave-active {
+	position: absolute;
+}
+
 // Mobile
 #help-centre {
   padding: $spacing*12 0 0;
@@ -290,6 +307,10 @@ export default {
   }
 }
 
+.no-results {
+  margin-top: $spacing*4;
+}
+
 .buttons-content {
   h2 {
     margin-bottom: $spacing*4;
@@ -306,11 +327,11 @@ export default {
 .buttons {
   width: 100%;
   max-width: 300px;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  //min-height: 136px;
   margin: $spacing*4 auto auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 
   &.search {
     justify-content: flex-start;
@@ -322,13 +343,14 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: $spacing;
+    margin: 12px;
     padding: $spacing;
     border-radius: $border-radius;
     background: $primary-blue;
     color: $light-font;
     box-shadow: $shadow;
     background-position: center;
+    transition: transform 0.4s, opacity 0.2s;
 
     h3 {
       text-align: center;
@@ -399,7 +421,6 @@ export default {
 
   .buttons {
     max-width: none;
-    justify-content: space-between;
   }
 
   .section-margin {
