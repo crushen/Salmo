@@ -6,6 +6,7 @@ import auth from './modules/auth'
 import questions from './modules/questions'
 import visas from './modules/visas'
 import helpCentre from './modules/helpCentre'
+import prCalc from './modules/prCalc'
 
 Vue.use(Vuex)
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
     auth,
     questions,
     visas,
-    helpCentre
+    helpCentre,
+    prCalc
   },
   state() {
     return {}

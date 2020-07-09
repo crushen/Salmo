@@ -814,7 +814,7 @@ export default {
           questionnaireResults: firebase.firestore.FieldValue.arrayUnion(result),
           favoriteVisa: favoriteVisa[0]
         })
-    },
+    }
   },
   mutations: {
     setQuestions(state, userCurrentVisa) {
