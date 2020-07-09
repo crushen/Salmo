@@ -75,7 +75,7 @@
         <section class="visa-tools">
           <visa-dates-card class="dates-card" :user="user" />
 
-          <pr-calculator class="pr-calc" />
+          <pr-calculator class="pr-calc" :user="user" />
 
           <img 
             src="@/assets/illustrations/visaPages/Laptop Person.svg" 
@@ -135,7 +135,7 @@
 <script>
 import profileCard from '@/components/profile/ProfileCard';
 import visaDatesCard from '@/components/profile/visa-dates/VisaDatesCard';
-import prCalculator from '@/components/profile/PrCalculator';
+import prCalculator from '@/components/profile/prCalc/PrCalculator';
 import visaPlannerImg from '@/assets/illustrations/visa-planner.svg';
 import waveH from '@/assets/patterns/wave-horizontal.svg';
 import waveV from '@/assets/patterns/wave-verticle.svg';

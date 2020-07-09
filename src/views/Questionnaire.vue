@@ -162,20 +162,9 @@ export default {
       setTimeout(() => {
         this.questionsStage = false;
         this.$router.push({name: 'results', params: {username: this.user.profile.username}});
-        //this.resultsStage = true;
       }, 2000);
     } 
   },
-  // beforeRouteLeave(to, from, next) {
-  //   if(this.questionsStage) {
-  //     const confirmLeave = confirm('Are you sure? Your progress will be lost');
-  //     if(confirmLeave) {
-  //       next();
-  //     }
-  //   } else {
-  //     next();
-  //   }
-  // },
   beforeRouteLeave(to, from, next) {
     if(this.questionsStage) {
       if (this.to) {
