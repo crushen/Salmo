@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div v-on-clickaway="closeModal" class="modal">
     <h3>Add a new holiday</h3>
 
     <div class="field">
@@ -56,8 +56,10 @@
 
 <script>
 import { required } from 'vuelidate/lib/validators';
+import { mixin as clickaway } from 'vue-clickaway';
 
 export default {
+  mixins: [ clickaway ],
   data() {
     return {
       form: {

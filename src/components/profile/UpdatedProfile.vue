@@ -75,7 +75,7 @@
         <section class="visa-tools">
           <visa-dates-card class="dates-card" :user="user" />
 
-          <pr-calculator class="pr-calc" :user="user" />
+          <pr-calculator class="pr-calc" />
 
           <img 
             src="@/assets/illustrations/visaPages/Laptop Person.svg" 

@@ -13,14 +13,15 @@
       <div class="body">
         <p class="text">Enter in your time outside the UK here, and the calculator will work out how many more days you have left to take.</p>
         <div class="holiday-input">
-          <!-- <div class="item">
-            <p class="location">New York, USA</p>
-            <p class="dates">12/03/19 - 12/05/19</p>
+          <div v-if="user.profile.holiday.length">
+            <div
+              v-for="(item, index) in user.profile.holiday"
+              :key="index"
+              class="item">
+              <p class="location">{{ item.location }}</p>
+              <p class="dates">{{ item.start }} - {{ item.end }}</p>
+            </div>
           </div>
-          <div class="item">
-            <p class="location">Delhi, India</p>
-            <p class="dates">24/02/18 - 2/03/18</p>
-          </div> -->
           <div class="add-holiday">
             <button 
               @click="openModal"
@@ -32,12 +33,12 @@
         </div>
       </div>
       <div class="result">
-        <div v-if="!user.profile.holiday">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo reprehenderit voluptatibus minima. Eius atque magnam reiciendis inventore debitis ipsa, esse amet incidunt accusantium.</p>
+        <h3>Result</h3>
+        <div v-if="!user.profile.holiday.length">
+          <p>Once you've entered your holiday, your results will appear here.</p>
         </div>
 
         <div v-else>
-          <h3>Result</h3>
           <div class="date">
             <p>2019 - 90 Days</p>
           </div>
@@ -53,9 +54,6 @@ import addHoliday from '@/components/profile/prCalc/AddHoliday';
 import waveV from '@/assets/patterns/wave-verticle.svg';
 
 export default {
-  props: {
-    user: { required: true, type: Object }
-  },
   components: {
     addHoliday
   },
@@ -64,6 +62,11 @@ export default {
       modalOpen: false,
       waveV
     }
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user
+    } 
   },
   methods: {
     openModal() {
@@ -136,11 +139,19 @@ export default {
   background: $primary-yellow;
   padding: $spacing*3 $spacing*2;
 
+  h3 {
+    margin-bottom: $spacing*2;
+  }
+
   .date {
     background: darken($primary-yellow, 12%);
     padding: 6px 8px;
     border-radius: 4px;
     margin: $spacing 0 $spacing*2 0;
+
+    &:first-of-type {
+      margin: 0 0 $spacing*2 0;
+    }
 
     p {
       font-size: 22px;

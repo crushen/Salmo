@@ -33,9 +33,9 @@ export default {
     nonUpdatedProfile,
     settings
   },
-  data() {
-    return {
-      user: this.$store.state.auth.user,
+  computed: {
+    user() {
+      return this.$store.state.auth.user;
     }
   }
 }

@@ -88,6 +88,9 @@ export default {
     },
     setUserDeleted(state) {
       state.userDeleted = true;
+    },
+    saveHoliday(state, holiday) {
+      Vue.set(state.user.profile.holiday, state.user.profile.holiday.length, holiday);
     }
   }
 }

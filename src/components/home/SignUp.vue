@@ -164,7 +164,8 @@ export default {
               user: user.uid,
               questionnaireResults: [],
               pastVisas: [],
-              currentVisa: {}
+              currentVisa: {},
+              holiday: []
             }
           })
           this.$router.push(`/profile/${this.form.username}`)
