@@ -10,8 +10,9 @@ export default {
         .doc(context.rootState.auth.user.uid)
         .update({
           holiday: firebase.firestore.FieldValue.arrayUnion(holiday)
-        }).then(() => {
-          context.commit('auth/saveHoliday', holiday, {root: true});
+        })
+        .then(() => {
+          context.commit('auth/saveHoliday', holiday);
         })
     }
   }
