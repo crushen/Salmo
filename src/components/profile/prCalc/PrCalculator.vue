@@ -151,9 +151,9 @@ export default {
       })
       // remove duplicates
       this.pre2016visas = this.removeDuplicates(array, 'start');
-      this.getEachYear();
+      this.getHolidayForEachYear();
     },
-    getEachYear() {
+    getHolidayForEachYear() {
       this.pre2016visas.forEach(visa => {
         visa.years = [];
         // get difference in years between start and end date
