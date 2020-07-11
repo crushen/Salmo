@@ -11,6 +11,7 @@
       <div class="title">
         <h3>Permanent residency calculator</h3>
       </div>
+
       <div class="body">
         <p class="text">Enter in your time outside the UK here, and the calculator will work out how many more days you have left to take.</p>
         <div class="holiday-input">
@@ -23,6 +24,7 @@
               <p class="dates">{{ date(item.start) }} - {{ date(item.end) }}</p>
             </div>
           </div>
+
           <div class="add-holiday">
             <button 
               @click="openModal"
@@ -33,17 +35,26 @@
           </div>
         </div>
       </div>
+
       <div class="result">
-        <h3>Result</h3>
+        <h3>Results</h3>
         <div v-if="!user.profile.holiday.length">
           <p>Once you've entered your holiday, your results will appear here.</p>
         </div>
 
         <div v-else>
-          <div class="date">
-            <p>2019 - 90 Days</p>
+          <div v-if="pre2016.length">
+            <h3>Before November 2016</h3>
+
+            <!-- <div
+              v-for="date in pre2016visas"
+              :key="date"
+              class="holiday-result">
+              <div class="year">
+                <p>Year from </p>
+              </div>
+            </div> -->
           </div>
-          <p>You only have <span>27 days</span> left to take away this year, or you risk not qualifying for the 10 year permanent residency.</p>
         </div>
       </div>
     </div>
@@ -64,7 +75,7 @@ export default {
       waveV,
       pre2016: [],
       post2016: [],
-      pre2016visaStartDates: []
+      pre2016visas: []
     }
   },
   computed: {
@@ -86,7 +97,7 @@ export default {
     },
     addHoliday() {
       this.checkIfPre2016();
-      this.getPre2016startDates();
+      this.get2016visas();
     },
     date(oldDate) {
       const newDate = oldDate.split('-');
@@ -106,27 +117,45 @@ export default {
         }
       });
     },
-    getPre2016startDates() {
-      // Pre nov 2016, users get 180 holiday days per year from the visa srart date
-      // Need to find out which visa they were on for each holiday pre Nov 2016
+    removeDuplicates(array, prop) {
+      // store the comparison  values in array
+      const unique =  array.map(e => e[prop])
+      // store the indexes of the unique objects
+      .map((e, i, final) => final.indexOf(e) === i && i)
+      // eliminate the false indexes & return unique objects
+      .filter((e) => array[e]).map(e => array[e]);
+
+      return unique;
+    },
+    get2016visas() {
+      // Pre nov 2016, users get 180 holiday days per year from the visa start date
+      // Find out which visa they were on for each holiday pre Nov 2016
       // Then add those start dates to array & check that user only takes 180 days per year from those dates
-      const array = this.pre2016visaStartDates;
+      const array = this.pre2016visas;
       this.pre2016.forEach(holiday => {
         this.user.profile.pastVisas.forEach(visa => {
           if(new Date(holiday.start) > new Date(visa.start) && new Date(holiday.start) < new Date(visa.end)) {
-            array.push(visa.start);
+            array.push({
+              start: visa.start,
+              end: visa.end,
+              holidays: []
+            });
+          }
+        })
+        // Add holiday to corresponding visa
+        array.forEach(visa => {
+          if(new Date(holiday.start) > new Date(visa.start) && new Date(holiday.start) < new Date(visa.end)) {
+            visa.holidays.push(holiday);
           }
         })
       })
       // remove duplicates
-      this.pre2016visaStartDates = [...new Set(array)];
-      // sort by oldest first
-      this.pre2016visaStartDates.sort((a, b) => new Date(b) - new Date(a)).reverse();
+      this.pre2016visas = this.removeDuplicates(array, 'start');
     }
   },
   mounted() {
     this.checkIfPre2016();
-    this.getPre2016startDates();
+    this.get2016visas();
   }
 }
 </script>
