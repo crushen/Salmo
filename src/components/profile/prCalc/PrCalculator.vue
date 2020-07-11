@@ -15,11 +15,11 @@
         <div class="holiday-input">
           <div v-if="user.profile.holiday.length">
             <div
-              v-for="(item, index) in user.profile.holiday"
+              v-for="(item, index) in sortByDate"
               :key="index"
               class="item">
               <p class="location">{{ item.location }}</p>
-              <p class="dates">{{ item.start }} - {{ item.end }}</p>
+              <p class="dates">{{ date(item.start) }} - {{ date(item.end) }}</p>
             </div>
           </div>
           <div class="add-holiday">
@@ -60,13 +60,19 @@ export default {
   data() {
     return {
       modalOpen: false,
-      waveV
+      waveV,
+      pre2016: [],
+      post2016: []
     }
   },
   computed: {
     user() {
       return this.$store.state.auth.user
-    } 
+    },
+    sortByDate() {
+      const array = this.user.profile.holiday;
+      return array.sort((a, b) => new Date(b.start) - new Date(a.start)).reverse();
+    }
   },
   methods: {
     openModal() {
@@ -75,7 +81,25 @@ export default {
       overlay.style.opacity = 1;
       overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
+    },
+    date(oldDate) {
+      const newDate = oldDate.split('-');
+      return newDate.reverse().join('/');
+    },
+    checkIfPre2016() {
+      // Check if the date is before november 2016 & group those that are and aren't
+      const nov2016 = new Date(2016, 10, 1); // month is 0 indexed, so 10 = nov
+      this.sortByDate.forEach(holiday => {
+        if(new Date (holiday.start) < nov2016) {
+          this.pre2016.push(holiday);
+        } else {
+          this.post2016.push(holiday);
+        }
+      });
     }
+  },
+  mounted() {
+    this.checkIfPre2016();
   }
 }
 </script>
