@@ -151,6 +151,31 @@ export default {
       })
       // remove duplicates
       this.pre2016visas = this.removeDuplicates(array, 'start');
+      this.getEachYear();
+    },
+    getEachYear() {
+      this.pre2016visas.forEach(visa => {
+        visa.years = []
+        // get difference in years between start and end date
+        const yearsDiff =  new Date(visa.end).getFullYear() - new Date(visa.start).getFullYear();
+        // add start and end date for every year between
+        for(let i = 0; i < yearsDiff; i++) {
+          const start = new Date(visa.start).setFullYear(new Date(visa.start).getFullYear() + i);
+          visa.years.push({
+            start: new Date(start),//.toDateString()
+            end: new Date(new Date(start).setFullYear(new Date(start).getFullYear() + 1)),//.toDateString()
+            holidays: []
+          });
+        }
+        // add holidays that are inbetween those years
+        visa.years.forEach((year, i) => {
+          visa.holidays.forEach(holiday => {
+            if(new Date(holiday.start) > new Date(year.start) && new Date(holiday.start) < new Date(year.end)) {
+              visa.years[i].holidays.push(holiday);
+            }
+          })
+        })
+      })
     }
   },
   mounted() {
