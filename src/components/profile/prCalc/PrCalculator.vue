@@ -3,7 +3,8 @@
     <transition name="modal" mode="out-in">
       <add-holiday 
         v-if="modalOpen"
-        @closeModal="modalOpen = false" />
+        @closeModal="modalOpen = false"
+        @addHoliday="addHoliday" />
     </transition>
 
     <div class="card">
@@ -62,7 +63,8 @@ export default {
       modalOpen: false,
       waveV,
       pre2016: [],
-      post2016: []
+      post2016: [],
+      pre2016visaStartDates: []
     }
   },
   computed: {
@@ -82,11 +84,18 @@ export default {
       overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
     },
+    addHoliday() {
+      this.checkIfPre2016();
+      this.getPre2016startDates();
+    },
     date(oldDate) {
       const newDate = oldDate.split('-');
       return newDate.reverse().join('/');
     },
     checkIfPre2016() {
+      // reset arrays
+      this.pre2016 = [];
+      this.post2016 = [];
       // Check if the date is before november 2016 & group those that are and aren't
       const nov2016 = new Date(2016, 10, 1); // month is 0 indexed, so 10 = nov
       this.sortByDate.forEach(holiday => {
@@ -96,10 +105,28 @@ export default {
           this.post2016.push(holiday);
         }
       });
+    },
+    getPre2016startDates() {
+      // Pre nov 2016, users get 180 holiday days per year from the visa srart date
+      // Need to find out which visa they were on for each holiday pre Nov 2016
+      // Then add those start dates to array & check that user only takes 180 days per year from those dates
+      const array = this.pre2016visaStartDates;
+      this.pre2016.forEach(holiday => {
+        this.user.profile.pastVisas.forEach(visa => {
+          if(new Date(holiday.start) > new Date(visa.start) && new Date(holiday.start) < new Date(visa.end)) {
+            array.push(visa.start);
+          }
+        })
+      })
+      // remove duplicates
+      this.pre2016visaStartDates = [...new Set(array)];
+      // sort by oldest first
+      this.pre2016visaStartDates.sort((a, b) => new Date(b) - new Date(a)).reverse();
     }
   },
   mounted() {
     this.checkIfPre2016();
+    this.getPre2016startDates();
   }
 }
 </script>

@@ -344,8 +344,11 @@ export default {
       }
       // If no errors, add holiday to db
       if(!this.$v.form.$invalid && !this.errors.dates && !this.errors.start && !this.errors.end) {
-        this.$store.dispatch('prCalc/addHoliday', this.form);
-        this.closeModal();
+        this.$store.dispatch('prCalc/addHoliday', this.form)
+        .then(() => {
+          this.closeModal();
+          this.$emit('addHoliday');
+        })
       }
     }
   }
