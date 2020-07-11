@@ -12,7 +12,7 @@ export default {
           holiday: firebase.firestore.FieldValue.arrayUnion(holiday)
         })
         .then(() => {
-          context.commit('auth/saveHoliday', holiday);
+          context.commit('auth/saveHoliday', holiday, {root: true});
         })
     }
   }
