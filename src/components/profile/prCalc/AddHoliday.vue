@@ -65,7 +65,8 @@ export default {
       form: {
         location: '',
         start: '',
-        end: ''
+        end: '',
+        days: null
       },
       errors: {
         start: false,
@@ -329,6 +330,11 @@ export default {
       this.errors.start = false;
       this.errors.end = false;
     },
+    calculateDays(start, end) {
+      const dt1 = new Date(start);
+      const dt2 = new Date(end);
+      return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24));
+    },
     validateForm() {
       this.resetErrors();
       this.$v.form.$touch();
@@ -344,6 +350,8 @@ export default {
       }
       // If no errors, add holiday to db
       if(!this.$v.form.$invalid && !this.errors.dates && !this.errors.start && !this.errors.end) {
+        // get number of days first
+        this.form.days = this.calculateDays(this.form.start, this.form.end);
         this.$store.dispatch('prCalc/addHoliday', this.form)
         .then(() => {
           this.closeModal();
