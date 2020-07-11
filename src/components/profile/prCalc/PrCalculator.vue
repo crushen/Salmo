@@ -131,7 +131,7 @@ export default {
       // Pre nov 2016, users get 180 holiday days per year from the visa start date
       // Find out which visa they were on for each holiday pre Nov 2016
       // Then add those start dates to array & check that user only takes 180 days per year from those dates
-      const array = this.pre2016visas;
+      const array = [];
       this.pre2016.forEach(holiday => {
         this.user.profile.pastVisas.forEach(visa => {
           if(new Date(holiday.start) > new Date(visa.start) && new Date(holiday.start) < new Date(visa.end)) {
@@ -155,7 +155,7 @@ export default {
     },
     getEachYear() {
       this.pre2016visas.forEach(visa => {
-        visa.years = []
+        visa.years = [];
         // get difference in years between start and end date
         const yearsDiff =  new Date(visa.end).getFullYear() - new Date(visa.start).getFullYear();
         // add start and end date for every year between
