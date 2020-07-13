@@ -43,9 +43,9 @@
         </div>
 
         <div v-else>
-          <div v-if="pre2016.length">
-            <h3>Before November 2016</h3>
-            <p>Your pr is calculated per year from the start date of your visa.</p>
+          <section v-if="pre2016.length">
+            <h3 class="underline">Before November 2016</h3>
+            <p>Your pr is calculated per year from the start date of your visa, so you can only take 180 days per year from the start date of the visa you were on at the time.</p>
 
             <div
               v-for="visa in pre2016visas"
@@ -58,7 +58,7 @@
                 v-for="(year, index) in visa.years"
                 :key="index"
                 class="year">
-                <b>From {{ year.start.toDateString() }}.. total days taken: {{ year.totalDays }}</b>
+                <b>Year from {{ year.start.toDateString() }}.. total days taken: {{ year.totalDays }}</b>
 
                 <div v-for="holiday in year.holidays"
                   :key="holiday.location">
@@ -66,7 +66,25 @@
                 </div>
               </div>
             </div>
-          </div>
+          </section>
+
+          <section v-if="post2016holiday.length">
+            <h3 class="underline">From November 2016</h3>
+            <p>Your pr is calculated on a 12 month basis, so you can only take 180 days within a 12 month period.</p>
+
+            <div
+              v-for="year in post2016holiday"
+              :key="year.yearStart.toString()"
+              class="holiday-result">
+              <b>Year from {{ year.yearStart.toDateString() }}.. total days taken: {{ year.totalDays }}</b>
+              <div 
+                v-for="(holiday, index) in year.holidays"
+                :key="index"
+                class="year">
+                {{ holiday.location }} - {{ holiday.days }} days
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </div>
@@ -87,7 +105,8 @@ export default {
       waveV,
       pre2016: [],
       post2016: [],
-      pre2016visas: []
+      pre2016visas: [],
+      post2016holiday: []
     }
   },
   computed: {
@@ -114,6 +133,7 @@ export default {
     addHoliday() {
       this.checkIfPre2016();
       this.getPre2016visas();
+      this.getPost2016holiday();
     },
     date(oldDate) {
       const newDate = oldDate.split('-');
@@ -168,9 +188,9 @@ export default {
       })
       // remove duplicates
       this.pre2016visas = this.removeDuplicates(array, 'start');
-      this.getHolidayForEachYear();
+      this.getHolidayForEachYearPre2016();
     },
-    getHolidayForEachYear() {
+    getHolidayForEachYearPre2016() {
       this.pre2016visas.forEach(visa => {
         visa.years = [];
         // get difference in years between start and end date
@@ -197,11 +217,43 @@ export default {
         // remove years that don't have any holiday days
         visa.years = visa.years.filter(year => year.totalDays);
       })
+    },
+    getPost2016holiday() {
+      this.post2016holiday = [];
+      while (this.post2016.length) {
+        this.getHolidayForEachYearPost2016();
+      }
+    },
+    getHolidayForEachYearPost2016() {
+      // Post nov 2016, users get 180 holiday days within a 12 month period
+      // Take the first holiday start date, find any holiday taken for a year since that date
+      // Repeat for any holiday that's after that time frame
+      const holiday = this.post2016.shift();
+      const start = new Date(holiday.start);
+      const end = new Date(new Date(start).setFullYear(new Date(start).getFullYear() + 1));
+      // create year obj
+      const holidayYear = {
+        yearStart: start,
+        yearEnd: end,
+        holidays: []
+      }
+      // push original holiday as it is within that year
+      holidayYear.holidays.push(holiday);
+      // check if remaining holidays are within time frame, if yes add to holiday array
+      const filteredHoliday = this.post2016.filter(item => new Date(item.start) > start && new Date(item.start) < end);
+      // and remove from original array
+      this.post2016 = this.post2016.filter(item => new Date(item.start) > end);
+      // add filtered holiday to holidayYear holiday array
+      holidayYear.holidays = holidayYear.holidays.concat(filteredHoliday);
+      // add total days
+      holidayYear.totalDays = holidayYear.holidays.reduce((prev, cur) => prev + cur.days, 0);
+      this.post2016holiday.push(holidayYear);
     }
   },
   mounted() {
     this.checkIfPre2016();
     this.getPre2016visas();
+    this.getPost2016holiday();
   }
 }
 </script>
@@ -288,19 +340,27 @@ export default {
   span {
     font-weight: 600;
   }
+
+  section {
+    margin: $spacing*4 0;
+  }
+
+  .holiday-result {
+    margin-top: $spacing*2;
+
+    h3 {
+      color: $primary-pink;
+      text-decoration: underline;
+    }
+
+    .year {
+      margin: $spacing 0;
+    }
+  }
 }
 
-.holiday-result {
-  margin-top: $spacing*2;
-
-  h3 {
-    color: $primary-pink;
-    text-decoration: underline;
-  }
-
-  .year {
-    margin-top: $spacing;
-  }
+.underline {
+  text-decoration: underline;
 }
 
 // Tablet
