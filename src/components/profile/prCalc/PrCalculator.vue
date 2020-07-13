@@ -45,15 +45,27 @@
         <div v-else>
           <div v-if="pre2016.length">
             <h3>Before November 2016</h3>
+            <p>Your pr is calculated per year from the start date of your visa.</p>
 
-            <!-- <div
-              v-for="date in pre2016visas"
-              :key="date"
+            <div
+              v-for="visa in pre2016visas"
+              :key="visa.start"
               class="holiday-result">
-              <div class="year">
-                <p>Year from </p>
+              <h3>{{ visa.name }}</h3>
+              <p>Visa start date - {{ new Date(visa.start).toDateString() }}</p>
+
+              <div 
+                v-for="(year, index) in visa.years"
+                :key="index"
+                class="year">
+                <b>From {{ year.start.toDateString() }}.. total days taken: {{ year.totalDays }}</b>
+
+                <div v-for="holiday in year.holidays"
+                  :key="holiday.location">
+                  {{ holiday.location }} - {{ holiday.days }} days
+                </div>
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
       </div>
@@ -85,6 +97,10 @@ export default {
     sortByDate() {
       const array = this.user.profile.holiday;
       return array.sort((a, b) => new Date(b.start) - new Date(a.start)).reverse();
+    },
+    getDaysInYearPre2016(array) {
+      const total = array.reduce((prev, cur) => prev + cur.days, 0);
+      return total;
     }
   },
   methods: {
@@ -97,7 +113,7 @@ export default {
     },
     addHoliday() {
       this.checkIfPre2016();
-      this.get2016visas();
+      this.getPre2016visas();
     },
     date(oldDate) {
       const newDate = oldDate.split('-');
@@ -127,7 +143,7 @@ export default {
 
       return unique;
     },
-    get2016visas() {
+    getPre2016visas() {
       // Pre nov 2016, users get 180 holiday days per year from the visa start date
       // Find out which visa they were on for each holiday pre Nov 2016
       // Then add those start dates to array & check that user only takes 180 days per year from those dates
@@ -136,6 +152,7 @@ export default {
         this.user.profile.pastVisas.forEach(visa => {
           if(new Date(holiday.start) > new Date(visa.start) && new Date(holiday.start) < new Date(visa.end)) {
             array.push({
+              name: visa.name,
               start: visa.start,
               end: visa.end,
               holidays: []
@@ -174,13 +191,17 @@ export default {
               visa.years[i].holidays.push(holiday);
             }
           })
+          // add all holiday days per year
+          year.totalDays = year.holidays.reduce((prev, cur) => prev + cur.days, 0);
         })
+        // remove years that don't have any holiday days
+        visa.years = visa.years.filter(year => year.totalDays);
       })
     }
   },
   mounted() {
     this.checkIfPre2016();
-    this.get2016visas();
+    this.getPre2016visas();
   }
 }
 </script>
@@ -266,6 +287,19 @@ export default {
 
   span {
     font-weight: 600;
+  }
+}
+
+.holiday-result {
+  margin-top: $spacing*2;
+
+  h3 {
+    color: $primary-pink;
+    text-decoration: underline;
+  }
+
+  .year {
+    margin-top: $spacing;
   }
 }
 
