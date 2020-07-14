@@ -207,9 +207,48 @@ export default {
         // add holidays that are inbetween those years
         visa.years.forEach((year, i) => {
           visa.holidays.forEach(holiday => {
-            if(new Date(holiday.start) > new Date(year.start) && new Date(holiday.end) < new Date(year.end)) {
-              visa.years[i].holidays.push(holiday);
-            }
+            if(new Date(holiday.start) > new Date(year.start) && new Date(holiday.start) < new Date(year.end)) {
+              // check if the holiday goes over the end of the year
+              if(new Date(holiday.start) > new Date(year.start) && new Date(holiday.end) > new Date(year.end)) {
+                const totalDays = holiday.days,
+                      dt1 = new Date(holiday.start),
+                      dt2 = new Date(year.end),
+                      currentYearDays = Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24)),
+                      nextYearDays = totalDays - currentYearDays;
+                // only add days in the current year
+                visa.years[i].holidays.push({
+                  days: currentYearDays - 1, // -1 for the initial flight day
+                  location: holiday.location,
+                  start: holiday.start,
+                  end: holiday.end
+                });
+                // add holiday with remaining days to next year
+                if(visa.years[i] !== visa.years.length) {
+                  visa.years[i + 1].holidays.push({
+                    days: nextYearDays + 1, // +1 for the initial flight day
+                    location: holiday.location,
+                    start: holiday.start,
+                    end: holiday.end
+                  });
+                } else {
+                  visa.years.push({
+                    start: new Date(new Date(year.start).setFullYear(new Date(year.start).getFullYear() + 1)),
+                    end: new Date(new Date(year.start).setFullYear(new Date(year.start).getFullYear() + 2)),
+                    holidays: []
+                  }).then(() => {
+                    visa.years[i + 1].holidays.push({
+                      days: nextYearDays + 1, // +1 for the initial flight day
+                      location: holiday.location,
+                      start: holiday.start,
+                      end: holiday.end
+                    });
+                  })
+                }
+              } else {
+                // otherwise add holiday as normal
+                visa.years[i].holidays.push(holiday);
+              }
+            } 
           })
           // add all holiday days per year
           year.totalDays = year.holidays.reduce((prev, cur) => prev + cur.days, 0);
