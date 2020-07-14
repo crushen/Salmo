@@ -217,15 +217,15 @@ export default {
                       nextYearDays = totalDays - currentYearDays;
                 // only add days in the current year
                 visa.years[i].holidays.push({
-                  days: currentYearDays - 1, // -1 for the initial flight day
+                  days: currentYearDays - 1, // -1 for the flight day
                   location: holiday.location,
                   start: holiday.start,
                   end: holiday.end
                 });
                 // add holiday with remaining days to next year
-                if(visa.years[i] !== visa.years.length) {
+                if(i !== visa.years.length) {
                   visa.years[i + 1].holidays.push({
-                    days: nextYearDays + 1, // +1 for the initial flight day
+                    days: nextYearDays + 1, // +1 for the flight day
                     location: holiday.location,
                     start: holiday.start,
                     end: holiday.end
@@ -237,7 +237,7 @@ export default {
                     holidays: []
                   }).then(() => {
                     visa.years[i + 1].holidays.push({
-                      days: nextYearDays + 1, // +1 for the initial flight day
+                      days: nextYearDays + 1, // +1 for the flight day
                       location: holiday.location,
                       start: holiday.start,
                       end: holiday.end
@@ -262,6 +262,44 @@ export default {
       while (this.post2016.length) {
         this.getHolidayForEachYearPost2016();
       }
+      // check if holiday goes over the end of the year
+      this.post2016holiday.forEach((year, i) => {
+        year.holidays.forEach(holiday => {
+          if(new Date(holiday.start) > new Date(year.yearStart) && new Date(holiday.end) > new Date(year.yearEnd)) {
+            const totalDays = holiday.days,
+                  dt1 = new Date(holiday.start),
+                  dt2 = new Date(year.yearEnd),
+                  currentYearDays = Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24)),
+                  nextYearDays = totalDays - currentYearDays;
+            // make holiday days only days that are within the year
+            holiday.days = currentYearDays - 1; // -1 for the flight day
+            // add holiday with remaining days to next year
+            if(i + 1 !== this.post2016holiday.length) {
+              // this.post2016holiday[i + 1].holidays.push({
+              //   days: nextYearDays + 1, // +1 for the flight day
+              //   location: holiday.location,
+              //   start: holiday.start,
+              //   end: holiday.end
+              // });
+            } else {
+              this.post2016holiday.push({
+                yearStart: new Date(new Date(year.yearStart).setFullYear(new Date(year.yearStart).getFullYear() + 1)),
+                yearEnd: new Date(new Date(year.yearStart).setFullYear(new Date(year.yearStart).getFullYear() + 2)),
+                holidays: [],
+                totalDays: currentYearDays - 1 // -1 for the flight day
+              })
+              this.post2016holiday[i + 1].holidays.push({
+                days: nextYearDays + 1, // +1 for the flight day
+                location: holiday.location,
+                start: holiday.start,
+                end: holiday.end
+              });
+            }
+          }
+        })
+        // add total days
+        year.totalDays = year.holidays.reduce((prev, cur) => prev + cur.days, 0);
+      })
     },
     getHolidayForEachYearPost2016() {
       // Post nov 2016, users get 180 holiday days within a 12 month period
@@ -284,8 +322,6 @@ export default {
       this.post2016 = this.post2016.filter(item => new Date(item.start) > end);
       // add filtered holiday to holidayYear holiday array
       holidayYear.holidays = holidayYear.holidays.concat(filteredHoliday);
-      // add total days
-      holidayYear.totalDays = holidayYear.holidays.reduce((prev, cur) => prev + cur.days, 0);
       this.post2016holiday.push(holidayYear);
     }
   },
