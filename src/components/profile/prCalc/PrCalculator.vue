@@ -170,7 +170,7 @@ export default {
       const array = [];
       this.pre2016.forEach(holiday => {
         this.user.profile.pastVisas.forEach(visa => {
-          if(new Date(holiday.start) > new Date(visa.start) && new Date(holiday.start) < new Date(visa.end)) {
+          if(new Date(holiday.start) > new Date(visa.start) && new Date(holiday.end) < new Date(visa.end)) {
             array.push({
               name: visa.name,
               start: visa.start,
@@ -181,7 +181,7 @@ export default {
         })
         // Add holiday to corresponding visa
         array.forEach(visa => {
-          if(new Date(holiday.start) > new Date(visa.start) && new Date(holiday.start) < new Date(visa.end)) {
+          if(new Date(holiday.start) > new Date(visa.start) && new Date(holiday.end) < new Date(visa.end)) {
             visa.holidays.push(holiday);
           }
         })
@@ -207,7 +207,7 @@ export default {
         // add holidays that are inbetween those years
         visa.years.forEach((year, i) => {
           visa.holidays.forEach(holiday => {
-            if(new Date(holiday.start) > new Date(year.start) && new Date(holiday.start) < new Date(year.end)) {
+            if(new Date(holiday.start) > new Date(year.start) && new Date(holiday.end) < new Date(year.end)) {
               visa.years[i].holidays.push(holiday);
             }
           })
