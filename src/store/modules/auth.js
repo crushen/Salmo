@@ -91,6 +91,9 @@ export default {
     },
     saveHoliday(state, holiday) {
       Vue.set(state.user.profile.holiday, state.user.profile.holiday.length, holiday);
+    },
+    updateHoliday(state, holiday) {
+      state.user.profile.holiday = holiday;
     }
   }
 }

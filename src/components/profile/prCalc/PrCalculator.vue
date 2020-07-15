@@ -5,6 +5,13 @@
         v-if="modalOpen"
         @closeModal="modalOpen = false"
         @addHoliday="addHoliday" />
+
+      <edit-holiday 
+        v-if="editOpen"
+        :holiday="sortByDate"
+        :index="index"
+        @closeModal="editOpen = false"
+        @addHoliday="addHoliday" />
     </transition>
 
     <div class="card">
@@ -22,6 +29,18 @@
               class="item">
               <p class="location">{{ item.location }}</p>
               <p class="dates">{{ date(item.start) }} - {{ date(item.end) }}</p>
+
+              <div v-if="editHoliday" class="edit-delete">
+                <button 
+                  @click="openEdit(index)"
+                  class="tertiary">
+                  Edit
+                </button>
+                <button 
+                  class="tertiary">
+                  Delete
+                </button>
+              </div>
             </div>
           </div>
 
@@ -31,6 +50,12 @@
               class="pink"
               :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
               Add Holiday
+            </button>
+
+            <button 
+              @click="editHoliday = true"
+              class="secondary">
+              Edit Holiday
             </button>
           </div>
         </div>
@@ -93,11 +118,13 @@
 
 <script>
 import addHoliday from '@/components/profile/prCalc/AddHoliday';
+import editHoliday from '@/components/profile/prCalc/EditHoliday';
 import waveV from '@/assets/patterns/wave-verticle.svg';
 
 export default {
   components: {
-    addHoliday
+    addHoliday,
+    editHoliday
   },
   data() {
     return {
@@ -107,7 +134,10 @@ export default {
       post2016: [],
       pre2016visas: [],
       post2016holiday: [],
-      number: 1
+      editHoliday: false,
+      editOpen: false,
+      holidayToEdit: {},
+      index: null
     }
   },
   computed: {
@@ -135,6 +165,17 @@ export default {
       this.checkIfPre2016();
       this.getPre2016visas();
       this.getPost2016holiday();
+    },
+    openEdit(index) {
+      this.editOpen = true;
+      this.index = index;
+      const overlay = document.querySelector('#overlay');
+      overlay.style.opacity = 1;
+      overlay.style.visibility = 'visible';
+      document.querySelector('body').style.overflow = 'hidden';
+    },
+    confirmEdit() {
+      console.log('edit');
     },
     date(oldDate) {
       const newDate = oldDate.split('-');
@@ -383,14 +424,26 @@ export default {
 .holiday-input {
   .item {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    padding: 4px 6px;
+    padding: $spacing;
     margin-top: $spacing;
     background: $lightest-grey;
     border-radius: 4px;
 
     .location {
       font-weight: 600;
+    }
+
+    .edit-delete {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      margin-top: $spacing*2;
+      
+      button {
+        color: $primary-pink;
+      }
     }
   }
 }

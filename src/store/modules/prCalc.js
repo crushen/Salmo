@@ -14,6 +14,16 @@ export default {
         .then(() => {
           context.commit('auth/saveHoliday', holiday, {root: true});
         })
+    },
+    editHoliday(context, holiday) {
+      return db.collection('profiles')
+        .doc(context.rootState.auth.user.uid)
+        .update({
+          holiday: holiday
+        })
+        .then(() => {
+          context.commit('auth/updateHoliday', holiday, {root: true});
+        })
     }
   }
 }
