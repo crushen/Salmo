@@ -264,6 +264,10 @@ export default {
       while (this.post2016.length) {
         this.getHolidayForEachYearPost2016();
       }
+      // add all holiday days per year
+      this.post2016holiday.forEach(year => {
+        year.totalDays = year.holidays.reduce((prev, cur) => prev + cur.days, 0);
+      })
     },
     getHolidayForEachYearPost2016() {
       // get holiday from start of array
