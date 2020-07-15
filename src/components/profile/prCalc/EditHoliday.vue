@@ -360,7 +360,7 @@ export default {
         this.$store.dispatch('prCalc/editHoliday', this.holiday)
         .then(() => {
           this.closeModal();
-          this.$emit('addHoliday');
+          this.$emit('updateHoliday');
         })
       }
     }

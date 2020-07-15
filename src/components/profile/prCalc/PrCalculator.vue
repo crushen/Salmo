@@ -4,14 +4,24 @@
       <add-holiday 
         v-if="modalOpen"
         @closeModal="modalOpen = false"
-        @addHoliday="addHoliday" />
+        @addHoliday="updateHoliday" />
 
       <edit-holiday 
         v-if="editOpen"
         :holiday="sortByDate"
         :index="index"
-        @closeModal="editOpen = false"
-        @addHoliday="addHoliday" />
+        @closeModal="editOpen = false, editHoliday = false;"
+        @updateHoliday="updateHoliday" />
+    </transition>
+
+    <transition name="alert" mode="out-in">
+      <alert 
+        v-if="showAlert"
+        alert="Delete Holiday"
+        text="Are you sure you want to delete this holiday?"
+        :buttons="['Cancel', 'Delete Holiday']"
+        @cancel="showAlert = false"
+        @confirm="deleteHoliday" />
     </transition>
 
     <div class="card">
@@ -37,6 +47,7 @@
                   Edit
                 </button>
                 <button 
+                  @click="openAlert(index)"
                   class="tertiary">
                   Delete
                 </button>
@@ -119,25 +130,27 @@
 <script>
 import addHoliday from '@/components/profile/prCalc/AddHoliday';
 import editHoliday from '@/components/profile/prCalc/EditHoliday';
+import alert from '@/components/Alert';
 import waveV from '@/assets/patterns/wave-verticle.svg';
 
 export default {
   components: {
     addHoliday,
-    editHoliday
+    editHoliday,
+    alert
   },
   data() {
     return {
-      modalOpen: false,
       waveV,
       pre2016: [],
       post2016: [],
       pre2016visas: [],
       post2016holiday: [],
+      modalOpen: false,
       editHoliday: false,
       editOpen: false,
-      holidayToEdit: {},
-      index: null
+      index: null,
+      showAlert: false
     }
   },
   computed: {
@@ -156,12 +169,9 @@ export default {
   methods: {
     openModal() {
       this.modalOpen = true;
-      const overlay = document.querySelector('#overlay');
-      overlay.style.opacity = 1;
-      overlay.style.visibility = 'visible';
-      document.querySelector('body').style.overflow = 'hidden';
+      this.showOverlay();
     },
-    addHoliday() {
+    updateHoliday() {
       this.checkIfPre2016();
       this.getPre2016visas();
       this.getPost2016holiday();
@@ -169,13 +179,25 @@ export default {
     openEdit(index) {
       this.editOpen = true;
       this.index = index;
+      this.showOverlay();
+    },
+    openAlert(index) {
+      this.showAlert = true; 
+      this.index = index;
+      this.showOverlay();
+    },
+    deleteHoliday() {
+      this.showAlert = false;
+      this.editHoliday = false;
+      this.sortByDate.splice(this.index, 1);
+      this.$store.dispatch('prCalc/editHoliday', this.sortByDate);
+      this.updateHoliday();
+    },
+    showOverlay() {
       const overlay = document.querySelector('#overlay');
       overlay.style.opacity = 1;
       overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
-    },
-    confirmEdit() {
-      console.log('edit');
     },
     date(oldDate) {
       const newDate = oldDate.split('-');
