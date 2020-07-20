@@ -204,7 +204,9 @@ h2 {
   .desktop-logo {
     position: relative;
     z-index: 10;
-    padding: 150px 0 0 230px;
+    padding: 150px 0 0 130px;
+    max-width: 1500px;
+    margin: auto;
 
     .logo-text-container {
       text-align: center;
