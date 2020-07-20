@@ -26,11 +26,12 @@
 
     <div class="card">
       <div class="title">
-        <h3>Permanent residency calculator</h3>
+        <h3>Holiday Tracker & Calculator</h3>
       </div>
 
       <div class="body">
-        <p class="text">Enter in your time outside the UK here, and the calculator will work out how many more days you have left to take.</p>
+        <p class="text">To gain Indefinite Leave to Remain and eventually become a British Citizen, there are rules you’ll need to follow around absenses from the UK, to ensure you qualify.</p>
+        <p>Let’s get started! First enter in all the dates you’ve left the UK (including the dates of travel) and we will take care of the rest...</p>
         <div class="holiday-input">
           <div v-if="user.profile.holiday.length">
             <div
@@ -41,7 +42,7 @@
               <p class="dates">{{ date(item.start) }} - {{ date(item.end) }}</p>
 
               <div v-if="editHoliday" class="edit-delete">
-                <button 
+                <button
                   @click="openEdit(index)"
                   class="tertiary">
                   Edit
@@ -63,7 +64,8 @@
               Add Holiday
             </button>
 
-            <button 
+            <button
+              v-if="user.profile.holiday.length"
               @click="editHoliday = true"
               class="secondary">
               Edit Holiday
@@ -73,28 +75,39 @@
       </div>
 
       <div class="result">
-        <h3>Results</h3>
-        <div v-if="!user.profile.holiday.length">
-          <p>Once you've entered your holiday, your results will appear here.</p>
+        <div class="description">
+          <p><b>How is this calculated?</b></p>
+          <p class="margin">To qualify for ILR, you are only allowed <b>180</b> days of absence per rolling 12 month periods starting from the date of your first holiday. However any dates pre Nov 2016 will be calculated on a fixed 12 months from the date of your visa start.</p>
+
+          <div class="button">
+            <button class="tertiary">
+              Read More...
+            </button>
+          </div>
         </div>
 
-        <div v-else>
+        <div>
+          <div
+            v-if="!user.profile.holiday.length"
+            class="holiday-result">
+            <p><b>Add a holiday to see your results here.</b></p>
+          </div>
+
           <section v-if="pre2016.length">
-            <h3 class="underline">Before November 2016</h3>
-            <p>Your pr is calculated per year from the start date of your visa, so you can only take 180 days per year from the start date of the visa you were on at the time.</p>
+            <!-- <h3 class="underline">Before November 2016</h3>
+            <p>Your pr is calculated per year from the start date of your visa, so you can only take 180 days per year from the start date of the visa you were on at the time.</p> -->
 
             <div
               v-for="visa in pre2016visas"
-              :key="visa.start"
-              class="holiday-result">
-              <h3>{{ visa.name }}</h3>
-              <p>Visa start date - {{ new Date(visa.start).toDateString() }}</p>
+              :key="visa.start">
+              <!-- <h3>{{ visa.name }}</h3>
+              <p>Visa start date - {{ new Date(visa.start).toDateString() }}</p> -->
 
               <div 
                 v-for="(year, index) in visa.years"
                 :key="index"
-                class="year">
-                <b>Year from {{ year.start.toDateString() }}.. total days taken: {{ year.totalDays }}</b>
+                class="year holiday-result">
+                <b>{{ jsDate(year.start) }} - {{ year.totalDays }} days in total</b>
 
                 <div v-for="holiday in year.holidays"
                   :key="holiday.location">
@@ -105,14 +118,14 @@
           </section>
 
           <section v-if="post2016holiday.length">
-            <h3 class="underline">From November 2016</h3>
-            <p>Your pr is calculated on a 12 month basis, so you can only take 180 days within a 12 month period.</p>
+            <!-- <h3 class="underline">From November 2016</h3>
+            <p>Your pr is calculated on a 12 month basis, so you can only take 180 days within a 12 month period.</p> -->
 
             <div
               v-for="year in post2016holiday"
               :key="year.start.toString()"
               class="holiday-result">
-              <b>Year from {{ year.start.toDateString() }}.. total days taken: {{ year.totalDays }}</b>
+              <b>{{ jsDate(year.start) }} - {{ year.totalDays }} days in total</b>
               <div 
                 v-for="(holiday, index) in year.holidays"
                 :key="index"
@@ -148,6 +161,7 @@ export default {
       post2016holiday: [],
       modalOpen: false,
       editHoliday: false,
+      readMoreOpen: false,
       editOpen: false,
       index: null,
       showAlert: false
@@ -202,6 +216,9 @@ export default {
     date(oldDate) {
       const newDate = oldDate.split('-');
       return newDate.reverse().join('/');
+    },
+    jsDate(date) {
+      return (((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear());
     },
     checkIfPre2016() {
       // reset arrays
@@ -472,7 +489,10 @@ export default {
 
 .add-holiday {
   margin-top: $spacing*3;
-  text-align: center;
+  //text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
 
 .result {
@@ -481,6 +501,15 @@ export default {
 
   h3 {
     margin-bottom: $spacing*2;
+  }
+
+  .description {
+    margin-bottom: $spacing*4;
+
+    .button {
+      margin-top: $spacing*4;
+      text-align: center;
+    }
   }
 
   .date {
@@ -503,12 +532,11 @@ export default {
     font-weight: 600;
   }
 
-  section {
-    margin: $spacing*4 0;
-  }
-
   .holiday-result {
     margin-top: $spacing*2;
+    background: darken($color: $primary-yellow, $amount: 10%);
+    border-radius: 4px;
+    padding: $spacing;
 
     h3 {
       color: $primary-pink;
@@ -523,6 +551,10 @@ export default {
 
 .underline {
   text-decoration: underline;
+}
+
+.margin {
+  margin-top: $spacing*2;
 }
 
 // Tablet

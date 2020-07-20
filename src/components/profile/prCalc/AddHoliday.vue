@@ -366,24 +366,6 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.open {
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: -$spacing*2;
-  right: -$spacing*2;
-  background: $primary-pink;
-  color: $light-font;
-
-  .icon {
-    width: 28px;
-  }
-}
-
 .modal {
   width: 90%;
   position: fixed;
