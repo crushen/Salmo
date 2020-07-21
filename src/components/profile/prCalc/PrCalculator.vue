@@ -357,18 +357,19 @@ export default {
       // add all holiday days per year
       this.post2016holiday.forEach(year => {
         year.totalDays = year.holidays.reduce((prev, cur) => prev + cur.days, 0);
-        // first check if they were on a visa whilst holiday takes place, and get visa name
+        // check if they were on current visa
         const currentVisa = this.user.profile.currentVisa;
         let yearVisa = null;
         if(new Date(year.start) > new Date(currentVisa.start) && new Date(year.end) < new Date(currentVisa.end)) {
           yearVisa = currentVisa.name;
-        } else {
-          this.user.profile.pastVisas.forEach(visa => {
-            if(new Date(year.start) > new Date(visa.start) && new Date(year.end) < new Date(visa.end)) {
-              yearVisa = visa.name;
-            }
-          })
         }
+        // check if they were on a past visa
+        this.user.profile.pastVisas.forEach(visa => {
+          if(new Date(year.start) > new Date(visa.start) && new Date(year.start) < new Date(visa.end)) {
+            yearVisa = visa.name;
+          }
+        })
+        // if they had no visa at the time
         if(!yearVisa) {
           yearVisa = 'No visa detected - this holiday will not effect your ILR'
         }
