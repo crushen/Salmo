@@ -33,12 +33,12 @@
               <span class="icon" @click="togglePassword">
                 <img 
                   v-if="!showPassword"
-                  src="@/assets/icons/password/Eye.svg" 
+                  src="@/assets/icons/password/eye-open.svg" 
                   alt="">
 
                   <img
                     v-else
-                    src="@/assets/icons/password/Eye-slash.svg" 
+                    src="@/assets/icons/password/eye-close.svg" 
                     alt="">
               </span>
             </div>
@@ -224,7 +224,7 @@ input.form {
     height: 100%;
     width: 40px;
     position: absolute;
-    top: 0;
+    top: 3px;
     right: 0;
     cursor: pointer;
 
