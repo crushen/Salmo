@@ -31,7 +31,7 @@
 
       <div class="body">
         <p class="text">To gain Indefinite Leave to Remain and eventually become a British Citizen, there are rules you’ll need to follow around absenses from the UK, to ensure you qualify.</p>
-        <p>Let’s get started! First enter in all the dates you’ve left the UK (including the dates of travel) and we will take care of the rest...</p>
+        <p v-if="!user.profile.holiday.length">Let’s get started! First enter in all the dates you’ve left the UK (including the dates of travel) and we will take care of the rest...</p>
         <div class="holiday-input">
           <div v-if="user.profile.holiday.length">
             <div
@@ -107,6 +107,7 @@
                 v-for="(year, index) in visa.years"
                 :key="index"
                 class="year holiday-result">
+                <p>{{ visa.name }}</p>
                 <b>{{ jsDate(year.start) }} - {{ year.totalDays }} days in total</b>
 
                 <div v-for="holiday in year.holidays"
@@ -125,6 +126,7 @@
               v-for="year in post2016holiday"
               :key="year.start.toString()"
               class="holiday-result">
+              <p>{{ year.visa }}</p>
               <b>{{ jsDate(year.start) }} - {{ year.totalDays }} days in total</b>
               <div 
                 v-for="(holiday, index) in year.holidays"
@@ -347,6 +349,22 @@ export default {
       // add all holiday days per year
       this.post2016holiday.forEach(year => {
         year.totalDays = year.holidays.reduce((prev, cur) => prev + cur.days, 0);
+        // first check if they were on a visa whilst holiday takes place, and get visa name
+        const currentVisa = this.user.profile.currentVisa;
+        let yearVisa = null;
+        if(new Date(year.start) > new Date(currentVisa.start) && new Date(year.end) < new Date(currentVisa.end)) {
+          yearVisa = currentVisa.name;
+        } else {
+          this.user.profile.pastVisas.forEach(visa => {
+            if(new Date(year.start) > new Date(visa.start) && new Date(year.end) < new Date(visa.end)) {
+              yearVisa = visa.name;
+            }
+          })
+        }
+        if(!yearVisa) {
+          yearVisa = 'No visa detected - this holiday will not effect your ILR'
+        }
+        year.visa = yearVisa;
       })
     },
     getHolidayForEachYearPost2016() {
