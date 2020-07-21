@@ -78,14 +78,8 @@
           <visa-dates-card class="dates-card" :user="user" />
 
           <img 
-            src="@/assets/illustrations/visaPages/Laptop Person.svg" 
-            alt="An illustrations of a girl using a laptop"
-            class="tablet">
-
-          <img 
             src="@/assets/illustrations/profilePages/guy-laptop.svg" 
-            alt="An illustrations of a man using a laptop"
-            class="desktop">
+            alt="An illustrations of a man using a laptop">
         </section>
 
         <section class="">
@@ -333,27 +327,20 @@ h1 {
 
   .visa-tools {
     margin-top: $spacing*10;
-    // display: flex;
-    // align-items: flex-start;
-    // justify-content: space-between;
-    // position: relative;
+    position: relative;
 
     .dates-card {
       margin-bottom: 0;
+      margin-left: 52%;
       width: 48%;
     }
 
-    .pr-calc {
-      //width: 48%;
-    }
-
-    img.tablet {
+    img {
       display: block;
       position: absolute;
       bottom: 0;
       left: 0;
-      width: 28%;
-      max-width: 155px;
+      width: 48%;
     }
   }
 
@@ -403,20 +390,6 @@ h1 {
 
   .moving-btn {
     margin-top: $spacing*12;
-  }
-
-  .visa-tools {
-    img.tablet {
-      display: none;
-    }
-
-    img.desktop {
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 48%;
-    }
   }
 }
 </style>
