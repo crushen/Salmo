@@ -88,10 +88,12 @@
           </div>
         </div>
 
-        <div class="years">
+        <div 
+          class="years"
+          :class="user.profile.holiday.length ? '' : 'center'">
           <div
             v-if="!user.profile.holiday.length"
-            class="holiday-result">
+            class="holiday-result before">
             <p><b>Add a holiday to see your results here.</b></p>
           </div>
 
@@ -596,13 +598,13 @@ export default {
       display: flex;
       justify-content: space-between;
 
+      &.center {
+        justify-content: center;
+      }
+
       section {
         width: 48%;
       }
-    }
-
-    .holiday-result {
-      //width: 48%;
     }
   }
 
@@ -617,7 +619,7 @@ export default {
     }
 
     .item {
-      width: 48%;
+      min-width: 48%;
     }
   }
 
