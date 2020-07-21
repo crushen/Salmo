@@ -33,12 +33,12 @@
               <span class="icon" @click="togglePassword">
                 <img 
                   v-if="!showPassword"
-                  src="@/assets/icons/password/eye.svg" 
+                  src="@/assets/icons/password/Eye.svg" 
                   alt="">
 
                   <img
                     v-else
-                    src="@/assets/icons/password/eye-slash.svg" 
+                    src="@/assets/icons/password/Eye-slash.svg" 
                     alt="">
               </span>
             </div>
