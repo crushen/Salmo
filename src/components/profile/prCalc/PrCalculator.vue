@@ -33,7 +33,9 @@
         <p class="text">To gain Indefinite Leave to Remain and eventually become a British Citizen, there are rules you’ll need to follow around absenses from the UK, to ensure you qualify.</p>
         <p v-if="!user.profile.holiday.length">Let’s get started! First enter in all the dates you’ve left the UK (including the dates of travel) and we will take care of the rest...</p>
         <div class="holiday-input">
-          <div v-if="user.profile.holiday.length">
+          <div 
+            v-if="user.profile.holiday.length"
+            class="inner">
             <div
               v-for="(item, index) in sortByDate"
               :key="index"
@@ -86,7 +88,7 @@
           </div>
         </div>
 
-        <div>
+        <div class="years">
           <div
             v-if="!user.profile.holiday.length"
             class="holiday-result">
@@ -103,15 +105,17 @@
               <!-- <h3>{{ visa.name }}</h3>
               <p>Visa start date - {{ new Date(visa.start).toDateString() }}</p> -->
 
-              <div 
+              <div
                 v-for="(year, index) in visa.years"
                 :key="index"
-                class="year holiday-result">
+                class="holiday-result">
                 <p>{{ visa.name }}</p>
                 <b>{{ jsDate(year.start) }} - {{ year.totalDays }} days in total</b>
 
-                <div v-for="holiday in year.holidays"
-                  :key="holiday.location">
+                <div 
+                  v-for="holiday in year.holidays"
+                  :key="holiday.location"
+                  class="year">
                   {{ holiday.location }} - {{ holiday.days }} days
                 </div>
               </div>
@@ -220,7 +224,9 @@ export default {
       return newDate.reverse().join('/');
     },
     jsDate(date) {
-      return (((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear());
+      const newDate = (((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear());
+      const newerDate = newDate.split('/');
+      return `${newerDate[1]}/${newerDate[0]}/${newerDate[2]}`
     },
     checkIfPre2016() {
       // reset arrays
@@ -506,11 +512,11 @@ export default {
 }
 
 .add-holiday {
-  margin-top: $spacing*3;
-  //text-align: center;
+  margin: $spacing*3 auto auto;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  max-width: 350px;
 }
 
 .result {
@@ -525,7 +531,7 @@ export default {
     margin-bottom: $spacing*4;
 
     .button {
-      margin-top: $spacing*4;
+      margin: $spacing*4;
       text-align: center;
     }
   }
@@ -585,6 +591,38 @@ export default {
     .result {
       min-height: 215px;
     }
+
+    .years {
+      display: flex;
+      justify-content: space-between;
+
+      section {
+        width: 48%;
+      }
+    }
+
+    .holiday-result {
+      //width: 48%;
+    }
+  }
+
+  .holiday-input {
+    margin-top: $spacing*3;
+
+    .inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .item {
+      width: 48%;
+    }
+  }
+
+  .add-holiday {
+    margin: $spacing*5 auto auto;
   }
 }
 </style>

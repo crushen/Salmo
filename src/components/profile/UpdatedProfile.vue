@@ -73,9 +73,9 @@
       <!-- If user has completed quiz -->
       <div v-else>
         <section class="visa-tools">
-          <visa-dates-card class="dates-card" :user="user" />
-
           <pr-calculator class="pr-calc" />
+
+          <visa-dates-card class="dates-card" :user="user" />
 
           <img 
             src="@/assets/illustrations/visaPages/Laptop Person.svg" 
@@ -197,7 +197,7 @@ h1 {
   margin-top: $spacing*6;
 
   .dates-card {
-    margin-bottom: $spacing*5;
+    margin-top: $spacing*5;
   }
 
   img {
@@ -333,10 +333,10 @@ h1 {
 
   .visa-tools {
     margin-top: $spacing*10;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    position: relative;
+    // display: flex;
+    // align-items: flex-start;
+    // justify-content: space-between;
+    // position: relative;
 
     .dates-card {
       margin-bottom: 0;
@@ -344,7 +344,7 @@ h1 {
     }
 
     .pr-calc {
-      width: 48%;
+      //width: 48%;
     }
 
     img.tablet {
