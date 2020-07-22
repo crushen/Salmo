@@ -195,8 +195,8 @@ h2 {
 // Desktop
 @media screen and (min-width: 1100px) {
   header {
-    min-height: 450px;
-    height: 450px;
+    min-height: 500px;
+    height: 500px;
     background-position: 0 80%;
     text-align: left;
   }
@@ -204,8 +204,8 @@ h2 {
   .desktop-logo {
     position: relative;
     z-index: 10;
-    padding: 150px 0 0 130px;
-    max-width: 1500px;
+    padding: 150px 0 0;
+    max-width: 420px;
     margin: auto;
 
     .logo-text-container {

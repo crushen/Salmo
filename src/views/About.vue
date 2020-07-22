@@ -158,7 +158,7 @@ h2 {
 // Desktop
 @media screen and (min-width: 1100px) {
   #about {
-    padding: $spacing*50 0 0;
+    padding: $spacing*56 0 0;
   }
 
   .logo-about {
@@ -178,7 +178,7 @@ h2 {
   h2 {
     position: absolute;
     top: 75px;
-    left: 300px;
+    left: 35vw;
     color: $light-font;
     width: 400px;
   }
