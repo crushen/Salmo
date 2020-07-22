@@ -111,7 +111,7 @@
                 v-for="(year, index) in visa.years"
                 :key="index"
                 class="holiday-result">
-                <p>{{ visa.name }}</p>
+                <p><b>{{ visa.name }}</b></p>
                 <b>{{ jsDate(year.start) }} - {{ year.totalDays }} days in total</b>
 
                 <div 
@@ -120,6 +120,24 @@
                   class="year">
                   {{ holiday.location }} - {{ holiday.days }} days
                 </div>
+
+                <img
+                  v-if="year.icon === 'tick'"
+                  src="@/assets/icons/calculator/tick.svg" 
+                  alt="" 
+                  class="icon">
+
+                <img
+                  v-if="year.icon === 'exclamation'"
+                  src="@/assets/icons/calculator/exclamation.svg" 
+                  alt="" 
+                  class="icon">
+
+                <img
+                  v-if="year.icon === 'cross'"
+                  src="@/assets/icons/calculator/cross.svg" 
+                  alt="" 
+                  class="icon">
               </div>
             </div>
           </section>
@@ -132,7 +150,7 @@
               v-for="year in post2016holiday"
               :key="year.start.toString()"
               class="holiday-result">
-              <p>{{ year.visa }}</p>
+              <p><b>{{ year.visa }}</b></p>
               <b>{{ jsDate(year.start) }} - {{ year.totalDays }} days in total</b>
               <div 
                 v-for="(holiday, index) in year.holidays"
@@ -140,6 +158,24 @@
                 class="year">
                 {{ holiday.location }} - {{ holiday.days }} days
               </div>
+
+              <img
+                v-if="year.icon === 'tick'"
+                src="@/assets/icons/calculator/tick.svg" 
+                alt="" 
+                class="icon">
+
+              <img
+                v-if="year.icon === 'exclamation'"
+                src="@/assets/icons/calculator/exclamation.svg" 
+                alt="" 
+                class="icon">
+
+              <img
+                v-if="year.icon === 'cross'"
+                src="@/assets/icons/calculator/cross.svg" 
+                alt="" 
+                class="icon">
             </div>
           </section>
         </div>
@@ -343,6 +379,14 @@ export default {
           })
           // add all holiday days per year
           year.totalDays = year.holidays.reduce((prev, cur) => prev + cur.days, 0);
+          // add icon for days
+          if(year.totalDays > 180) {
+            year.icon = 'cross'
+          } else if(year.totalDays <= 180 && year.totalDays >= 160) {
+            year.icon = 'exclamation'
+          } else {
+            year.icon = 'tick'
+          }
         })
         // remove years that don't have any holiday days
         visa.years = visa.years.filter(year => year.totalDays);
@@ -357,6 +401,14 @@ export default {
       // add all holiday days per year
       this.post2016holiday.forEach(year => {
         year.totalDays = year.holidays.reduce((prev, cur) => prev + cur.days, 0);
+        // add icon for days
+        if(year.totalDays > 180) {
+          year.icon = 'cross'
+        } else if(year.totalDays <= 180 && year.totalDays >= 160) {
+          year.icon = 'exclamation'
+        } else {
+          year.icon = 'tick'
+        }
         // check if they were on current visa
         const currentVisa = this.user.profile.currentVisa;
         let yearVisa = null;
@@ -564,6 +616,7 @@ export default {
     background: darken($color: $primary-yellow, $amount: 10%);
     border-radius: 4px;
     padding: $spacing;
+    position: relative;
 
     h3 {
       color: $primary-pink;
@@ -572,6 +625,12 @@ export default {
 
     .year {
       margin: $spacing 0;
+    }
+
+    .icon {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
     }
   }
 }
