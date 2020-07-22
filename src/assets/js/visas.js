@@ -101,14 +101,15 @@ export const visas = [
     slug: 'global-talent',
     card: {
       subTitle: 'Great for individuals who are top in their field of work.',
-      quickTip: {
-        header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
-        list: [
-          'with £2 million, you will gain permanent residency in 5 years', 
-          'with £5 million, you will gain permanent residency in 3 years', 
-          'with £10 million, you will gain permanent residency in 2 years'
-        ]
-      },
+      quickTip: `
+        <p>If you're a scientist researching coronavirus (COVID-19) you can get a visa using the <b>UKRI funding option</b>.</p>
+        <p style="margin-top: 16px;">This comes with the standard UKRI rules plus these two temporary exceptions:</p>
+        <ul style="list-style-position: inside;">
+          <li style="margin-top: 16px;">Your grant can be for just 1 year instead of the usual 2</li>
+          <li style="margin-top: 16px;">Your employment contract or hosting agreement can be 1 year instead of 2</li>
+        </ul>
+        <p style="margin-top: 16px;">These new exceptions are in place till 31 January 2021, but could be extended.</p>
+      `,
       checklist: [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },
@@ -125,14 +126,14 @@ export const visas = [
     slug: 'innovator',
     card: {
       subTitle: 'Amazing for individuals looking to bring a new business concept to the UK.',
-      quickTip: {
-        header: 'The more you can invest in the UK, the quicker you can achieve permanent residency:',
-        list: [
-          'with £2 million, you will gain permanent residency in 5 years', 
-          'with £5 million, you will gain permanent residency in 3 years', 
-          'with £10 million, you will gain permanent residency in 2 years'
-        ]
-      },
+      quickTip: `
+        <p>The more you can invest in the UK, the quicker you can achieve permanent residency:</p>
+        <ul style="list-style-position: inside;">
+          <li style="margin-top: 16px;">with £2 million, you will gain permanent residency in 5 years</li>
+          <li style="margin-top: 16px;">with £5 million, you will gain permanent residency in 3 years</li>
+          <li style="margin-top: 16px;">with £10 million, you will gain permanent residency in 2 years</li>
+        </ul>
+      `,
       checklist: [
         { name: 'ILR', status: true },
         { name: 'Work', status: true },

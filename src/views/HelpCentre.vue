@@ -56,8 +56,8 @@
               :key="page.title"
               :to="{ name: 'help-centre-page', params: { slug: page.slug } }"
               :style="{ 
-                backgroundImage: getBackground(page.bg),
-                backgroundSize: getSize(page.bg) 
+                backgroundImage: getBackground(page.background),
+                backgroundSize: getSize(page.background) 
               }">
               <div>
                 <h3>{{ page.title }}</h3>
@@ -166,13 +166,14 @@ export default {
       wave,
       line,
       dashed,
-      confetti
+      confetti,
+      helpCentreArticles: []
     }
   },
   computed: {
-    ...mapState('helpCentre', ['helpPages']),
+    //...mapState('helpCentre', ['helpPages']),
     filteredPages() {
-      let pages = this.helpPages;
+      let pages = this.helpCentreArticles;
 
       if(this.search) {
         return pages.filter(page => page.title.toLowerCase().includes(this.search.toLowerCase()));
@@ -225,6 +226,21 @@ export default {
           return 'auto';
       }
     }
+  },
+  async created() {
+    const response = await fetch(
+      'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          query: `{ helpCentreArticles { title slug background tags } }`,
+        }),
+      }
+    );
+    const { data } = await response.json();
+    // this.errors = data.errors;
+    // this.loading = false;
+    this.helpCentreArticles = data.helpCentreArticles;
   }
 }
 </script>

@@ -1,10 +1,12 @@
 <template>
-  <section id="help-center-page">
+  <section id="help-center-page" v-if="article">
     <article class="content">
-      <h1>{{ currentPage.title }}</h1>
+      <h1>{{ article.title }}</h1>
 
-      <div class="body">
-        <h3>{{ currentPage.subTitle }}</h3>
+      <div
+        v-html="article.content.html"
+        class="body">
+        <!-- <h3>{{ currentPage.subTitle }}</h3>
         
         <img 
           :src="currentPage.img.url" 
@@ -16,7 +18,7 @@
             :key="index">
             {{ p }}
           </p>
-        </div>
+        </div> -->
       </div>
     </article> 
 
@@ -40,7 +42,7 @@
 <script>
 import helpCentreFeedback from '@/components/HelpCentreFeedback';
 
-import { mapState } from 'vuex';
+//import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -48,20 +50,60 @@ export default {
   },
   data() {
     return {
-      slug: this.$route.params.slug
+      slug: this.$route.params.slug,
+      // error: null,
+      // loading: true,
+      article: null
     }
   },
-  computed: {
-    ...mapState('helpCentre', ['helpPages']),
-    currentPage() {
-      return this.helpPages.find(page => page.slug === this.slug);
-    }
+  // computed: {
+  //   ...mapState('helpCentre', ['helpPages']),
+  //   currentPage() {
+  //     return this.helpPages.find(page => page.slug === this.slug);
+  //   }
+  // },
+  created() {
+    // fetch the data when the view is created and the data is
+    // already being observed
+    this.fetchData();
   },
-  mounted() {
-    if(!this.currentPage) {
-      this.$router.push({name: 'not-found'});
-    }
-  }
+  watch: {
+    // call again the method if the route changes
+    $route: 'fetchData',
+  },
+  methods: {
+    async fetchData() {
+      // this.error = null;
+      // this.loading = true;
+      this.article = null;
+      // replace `getPost` with your data fetching util / API wrapper
+      try {
+        const response = await fetch(
+          'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              query: `query GetArticle($slug: String){ helpCentreArticle(where: {slug: $slug}) { title content { html } } }`,
+              variables: {
+                slug: this.$route.params.slug,
+              },
+            }),
+          }
+        );
+        const { data } = await response.json();
+        // this.loading = false;
+        // this.error = data.error;
+        this.article = data.helpCentreArticle;
+      } catch (e) {
+        console.log(e)
+      }
+    },
+  },
+  // mounted() {
+  //   if(!this.article) {
+  //     this.$router.push({name: 'not-found'});
+  //   }
+  // }
 }
 </script>
 
@@ -72,27 +114,93 @@ export default {
   padding: $spacing*12 0 0;
 }
 
-h3 {
-  margin-top: $spacing*3;
-}
+.body {
+  /deep/ h3 {
+    margin-top: $spacing*4;
+  }
 
-img {
-  display: block;
-  width: 45vw;
-  max-width: 250px;
-  margin: $spacing*6 auto;
-}
+  /deep/ .red {
+    h3 {
+      color: $primary-pink;
+    }
+  }
 
-.text {
-  p {
-    margin-top: $spacing*3;
+  /deep/ p {
+    margin-top: $spacing*2;
+  }
+
+  /deep/ strong {
+    font-weight: 600;
+  }
+
+  /deep/ .centre {
+    text-align: center;
+    margin: $spacing*6;
+  }
+
+  /deep/ ul {
+    list-style-position: inside;
+    margin-top: $spacing*4;
+
+    li {
+      margin-top: $spacing*2;
+
+      div {
+        display: inline;
+      }
+    }
+  }
+
+  /deep/ .tip {
+    padding: $spacing*3 $spacing*2;
+    margin: $spacing*5 0;
+    background: $primary-yellow;
+    border-radius: 4px;
+    position: relative;
+
+    p {
+      margin-top: 0;
+      position: relative;
+      z-index: 10;
+    }
+
+    &::before,
+    &::after {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      z-index: 5;
+      top: 20%;
+      background: url('../assets/icons/lightbulbs/tip.svg') center;
+      background-size: 100% 100%;
+      content: ''
+    }
+
+    &::before {
+      right: 0;
+    }
+
+    &::after {
+      left: 0;
+    }
+  }
+
+  /deep/ .text-img-right {
+    display: flex;
+    align-items: center;
+    margin: $spacing*3 0;
+
+    img {
+      width: 30%;
+      margin-left: 5%;
+    }
   }
 }
 
 .bottom {
   background: $background;
-  margin-top: $spacing*6;
-  padding: $spacing*6 0 $spacing*12 0;
+  margin-top: $spacing*8;
+  padding: $spacing*8 0 $spacing*12 0;
   text-align: center;
 
   button {
@@ -106,8 +214,36 @@ img {
     padding: $spacing*15 0 0;
   }
 
-  img {
-    margin: $spacing*8 auto;
+  .body {
+    /deep/ h3 {
+      margin-top: $spacing*5;
+    }
+
+    /deep/ p {
+      margin-top: $spacing*3;
+    }
+
+    /deep/ .centre {
+      text-align: center;
+      margin: $spacing*8;
+    }
+
+    /deep/ ul {
+      width: 84%;
+      margin: $spacing*4 auto 0 auto;
+    }
+
+    /deep/ .tip {
+      margin: $spacing*6 0;
+    }
+
+    /deep/ .text-img-right {
+      margin: $spacing*5 0;
+
+      img {
+        max-width: 130px;
+      }
+    }
   }
 
   .bottom {

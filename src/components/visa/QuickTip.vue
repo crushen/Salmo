@@ -16,15 +16,15 @@
           <img :src="lightbulbYellow" class="lightbulb-yellow">
           <img :src="lightbulbYellow" class="lightbulb-yellow">
           <h2><span>Quick Tip</span> {{ visa.name }}</h2>
-          <div class="text">
-            <p>{{ visa.card.quickTip.header }}</p>
+          <div v-html="visa.card.quickTip" class="text">
+            <!-- <p>{{ visa.card.quickTip.header }}</p>
             <ul>
               <li
                 v-for="item in visa.card.quickTip.list"
                 :key="item">
                 {{ item }}
               </li>
-            </ul>
+            </ul> -->
           </div>
 
           <div class="close">
