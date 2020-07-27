@@ -94,6 +94,7 @@ export default {
   /deep/ .red {
     h3 {
       color: $primary-pink;
+      margin-top: $spacing*6;
     }
   }
 
@@ -112,7 +113,8 @@ export default {
 
   /deep/ ul {
     list-style-position: inside;
-    margin-top: $spacing*4;
+    margin: $spacing*4 auto;
+    max-width: 500px;
 
     li {
       margin-top: $spacing*2;
@@ -124,9 +126,10 @@ export default {
   }
 
   /deep/ .tip {
-    padding: $spacing $spacing*2;
+    padding: $spacing*2;
     margin: $spacing*6 0;
     border-left: 6px solid $primary-yellow;
+    background: lighten($color: $primary-yellow, $amount: 23%);
     //background: $primary-yellow;
     //border-radius: 4px;
     //position: relative;
@@ -161,11 +164,17 @@ export default {
   /deep/ .text-img-right {
     display: flex;
     align-items: center;
-    margin: $spacing*3 0;
+    justify-content: space-between;
+    margin: $spacing*6 auto;
+    max-width: 500px;
+
+    p {
+      margin: 0;
+    }
 
     img {
       width: 30%;
-      margin-left: 5%;
+      margin-left: 10%;
     }
   }
 }
@@ -192,6 +201,12 @@ export default {
       margin-top: $spacing*6;
     }
 
+    /deep/ .red {
+      h3 {
+        margin-top: $spacing*8;
+      }
+    }
+
     /deep/ p {
       margin-top: $spacing*4;
     }
@@ -202,8 +217,7 @@ export default {
     }
 
     /deep/ ul {
-      //width: 80%;
-      margin: $spacing*6 auto 0 auto;
+      margin: $spacing*6 auto;
 
       li {
         margin-top: $spacing*4;
@@ -215,7 +229,7 @@ export default {
     }
 
     /deep/ .text-img-right {
-      margin: $spacing*5 0;
+      //margin: $spacing*5 0;
 
       img {
         max-width: 130px;
