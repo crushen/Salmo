@@ -3,23 +3,7 @@
     <article class="content">
       <h1>{{ article.title }}</h1>
 
-      <div
-        v-html="article.content.html"
-        class="body">
-        <!-- <h3>{{ currentPage.subTitle }}</h3>
-        
-        <img 
-          :src="currentPage.img.url" 
-          :alt="currentPage.img.alt">
-
-        <div class="text">
-          <p 
-            v-for="(p, index) in currentPage.text"
-            :key="index">
-            {{ p }}
-          </p>
-        </div> -->
-      </div>
+      <div v-html="article.content.html" class="body" />
     </article> 
 
     <section class="bottom">
@@ -42,8 +26,6 @@
 <script>
 import helpCentreFeedback from '@/components/HelpCentreFeedback';
 
-//import { mapState } from 'vuex';
-
 export default {
   components: {
     helpCentreFeedback
@@ -51,20 +33,12 @@ export default {
   data() {
     return {
       slug: this.$route.params.slug,
+      article: null,
       // error: null,
-      // loading: true,
-      article: null
+      // loading: true
     }
   },
-  // computed: {
-  //   ...mapState('helpCentre', ['helpPages']),
-  //   currentPage() {
-  //     return this.helpPages.find(page => page.slug === this.slug);
-  //   }
-  // },
   created() {
-    // fetch the data when the view is created and the data is
-    // already being observed
     this.fetchData();
   },
   watch: {
@@ -76,7 +50,6 @@ export default {
       // this.error = null;
       // this.loading = true;
       this.article = null;
-      // replace `getPost` with your data fetching util / API wrapper
       try {
         const response = await fetch(
           'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
@@ -94,16 +67,15 @@ export default {
         // this.loading = false;
         // this.error = data.error;
         this.article = data.helpCentreArticle;
+        // 404 if no article
+        if(!this.article) {
+          this.$router.push({name: 'not-found'});
+        }
       } catch (e) {
-        console.log(e)
+        console.log(e);
       }
     },
-  },
-  // mounted() {
-  //   if(!this.article) {
-  //     this.$router.push({name: 'not-found'});
-  //   }
-  // }
+  }
 }
 </script>
 
@@ -152,11 +124,12 @@ export default {
   }
 
   /deep/ .tip {
-    padding: $spacing*3 $spacing*2;
-    margin: $spacing*5 0;
-    background: $primary-yellow;
-    border-radius: 4px;
-    position: relative;
+    padding: $spacing $spacing*2;
+    margin: $spacing*6 0;
+    border-left: 6px solid $primary-yellow;
+    //background: $primary-yellow;
+    //border-radius: 4px;
+    //position: relative;
 
     p {
       margin-top: 0;
@@ -164,25 +137,25 @@ export default {
       z-index: 10;
     }
 
-    &::before,
-    &::after {
-      width: 50px;
-      height: 50px;
-      position: absolute;
-      z-index: 5;
-      top: 20%;
-      background: url('../assets/icons/lightbulbs/tip.svg') center;
-      background-size: 100% 100%;
-      content: ''
-    }
+    // &::before,
+    // &::after {
+    //   width: 50px;
+    //   height: 50px;
+    //   position: absolute;
+    //   z-index: 5;
+    //   top: 20%;
+    //   background: url('../assets/icons/lightbulbs/tip.svg') center;
+    //   background-size: 100% 100%;
+    //   content: ''
+    // }
 
-    &::before {
-      right: 0;
-    }
+    // &::before {
+    //   right: 0;
+    // }
 
-    &::after {
-      left: 0;
-    }
+    // &::after {
+    //   left: 0;
+    // }
   }
 
   /deep/ .text-img-right {
@@ -216,11 +189,11 @@ export default {
 
   .body {
     /deep/ h3 {
-      margin-top: $spacing*5;
+      margin-top: $spacing*6;
     }
 
     /deep/ p {
-      margin-top: $spacing*3;
+      margin-top: $spacing*4;
     }
 
     /deep/ .centre {
@@ -229,12 +202,16 @@ export default {
     }
 
     /deep/ ul {
-      width: 84%;
-      margin: $spacing*4 auto 0 auto;
+      //width: 80%;
+      margin: $spacing*6 auto 0 auto;
+
+      li {
+        margin-top: $spacing*4;
+      }
     }
 
     /deep/ .tip {
-      margin: $spacing*6 0;
+      margin: $spacing*8 0;
     }
 
     /deep/ .text-img-right {
