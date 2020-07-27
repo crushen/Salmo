@@ -102,6 +102,10 @@ export default {
     margin-top: $spacing*2;
   }
 
+  /deep/ a {
+    text-decoration: underline;
+  }
+
   /deep/ strong {
     font-weight: 600;
   }
@@ -109,6 +113,11 @@ export default {
   /deep/ .centre {
     text-align: center;
     margin: $spacing*6;
+
+    img {
+      width: 80%;
+      max-width: 200px;
+    }
   }
 
   /deep/ ul {
@@ -170,11 +179,12 @@ export default {
 
     p {
       margin: 0;
+      margin-right: 5%;
     }
 
     img {
-      width: 30%;
-      margin-left: 10%;
+      width: 25%;
+      max-width: 100px;
     }
   }
 }
@@ -228,13 +238,13 @@ export default {
       margin: $spacing*8 0;
     }
 
-    /deep/ .text-img-right {
-      //margin: $spacing*5 0;
+    // /deep/ .text-img-right {
+    //   //margin: $spacing*5 0;
 
-      img {
-        max-width: 130px;
-      }
-    }
+    //   img {
+    //     max-width: 130px;
+    //   }
+    // }
   }
 
   .bottom {

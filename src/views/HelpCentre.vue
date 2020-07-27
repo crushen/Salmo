@@ -171,7 +171,6 @@ export default {
     }
   },
   computed: {
-    //...mapState('helpCentre', ['helpPages']),
     filteredPages() {
       let pages = this.helpCentreArticles;
 
@@ -228,19 +227,23 @@ export default {
     }
   },
   async created() {
-    const response = await fetch(
-      'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
-      {
-        method: 'POST',
-        body: JSON.stringify({
-          query: `{ helpCentreArticles { title slug background tags } }`,
-        }),
-      }
-    );
-    const { data } = await response.json();
-    // this.errors = data.errors;
-    // this.loading = false;
-    this.helpCentreArticles = data.helpCentreArticles;
+    try {
+      const response = await fetch(
+        'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            query: `{ helpCentreArticles { title slug background tags } }`,
+          }),
+        }
+      );
+      const { data } = await response.json();
+      // this.errors = data.errors;
+      // this.loading = false;
+      this.helpCentreArticles = data.helpCentreArticles;
+    } catch(e) {
+      console.log(e)
+    }
   }
 }
 </script>
