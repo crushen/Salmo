@@ -187,6 +187,28 @@ export default {
       max-width: 100px;
     }
   }
+
+  /deep/ table {
+    margin-bottom: $spacing*6;
+    tr {
+      td {
+        width: 30%;
+        text-align: center;
+
+        p {
+          margin: $spacing auto auto;
+          width: 90%;
+          max-width: 180px;
+        }
+
+        img {
+          width: 60%;
+          max-width: 100px;
+          margin: $spacing*3 auto 0 auto;
+        }
+      }
+    }
+  }
 }
 
 .bottom {
