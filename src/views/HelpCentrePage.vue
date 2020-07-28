@@ -188,8 +188,21 @@ export default {
     }
   }
 
+  /deep/ .text-img-left {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: $spacing*2;
+
+    p {
+      width: 90%;
+      margin: 0;
+    }
+  }
+
   /deep/ table {
     margin-bottom: $spacing*6;
+
     tr {
       td {
         width: 30%;
@@ -267,6 +280,10 @@ export default {
     //     max-width: 130px;
     //   }
     // }
+  }
+
+  /deep/ .text-img-left {
+    margin-top: $spacing*4;
   }
 
   .bottom {
