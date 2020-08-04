@@ -49,7 +49,7 @@
             <p>No results found.</p>
           </div>
 
-          <transition-group class="projects buttons" name="buttons">
+          <transition-group class="buttons" name="buttons">
             <router-link
               class="button buttons-item"
               v-for="page in filteredPages"
@@ -173,9 +173,28 @@ export default {
   computed: {
     filteredPages() {
       let pages = this.helpCentreArticles;
+      let filtered = [];
 
       if(this.search) {
-        return pages.filter(page => page.title.toLowerCase().includes(this.search.toLowerCase()));
+        // Check to see if page title has been searched
+        pages.forEach(page => {
+          if(page.title.toLowerCase().includes(this.search.toLowerCase())) {
+            // Only add to filtered array if page hasn't already been pushed
+            if(!filtered.includes(page)) {
+              filtered.push(page);
+            }
+          }
+          // Check to see if any of the tags have been searched
+          page.tags.forEach(tag => {
+            if(tag.toLowerCase().includes(this.search.toLowerCase())) {
+              // Only add to filtered array if page hasn't already been pushed
+              if(!filtered.includes(page)) {
+                filtered.push(page);
+              }
+            }
+          })
+        });
+        return filtered;
       } else {
         if(!this.showMore) {
           return pages.slice(0, 4);
