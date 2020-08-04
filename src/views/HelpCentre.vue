@@ -49,7 +49,8 @@
             <p>No results found.</p>
           </div>
 
-          <transition-group class="buttons" name="buttons">
+          <!-- <transition-group class="buttons" name="buttons"> -->
+          <div class="buttons">
             <router-link
               class="button buttons-item"
               v-for="page in filteredPages"
@@ -63,12 +64,13 @@
                 <h3>{{ page.title }}</h3>
               </div>
             </router-link>
-          </transition-group>
+          </div>
+          <!-- </transition-group> -->
 
           <div 
             v-if="!search"
             class="see-more">
-            <button 
+            <button
               v-if="!showMore"
               @click="showMore = true"
               class="tertiary">
@@ -197,7 +199,7 @@ export default {
         return filtered;
       } else {
         if(!this.showMore) {
-          return pages.slice(0, 4);
+          return pages.slice(0, 8);
         } else {
           return pages;
         }
