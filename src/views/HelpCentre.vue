@@ -168,42 +168,45 @@ export default {
       wave,
       line,
       dashed,
-      confetti,
-      helpCentreArticles: []
+      confetti
     }
   },
   computed: {
+    ...mapState('helpCentre', ['helpCentreArticles']),
     filteredPages() {
       let pages = this.helpCentreArticles;
       let filtered = [];
 
-      if(this.search) {
-        // Check to see if page title has been searched
-        pages.forEach(page => {
-          if(page.title.toLowerCase().includes(this.search.toLowerCase())) {
-            // Only add to filtered array if page hasn't already been pushed
-            if(!filtered.includes(page)) {
-              filtered.push(page);
-            }
-          }
-          // Check to see if any of the tags have been searched
-          page.tags.forEach(tag => {
-            if(tag.toLowerCase().includes(this.search.toLowerCase())) {
+      if(this.helpCentreArticles) {
+        if(this.search) {
+          // Check to see if page title has been searched
+          pages.forEach(page => {
+            if(page.title.toLowerCase().includes(this.search.toLowerCase())) {
               // Only add to filtered array if page hasn't already been pushed
               if(!filtered.includes(page)) {
                 filtered.push(page);
               }
             }
-          })
-        });
-        return filtered;
-      } else {
-        if(!this.showMore) {
-          return pages.slice(0, 8);
+            // Check to see if any of the tags have been searched
+            page.tags.forEach(tag => {
+              if(tag.toLowerCase().includes(this.search.toLowerCase())) {
+                // Only add to filtered array if page hasn't already been pushed
+                if(!filtered.includes(page)) {
+                  filtered.push(page);
+                }
+              }
+            })
+          });
+          return filtered;
         } else {
-          return pages;
+          if(!this.showMore) {
+            return pages.slice(0, 8);
+          } else {
+            return pages;
+          }
         }
       }
+      return pages;
     }
   },
   methods: {
@@ -247,24 +250,8 @@ export default {
       }
     }
   },
-  async created() {
-    try {
-      const response = await fetch(
-        'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
-        {
-          method: 'POST',
-          body: JSON.stringify({
-            query: `{ helpCentreArticles { title slug background tags } }`,
-          }),
-        }
-      );
-      const { data } = await response.json();
-      // this.errors = data.errors;
-      // this.loading = false;
-      this.helpCentreArticles = data.helpCentreArticles;
-    } catch(e) {
-      console.log(e)
-    }
+  created() {
+    this.$store.dispatch('helpCentre/getArticles');
   }
 }
 </script>
