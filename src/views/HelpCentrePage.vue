@@ -25,6 +25,7 @@
 
 <script>
 import helpCentreFeedback from '@/components/HelpCentreFeedback';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -33,49 +34,27 @@ export default {
   data() {
     return {
       slug: this.$route.params.slug,
-      article: null,
-      // error: null,
-      // loading: true
     }
   },
-  created() {
-    this.fetchData();
+  computed: {
+    ...mapState('helpCentre', ['article'])
   },
   watch: {
-    // call again the method if the route changes
-    $route: 'fetchData',
+    $route: 'fetchArticle',
   },
   methods: {
-    async fetchData() {
-      // this.error = null;
-      // this.loading = true;
-      this.article = null;
-      try {
-        const response = await fetch(
-          'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
-          {
-            method: 'POST',
-            body: JSON.stringify({
-              query: `query GetArticle($slug: String){ helpCentreArticle(where: {slug: $slug}) { title content { html } } }`,
-              variables: {
-                slug: this.$route.params.slug,
-              },
-            }),
-          }
-        );
-        const { data } = await response.json();
-        // this.loading = false;
-        // this.error = data.error;
-        this.article = data.helpCentreArticle;
-        // 404 if no article
+    fetchArticle() {
+      this.$store.dispatch('helpCentre/getArticle', this.slug)
+      .then(() => {
         if(!this.article) {
           this.$router.push({name: 'not-found'});
         }
-      } catch (e) {
-        console.log(e);
-      }
-    },
-  }
+      })
+    }
+  },
+  created() {
+    this.fetchArticle();
+  },
 }
 </script>
 
@@ -139,35 +118,12 @@ export default {
     margin: $spacing*6 0;
     border-left: 6px solid $primary-yellow;
     background: lighten($color: $primary-yellow, $amount: 23%);
-    //background: $primary-yellow;
-    //border-radius: 4px;
-    //position: relative;
 
     p {
       margin-top: 0;
       position: relative;
       z-index: 10;
     }
-
-    // &::before,
-    // &::after {
-    //   width: 50px;
-    //   height: 50px;
-    //   position: absolute;
-    //   z-index: 5;
-    //   top: 20%;
-    //   background: url('../assets/icons/lightbulbs/tip.svg') center;
-    //   background-size: 100% 100%;
-    //   content: ''
-    // }
-
-    // &::before {
-    //   right: 0;
-    // }
-
-    // &::after {
-    //   left: 0;
-    // }
   }
 
   /deep/ .text-img-right {
@@ -272,14 +228,6 @@ export default {
     /deep/ .tip {
       margin: $spacing*8 0;
     }
-
-    // /deep/ .text-img-right {
-    //   //margin: $spacing*5 0;
-
-    //   img {
-    //     max-width: 130px;
-    //   }
-    // }
   }
 
   /deep/ .text-img-left {

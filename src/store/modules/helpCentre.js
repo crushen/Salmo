@@ -1,32 +1,59 @@
-//import { helpPages } from '@/assets/js/helpCentreArticles'
-
 export default {
   namespaced: true,
   state: {
-    helpCentreArticles: []
+    url: 'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
+    buttons: [],
+    article: null
   },
   actions: {
-    async getArticles({commit}) {
+    async getButtons({state, commit}) {
       try {
         const response = await fetch(
-          'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
+          state.url, 
           {
             method: 'POST',
             body: JSON.stringify({
-              query: `{ helpCentreArticles { title slug background tags } }`,
-            }),
+              query: `{ helpCentreArticles { title slug background tags } }`
+            })
           }
         );
         const { data } = await response.json();
-        commit('setArticles', data.helpCentreArticles)
-      } catch(e) {
-        console.log(e)
+        commit('setButtons', data.helpCentreArticles);
+      } catch(error) {
+        console.log(error);
+      }
+    },
+    async getArticle({state, commit}, slug) {
+      commit('clearArticle');
+      try {
+        const response = await fetch(
+          state.url,
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              query: `query GetArticle($slug: String){ helpCentreArticle(where: {slug: $slug}) { title content { html } } }`,
+              variables: {
+                slug: slug
+              }
+            })
+          }
+        );
+        const { data } = await response.json();
+        commit('setArticle', data.helpCentreArticle);
+      } catch(error) {
+        console.log(error);
       }
     }
   },
   mutations: {
-    setArticles(state, data) {
-      state.helpCentreArticles = data;
+    setButtons(state, data) {
+      state.buttons = data;
+    },
+    clearArticle(state) {
+      state.article = null;
+    },
+    setArticle(state, article) {
+      state.article = article;
     }
   }
 }

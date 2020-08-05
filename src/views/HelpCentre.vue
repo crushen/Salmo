@@ -172,12 +172,12 @@ export default {
     }
   },
   computed: {
-    ...mapState('helpCentre', ['helpCentreArticles']),
+    ...mapState('helpCentre', ['buttons']),
     filteredPages() {
-      let pages = this.helpCentreArticles;
+      let pages = this.buttons;
       let filtered = [];
 
-      if(this.helpCentreArticles) {
+      if(pages) {
         if(this.search) {
           // Check to see if page title has been searched
           pages.forEach(page => {
@@ -251,7 +251,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch('helpCentre/getArticles');
+    this.$store.dispatch('helpCentre/getButtons');
   }
 }
 </script>
