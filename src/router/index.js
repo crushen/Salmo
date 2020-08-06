@@ -15,6 +15,7 @@ import VisaInfo from '@/views/visa/VisaInfo';
 import NonEU from '@/views/visa/NonEU';
 import CategoryPage from '@/views/visa/CategoryPage';
 import VisaPage from '@/views/visa/VisaPage';
+import VisaSection from '@/views/visa/VisaSection';
 import VisaInfoEU from '@/views/visa/EU';
 import Settled from '@/views/visa/Settled';
 import PreSettled from '@/views/visa/PreSettled';
@@ -123,7 +124,14 @@ const routes = [
   { 
     path: '/visa-info/:slug', 
     name: 'visa-page', 
-    component: VisaPage
+    component: VisaPage,
+    children: [
+      {
+        path: ':section',
+        name: 'visa-section',
+        component: VisaSection
+      }
+    ]
   },
   { 
     path: '/about', 

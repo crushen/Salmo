@@ -29,7 +29,10 @@
               :key="section.id"
               @click="selectedTab = selectedTab === index ? null : index"
               class="top">
-              {{ section.title }}
+              <router-link
+                :to="{ name: 'visa-section', params: { section: section.slug } }">
+                {{ section.title }}
+              </router-link>
               <div class="tab" />
 
               <ul
@@ -43,11 +46,13 @@
               </ul>
             </li>
           </transition-group>
-        </div>     
-      </transition-group>
+        </div>  
+      </transition-group> 
     </div>
 
-
+    <section class="visa-sections">
+      <router-view />
+    </section>  
   </section>
 </template>
 
@@ -109,7 +114,7 @@ h1 {
 .menu {
   width: 85%;
   margin: auto;
-  position: relative;
+  position: absolute;
 
   button {
     padding: 12px;

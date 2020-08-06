@@ -48,9 +48,11 @@ export default {
                     sections {
                       id
                       title
+                      slug
                       subsections {
                         id
                         title
+                        slug
                       }
                     }
                   }
