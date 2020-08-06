@@ -1,5 +1,5 @@
 <template>
-  <section class="content">
+  <section class="content" v-if="visa">
     <h1>{{ visa.name }}</h1>
 
     <div class="menu">
@@ -200,15 +200,23 @@ export default {
     }
   },
   computed: {
-    ...mapState('visas', ['visaList']),
-    visa() {
-      return this.visaList.find(item => item.slug === this.slug);
-    }
+    ...mapState('visas', ['visa'])
+    // visa() {
+    //   return this.visaList.find(item => item.slug === this.slug);
+    // }
   },
-  mounted() {
-    if(!this.visa) {
-      this.$router.push({name: 'not-found'});
+  methods: {
+    fetchVisa() {
+      this.$store.dispatch('visas/getVisa', this.slug)
+      .then(() => {
+        if(!this.visa) {
+          this.$router.push({name: 'not-found'});
+        }
+      })
     }
+  }, 
+  created() {
+    this.fetchVisa();
   }
 }
 </script>
