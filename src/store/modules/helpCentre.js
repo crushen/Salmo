@@ -13,7 +13,16 @@ export default {
           {
             method: 'POST',
             body: JSON.stringify({
-              query: `{ helpCentreArticles { title slug background tags } }`
+              query: `
+                {
+                  helpCentreArticles {
+                    title
+                    slug
+                    background
+                    tags
+                  }
+                }
+              `
             })
           }
         );
@@ -31,7 +40,16 @@ export default {
           {
             method: 'POST',
             body: JSON.stringify({
-              query: `query GetArticle($slug: String){ helpCentreArticle(where: {slug: $slug}) { title content { html } } }`,
+              query: `
+                query GetArticle($slug: String) {
+                  helpCentreArticle(where: {slug: $slug}) {
+                    title
+                    content {
+                      html
+                    }
+                  }
+                }
+              `,
               variables: {
                 slug: slug
               }
