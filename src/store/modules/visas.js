@@ -46,8 +46,10 @@ export default {
                   visa(where: {slug: $slug}) {
                     name
                     sections {
+                      id
                       title
                       subsections {
+                        id
                         title
                       }
                     }

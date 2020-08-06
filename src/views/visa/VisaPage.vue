@@ -25,8 +25,8 @@
             tag="ul"
             class="top outer-list">
             <li
-              v-for="(section, index) in tempVisa.sections"
-              :key="index"
+              v-for="(section, index) in visa.sections"
+              :key="section.id"
               @click="selectedTab = selectedTab === index ? null : index"
               class="top">
               {{ section.title }}
@@ -36,9 +36,9 @@
                 :class="selectedTab === index ? 'active' : ''"
                 class="inner-list">
                 <li
-                  v-for="route in section.routes"
-                  :key="route.slug">
-                  {{ route.title }}
+                  v-for="subsection in section.subsections"
+                  :key="subsection.id">
+                  {{ subsection.title }}
                 </li>
               </ul>
             </li>
@@ -60,143 +60,7 @@ export default {
     return {
       slug: this.$route.params.slug,
       menuOpen: false,
-      selectedTab: null,
-      tempVisa: {
-        sections: [
-          {
-            title: 'Introduction',
-            routes: [
-              {
-                title: 'What can I do with this visa?',
-                slug: 'what-can-I-do-with-this-visa'
-              },
-              {
-                title: 'What are the requirements?',
-                slug: 'what-are-the-requirements'
-              },
-              {
-                title: 'How long can I stay?',
-                slug: 'how-long-can-I-stay'
-              },
-              {
-                title: ' What are my chances of getting this visa?',
-                slug: 'what-are-my-chances'
-              },
-              {
-                title: 'Why is it so hard?',
-                slug: 'why-is-it-so-hard'
-              },
-              {
-                title: 'What happens if I successfully get the visa?',
-                slug: 'what-happens-if-im-successful'
-              },
-              {
-                title: 'What happens if I’m unsuccessful?',
-                slug: 'what-happens-if-im-unsuccessful'
-              }
-            ]
-          }, 
-          {
-            title: 'Documentation',
-            routes: [
-              {
-                title: 'What can I do with this visa?',
-                slug: 'what-can-I-do-with-this-visa'
-              },
-              {
-                title: 'What are the requirements?',
-                slug: 'what-are-the-requirements'
-              },
-              {
-                title: 'How long can I stay?',
-                slug: 'how-long-can-I-stay'
-              },
-              {
-                title: ' What are my chances of getting this visa?',
-                slug: 'what-are-my-chances'
-              }
-            ]
-          },
-          {
-            title: 'Process'
-          },
-          {
-            title: 'Apply, Switch & Extend'
-          },
-          {
-            title: 'Dependants'
-          }
-        ]
-      },
-      card: {
-        pages: [
-          {
-            sections: [
-              {
-                title: 'Why this visa?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
-                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
-              },
-              {
-                title: 'Is this visa right for me?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
-              }
-            ]
-          },
-          {
-            sections: [
-              {
-                title: 'How long is the visa?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
-              },
-              {
-                title: 'When can I apply?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
-                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
-              }
-            ]
-          },
-          {
-            sections: [
-              {
-                title: 'Why this visa?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
-                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
-              },
-              {
-                title: 'Is this visa right for me?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
-              }
-            ]
-          },
-          {
-            sections: [
-              {
-                title: 'How long is the visa?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
-              },
-              {
-                title: 'When can I apply?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
-                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
-              }
-            ]
-          },
-          {
-            sections: [
-              {
-                title: 'Why this visa?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?',
-                tipText: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti paritur.'
-              },
-              {
-                title: 'Is this visa right for me?',
-                text: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam voluptates in corrupti pariatur at suscipit molestiae maxime nam expedita, velit eos esse doloribus sit explicabo, delectus laborum obcaecati soluta earum?'
-              }
-            ]
-          }
-        ]
-      }
+      selectedTab: null
     }
   },
   computed: {
