@@ -10,6 +10,7 @@ export default {
   },
   actions: {
     async getVisas({state, commit}, category) {
+      commit('clearVisas');
       try {
         const response = await fetch(
           state.url, 
@@ -86,6 +87,9 @@ export default {
   mutations: {
     setVisas(state, visas) {
       state.visaList = visas;
+    },
+    clearVisas(state) {
+      state.visaList = [];
     },
     clearVisa(state) {
       state.visa = null;
