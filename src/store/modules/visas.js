@@ -4,12 +4,12 @@ export default {
   namespaced: true,
   state: {
     url: 'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
-    visas: [],
+    visaList: [],
     visa: null,
     documentChecklist: documentChecklist
   },
   actions: {
-    async getVisas({state, commit}) {
+    async getVisas({state, commit}, category) {
       try {
         const response = await fetch(
           state.url, 
@@ -17,13 +17,25 @@ export default {
             method: 'POST',
             body: JSON.stringify({
               query: `
-                {
-                  visas {
+                query GetVisas($category: String) {
+                  visas(where: {category: $category}) {
                     name
                     slug
+                    subtitle
+                    category
+                    cardChecklist {
+                      label
+                      state
+                    }
+                    quicktip {
+                      html
+                    }
                   }
                 }
-              `
+              `,
+              variables: {
+                category: category
+              }
             })
           }
         );
@@ -73,8 +85,7 @@ export default {
   },
   mutations: {
     setVisas(state, visas) {
-      state.visas = visas;
-      console.log(visas)
+      state.visaList = visas;
     },
     clearVisa(state) {
       state.visa = null;

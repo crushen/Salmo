@@ -1,12 +1,12 @@
 <template>
-  <section id="category-page">
+  <section id="category-page" v-if="visaList">
     <div class="content">
       <h1>{{ category }} Visas</h1>
     </div>
     
     <div class="content">
       <visa-card 
-        v-for="visa in visas"
+        v-for="visa in visaList"
         :key="visa.name"
         :visa="visa"
         :category="category"
@@ -38,9 +38,6 @@ export default {
   },
   computed: {
     ...mapState('visas', ['visaList']),
-    visas() {
-      return this.visaList.filter(item => item.category === this.category);
-    },
     favouriteVisa() {
       if(this.user && this.user.profile.favoriteVisa) {
         return this.user.profile.favoriteVisa.name;
@@ -49,10 +46,17 @@ export default {
       }
     }
   },
-  mounted() {
-    if(!this.visas.length) {
-      this.$router.push({name: 'not-found'});
+  methods: {
+    fetchVisas() {
+      this.$store.dispatch('visas/getVisas', this.category).then(() => {
+        if(!this.visaList.length) {
+          this.$router.push({name: 'not-found'});
+        }
+      })
     }
+  },
+  mounted() {
+    this.fetchVisas();
   }
 }
 </script>

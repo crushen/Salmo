@@ -7,7 +7,7 @@
       <h3>{{ visa.name }}</h3>
     </div>
     <div class="body">
-      <p>{{ visa.card.subTitle }}</p>
+      <p>{{ visa.subtitle }}</p>
 
       <div class="checklist">
         <div
@@ -19,7 +19,7 @@
             <img 
               :src="item.icon"
               class="icon">
-            <p>{{ item.name }}</p>
+            <p>{{ item.label }}</p>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@ export default {
   data() {
     return {
       user: this.$store.state.auth.user,
-      checklist: this.visa.card.checklist,
+      checklist: this.visa.cardChecklist,
       dots,
       check,
       cross,
@@ -92,9 +92,9 @@ export default {
   methods: {
     getIcon() {
       this.checklist.forEach(item => {
-        if(item.status === 'maybe') {
+        if(item.state === 'maybe') {
           item.icon = this.question;
-        } else if(item.status) {
+        } else if(item.state === 'true') {
           item.icon = this.check;
         } else {
           item.icon = this.cross;
