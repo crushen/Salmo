@@ -15,17 +15,10 @@
           <img :src="lightbulbYellow" class="lightbulb-yellow">
           <img :src="lightbulbYellow" class="lightbulb-yellow">
           <img :src="lightbulbYellow" class="lightbulb-yellow">
+
           <h2><span>Quick Tip</span> {{ visa.name }}</h2>
-          <div v-html="visa.card.quickTip" class="text">
-            <!-- <p>{{ visa.card.quickTip.header }}</p>
-            <ul>
-              <li
-                v-for="item in visa.card.quickTip.list"
-                :key="item">
-                {{ item }}
-              </li>
-            </ul> -->
-          </div>
+
+          <div v-html="visa.quicktip.html" class="text" />
 
           <div class="close">
             <button 
@@ -136,28 +129,12 @@ export default {
   }
 
   h2 {
+    max-width: 270px;
     text-align: center;
-    margin-bottom: 8vw;
+    margin: 0 auto $spacing*4 auto;
     color: #222;
     span {
       color: $grey;
-    }
-  }
-  
-  ul {
-    margin-top: $spacing*4;
-    list-style-position: inside;
-    list-style: none;
-
-    li {
-      margin-top: $spacing*2;
-    }
-
-    li::before {
-      content: "\25CF";
-      color: $primary-yellow;
-      display: inline-block;
-      width: 10px;
     }
   }
 
@@ -168,6 +145,35 @@ export default {
     button {
       color: $primary-pink;
       font-size: 18px;
+    }
+  }
+}
+
+.text {
+  /deep/ p {
+    margin-top: $spacing*2;
+  }
+
+  /deep/ ul {
+    width: 90%;
+    margin: $spacing*2 auto 0 auto;
+    list-style-position: inside;
+    list-style: none;
+
+    li {
+      margin-top: $spacing*2;
+
+      div {
+        display: inline;
+      }
+    }
+
+    li::before {
+      content: "\25CF";
+      color: $primary-yellow;
+      display: inline-block;
+      width: 10px;
+      margin-right: $spacing;
     }
   }
 }
@@ -197,11 +203,26 @@ export default {
     }
 
     h2 {
-      margin-bottom: $spacing*8;
+      max-width: none;
+      margin-bottom: $spacing*6;
     }
 
     .close {
-      margin-top: $spacing*8;
+      margin-top: $spacing*6;
+    }
+  }
+
+  .text {
+    /deep/ p {
+      margin-top: $spacing*3;
+    }
+
+    /deep/ ul {
+      margin-top: $spacing*3;
+
+      li {
+        margin-top: $spacing*3;
+      }
     }
   }
 }
@@ -223,7 +244,6 @@ export default {
     .text {
       max-width: 700px;
       margin: auto;
-      text-align: center;
     }
   }
 }
