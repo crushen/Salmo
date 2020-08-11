@@ -1,6 +1,7 @@
 <template>
   <div class="section">
-    <h2>{{ section.title }}</h2>
+    <h2>{{ title }}</h2>
+    <h3>{{ section.title }}</h3>
   </div>
 </template>
 
@@ -10,8 +11,31 @@ import { mapState } from 'vuex';
 export default {
   computed: {
     ...mapState('visas', ['visa']),
+    title() {
+      let title = '';
+
+      this.visa.sections.forEach((section, index) => {
+        section.subsections.forEach(subsection => {
+          if(subsection.slug === this.$route.params.section) {
+            title = this.visa.sections[index].title;
+          }
+        })
+      });
+
+      return title;
+    },
     section() {
-      return this.visa.sections.find(section => section.slug === this.$route.params.section);
+      let obj = {};
+
+      this.visa.sections.forEach(section => {
+        section.subsections.forEach(subsection => {
+          if(subsection.slug === this.$route.params.section) {
+            obj = subsection;
+          }
+        })
+      });
+
+      return obj;
     }
   }
 }
@@ -21,10 +45,11 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .section {
-  padding-top: 100px;
+  padding-top: $spacing*2;
 }
 
-h2 {
+h3 {
   color: $primary-pink;
+  font-weight: 300;
 }
 </style>

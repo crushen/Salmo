@@ -4,7 +4,7 @@
 
     <div class="menu">
       <button
-        @click="menuOpen = !menuOpen"
+        @click="toggle"
         :class="menuOpen ? 'active' : ''">
         Jump To Section
         <img 
@@ -14,7 +14,6 @@
           class="icon">
       </button>
 
-      <!-- page content start here, should slide down with menu -->
       <transition-group name="slide">
         <div
           class="slide-item"
@@ -27,12 +26,12 @@
             <li
               v-for="(section, index) in visa.sections"
               :key="section.id"
-              @click="selectedTab = selectedTab === index ? null : index"
               class="top">
-              <router-link
-                :to="{ name: 'visa-section', params: { section: section.slug } }">
+              <p
+                @click="selectTab($event, index)"
+                class="section-title">
                 {{ section.title }}
-              </router-link>
+              </p>
               <div class="tab" />
 
               <ul
@@ -40,14 +39,17 @@
                 class="inner-list">
                 <li
                   v-for="subsection in section.subsections"
-                  :key="subsection.id">
-                  {{ subsection.title }}
+                  :key="subsection.id"
+                  @click="close">
+                  <router-link :to="{ name: 'visa-section', params: { section: subsection.slug } }">
+                    {{ subsection.title }}
+                  </router-link>
                 </li>
               </ul>
             </li>
           </transition-group>
-        </div>  
-      </transition-group> 
+        </div>
+      </transition-group>
     </div>
 
     <section class="visa-sections">
@@ -69,17 +71,37 @@ export default {
     }
   },
   computed: {
-    ...mapState('visas', ['visa'])
-    // visa() {
-    //   return this.visaList.find(item => item.slug === this.slug);
-    // }
+    ...mapState('visas', ['visa']),
+    firstSection() {
+      return this.visa.sections[0].subsections[0].slug
+    }
   },
   methods: {
+    toggle() {
+      this.menuOpen = !this.menuOpen;
+    },
+    close() {
+      this.menuOpen = false;
+    },
+    selectTab(event, index) {
+      if(event.target.classList.contains('section-title')) {
+        this.selectedTab = this.selectedTab === index ? null : index;
+      }
+    },
     fetchVisa() {
       this.$store.dispatch('visas/getVisa', this.slug)
       .then(() => {
+        // if no visa found, 404 page
         if(!this.visa) {
           this.$router.push({name: 'not-found'});
+        } else {
+          // if no section defined, go to first section... otherwise continue to defined section.
+          if(!this.$route.params.section) {
+            this.$router.push({
+              name: 'visa-section',
+              params: { section: this.firstSection }
+            })
+          }
         }
       })
     }
@@ -112,9 +134,9 @@ h1 {
 }
 
 .menu {
-  width: 85%;
-  margin: auto;
+  width: 80%;
   position: absolute;
+  left: 10%;
 
   button {
     padding: 12px;
@@ -175,6 +197,7 @@ h1 {
         position: absolute;
         transform: translateY(-20px);
         opacity: 0;
+        visibility: hidden;
         transition: 0s;
       }
 
@@ -182,6 +205,7 @@ h1 {
         position: relative;
         transform: translateY(0);
         opacity: 1;
+        visibility: visible;
         transition: 0.4s;
       }
     }
@@ -211,7 +235,13 @@ h1 {
   }
 }
 
+.visa-sections {
+  padding-top: $spacing*10;
 
+  h2 {
+    color: $primary-pink;
+  }
+}
 
 
 
