@@ -5,7 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve --port 8000",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "resolutions": {
+    "minimist": "1.2.3",
+    "mkdir": "0.5.3"
   },
   "dependencies": {
     "animate.css": "^3.7.2",
@@ -14,7 +19,7 @@
     "firebase-admin": "^8.9.2",
     "firebase-functions": "^3.3.0",
     "lodash": "^4.17.19",
-    "minimist": ">=0.2.1",
+    "minimist": "1.2.3",
     "pretty-checkbox-vue": "^1.1.9",
     "v-calendar": "^1.0.0-beta.23",
     "vue": "^2.6.10",
