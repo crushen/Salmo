@@ -53,7 +53,13 @@
     </div>
 
     <section class="visa-sections">
-      <router-view />
+      <transition name="section" mode="out-in">
+        <h2 :key="title">{{ title }}</h2>
+      </transition>
+
+      <transition name="section" mode="out-in">
+        <router-view :key="key" />
+      </transition>
     </section>  
   </section>
 </template>
@@ -67,13 +73,27 @@ export default {
     return {
       slug: this.$route.params.slug,
       menuOpen: false,
-      selectedTab: null
+      selectedTab: null,
+      key: 0
     }
   },
   computed: {
     ...mapState('visas', ['visa']),
     firstSection() {
       return this.visa.sections[0].subsections[0].slug
+    },
+    title() {
+      let title = '';
+
+      this.visa.sections.forEach((section, index) => {
+        section.subsections.forEach(subsection => {
+          if(subsection.slug === this.$route.params.section) {
+            title = this.visa.sections[index].title;
+          }
+        })
+      });
+
+      return title;
     }
   },
   methods: {
@@ -82,6 +102,7 @@ export default {
     },
     close() {
       this.menuOpen = false;
+      this.key++;
     },
     selectTab(event, index) {
       if(event.target.classList.contains('section-title')) {
@@ -115,7 +136,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-// Slide transition group
+// Transitions
 .slide-item {
   transition: 0.4s;
 }
@@ -124,9 +145,20 @@ export default {
   position: absolute;
 }
 
+.section-enter,
+.section-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+.section-enter-active,
+.section-leave-active {
+  transition: 0.7s;
+  transition-timing-function: cubic-bezier(0,1.15,1,.99);
+}
+
+// Styles
 .content {
-  padding: $spacing*15 0;
-  height: 200vh;
+  padding: $spacing*15 0 $spacing*10 0;
 }
 
 h1 {
@@ -170,11 +202,13 @@ h1 {
     width: 100%;
     position: absolute;
     transform: translateY(-20px);
+    visibility: hidden;
     opacity: 0;
 
     &.active {
       position: relative;
       transform: translateY(0);
+      visibility: visible;
       opacity: 1;
     }
 
@@ -233,17 +267,29 @@ h1 {
       top: 0;
     }
   }
-}
 
-.visa-sections {
-  padding-top: $spacing*10;
+  p {
+    font-weight: 600;
+  }
 
-  h2 {
-    color: $primary-pink;
+  a {
+    color: $light-font;
+    font-weight: 300;
+
+    &.router-link-active {
+      text-decoration: underline;
+    }
   }
 }
 
+.visa-sections {
+  padding-top: $spacing*12;
 
+  h2 {
+    color: $primary-pink;
+    margin-bottom: $spacing*3;
+  }
+}
 
 // Tablet
 @media screen and (min-width: 600px) {
