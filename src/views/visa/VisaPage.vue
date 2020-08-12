@@ -72,6 +72,7 @@
         </button>
 
         <button
+          v-if="$route.params.section !== lastSection"
           @click="nextSection"
           class="tertiary">
           Next
@@ -98,6 +99,11 @@ export default {
     ...mapState('visas', ['visa']),
     firstSection() {
       return this.visa.sections[0].subsections[0].slug;
+    },
+    lastSection() {
+      const lastSection = this.visa.sections[this.visa.sections.length - 1];
+      const subsections = lastSection.subsections;
+      return subsections[subsections.length - 1].slug;
     },
     title() {
       let title = '';
@@ -132,7 +138,7 @@ export default {
         if(this.title === section.title) {
           const currentSubsection = section.subsections.find(subsection => this.$route.params.section === subsection.slug);
           const currentIndex = section.subsections.indexOf(currentSubsection);
-          // If current subsection is last in sunsection array
+          // If current subsection is last in subsection array
           // but section isn't last in section array - go to next section
           if(currentSubsection === section.subsections[section.subsections.length - 1]) {
             if(section !== this.visa.sections[this.visa.sections.length - 1]) {
