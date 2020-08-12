@@ -23,7 +23,8 @@ export default {
 
 .card {
   width: 100%;
-  margin-bottom: $spacing*8;
+  max-width: 400px;
+  margin: 0 auto $spacing*8 auto;
 
   h3 {
     margin-bottom: $spacing*2;
@@ -34,9 +35,14 @@ export default {
     align-items: center;
     justify-content: space-between;
 
+    p {
+      width: 60%;
+    }
+
     img {
-      width: 32%;
-      max-width: 200px;
+      width: 100px;
+      // width: 100%;
+      // max-width: 200px;
       margin: 0 4vw 0 0;
     }
   }
@@ -56,6 +62,7 @@ export default {
 @media screen and (min-width: 600px) {
   .card {
     margin: 0 auto $spacing*12 auto;
+    max-width: none;
 
     h3 {
       margin: 0 0 $spacing*2 35%;
@@ -69,7 +76,7 @@ export default {
       }
 
       img {
-        width: 18%;
+        width: 140px;
         transform: translateY(-30px);
         position: absolute;
         margin: 0;
@@ -83,6 +90,7 @@ export default {
 
       .inner {
         flex-direction: row-reverse;
+        position: relative;
 
         p {
           margin: 0 35% 0 0;
@@ -90,6 +98,7 @@ export default {
 
         img {
           margin: 0;
+          right: 0;
         }
       }
     }
@@ -113,6 +122,7 @@ export default {
       }
 
       img {
+        width: 180px;
         transform: translate(-150px, -30px);
       }
     }
