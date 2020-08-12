@@ -27,6 +27,7 @@ export default {
   margin: 0 auto $spacing*8 auto;
 
   h3 {
+    font-size: 20px;
     margin-bottom: $spacing*2;
   }
 
@@ -41,8 +42,6 @@ export default {
 
     img {
       width: 100px;
-      // width: 100%;
-      // max-width: 200px;
       margin: 0 4vw 0 0;
     }
   }
