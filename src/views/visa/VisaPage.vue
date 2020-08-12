@@ -60,6 +60,23 @@
       <transition name="section" mode="out-in">
         <router-view :key="key" />
       </transition>
+
+      <div
+        :class="$route.params.section === firstSection ? 'first-section' : ''"
+        class="buttons">
+        <button
+          v-if="$route.params.section !== firstSection"
+          @click="prevSection"
+          class="tertiary">
+          Previous
+        </button>
+
+        <button
+          @click="nextSection"
+          class="tertiary">
+          Next
+        </button>
+      </div>
     </section>  
   </section>
 </template>
@@ -73,14 +90,14 @@ export default {
     return {
       slug: this.$route.params.slug,
       menuOpen: false,
-      selectedTab: null,
+      selectedTab: 0,
       key: 0
     }
   },
   computed: {
     ...mapState('visas', ['visa']),
     firstSection() {
-      return this.visa.sections[0].subsections[0].slug
+      return this.visa.sections[0].subsections[0].slug;
     },
     title() {
       let title = '';
@@ -108,6 +125,52 @@ export default {
       if(event.target.classList.contains('section-title')) {
         this.selectedTab = this.selectedTab === index ? null : index;
       }
+    },
+    nextSection() {
+      let pushToSub = true;
+      this.visa.sections.forEach((section, index) => {
+        if(this.title === section.title) {
+          const currentSubsection = section.subsections.find(subsection => this.$route.params.section === subsection.slug);
+          const currentIndex = section.subsections.indexOf(currentSubsection);
+          // If current subsection is last in sunsection array
+          // but section isn't last in section array - go to next section
+          if(currentSubsection === section.subsections[section.subsections.length - 1]) {
+            if(section !== this.visa.sections[this.visa.sections.length - 1]) {
+              this.key ++;
+              const nextSection = this.visa.sections[index + 1];
+              this.$router.push({
+                name: 'visa-section',
+                params: { section: nextSection.subsections[0].slug }
+              });
+              pushToSub = false; // Dont push to next subsection when going to next section
+            }
+          } else {
+            // If current subsection isn't last in array, go to next subsection
+            if(pushToSub) {
+              this.key ++;
+              this.$router.push({
+                name: 'visa-section',
+                params: { section: section.subsections[currentIndex + 1].slug }
+              });
+            }
+          }
+        }
+      });
+    },
+    prevSection() {
+      this.key ++;
+      this.visa.sections.forEach(section => {
+        if(this.title === section.title) {
+          const currentSection = section.subsections.find(subsection => this.$route.params.section === subsection.slug),
+                currentIndex = section.subsections.indexOf(currentSection),
+                prevSection = section.subsections[currentIndex - 1].slug;
+
+          this.$router.push({
+            name: 'visa-section',
+            params: { section: prevSection }
+          });
+        }
+      });
     },
     fetchVisa() {
       this.$store.dispatch('visas/getVisa', this.slug)
@@ -158,7 +221,7 @@ export default {
 
 // Styles
 .content {
-  padding: $spacing*15 0 $spacing*10 0;
+  padding: $spacing*15 0 $spacing*12 0;
 }
 
 h1 {
@@ -288,6 +351,18 @@ h1 {
   h2 {
     color: $primary-pink;
     margin-bottom: $spacing*3;
+  }
+
+  .buttons {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: $spacing*6;
+
+    &.first-section {
+      justify-content: flex-end;
+    }
   }
 }
 
