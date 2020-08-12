@@ -9,7 +9,7 @@
         Jump To Section
         <img 
           src="@/assets/icons/pink/down.svg"
-          :class="menuOpen ? 'active' : ''" 
+          :class="menuOpen ? 'active' : ''"
           alt=""
           class="icon">
       </button>
@@ -163,18 +163,34 @@ export default {
         }
       });
     },
-    prevSection() {
-      this.key ++;
-      this.visa.sections.forEach(section => {
+      prevSection() {
+      let pushToSub = true;
+      this.visa.sections.forEach((section, index) => {
         if(this.title === section.title) {
-          const currentSection = section.subsections.find(subsection => this.$route.params.section === subsection.slug),
-                currentIndex = section.subsections.indexOf(currentSection),
-                prevSection = section.subsections[currentIndex - 1].slug;
-
-          this.$router.push({
-            name: 'visa-section',
-            params: { section: prevSection }
-          });
+          const currentSubsection = section.subsections.find(subsection => this.$route.params.section === subsection.slug);
+          const currentIndex = section.subsections.indexOf(currentSubsection);
+          // If current subsection is first in subsection array
+          // but section isn't first in section array - go to next section
+          if(currentSubsection === section.subsections[0]) {
+            if(section !== this.visa.sections[0]) {
+              this.key ++;
+              const prevSection = this.visa.sections[index - 1];
+              this.$router.push({
+                name: 'visa-section',
+                params: { section: prevSection.subsections[prevSection.subsections.length - 1].slug }
+              });
+              pushToSub = false; // Dont push to prev subsection when going to prev section
+            }
+          } else {
+            // If current subsection isn't first in array, go to prev subsection
+            if(pushToSub) {
+              this.key ++;
+              this.$router.push({
+                name: 'visa-section',
+                params: { section: section.subsections[currentIndex - 1].slug }
+              });
+            }
+          }
         }
       });
     },
