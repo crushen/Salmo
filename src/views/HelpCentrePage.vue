@@ -101,7 +101,7 @@ export default {
 
   /deep/ ul {
     list-style-position: inside;
-    margin: $spacing*4 auto;
+    margin: $spacing auto $spacing*5 auto;
     max-width: 500px;
 
     li {
@@ -218,11 +218,7 @@ export default {
     }
 
     /deep/ ul {
-      margin: $spacing*6 auto;
-
-      li {
-        margin-top: $spacing*4;
-      }
+      margin: $spacing*2 auto $spacing*8 auto;
     }
 
     /deep/ .tip {
