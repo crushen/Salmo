@@ -53,11 +53,11 @@
     </div>
 
     <section class="visa-sections">
-      <transition name="section" mode="out-in">
+      <transition :name="animateOn" mode="out-in">
         <h2 :key="title">{{ title }}</h2>
       </transition>
 
-      <transition name="section" mode="out-in">
+      <transition :name="animateOn" mode="out-in">
         <router-view :key="key" />
       </transition>
 
@@ -92,7 +92,8 @@ export default {
       slug: this.$route.params.slug,
       menuOpen: false,
       selectedTab: 0,
-      key: 0
+      key: 0,
+      animateOn: 'none'
     }
   },
   computed: {
@@ -214,6 +215,9 @@ export default {
   }, 
   created() {
     this.fetchVisa();
+    setTimeout(() => {
+      this.animateOn = 'section'
+    }, 1500)
   }
 }
 </script>
