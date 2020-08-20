@@ -68,9 +68,9 @@
 
             <button
               v-if="user.profile.holiday.length"
-              @click="editHoliday = true"
+              @click="editHoliday = !editHoliday"
               class="secondary">
-              Edit Holiday
+              {{ editText }}
             </button>
           </div>
         </div>
@@ -222,6 +222,13 @@ export default {
     getDaysInYearPre2016(array) {
       const total = array.reduce((prev, cur) => prev + cur.days, 0);
       return total;
+    },
+    editText() {
+      if(this.editHoliday) {
+        return 'Close Editor'
+      } else {
+        return 'Edit Holiday'
+      }
     }
   },
   methods: {
@@ -576,6 +583,10 @@ export default {
   align-items: center;
   justify-content: space-around;
   max-width: 350px;
+
+  button {
+    width: 135px;
+  }
 }
 
 .result {
