@@ -52,12 +52,22 @@ input[type="submit"] {
   outline: none;
   box-shadow: $shadow;
   cursor: pointer;
+  transition: 0.3s;
+
+  &:hover {
+    background: darken($color: $primary-yellow, $amount: 16%);
+  }
 
   &.secondary {
     background: white;
     border: 3px solid $primary-pink;
     color: $primary-pink;
     font-weight: bold;
+
+    &:hover {
+      background: $primary-pink;
+      color: white;
+    }
   }
 
   &.tertiary {
@@ -80,6 +90,10 @@ input[type="submit"] {
   &.pink {
     background: $primary-pink;
     color: $light-font;
+
+    &:hover {
+      background: darken($color: $primary-pink, $amount: 10%);
+    }
   }
 
   &.disabled {
