@@ -384,7 +384,7 @@ h1 {
 // Desktop
 @media screen and (min-width: 1100px) {
   .wrapper {
-    max-width: 700px;
+    max-width: 800px;
     margin: $spacing*8 auto 0 auto;
   }
 

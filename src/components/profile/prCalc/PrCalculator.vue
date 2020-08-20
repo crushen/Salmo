@@ -548,6 +548,10 @@ export default {
     margin-top: $spacing;
     background: $lightest-grey;
     border-radius: 4px;
+    
+    p {
+      font-size: 16px;
+    }
 
     .location {
       font-weight: 600;
@@ -679,7 +683,7 @@ export default {
     }
 
     .item {
-      min-width: 48%;
+      width: 48%;
     }
   }
 
