@@ -1,16 +1,17 @@
 <template>
-  <div>
+  <div v-if="favoriteVisa">
     <section class="content">
       <h1>Your next step.</h1>
 
       <section class="results">
         <p class="title">Here's your favourite visa:</p>
 
-        <visa-card 
-          :visa="faveVisa"
-          :favouriteVisa="user.favoriteVisa.name">
+        <visa-card
+          :visa="favoriteVisa"
+          :favouriteVisa="favoriteVisa.name"
+          class="visa-card">
           <template #quickTip>
-            <quick-tip :visa="faveVisa"/>
+            <quick-tip :visa="favoriteVisa"/>
           </template>
         </visa-card>
 
@@ -36,7 +37,7 @@
 
         <div class="row">
           <doc-checklist 
-            :visa="faveVisa"
+            :visa="favoriteVisa"
             :docChecklist="user.favoriteVisa"
             class="col" />
 
@@ -68,18 +69,14 @@ export default {
   data() {
     return {
       user: this.$store.state.auth.user.profile,
-      visaList: this.$store.state.visas.visaList,
       results: this.$store.state.auth.user.profile.questionnaireResults,
     }
   },
   computed: {
-    faveVisa() {
-      if(this.user.favoriteVisa) {
-        return this.visaList.filter(item => item.name === this.user.favoriteVisa.name)[0];
-      } else {
-        return false;
-      }
-    }
+    ...mapState('visas', ['favoriteVisa'])
+  },
+  created() {
+    this.$store.dispatch('visas/getFaveVisa', this.user.favoriteVisa.name);
   },
   // Update documentChecklist in database before route leave
   beforeRouteLeave(to, from, next) {

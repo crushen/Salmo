@@ -9,7 +9,6 @@
         v-for="visa in visaList"
         :key="visa.name"
         :visa="visa"
-        :category="category"
         :favouriteVisa="favouriteVisa"
         class="visa-card">
         <template #quickTip>

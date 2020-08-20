@@ -6,6 +6,7 @@ export default {
     url: 'https://api-eu-central-1.graphcms.com/v2/ckcxaziyh148x01usg2uiehoe/master',
     visaList: [],
     visa: null,
+    favoriteVisa: null,
     documentChecklist: documentChecklist
   },
   actions: {
@@ -84,6 +85,43 @@ export default {
       } catch(error) {
         console.log(error);
       }
+    },
+    async getFaveVisa({state, commit}, name) {
+      commit('clearVisa');
+      try {
+        const response = await fetch(
+          state.url,
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              query: `
+                query GetVisa($name: String) {
+                  visa(where: {name: $name}) {
+                    name
+                    slug
+                    subtitle
+                    category
+                    cardChecklist {
+                      label
+                      state
+                    }
+                    quicktip {
+                      html
+                    }
+                  }
+                }
+              `,
+              variables: {
+                name: name
+              }
+            })
+          }
+        );
+        const { data } = await response.json();
+        commit('setFavoriteVisa', data.visa);
+      } catch(error) {
+        console.log(error);
+      }
     }
   },
   mutations: {
@@ -95,9 +133,13 @@ export default {
     },
     clearVisa(state) {
       state.visa = null;
+      state.favoriteVisa = null;
     },
     setVisa(state, visa) {
       state.visa = visa;
+    },
+    setFavoriteVisa(state, visa) {
+      state.favoriteVisa = visa;
     }
   }
 }
