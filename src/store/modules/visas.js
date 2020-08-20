@@ -7,9 +7,44 @@ export default {
     visaList: [],
     visa: null,
     favoriteVisa: null,
+    topResult: null,
     documentChecklist: documentChecklist
   },
   actions: {
+    async getAllVisas({state, commit}) {
+      commit('clearVisas');
+      try {
+        const response = await fetch(
+          state.url, 
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              query: `
+                query GetAllVisas {
+                  visas {
+                    name
+                    slug
+                    subtitle
+                    category
+                    cardChecklist {
+                      label
+                      state
+                    }
+                    quicktip {
+                      html
+                    }
+                  }
+                }
+              `
+            })
+          }
+        );
+        const { data } = await response.json();
+        commit('setAllVisas', data.visas);
+      } catch(error) {
+        console.log(error);
+      }
+    },
     async getVisas({state, commit}, category) {
       commit('clearVisas');
       try {
@@ -122,9 +157,49 @@ export default {
       } catch(error) {
         console.log(error);
       }
+    },
+    async getTopResult({state, commit}, name) {
+      commit('clearVisa');
+      try {
+        const response = await fetch(
+          state.url,
+          {
+            method: 'POST',
+            body: JSON.stringify({
+              query: `
+                query GetVisa($name: String) {
+                  visa(where: {name: $name}) {
+                    name
+                    slug
+                    subtitle
+                    category
+                    cardChecklist {
+                      label
+                      state
+                    }
+                    quicktip {
+                      html
+                    }
+                  }
+                }
+              `,
+              variables: {
+                name: name
+              }
+            })
+          }
+        );
+        const { data } = await response.json();
+        commit('setTopResult', data.visa);
+      } catch(error) {
+        console.log(error);
+      }
     }
   },
   mutations: {
+    setAllVisas(state, visas) {
+      state.visaList = visas;
+    },
     setVisas(state, visas) {
       state.visaList = visas;
     },
@@ -134,12 +209,16 @@ export default {
     clearVisa(state) {
       state.visa = null;
       state.favoriteVisa = null;
+      state.topResult = null;
     },
     setVisa(state, visa) {
       state.visa = visa;
     },
     setFavoriteVisa(state, visa) {
       state.favoriteVisa = visa;
+    },
+    setTopResult(state, visa) {
+      state.topResult = visa;
     }
   }
 }

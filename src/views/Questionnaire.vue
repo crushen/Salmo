@@ -151,8 +151,6 @@ export default {
       } else {
         this.result.recommendedVisa.push(answer);
       }
-      const faveVisa = this.documentChecklist.find(item => item.name === this.result.recommendedVisa[0]);
-      this.$store.commit('auth/addFavoriteToUser', {...faveVisa});
       this.$store.dispatch('questions/getResults', this.result);
       this.$store.dispatch('questions/sendDbResults');
       this.introStage = false;

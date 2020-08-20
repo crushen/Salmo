@@ -4,7 +4,7 @@
       <h3>{{ name }}</h3>
     </div>
     <div class="body">
-      <p>{{ visa.card.subTitle }}</p>
+      <p>{{ visa.subtitle }}</p>
 
       <router-link
         tag="button"

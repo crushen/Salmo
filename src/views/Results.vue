@@ -13,7 +13,7 @@
           alt="">
       </div>
 
-      <div class="results">
+      <div class="results" v-if="topResult && favoriteVisa">
         <div class="top">
           <div class="sub-title">
             <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
@@ -21,23 +21,21 @@
           </div>
           
           <visa-card
-            v-for="visa in topResult"
-            :key="visa.name"
-            :visa="visa"
-            :favouriteVisa="user.favoriteVisa.name"
+            :visa="topResult"
+            :favouriteVisa="favoriteVisa.name"
             class="top-card">
             <template #quickTip>
-              <quick-tip :visa="visa"/>
+              <quick-tip :visa="topResult"/>
             </template>
           </visa-card>
 
           <p>Switching is the most cost effective, and least personally disruptive way to remain in the UK.</p>
         </div>
 
-        <div v-if="switchVisas[0]" class="switch">
+        <div v-if="switchVisas.length" class="switch">
           <div class="sub-title">
             <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
-            <p class="card-title">There are other visas in the {{ topResult[0].category }} catagory that you could switch to:</p>
+            <p class="card-title">There are other visas in the {{ topResult.category }} catagory that you could switch to:</p>
           </div>
 
           <div class="small-cards">
@@ -51,11 +49,11 @@
         </div>
 
         <div 
-          v-if="otherVisas[0] || youthMobility[0]" 
+          v-if="otherVisas.length || youthMobility.length" 
           class="other">
           <div class="sub-title">
             <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
-            <p>Other visas in the {{ topResult[0].category }} catagory that you may be able to apply to:</p>
+            <p>Other visas in the {{ topResult.category }} catagory that you may be able to apply to:</p>
           </div>
 
 
@@ -76,7 +74,7 @@
               class="card" />
 
             <small-card 
-              v-if="youthMobility[0]"
+              v-if="youthMobility.length"
               :visa="youthMobility[0]"
               :name="`${youthMobility[0].name}`"
               class="card" />
@@ -84,7 +82,7 @@
         </div>
 
         <div 
-          v-if="currentVisaObj.card.checklist[5].status === true" 
+          v-if="currentVisaObj && currentVisaObj.cardChecklist[3].state === 'true'" 
           class="extend">
           <div class="sub-title">
             <img src="@/assets/icons/results/extend.svg" alt="" class="icon">
@@ -164,34 +162,39 @@ export default {
     }
   },
   computed: {
-    ...mapState('visas', ['visaList']),
+    ...mapState('visas', ['visaList', 'favoriteVisa', 'topResult']),
     mostRecentResult() {
       return this.results.slice(-1)[0]; 
-    },
-    topResult() {
-      return this.visaList.filter(item => this.mostRecentResult.recommendedVisa.includes(item.name));
     },
     switchVisas() {
       // Filter visa list for user's switch options
       const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name));
       // Get all visas in same category
-      const sameCategory = switchOptions.filter(item => item.category === this.topResult[0].category);
-      // Remove visa(s) that appear in top result
-      return sameCategory.filter(item => !this.topResult.includes(item));
+      const sameCategory = switchOptions.filter(item => item.category === this.topResult.category);
+      // Remove top result visa
+      return sameCategory.filter(item => item.name !== this.topResult.name);
     },
     otherVisas() {
       // Filter visa list for visas in same category as top result
-      const sameCategory = this.visaList.filter(item => item.category === this.topResult[0].category);
-      // Remove visa(s) that appear in top result
-      const removeDup = sameCategory.filter(item => !this.topResult.includes(item));
+      const sameCategory = this.visaList.filter(item => item.category === this.topResult.category);
+      // Remove top result visa
+      const removeDup = sameCategory.filter(item => item.name !== this.topResult.name);
+      // Remove youth mobility
+      const removeYM = removeDup.filter(item => item.name !== 'Tier 5 Youth Mobility Scheme')
       // Remove visa(s) that appear in switch visas
-      return removeDup.filter(item => !this.switchVisas.includes(item));
+      return removeYM.filter(item => !this.switchVisas.includes(item));
     },
     currentVisaObj() {
-      return this.visaList.find(item => this.currentVisa.name === item.name);
+      return this.visaList.find(item => item.name === this.currentVisa.name);
     }
   },
   methods: {
+    getFavoriteVisa() {
+      this.$store.dispatch('visas/getFaveVisa', this.mostRecentResult.recommendedVisa[0])
+    },
+    getTopResult() {
+      this.$store.dispatch('visas/getTopResult', this.mostRecentResult.recommendedVisa[0])
+    },
     checkSwitch() {  
       // For now, will only be testing Student specific questionnaires, so all top results will be switchable
       // However, this will change when other current visas are options
@@ -205,17 +208,21 @@ export default {
       const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)'];
       YMcountries.forEach(country => {
         if(this.userCountry === country &&
-           this.userAge >= 18 && 
-           this.userAge <= 30 &&
-           this.dependants === 'None') {
-           this.youthMobility = this.visaList.filter(item => item.category === 'youth-mobility');
+        this.userAge >= 18 && 
+        this.userAge <= 30 &&
+        this.dependants === 'None') {
+          this.youthMobility = this.visaList.filter(item => item.name === 'Tier 5 Youth Mobility Scheme');
         }
       });
     }
   },
   created() {
-    this.checkSwitch();
-    this.checkYouthMobility();
+    this.$store.dispatch('visas/getAllVisas').then(() => {
+      this.getFavoriteVisa();
+      this.getTopResult();
+      this.checkSwitch();
+      this.checkYouthMobility();
+    })
   }
 }
 </script>
