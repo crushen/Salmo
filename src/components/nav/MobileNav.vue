@@ -134,7 +134,7 @@ export default {
 #nav {
   width: 120px;
   height: 120px;
-  background: $secondary-blue;
+  background: $primary-blue;
   border-radius: 100px;
   position: fixed;
   z-index: 20;
@@ -202,7 +202,7 @@ a.router-link-active {
   text-decoration: none;
   
   .background {
-    fill: $primary-blue;
+    fill: $secondary-blue;
   }
 }
 </style>
