@@ -1,21 +1,22 @@
 <template>
-  <div class="card">
-    <div class="text">
-      <h3>{{ title }}</h3>
-      <!-- <p>{{ subTitle }}</p> -->
-      <p class="tag">{{ source }}</p>
+  <a
+    :href="article.link"
+    target="_blank"
+    :style="{ backgroundImage: `url(${article.image.url})` }"
+    class="card">
+    <div
+      :class="article.colour"
+      class="text">
+      <h3>{{ article.title }}</h3>
+      <p>{{ article.source }}</p>
     </div>
-  </div>
+  </a>
 </template>
 
 <script>
 export default {
   props: {
-    title: { required: true, type: String },
-    subTitle: { required: true, type: String },
-    source: { required: true, type: String }
-    //link: { required: true, type: String },
-    //image: { required: true, type: String }
+    article: { required: true, type: Object }
   }
 }
 </script>
@@ -31,19 +32,33 @@ export default {
   justify-content: flex-end;
   margin-bottom: $spacing*4;
   background: $light-grey;
+  background-position: center;
+  background-size: cover;
   border-radius: $border-radius;
   box-shadow: $shadow;
   color: $light-font;
 }
 
 .text {
-  background: $primary-blue;
   border-bottom-left-radius: $border-radius;
   border-bottom-right-radius: $border-radius;
   padding: $spacing;
 
+  &.blue {
+    background: $primary-blue;
+  }
+
+  &.red {
+    background: $primary-pink;
+  }
+
   h3 {
     margin-bottom: $spacing;
+    font-weight: 300;
+  }
+
+  p {
+    font-weight: 600;
   }
 }
 

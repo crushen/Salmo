@@ -1,20 +1,19 @@
 <template>
-  <section>
+  <section v-if="articles.length">
     <h2>Latest UK visa news</h2>
 
     <div class="cards">
       <news-card 
-        v-for="card in news"
-        :key="card.title"
-        :title="card.title"
-        :subTitle="card.subTitle"
-        :source="card.source"/>
+        v-for="article in articles"
+        :key="article.id"
+        :article="article" />
     </div>
   </section>
 </template>
 
 <script>
 import newsCard from '@/components/news/NewsCard';
+import { mapState } from 'vuex';
 
 export default {
   components: {
@@ -35,6 +34,12 @@ export default {
         }
       ]
     }
+  },
+  computed: {
+    ...mapState('news', ['articles'])
+  },
+  created() {
+    this.$store.dispatch('news/getArticles');
   }
 }
 </script>
