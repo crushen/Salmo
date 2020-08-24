@@ -40,9 +40,9 @@
           </div>
 
           <div v-else key="2">
-            <p>Prepare yourself for your new life in the UK!</p>
-            <p>Be sure not to arrive before your new visa starts.</p>
-            <p>Collect your BRP within 10 days of when you said you would arrive.</p>
+            <p>Don’t give up!</p>
+            <p>It can be really tough to have you visa denied, but you’re not out of options yet.</p>
+            <p>If you feel as though you were misjudged, you can ask for a review.</p>
 
             <img src="@/assets/illustrations/profilePages/Application fail.svg" alt="">
           </div>
