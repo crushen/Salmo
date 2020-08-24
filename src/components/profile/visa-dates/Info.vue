@@ -74,6 +74,10 @@ export default {
   background: $primary-pink;
   color: $light-font;
 
+  &:hover {
+    background: darken($color: $primary-pink, $amount: 10%);
+  }
+
   .icon {
     width: 28px;
   }

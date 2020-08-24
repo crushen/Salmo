@@ -83,6 +83,10 @@ export default {
   background: $primary-yellow;
   color: $light-font;
 
+  &:hover {
+    background: darken($color: $primary-yellow, $amount: 10%);
+  }
+
   .icon {
     width: 28px;
   }
