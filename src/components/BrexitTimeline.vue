@@ -12,8 +12,10 @@
           v-for="(event, index) in events"
           :key="event.title"
           @click="selectItem(index)"
+          @focus="selectItem(index)"
           :class="{'selected': selected === index}"
-          class="card">
+          class="card"
+          tabindex="0">
           <p class="date">{{ event.date }}</p>
 
           <transition-group name="fade" tag="div">
@@ -196,6 +198,8 @@ ul {
   position: relative;
   z-index: 10;
   transition: 0.4s;
+  cursor: pointer;
+  outline: none;
 
   p {
     color: white;
