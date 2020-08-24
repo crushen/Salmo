@@ -13,7 +13,8 @@
         <article>
           <h3>How application guidlines are calculated.</h3>
 
-          <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda similique debitis mollitia corrupti beatae ad necessitatibus incidunt sed inventore. Omnis doloribus quis nostrum nam magni odit debitis, soluta quia sit.</p>
+          <p>For most visas the earliest you can apply is around 3 months before your travel date (for visiting visas) your course start date (for study visas) or your job start date (for work visas).</p>
+          <p>However settlement applications can take up to 6 months to be approved, so be careful to allow extra time for this.</p>
 
           <div class="close">
             <button 
@@ -93,6 +94,10 @@ export default {
 
   h3 {
     margin-bottom: 8vw;
+  }
+
+  p:last-of-type {
+    margin-top: $spacing*2;
   }
  
   .close {
