@@ -389,7 +389,6 @@ export default {
     text-align: center;
 
     button {
-      color: $primary-pink;
       font-size: 18px;
     }
   }
