@@ -216,7 +216,7 @@ export default {
     }
 
     &:focus {
-      outline: none;
+      //outline: none;
       box-shadow: 0px 0px 0px 4px $primary-yellow;
     }
   }
@@ -270,7 +270,7 @@ export default {
     align-items: center;
     line-height: 0;
     padding: 20px $spacing*3;
-    outline: none;
+    //outline: none;
   }
 }
 

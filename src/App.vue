@@ -1,8 +1,11 @@
 <template>
   <div id="app">
-    <a v-if="arrowPage && innerWidth < 1100" @click="$router.go(-1)" class="arrow-btn">
+    <button
+      v-if="arrowPage && innerWidth < 1100"
+      @click="$router.go(-1)"
+      class="arrow-btn">
       <img :src="arrow" class="arrow">
-    </a>
+    </button>
 
     <mobile-nav v-if="innerWidth < 600" />
     <sidebar-nav v-else />

@@ -154,7 +154,7 @@ input.form {
   margin-top: $spacing*4;
 
   button {
-    outline: none;
+    //outline: none;
   }
 }
 

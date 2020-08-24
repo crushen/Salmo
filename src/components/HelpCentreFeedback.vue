@@ -145,7 +145,7 @@ button {
   padding: 0;
   box-shadow: none;
   margin-bottom: $spacing;
-  outline: none;
+  //outline: none;
 
   .background {
     fill: #C4C4C4;

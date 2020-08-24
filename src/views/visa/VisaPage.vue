@@ -269,7 +269,7 @@ h1 {
     align-items: center;
     justify-content: space-around;
     transition: 0.4s;
-    outline: none;
+    //outline: none;
     position: relative;
     z-index: 10;
 

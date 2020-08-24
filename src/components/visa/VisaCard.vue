@@ -24,18 +24,12 @@
         </div>
       </div>
 
-      <router-link
-        tag="button"
-        :to="{ name: 'visa-page', params: { slug: visa.slug } }"
-        :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
-        Tell Me More!
-      </router-link>
-
       <div v-if="user && favouriteVisa !== 'none'">
-        <img 
+        <button
           @click="makeFavorite"
-          :src="heart" 
           class="heart">
+          <img :src="heart">
+        </button>
 
         <transition name="modal" mode="out-in">
           <confirm-favorite 
@@ -45,6 +39,13 @@
             @closeModal="closeModal" />
         </transition>
       </div>
+
+      <router-link
+        tag="button"
+        :to="{ name: 'visa-page', params: { slug: visa.slug } }"
+        :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
+        Tell Me More!
+      </router-link>
     </div>
   </div>
 </template>
@@ -197,11 +198,16 @@ export default {
   }
 
   .heart {
-    width: 34px;
+    padding: none;
+    background: transparent;
+    box-shadow: none;
     position: absolute;
-    bottom: 10px;
-    left: 10px;
-    cursor: pointer;
+    bottom: 0;
+    left: 0;
+
+    img {
+      width: 34px;
+    }
   }
 }
 
