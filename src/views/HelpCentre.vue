@@ -10,22 +10,27 @@
           <li 
             v-for="(question, index) in questions"
             :key="index"
-            @click="selected = selected === index ? null : index"
-            @focus="selected = selected === index ? null : index"
-            class="slide-item list"
-            tabindex="0">
-            <div class="title">
+            class="slide-item">
+            <button
+              @click="selected = selected === index ? null : index, setAria(index)"
+              :id="`button-${index}`"
+              aria-expanded="false"
+              aria-controls="text"
+              class="title">
               <img 
                 src="@/assets/icons/pink/down.svg" 
                 alt=""
                 :class="selected === index ? 'active' : ''" 
                 class="icon">
               <h3>{{ question.title }}</h3>
-            </div>
+            </button>
 
             <div 
               :class="selected === index ? 'active' : ''"
-              class="text">
+              id="text"
+              class="text"
+              role="region"
+              :aria-labelledby="`button-${index}`">
               <p>{{ question.text }}</p>
             </div>
           </li>
@@ -250,6 +255,11 @@ export default {
        default:
           return 'auto';
       }
+    },
+    setAria(index) {
+      const button = document.querySelector(`#button-${index}`);
+
+      this.selected === index ? button.setAttribute('aria-expanded', 'true') : button.setAttribute('aria-expanded', 'false'); 
     }
   },
   created() {
@@ -264,10 +274,6 @@ export default {
 // Slide transition group
 .slide-item {
   transition: 0.4s;
-
-  &.list {
-    outline: none;
-  }
 }
 
 .slide-leave-active {
@@ -312,7 +318,9 @@ export default {
   .title {
     display: flex;
     align-items: center;
-    cursor: pointer;
+    background: transparent;
+    box-shadow: none;
+    padding: none;
   }
 
   .icon {
