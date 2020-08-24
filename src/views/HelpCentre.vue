@@ -11,7 +11,9 @@
             v-for="(question, index) in questions"
             :key="index"
             @click="selected = selected === index ? null : index"
-            class="slide-item">
+            @focus="selected = selected === index ? null : index"
+            class="slide-item list"
+            tabindex="0">
             <div class="title">
               <img 
                 src="@/assets/icons/pink/down.svg" 
@@ -262,6 +264,10 @@ export default {
 // Slide transition group
 .slide-item {
   transition: 0.4s;
+
+  &.list {
+    outline: none;
+  }
 }
 
 .slide-leave-active {
