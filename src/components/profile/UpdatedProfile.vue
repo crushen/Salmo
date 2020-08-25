@@ -12,7 +12,7 @@
           <div class="edit-button">
             <router-link 
               :to="{ name: 'update-profile'}"
-              class="edit-button">
+              class="edit-button aria-btn">
               Edit Profile
             </router-link> 
           </div>
@@ -93,7 +93,7 @@
               <router-link
                 :to="{name: 'visa-planner', params: {username: user.profile.username}}"
                 tag="button"
-                class="pink"
+                class="pink aria-btn"
                 :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
                 Visa Planner
               </router-link>
@@ -109,14 +109,14 @@
             <router-link
               :to="{name: 'questionnaire', params: {username: user.profile.username}}"
               tag="button"
-              class="tertiary">
+              class="tertiary aria-btn">
               Re-Take Quiz
             </router-link>
 
             <router-link
               :to="{name: 'results', params: {username: user.profile.username}}"
               tag="button"
-              class="secondary">
+              class="secondary aria-btn">
               Quiz results
             </router-link>
           </div>

@@ -22,6 +22,7 @@
           <router-link 
             :to="{name: 'help-centre'}"
             tag="button"
+            class="aria-btn"
             :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
             Help Centre
           </router-link>
@@ -35,7 +36,7 @@
               <router-link 
                 :to="{ name: 'settings' }"
                 tag="button"
-                class="tertiary">
+                class="tertiary aria-btn">
                 Settings
               </router-link>
               page.</p>
@@ -45,7 +46,7 @@
           <button 
             @click="logOut" 
             type="button"
-            class="secondary">
+            class="secondary aria-btn">
             Log Out
           </button>
         </div>

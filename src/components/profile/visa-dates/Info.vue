@@ -1,14 +1,19 @@
 <template>
   <div>
-    <button 
-      class="open"
-      @click="openModal">
+    <button
+      id="visa-dates-btn"
+      class="open aria-btn"
+      @click="openModal"
+      aria-label="Open Key visa application dates information"
+      aria-expanded="false"
+      aria-controls="visa-dates-modal">
       <img :src="lightbulb" class="icon">
     </button>
 
     <transition name="modal" mode="out-in">
       <div 
         v-if="open"
+        id="visa-dates-modal"
         class="modal">
         <article>
           <h3>How application guidlines are calculated.</h3>
@@ -19,7 +24,8 @@
           <div class="close">
             <button 
               @click="closeModal"
-              class="tertiary">
+              class="tertiary"
+              aria-label="Close Key visa application dates information">
               Close
             </button>
           </div>
@@ -46,6 +52,12 @@ export default {
       overlay.style.opacity = 1;
       overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
+
+      const button = document.querySelector('#visa-dates-btn');
+      button.setAttribute('aria-expanded', 'true');
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '-1');
     },
     closeModal() {
       this.open = false;
@@ -53,6 +65,17 @@ export default {
       overlay.style.opacity = 0;
       overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
+
+      const button = document.querySelector('#visa-dates-btn');
+      button.setAttribute('aria-expanded', 'false');
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '0');
+    },
+    changeBtnFocus(buttons, focus) {
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
+      })
     }
   }
 }

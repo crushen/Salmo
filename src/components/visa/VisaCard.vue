@@ -28,7 +28,8 @@
       <div v-if="user && favouriteVisa !== 'none'">
         <button
           @click="makeFavorite"
-          class="heart">
+          class="heart aria-btn"
+          aria-label="Make favourite visa">
           <img :src="heart">
         </button>
 

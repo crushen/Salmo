@@ -61,7 +61,7 @@
           <div class="add-holiday">
             <button 
               @click="openModal"
-              class="pink"
+              class="pink aria-btn"
               :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
               Add Holiday
             </button>
@@ -69,7 +69,7 @@
             <button
               v-if="user.profile.holiday.length"
               @click="editHoliday = !editHoliday"
-              class="secondary">
+              class="secondary aria-btn">
               {{ editText }}
             </button>
           </div>
@@ -82,7 +82,9 @@
           <p class="margin">To qualify for ILR, you are only allowed <b>180 days</b> of absence per rolling 12 month periods starting from the date of your first holiday. However any dates pre Nov 2016 will be calculated on a fixed 12 months from the date of your visa start.</p>
 
           <div class="button">
-            <button class="tertiary">
+            <button
+              aria-label="Read more about how you qualify for ILR"
+              class="tertiary aria-btn">
               Read More...
             </button>
           </div>
