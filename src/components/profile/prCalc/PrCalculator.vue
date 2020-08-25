@@ -1,7 +1,8 @@
 <template>
   <div>
     <transition name="modal" mode="out-in">
-      <add-holiday 
+      <add-holiday
+        id="add-holiday-modal"
         v-if="modalOpen"
         @closeModal="modalOpen = false"
         @addHoliday="updateHoliday" />
@@ -61,8 +62,11 @@
           <div class="add-holiday">
             <button 
               @click="openModal"
+              id="add-holiday-btn"
               class="pink aria-btn"
-              :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
+              :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}"
+              aria-expanded="false"
+              aria-controls="add-holiday-modal">
               Add Holiday
             </button>
 
@@ -237,6 +241,12 @@ export default {
     openModal() {
       this.modalOpen = true;
       this.showOverlay();
+
+      const button = document.querySelector('#add-holiday-btn');
+      button.setAttribute('aria-expanded', 'true');
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '-1');
     },
     updateHoliday() {
       this.checkIfPre2016();
@@ -265,6 +275,11 @@ export default {
       overlay.style.opacity = 1;
       overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
+    },
+    changeBtnFocus(buttons, focus) {
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
+      })
     },
     date(oldDate) {
       const newDate = oldDate.split('-');
