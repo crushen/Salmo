@@ -19,14 +19,14 @@
           <router-link
             :to="{ name: 'non-eu' }"
             tag="button"
-            class="tertiary">
+            class="tertiary aria-btn">
             Change Favourite Visa
           </router-link>
           <p>The below can help you keep track of what documentation you need and the process overall. You can also revisit your Quiz Results if you want to see more options.</p>
           <router-link
             :to=" {name: 'results', params: {username: user.username} }"
             tag="button"
-            class="secondary">
+            class="secondary aria-btn">
             Quiz results
           </router-link>
         </section>

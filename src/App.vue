@@ -93,7 +93,6 @@ export default {
   outline: auto;
 }
 
-/* When mouse is detected, ALL focused elements have outline removed. */
 body.using-mouse :focus {
   outline: none;
 }

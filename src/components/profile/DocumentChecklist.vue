@@ -17,7 +17,7 @@
           <pretty-check 
             v-model="item.checked"
             :id="`check-${index}`"
-            class="p-icon p-smooth" 
+            class="p-icon p-smooth"
             color="danger">
             <i slot="extra" class="icon fa fa-check"></i>
           </pretty-check>

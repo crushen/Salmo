@@ -19,7 +19,7 @@
         <button
           @click="selectedTab = 1"
           :class="{'selected': 1 === selectedTab}"
-          class="tab"
+          class="tab aria-btn"
           aria-label="Show information on approved visas"
           :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
           <p>Approved</p>
@@ -27,7 +27,7 @@
         <button
           @click="selectedTab = 2"
           :class="{'selected': 2 === selectedTab}"
-          class="tab"
+          class="tab aria-btn"
           aria-label="Show information on denied visas"
           :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
           <p>Denied</p>
