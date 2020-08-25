@@ -9,7 +9,8 @@
       <router-link
         tag="button"
         :to="{ name: 'visa-page', params: { slug: visa.slug } }"
-        :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
+        :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}"
+        :aria-label="`Tell me more about ${visa.name}`">
         Tell Me More!
       </router-link>
     </div>
