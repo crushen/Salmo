@@ -1,5 +1,8 @@
 <template>
-  <div v-on-clickaway="closeModal" class="modal">
+  <div
+    v-on-clickaway="closeModal"
+    class="modal"
+    @keydown.esc="closeModal">
     <h3>Edit holiday</h3>
 
     <div class="field">
@@ -328,6 +331,17 @@ export default {
       overlay.style.opacity = 0;
       overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
+
+      const button = document.querySelector('#edit-holiday-btn');
+      button.setAttribute('aria-expanded', 'false');
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '0');
+    },
+    changeBtnFocus(buttons, focus) {
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
+      })
     },
     resetErrors() {
       this.errors.dates = false;

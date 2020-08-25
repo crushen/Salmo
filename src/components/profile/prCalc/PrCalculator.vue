@@ -7,7 +7,8 @@
         @closeModal="modalOpen = false"
         @addHoliday="updateHoliday" />
 
-      <edit-holiday 
+      <edit-holiday
+        id="edit-holiday-modal"
         v-if="editOpen"
         :holiday="sortByDate"
         :index="index"
@@ -34,30 +35,36 @@
         <p class="text">To gain Indefinite Leave to Remain and eventually become a British Citizen, there are rules you’ll need to follow around absenses from the UK, to ensure you qualify.</p>
         <p v-if="!user.profile.holiday.length">Let’s get started! First enter in all the dates you’ve left the UK (including the dates of travel) and we will take care of the rest...</p>
         <div class="holiday-input">
-          <div 
+          <ul 
             v-if="user.profile.holiday.length"
             class="inner">
-            <div
+            <li
               v-for="(item, index) in sortByDate"
               :key="index"
               class="item">
               <p class="location">{{ item.location }}</p>
-              <p class="dates">{{ date(item.start) }} - {{ date(item.end) }}</p>
+              <p
+                class="dates" 
+                :aria-label="`${item.location} start and end`">
+                {{ date(item.start) }} - {{ date(item.end) }}
+              </p>
 
               <div v-if="editHoliday" class="edit-delete">
                 <button
                   @click="openEdit(index)"
-                  class="tertiary">
+                  class="tertiary aria-btn"
+                  :aria-label="`Edit ${item.location}`">
                   Edit
                 </button>
                 <button 
                   @click="openAlert(index)"
-                  class="tertiary">
+                  class="tertiary aria-btn"
+                  :aria-label="`Delete ${item.location}`">
                   Delete
                 </button>
               </div>
-            </div>
-          </div>
+            </li>
+          </ul>
 
           <div class="add-holiday">
             <button 
@@ -73,7 +80,10 @@
             <button
               v-if="user.profile.holiday.length"
               @click="editHoliday = !editHoliday"
-              class="secondary aria-btn">
+              id="edit-holiday-btn"
+              class="secondary aria-btn"
+              aria-expanded="false"
+              aria-controls="edit-holiday-modal">
               {{ editText }}
             </button>
           </div>
@@ -104,15 +114,9 @@
           </div>
 
           <section v-if="pre2016.length">
-            <!-- <h3 class="underline">Before November 2016</h3>
-            <p>Your pr is calculated per year from the start date of your visa, so you can only take 180 days per year from the start date of the visa you were on at the time.</p> -->
-
             <div
               v-for="visa in pre2016visas"
               :key="visa.start">
-              <!-- <h3>{{ visa.name }}</h3>
-              <p>Visa start date - {{ new Date(visa.start).toDateString() }}</p> -->
-
               <div
                 v-for="(year, index) in visa.years"
                 :key="index"
@@ -149,9 +153,6 @@
           </section>
 
           <section v-if="post2016holiday.length">
-            <!-- <h3 class="underline">From November 2016</h3>
-            <p>Your pr is calculated on a 12 month basis, so you can only take 180 days within a 12 month period.</p> -->
-
             <div
               v-for="year in post2016holiday"
               :key="year.start.toString()"
@@ -257,6 +258,12 @@ export default {
       this.editOpen = true;
       this.index = index;
       this.showOverlay();
+
+      const button = document.querySelector('#edit-holiday-btn');
+      button.setAttribute('aria-expanded', 'true');
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '-1');
     },
     openAlert(index) {
       this.showAlert = true; 
