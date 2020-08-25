@@ -4,7 +4,7 @@
       <add-holiday
         id="add-holiday-modal"
         v-if="modalOpen"
-        @closeModal="modalOpen = false"
+        @closeModal="modalOpen = false, closeEdits()"
         @addHoliday="updateHoliday" />
 
       <edit-holiday
@@ -51,9 +51,11 @@
 
               <div v-if="editHoliday" class="edit-delete">
                 <button
+                  :id="`edit-btn-${index}`"
                   @click="openEdit(index)"
-                  class="tertiary aria-btn"
-                  :aria-label="`Edit ${item.location}`">
+                  class="tertiary aria-btn edit-btn"
+                  :aria-label="`Edit ${item.location}`"
+                  aria-expanded="false">
                   Edit
                 </button>
                 <button 
@@ -82,7 +84,6 @@
               @click="editHoliday = !editHoliday"
               id="edit-holiday-btn"
               class="secondary aria-btn"
-              aria-expanded="false"
               aria-controls="edit-holiday-modal">
               {{ editText }}
             </button>
@@ -259,11 +260,18 @@ export default {
       this.index = index;
       this.showOverlay();
 
-      const button = document.querySelector('#edit-holiday-btn');
+      const button = document.querySelector(`#edit-btn-${index}`);
       button.setAttribute('aria-expanded', 'true');
 
       const ariaBtns = document.querySelectorAll('.aria-btn');
       this.changeBtnFocus(ariaBtns, '-1');
+    },
+    closeEdits() {
+      const editBtns = document.querySelectorAll('.edit-btn');
+
+      editBtns.forEach(btn => {
+        btn.setAttribute('aria-expanded', 'false');
+      })
     },
     openAlert(index) {
       this.showAlert = true; 
