@@ -18,6 +18,7 @@
           <div class="inner">
             <img 
               :src="item.icon"
+              :alt="item.alt"
               class="icon">
             <p>{{ item.label }}</p>
           </div>
@@ -44,7 +45,8 @@
         tag="button"
         :to="{ name: 'visa-page', params: { slug: visa.slug } }"
         :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}"
-        class="aria-btn">
+        class="aria-btn"
+        :aria-label="`Tell me more about ${visa.name }`">
         Tell Me More!
       </router-link>
     </div>
@@ -96,10 +98,13 @@ export default {
       this.checklist.forEach(item => {
         if(item.state === 'maybe') {
           item.icon = this.question;
+          item.alt = 'question mark'
         } else if(item.state === 'true') {
           item.icon = this.check;
+          item.alt = 'check'
         } else {
           item.icon = this.cross;
+          item.alt = 'cross'
         }
       });
     },
