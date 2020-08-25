@@ -1,5 +1,8 @@
 <template>
-  <div v-on-clickaway="closeModal" class="modal" @keydown.esc="closeModal">
+  <div
+    v-on-clickaway="closeModal"
+    class="modal"
+    @keydown.esc="closeModal">
     <h3>Add a new holiday</h3>
 
     <div class="field">

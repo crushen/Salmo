@@ -15,7 +15,8 @@
         v-if="open"
         :id="`${visa.slug }-modal`"
         class="modal"
-        role="region">
+        role="region"
+        @keydown.esc="closeModal">
         <article>
           <img :src="lightbulbYellow" class="lightbulb-yellow">
           <img :src="lightbulbYellow" class="lightbulb-yellow">

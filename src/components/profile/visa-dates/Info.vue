@@ -14,7 +14,8 @@
       <div 
         v-if="open"
         id="visa-dates-modal"
-        class="modal">
+        class="modal"
+        @keydown.esc="closeModal">
         <article>
           <h3>How application guidlines are calculated.</h3>
 
