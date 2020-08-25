@@ -4,7 +4,7 @@
       class="open aria-btn"
       @click="openModal"
       :id="`${visa.slug }-modal-btn`"
-      :aria-label="`open ${visa.name } modal`"
+      :aria-label="`open ${visa.name } quick tip`"
       :aria-controls="`${visa.slug }-modal`"
       aria-expanded="false">
       <img :src="lightbulb" class="icon">
@@ -30,7 +30,7 @@
             <button 
               @click="closeModal"
               class="tertiary"
-              :aria-label="`close ${visa.name } modal`">
+              :aria-label="`close ${visa.name } quick tip`">
               Close
             </button>
           </div>
