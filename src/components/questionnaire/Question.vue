@@ -17,9 +17,9 @@
               class="button"
               v-for="(answer, index) in question.answers"
               :key="index"
-              @click="selectButton(answer.value, index)"
+              @click="selected = answer.value"
               :style="{ backgroundImage: buttonBackground(index) }"
-              aria-pressed="false">
+              :aria-pressed="answer.value === selected ?  'true' : 'false'">
               <div v-if="answer.value !== selected && selected !== null" class="btn-overlay"></div>
               <p>{{ answer.text }}</p>
               <img :src="buttonIcon(index)" class="icon">
@@ -114,12 +114,6 @@ export default {
     }
   },
   methods: {
-    selectButton(answer, index) {
-      this.selected = answer;
-
-      const button = document.querySelector(`#button-${index}`);
-      button.setAttribute('aria-pressed', 'true');
-    },
     submitAnswer() {
       this.$emit('submitAnswer', this.selected);
       this.selected = null;
