@@ -110,7 +110,8 @@
             <router-link
               :to="{ name: 'profile', params: {username: user.username} }"
               tag="button"
-              :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}">
+              :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}"
+              class="aria-btn">
               Go To Profile
             </router-link>
           </div>
@@ -123,7 +124,7 @@
             <router-link
               :to="{name: 'questionnaire', params: {username: user.username}}"
               tag="button"
-              class="tertiary">
+              class="tertiary aria-btn">
               Take Quiz Again
             </router-link>
           </div>
