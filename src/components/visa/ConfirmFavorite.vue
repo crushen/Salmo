@@ -1,5 +1,5 @@
 <template>
-  <div class="modal">
+  <div class="modal" @keydown.esc="close">
     <div v-if="user.favoriteVisa">
       <p>This will change your favorite visa from <span>{{ user.favoriteVisa.name }}</span> to <span>{{ visa.name }}</span>.</p>
       <p>Changing your favorite visa will also change your documentation checklist, and any changes you've made to it will be lost.</p>
@@ -44,6 +44,9 @@ export default {
         this.$store.dispatch('auth/updateProfile', this.user);
         this.$emit('closeModal');
       }
+    },
+    close() {
+      this.$emit('closeModal');
     }
   }
 }

@@ -27,9 +27,21 @@
 
       <div v-if="user && favouriteVisa !== 'none'">
         <button
+          v-if="favouriteVisa === visa.name"
           @click="makeFavorite"
           class="heart aria-btn"
-          aria-label="Make favourite visa">
+          aria-label="Favourite this visa"
+          disabled>
+          <img :src="heart">
+        </button>
+
+        <button
+          v-else
+          :id="`${visa.slug}-fave-btn`"
+          @click="makeFavorite"
+          class="heart aria-btn"
+          aria-label="Favourite this visa"
+          aria-expanded="false">
           <img :src="heart">
         </button>
 
@@ -117,6 +129,12 @@ export default {
         document.querySelector('body').style.overflow = 'hidden';
         this.favourite = true;
         this.confirmChange = true;
+
+        const button = document.querySelector(`#${this.visa.slug}-fave-btn`);
+        button.setAttribute('aria-expanded', 'true');
+
+        const ariaBtns = document.querySelectorAll('.aria-btn');
+        this.changeBtnFocus(ariaBtns, '-1');
       }
     },
     closeModal() {
@@ -125,6 +143,17 @@ export default {
       overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
       this.confirmChange = false;
+
+      const button = document.querySelector(`#${this.visa.slug}-fave-btn`);
+      button.setAttribute('aria-expanded', 'false');
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '0');
+    },
+    changeBtnFocus(buttons, focus) {
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
+      })
     }
   },
   mounted() {
