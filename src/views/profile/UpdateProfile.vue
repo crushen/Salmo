@@ -97,7 +97,8 @@
             <p>{{ date(user.currentVisa.start) }} - {{ date(user.currentVisa.end) }}</p>
             <button 
               @click="editCurrentVisa = true"
-              class="tertiary">
+              class="tertiary"
+              :aria-label="`Edit ${user.currentVisa.name} visa`">
               Edit Visa
             </button>
             <div class="space"></div>
@@ -211,13 +212,15 @@
               <p>{{ date(visa.start) }} - {{ date(visa.end) }}</p>
               <button 
                 @click="editPastVisa = index"
-                class="tertiary">
+                class="tertiary"
+                :aria-label="`Edit ${visa.name} visa`">
                 Edit Visa
               </button>
 
               <div 
                 @click="removePastVisa(index)"
-                class="tertiary delete-button">
+                class="tertiary delete-button"
+                :aria-label="`Delete ${visa.name} visa`">
                 Delete
               </div>
             </div>
