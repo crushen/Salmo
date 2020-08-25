@@ -10,7 +10,8 @@
           name="fade">
           <button
             v-if="!open"
-            @click="open = true">
+            @click="open = true"
+            class="aria-btn">
             <div class="open">
               <div class="line"></div>
               <div class="line"></div>
