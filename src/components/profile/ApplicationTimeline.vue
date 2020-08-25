@@ -16,18 +16,22 @@
         </div>
       </div>
       <div class="tabs">
-        <div
+        <button
           @click="selectedTab = 1"
           :class="{'selected': 1 === selectedTab}"
-          class="tab">
+          class="tab"
+          aria-label="Show information on approved visas"
+          :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
           <p>Approved</p>
-        </div>
-        <div
+        </button>
+        <button
           @click="selectedTab = 2"
           :class="{'selected': 2 === selectedTab}"
-          class="tab">
+          class="tab"
+          aria-label="Show information on denied visas"
+          :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
           <p>Denied</p>
-        </div>
+        </button>
       </div>
       <div class="bottom">
         <transition name="slide" mode="out-in">
@@ -41,7 +45,7 @@
 
           <div v-else key="2">
             <p>Don’t give up!</p>
-            <p>It can be really tough to have you visa denied, but you’re not out of options yet.</p>
+            <p>It can be really tough to have your visa denied, but you’re not out of options yet.</p>
             <p>If you feel as though you were misjudged, you can ask for a review.</p>
 
             <img src="@/assets/illustrations/profilePages/Application fail.svg" alt="">
@@ -143,6 +147,8 @@ export default {
     height: 80%;
     background: #ffe4b3;
     color: $grey;
+    border-radius: 0;
+    box-shadow: none;
     border-top-right-radius: $border-radius;
     border-top-left-radius: $border-radius;
     display: flex;
