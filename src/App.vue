@@ -65,6 +65,16 @@ export default {
     window.addEventListener('resize', () => {
       this.innerWidth = window.innerWidth;
     })
+
+    window.addEventListener('mousedown', () => {
+      document.body.classList.add('using-mouse');
+    })
+
+    window.addEventListener('keydown', event => {
+      if(event.keyCode === 9) {
+        document.body.classList.remove('using-mouse');
+      }
+    });
   }
 }
 </script>
@@ -77,6 +87,15 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+:focus {
+  outline: auto;
+}
+
+/* When mouse is detected, ALL focused elements have outline removed. */
+body.using-mouse :focus {
+  outline: none;
 }
 
 #app {
