@@ -135,21 +135,21 @@
                   v-if="year.icon === 'tick'"
                   src="@/assets/icons/calculator/tick.svg" 
                   alt="Check - This year has under 180 days holiday" 
-                  class="icon"
+                  class="icon aria-btn"
                   tabindex="0">
 
                 <img
                   v-if="year.icon === 'exclamation'"
                   src="@/assets/icons/calculator/exclamation.svg" 
                   alt="Exclamation point - This year is close to 180 days holiday" 
-                  class="icon"
+                  class="icon aria-btn"
                   tabindex="0">
 
                 <img
                   v-if="year.icon === 'cross'"
                   src="@/assets/icons/calculator/cross.svg" 
                   alt="Cross - This year has over 180 days holiday" 
-                  class="icon"
+                  class="icon aria-btn"
                   tabindex="0">
               </div>
             </div>
@@ -173,21 +173,21 @@
                 v-if="year.icon === 'tick'"
                 src="@/assets/icons/calculator/tick.svg" 
                 alt="Check - This year has under 180 days holiday" 
-                class="icon"
+                class="icon aria-btn"
                 tabindex="0">
 
               <img
                 v-if="year.icon === 'exclamation'"
                 src="@/assets/icons/calculator/exclamation.svg" 
                 alt="Exclamation point - This year is close to 180 days holiday" 
-                class="icon"
+                class="icon aria-btn"
                 tabindex="0">
 
               <img
                 v-if="year.icon === 'cross'"
                 src="@/assets/icons/calculator/cross.svg" 
                 alt="Cross - This year has over 180 days holiday" 
-                class="icon"
+                class="icon aria-btn"
                 tabindex="0">
             </div>
           </section>
