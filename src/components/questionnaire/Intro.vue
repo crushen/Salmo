@@ -17,7 +17,11 @@
     </div>
 
     <div class="moving-btn">
-      <a @click="startQuestionnaire">
+      <a
+        @click="startQuestionnaire"
+        @keyup.enter="startQuestionnaire"
+        tabindex="0"
+        aria-label="Start quiz">
         <div class="container"> 
           <p>Start Quiz</p> 
 

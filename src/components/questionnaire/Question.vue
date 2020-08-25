@@ -13,11 +13,13 @@
       <div v-if="currentQuestion === 0">
           <div class="buttons">
             <button
+              :id="`button-${index}`"
               class="button"
               v-for="(answer, index) in question.answers"
               :key="index"
-              @click="selected = answer.value"
-              :style="{ backgroundImage: buttonBackground(index) }">
+              @click="selectButton(answer.value, index)"
+              :style="{ backgroundImage: buttonBackground(index) }"
+              aria-pressed="false">
               <div v-if="answer.value !== selected && selected !== null" class="btn-overlay"></div>
               <p>{{ answer.text }}</p>
               <img :src="buttonIcon(index)" class="icon">
@@ -40,17 +42,34 @@
 
       <div class="nav">
         <button
-          @click="previousQuestion"
-          class="tertiary"
-          :class="{ 'inactive': currentQuestion === 0 }">
+          v-if="currentQuestion === 0"
+          class="tertiary inactive"
+          disabled>
           <span>&#8227;</span> 
           <p>Previous</p>
         </button>
 
         <button
+          v-else
+          @click="previousQuestion"
+          class="tertiary"
+          aria-label="Previous question">
+          <span>&#8227;</span> 
+          <p>Previous</p>
+        </button>
+
+        <button
+          v-if="!selected"
+          class="secondary inactive"
+          disabled>
+          Next <span>&#8227;</span>
+        </button>
+
+        <button
+          v-else
           @click="submitAnswer"
-          :class="{'inactive': !selected}"
-          class="secondary">
+          class="secondary"
+          aria-label="Next question">
           Next <span>&#8227;</span>
         </button>
       </div>
@@ -95,6 +114,12 @@ export default {
     }
   },
   methods: {
+    selectButton(answer, index) {
+      this.selected = answer;
+
+      const button = document.querySelector(`#button-${index}`);
+      button.setAttribute('aria-pressed', 'true');
+    },
     submitAnswer() {
       this.$emit('submitAnswer', this.selected);
       this.selected = null;
