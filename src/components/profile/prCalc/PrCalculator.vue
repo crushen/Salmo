@@ -83,8 +83,7 @@
               v-if="user.profile.holiday.length"
               @click="editHoliday = !editHoliday"
               id="edit-holiday-btn"
-              class="secondary aria-btn"
-              aria-controls="edit-holiday-modal">
+              class="secondary aria-btn">
               {{ editText }}
             </button>
           </div>
@@ -135,20 +134,23 @@
                 <img
                   v-if="year.icon === 'tick'"
                   src="@/assets/icons/calculator/tick.svg" 
-                  alt="" 
-                  class="icon">
+                  alt="Check - This year has under 180 days holiday" 
+                  class="icon"
+                  tabindex="0">
 
                 <img
                   v-if="year.icon === 'exclamation'"
                   src="@/assets/icons/calculator/exclamation.svg" 
-                  alt="" 
-                  class="icon">
+                  alt="Exclamation point - This year is close to 180 days holiday" 
+                  class="icon"
+                  tabindex="0">
 
                 <img
                   v-if="year.icon === 'cross'"
                   src="@/assets/icons/calculator/cross.svg" 
-                  alt="" 
-                  class="icon">
+                  alt="Cross - This year has over 180 days holiday" 
+                  class="icon"
+                  tabindex="0">
               </div>
             </div>
           </section>
@@ -170,20 +172,23 @@
               <img
                 v-if="year.icon === 'tick'"
                 src="@/assets/icons/calculator/tick.svg" 
-                alt="" 
-                class="icon">
+                alt="Check - This year has under 180 days holiday" 
+                class="icon"
+                tabindex="0">
 
               <img
                 v-if="year.icon === 'exclamation'"
                 src="@/assets/icons/calculator/exclamation.svg" 
-                alt="" 
-                class="icon">
+                alt="Exclamation point - This year is close to 180 days holiday" 
+                class="icon"
+                tabindex="0">
 
               <img
                 v-if="year.icon === 'cross'"
                 src="@/assets/icons/calculator/cross.svg" 
-                alt="" 
-                class="icon">
+                alt="Cross - This year has over 180 days holiday" 
+                class="icon"
+                tabindex="0">
             </div>
           </section>
         </div>
