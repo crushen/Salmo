@@ -7,6 +7,14 @@
         @close="closeQuickTip"/>
     </transition>
 
+    <transition name="modal" mode="out-in">
+      <confirm-favorite 
+        v-if="confirmChange"
+        :visa="visa"
+        :user="user.profile"
+        @closeModal="closeModal" />
+    </transition>
+
     <div class="card visa-card-pointer">
       <div class="title">
         <button 
@@ -59,14 +67,6 @@
             aria-expanded="false">
             <img :src="heart">
           </button>
-
-          <transition name="modal" mode="out-in">
-            <confirm-favorite 
-              v-if="confirmChange"
-              :visa="visa"
-              :user="user.profile"
-              @closeModal="closeModal" />
-          </transition>
         </div>
 
         <router-link
@@ -156,6 +156,11 @@ export default {
 
         const ariaBtns = document.querySelectorAll('.aria-btn');
         this.changeBtnFocus(ariaBtns, '-1');
+
+        const cards = document.querySelectorAll('.visa-card-pointer');
+        cards.forEach(card => {
+          card.style.pointerEvents = 'none';
+        })
       }
     },
     openQuickTip() {
@@ -206,6 +211,11 @@ export default {
 
       const ariaBtns = document.querySelectorAll('.aria-btn');
       this.changeBtnFocus(ariaBtns, '0');
+
+      const cards = document.querySelectorAll('.visa-card-pointer');
+      cards.forEach(card => {
+        card.style.pointerEvents = 'auto';
+      })
     },
     changeBtnFocus(buttons, focus) {
       buttons.forEach(btn => {
