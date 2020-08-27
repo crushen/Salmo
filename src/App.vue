@@ -19,7 +19,9 @@
       class="small-logo">
 
     <div class="content-wrapper">
-      <router-view/>
+      <transition name="page" mode="out-in">
+        <router-view />
+      </transition>
     </div>
   </div>
 </template>
@@ -95,6 +97,16 @@ export default {
 
 body.using-mouse :focus {
   outline: none;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: 0.4s;
+}
+
+.page-enter, 
+.page-leave-to {
+  opacity: 0;
 }
 
 #app {

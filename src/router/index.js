@@ -173,12 +173,11 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
   scrollBehavior (to, from) {
-    // if(to.name === 'home' && from.name === 'login') {
-    //   return { x: 0, y: document.body.scrollHeight }
-    // } else {
-    //   return { x: 0, y: 0 }
-    // }
-    return { x: 0, y: 0 }
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ x: 0, y: 0 })
+      }, 400)
+    })
   }
 })
 
