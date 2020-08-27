@@ -11,14 +11,24 @@
     </div>
 
     <div class="buttons">
-      <button @click="handleConfirm" class="secondary">No Thanks</button>
-      <button @click="handleConfirm" class="pink">Yes!</button>
+      <button
+        @click="handleConfirm"
+        class="secondary">
+        No Thanks
+      </button>
+      <button
+        @click="handleConfirm"
+        class="pink"
+        :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
+        Yes!
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import waveV from '@/assets/patterns/wave-verticle.svg';
 
 export default {
   props: {
@@ -27,6 +37,7 @@ export default {
   },
   data() {
     return {
+      waveV
     }
   },
   computed: {
