@@ -37,28 +37,44 @@ export default {
   border-radius: $border-radius;
   box-shadow: $shadow;
   color: $light-font;
-}
+  transition: 0.2s;
 
-.text {
-  border-bottom-left-radius: $border-radius;
-  border-bottom-right-radius: $border-radius;
-  padding: $spacing;
+  .text {
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    padding: $spacing;
+    transition: 0.2s;
 
-  &.blue {
-    background: $primary-blue;
+    &.blue {
+      background: $primary-blue;
+    }
+
+    &.red {
+      background: $primary-pink;
+    }
+
+    h3 {
+      margin-bottom: $spacing;
+      font-weight: 300;
+    }
+
+    p {
+      font-weight: 600;
+    }
   }
 
-  &.red {
-    background: $primary-pink;
-  }
+  &:hover {
+    transform: scale(1.02);
 
-  h3 {
-    margin-bottom: $spacing;
-    font-weight: 300;
-  }
+    .text {
+      &.blue {
+        background: darken($color: $primary-blue, $amount: 5%);
+      }
 
-  p {
-    font-weight: 600;
+      &.red {
+        background: darken($color: $primary-pink, $amount: 5%);
+      }
+    }
   }
 }
 
