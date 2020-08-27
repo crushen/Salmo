@@ -93,16 +93,29 @@ export default {
       return this.$store.getters['auth/isAuthenticated'];
     }
   },
+  methods: {
+    changeBtnFocus(buttons, focus) {
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
+      })
+    }
+  },
   mounted() {
     if(this.$store.state.auth.loggedOut) {
       setTimeout(() => {
         this.loggedOut = true;
+
+        const ariaBtns = document.querySelectorAll('.aria-btn');
+        this.changeBtnFocus(ariaBtns, '-1');
       }, 500)
     }
 
     if(this.$store.state.auth.userDeleted) {
       setTimeout(() => {
         this.userDeleted = true;
+
+        const ariaBtns = document.querySelectorAll('.aria-btn');
+        this.changeBtnFocus(ariaBtns, '-1');
       }, 500)
     }
 

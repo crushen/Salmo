@@ -161,7 +161,13 @@ export default {
         this.questionsStage = false;
         this.$router.push({name: 'results', params: {username: this.user.profile.username}});
       }, 2000);
-    } 
+    },
+    changeBtnFocus(buttons, focus) {
+      console.log('hello')
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
+      })
+    }
   },
   beforeRouteLeave(to, from, next) {
     if(this.questionsStage) {
@@ -174,6 +180,9 @@ export default {
         document.querySelector('body').style.overflow = 'hidden';
         this.to = to;
         this.showAlert = true;
+
+        const ariaBtns = document.querySelectorAll('.aria-btn');
+        this.changeBtnFocus(ariaBtns, '-1');
       }
     } else {
       next();

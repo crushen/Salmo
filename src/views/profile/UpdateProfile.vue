@@ -34,7 +34,7 @@
             placeholder="Username"
             autocomplete="username"
             id="username"
-            class="form">
+            class="form aria-btn">
           <div v-if="$v.profileToUpdate.username.$error">
             <p v-if="!$v.profileToUpdate.username.required" class="error">Username is required</p>
             <p v-if="!$v.profileToUpdate.username.minLength" class="error">Username should be at least 6 characters</p>
@@ -50,7 +50,7 @@
             type="date" 
             placeholder="Birthday"
             id="dob"
-            class="form unstyled">
+            class="form unstyled aria-btn">
             <p v-if="errors.birthday" class="error">Birthday is required</p>
         </div>
 
@@ -60,7 +60,7 @@
             v-model="profileToUpdate.dependants"
             name="Dependants"
             id="dependants"
-            class="form">
+            class="form aria-btn">
             <option
               v-for="dependant in dependantsList"
               :key="dependant"
@@ -74,7 +74,7 @@
         <div class="field">
           <label for="nationality">Nationality</label>
           <select 
-            class="form"
+            class="form aria-btn"
             v-model="profileToUpdate.nationality"
             name="Nationality"
             id="nationality">
@@ -97,7 +97,7 @@
             <p>{{ date(user.currentVisa.start) }} - {{ date(user.currentVisa.end) }}</p>
             <button 
               @click="editCurrentVisa = true"
-              class="tertiary"
+              class="tertiary aria-btn"
               :aria-label="`Edit ${user.currentVisa.name} visa`">
               Edit Visa
             </button>
@@ -110,7 +110,7 @@
             <div class="field current-visa">
               <label for="current-visa">Current visa</label>
               <select
-                class="form" 
+                class="form aria-btn" 
                 v-model="profileToUpdate.currentVisa.name"
                 name="Current Visa"
                 id="current-visa">
@@ -130,7 +130,7 @@
                   v-model="profileToUpdate.currentVisa.start"
                   type="date"
                   id="current-start"
-                  class="form unstyled">
+                  class="form unstyled aria-btn">
               </div>
 
               <div>
@@ -139,7 +139,7 @@
                   v-model="profileToUpdate.currentVisa.end"
                   type="date"
                   id="current-end"
-                  class="form unstyled">
+                  class="form unstyled aria-btn">
               </div>
             </div>
           </div>
@@ -160,7 +160,7 @@
               <div class="field past-visa">
                 <label :for="`past-visa-${index}`">Past visa</label>
                 <select
-                  class="form" 
+                  class="form aria-btn" 
                   v-model="visa.name"
                   name="Current Visa"
                   :id="`past-visa-${index}`">
@@ -180,7 +180,7 @@
                     v-model="visa.start"
                     type="date"
                     :id="`past-start-${index}`"
-                    class="form unstyled">
+                    class="form unstyled aria-btn">
                 </div>
 
                 <div>
@@ -189,14 +189,14 @@
                     v-model="visa.end"
                     type="date"
                     :id="`current-end-${index}`"
-                    class="form unstyled">
+                    class="form unstyled aria-btn">
                 </div>
               </div>
             </div>
 
             <button
               @click="removePastVisa(index)"
-              class="tertiary remove"
+              class="tertiary remove aria-btn"
               type="button">
               Remove this visa
             </button>
@@ -212,14 +212,16 @@
               <p>{{ date(visa.start) }} - {{ date(visa.end) }}</p>
               <button 
                 @click="editPastVisa = index"
-                class="tertiary"
+                class="tertiary aria-btn"
                 :aria-label="`Edit ${visa.name} visa`">
                 Edit Visa
               </button>
 
               <div 
                 @click="removePastVisa(index)"
-                class="tertiary delete-button"
+                @keyup.enter="removePastVisa(index)"
+                class="tertiary delete-button aria-btn"
+                tabindex="0"
                 :aria-label="`Delete ${visa.name} visa`">
                 Delete
               </div>
@@ -237,7 +239,7 @@
 
         <button 
           @click="addPastVisa"
-          class="tertiary"
+          class="tertiary aria-btn"
           type="button">
           + Add Past Visa
         </button>
@@ -246,7 +248,7 @@
           <input 
             type="submit" 
             value="Save Changes"
-            class="pink"
+            class="pink aria-btn"
             :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
         </div>
       </form>
@@ -697,6 +699,9 @@ export default {
       overlay.style.opacity = 1;
       overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '-1');
     },
     confirmRemove() {
       this.deleteVisa = false;
@@ -706,6 +711,12 @@ export default {
     date(oldDate) {
       const newDate = oldDate.split('-');
       return newDate.reverse().join('/');
+    },
+    changeBtnFocus(buttons, focus) {
+      console.log('hello')
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
+      })
     }
   },
   watch: {
@@ -739,6 +750,9 @@ export default {
         document.querySelector('body').style.overflow = 'hidden';
         this.to = to;
         this.showAlert = true;
+
+        const ariaBtns = document.querySelectorAll('.aria-btn');
+        this.changeBtnFocus(ariaBtns, '-1');
       }
     } else {
       next();
@@ -833,6 +847,7 @@ h3 {
   .delete-button {
     margin-left: $spacing*3;
     display: inline-block;
+    cursor: pointer;
   }
   // .delete {
   //   width: 30px;

@@ -16,7 +16,7 @@
               placeholder="First and Last name"
               autocomplete="name"
               id="name"
-              class="form">
+              class="form aria-btn">
             <div v-if="$v.form.name.$error">
               <p v-if="!$v.form.name.required" class="error">Name is required</p>
             </div>
@@ -30,7 +30,7 @@
               placeholder="Be imaginitive!"
               autocomplete="username"
               id="username"
-              class="form">
+              class="form aria-btn">
             <div v-if="$v.form.username.$error">
               <p v-if="!$v.form.username.required" class="error">Username is required</p>
               <p v-if="!$v.form.username.minLength" class="error">Username should be at least 6 characters</p>
@@ -46,7 +46,7 @@
               placeholder="example@mail.com"
               autocomplete="email"
               id="email"
-              class="form">
+              class="form aria-btn">
             <div v-if="$v.form.email.$error">
               <p v-if="!$v.form.email.required" class="error">Email is required</p>
               <p v-if="!$v.form.email.email" class="error">Email address is not valid</p>
@@ -62,7 +62,7 @@
                 placeholder="Anything but 'password'"
                 autocomplete="current-password"
                 id="password"
-                class="form">
+                class="form aria-btn">
               <span class="icon" @click="togglePassword">
                 <img 
                   v-if="!showPassword"
@@ -87,7 +87,7 @@
             <input 
               type="submit" 
               value="Sign Me Up!"
-              class="pink"
+              class="pink aria-btn"
               :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
           </div>
         </form>
@@ -97,7 +97,7 @@
           <router-link 
             :to="{ name: 'login' }"
             tag="button"
-            class="tertiary">
+            class="tertiary aria-btn">
             Log In Here
           </router-link>
         </div>

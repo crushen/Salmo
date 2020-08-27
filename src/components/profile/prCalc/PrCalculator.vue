@@ -282,6 +282,9 @@ export default {
       this.showAlert = true; 
       this.index = index;
       this.showOverlay();
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '-1');
     },
     deleteHoliday() {
       this.showAlert = false;

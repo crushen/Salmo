@@ -9,7 +9,7 @@
       v-if="!buttons"
       @click="confirm"
       class="exit"
-      aria-label="Close">
+      aria-label="Close confirmation">
       <img :src="cross">
     </button>
 

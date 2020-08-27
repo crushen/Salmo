@@ -14,7 +14,7 @@
           <div class="buttons">
             <button
               :id="`button-${index}`"
-              class="button"
+              class="button aria-btn"
               v-for="(answer, index) in question.answers"
               :key="index"
               @click="selected = answer.value"

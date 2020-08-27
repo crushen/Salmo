@@ -77,6 +77,9 @@ export default {
       overlay.style.opacity = 1;
       overlay.style.visibility = 'visible';
       document.querySelector('body').style.overflow = 'hidden';
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '-1');
     },
     handleLogout() {
       this.$store.dispatch('auth/logOut')
@@ -85,6 +88,11 @@ export default {
         if(this.$route.path !== '/') {
           this.$router.push('/')
         }
+      })
+    },
+    changeBtnFocus(buttons, focus) {
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
       })
     }
   }
