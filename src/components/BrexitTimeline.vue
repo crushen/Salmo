@@ -223,8 +223,7 @@ ul {
   }
 
   &:nth-of-type(5),
-  &:nth-of-type(12),
-  &:nth-of-type(13) {
+  &:nth-of-type(12) {
     background: $secondary-pink;
 
     &.selected {
@@ -240,6 +239,15 @@ ul {
     position: absolute;
     left: 100%;
     top: 0px;
+  }
+
+  &:hover {
+    background-color: $primary-blue;
+
+    &:nth-of-type(5),
+    &:nth-of-type(12) {
+      background-color: $primary-pink;
+    }
   }
 }
 </style>
