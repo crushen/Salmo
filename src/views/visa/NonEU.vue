@@ -112,6 +112,7 @@ export default {
     text-transform: capitalize;
     box-shadow: $shadow;
     background-position: center;
+    transition: 0.3s;
 
     &:nth-of-type(1) {
       background-size: 240px;
@@ -132,6 +133,10 @@ export default {
 
     .icon {
       width: 55px;
+    }
+
+    &:hover {
+      background-color: lighten($color: $primary-blue, $amount: 3%);
     }
   }
 }

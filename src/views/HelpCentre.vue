@@ -391,11 +391,15 @@ export default {
     color: $light-font;
     box-shadow: $shadow;
     background-position: center;
-    transition: transform 0.4s, opacity 0.2s;
+    transition: 0.3s;
 
     h3 {
       text-align: center;
       font-size: 16px;
+    }
+
+    &:hover {
+      background-color: lighten($color: $primary-blue, $amount: 3%);
     }
   }
 }
