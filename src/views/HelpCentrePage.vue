@@ -15,7 +15,7 @@
         <router-link 
           :to="{name: 'help-centre'}"
           tag="button"
-          class="secondary">
+          class="secondary aria-btn">
           Back To Help Centre
         </router-link>
       </div>
@@ -48,7 +48,16 @@ export default {
       .then(() => {
         if(!this.article) {
           this.$router.push({name: 'not-found'});
+        } else {
+          this.makeAriaBtns();
         }
+      })
+    },
+    makeAriaBtns() {
+      const links = document.querySelectorAll('a');
+
+      links.forEach(link => {
+        link.classList.add('aria-btn');
       })
     }
   },

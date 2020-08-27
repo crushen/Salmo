@@ -2,12 +2,16 @@
   <div 
     class="alert"
     :class="!buttons ? 'top' : 'bottom'">
-    <a v-if="!buttons" @click="confirm">
-      <img :src="cross">
-    </a>
-
     <p>{{ alert }}</p>
     <p>{{ text }}</p>
+
+    <button
+      v-if="!buttons"
+      @click="confirm"
+      class="exit"
+      aria-label="Close">
+      <img :src="cross">
+    </button>
 
     <div
       v-if="buttons" 
@@ -45,6 +49,10 @@ export default {
       overlay.style.opacity = 0;
       overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '0');
+
       this.$emit('cancel');
     },
     confirm() {
@@ -52,7 +60,16 @@ export default {
       overlay.style.opacity = 0;
       overlay.style.visibility = 'hidden';
       document.querySelector('body').style.overflow = 'auto';
+
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '0');
+
       this.$emit('confirm');
+    },
+    changeBtnFocus(buttons, focus) {
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
+      })
     }
   }
 }
@@ -61,11 +78,21 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-a {
+.exit {
   width: 18px;
   position: absolute;
   top: 10px;
   right: 10px;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+
+  img {
+    width: 18px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
 
 .alert {

@@ -11,7 +11,10 @@
     <div class="faces">
       <div class="button">
         <button 
-          @click="yes">
+          @click="yes($event)"
+          aria-label="This article was helpful"
+          aria-pressed="false"
+          class="aria-btn">
           <svg width="73" height="73" viewBox="0 0 73 73" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path class="background" d="M36.423 70.6853C55.3545 70.6853 70.7014 55.3383 70.7014 36.4069C70.7014 17.4754 55.3545 2.12842 36.423 2.12842C17.4915 2.12842 2.14453 17.4754 2.14453 36.4069C2.14453 55.3383 17.4915 70.6853 36.423 70.6853Z" fill="#C4C4C4"/>
             <circle cx="50%" cy="50%" r="0%" fill="#FFD275">
@@ -37,7 +40,10 @@
 
       <div class="button">
         <button 
-          @click="maybe">
+          @click="maybe($event)"
+          aria-label="This article was a little helpful"
+          aria-pressed="false"
+          class="aria-btn">
           <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path class="background" d="M36.1445 70.2566C54.9696 70.2566 70.2304 54.9096 70.2304 35.9782C70.2304 17.0467 54.9696 1.69971 36.1445 1.69971C17.3194 1.69971 2.05859 17.0467 2.05859 35.9782C2.05859 54.9096 17.3194 70.2566 36.1445 70.2566Z" fill="#C4C4C4"/>
             <circle cx="50%" cy="50%" r="0%" fill="#77B3C4">
@@ -63,7 +69,10 @@
 
       <div class="button">
         <button 
-          @click="no">
+          @click="no($event)"
+          aria-label="This article was not helpful"
+          aria-pressed="false"
+          class="aria-btn">
           <svg width="72" height="73" viewBox="0 0 72 73" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path class="background" d="M35.8722 70.6853C54.8037 70.6853 70.1507 55.3383 70.1507 36.4069C70.1507 17.4754 54.8037 2.12842 35.8722 2.12842C16.9407 2.12842 1.59375 17.4754 1.59375 36.4069C1.59375 55.3383 16.9407 70.6853 35.8722 70.6853Z" fill="#C4C4C4"/>
             <circle cx="50%" cy="50%" r="0%" fill="#E05E48">
@@ -104,26 +113,35 @@ export default {
     }
   },
   methods: {
-    yes() {
+    yes(event) {
       if(!this.selected) {
         document.querySelector('#yes').beginElement(); 
-        this.selected = true;
-        this.alert = true;
+        this.selectButton(event);
       }
     },
-    maybe() {
+    maybe(event) {
       if(!this.selected) {
         document.querySelector('#maybe').beginElement(); 
-        this.selected = true;
-        this.alert = true;
+        this.selectButton(event);
       }
     },
-    no() {
+    no(event) {
       if(!this.selected) {
         document.querySelector('#no').beginElement();
-        this.selected = true; 
-        this.alert = true;
+        this.selectButton(event);
       }
+    },
+    selectButton(event) {
+      this.selected = true; 
+      this.alert = true;
+      event.target.parentElement.parentElement.setAttribute('aria-pressed', 'true');
+      const ariaBtns = document.querySelectorAll('.aria-btn');
+      this.changeBtnFocus(ariaBtns, '-1');
+    },
+    changeBtnFocus(buttons, focus) {
+      buttons.forEach(btn => {
+        btn.setAttribute('tabindex', focus);
+      })
     }
   }
 }
@@ -145,7 +163,6 @@ button {
   padding: 0;
   box-shadow: none;
   margin-bottom: $spacing;
-  //outline: none;
 
   .background {
     fill: #C4C4C4;
