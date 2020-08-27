@@ -1,48 +1,32 @@
 <template>
-  <div>
-    <button 
-      class="open aria-btn"
-      @click="openModal"
-      :id="`${visa.slug }-modal-btn`"
-      :aria-label="`open ${visa.name } quick tip`"
-      :aria-controls="`${visa.slug }-modal`"
-      aria-expanded="false">
-      <img :src="lightbulb" class="icon">
-    </button>
+  <div
+    :id="`${visa.slug }-modal`"
+    class="modal"
+    role="region"
+    @keydown.esc="closeModal">
+    <article>
+      <img :src="lightbulbYellow" class="lightbulb-yellow">
+      <img :src="lightbulbYellow" class="lightbulb-yellow">
+      <img :src="lightbulbYellow" class="lightbulb-yellow">
+      <img :src="lightbulbYellow" class="lightbulb-yellow">
 
-    <transition name="modal" mode="out-in">
-      <div 
-        v-if="open"
-        :id="`${visa.slug }-modal`"
-        class="modal"
-        role="region"
-        @keydown.esc="closeModal">
-        <article>
-          <img :src="lightbulbYellow" class="lightbulb-yellow">
-          <img :src="lightbulbYellow" class="lightbulb-yellow">
-          <img :src="lightbulbYellow" class="lightbulb-yellow">
-          <img :src="lightbulbYellow" class="lightbulb-yellow">
+      <h2><span>Quick Tip</span> {{ visa.name }}</h2>
 
-          <h2><span>Quick Tip</span> {{ visa.name }}</h2>
+      <div v-html="visa.quicktip.html" class="text" />
 
-          <div v-html="visa.quicktip.html" class="text" />
-
-          <div class="close">
-            <button 
-              @click="closeModal"
-              class="tertiary"
-              :aria-label="`close ${visa.name } quick tip`">
-              Close
-            </button>
-          </div>
-        </article>
+      <div class="close">
+        <button 
+          @click="closeModal"
+          class="tertiary"
+          :aria-label="`close ${visa.name } quick tip`">
+          Close
+        </button>
       </div>
-    </transition>
+    </article>
   </div>
 </template>
 
 <script>
-import lightbulb from '@/assets/icons/lightbulbs/button-yellow.svg';
 import lightbulbYellow from '@/assets/icons/lightbulbs/quick-tip.svg';
 
 export default {
@@ -51,42 +35,12 @@ export default {
   },
   data() {
     return {
-      open: false,
-      lightbulb,
       lightbulbYellow
     }
   },
   methods: {
-    openModal() {
-      this.open = true;
-      const overlay = document.querySelector('#overlay');
-      overlay.style.opacity = 1;
-      overlay.style.visibility = 'visible';
-      document.querySelector('body').style.overflow = 'hidden';
-
-      const button = document.querySelector(`#${this.visa.slug }-modal-btn`);
-      button.setAttribute('aria-expanded', 'true');
-
-      const ariaBtns = document.querySelectorAll('.aria-btn');
-      this.changeBtnFocus(ariaBtns, '-1');
-    },
     closeModal() {
-      this.open = false;
-      const overlay = document.querySelector('#overlay');
-      overlay.style.opacity = 0;
-      overlay.style.visibility = 'hidden';
-      document.querySelector('body').style.overflow = 'auto';
-
-      const button = document.querySelector(`#${this.visa.slug }-modal-btn`);
-      button.setAttribute('aria-expanded', 'false');
-
-      const ariaBtns = document.querySelectorAll('.aria-btn');
-      this.changeBtnFocus(ariaBtns, '0');
-    },
-    changeBtnFocus(buttons, focus) {
-      buttons.forEach(btn => {
-        btn.setAttribute('tabindex', focus);
-      })
+      this.$emit('close');
     }
   }
 }
@@ -94,28 +48,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
-
-.open {
-  width: 50px;
-  height: 50px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: -$spacing*2;
-  right: -$spacing*2;
-  background: $primary-yellow;
-  color: $light-font;
-
-  &:hover {
-    background: darken($color: $primary-yellow, $amount: 10%);
-  }
-
-  .icon {
-    width: 28px;
-  }
-}
 
 .modal {
   width: 90%;

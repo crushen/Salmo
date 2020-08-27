@@ -10,9 +10,6 @@
           :visa="favoriteVisa"
           :favouriteVisa="favoriteVisa.name"
           class="visa-card">
-          <template #quickTip>
-            <quick-tip :visa="favoriteVisa"/>
-          </template>
         </visa-card>
 
         <section class="buttons">
@@ -55,14 +52,12 @@
 <script>
 import { mapState } from 'vuex';
 import visaCard from '@/components/visa/VisaCard';
-import quickTip from '@/components/visa/QuickTip';
 import docChecklist from '@/components/profile/DocumentChecklist';
 import timeline from '@/components/profile/ApplicationTimeline';
 
 export default {
   components: {
     visaCard,
-    quickTip,
     docChecklist,
     timeline
   },

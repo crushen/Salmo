@@ -11,9 +11,6 @@
         :visa="visa"
         :favouriteVisa="favouriteVisa"
         class="visa-card">
-        <template #quickTip>
-          <quick-tip :visa="visa"/>
-        </template>
       </visa-card>
     </div>
   </section>
@@ -21,13 +18,11 @@
 
 <script>
 import visaCard from '@/components/visa/VisaCard';
-import quickTip from '@/components/visa/QuickTip';
 import { mapState } from 'vuex';
 
 export default {
   components: {
-    visaCard,
-    quickTip
+    visaCard
   },
   data() {
     return {

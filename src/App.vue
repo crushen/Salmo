@@ -117,6 +117,7 @@ body.using-mouse :focus {
   background: rgba($color: $dark-grey, $alpha: 0.5);
   pointer-events: all;
   transition: 0.4s;
+  pointer-events: none;
 }
 
 .small-logo {

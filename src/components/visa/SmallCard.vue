@@ -45,6 +45,7 @@ export default {
   border-radius: $border-radius;
   position: relative;
   box-shadow: $shadow;
+  transition: 0.2s;
 
   &:not(:first-of-type) {
     margin-top: $spacing*3;
@@ -70,6 +71,10 @@ export default {
 
   button {
     margin-top: $spacing*2;
+  }
+
+  &:hover {
+    transform: scale(1.02);
   }
 }
 

@@ -24,9 +24,6 @@
             :visa="topResult"
             :favouriteVisa="favoriteVisa.name"
             class="top-card">
-            <template #quickTip>
-              <quick-tip :visa="topResult"/>
-            </template>
           </visa-card>
 
           <p>Switching is the most cost effective, and least personally disruptive way to remain in the UK.</p>
@@ -137,7 +134,6 @@
 <script>
 import { mapState } from 'vuex';
 import visaCard from '@/components/visa/VisaCard';
-import quickTip from '@/components/visa/QuickTip';
 import smallCard from '@/components/visa/SmallCard';
 import lightbulb from '@/assets/icons/lightbulbs/tip.svg';
 import dots from '@/assets/patterns/dots.svg';
@@ -145,7 +141,6 @@ import dots from '@/assets/patterns/dots.svg';
 export default {
   components: {
     visaCard,
-    quickTip,
     smallCard
   },
   data() {
