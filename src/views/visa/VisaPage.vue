@@ -292,12 +292,14 @@ h1 {
     position: absolute;
     transform: translateY(-20px);
     visibility: hidden;
+    pointer-events: none;
     opacity: 0;
 
     &.active {
       position: relative;
       transform: translateY(0);
       visibility: visible;
+      pointer-events: initial;
       opacity: 1;
     }
 
