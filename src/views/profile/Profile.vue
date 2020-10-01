@@ -1,65 +1,24 @@
 <template>
   <section id="profile">
-    <!-- Check if user has verified email and accepted T&C's -->
-    <verify-email 
-      v-if="!user.emailVerified" 
-      :user="user" />
+    <user-info v-if="!this.user.profile.completeUserInfo" />
 
-    <div v-else>
-      <!-- Check if user has filled out profile info -->
-      <updated-profile 
-        v-if="user.profile.age"
-        :user="user" />
-
-      <non-updated-profile v-else/>
-
-      <!-- Links to help center and settings & log out button -->
-      <settings />
-    </div>
+    <updated-profile v-else :user="user" />
   </section>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import verifyEmail from '@/components/profile/VerifyEmail';
-import updatedProfile from '@/components/profile/UpdatedProfile';
-import nonUpdatedProfile from '@/components/profile/NonUpdatedProfile';
-import settings from '@/components/profile/Settings';
+import userInfo from '@/components/profile/userInfo/UserInfo'
+import updatedProfile from '@/components/profile/UpdatedProfile'
 
 export default {
   components: {
-    verifyEmail,
-    updatedProfile,
-    nonUpdatedProfile,
-    settings
+    userInfo,
+    updatedProfile
   },
   computed: {
     user() {
-      return this.$store.state.auth.user;
+      return this.$store.state.auth.user
     }
   }
 }
 </script>
-
-<style scoped lang="scss">
-@import '@/assets/styles/variables.scss';
-
-#profile {
-  padding: $spacing*12 0 0;
-  position: relative;
-}
-
-// Tablet
-@media screen and (min-width: 600px) {
-  #profile {
-    padding: $spacing*15 0 0;
-    min-height: 100vh;
-    overflow: hidden;
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-
-}
-</style>
