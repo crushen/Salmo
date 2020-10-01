@@ -103,7 +103,6 @@
 
 <script>
 import { required, email, minLength, maxLength } from 'vuelidate/lib/validators';
-import waveH from '@/assets/patterns/wave-horizontal.svg';
 
 export default {
   data() {
@@ -114,7 +113,6 @@ export default {
         password: ''
       },
       error: '',
-      waveH,
       showPassword: false
     }
   },

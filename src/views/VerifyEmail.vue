@@ -32,6 +32,9 @@ export default {
         this.error = 'Please verify your email'
       }
     }
+  },
+  mounted() {
+    this.$store.dispatch('auth/sendEmailVerification')
   }
 }
 </script>

@@ -43,7 +43,6 @@ export default {
   methods: {
     acceptTerms() {
       if(this.accepted) {
-        this.$store.dispatch('auth/sendEmailVerification')
         this.$router.push({ name: 'verify-email' })
       }
     }

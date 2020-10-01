@@ -64,32 +64,32 @@ const routes = [
   {
     path: '/sign-up/terms-and-conditions',
     name: 'sign-up-terms',
-    component: TandC
-    //meta: { onlyGuestUser: true }
+    component: TandC,
+    meta: { onlyAuthUser: true }
   },
   {
     path: '/sign-up/verify-email',
     name: 'verify-email',
-    component: VerifyEmail
-    //meta: { onlyGuestUser: true }
+    component: VerifyEmail,
+    meta: { onlyAuthUser: true }
   },
   { 
     path: '/profile/:username', 
     name: 'profile',
     component: Profile,
-    meta: { onlyAuthUser: true }
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/settings', 
     name: 'settings',
     component: Settings,
-    meta: { onlyAuthUser: true }
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/settings/delete-account', 
     name: 'delete-account',
     component: DeleteAccount,
-    meta: { onlyAuthUser: true }
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/update', 
@@ -207,25 +207,33 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const authenticatedUser = firebase.auth().currentUser;
+
   let verifiedUser;
   if(authenticatedUser) {
     verifiedUser = firebase.auth().currentUser.emailVerified;
   }
-  if(to.meta.onlyAuthUser) {
-    if(authenticatedUser) {
+
+  if(to.meta.onlyAuthUser) { // pages for signed up but not verified email address
+    if(authenticatedUser && verifiedUser) {
+      next({ name: 'profile', params: { username: authenticatedUser.profile.username } });
+    } else if(authenticatedUser && !verifiedUser) {
       next();
     } else {
-      next({name: 'login'});
+      next({ name: 'sign-up' })
     }
-  } else if(to.meta.onlyVerifiedUser) {
+  } else if(to.meta.onlyVerifiedUser) { // pages for signed up and verified email address
     if(authenticatedUser && verifiedUser) {
       next();
+    } else if(authenticatedUser && !verifiedUser) {
+      next({ name: 'sign-up-terms' });
     } else {
-      next({name: 'profile', params: {username: authenticatedUser.profile.username}});
+      next({ name: 'home' })
     }
-  } else if(to.meta.onlyGuestUser) {
-    if(authenticatedUser) {
-      next({name: 'home'});
+  } else if(to.meta.onlyGuestUser) { // pages only for not signed up
+    if(authenticatedUser && verifiedUser) {
+      next({ name: 'profile', params: { username: authenticatedUser.profile.username } });
+    } else if(authenticatedUser && !verifiedUser) {
+      next({ name: 'sign-up-terms' });
     } else {
       next();
     }

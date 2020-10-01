@@ -7,7 +7,7 @@ import questions from './modules/questions'
 import visas from './modules/visas'
 import helpCentre from './modules/helpCentre'
 import prCalc from './modules/prCalc'
-import news from './modules/news.js'
+import news from './modules/news'
 
 Vue.use(Vuex)
 
