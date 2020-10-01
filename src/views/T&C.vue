@@ -19,7 +19,7 @@
     <div class="button">
       <button 
         @click="acceptTerms"
-        :class="terms.accepted ? 'pink' : 'disabled'">
+        :class="accepted ? 'pink' : 'disabled'">
         Next
       </button>
     </div>

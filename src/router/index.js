@@ -64,14 +64,14 @@ const routes = [
   {
     path: '/sign-up/terms-and-conditions',
     name: 'sign-up-terms',
-    component: TandC,
-    meta: { onlyGuestUser: true }
+    component: TandC
+    //meta: { onlyGuestUser: true }
   },
   {
     path: '/sign-up/verify-email',
     name: 'verify-email',
-    component: VerifyEmail,
-    meta: { onlyGuestUser: true }
+    component: VerifyEmail
+    //meta: { onlyGuestUser: true }
   },
   { 
     path: '/profile/:username', 
