@@ -4,6 +4,10 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home';
 import Login from '@/views/Login';
 import ForgotPassword from '@/views/ForgotPassword';
+import SignUp from '@/views/SignUp';
+import TandC from '@/views/T&C';
+import VerifyEmail from '@/views/VerifyEmail';
+
 import Profile from '@/views/profile/Profile';
 import UpdateProfile from '@/views/profile/UpdateProfile';
 import Settings from '@/views/profile/Settings';
@@ -11,6 +15,7 @@ import DeleteAccount from '@/views/profile/DeleteAccount';
 import VisaPlanner from '@/views/profile/VisaPlanner';
 import Questionnaire from '@/views/Questionnaire';
 import Results from '@/views/Results';
+
 import VisaInfo from '@/views/visa/VisaInfo';
 import NonEU from '@/views/visa/NonEU';
 import CategoryPage from '@/views/visa/CategoryPage';
@@ -19,6 +24,7 @@ import VisaSection from '@/views/visa/VisaSection';
 import VisaInfoEU from '@/views/visa/EU';
 import Settled from '@/views/visa/Settled';
 import PreSettled from '@/views/visa/PreSettled';
+
 import About from '@/views/About';
 import HelpCentre from '@/views/HelpCentre';
 import HelpCentrePage from '@/views/HelpCentrePage';
@@ -47,6 +53,24 @@ const routes = [
     path: '/login/forgot-password',
     name: 'forgot-password',
     component: ForgotPassword,
+    meta: { onlyGuestUser: true }
+  },
+  {
+    path: '/sign-up',
+    name: 'sign-up',
+    component: SignUp,
+    meta: { onlyGuestUser: true }
+  },
+  {
+    path: '/sign-up/terms-and-conditions',
+    name: 'sign-up-terms',
+    component: TandC,
+    meta: { onlyGuestUser: true }
+  },
+  {
+    path: '/sign-up/verify-email',
+    name: 'verify-email',
+    component: VerifyEmail,
     meta: { onlyGuestUser: true }
   },
   { 

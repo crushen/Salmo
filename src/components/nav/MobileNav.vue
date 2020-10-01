@@ -1,6 +1,7 @@
 <template>
   <section>
     <div
+      v-if="isAuthenticated"
       v-on-clickaway="close"
       :class="this.open ? 'open' : ''"
       id="nav">

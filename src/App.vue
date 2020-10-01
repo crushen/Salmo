@@ -1,27 +1,27 @@
 <template>
   <div id="app">
-    <button
+    <!-- <button
       v-if="arrowPage && innerWidth < 1100"
       @click="$router.go(-1)"
       class="arrow-btn aria-btn">
       <img :src="arrow" class="arrow">
-    </button>
+    </button> -->
 
     <mobile-nav v-if="innerWidth < 600" />
     <sidebar-nav v-else />
 
     <div id="overlay"></div>
 
-    <img 
+    <!-- <img 
       v-if="$route.path !== '/about' && $route.path !== '/'"
       src="@/assets/logo/colour.svg" 
       alt="Salmo logo"
-      class="small-logo">
+      class="small-logo"> -->
 
     <div class="content-wrapper">
-      <transition name="page" mode="out-in">
+      <!-- <transition name="page" mode="out-in"> -->
         <router-view />
-      </transition>
+      <!-- </transition> -->
     </div>
   </div>
 </template>
