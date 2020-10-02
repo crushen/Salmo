@@ -6,7 +6,12 @@
 
     <h2>My Status</h2>
     
-    <router-link to="/">Choose my next visa</router-link>
+    <button @click="toggleModal">Choose my next visa</button>
+
+    <visa-choices
+      v-if="modalIsOpen"
+      @closeModal="toggleModal"
+      @submitModal="saveVisa" />
 
     <visa-dates-card class="dates-card" :user="user" />
 
@@ -19,10 +24,25 @@
 <script>
 import profileCard from '@/components/profile/ProfileCard'
 import visaDatesCard from '@/components/profile/VisaDatesCard'
+import visaChoices from '@/components/modals/VisaChoices'
 import tools from '@/components/profile/Tools'
 
 export default {
   props: { user: { required: true, type: Object } },
-  components: { profileCard, visaDatesCard, tools }
+  components: { profileCard, visaDatesCard, visaChoices, tools },
+  data() {
+    return {
+      modalIsOpen: false
+    }
+  },
+  methods: {
+    toggleModal() {
+      this.modalIsOpen = !this.modalIsOpen
+    },
+    saveVisa(form) {
+      this.toggleModal()
+      console.log(form)
+    }
+  }
 }
 </script>
