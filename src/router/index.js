@@ -78,13 +78,13 @@ const routes = [
   { 
     path: '/profile/:username/questionnaire', 
     name: 'questionnaire', 
-    component: () => import('@/views/Questionnaire'),
+    component: () => import('@/views/questionnaire/Questionnaire'),
     meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/questionnaire/results', 
     name: 'results', 
-    component: () => import('@/views/Results'),
+    component: () => import('@/views/questionnaire/Results'),
     meta: { onlyVerifiedUser: true }
   },
   // Visa pages
@@ -139,12 +139,12 @@ const routes = [
   { 
     path: '/about/help-centre', 
     name: 'help-centre', 
-    component: () => import('@/views/HelpCentre')
+    component: () => import('@/views/helpCentre/HelpCentre')
   },
   { 
     path: '/about/help-centre/:slug', 
     name: 'help-centre-page', 
-    component: () => import('@/views/HelpCentrePage')
+    component: () => import('@/views/helpCentre/HelpCentrePage')
   },
   { 
     path: '/about/privacy', 
