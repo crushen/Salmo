@@ -1,36 +1,5 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-
-import Home from '@/views/Home';
-import SignIn from '@/views/signIn/SignIn';
-import ForgotPassword from '@/views/signIn/ForgotPassword';
-import SignUp from '@/views/signUp/SignUp';
-import TandC from '@/views/signUp/T&C';
-import VerifyEmail from '@/views/signUp/VerifyEmail';
-
-import Profile from '@/views/profile/Profile';
-import UpdateProfile from '@/views/profile/UpdateProfile';
-import Settings from '@/views/profile/Settings';
-import DeleteAccount from '@/views/profile/DeleteAccount';
-import VisaPlanner from '@/views/profile/VisaPlanner';
-import Questionnaire from '@/views/Questionnaire';
-import Results from '@/views/Results';
-
-import VisaInfo from '@/views/visa/VisaInfo';
-import NonEU from '@/views/visa/NonEU';
-import CategoryPage from '@/views/visa/CategoryPage';
-import VisaPage from '@/views/visa/VisaPage';
-import VisaSection from '@/views/visa/VisaSection';
-import VisaInfoEU from '@/views/visa/EU';
-import Settled from '@/views/visa/Settled';
-import PreSettled from '@/views/visa/PreSettled';
-
-import About from '@/views/About';
-import HelpCentre from '@/views/HelpCentre';
-import HelpCentrePage from '@/views/HelpCentrePage';
-import NotFound from '@/views/NotFound';
-import Privacy from '@/views/Privacy';
-import Terms from '@/views/Terms';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -38,208 +7,215 @@ import 'firebase/auth';
 Vue.use(VueRouter);
 
 const routes = [
+  // Home, Sign up and Sign in pages
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: () => import('@/views/Home.vue')
   },
   {
     path: '/sign-in',
     name: 'sign-in',
-    component: SignIn,
+    component: () => import('@/views/signIn/SignIn'),
     meta: { onlyGuestUser: true }
   },
   {
     path: '/login/forgot-password',
     name: 'forgot-password',
-    component: ForgotPassword,
+    component: () => import('@/views/signIn/ForgotPassword'),
     meta: { onlyGuestUser: true }
   },
   {
     path: '/sign-up',
     name: 'sign-up',
-    component: SignUp,
+    component: () => import('@/views/signUp/SignUp'),
     meta: { onlyGuestUser: true }
   },
   {
     path: '/sign-up/terms-and-conditions',
     name: 'sign-up-terms',
-    component: TandC,
+    component: () => import('@/views/signUp/T&C'),
     meta: { onlyAuthUser: true }
   },
   {
     path: '/sign-up/verify-email',
     name: 'verify-email',
-    component: VerifyEmail,
+    component: () => import('@/views/signUp/VerifyEmail'),
     meta: { onlyAuthUser: true }
   },
+  // Profile pages
   { 
     path: '/profile/:username', 
     name: 'profile',
-    component: Profile,
+    component: () => import('@/views/profile/Profile'),
     meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/settings', 
     name: 'settings',
-    component: Settings,
+    component: () => import('@/views/profile/Settings'),
     meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/settings/delete-account', 
     name: 'delete-account',
-    component: DeleteAccount,
+    component: () => import('@/views/profile/DeleteAccount'),
     meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/update', 
     name: 'update-profile',
-    component: UpdateProfile,
+    component: () => import('@/views/profile/UpdateProfile'),
     meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/visa-planner', 
     name: 'visa-planner',
-    component: VisaPlanner,
+    component: () => import('@/views/profile/VisaPlanner'),
     meta: { onlyVerifiedUser: true }
   },
+  // Questionnaire pages
   { 
     path: '/profile/:username/questionnaire', 
     name: 'questionnaire', 
-    component: Questionnaire,
+    component: () => import('@/views/Questionnaire'),
     meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/questionnaire/results', 
     name: 'results', 
-    component: Results,
+    component: () => import('@/views/Results'),
     meta: { onlyVerifiedUser: true }
   },
+  // Visa pages
   { 
     path: '/visa-info', 
     name: 'visa-info', 
-    component: VisaInfo
+    component: () => import('@/views/visa/VisaInfo')
   },
   { 
     path: '/visa-info/non-eu', 
     name: 'non-eu', 
-    component: NonEU
+    component: () => import('@/views/visa/NonEU')
   },
   { 
     path: '/visa-info/eu', 
     name: 'visa-info-eu', 
-    component: VisaInfoEU
+    component: () => import('@/views/visa/EU')
   },
   { 
     path: '/visa-info/non-eu/:category', 
     name: 'non-eu-category', 
-    component: CategoryPage
+    component: () => import('@/views/visa/CategoryPage')
   },
   { 
     path: '/visa-info/eu/settled', 
     name: 'eu-settled', 
-    component: Settled
+    component: () => import('@/views/visa/Settled')
   },
   { 
     path: '/visa-info/eu/pre-settled', 
     name: 'eu-pre-settled', 
-    component: PreSettled
+    component: () => import('@/views/visa/PreSettled')
   },
   { 
     path: '/visa-info/:slug', 
     name: 'visa-page', 
-    component: VisaPage,
+    component: () => import('@/views/visa/VisaPage'),
     children: [
       {
         path: ':section',
         name: 'visa-section',
-        component: VisaSection
+        component: () => import('@/views/visa/VisaSection')
       }
     ]
   },
+  // About and Help centre pages
   { 
     path: '/about', 
     name: 'about', 
-    component: About
+    component: () => import('@/views/About')
   },
   { 
     path: '/about/help-centre', 
     name: 'help-centre', 
-    component: HelpCentre
+    component: () => import('@/views/HelpCentre')
   },
   { 
     path: '/about/help-centre/:slug', 
     name: 'help-centre-page', 
-    component: HelpCentrePage
+    component: () => import('@/views/HelpCentrePage')
   },
   { 
     path: '/about/privacy', 
     name: 'privacy', 
-    component: Privacy
+    component: () => import('@/views/Privacy')
   },
   { 
     path: '/about/terms-and-conditions', 
     name: 'terms', 
-    component: Terms
+    component: () => import('@/views/Terms')
   },
-  { path: '/404',
+  { path: '/page-not-found',
     name: 'not-found',
-    component: NotFound 
+    component: () => import('@/views/NotFound')
   },  
   { 
     path: '*', 
-    redirect: '/404' 
-  }, 
+    redirect: '/page-not-found' 
+  }
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-  scrollBehavior (to, from) {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve({ x: 0, y: 0 })
-      }, 400)
+  scrollBehavior() {
+    return new Promise((resolve) => {
+      setTimeout(() => {resolve({ x: 0, y: 0 })}, 400)
     })
   }
 })
 
 router.beforeEach((to, from, next) => {
-  const authenticatedUser = firebase.auth().currentUser;
+  const authenticatedUser = firebase.auth().currentUser
+  let verifiedUser
 
-  let verifiedUser;
   if(authenticatedUser) {
-    verifiedUser = firebase.auth().currentUser.emailVerified;
+    verifiedUser = firebase.auth().currentUser.emailVerified
   }
 
-  if(to.meta.onlyAuthUser) { // pages for signed up but not verified email address
+  // pages for signed up but not verified email address
+  if(to.meta.onlyAuthUser) {
     if(authenticatedUser && verifiedUser) {
-      next({ name: 'profile', params: { username: authenticatedUser.profile.username } });
+      next({ name: 'profile', params: { username: authenticatedUser.profile.username } })
     } else if(authenticatedUser && !verifiedUser) {
       next();
     } else {
       next({ name: 'sign-up' })
     }
-  } else if(to.meta.onlyVerifiedUser) { // pages for signed up and verified email address
+    // pages for signed up and verified email address
+  } else if(to.meta.onlyVerifiedUser) {
     if(authenticatedUser && verifiedUser) {
       next();
     } else if(authenticatedUser && !verifiedUser) {
-      next({ name: 'sign-up-terms' });
+      next({ name: 'sign-up-terms' })
     } else {
       next({ name: 'home' })
     }
-  } else if(to.meta.onlyGuestUser) { // pages only for not signed up
+    // pages only for not signed up
+  } else if(to.meta.onlyGuestUser) {
     if(authenticatedUser && verifiedUser) {
-      next({ name: 'profile', params: { username: authenticatedUser.profile.username } });
+      next({ name: 'profile', params: { username: authenticatedUser.profile.username } })
     } else if(authenticatedUser && !verifiedUser) {
-      next({ name: 'sign-up-terms' });
+      next({ name: 'sign-up-terms' })
     } else {
-      next();
+      next()
     }
+    // all other pages
   } else {
-    next();
+    next()
   }
 })
 
-export default router;
+export default router
