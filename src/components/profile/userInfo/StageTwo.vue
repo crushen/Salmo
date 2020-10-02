@@ -27,9 +27,7 @@
 export default {
   props: { form: { type: Object, required: true } },
   data() {
-    return {
-      user: this.$store.state.auth.user
-    }
+    return { user: this.$store.state.auth.user }
   },
   computed: {
     profileToUpdate() { 

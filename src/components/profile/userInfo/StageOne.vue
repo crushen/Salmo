@@ -330,23 +330,6 @@ export default {
     profileToUpdate() { 
       return {...this.user.profile} 
     }
-    // pastVisaDatesError() {
-    //   const errors = []
-    //   const dates = this.form.pastVisas.map(({ end, start }) => [end, start])
-    //   // Loop through past visas array
-    //   dates.forEach(date => {
-    //     // If any start date is larger than end date, error is true and pushed to array
-    //     if(date[0] < date[1]) {
-    //       errors.push(true)
-    //     }
-    //   })
-    //   // If there are any errors, return true
-    //   if(errors.includes(true)) {
-    //     return true
-    //   } else {
-    //     return false
-    //   }
-    // }
   },
   methods: {
     makeOptions(array) {
@@ -376,32 +359,6 @@ export default {
 
       window.scrollTo(0, 0)
     }
-    // validateForm() {
-    //   this.resetErrors()
-
-    //   if(this.form.pastVisas.length) {
-    //     const array = this.form.pastVisas.flatMap(({ name, start, end }) => [name, start, end]);
-    //     if(array.some(val => (val === null || val === ''))) {
-    //       this.errors.pastVisas.required = true
-    //     }
-    //     if(this.pastVisaDatesError) {
-    //       this.errors.pastVisas.dates = true
-    //     }
-    //   }
-
-    //   // If there's no past visa added and other fields complete - submit form
-    //   if(this.form.birthday && this.form.age && this.form.nationality && this.form.dependants && !Object.values(this.form.currentVisa).some(val => (val === null || val === '')) && !this.errors.currentVisa.dates) {
-    //     if(!this.form.pastVisas.length) {
-    //       this.submitProfile()
-    //     } else {
-    //       // If there is past visa(s) added, check that all fields are complete
-    //       const array = this.form.pastVisas.flatMap(({ name, start, end }) => [name, start, end]);
-    //       if(!array.some(val => (val === null || val === '')) && !this.errors.pastVisas.dates) {
-    //         this.submitProfile()
-    //       }
-    //     }
-    //   }
-    // }
   }
 }
 </script>
