@@ -161,45 +161,45 @@ p {
 }
 
 // For date picker
-.unstyled {
-    -webkit-appearance: none;
-}
-.unstyled::-webkit-inner-spin-button,
-.unstyled::-webkit-calendar-picker-indicator {
-    display: none;
-    -webkit-appearance: none;
-}
+// .unstyled {
+//     -webkit-appearance: none;
+// }
+// .unstyled::-webkit-inner-spin-button,
+// .unstyled::-webkit-calendar-picker-indicator {
+//     display: none;
+//     -webkit-appearance: none;
+// }
 
-input.form,
-textarea.form {
-  border: none !important;
-  background: $lightest-grey !important;
-  border-radius: 4px !important;
-  padding: 14px $spacing !important;
-}
+// input.form,
+// textarea.form {
+//   border: none !important;
+//   background: $lightest-grey !important;
+//   border-radius: 4px !important;
+//   padding: 14px $spacing !important;
+// }
 
-input.form:focus,
-textarea.form:focus {
-  box-shadow: 0 0 0 3px $primary-yellow !important;
-}
+// input.form:focus,
+// textarea.form:focus {
+//   box-shadow: 0 0 0 3px $primary-yellow !important;
+// }
 
-select.form:not([multiple]) {
-  border: none !important;
-  border-radius: 4px !important;
-  padding: 14px $spacing !important;
-  background-color: $lightest-grey;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='41' height='26' viewBox='0 0 41 26'%3E%3Cpath fill='%23606060' d='M0 5.382l19.983 19.983L40.14 5.208 34.932 0 19.869 15.062 4.84.032z' fill-rule='evenodd' style='&%2310; fill: %23b8c2cc;&%2310;'/%3E%3C/svg%3E");
-}
+// select.form:not([multiple]) {
+//   border: none !important;
+//   border-radius: 4px !important;
+//   padding: 14px $spacing !important;
+//   background-color: $lightest-grey;
+//   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='41' height='26' viewBox='0 0 41 26'%3E%3Cpath fill='%23606060' d='M0 5.382l19.983 19.983L40.14 5.208 34.932 0 19.869 15.062 4.84.032z' fill-rule='evenodd' style='&%2310; fill: %23b8c2cc;&%2310;'/%3E%3C/svg%3E");
+// }
 
-select.form:not([multiple]):focus {
-  box-shadow: 0 0 0 3px $primary-yellow !important;
-}
+// select.form:not([multiple]):focus {
+//   box-shadow: 0 0 0 3px $primary-yellow !important;
+// }
 
-label {
-  line-height: 26px;
-  color: $grey;
-  font-weight: 500;
-}
+// label {
+//   line-height: 26px;
+//   color: $grey;
+//   font-weight: 500;
+// }
 
 // Tablet
 @media screen and (min-width: 600px) {

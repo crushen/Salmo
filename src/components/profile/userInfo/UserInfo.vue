@@ -1,10 +1,12 @@
 <template>
   <section id="profile">
-    <stage-one v-if="stage === 1" @nextStage="stage++" />
+    <button @click="prev">Back</button>
 
-    <stage-two v-else-if="stage === 2" @nextStage="stage++" />
+    <stage-one v-if="stage === 1" @nextStage="next" />
 
-    <stage-three v-else-if="stage === 3" @nextStage="stage++" />
+    <stage-two v-else-if="stage === 2" @nextStage="next" />
+
+    <stage-three v-else-if="stage === 3" @nextStage="next" />
 
     <completed v-else :user="user" />
   </section>
@@ -31,6 +33,16 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user
+    }
+  },
+  methods: {
+    prev() {
+      if(this.stage > 1) {
+        this.stage--
+      }
+    },
+    next() {
+      this.stage++
     }
   }
 }

@@ -1,126 +1,37 @@
 <template>
-  <section>
-    <h1>What is your plan in the uk?</h1>
+  <section class="content">
+    <h1>What is your plan in the UK?</h1>
 
-    <form @submit.prevent="validateForm">
-      <div>
-        <h2 for="planning-to">
-          I'm planning to...
-          <span>(you can chose as many as you want!)</span>
-        </h2>
+    <FormulateForm @submit="submitForm">
+      <FormulateInput
+        v-model="form.planningTo"
+        type="checkbox"
+        :options="{study: 'study', work: 'work', business: 'start a business', notSure: 'not sure yet! see how it goes'}"
+        label="I'm planning to...(you can choose as many as you want!)" />
 
-        <div class="field">
-          <label class="container" for="study">study</label>
+      <FormulateInput
+        v-model="form.permanentResidency"
+        type="radio"
+        :options="{yes: 'yes', no: 'no'}"
+        label="Get permanent residency?"
+        validation="required" />
 
-          <pretty-check 
-            v-model="planningTo.study"
-            id="study"
-            class="p-icon p-smooth" 
-            color="danger">
-            <i slot="extra" class="icon fa fa-check"></i>
-          </pretty-check>
-        </div>
-
-        <div class="field">
-          <label class="container" for="work">work</label>
-
-          <pretty-check 
-            v-model="planningTo.work"
-            id="work"
-            class="p-icon p-smooth" 
-            color="danger">
-            <i slot="extra" class="icon fa fa-check"></i>
-          </pretty-check>
-        </div>
-
-        <div class="field">
-          <label class="container" for="business">start a business</label>
-
-          <pretty-check 
-            v-model="planningTo.startBusiness"
-            id="business"
-            class="p-icon p-smooth" 
-            color="danger">
-            <i slot="extra" class="icon fa fa-check"></i>
-          </pretty-check>
-        </div>
-
-        <div class="field">
-          <label class="container" for="love">find love</label>
-
-          <pretty-check 
-            v-model="planningTo.findLove"
-            id="love"
-            class="p-icon p-smooth" 
-            color="danger">
-            <i slot="extra" class="icon fa fa-check"></i>
-          </pretty-check>
-        </div>
-
-        <div class="field">
-          <label class="container" for="not-sure">not sure yet! see how it goes</label>
-
-          <pretty-check 
-            v-model="planningTo.notSure"
-            id="not-sure"
-            class="p-icon p-smooth" 
-            color="danger">
-            <i slot="extra" class="icon fa fa-check"></i>
-          </pretty-check>
-        </div>
-      </div>
-
-      <div>
-        <h2>Get permanent residency?</h2>
-
-        <div>
-          <pretty-radio
-            v-model="permanentResidency"
-            value="yes"
-            class="p-smooth p-default p-round radio"
-            color="primary-o">
-            yes
-          </pretty-radio>
-
-          <pretty-radio
-            v-model="permanentResidency"
-            value="no"
-            class="p-smooth p-default p-round radio"
-            color="primary-o">
-            no
-          </pretty-radio>
-        </div>
-      </div>
-
-      <input type="submit" value="Next">
-    </form>
-
-    <p v-if="error">Must select if you're planning for permanent residency</p>
-
+      <FormulateInput
+        type="submit"
+        label="Next"/>
+    </FormulateForm>
   </section>
 </template>
 
 <script>
-import prettyRadio from 'pretty-checkbox-vue/radio'
-import prettyCheck from 'pretty-checkbox-vue/check'
-
 export default {
-  components: {
-    prettyRadio,
-    prettyCheck
-  },
   data() {
     return {
       user: this.$store.state.auth.user,
-      planningTo: {
-        study: false,
-        work: false,
-        startBusiness: false,
-        findLove: false,
-        notSure: false
-      },
-      permanentResidency: null,
-      error: false
+      form: {
+        planningTo: [],
+        permanentResidency: null
+      }
     }
   },
   computed: {
@@ -129,21 +40,14 @@ export default {
     }
   },
   methods: {
-    validateForm() {
-      if(this.permanentResidency) {
-        this.profileToUpdate.permanentResidency = this.permanentResidency
+    submitForm() {
+      this.profileToUpdate.permanentResidency = this.form.permanentResidency
+      this.profileToUpdate.planningTo = this.form.planningTo
 
-        const planningArray = Object.keys(this.planningTo).filter(val => this.planningTo[val] !== false)
-        if(planningArray.length) {
-          this.profileToUpdate.planningTo = planningArray
-        }
+      this.$store.commit('auth/setUserProfile', this.profileToUpdate)
+      this.$emit('nextStage')
 
-        this.$store.commit('auth/setUserProfile', this.profileToUpdate)
-        this.$emit('nextStage')
-        window.scrollTo(0, 0)
-      } else {
-        this.error = true
-      }
+      window.scrollTo(0, 0)
     }
   }
 }
