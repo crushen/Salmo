@@ -1,6 +1,6 @@
 <template>
   <section>
-    <form @submit.prevent="nextStage">
+    <!-- <form @submit.prevent="nextStage">
       <p>Before you go, please let us know why you're leaving us today:</p>
 
       <div class="check-boxes">
@@ -51,17 +51,13 @@
         <p>Skip</p>
         <span>&#8227;</span>
       </button>
-    </div>
+    </div> -->
   </section>
 </template>
 
 <script>
-import prettyCheck from 'pretty-checkbox-vue/check';
 
 export default {
-  components: {
-    prettyCheck
-  },
   methods: {
     submitFeedback() {
       console.log('submit');

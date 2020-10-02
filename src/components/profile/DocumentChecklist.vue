@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="title">
+    <!-- <div class="title">
       <h3>Documentation checklist <br>
         <span>{{ visa.name }}</span>
       </h3>
@@ -23,26 +23,16 @@
           </pretty-check>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import prettyCheck from 'pretty-checkbox-vue/check';
 
 export default {
   props: {
     visa: { required: true, type: Object },
     docChecklist: { required: true, type: Object }
-  },
-  components: {
-    prettyCheck
-  },
-  computed: {
-
-  },
-  mounted() {
-
   }
 }
 </script>

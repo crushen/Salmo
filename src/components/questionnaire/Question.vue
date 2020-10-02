@@ -1,6 +1,6 @@
 <template>
   <section>
-    <img 
+    <!-- <img 
       src="@/assets/grey-background.png" alt=""
       class="background-1">
     <img 
@@ -73,14 +73,12 @@
           Next <span>&#8227;</span>
         </button>
       </div>
-    </div>
+    </div> -->
   </section>
 
 </template>
 
 <script>
-import prettyRadio from 'pretty-checkbox-vue/radio';
-
 import study from '@/assets/icons/visa-buttons/study.svg';
 import work from '@/assets/icons/visa-buttons/work.svg';
 import business from '@/assets/icons/visa-buttons/business.svg';
@@ -96,9 +94,6 @@ export default {
     question: { type: Object, required: true },
     questions: { type: Array, required: true },
     currentQuestion: { type: Number, required: true }
-  },
-  components: {
-    prettyRadio
   },
   data () {
     return {
