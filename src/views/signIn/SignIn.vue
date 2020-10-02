@@ -56,9 +56,7 @@ export default {
         this.$router.push({name: 'profile', params: {username: user.profile.username}})
         this.$store.commit('auth/setLoggedIn')
       })
-      .catch(() => {
-        this.error = 'Invalid email address or password'
-      })
+      .catch(() => this.error = 'Invalid email address or password')
     }
   }
 }

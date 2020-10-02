@@ -2,8 +2,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '@/views/Home';
-import SignIn from '@/views/SignIn';
-import ForgotPassword from '@/views/ForgotPassword';
+import SignIn from '@/views/signIn/SignIn';
+import ForgotPassword from '@/views/signIn/ForgotPassword';
 import SignUp from '@/views/signUp/SignUp';
 import TandC from '@/views/signUp/T&C';
 import VerifyEmail from '@/views/signUp/VerifyEmail';

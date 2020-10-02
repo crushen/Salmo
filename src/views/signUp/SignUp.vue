@@ -19,7 +19,7 @@
         v-model="form.password"
         type="password"
         label="password"
-        validation="bail|required|min:6" />
+        validation="bail|required|min:6|not:password" />
 
       <FormulateInput
         type="submit"
@@ -48,7 +48,6 @@ export default {
 
       this.$store.dispatch('auth/signUp', this.form)
       .then(async user => {
-        // waits for user profile to be created before executing the rest of the function
         await this.$store.dispatch('auth/createUserProfile', {
           uid: user.uid, 
           userProfile: {
@@ -60,9 +59,10 @@ export default {
             holiday: []
           }
         })
+
         this.$router.push({ name: 'sign-up-terms' })
       })
-      .catch(errorMessage => { this.error = errorMessage })
+      .catch(errorMessage => this.error = errorMessage)
     }
   }
 }

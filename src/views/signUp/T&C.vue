@@ -4,41 +4,27 @@
 
     <h1>Terms and Conditions</h1>
 
-    <div class="field">
-      <label class="container" for="terms">I accept the terms and conditions listed above.</label>
-
-      <pretty-check 
+    <FormulateForm @submit="acceptTerms">
+      <FormulateInput
         v-model="accepted"
-        id="terms"
-        class="p-icon p-smooth" 
-        color="danger">
-        <i slot="extra" class="icon fa fa-check"></i>
-      </pretty-check>
-    </div>
+        type="checkbox"
+        label="I accept the terms and conditions listed above."
+        validation="required" />
 
-    <div class="button">
-      <button 
-        @click="acceptTerms"
-        :class="accepted ? 'pink' : 'disabled'">
-        Next
-      </button>
-    </div>
+      <FormulateInput
+        type="submit"
+        label="Next"/>
+    </FormulateForm>
   </section>
 </template>
 
 <script>
-import terms from '@/components/profile/TermsAndConditions';
-import prettyCheck from 'pretty-checkbox-vue/check';
+import terms from '@/components/profile/TermsAndConditions'
 
 export default {
-  components: {
-    terms,
-    prettyCheck
-  },
+  components: { terms },
   data() {
-    return {
-      accepted: false
-    }
+    return { accepted: false }
   },
   methods: {
     acceptTerms() {
