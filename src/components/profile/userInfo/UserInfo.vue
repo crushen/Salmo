@@ -1,6 +1,6 @@
 <template>
   <section id="profile">
-    <button @click="prev">Back</button>
+    <button v-if="stage > 1 && stage < 4" @click="prev">Back</button>
 
     <stage-one v-if="stage === 1" @nextStage="next" :form="form" />
 
