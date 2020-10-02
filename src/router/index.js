@@ -2,11 +2,11 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '@/views/Home';
-import Login from '@/views/Login';
+import SignIn from '@/views/SignIn';
 import ForgotPassword from '@/views/ForgotPassword';
-import SignUp from '@/views/SignUp';
-import TandC from '@/views/T&C';
-import VerifyEmail from '@/views/VerifyEmail';
+import SignUp from '@/views/signUp/SignUp';
+import TandC from '@/views/signUp/T&C';
+import VerifyEmail from '@/views/signUp/VerifyEmail';
 
 import Profile from '@/views/profile/Profile';
 import UpdateProfile from '@/views/profile/UpdateProfile';
@@ -44,9 +44,9 @@ const routes = [
     component: Home
   },
   {
-    path: '/login',
-    name: 'login',
-    component: Login,
+    path: '/sign-in',
+    name: 'sign-in',
+    component: SignIn,
     meta: { onlyGuestUser: true }
   },
   {

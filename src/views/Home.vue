@@ -4,7 +4,7 @@
       Sign Up
     </router-link>
 
-    <router-link :to="{ name: 'login' }" tag="button">
+    <router-link :to="{ name: 'sign-in' }" tag="button">
       Sign In
     </router-link>
 
