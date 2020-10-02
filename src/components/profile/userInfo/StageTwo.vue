@@ -25,13 +25,10 @@
 
 <script>
 export default {
+  props: { form: { type: Object, required: true } },
   data() {
     return {
-      user: this.$store.state.auth.user,
-      form: {
-        planningTo: [],
-        permanentResidency: null
-      }
+      user: this.$store.state.auth.user
     }
   },
   computed: {

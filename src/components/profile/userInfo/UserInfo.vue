@@ -2,11 +2,11 @@
   <section id="profile">
     <button @click="prev">Back</button>
 
-    <stage-one v-if="stage === 1" @nextStage="next" />
+    <stage-one v-if="stage === 1" @nextStage="next" :form="form" />
 
-    <stage-two v-else-if="stage === 2" @nextStage="next" />
+    <stage-two v-else-if="stage === 2" @nextStage="next" :form="form" />
 
-    <stage-three v-else-if="stage === 3" @nextStage="next" />
+    <stage-three v-else-if="stage === 3" @nextStage="next" :form="form" />
 
     <completed v-else :user="user" />
   </section>
@@ -27,7 +27,22 @@ export default {
   },
   data() {
     return {
-      stage: 1
+      stage: 1,
+      form: {
+        name: null,
+        birthday: null,
+        nationality: null,
+        dependants: null,
+        currentVisa: {
+          name: null,
+          start: null,
+          end: null
+        },
+        planningTo: [],
+        permanentResidency: null,
+        newVisaOptions: null,
+        whichVisa: null
+      }
     }
   },
   computed: {

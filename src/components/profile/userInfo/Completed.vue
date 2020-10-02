@@ -36,9 +36,7 @@
 
 <script>
 export default {
-  props: {
-    user: { type: Object }
-  },
+  props: { user: { type: Object, required: true } },
   computed: {
     profileToUpdate() { 
       return {...this.user.profile} 

@@ -27,13 +27,10 @@
 
 <script>
 export default {
+  props: { form: { type: Object, required: true } },
   data() {
     return {
-      user: this.$store.state.auth.user,
-      form: {
-        newVisaOptions: null,
-        whichVisa: null
-      }
+      user: this.$store.state.auth.user
     }
   },
   computed: {

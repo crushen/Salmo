@@ -65,20 +65,10 @@
 
 <script>
 export default {
+  props: { form: { type: Object, required: true } },
   data() {
     return {
       user: this.$store.state.auth.user,
-      form: {
-        name: null,
-        birthday: null,
-        nationality: null,
-        dependants: null,
-        currentVisa: {
-          name: null,
-          start: null,
-          end: null
-        }
-      },
       countries: [
         "Afghanistan",
         "Albania",
