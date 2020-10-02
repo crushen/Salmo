@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import terms from '@/components/profile/TermsAndConditions'
+import terms from '@/components/TermsAndConditions'
 
 export default {
   components: { terms },
