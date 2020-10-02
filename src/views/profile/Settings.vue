@@ -1,6 +1,6 @@
 <template>
   <section id="settings" class="content">
-    <h1>Settings</h1>
+    <!-- <h1>Settings</h1>
 
     <div class="wrapper">
       <section class="notifications section">
@@ -62,19 +62,9 @@
           </router-link> 
         </div>
       </section>
-    </div>
+    </div> -->
   </section>
 </template>
-
-<script>
-import prettyCheck from 'pretty-checkbox-vue/check';
-
-export default {
-  components: {
-    prettyCheck
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';

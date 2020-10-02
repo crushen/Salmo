@@ -9,12 +9,7 @@
         @cancel="showAlert = false"
         @confirm="handleLogout" />
     </transition>
-
-    <img 
-      v-if="!user.emailVerified || !user.profile.questionnaireResults.length"
-      src="@/assets/illustrations/alternateStates/Profile before sign in etc.svg" 
-      alt="An illustration of a person thinking">
-
+    
     <div class="content">
       <div class="col">
         <p class="help-text">If you’ve got a specific question about a visa related topic, our Help Centre has lots of helpful guides to all things visa!</p>

@@ -74,6 +74,18 @@ const routes = [
     component: () => import('@/views/profile/VisaPlanner'),
     meta: { onlyVerifiedUser: true }
   },
+  { 
+    path: '/profile/:username/visa-book', 
+    name: 'visa-book',
+    component: () => import('@/views/profile/VisaBook'),
+    meta: { onlyVerifiedUser: true }
+  },
+  { 
+    path: '/profile/:username/ilr-tracker', 
+    name: 'ilr-tracker',
+    component: () => import('@/views/profile/ILR'),
+    meta: { onlyVerifiedUser: true }
+  },
   // Questionnaire pages
   { 
     path: '/profile/:username/questionnaire', 
