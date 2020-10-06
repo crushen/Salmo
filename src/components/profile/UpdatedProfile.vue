@@ -6,7 +6,15 @@
 
     <h2>My Status</h2>
     
-    <button @click="toggleModal">Choose my next visa</button>
+    <button
+      v-if="!user.profile.nextVisa"
+      @click="toggleModal">
+      Choose my next visa
+    </button>
+
+    <div v-else>
+      <p>You're Here</p>
+    </div>
 
     <visa-choices
       v-if="modalIsOpen"
