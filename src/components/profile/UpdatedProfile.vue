@@ -10,7 +10,7 @@
 
     <visa-choices
       v-if="modalIsOpen"
-      @closeModal="toggleModal"
+      @closeModal="confirmClose = true"
       @submitModal="saveVisa" />
 
     <visa-dates-card class="dates-card" :user="user" />
@@ -18,6 +18,12 @@
     <h2>Tools</h2>
 
     <tools :user="user" />
+
+    <!-- Alerts -->
+    <close-alert
+      v-if="confirmClose"
+      @confirm="confirm"
+      @cancel="cancel" />
   </section>
 </template>
 
@@ -27,12 +33,15 @@ import visaDatesCard from '@/components/profile/VisaDatesCard'
 import visaChoices from '@/components/modals/VisaChoices'
 import tools from '@/components/profile/Tools'
 
+import closeAlert from '@/components/alerts/visaChoices/Close'
+
 export default {
   props: { user: { required: true, type: Object } },
-  components: { profileCard, visaDatesCard, visaChoices, tools },
+  components: { profileCard, visaDatesCard, visaChoices, tools, closeAlert },
   data() {
     return {
-      modalIsOpen: false
+      modalIsOpen: false,
+      confirmClose: false
     }
   },
   computed: {
@@ -53,6 +62,13 @@ export default {
 
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       this.toggleModal()
+    },
+    confirm() {
+      this.toggleModal()
+      this.confirmClose = false
+    },
+    cancel() {
+      this.confirmClose = false
     }
   }
 }

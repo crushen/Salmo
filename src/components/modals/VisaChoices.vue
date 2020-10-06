@@ -1,5 +1,5 @@
 <template>
-  <modal-base @closeModal="closeModal">
+  <base-modal @closeModal="closeModal">
     <h1>My visa choices</h1>
 
     <FormulateForm @submit="handleSubmit">
@@ -33,15 +33,15 @@
         type="submit"
         label="Save"/>
     </FormulateForm>
-  </modal-base>
+  </base-modal>
 </template>
 
 <script>
-import modalBase from '@/components/modals/ModalBase'
+import baseModal from '@/components/modals/BaseModal'
 import { visaOptions } from '@/assets/js/visaOptions'
 
 export default {
-  components: { modalBase },
+  components: { baseModal },
   data() {
     return {
       visaOptions,
