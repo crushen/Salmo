@@ -35,13 +35,24 @@ export default {
       modalIsOpen: false
     }
   },
+  computed: {
+    profileToUpdate() { 
+      return {...this.user.profile} 
+    }
+  },
   methods: {
     toggleModal() {
       this.modalIsOpen = !this.modalIsOpen
     },
     saveVisa(form) {
+      this.profileToUpdate.nextVisa = form.nextVisa
+
+      if(form.interestedVisas) {
+        this.profileToUpdate.interestedVisas = form.interestedVisas
+      }
+
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       this.toggleModal()
-      console.log(form)
     }
   }
 }

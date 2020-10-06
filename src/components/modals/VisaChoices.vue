@@ -4,7 +4,7 @@
 
     <FormulateForm @submit="handleSubmit">
       <FormulateInput
-        v-model="form.visa"
+        v-model="form.nextVisa"
         type="select"
         :options="makeOptions(visaOptions)"
         label="Choose your next visa:"
@@ -16,7 +16,7 @@
         :options="makeOptions(removeVisa)"
         label="Are you considering other visas? Select your interests below and they will be added into your Visa Book!"
         placeholder="visa name"
-        :disabled="!form.visa" />
+        :disabled="!form.nextVisa" />
 
       <ul v-if="form.interestedVisas.length">
         <li
@@ -47,7 +47,7 @@ export default {
       visaOptions,
       interested: null,
       form: {
-        visa: null,
+        nextVisa: null,
         interestedVisas: []
       }
     }
@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     removeVisa() {
-      return this.visaOptions.filter(visa => visa !== this.form.visa)
+      return this.visaOptions.filter(visa => visa !== this.form.nextVisa)
     }
   },
   methods: {
