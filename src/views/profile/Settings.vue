@@ -1,146 +1,123 @@
 <template>
-  <section id="settings" class="content">
-    <!-- <h1>Settings</h1>
+  <main class="content">
+    <h1>Settings</h1>
 
-    <div class="wrapper">
-      <section class="notifications section">
-        <h3>Notifications</h3>
+    <section>
+      <h2>Account</h2>
 
-        <div class="switches">
-          <div class="switch">
-            <pretty-check class="p-switch p-fill"></pretty-check>
-            <p>Notify you about important dates by email.</p>
-          </div>
+      <button @click="modalIsOpen = true">Edit</button>
 
-          <div class="switch">
-            <pretty-check class="p-switch p-fill"></pretty-check>
-            <p>Notify you about important dates by email.</p>
-          </div>
-    
-          <div class="switch">
-            <pretty-check class="p-switch p-fill"></pretty-check>
-            <p>Notify you about important dates by email.</p>
-          </div>
-        </div>
-      </section>
+      <p>Full Name: {{ user.profile.name }}</p>
+      <p>Username: {{ user.profile.username }}</p>
 
-      <section class="privacy section">
-        <h3>Privacy</h3>
+      <edit-account
+        v-if="modalIsOpen"
+        @closeModal="closeModal"
+        @submitModal="submitModal"
+        :profileToUpdate="profileToUpdate"
+        :user="user" />
 
-        <div class="switches">
-          <div class="switch">
-            <pretty-check class="p-switch p-fill"></pretty-check>
-            <p>Notify you about important dates by email.</p>
-          </div>
+      <edit-account-alert
+        v-if="confirmingClose"
+        @confirm="confirmClose"
+        @cancel="confirmingClose = false" />
+    </section>
 
-          <div class="switch">
-            <pretty-check class="p-switch p-fill"></pretty-check>
-            <p>Notify you about important dates by email.</p>
-          </div>
-        </div>
-      </section>
+    <section>
+      <h2>Notifications</h2>
 
-      <section class="delete section">
-        <h3>Delete Account</h3>
+      <FormulateInput
+        v-model="profileToUpdate.notifications.newsletter"
+        type="checkbox"
+        label="I wish to receive Salmo newsletters"
+        :disabled="profileToUpdate.notifications.off" />
 
-        <p>If you're having issues with any aspect of our service, please do 
-          <router-link
-            :to="{ name: 'help-centre' }"
-            tag="button"
-            class="tertiary">
-            get in touch 
-          </router-link> 
-        with us now and we will do our best to help!</p>
-        <p class="warning">THIS ACTION IS IRREVERSIBLE</p>
+      <FormulateInput
+        v-model="profileToUpdate.notifications.timeline"
+        type="checkbox"
+        label="I wish to receive Timeline reminders of my visa"
+        :disabled="profileToUpdate.notifications.off" />
 
-        <div class="button">
-          <router-link
-            :to="{ name: 'delete-account' }"
-            tag="button"
-            class="tertiary">
-            Delete Account 
-          </router-link> 
-        </div>
-      </section>
-    </div> -->
-  </section>
+      <FormulateInput
+        v-model="profileToUpdate.notifications.planner"
+        type="checkbox"
+        label="I wish to receive my Visa Planner reminders for my Checklist tasks"
+        :disabled="profileToUpdate.notifications.off" />
+
+      <FormulateInput
+        v-model="profileToUpdate.notifications.off"
+        type="checkbox"
+        label="Turn off all notifications" />
+    </section>
+
+    <section>
+      <h2>Reset Password</h2>
+
+      <a href="#">Send Reset Password Link</a>
+    </section>
+
+    <section>
+      <h2>Delete Account</h2>
+
+      <a href="#">Delete Account</a>
+    </section>
+
+    <section>
+      <button @click="savePreferences">Save</button>
+    </section>
+  </main>
 </template>
 
-<style lang="scss" scoped>
-@import '@/assets/styles/variables.scss';
+<script>
+import editAccount from '@/components/modals/EditAccount'
+import editAccountAlert from '@/components/alerts/CloseEditAccount'
 
-#settings {
-  padding: $spacing*12 0;
-}
+export default {
+  components: { editAccount, editAccountAlert },
+  data() {
+    return {
+      user: this.$store.state.auth.user,
+      modalIsOpen: false,
+      confirmingClose: false
+    }
+  },
+  watch: {
+    'profileToUpdate.notifications.off'(val) {
+      if(val) {
+        this.profileToUpdate.notifications.newsletters = false
+        this.profileToUpdate.notifications.timeline = false
+        this.profileToUpdate.notifications.planner = false
+      }
+    }
+  },
+  computed: {
+    profileToUpdate() {
+      return {...this.user.profile}
+    }
+  },
+  methods: {
+    toggleModal() {
+      this.modalIsOpen = !this.modalIsOpen
+    },
+    closeModal() {
+      this.confirmingClose = true
+    },
+    submitModal(form) {
+      this.profileToUpdate.name = form.name
+      this.profileToUpdate.username = form.username
 
-.section {
-  margin-top: $spacing*5;
-}
-
-.switches {
-  display: flex;
-  flex-direction: column;
-  padding: 0 $spacing;
-}
-
-.switch {
-  margin-top: $spacing*3;
-  display: flex;
-  align-items: center;
-  font-size: 20px;
-
-  p {
-    margin-left: $spacing*2;
-  }
-}
-
-.delete {
-  h3 {
-    margin-bottom: $spacing*3;
-  }
-
-  .warning {
-    background: $light-grey;
-    padding: $spacing;
-    text-align: center;
-    margin: $spacing*4 0 $spacing*6 0;
-  }
-
-  .button {
-    text-align: center;
-
-    button {
-      color: $primary-pink;
-      font-size: 18px;
-      font-weight: 700;
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
+      this.toggleModal()
+    },
+    confirmClose() {
+      this.confirmingClose = false
+      this.toggleModal()
+    },
+    savePreferences() {
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
+      this.$router.push({ name: 'profile', params: { username: this.user.profile.username } })
     }
   }
 }
-
-// Tablet
-@media screen and (min-width: 600px) {
-  #settings {
-    padding: $spacing*15 0;
-  }
-
-  .section {
-    margin-top: $spacing*8;
-  }
-
-  .switch {
-    margin-top: $spacing*5;
-
-    p {
-      margin-left: $spacing*3;
-    }
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  .wrapper {
-    max-width: 700px;
-    margin: auto;
-  }
-}
-</style>
+</script>
+ 

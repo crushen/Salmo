@@ -8,6 +8,12 @@
       <p>{{ user.profile.nationality }}</p>
       <p>{{ dependants }}</p>
     </div>
+
+    <router-link
+      :to="{ name: 'settings', params: { username: user.profile.username } }"
+      tag="button">
+      Edit
+    </router-link>
   </div>
 </template>
 
@@ -54,5 +60,6 @@ export default {
 <style scoped lang="scss">
 .profile-card {
   display: flex;
+  align-items: center;
 }
 </style>

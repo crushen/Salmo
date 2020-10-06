@@ -50,22 +50,22 @@ const routes = [
     component: () => import('@/views/profile/Profile'),
     meta: { onlyVerifiedUser: true }
   },
+  // { 
+  //   path: '/profile/:username/settings', 
+  //   name: 'settings',
+  //   component: () => import('@/views/profile/Settings'),
+  //   meta: { onlyVerifiedUser: true }
+  // },
+  // { 
+  //   path: '/profile/:username/settings/delete-account', 
+  //   name: 'delete-account',
+  //   component: () => import('@/views/profile/DeleteAccount'),
+  //   meta: { onlyVerifiedUser: true }
+  // },
   { 
     path: '/profile/:username/settings', 
     name: 'settings',
     component: () => import('@/views/profile/Settings'),
-    meta: { onlyVerifiedUser: true }
-  },
-  { 
-    path: '/profile/:username/settings/delete-account', 
-    name: 'delete-account',
-    component: () => import('@/views/profile/DeleteAccount'),
-    meta: { onlyVerifiedUser: true }
-  },
-  { 
-    path: '/profile/:username/update', 
-    name: 'update-profile',
-    component: () => import('@/views/profile/UpdateProfile'),
     meta: { onlyVerifiedUser: true }
   },
   { 

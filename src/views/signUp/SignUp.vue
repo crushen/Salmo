@@ -54,9 +54,14 @@ export default {
             username: this.form.username,
             user: user.uid,
             questionnaireResults: [],
-            //pastVisas: [],
             currentVisa: {},
-            holiday: []
+            holiday: [],
+            notifications: {
+              newsletter: true,
+              planner: true,
+              timeline: true,
+              off: false
+            }
           }
         })
 
