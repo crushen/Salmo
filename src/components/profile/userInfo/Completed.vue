@@ -2,7 +2,14 @@
   <section>
     <h1>Completed!</h1>
 
-    <div v-if="user.profile.whichVisa === 'yes'">
+    <div v-if="user.profile.whichVisa === 'no'">
+      <h2>Congrats! You’ve completed your profile, it’s time to take a quiz and begin your visa journey.</h2>
+
+      <p>This visa quiz is custom-made for your profile. Once completed, it does all the research for you and offers a selection of visas to consider.</p>
+      <p>Afterwards, you can access your profile to explore Salmo’s features!</p>
+    </div>
+
+    <div v-else>
       <h2>Congrats! You’ve completed your profile!</h2>
 
       <p>Seems like you have got everything under control!</p>
@@ -10,16 +17,9 @@
       <p>Otherwise, you can jump straight to your profile. You can find the quiz there, in case you want to try later!</p>
     </div>
 
-    <div v-else>
-      <h2>Congrats! You’ve completed your profile, it’s time to take a quiz and begin your visa journey.</h2>
-
-      <p>This visa quiz is custom-made for your profile. Once completed, it does all the research for you and offers a selection of visas to consider.</p>
-      <p>Afterwards, you can access your profile to explore Salmo’s features!</p>
-    </div>
-
     <div class="buttons">
       <button
-        v-if="user.profile.whichVisa === 'yes'"
+        v-if="user.profile.whichVisa !== 'no'"
         @click="completeUserInfo">
         Go to profile!
       </button>
