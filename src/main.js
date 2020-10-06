@@ -17,6 +17,14 @@ Vue.use(Vuelidate)
 Vue.use(VCalendar)
 Vue.use(VueFormulate)
 
+Vue.mixin({
+  methods: {
+    makeOptions(array) {
+      return Object.assign({}, ...array.map(key => ({[key]: key})))
+    }
+  }
+})
+
 let app
 firebase.auth().onAuthStateChanged(async user => {
   if(user) {
