@@ -11,16 +11,16 @@
         placeholder="visa name" />
 
       <FormulateInput
-        v-model="form.interested"
+        v-model="interested"
         type="select"
         :options="makeOptions(removeVisa)"
         label="Are you considering other visas? Select your interests below and they will be added into your Visa Book!"
         placeholder="visa name"
         :disabled="!form.visa" />
 
-      <ul v-if="interestedVisas.length">
+      <ul v-if="form.interestedVisas.length">
         <li
-          v-for="visa in interestedVisas"
+          v-for="visa in form.interestedVisas"
           :key="visa">
           {{ visa }}
           <span>
@@ -45,17 +45,17 @@ export default {
   data() {
     return {
       visaOptions,
-      interestedVisas: [],
+      interested: null,
       form: {
         visa: null,
-        interested: null
+        interestedVisas: []
       }
     }
   },
   watch: {
-    'form.interested'(visa) {
-      if(this.interestedVisas.indexOf(visa) === -1) {
-        this.interestedVisas.push(visa)
+    'interested'(visa) {
+      if(this.form.interestedVisas.indexOf(visa) === -1) {
+        this.form.interestedVisas.push(visa)
       }
     }
   },
@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     removeFromList(visa) {
-      this.interestedVisas.splice(this.interestedVisas.indexOf(visa), 1)
+      this.form.interestedVisas.splice(this.form.interestedVisas.indexOf(visa), 1)
     },
     closeModal() {
       this.$emit('closeModal')
