@@ -6,22 +6,26 @@
       <FormulateInput
         v-model="form.visa"
         type="select"
-        :options="{first: 'First', second: 'Second', third: 'Third', fourth: 'Fourth'}"
+        :options="makeOptions(visaOptions)"
         label="Choose your next visa:"
         placeholder="visa name" />
 
       <FormulateInput
         v-model="form.interested"
         type="select"
-        :options="{first: 'First', second: 'Second', third: 'Third', fourth: 'Fourth'}"
+        :options="makeOptions(removeVisa)"
         label="Are you considering other visas? Select your interests below and they will be added into your Visa Book!"
-        placeholder="visa name" />
+        placeholder="visa name"
+        :disabled="!form.visa" />
 
       <ul v-if="interestedVisas.length">
         <li
           v-for="visa in interestedVisas"
           :key="visa">
           {{ visa }}
+          <span>
+            <button @click="removeFromList(visa)">X</button>
+          </span>
         </li>
       </ul>
 
@@ -34,11 +38,13 @@
 
 <script>
 import modalBase from '@/components/modals/ModalBase'
+import { visaOptions } from '@/assets/js/visaOptions'
 
 export default {
   components: { modalBase },
   data() {
     return {
+      visaOptions,
       interestedVisas: [],
       form: {
         visa: null,
@@ -50,13 +56,18 @@ export default {
     'form.interested'(visa) {
       if(this.interestedVisas.indexOf(visa) === -1) {
         this.interestedVisas.push(visa)
-      } 
-      // else {
-      //   this.interestedVisas.splice(this.interestedVisas.indexOf(visa), 1)
-      // }
+      }
+    }
+  },
+  computed: {
+    removeVisa() {
+      return this.visaOptions.filter(visa => visa !== this.form.visa)
     }
   },
   methods: {
+    removeFromList(visa) {
+      this.interestedVisas.splice(this.interestedVisas.indexOf(visa), 1)
+    },
     closeModal() {
       this.$emit('closeModal')
     },
