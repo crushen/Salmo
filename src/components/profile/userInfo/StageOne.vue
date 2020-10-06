@@ -87,9 +87,6 @@ export default {
     }
   },
   methods: {
-    makeOptions(array) {
-      return Object.assign({}, ...array.map(key => ({[key]: key})))
-    },
     calculateAge(date) {
       let today = new Date(),
           birthDate = new Date(date),
