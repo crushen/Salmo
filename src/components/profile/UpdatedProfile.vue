@@ -51,6 +51,8 @@ import tools from '@/components/profile/Tools'
 import closeAlert from '@/components/alerts/visaChoices/Close'
 import changeAlert from '@/components/alerts/visaChoices/Change'
 
+import { documentChecklist } from '@/assets/js/documentChecklist'
+
 export default {
   props: { user: { required: true, type: Object } },
   components: { profileCard, visaDatesCard, visaChoices, tools, closeAlert, changeAlert },
@@ -58,7 +60,8 @@ export default {
     return {
       modalIsOpen: false,
       confirmingClose: false,
-      confirmingChange: false
+      confirmingChange: false,
+      documentChecklist
     }
   },
   computed: {
@@ -72,7 +75,11 @@ export default {
     },
     saveVisa(form) {
       if(form.nextVisa) {
-        this.profileToUpdate.nextVisa = form.nextVisa
+        this.profileToUpdate.nextVisa = {}
+        this.profileToUpdate.nextVisa.name = form.nextVisa
+
+        const checklistObj = this.documentChecklist.find(item => item.name === form.nextVisa)
+        this.profileToUpdate.nextVisa.documentChecklist = checklistObj.checklist
 
         if(form.interestedVisas) {
           this.profileToUpdate.interestedVisas = form.interestedVisas

@@ -4,7 +4,7 @@
     @cancel="cancel"
     confirmText="Are you sure you want to change your next visa?">
  
-    <p>You are about to change <b>{{ user.profile.nextVisa }}</b> to <b>{{ profileToUpdate.nextVisa }}</b>.</p> 
+    <p>You are about to change <b>{{ user.profile.nextVisa.name }}</b> to <b>{{ profileToUpdate.nextVisa.name }}</b>.</p> 
     <p>Changing your next visa will restart your documentation list and anything you’ve made to the list will be lost.</p>
   </base-alert>
 </template>

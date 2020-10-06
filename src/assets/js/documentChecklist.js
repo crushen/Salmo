@@ -68,7 +68,7 @@ export const documentChecklist = [
     ]
   },
   {
-    name: 'Global Talent',
+    name: 'Tier 1 : Global Talent',
     checklist: [
       { 
         label: 'Current passport (or travel documentation with blank page)',
@@ -119,7 +119,7 @@ export const documentChecklist = [
     ]
   },
   {
-    name: 'Tier 1 Investor',
+    name: 'Tier 1 : Investor',
     checklist: [
       { 
         label: 'Current passport (or travel documentation with blank page)',
