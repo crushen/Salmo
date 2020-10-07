@@ -337,20 +337,20 @@ export const questions = [
         number: 0,
         answers: [
           {
-            text: 'Study',
-            value: 'Tier 4 General Student'
+            value: 'Tier 4 General Student',
+            label: 'Study'
           },
           {
-            text: 'Work',
-            value: 2
+            value: 2,
+            label: 'Work'
           },
           {
-            text: 'Business',
-            value: 1
+            value: 1,
+            label: 'Business'
           },
           {
-            text: 'Family',
-            value: 'Family (needs expanding)'
+            value: 'Family (needs expanding)',
+            label: 'Family'
           }
         ]
       },
@@ -359,12 +359,12 @@ export const questions = [
         number: 1,
         answers: [
           {
-            text: 'Invest',
-            value: 'Tier 1 Investor'
+            value: 'Tier 1 Investor',
+            label: 'Invest'
           },
           {
-            text: 'Start my own',
-            value: 'Startup'
+            value: 'Startup',
+            label: 'Start my own'
           }
         ]
       },
@@ -373,16 +373,16 @@ export const questions = [
         number: 2,
         answers: [
           {
-            text: 'Sports',
-            value: 'Tier 2 Sportsperson'
+            value: 'Tier 2 Sportsperson',
+            label: 'Sports'
           },
           {
-            text: 'Religion',
-            value: 'Tier 2 Minister of Religion'
+            value: 'Tier 2 Minister of Religion',
+            label: 'Religion'
           },
           {
-            text: 'Neither',
-            value: 3
+            value: 3,
+            label: 'Neither'
           }
         ]
       },
@@ -391,12 +391,12 @@ export const questions = [
         number: 3,
         answers: [
           {
-            text: 'Yes',
-            value: 'Tier 5 Government Authorised Exchange'
+            value: 'Tier 5 Government Authorised Exchange',
+            label: 'Yes'
           },
           {
-            text: 'No',
-            value: 'Tier 2 General Work'
+            value: 'Tier 2 General Work',
+            label: 'No'
           }
           // {
           //   text: 'Not sure',

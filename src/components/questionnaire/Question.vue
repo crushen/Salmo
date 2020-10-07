@@ -1,93 +1,80 @@
 <template>
-  <section>
-    <!-- <img 
-      src="@/assets/grey-background.png" alt=""
-      class="background-1">
-    <img 
-      src="@/assets/grey-background-bottom.png" alt=""
-      class="background-2">
-
-    <div class="container">
-      <h3>{{ question.question }}</h3>
-
-      <div v-if="currentQuestion === 0">
-          <div class="buttons">
-            <button
-              :id="`button-${index}`"
-              class="button aria-btn"
-              v-for="(answer, index) in question.answers"
-              :key="index"
-              @click="selected = answer.value"
-              :style="{ backgroundImage: buttonBackground(index) }"
-              :aria-pressed="answer.value === selected ?  'true' : 'false'">
-              <div v-if="answer.value !== selected && selected !== null" class="btn-overlay"></div>
-              <p>{{ answer.text }}</p>
-              <img :src="buttonIcon(index)" class="icon">
-            </button>
-          </div>
-      </div>
-
-      <div v-else class="radio-buttons">
-        <pretty-radio
-          v-model="selected"
+  <section class="container">
+    <div v-if="currentQuestion === 0">
+      <p>{{ question.question }}</p>
+      
+      <div class="buttons">
+        <button
           v-for="(answer, index) in question.answers"
           :key="index"
-          :value="answer.value"
-          class="p-smooth p-default p-round radio"
-          :class="{'un-checked': answer.value !== selected && selected !== null}"
-          color="primary-o">
-          {{ answer.text }}
-        </pretty-radio>
-      </div>
-
-      <div class="nav">
-        <button
-          v-if="currentQuestion === 0"
-          class="tertiary inactive"
-          disabled>
-          <span>&#8227;</span> 
-          <p>Previous</p>
-        </button>
-
-        <button
-          v-else
-          @click="previousQuestion"
-          class="tertiary"
-          aria-label="Previous question">
-          <span>&#8227;</span> 
-          <p>Previous</p>
-        </button>
-
-        <button
-          v-if="!selected"
-          class="secondary inactive"
-          disabled>
-          Next <span>&#8227;</span>
-        </button>
-
-        <button
-          v-else
-          @click="submitAnswer"
-          class="secondary"
-          aria-label="Next question">
-          Next <span>&#8227;</span>
+          @click="selected = answer.value"
+          :id="`button-${index}`"
+          class="button aria-btn"
+          :style="{ backgroundImage: buttonBackground(index) }"
+          :aria-pressed="answer.value === selected ?  'true' : 'false'">
+          <div v-if="answer.value !== selected && selected !== null" class="btn-overlay" />
+          <p>{{ answer.label }}</p>
+          <img :src="buttonIcon(index)" class="icon">
         </button>
       </div>
-    </div> -->
+    </div>
+
+    <div v-else class="radio-buttons">
+      <FormulateInput
+        v-model="selected"
+        type="radio"
+        :options="question.answers"
+        :label="question.question"
+        validation="required"
+        error-behavior="submit" />
+    </div>
+
+    <div class="nav">
+      <button
+        v-if="currentQuestion === 0"
+        class="tertiary inactive"
+        disabled>
+        <span>&#8227;</span> 
+        <p>Previous</p>
+      </button>
+
+      <button
+        v-else
+        @click="previousQuestion"
+        class="tertiary"
+        aria-label="Previous question">
+        <span>&#8227;</span> 
+        <p>Previous</p>
+      </button>
+
+      <button
+        v-if="!selected"
+        class="secondary inactive"
+        disabled>
+        Next <span>&#8227;</span>
+      </button>
+
+      <button
+        v-else
+        @click="submitAnswer"
+        class="secondary"
+        aria-label="Next question">
+        Next <span>&#8227;</span>
+      </button>
+    </div>
   </section>
-
 </template>
 
 <script>
-import study from '@/assets/icons/visa-buttons/study.svg';
-import work from '@/assets/icons/visa-buttons/work.svg';
-import business from '@/assets/icons/visa-buttons/business.svg';
-import family from '@/assets/icons/visa-buttons/family.svg';
+import study from '@/assets/icons/visa-buttons/study.svg'
+import work from '@/assets/icons/visa-buttons/work.svg'
+import business from '@/assets/icons/visa-buttons/business.svg'
+import family from '@/assets/icons/visa-buttons/family.svg'
 
-import wave from '@/assets/patterns/wave-2.svg';
-import line from '@/assets/patterns/line.svg';
-import dashed from '@/assets/patterns/dashed-line.svg';
-import confetti from '@/assets/patterns/confetti.svg';
+import wave from '@/assets/patterns/wave-2.svg'
+import line from '@/assets/patterns/line.svg'
+import dashed from '@/assets/patterns/dashed-line.svg'
+import confetti from '@/assets/patterns/confetti.svg'
 
 export default {
   props: {
@@ -110,39 +97,39 @@ export default {
   },
   methods: {
     submitAnswer() {
-      this.$emit('submitAnswer', this.selected);
+      this.$emit('submitAnswer', this.selected)
       this.selected = null;
     },
     previousQuestion() {
-      this.$emit('previousQuestion');
-      this.selected = null;
+      this.$emit('previousQuestion')
+      this.selected = null
     },
     buttonBackground(index) {
       switch(index) {
         case 0:
-          return `url(${this.wave})`;
+          return `url(${this.wave})`
         case 1:
-          return `url(${this.line})`;
+          return `url(${this.line})`
         case 2:
-          return `url(${this.dashed})`;
+          return `url(${this.dashed})`
         case 3:
-          return `url(${this.confetti})`;
+          return `url(${this.confetti})`
         default:
-          return `url(${this.wave})`;
+          return `url(${this.wave})`
       }
     },
     buttonIcon(index) {
       switch(index) {
         case 0:
-          return this.study;
+          return this.study
         case 1:
-          return this.work;
+          return this.work
         case 2:
-          return this.business;
+          return this.business
         case 3:
-          return this.family;
+          return this.family
         default:
-          return this.study;
+          return this.study
       }
     }
   }

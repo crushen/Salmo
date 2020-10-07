@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <main>
     <transition name="alert" mode="out-in">
       <alert 
         v-if="showAlert"
@@ -10,44 +10,39 @@
         @confirm="showAlert = false, to = null, $router.go(1)" />
     </transition>
 
-    <!-- If user has updated profile info -->
-    <div v-if="user.profile.age">
-      <intro 
-        v-if="introStage"
-        :user="user"
-        @startQuestionnaire="startQuestionnaire" />
+    <section class="content questions-stage">
+      <h1>Visa Quiz</h1>
 
-      <div 
-        v-if="questionsStage"
-        class="content questions-stage">
-        <div class="progress-bar">
-          <div
-            :style="{ width: `${progress}%` }" 
-            class="progress-bar-inner"></div>
-        </div>
+      <h2>Let’s work out your best options to remain in the UK. </h2>
 
-        <div class="question">
-          <question 
-            :question="questions[currentQuestion]"
-            :questions="questions"
-            :currentQuestion="currentQuestion"
-            @submitAnswer="submitAnswer"
-            @previousQuestion="previousQuestion" />
-        </div>
+      <p>The following questions are based off your current visa choice, so please ensure that your current visa in your profile is up to date.</p>
+
+
+      <div class="progress-bar">
+        <div
+          :style="{ width: `${progress}%` }" 
+          class="progress-bar-inner"></div>
       </div>
-    </div>
-  </section>
+
+      <div v-if="questions.length" class="question">
+        <question 
+          :question="questions[currentQuestion]"
+          :questions="questions"
+          :currentQuestion="currentQuestion"
+          @submitAnswer="submitAnswer"
+          @previousQuestion="previousQuestion" />
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import intro from '@/components/questionnaire/Intro';
-import question from '@/components/questionnaire/Question';
-import alert from '@/components/Alert';
+import { mapState } from 'vuex'
+import question from '@/components/questionnaire/Question'
+import alert from '@/components/Alert'
 
 export default {
   components: {
-    intro,
     question,
     alert
   },
@@ -100,74 +95,85 @@ export default {
   computed: {
     ...mapState('visas', ['documentChecklist']),
     newVisa() {
-      return this.documentChecklist.find(item => item.name === this.visa.name);
+      return this.documentChecklist.find(item => item.name === this.visa.name)
     }
   },
   methods: {
     startQuestionnaire() {
-      this.getQuestions();
-      this.introStage = false;
-      this.questionsStage = true;
-      this.buildProfile = true;
+      this.getQuestions()
+
+      this.introStage = false
+      this.questionsStage = true
+      this.buildProfile = true
     },
     getQuestions() {
-      this.$store.dispatch('questions/getQuestions');
-      this.questions = this.$store.state.questions.items;
+      this.$store.dispatch('questions/getQuestions')
+      this.questions = this.$store.state.questions.items
+
       // If user is 18 or over, don't ask this question
       if(this.user.profile.age >= 18 && this.questions[0].question === 'Will you be over 18 at the time of application?') {
-        this.currentQuestion = 3;
+        this.currentQuestion = 3
       }
     },
     submitAnswer(answer) {
       if(answer) {
-        this.progress += 20;
+        this.progress += 20
+
         // If question leads to visa, finish questionnaire and reccommend this visa
         this.visaList.forEach(visa => {
           if(answer === visa) {
-            this.finishQuestionnaire(answer);
+            this.finishQuestionnaire(answer)
           }
         })
+
         // If answer is array, make both answers the reccomended visas
         if(Array.isArray(answer)) {
-          this.finishQuestionnaire(answer);
+          this.finishQuestionnaire(answer)
         }
+
         // If questions leads to number, go to this index in questions
         if(Number.isInteger(answer)) {
-          this.lastQuestionIndexes.push(this.currentQuestion);
-          this.currentQuestion = answer;
+          this.lastQuestionIndexes.push(this.currentQuestion)
+          this.currentQuestion = answer
         }
       }
     },
     previousQuestion() {
-      this.progress -= 20;
-      const lastQuestion = this.lastQuestionIndexes.pop();
-      this.currentQuestion = lastQuestion;
+      this.progress -= 20
+
+      const lastQuestion = this.lastQuestionIndexes.pop()
+      this.currentQuestion = lastQuestion
     },
     finishQuestionnaire(answer) {
-      this.progress = 100;
+      this.progress = 100
+
       // Check if answer is array
       if(Array.isArray(answer)) {
-        this.result.recommendedVisa = answer;
+        this.result.recommendedVisa = answer
       } else {
-        this.result.recommendedVisa.push(answer);
+        this.result.recommendedVisa.push(answer)
       }
-      this.$store.dispatch('questions/getResults', this.result);
-      this.$store.dispatch('questions/sendDbResults');
-      this.introStage = false;
-      this.showResults();
+
+      this.$store.dispatch('questions/getResults', this.result)
+      this.$store.dispatch('questions/sendDbResults')
+
+      this.introStage = false
+      this.showResults()
     },
     showResults() { 
       setTimeout(() => {
-        this.questionsStage = false;
-        this.$router.push({name: 'results', params: {username: this.user.profile.username}});
-      }, 2000);
+        this.questionsStage = false
+        this.$router.push({ name: 'results', params: { username: this.user.profile.username } })
+      }, 2000)
     },
     changeBtnFocus(buttons, focus) {
-      console.log('hello')
       buttons.forEach(btn => {
-        btn.setAttribute('tabindex', focus);
+        btn.setAttribute('tabindex', focus)
       })
     }
+  },
+  mounted() {
+    this.startQuestionnaire()
   },
   beforeRouteLeave(to, from, next) {
     if(this.questionsStage) {

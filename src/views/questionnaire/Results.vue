@@ -1,134 +1,93 @@
 <template>
-  <div id="results">
-    <section class="content">
-      <div class="page-header">
-        <div class="title">
-          <h1>Complete!</h1>
-          <h3>Here are the results of your quiz...</h3>
-        </div>
+  <main v-if="topResult && favoriteVisa" id="results" class="content">
+    <h1>Completed!</h1>
 
-        <img 
-          class="hero"
-          src="@/assets/illustrations/quiz/Quiz Complete.svg" 
-          alt="">
+    <section class="top">
+      <h2>Your best option is...</h2>
+
+      <div class="sub-title">
+        <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
+        <p>Switch to</p>
+      </div>
+      
+      <visa-card
+        :visa="topResult"
+        :favouriteVisa="favoriteVisa.name"
+        class="top-card">
+      </visa-card>
+
+      <p>Switching is the most cost effective and a more direct way to remain in the UK.</p>
+    </section>
+
+    <section>
+      <h2>Alternative optiosn are...</h2>
+
+      <div v-if="switchVisas.length" class="switch">
+        <div v-for="visa in switchVisas" :key="visa.name">
+          <div class="sub-title">
+            <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
+            <p>Switch to</p>
+          </div>
+
+          <small-card 
+            :visa="visa"
+            :name="`${visa.name}`"
+            class="card" />
+        </div>
       </div>
 
-      <div class="results" v-if="topResult && favoriteVisa">
-        <div class="top">
-          <div class="sub-title">
-            <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
-            <p>Your best option to remain in the UK is by switching to:</p>
-          </div>
-          
-          <visa-card
-            :visa="topResult"
-            :favouriteVisa="favoriteVisa.name"
-            class="top-card">
-          </visa-card>
-
-          <p>Switching is the most cost effective, and least personally disruptive way to remain in the UK.</p>
-        </div>
-
-        <div v-if="switchVisas.length" class="switch">
-          <div class="sub-title">
-            <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
-            <p class="card-title">There are other visas in the {{ topResult.category }} catagory that you could switch to:</p>
-          </div>
-
-          <div class="small-cards">
-            <small-card 
-              v-for="visa in switchVisas"
-              :key="visa.name"
-              :visa="visa"
-              :name="`${visa.name}`"
-              class="card" />
-          </div>
-        </div>
-
-        <div 
-          v-if="otherVisas.length || youthMobility.length" 
-          class="other">
+      <div v-if="otherVisas.length || youthMobility.length" class="other">
+        <div v-for="visa in otherVisas" :key="visa.name">
           <div class="sub-title">
             <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
-            <p>Other visas in the {{ topResult.category }} catagory that you may be able to apply to:</p>
+            <p>Apply to</p>
           </div>
 
-
-          <div class="tip">
-            <img 
-              v-for="i in 4"
-              :key="i"
-              :src="lightbulb">
-            <p>Be aware! All the visas below are great options <strong>however</strong> you'll need to leave the UK and <strong>apply from your home country</strong> to be considered for them.</p>
-          </div>
-
-          <div class="small-cards">
-            <small-card 
-              v-for="visa in otherVisas"
-              :key="visa.name"
-              :visa="visa"
-              :name="visa.name"
-              class="card" />
-
-            <small-card 
-              v-if="youthMobility.length"
-              :visa="youthMobility[0]"
-              :name="`${youthMobility[0].name}`"
-              class="card" />
-          </div>
+          <small-card 
+            :visa="visa"
+            :name="visa.name"
+            class="card" />
         </div>
 
-        <div 
-          v-if="currentVisaObj && currentVisaObj.cardChecklist[3].state === 'true'" 
-          class="extend">
+        <div v-if="youthMobility.length">
           <div class="sub-title">
-            <img src="@/assets/icons/results/extend.svg" alt="" class="icon">
-            <p>Don't forget about possibly extending your current visa!</p>
+            <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
+            <p>Apply to</p>
           </div>
 
-          <div class="small-cards">
-            <small-card 
-              :visa="currentVisaObj"
-              :name="`${currentVisaObj.name} (Extend)`"
-              class="card" />
-          </div>
+          <small-card 
+            :visa="youthMobility[0]"
+            :name="`${youthMobility[0].name}`"
+            class="card" />
         </div>
+      </div>
+
+      <div v-if="currentVisaObj && currentVisaObj.cardChecklist[3].state === 'true'" class="extend">
+        <div class="sub-title">
+          <img src="@/assets/icons/results/extend.svg" alt="" class="icon">
+          <p>Extend</p>
+        </div>
+
+        <small-card 
+          :visa="currentVisaObj"
+          :name="`${currentVisaObj.name} (Extend)`"
+          class="card" />
       </div>
     </section>
 
-    <section class="bottom">
-      <div class="content">
-        <div class="col">
-          <p class="margin">Thanks for taking our quiz!</p>
+    <section>
+      <div>
+        <p>Take your time to view all the options. Don’t worry about losing your results, they are all saved to your profile page!</p>
 
-          <p>Please do take your time and look over your options. When you’re done your results will stay here and you can always re-visit them from your profile page.</p>
+        <p>Want to try again? Go for it! Just remember, taking the quiz again will clear your current options above.</p>
 
-          <div class="button">
-            <router-link
-              :to="{ name: 'profile', params: {username: user.username} }"
-              tag="button"
-              :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}"
-              class="aria-btn">
-              Go To Profile
-            </router-link>
-          </div>
-        </div>
-
-        <div class="retake-quiz col">
-          <p>You can also retake this quiz as many times as you'd like. But remember that taking the quiz again will clear your current options above.</p>
-
-          <div class="button">
-            <router-link
-              :to="{name: 'questionnaire', params: {username: user.username}}"
-              tag="button"
-              class="tertiary aria-btn">
-              Take Quiz Again
-            </router-link>
-          </div>
-        </div>
+        <router-link
+          :to="{ name: 'questionnaire', params: { username: this.user.username } }">
+          Take again
+        </router-link>
       </div>
     </section>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -225,10 +184,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
-
-#results {
-  padding: $spacing*12 0 0;
-}
 
 .title {
   text-align: center;
