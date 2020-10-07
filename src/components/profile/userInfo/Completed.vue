@@ -25,7 +25,7 @@
       </button>
 
       <router-link
-        :to="{ name: 'questionnaire', params: { username: user.profile.username } }"
+        :to="{ name: 'visa-quiz', params: { username: user.profile.username } }"
         @click.native="completeUserInfo"
         tag="button">
         Take my quiz!

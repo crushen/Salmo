@@ -26,7 +26,7 @@
       <FormulateInput
         v-model="form.currentVisa.name"
         type="select"
-        :options="makeOptions(visaOptions)"
+        :options="visaOptions"
         label="current visa"
         validation="required"
         placeholder="Select an option" />
