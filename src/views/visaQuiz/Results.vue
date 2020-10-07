@@ -82,7 +82,7 @@
         <p>Want to try again? Go for it! Just remember, taking the quiz again will clear your current options above.</p>
 
         <router-link
-          :to="{ name: 'questionnaire', params: { username: this.user.username } }">
+          :to="{ name: 'visa-quiz', params: { username: this.user.username } }">
           Take again
         </router-link>
       </div>

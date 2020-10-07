@@ -38,7 +38,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import question from '@/components/questionnaire/Question'
+import question from '@/components/visaQuiz/Question'
 import alert from '@/components/Alert'
 
 export default {

@@ -7,7 +7,7 @@
     </li>
 
     <li>
-      <router-link :to="{ name: 'questionnaire', params: { username: user.profile.username } }">
+      <router-link :to="{ name: 'visa-quiz', params: { username: user.profile.username } }">
         Visa Quiz
       </router-link>
     </li>

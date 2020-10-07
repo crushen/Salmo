@@ -82,15 +82,15 @@ const routes = [
   },
   // Questionnaire pages
   { 
-    path: '/profile/:username/questionnaire', 
-    name: 'questionnaire', 
-    component: () => import('@/views/questionnaire/Questionnaire'),
+    path: '/profile/:username/visa-quiz', 
+    name: 'visa-quiz', 
+    component: () => import('@/views/visaQuiz/VisaQuiz'),
     meta: { onlyVerifiedUser: true }
   },
   { 
-    path: '/profile/:username/questionnaire/results', 
+    path: '/profile/:username/visa-quiz/results', 
     name: 'results', 
-    component: () => import('@/views/questionnaire/Results'),
+    component: () => import('@/views/visaQuiz/Results'),
     meta: { onlyVerifiedUser: true }
   },
   // Visa pages
