@@ -59,7 +59,9 @@
     <section>
       <h2>Delete Account</h2>
 
-      <a href="#">Delete Account</a>
+      <router-link :to="{ name: 'delete-account', params: { username: user.profile.username } }">
+        Delete Account
+      </router-link>
     </section>
 
     <section>

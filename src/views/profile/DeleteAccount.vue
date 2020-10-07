@@ -1,111 +1,107 @@
 <template>
-  <section id="delete-account" >
-    <div class="content">
+  <main class="content">
+    <section v-if="stage === 1">
+      <h1>Oh! You're leaving?</h1>
+      <FormulateInput
+        v-model="feedback.reason"
+        type="radio"
+        :options="options"
+        label="Before you go, please let us know why you’ve decided to leave Salmo:"
+        validation="required" />
+
+      <FormulateInput
+        v-model="feedback.text"
+        type="text"
+        :disabled="feedback.reason !== 'other'"
+        :validation="feedback.reason === 'other' ? 'required' : null" /> 
+
+      <button @click="submitFeedback">Submit Feedback</button>
+    </section>
+
+    <section v-else>
       <h1>We're sorry to see you go!</h1>
 
-      <img 
-        src="@/assets/illustrations/alternateStates/Delete account 1.svg" 
-        alt="An illustration of two people hugging goodbye"
-        class="img-one">
+      <p>Thanks for letting us know how you feel, we will reflect on your feedback!</p>
+      <p>If you wish to delete your account and have all personal details wiped out from our system, please enter your email address and password:</p>
 
-      <stage-one 
-        v-if="stage === 1"
-        @nextStage="nextStage" />
+      <FormulateForm @submit="submitDelete">
+        <FormulateInput
+          v-model="userDetails.email"
+          type="email"
+          label="email address"
+          validation="bail|required|email"
+          error-behavior="submit" />
 
-      <stage-two v-if="stage === 2" />
+        <FormulateInput
+          v-model="userDetails.password"
+          type="password"
+          label="password"
+          validation="required"
+          error-behavior="submit" />
 
-      <img 
-        v-if="stage === 1"
-        src="@/assets/illustrations/alternateStates/Leaving user 2.svg" 
-        alt="An illustration of a person waving"
-        class="img-two">
-    </div>
-  </section>
+          <p><strong>THIS ACTION IS IRREVERSIBLE!</strong></p>
+
+        <FormulateInput
+          type="submit"
+          label="Delete Account"/>
+
+        <p v-if="error">{{ error }}</p>
+      </FormulateForm>
+    </section>
+  </main>
 </template>
 
 <script>
-import stageOne from '@/components/profile/delete-account/StageOne.vue';
-import stageTwo from '@/components/profile/delete-account/StageTwo.vue';
+import firebase from 'firebase/app'
+import 'firebase/auth'
 
 export default {
-  components: {
-    stageOne,
-    stageTwo
-  },
+  components: {},
   data() {
     return {
-      stage: 1
+      stage: 1,
+      error: null,
+      options: {
+        features: 'Features are not useful',
+        notifications: 'Too many notifications',
+        relevance: 'Not personally relevant to me anymore',
+        other: 'Other (please specify below)'
+      },
+      feedback: {
+        reason: null,
+        text: null
+      },
+      userDetails: {
+        email: null,
+        password: null
+      }
     }
   },
   methods: {
-    nextStage() {
-      this.stage++;
-      window.scrollTo(0, 0);
+    submitFeedback() {
+      this.stage++
+    },
+    submitDelete() {
+      const user = firebase.auth().currentUser,
+            credential = firebase.auth.EmailAuthProvider.credential(this.userDetails.email, this.userDetails.password);
+
+      user.reauthenticateWithCredential(credential)
+      .then(() => this.deleteAccount(user))
+      .catch(error => this.error = error.message)
+    },
+    deleteAccount(user) {
+      user.delete()
+      .then(() => {
+        this.$store.state.auth.user = null
+        this.$store. commit('auth/setUserDeleted')
+        this.$router.push('/')
+      })
+      .catch(error => this.error = error.message)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables.scss';
 
-#delete-account {
-  padding: $spacing*12 0 0 0;
-}
-
-.content {
-  position: relative;
-  z-index: 0;
-  padding-bottom: $spacing*12;
-}
-
-h1 {
-  text-align: center;
-  width: 80%;
-  max-width: 320px;
-  margin: auto;
-}
-
-.placeholder-img {
-  width: 150px;
-  height: 150px;
-  background: $light-grey;
-  border-radius: 100px;
-  margin: $spacing*6 auto 0 auto;
-  margin-bottom: $spacing*6;
-}
-
-.img-one {
-  display: block;
-  width: 45vw;
-  max-width: 230px;
-  margin: $spacing*6 auto;
-}
-
-.img-two {
-  width: 40vw;
-  height: 40vw;
-  max-width: 250px;
-  max-height: 250px;
-  position: absolute;
-  bottom: 0;
-  left: -12vw;
-  object-fit: cover;
-  object-position: -5vw 5vw;
-}
-
-// Tablet
-@media screen and (min-width: 600px) {
-  #delete-account {
-    padding: $spacing*15 0 0 0;
-  }
-
-  .content {
-    padding-bottom: $spacing*18;
-  }
-
-  .img-one {
-    margin: $spacing*8 auto;
-  }
-}
 </style>
