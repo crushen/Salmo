@@ -1,10 +1,8 @@
 <template>
-  <section id="category-page" v-if="visaList">
-    <div class="content">
-      <h1>{{ category }} Visas</h1>
-    </div>
+  <main v-if="visaList.length" class="content">
+    <h1>{{ category }} Visas</h1>
     
-    <div class="content">
+    <section>
       <visa-card 
         v-for="visa in visaList"
         :key="visa.name"
@@ -12,18 +10,21 @@
         :favouriteVisa="favouriteVisa"
         class="visa-card">
       </visa-card>
-    </div>
-  </section>
+    </section>
+
+    <section>
+      <help-centre-card />
+    </section>
+  </main>
 </template>
 
 <script>
-import visaCard from '@/components/visa/VisaCard';
-import { mapState } from 'vuex';
+import visaCard from '@/components/visa/VisaCard'
+import helpCentreCard from '@/components/cards/HelpCentre'
+import { mapState } from 'vuex'
 
 export default {
-  components: {
-    visaCard
-  },
+  components: { visaCard, helpCentreCard },
   data() {
     return {
       user: this.$store.state.auth.user,
@@ -36,64 +37,29 @@ export default {
       if(this.user && this.user.profile.favoriteVisa) {
         return this.user.profile.favoriteVisa.name;
       } else {
-        return 'none';
+        return 'none'
       }
     }
   },
-  methods: {
-    fetchVisas() {
-      this.$store.dispatch('visas/getVisas', this.category).then(() => {
-        if(!this.visaList.length) {
-          this.$router.push({name: 'not-found'});
-        }
-      })
-    }
-  },
   mounted() {
-    this.fetchVisas();
+    this.$store.dispatch('visas/getVisas', this.category)
+    .then(() => {
+      if(!this.visaList.length) {
+        this.$router.push({name: 'not-found'})
+      }
+    })
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/variables.scss';
-
-#category-page {
-  padding: $spacing*12 0 $spacing*8;
-}
 
 h1 {
   text-transform: capitalize;
-  margin-bottom: $spacing*5;
+  margin-bottom: 16px;
 }
 
 .visa-card {
-  margin-bottom: $spacing*4;
-}
-
-// Tablet
-@media screen and (min-width: 600px) {
-  #category-page {
-    padding: $spacing*15 0 $spacing*8;
-  }
-
-  h1 {
-    margin-bottom: $spacing*8;
-  }
-
-  .visa-card {
-    margin-bottom: $spacing*6;
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  h1 {
-    margin-bottom: $spacing*10;
-  }
-
-  .visa-card {
-    margin-bottom: $spacing*8;
-  }
+  margin-bottom: 16px;
 }
 </style>

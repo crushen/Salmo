@@ -13,7 +13,7 @@
           :style="{ backgroundImage: buttonBackground(index) }"
           :aria-pressed="answer.value === selected ?  'true' : 'false'">
           <div v-if="answer.value !== selected && selected !== null" class="btn-overlay" />
-          <p>{{ answer.label }}</p>
+          {{ answer.label }}
           <img :src="buttonIcon(index)" class="icon">
         </button>
       </div>
