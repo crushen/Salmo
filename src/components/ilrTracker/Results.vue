@@ -10,7 +10,7 @@
           v-for="(year, index) in visa.years"
           :key="index"
           class="holiday-result">
-          <b>{{ year.start.getFullYear() }} - {{ year.totalDays }} days in total</b>
+          <b>{{ year.start.getFullYear() }} - {{ year.totalDays }} days away</b>
 
           <img
             v-if="year.icon === 'tick'"
