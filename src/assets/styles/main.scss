@@ -1,121 +1,10 @@
-//@import '~pretty-checkbox/src/pretty-checkbox.scss';
 @import '../../../node_modules/@braid/vue-formulate/themes/snow/snow.scss';
 
-// Headings and Text
 @mixin font($size, $weight) {
   font-size: $size;
   font-weight: $weight;
 }
 
-// h1 { @include font(10vw, 900) }
-// h2.header { @include font(10vw, 900) }
-// h2 { @include font(20px, 600) }
-// h3 { @include font(18px, 600) }
-// h4, .label { 
-//   @include font(20px, 400);
-//   font-family: 'mrs-eaves-roman-all-small-ca', $serif;
-// }
-
-// p,
-// li { @include font(16px, 300) }
-// a { 
-//   @include font(16px, 600);
-//   //text-decoration: none;
-//   color: $dark-font;
-//   cursor: pointer;
-
-//   &:hover {
-//     text-decoration: none;
-//   }
-// }
-
-// b {
-//   font-weight: 600;
-// }
-
-// .error { color: red; }
-// .emphasis { font-style: italic; }
-// .quote { font-family: $serif; }
-// .caption { 
-//   @include font(4vw, 300);
-// }
-
-// // Buttons
-// button,
-// input[type="submit"] {
-//   @include font(16px, 600);
-//   background-color: $primary-yellow;
-//   color: $dark-font;
-//   font-family: $sans-serif;
-//   border: none;
-//   padding: 14px 18px;
-//   border-radius: 100px;
-//   box-shadow: $shadow;
-//   cursor: pointer;
-//   transition: 0.3s;
-
-//   &:hover {
-//     background: darken($color: $primary-yellow, $amount: 16%);
-//   }
-
-//   &.secondary {
-//     background: white;
-//     border: 3px solid $primary-pink;
-//     color: $primary-pink;
-//     font-weight: bold;
-
-//     &:hover {
-//       background: $primary-pink;
-//       color: white;
-//     }
-//   }
-
-//   &.tertiary {
-//     background: none;
-//     color: $dark-font;
-//     font-family: $sans-serif;
-//     border: none;
-//     padding: 0;
-//     border-radius: none;
-//     box-shadow: none;
-//     text-decoration: underline;
-    
-//     p {
-//       text-decoration: underline;
-//       @include font(16px, 600);
-//     }
-//   }
-
-//   &.pink {
-//     background: $primary-pink;
-//     color: $light-font;
-
-//     &:hover {
-//       background: darken($color: $primary-pink, $amount: 10%);
-//     }
-//   }
-
-//   &.disabled {
-//     background: $light-grey;
-//     color: white;
-//     pointer-events: none;
-//   }
-// }
-
-// .tertiary {
-//   @include font(16px, 600);
-//   background: none;
-//   color: $dark-font;
-//   font-family: $sans-serif;
-//   border: none;
-//   padding: 0;
-//   border-radius: none;
-//   //outline: none;
-//   box-shadow: none;
-//   text-decoration: underline;
-// }
-
-// Page
 @mixin grid($col, $row, $gap) {
   display: grid;
   grid-template-columns: $col;
@@ -123,105 +12,47 @@
   grid-gap: $gap;
 }
 
+// Text
+p {
+  @include font(16px, 300);
+}
+
+// Page
 .content {
   width: 85%;
   margin: auto;
-  padding-top: 50px;
+
+  &.padding {
+    &.top {
+      padding-top: 60px;
+    }
+    
+    &.bottom {
+      padding-bottom: 60px;
+    }
+  }
 }
 
-// .section-margin {
-//   margin-top: $spacing*10;
-// }
+// Elements
+button {
+  border: none;
+  font-family: $sans-serif;
+  @include font(16px, 600);
+  padding: 8px 22px;
+  border-radius: 100px;
+  
+  &.primary {
+    background: $red;
+    color: $light-font;
+  }
 
-// .single-page {
-//   height: 100vh;
-//   //width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-around;
-//   padding: 16vw 0;
-// }
+  &.secondary {
+    background: lighten($color: $red, $amount: 35%);
+    color: $red;
+  }
 
-// .arrow-btn {
-//   background: transparent;
-//   box-shadow: none;
-//   padding: none;
-//   width: 40px;
-//   height: 40px;
-//   position: absolute;
-//   top: 24px;
-//   left: 5vw;
-//   z-index: 5;
-
-//   &:hover {
-//     background: transparent;
-//   }
-
-//   img {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 40px;
-//   }
-// }
-
-// .radio-buttons {
-//   .pretty .state label:before, .pretty .state label:after {
-//     top: 4px;
-//   }
-
-//   .pretty .state label {
-//     margin: 0 0 0 8px;
-//   }
-// }
-
-// .switches {
-//   .pretty .state label:before, .pretty .state label:after {
-//     top: -2px;
-//   }
-
-//   .pretty.p-switch.p-fill input:checked ~ .state:before {
-//     border-color: #FFD275;
-//     background-color: #FFD275 !important;
-//   }
-// }
-
-// // Tablet font
-// @media screen and (min-width: 420px) {
-//   // Headings and Text
-//   h1 { @include font(40px, 900) }
-//   h2.header { @include font(40px, 900) }
-
-//   .caption { 
-//     @include font(20px, 300);
-//   }
-
-//   // Page
-//   .content {
-//     width: 75%;
-//     margin: auto;
-//     max-width: 800px;
-//   }
-// }
-
-// // Tablet
-// @media screen and (min-width: 600px) {
-//   .arrow {
-//     top: 24px;
-//     left: calc(100px + 7.5%)
-//   }
-
-//   .section-margin {
-//     margin-top: $spacing*12;
-//   }
-// }
-
-// // Tablet
-// @media screen and (min-width: 1100px) {
-//   p, li, a {
-//     font-size: 18px;
-//   } 
-
-//   h2 { @include font(22px, 600) }
-//   h3 { @include font(20px, 600) }
-// }
+  &.wave-background {
+    background-size: 110%;
+    background-position: center;
+  }
+}
