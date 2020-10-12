@@ -22,6 +22,7 @@
     "firebase-functions": "^3.3.0",
     "lodash": "^4.17.19",
     "minimist": "1.2.3",
+    "sass-resources-loader": "^2.1.1",
     "v-calendar": "^1.0.0-beta.23",
     "vue": "^2.6.10",
     "vue-clickaway": "^2.2.2",
