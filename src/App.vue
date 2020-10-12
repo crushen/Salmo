@@ -27,9 +27,9 @@
       <!-- v-if="$route.path !== '/about' && $route.path !== '/'" -->
 
     <div class="content-wrapper">
-      <!-- <transition name="page" mode="out-in"> -->
+      <transition name="slide" mode="out-in">
         <router-view />
-      <!-- </transition> -->
+      </transition>
     </div>
   </div>
 </template>
@@ -63,6 +63,8 @@ export default {
           return 950
         case 'sign-in':
           return 950
+        case 'forgot-password':
+          return 1950
         default:
           return -50
       }
@@ -75,6 +77,8 @@ export default {
           return -650
         case 'sign-in':
           return -650
+        case 'forgot-password':
+          return -550
         default:
           return -800
       }
@@ -131,6 +135,7 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 :focus {
@@ -139,16 +144,6 @@ export default {
 
 body.using-mouse :focus {
   outline: none;
-}
-
-.page-enter-active,
-.page-leave-active {
-  transition: 0.4s;
-}
-
-.page-enter, 
-.page-leave-to {
-  opacity: 0;
 }
 
 #app {
@@ -183,7 +178,7 @@ body.using-mouse :focus {
   top: 0;
   background-repeat: repeat-x;
   pointer-events: none;
-  transition: 2s cubic-bezier(.26,.3,.36,.94);
+  transition: 1.7s cubic-bezier(.26,.3,.36,.94);
   z-index: 1;
 }
 
@@ -209,6 +204,28 @@ p {
   position: relative;
   z-index: 1;
 }
+
+// Page transitions
+.slide-enter,
+.slide-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: 0.7s;
+  transition-timing-function: cubic-bezier(0,1.15,1,.99);
+}
+
+// .page-enter-active,
+// .page-leave-active {
+//   transition: 0.4s;
+// }
+
+// .page-enter, 
+// .page-leave-to {
+//   opacity: 0;
+// }
 
 // Alert transitions
 .alert-enter,

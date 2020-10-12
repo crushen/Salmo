@@ -1,34 +1,45 @@
 <template>
-  <section class="content">
-    <section v-if="!linkSent">
-      <div>
-        <h1>Let's reset your password!</h1>
-        <p>we will send an email to you for verification.</p>
-      </div>
+  <main class="content sign-up-in">
+    <transition name="slide" mode="out-in">
+      <section v-if="!linkSent" key="!linkSent">
+        <div class="title">
+          <h1>Let's reset your password!</h1>
+          <p>we will send an email to you for verification.</p>
+        </div>
 
-      <FormulateForm @submit="handleReset">
-        <FormulateInput
-          v-model="form.email"
-          type="email"
-          label="email"
-          validation="bail|required|email" />
+        <FormulateForm @submit="handleReset" class="form">
+          <FormulateInput
+            v-model="form.email"
+            type="email"
+            label="email"
+            validation="bail|required|email" />
 
-        <FormulateInput
-          type="submit"
-          label="Send Reset Link"/>
-      </FormulateForm>
+          <FormulateInput
+            type="submit"
+            label="Send Reset Link"
+            class="button" />
+        </FormulateForm>
 
-      <p v-if="error" class="error">{{ error }}</p> 
-    </section>
+        <p v-if="error" class="error">{{ error }}</p> 
+      </section>
 
-    <section v-else class="single-page">
-      <h1>On it's way!</h1>
-      <p>The email containing a link to reset your password has been sent.</p>
-      <p>Once you've reset your passowrd, please head to the Sign In page.</p>
+      <section v-else key="linkSent" class="form stage-2">
+        <div class="title">
+          <h1>On it's way!</h1>
+        </div>
+        
+        <p>The email containing a link to reset your password has been sent.</p>
+        <p>Once you've reset your passowrd, please head to the Sign In page.</p>
 
-      <router-link :to="{ name: 'sign-in' }" tag="button">Sign In</router-link>
-    </section>
-  </section>
+        <router-link
+          :to="{ name: 'sign-in' }"
+          tag="button"
+          class="button primary">
+          Sign In
+        </router-link>
+      </section>
+    </transition>
+  </main>
 </template>
 
 <script>
@@ -56,3 +67,35 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
+.title {
+  max-width: 190px;
+  text-align: right;
+  color: $light-font;
+  position: absolute;
+  top: 120px;
+  right: 0;
+
+  h1 {
+    margin-bottom: .5em;
+  }
+}
+
+.form {
+  height: 100vh;
+  padding-top: 35vh;
+
+  &.stage-2 {
+    p:last-of-type {
+      margin-top: 1em;
+    }
+  }
+}
+
+.button {
+  bottom: 60px;
+}
+</style>

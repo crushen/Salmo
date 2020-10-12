@@ -1,5 +1,5 @@
 <template>
-  <section id="sign-up" class="content initial-pages">
+  <main id="sign-up" class="content sign-up-in">
     <h1>What's your account?</h1>
 
     <FormulateForm @submit="handleSignUp" class="form">
@@ -24,11 +24,11 @@
       <FormulateInput
         type="submit"
         label="Next"
-        class="primary button" />
+        class="button" />
     </FormulateForm>
 
     <p v-if="error" class="error">{{ error }}</p>
-  </section>
+  </main>
 </template>
 
 <script>
@@ -77,14 +77,6 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.form {
-  height: 100vh;
-  padding-top: 20vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 h1 {
   width: 50%;
   text-align: right;
@@ -94,9 +86,12 @@ h1 {
   right: 0;
 }
 
+.form {
+  height: 100vh;
+  padding-top: 20vh;
+}
+
 .button {
-  position: absolute;
-  right: 0;
   bottom: 60px;
 }
 </style>

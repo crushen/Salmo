@@ -38,6 +38,20 @@ a {
   }
 }
 
+.sign-up-in {
+  .form {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .button {
+    position: absolute;
+    right: 0;
+  }
+}
+
 // Elements
 button {
   border: none;

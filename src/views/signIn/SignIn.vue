@@ -1,5 +1,5 @@
 <template>
-  <main class="content initial-pages">
+  <main class="content sign-up-in">
     <FormulateForm @submit="handleSignIn" class="form">
       <FormulateInput
         v-model="form.email"
@@ -22,7 +22,7 @@
       <FormulateInput
         type="submit"
         label="Sign In"
-        class="primary button" />
+        class="button" />
     </FormulateForm>
 
     <div class="sign-up">
@@ -68,14 +68,6 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.form {
-  height: 100vh;
-  padding-top: 5vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 h1 {
   width: 50%;
   text-align: right;
@@ -85,13 +77,16 @@ h1 {
   right: 0;
 }
 
+.form {
+  height: 100vh;
+  padding-top: 5vh;
+}
+
 .forgot-password {
   text-align: right;
 }
 
 .button {
-  position: absolute;
-  right: 0;
   bottom: 100px;
 }
 
