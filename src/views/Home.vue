@@ -1,12 +1,12 @@
 <template>
   <main>
-    <div
+    <!-- <div
       @click="morph"
       class="wave"
       :style="{ 
         backgroundImage: `url(${require('@/assets/backgrounds/wave.svg')})`,
         backgroundPosition: `${wavePosition.x}px ${wavePosition.y}px`
-      }" />
+      }" /> -->
 
     <div
       class="background"
@@ -42,17 +42,17 @@
 export default {
   data() {
     return {
-      wavePosition: {
-        x: -50,
-        y: -800
-      }
+      // wavePosition: {
+      //   x: -50,
+      //   y: -800
+      // }
     }
   },
   methods: {
-    morph() {
-      this.wavePosition.x += 1000
-      this.wavePosition.y += 300
-    }
+    // morph() {
+    //   this.wavePosition.x += 1000
+    //   this.wavePosition.y += 300
+    // }
   }
 }
 
@@ -144,31 +144,4 @@ export default {
 p {
   text-align: center;
 }
-
-
-
-
-
-
-.wave {
-  height: 100vh;
-  position: absolute;
-  width: 100%;
-  z-index: 12;
-  left: 0;
-  top: 0;
-  background-repeat: repeat-x;
-  //pointer-events: none;
-  transition: 2s cubic-bezier(.26,.3,.36,.94);
-  //animation: wave-animation 2.5s infinite linear;
-  z-index: 0;
-}
-
-
-
-// @keyframes wave-animation {
-//   0%   { background-position: 0 -800px; }
-//   100% {background-position: 998px -800px;}
-// }
-
 </style>

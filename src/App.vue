@@ -6,17 +6,25 @@
       class="arrow-btn aria-btn">
       <img :src="arrow" class="arrow">
     </button> -->
+    
+    <div
+      @click="morph"
+      class="wave"
+      :style="{ 
+        backgroundImage: `url(${require('@/assets/backgrounds/wave.svg')})`,
+        backgroundPosition: `${wavePosition.x}px ${wavePosition.y}px`
+      }" />
 
     <mobile-nav v-if="innerWidth < 600" />
     <sidebar-nav v-else />
 
     <div id="overlay"></div>
 
-    <!-- <img 
-      v-if="$route.path !== '/about' && $route.path !== '/'"
-      src="@/assets/logo/colour.svg" 
+    <img
+      src="@/assets/logo/outline-2.svg" 
       alt="Salmo logo"
-      class="small-logo"> -->
+      class="small-logo">
+      <!-- v-if="$route.path !== '/about' && $route.path !== '/'" -->
 
     <div class="content-wrapper">
       <!-- <transition name="page" mode="out-in"> -->
@@ -39,7 +47,11 @@ export default {
   data () {
     return {
       innerWidth: null,
-      arrow
+      arrow,
+      wavePosition: {
+        x: -50,
+        y: -800
+      }
     }
   },
   computed: {
@@ -60,6 +72,12 @@ export default {
         default:
           return true;
       }
+    }
+  },
+  methods: {
+    morph() {
+      this.wavePosition.x += 1000
+      this.wavePosition.y += 300
     }
   },
   mounted() {
@@ -132,12 +150,30 @@ body.using-mouse :focus {
   pointer-events: none;
 }
 
+.wave {
+  height: 100vh;
+  position: absolute;
+  width: 100%;
+  z-index: 12;
+  left: 0;
+  top: 0;
+  background-repeat: repeat-x;
+  pointer-events: none;
+  transition: 2s cubic-bezier(.26,.3,.36,.94);
+  z-index: 0;
+}
+
+// @keyframes wave-animation {
+//   0%   { background-position: 0 -800px; }
+//   100% {background-position: 998px -800px;}
+// }
+
 .small-logo {
-  width: 35px;
-  opacity: 0.8;
+  width: 40px;
   position: absolute;
   top: 24px;
-  right: 6vw;
+  right: 7.5vw;
+  z-index: 5;
 }
 
 p {
