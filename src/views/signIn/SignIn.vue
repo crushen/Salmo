@@ -1,6 +1,6 @@
 <template>
-  <section class="content">
-    <FormulateForm @submit="handleSignIn">
+  <main class="content initial-pages">
+    <FormulateForm @submit="handleSignIn" class="form">
       <FormulateInput
         v-model="form.email"
         type="email"
@@ -13,24 +13,27 @@
         label="password"
         validation="required" />
 
-      <router-link :to="{ name: 'forgot-password' }">
-        Forgot Password?
+      <router-link
+        :to="{ name: 'forgot-password' }"
+        class="forgot-password">
+        forgotton password?
       </router-link>
 
       <FormulateInput
         type="submit"
-        label="Sign In"/>
+        label="Sign In"
+        class="primary button" />
     </FormulateForm>
 
-    <div>
-      <p>Need an account?</p>
-      <router-link :to="{ name: 'sign-up' }" tag="button">
-        Sign Up
+    <div class="sign-up">
+      <p>need an account?</p>
+      <router-link :to="{ name: 'sign-up' }">
+        sign up
       </router-link>
     </div>
 
     <p v-if="error">{{ error }}</p>
-  </section>
+  </main>
 </template>
 
 <script>
@@ -61,3 +64,47 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
+.form {
+  height: 100vh;
+  padding-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  width: 50%;
+  text-align: right;
+  color: $light-font;
+  position: absolute;
+  top: 120px;
+  right: 0;
+}
+
+.forgot-password {
+  text-align: right;
+}
+
+.button {
+  position: absolute;
+  right: 0;
+  bottom: 100px;
+}
+
+.sign-up {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 60px;
+
+  a {
+    margin-left: 1em;
+  }
+}
+</style>

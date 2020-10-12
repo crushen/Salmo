@@ -1,5 +1,5 @@
 <template>
-  <section id="sign-up" class="content">
+  <section id="sign-up" class="content initial-pages">
     <h1>What's your account?</h1>
 
     <FormulateForm @submit="handleSignUp" class="form">

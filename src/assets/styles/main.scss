@@ -13,8 +13,12 @@
 }
 
 // Text
-p {
-  @include font(1em, 300);
+h1 { @include font(1.5em, 600) }
+
+p { @include font(1em, 300) }
+
+a {
+  color: $red;
 }
 
 // Page

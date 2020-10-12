@@ -61,6 +61,8 @@ export default {
           return -50
         case 'sign-up':
           return 950
+        case 'sign-in':
+          return 950
         default:
           return -50
       }
@@ -70,6 +72,8 @@ export default {
         case 'home':
           return -800
         case 'sign-up':
+          return -650
+        case 'sign-in':
           return -650
         default:
           return -800
