@@ -14,7 +14,7 @@
 
 // Text
 p {
-  @include font(16px, 300);
+  @include font(1em, 300);
 }
 
 // Page
@@ -37,7 +37,7 @@ p {
 button {
   border: none;
   font-family: $sans-serif;
-  @include font(16px, 600);
+  @include font(1em, 600);
   padding: 8px 22px;
   border-radius: 100px;
   
