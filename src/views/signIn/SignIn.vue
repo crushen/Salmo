@@ -78,7 +78,7 @@ h1 {
 }
 
 .form {
-  height: 100vh;
+  min-height: 120vh;
   padding-top: 5vh;
 }
 
@@ -100,6 +100,12 @@ h1 {
 
   a {
     margin-left: 1em;
+  }
+}
+
+@media screen and (min-width: 370px) {
+  .form {
+    min-height: 100vh;
   }
 }
 </style>

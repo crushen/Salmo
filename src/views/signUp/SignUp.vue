@@ -87,11 +87,17 @@ h1 {
 }
 
 .form {
-  height: 100vh;
+  min-height: 120vh;
   padding-top: 20vh;
 }
 
 .button {
   bottom: 60px;
+}
+
+@media screen and (min-width: 370px) {
+  .form {
+    min-height: 100vh;
+  }
 }
 </style>

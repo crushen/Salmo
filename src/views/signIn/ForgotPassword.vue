@@ -85,7 +85,7 @@ export default {
 }
 
 .form {
-  height: 100vh;
+  min-height: 115vh;
   padding-top: 35vh;
 
   &.stage-2 {
@@ -97,5 +97,11 @@ export default {
 
 .button {
   bottom: 60px;
+}
+
+@media screen and (min-width: 370px) {
+  .form {
+    min-height: 100vh;
+  }
 }
 </style>
