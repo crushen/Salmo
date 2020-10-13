@@ -19,14 +19,17 @@
         label="Next"
         class="button" />
     </FormulateForm>
+
+    <settings />
   </main>
 </template>
 
 <script>
 import terms from '@/components/TermsAndConditions'
+import settings from '@/components/profile/Settings'
 
 export default {
-  components: { terms },
+  components: { terms, settings },
   data() {
     return { accepted: false }
   },
@@ -36,6 +39,9 @@ export default {
         this.$router.push({ name: 'verify-email' })
       }
     }
+  },
+  mounted() {
+    this.$store.commit('wave/setWavePosition', {x: 1950, y: -450})
   }
 }
 </script>

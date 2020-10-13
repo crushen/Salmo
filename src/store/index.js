@@ -8,6 +8,7 @@ import visas from './modules/visas'
 import helpCentre from './modules/helpCentre'
 import prCalc from './modules/prCalc'
 import news from './modules/news'
+import wave from './modules/wave'
 
 Vue.use(Vuex)
 
@@ -18,13 +19,11 @@ export default new Vuex.Store({
     visas,
     helpCentre,
     prCalc,
-    news
+    news,
+    wave
   },
   state() {
-    return {
-      waveFullScreen: false,
-      waveAway: false
-    }
+    return {}
   },
   getters: {
 
@@ -32,12 +31,6 @@ export default new Vuex.Store({
   actions: {
   },
   mutations: {
-    ...vuexfireMutations,
-    setFullScreen(state) {
-      state.waveFullScreen = true
-    },
-    setWaveAway(state) {
-      state.waveAway = true
-    }
+    ...vuexfireMutations
   },
 })

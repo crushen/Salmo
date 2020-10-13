@@ -56,7 +56,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['waveFullScreen', 'waveAway']),
+    ...mapState('wave', ['waveFullScreen', 'waveAway']),
     waveX() {
       if(!this.waveFullScreen) {
         switch(this.$route.name) {
@@ -223,6 +223,15 @@ p {
 .content-wrapper {
   position: relative;
   z-index: 1;
+}
+
+main {
+  transition: 0.5s;
+  opacity: 1;
+
+  &.fade {
+    opacity: 0;
+  }
 }
 
 // Page transitions

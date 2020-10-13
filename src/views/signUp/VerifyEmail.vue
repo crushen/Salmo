@@ -1,6 +1,5 @@
 <template>
   <main
-    :key="componentKey"
     :class="verified ? 'fade' : ''"
     class="content padding top">
     <h1>Verify your email address</h1>
@@ -32,17 +31,16 @@ export default {
     return {
       user: this.$store.state.auth.user,
       error: null,
-      verified: false,
-      componentKey: 0
+      verified: false
     }
   },
   methods: {
     verify() {
-      this.$store.commit('setFullScreen')
+      this.$store.commit('wave/setFullScreen')
       this.verified = true
 
       setTimeout(() => {
-        this.$store.commit('setWaveAway')
+        this.$store.commit('wave/setWaveAway')
       }, 1500)
 
       setTimeout(() => {
@@ -58,15 +56,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
-
-main {
-  transition: 0.5s;
-  opacity: 1;
-
-  &.fade {
-    opacity: 0;
-  }
-}
 
 .content {
   min-height: 100vh;
