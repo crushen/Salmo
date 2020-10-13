@@ -8,7 +8,7 @@
     </button> -->
 
     <div
-      @click="morph"
+      :class="waveAway ? 'fast' : ''"
       class="wave"
       :style="{ 
         backgroundImage: `url(${require('@/assets/backgrounds/wave.svg')})`,
@@ -21,7 +21,7 @@
     <div id="overlay"></div>
 
     <img
-      src="@/assets/logo/outline-2.svg" 
+      src="@/assets/logo/colour.svg" 
       alt="Salmo logo"
       class="small-logo">
       <!-- v-if="$route.path !== '/about' && $route.path !== '/'" -->
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import mobileNav from '@/components/nav/MobileNav';
 import sidebarNav from '@/components/nav/SidebarNav';
 import arrow from '@/assets/icons/back.svg';
@@ -55,41 +56,50 @@ export default {
     }
   },
   computed: {
+    ...mapState(['waveFullScreen', 'waveAway']),
     waveX() {
-      switch(this.$route.name) {
-        case 'home':
-          return -50
-        case 'sign-up':
-          return 950
-        case 'sign-in':
-          return 950
-        case 'forgot-password':
-          return 1950
-        case 'sign-up-terms':
-          return 1950
-        case 'verify-email':
-          return 2950
-        default:
-          return -50
+      if(!this.waveFullScreen) {
+        switch(this.$route.name) {
+          case 'home':
+            return -50
+          case 'sign-up':
+            return 950
+          case 'sign-in':
+            return 950
+          case 'forgot-password':
+            return 1950
+          case 'sign-up-terms':
+            return 1950
+          case 'verify-email':
+            return 2950
+          default:
+            return -50
+        }
+      } else {
+        return 3950
       }
     },
     waveY() {
-      switch(this.$route.name) {
-        case 'home':
-          return -800
-        case 'sign-up':
-          return -650
-        case 'sign-in':
-          return -650
-        case 'forgot-password':
-          return -550
-        case 'sign-up-terms':
-          return -450
-        case 'verify-email':
-          return -450
-        default:
-          return -800
-      }
+      if(!this.waveFullScreen) {
+        switch(this.$route.name) {
+          case 'home':
+            return -800
+          case 'sign-up':
+            return -650
+          case 'sign-in':
+            return -650
+          case 'forgot-password':
+            return -550
+          case 'sign-up-terms':
+            return -450
+          case 'verify-email':
+            return -450
+          default:
+            return -800
+        }
+      } else {
+        return 0
+      } 
     },
     arrowPage() {
       switch(this.$route.name) {
@@ -110,27 +120,21 @@ export default {
       }
     }
   },
-  methods: {
-    morph() {
-      this.wavePosition.x += 1000
-      this.wavePosition.y += 300
-    }
-  },
   mounted() {
     this.innerWidth = window.innerWidth;
     window.addEventListener('resize', () => {
-      this.innerWidth = window.innerWidth;
+      this.innerWidth = window.innerWidth
     })
 
     window.addEventListener('mousedown', () => {
-      document.body.classList.add('using-mouse');
+      document.body.classList.add('using-mouse')
     })
 
     window.addEventListener('keydown', event => {
       if(event.keyCode === 9) {
-        document.body.classList.remove('using-mouse');
+        document.body.classList.remove('using-mouse')
       }
-    });
+    })
   }
 }
 </script>
@@ -188,6 +192,14 @@ body.using-mouse :focus {
   pointer-events: none;
   transition: 1.7s cubic-bezier(.26,.3,.36,.94);
   z-index: 1;
+  opacity: 1;
+  visibility: visible;
+
+  &.fast {
+    transition: 0.5s cubic-bezier(.26,.3,.36,.94);
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 // @keyframes wave-animation {

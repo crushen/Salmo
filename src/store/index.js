@@ -21,7 +21,10 @@ export default new Vuex.Store({
     news
   },
   state() {
-    return {}
+    return {
+      waveFullScreen: false,
+      waveAway: false
+    }
   },
   getters: {
 
@@ -29,6 +32,12 @@ export default new Vuex.Store({
   actions: {
   },
   mutations: {
-    ...vuexfireMutations
+    ...vuexfireMutations,
+    setFullScreen(state) {
+      state.waveFullScreen = true
+    },
+    setWaveAway(state) {
+      state.waveAway = true
+    }
   },
 })
