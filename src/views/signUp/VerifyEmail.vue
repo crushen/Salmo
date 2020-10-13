@@ -1,5 +1,6 @@
 <template>
   <main
+    :key="componentKey"
     :class="verified ? 'fade' : ''"
     class="content padding top">
     <h1>Verify your email address</h1>
@@ -23,12 +24,16 @@
 </template>
 
 <script>
+import firebase from 'firebase/app'
+import 'firebase/auth'
+
 export default {
   data() {
     return {
       user: this.$store.state.auth.user,
       error: null,
-      verified: false
+      verified: false,
+      componentKey: 0
     }
   },
   methods: {
@@ -38,16 +43,15 @@ export default {
 
       setTimeout(() => {
         this.$store.commit('setWaveAway')
-      }, 1500);
-      // if(this.user.emailVerified) {
-      //   this.$router.push({ name: 'profile', params: { username: this.user.profile.username } })
-      // } else {
-      //   this.error = 'Please verify your email'
-      // }
+      }, 1500)
+
+      setTimeout(() => {
+        location.reload()
+      }, 1800)
     }
   },
   mounted() {
-    //this.$store.dispatch('auth/sendEmailVerification')
+    this.$store.dispatch('auth/sendEmailVerification')
   }
 }
 </script>
