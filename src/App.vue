@@ -15,8 +15,8 @@
         backgroundPosition: `${waveX}px ${waveY}px`
       }" />
 
-    <mobile-nav v-if="innerWidth < 600" />
-    <sidebar-nav v-else />
+    <!-- <mobile-nav v-if="innerWidth < 600" />
+    <sidebar-nav v-else /> -->
 
     <div id="overlay"></div>
 
@@ -41,8 +41,8 @@ import arrow from '@/assets/icons/back.svg';
 
 export default {
   components: {
-    mobileNav,
-    sidebarNav
+    // mobileNav,
+    // sidebarNav
   },
   data () {
     return {
@@ -65,6 +65,8 @@ export default {
           return 950
         case 'forgot-password':
           return 1950
+        case 'sign-up-terms':
+          return 1950
         default:
           return -50
       }
@@ -79,6 +81,8 @@ export default {
           return -650
         case 'forgot-password':
           return -550
+        case 'sign-up-terms':
+          return -450
         default:
           return -800
       }
@@ -215,6 +219,10 @@ p {
 .slide-leave-active {
   transition: 0.7s;
   transition-timing-function: cubic-bezier(0,1.15,1,.99);
+}
+
+.slide-enter-active {
+  transition-delay: 0.5s;
 }
 
 // .page-enter-active,
