@@ -1,6 +1,8 @@
 <template>
-  <main class="content sign-up-in">
-    <FormulateForm @submit="handleSignIn" class="form">
+  <main
+    :class="verified ? 'fade' : ''"
+    class="content sign-up-in">
+    <FormulateForm @submit="verify" class="form">
       <FormulateInput
         v-model="form.email"
         type="email"
@@ -45,10 +47,20 @@ export default {
       form: {
         email: null,
         password: null
-      }
+      },
+      verified: false
     }
   },
   methods: {
+    verify() {
+      this.$store.commit('wave/setFullScreen')
+      this.verified = true
+
+      setTimeout(() => {
+        this.$store.commit('wave/setWaveAway')
+        this.handleSignIn()
+      }, 1500)
+    },
     handleSignIn() {
       this.error = null
 
