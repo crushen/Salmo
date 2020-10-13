@@ -68,6 +68,8 @@ export default {
             return 950
           case 'forgot-password':
             return 1950
+          case 'link-sent':
+            return 2950
           case 'sign-up-terms':
             return 1950
           case 'verify-email':
@@ -89,6 +91,8 @@ export default {
           case 'sign-in':
             return -650
           case 'forgot-password':
+            return -550
+          case 'link-sent':
             return -550
           case 'sign-up-terms':
             return -450

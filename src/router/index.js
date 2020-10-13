@@ -26,6 +26,12 @@ const routes = [
     meta: { onlyGuestUser: true }
   },
   {
+    path: '/login/forgot-password/link-sent',
+    name: 'link-sent',
+    component: () => import('@/views/signIn/LinkSent'),
+    meta: { onlyGuestUser: true }
+  },
+  {
     path: '/sign-up',
     name: 'sign-up',
     component: () => import('@/views/signUp/SignUp'),
