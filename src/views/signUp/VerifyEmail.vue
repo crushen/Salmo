@@ -1,19 +1,23 @@
 <template>
-  <section>
-    <div>
+  <main class="content padding top">
+    <h1>Verify your email address</h1>
+
+    <section>
       <p>Please click on the link in your email to begin setting up your account. Don’t forget to check you junk/spam folders!</p>
       <p>If you’ve clicked the link and still see this message, try refreshing the page before clicking the button.</p>
       <p>Once you’ve completed your verification, you’ll be able to access your account to complete your profile.</p>
-    </div>
+    </section>
 
-    <h1>Verify your email address</h1>
+    <section class="button">
+      <button @click="verify" class="outline">
+        Done
+      </button>
 
-    <button @click="verify">
-      Done
-    </button>
+      <p v-if="error">{{ error }}</p>
+    </section>
 
-    <p v-if="error">{{ error }}</p>
-  </section>
+    <img src="@/assets/version-2/email.svg" alt="">
+  </main>
 </template>
 
 <script>
@@ -38,3 +42,53 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
+.content {
+  min-height: 100vh;
+}
+
+h1 {
+  width: 50%;
+  text-align: right;
+  color: $light-font;
+  position: absolute;
+  top: 320px;
+  right: 0;
+}
+
+p {
+  font-size: 0.9em;
+  color: $light-font;
+
+  &:not(:last-of-type) {
+    margin-bottom: 1em;
+  }
+}
+
+.button {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  text-align: right;
+
+  p {
+    color: $red;
+  }
+}
+
+img {
+  width: 30vw;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+@media screen and (min-width: 370px) {
+  p {
+    font-size: 1em;
+  }
+}
+</style>

@@ -67,6 +67,8 @@ export default {
           return 1950
         case 'sign-up-terms':
           return 1950
+        case 'verify-email':
+          return 2950
         default:
           return -50
       }
@@ -82,6 +84,8 @@ export default {
         case 'forgot-password':
           return -550
         case 'sign-up-terms':
+          return -450
+        case 'verify-email':
           return -450
         default:
           return -800

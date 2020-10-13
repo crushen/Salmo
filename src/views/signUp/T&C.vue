@@ -52,16 +52,24 @@ h1 {
   text-align: right;
   color: $light-font;
   position: absolute;
-  top: 330px;
+  top: 340px;
   right: 0;
 }
 
 .scroll-container {
-  overflow: scroll;
+  overflow-y: scroll;
   border-radius: 0.5em;
   width: 100%;
   height: 250px;
-  color: $light-font; 
+  color: $light-font;
+
+  &::-webkit-scrollbar {
+    width: 0.2em;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba($color: $light-font, $alpha: 0.8)
+  }
 }
 
 .form {

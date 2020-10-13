@@ -29,7 +29,7 @@ a {
 
   &.padding {
     &.top {
-      padding-top: 60px;
+      padding-top: 80px;
     }
     
     &.bottom {
@@ -68,6 +68,19 @@ button {
   &.secondary {
     background: lighten($color: $red, $amount: 35%);
     color: $red;
+  }
+
+  &.outline {
+    font-weight: bold;
+    border: 3px solid $red;
+    background-color: $light-font;
+    color: $red;
+    transition: 0.2s;
+
+    &:hover {
+      background-color: $red;
+      color: $light-font;
+    }
   }
 
   &.wave-background {
