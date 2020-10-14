@@ -21,13 +21,13 @@
         label="password"
         validation="bail|required|min:6|not:password" />
 
+      <p v-if="error" class="error">{{ error }}</p>
+
       <FormulateInput
         type="submit"
         label="Next"
         class="button" />
     </FormulateForm>
-
-    <p v-if="error" class="error">{{ error }}</p>
   </main>
 </template>
 

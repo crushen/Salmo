@@ -1,8 +1,12 @@
 <template>
-  <section class="content">
-    <h1>Let's talk about your visa.</h1>
-
-    <FormulateForm @submit="submitForm">
+  <section class="user-profile">
+    <div class="title content">
+      <h1>Let's talk about your visa. (2/2)</h1>
+    </div>
+    
+    <FormulateForm
+      @submit="submitForm"
+      class="content">
       <FormulateInput
         v-model="form.newVisaOptions"
         type="radio"
@@ -20,7 +24,8 @@
 
       <FormulateInput
         type="submit"
-        label="Save"/>
+        label="Save"
+        class="button" />
     </FormulateForm>
   </section>
 </template>

@@ -1,6 +1,9 @@
 <template>
-  <section id="profile">
-    <button v-if="stage > 1 && stage < 4" @click="prev">Back</button>
+  <section id="user-info" class="page padding top bottom">
+    <button v-if="stage > 1 && stage < 4" @click="prev">
+      <img src="@/assets/icons/back-blue.svg" alt="">
+      Back
+    </button>
 
     <stage-one v-if="stage === 1" @nextStage="next" :form="form" />
 
@@ -62,3 +65,25 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
+button {
+  background: none;
+  padding: 0;
+  position: absolute;
+  top: 2em;
+  left: 7.5vw;
+  color: $blue;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+
+  img {
+    display: inline-block;
+    width: 1.2em;
+    padding-top: .1em;
+  }
+}
+</style>

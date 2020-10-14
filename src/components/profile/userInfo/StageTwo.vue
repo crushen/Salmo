@@ -1,13 +1,17 @@
 <template>
-  <section class="content">
-    <h1>What is your plan in the UK?</h1>
+  <section class="user-profile">
+    <div class="title content">
+      <h1>What is your plan in the UK? (1/2)</h1>
+    </div>
 
-    <FormulateForm @submit="submitForm">
+    <FormulateForm
+      @submit="submitForm"
+      class="content">
       <FormulateInput
         v-model="form.planningTo"
         type="checkbox"
         :options="{study: 'study', work: 'work', business: 'start a business', notSure: 'not sure yet! see how it goes'}"
-        label="I'm planning to...(you can choose as many as you want!)" />
+        label="I'm planning to..." />
 
       <FormulateInput
         v-model="form.permanentResidency"
@@ -18,7 +22,8 @@
 
       <FormulateInput
         type="submit"
-        label="Next"/>
+        label="Next"
+        class="button" />
     </FormulateForm>
   </section>
 </template>

@@ -1,8 +1,12 @@
 <template>
-  <section class="content">
-    <h1>Complete your profile</h1>
+  <section class="user-profile">
+    <div class="title content">
+      <h1>Complete your profile</h1>
+    </div>
 
-    <FormulateForm @submit="submitForm">
+    <FormulateForm
+      @submit="submitForm"
+      class="content">
       <FormulateInput
         v-model="form.name"
         type="text"
@@ -21,7 +25,7 @@
         :options="makeOptions(countries)"
         label="nationality"
         validation="required"
-        placeholder="Select an option" />
+        placeholder="select an option" />
 
       <FormulateInput
         v-model="form.currentVisa.name"
@@ -29,7 +33,7 @@
         :options="visaOptions"
         label="current visa"
         validation="required"
-        placeholder="Select an option" />
+        placeholder="select an option" />
 
       <FormulateInput
         v-model="form.currentVisa.start"
@@ -58,7 +62,8 @@
 
       <FormulateInput
         type="submit"
-        label="Next"/>
+        label="Next"
+        class="button" />
     </FormulateForm>
   </section>
 </template>
