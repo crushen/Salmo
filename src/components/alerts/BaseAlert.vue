@@ -2,10 +2,12 @@
   <dialog open>
     <slot />
 
-    <p>{{ confirmText }}</p>
+    <p class="confirm">{{ confirmText }}</p>
 
-    <button @click="confirm">Yes</button>
-    <button @click="cancel">No</button>
+    <div class="buttons">
+      <button @click="confirm" class="confirm">Yes</button>
+      <button @click="cancel" class="cancel">No</button>
+    </div>
   </dialog>
 </template>
 
@@ -24,17 +26,54 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
 dialog {
   width: 90%;
-  padding: 16px;
-  min-height: 50vh;
-  position: fixed;
+  padding: 1em;
+  position: absolute;
   top: 50%; 
   left: 50%; 
   transform: translate(-50%, -50%);
-  z-index: 50;
-  background: #E05E48;
+  background: $red;
   color: white;
   border: none;
+  text-align: center;
+  border-radius: .5em;
+  z-index: 50;
+}
+
+p {
+  margin-bottom: 1em;
+
+  &.confirm {
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  width: 35%;
+
+  &.confirm {
+    background: white;
+    border: 3px solid white;
+    color: $red;
+    margin-top: 2em;
+  }
+
+  &.cancel {
+    background: $red;
+    border: 3px solid white;
+    color: white;
+    margin-top: 1em;
+  }
 }
 </style>
