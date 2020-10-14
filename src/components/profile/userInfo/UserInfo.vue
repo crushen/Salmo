@@ -1,6 +1,9 @@
 <template>
   <section id="user-info" class="page padding top bottom">
-    <button v-if="stage > 1 && stage < 4" @click="prev">
+    <button
+      v-if="stage > 1 && stage < 4"
+      @click="prev"
+      class="back">
       <img src="@/assets/icons/back-blue.svg" alt="">
       Back
     </button>
@@ -69,21 +72,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-button {
-  background: none;
-  padding: 0;
-  position: absolute;
-  top: 2em;
+.back {
   left: 7.5vw;
-  color: $blue;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-
-  img {
-    display: inline-block;
-    width: 1.2em;
-    padding-top: .1em;
-  }
 }
 </style>

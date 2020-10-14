@@ -1,7 +1,14 @@
 <template>
   <main
     :class="verified ? 'fade' : ''"
-    class="content padding top">
+    class="content page padding top">
+    <button
+      @click="handleLogout"
+      class="back">
+      <img src="@/assets/icons/back.svg" alt="">
+      Sign Out
+    </button>
+
     <h1>Verify your email address</h1>
 
     <section>
@@ -14,11 +21,12 @@
       <button @click="verify" class="outline">
         Done
       </button>
-
-      <p v-if="error">{{ error }}</p>
     </section>
 
-    <img src="@/assets/version-2/email.svg" alt="">
+    <img
+      class="email-img"
+      src="@/assets/version-2/email.svg"
+      alt="">
   </main>
 </template>
 
@@ -46,6 +54,18 @@ export default {
       setTimeout(() => {
         location.reload()
       }, 1800)
+    },
+    handleLogout() {
+      this.$store.dispatch('auth/logOut')
+      .then(() => {
+        this.$store. commit('auth/setLoggedOut')
+        this.$store.commit('wave/setWaveAway', false)
+        this.$store.commit('wave/setFullScreen', false)
+        this.$store.dispatch('wave/handleTransition')
+        if(this.$route.path !== '/') {
+          this.$router.push('/')
+        }
+      })
     }
   },
   mounted() {
@@ -58,7 +78,12 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .content {
-  min-height: 100vh;
+  min-height: 110vh;
+}
+
+.back {
+  left: 0;
+  color: $light-font;
 }
 
 h1 {
@@ -66,7 +91,7 @@ h1 {
   text-align: right;
   color: $light-font;
   position: absolute;
-  top: 320px;
+  top: 350px;
   right: 0;
 }
 
@@ -84,13 +109,9 @@ p {
   bottom: 60px;
   right: 0;
   text-align: right;
-
-  p {
-    color: $red;
-  }
 }
 
-img {
+.email-img {
   width: 30vw;
   position: absolute;
   bottom: 0;
@@ -98,6 +119,10 @@ img {
 }
 
 @media screen and (min-width: 370px) {
+  .content {
+    min-height: 100vh;
+  }
+
   p {
     font-size: 1em;
   }
