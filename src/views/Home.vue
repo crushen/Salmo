@@ -1,13 +1,5 @@
 <template>
   <main>
-    <!-- <div
-      @click="morph"
-      class="wave"
-      :style="{ 
-        backgroundImage: `url(${require('@/assets/backgrounds/wave.svg')})`,
-        backgroundPosition: `${wavePosition.x}px ${wavePosition.y}px`
-      }" /> -->
-
     <div
       class="background"
       :style="{ backgroundImage: `url(${require('@/assets/backgrounds/home-background.svg')})` }" />
@@ -38,24 +30,6 @@
 </template>
 
 <script>
-
-export default {
-  data() {
-    return {
-      // wavePosition: {
-      //   x: -50,
-      //   y: -800
-      // }
-    }
-  },
-  methods: {
-    // morph() {
-    //   this.wavePosition.x += 1000
-    //   this.wavePosition.y += 300
-    // }
-  }
-}
-
 // export default {
 //   data() {
 //     return {

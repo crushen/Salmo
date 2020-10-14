@@ -80,6 +80,9 @@ export default {
       this.$store.dispatch('auth/logOut')
       .then(() => {
         this.$store. commit('auth/setLoggedOut')
+        this.$store.commit('wave/setWaveAway', false)
+        this.$store.commit('wave/setFullScreen', false)
+        this.$store.dispatch('wave/handleTransition')
         if(this.$route.path !== '/') {
           this.$router.push('/')
         }

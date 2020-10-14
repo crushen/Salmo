@@ -8,7 +8,8 @@
     </button> -->
 
     <div
-      :class="waveAway ? 'fast' : ''"
+      v-if="visible"
+      :class="{ 'fast': waveAway, 'none': !transition }"
       class="wave"
       :style="{ 
         backgroundImage: `url(${require('@/assets/backgrounds/wave.svg')})`,
@@ -56,7 +57,8 @@ export default {
     }
   },
   computed: {
-    ...mapState('wave', ['waveFullScreen', 'waveAway']),
+    ...mapState('wave', ['waveFullScreen', 'waveAway', 'transition']),
+    ...mapState('auth', ['user', 'loggedOut']),
     waveX() {
       if(!this.waveFullScreen) {
         switch(this.$route.name) {
@@ -121,6 +123,26 @@ export default {
         //   return false;
         default:
           return true;
+      }
+    },
+    visible() {
+      switch(this.$route.name) {
+        case 'home':
+          return true
+        case 'sign-up':
+          return true
+        case 'sign-in':
+          return true
+        case 'forgot-password':
+          return true
+        case 'link-sent':
+          return true
+        case 'sign-up-terms':
+          return true
+        case 'verify-email':
+          return true
+        default:
+          return false
       }
     }
   },
@@ -203,6 +225,12 @@ body.using-mouse :focus {
     transition: 0.5s cubic-bezier(.26,.3,.36,.94);
     opacity: 0;
     visibility: hidden;
+  }
+
+  &.none {
+    transition: 0s;
+    opacity: 1;
+    visibility: visible;
   }
 }
 

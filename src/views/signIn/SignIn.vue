@@ -2,7 +2,7 @@
   <main
     :class="verified ? 'fade' : ''"
     class="content sign-up-in">
-    <FormulateForm @submit="verify" class="form">
+    <FormulateForm @submit="handleSignIn" class="form">
       <FormulateInput
         v-model="form.email"
         type="email"
@@ -25,6 +25,8 @@
         type="submit"
         label="Sign In"
         class="button" />
+
+      <p v-if="error" class="error">{{ error }}</p>
     </FormulateForm>
 
     <div class="sign-up">
@@ -33,8 +35,6 @@
         sign up
       </router-link>
     </div>
-
-    <p v-if="error">{{ error }}</p>
   </main>
 </template>
 
@@ -52,15 +52,6 @@ export default {
     }
   },
   methods: {
-    verify() {
-      this.$store.commit('wave/setFullScreen')
-      this.verified = true
-
-      setTimeout(() => {
-        this.$store.commit('wave/setWaveAway')
-        this.handleSignIn()
-      }, 1500)
-    },
     handleSignIn() {
       this.error = null
 
@@ -68,8 +59,17 @@ export default {
       .then(() => {
         const user = this.$store.state.auth.user
 
-        this.$router.push({name: 'profile', params: {username: user.profile.username}})
-        this.$store.commit('auth/setLoggedIn')
+        this.$store.commit('wave/setFullScreen', true)
+        this.verified = true
+
+        setTimeout(() => {
+          this.$store.commit('wave/setWaveAway', true)
+        }, 1500)
+
+        setTimeout(() => {
+          this.$router.push({name: 'profile', params: {username: user.profile.username}})
+          this.$store.commit('auth/setLoggedIn')
+        }, 2000)
       })
       .catch(() => this.error = 'Invalid email address or password')
     }
@@ -113,6 +113,11 @@ h1 {
   a {
     margin-left: 1em;
   }
+}
+
+.error {
+  color: $red;
+  text-align: right;
 }
 
 @media screen and (min-width: 370px) {

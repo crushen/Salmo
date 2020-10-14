@@ -36,11 +36,11 @@ export default {
   },
   methods: {
     verify() {
-      this.$store.commit('wave/setFullScreen')
+      this.$store.commit('wave/setFullScreen', true)
       this.verified = true
 
       setTimeout(() => {
-        this.$store.commit('wave/setWaveAway')
+        this.$store.commit('wave/setWaveAway', true)
       }, 1500)
 
       setTimeout(() => {

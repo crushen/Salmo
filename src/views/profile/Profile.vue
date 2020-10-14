@@ -1,6 +1,6 @@
 <template>
   <section id="profile">
-    <user-info v-if="!this.user.profile.completeUserInfo" />
+    <user-info v-if="this.user && !this.user.profile.completeUserInfo" />
 
     <updated-profile v-else :user="user" />
 
