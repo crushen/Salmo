@@ -116,7 +116,6 @@ h1 {
 }
 
 .error {
-  color: $red;
   text-align: right;
 }
 

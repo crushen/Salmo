@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    <!-- <button
+    <button
       v-if="arrowPage && innerWidth < 1100"
       @click="$router.go(-1)"
       class="arrow-btn aria-btn">
-      <img :src="arrow" class="arrow">
-    </button> -->
+      <img src="@/assets/icons/back.svg" class="arrow">
+    </button>
 
     <div
       v-if="visible"
@@ -37,9 +37,8 @@
 
 <script>
 import { mapState } from 'vuex'
-import mobileNav from '@/components/nav/MobileNav';
-import sidebarNav from '@/components/nav/SidebarNav';
-import arrow from '@/assets/icons/back.svg';
+import mobileNav from '@/components/nav/MobileNav'
+import sidebarNav from '@/components/nav/SidebarNav'
 
 export default {
   components: {
@@ -49,7 +48,6 @@ export default {
   data () {
     return {
       innerWidth: null,
-      arrow,
       wavePosition: {
         x: -50,
         y: -800
@@ -57,8 +55,8 @@ export default {
     }
   },
   computed: {
+    ...mapState('auth', ['user']),
     ...mapState('wave', ['waveFullScreen', 'waveAway', 'transition']),
-    ...mapState('auth', ['user', 'loggedOut']),
     waveX() {
       if(!this.waveFullScreen) {
         switch(this.$route.name) {
@@ -109,20 +107,16 @@ export default {
     },
     arrowPage() {
       switch(this.$route.name) {
-        case 'home':
-          return false;
-        case 'profile':
-          return false;
-        case 'login':
-          return false;
-        case 'about':
-          return false;
-        case 'visa-info':
-          return false;
-        // case 'results':
-        //   return false;
+        case 'sign-up':
+          return true
+        case 'sign-in':
+          return true
+        case 'forgot-password':
+          return true
+        case 'link-sent':
+          return true
         default:
-          return true;
+          return false;
       }
     },
     visible() {
@@ -238,6 +232,20 @@ body.using-mouse :focus {
 //   0%   { background-position: 0 -800px; }
 //   100% {background-position: 998px -800px;}
 // }
+
+.arrow-btn {
+  background: none;
+  padding: 0;
+  width: 32px;
+  position: absolute;
+  top: 24px;
+  left: 7.5vw;
+  z-index: 5;
+
+  img {
+    width: 32px;
+  }
+}
 
 .small-logo {
   width: 40px;

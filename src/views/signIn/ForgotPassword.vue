@@ -13,13 +13,13 @@
           label="email"
           validation="bail|required|email" />
 
+        <p v-if="error" class="error">{{ error }}</p>
+
         <FormulateInput
           type="submit"
           label="Send Reset Link"
           class="button" />
-      </FormulateForm>
-
-      <p v-if="error" class="error">{{ error }}</p> 
+      </FormulateForm> 
     </section>
   </main>
 </template>
