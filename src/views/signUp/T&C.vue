@@ -1,5 +1,5 @@
 <template>
-  <main class="content padding top">
+  <main class="content page padding top">
     <h1>Terms and Conditions</h1>
 
     <section class="scroll-container">
@@ -47,7 +47,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .content {
-  min-height: 110vh;
+  min-height: 115vh;
 }
 
 h1 {
@@ -55,7 +55,7 @@ h1 {
   text-align: right;
   color: $light-font;
   position: absolute;
-  top: 340px;
+  top: 370px;
   right: 0;
 }
 

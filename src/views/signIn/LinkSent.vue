@@ -1,5 +1,5 @@
 <template>
-  <main class="content sign-up-in">
+  <main class="content page sign-up-in">
     <h1>On it's way!</h1>
 
     <section class="form">      

@@ -95,9 +95,9 @@ export default {
           case 'link-sent':
             return -550
           case 'sign-up-terms':
-            return -450
+            return -420
           case 'verify-email':
-            return -450
+            return -420
           default:
             return -800
         }

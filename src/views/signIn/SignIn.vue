@@ -1,7 +1,7 @@
 <template>
   <main
     :class="verified ? 'fade' : ''"
-    class="content sign-up-in">
+    class="content page sign-up-in">
     <FormulateForm @submit="handleSignIn" class="form">
       <FormulateInput
         v-model="form.email"

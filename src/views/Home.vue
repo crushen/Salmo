@@ -4,7 +4,7 @@
       class="background"
       :style="{ backgroundImage: `url(${require('@/assets/backgrounds/home-background.svg')})` }" />
 
-    <section id="home" class="content padding bottom">
+    <section id="home" class="content page padding bottom">
       <div class="buttons">
         <router-link
           :to="{ name: 'sign-up' }"

@@ -1,5 +1,5 @@
 <template>
-  <main class="content sign-up-in">
+  <main class="content page sign-up-in">
     <div class="title">
       <h1>Let's reset your password!</h1>
       <p>we will send an email to you for verification.</p>
