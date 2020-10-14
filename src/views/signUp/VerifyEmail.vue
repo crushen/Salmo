@@ -2,8 +2,13 @@
   <main
     :class="verified ? 'fade' : ''"
     class="content page padding top">
+    <logout-alert
+      v-if="showAlert"
+      @confirm="handleLogout"
+      @cancel="showAlert = false" />
+
     <button
-      @click="handleLogout"
+      @click="showAlert = true"
       class="back">
       <img src="@/assets/icons/back.svg" alt="">
       Sign Out
@@ -31,15 +36,17 @@
 </template>
 
 <script>
+import logoutAlert from '@/components/alerts/logout/ConfirmLogout'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
 export default {
+  components: { logoutAlert },
   data() {
     return {
       user: this.$store.state.auth.user,
-      error: null,
-      verified: false
+      verified: false,
+      showAlert: false
     }
   },
   methods: {
@@ -56,6 +63,7 @@ export default {
       }, 1800)
     },
     handleLogout() {
+      this.showAlert = false
       this.$store.dispatch('auth/logOut')
       .then(() => {
         this.$store. commit('auth/setLoggedOut')
