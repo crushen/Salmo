@@ -93,7 +93,7 @@ export default {
           case 'forgot-password':
             return -550
           case 'link-sent':
-            return -550
+            return -420
           case 'sign-up-terms':
             return -420
           case 'verify-email':

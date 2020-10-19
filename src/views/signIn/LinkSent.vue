@@ -1,5 +1,5 @@
 <template>
-  <main class="content page sign-up-in">
+  <main class="content">
     <h1>On it's way!</h1>
 
     <section class="form">      
@@ -24,21 +24,27 @@ h1 {
   text-align: right;
   color: $light-font;
   position: absolute;
-  top: 120px;
+  top: 370px;
   right: 0;
 }
 
 .form {
-  min-height: 115vh;
-  padding-top: 35vh;
+  padding-top: 100px;
+  min-height: 110vh;
 
-  p:last-of-type {
-    margin-top: 1em;
+  p {
+    color: $light-font;
+
+    &:last-of-type {
+      margin-top: 1em;
+    }
   }
 }
 
 .button {
+  position: absolute;
   bottom: 60px;
+  right: 0;
 }
 
 @media screen and (min-width: 370px) {
