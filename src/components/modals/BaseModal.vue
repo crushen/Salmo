@@ -1,9 +1,11 @@
 <template>
-  <dialog open>
-    <button @click="closeModal">X</button>
+  <div class="container">
+    <dialog open>
+      <button @click="closeModal">X</button>
 
-    <slot />
-  </dialog>
+      <slot />
+    </dialog>
+  </div>
 </template>
 
 <script>
@@ -12,21 +14,28 @@ export default {
     closeModal() {
       this.$emit('closeModal')
     }
+  },
+  mounted() {
+    this.setOverlay()
   }
 }
 </script>
 
 <style lang="scss" scoped>
-dialog {
-  width: 90%;
-  padding: 16px;
-  min-height: 50vh;
+.container {
+  width: 100%;
+  height: 100vh;
   position: fixed;
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   z-index: 50;
+}
+
+dialog {
+  min-height: 50vh;
   background: #eee;
-  border: none;
 }
 </style>

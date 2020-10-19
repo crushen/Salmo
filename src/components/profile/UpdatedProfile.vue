@@ -20,10 +20,12 @@
       <p>You're Here</p>
     </div>
 
-    <visa-choices
-      v-if="modalIsOpen"
-      @closeModal="confirmingClose = true"
-      @submitModal="saveVisa" />
+    <transition name="dialog" mode="out-in">
+      <visa-choices
+        v-if="modalIsOpen"
+        @closeModal="confirmingClose = true"
+        @submitModal="saveVisa" />
+    </transition>
 
     <visa-dates-card class="dates-card" :user="user" />
 
@@ -31,31 +33,35 @@
 
     <tools :user="user" />
 
-    <button @click="showLogoutAlert = true, setOverlay()">
+    <button @click="showLogoutAlert = true">
       Sign Out
     </button>
 
     <!-- Alerts -->
     <div id="overlay" />
 
-    <transition name="alert" mode="out-in">
+    <transition name="dialog" mode="out-in">
       <logout-alert
         v-if="showLogoutAlert"
         @confirm="handleLogout"
         @cancel="showLogoutAlert = false" />
     </transition>
 
-    <close-alert
-      v-if="confirmingClose"
-      @confirm="confirmClose"
-      @cancel="confirmingClose = false" />
+    <transition name="dialog" mode="out-in">
+      <close-alert
+        v-if="confirmingClose"
+        @confirm="confirmClose"
+        @cancel="confirmingClose = false" />
+    </transition>
 
-    <change-alert
-      v-if="confirmingChange"
-      @confirm="confirmChange"
-      @cancel="confirmingChange = false"
-      :user="user"
-      :profileToUpdate="profileToUpdate" />
+    <transition name="dialog" mode="out-in">
+      <change-alert
+        v-if="confirmingChange"
+        @confirm="confirmChange"
+        @cancel="confirmingChange = false"
+        :user="user"
+        :profileToUpdate="profileToUpdate" />
+    </transition>
   </section>
 </template>
 

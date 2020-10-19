@@ -25,6 +25,9 @@ export default {
       this.$emit('cancel')
       this.removeOverlay()
     }
+  },
+  mounted() {
+    this.setOverlay()
   }
 }
 </script>
@@ -45,14 +48,10 @@ export default {
 }
 
 dialog {
-  width: 90%;
-  position: relative;
-  padding: 1em;
   background: $red;
-  color: white;
-  border: none;
+  color: $light-font;
   text-align: center;
-  border-radius: $radius;
+  width: 85%;
 }
 
 p {

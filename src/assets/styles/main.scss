@@ -94,6 +94,14 @@ button {
   }
 }
 
+dialog {
+  width: 90%;
+  position: relative;
+  padding: 1em;
+  border: none;
+  border-radius: $radius;
+}
+
 // Pages
 .content {
   width: 85%;

@@ -280,14 +280,14 @@ main {
   transition-delay: 0.5s;
 }
 
-// Alert transitions
-.alert-enter,
-.alert-leave-to {
+// Alert and Modal transitions
+.dialog-enter,
+.dialog-leave-to {
   transform: translateY(-20px);
   opacity: 0;
 }
-.alert-enter-active,
-.alert-leave-active {
+.dialog-enter-active,
+.dialog-leave-active {
   transition: 0.4s;
 }
 

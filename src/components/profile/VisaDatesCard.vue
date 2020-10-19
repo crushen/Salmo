@@ -52,7 +52,7 @@ export default {
   justify-content: space-between;
   background: $pink;
   border-radius: $radius;
-  padding: 1em 1.5em;
+  padding: 0.5em 1.5em;
 }
 
 p {

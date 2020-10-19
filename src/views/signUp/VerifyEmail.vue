@@ -4,7 +4,7 @@
     class="content page padding top">
 
     <div id="overlay" />
-    <transition name="alert" mode="out-in">
+    <transition name="dialog" mode="out-in">
       <logout-alert
         v-if="showAlert"
         @confirm="handleLogout"
