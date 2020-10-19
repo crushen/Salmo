@@ -19,8 +19,6 @@
     <!-- <mobile-nav v-if="innerWidth < 600" />
     <sidebar-nav v-else /> -->
 
-    <div id="overlay"></div>
-
     <img
       src="@/assets/logo/colour.svg" 
       alt="Salmo logo"
@@ -185,22 +183,6 @@ body.using-mouse :focus {
   min-height: 100vh;
 }
 
-#overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  z-index: 30;
-  opacity: 0;
-  visibility: hidden;
-  background: rgba($color: $dark-grey, $alpha: 0.5);
-  pointer-events: all;
-  transition: 0.4s;
-  pointer-events: none;
-}
-
 .wave {
   height: 100vh;
   position: absolute;
@@ -274,6 +256,22 @@ main {
   }
 }
 
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  background: rgba($color: $dark-grey, $alpha: 0.5);
+  pointer-events: all;
+  transition: 0.4s;
+  pointer-events: none;
+}
+
 // Page transitions
 .slide-enter,
 .slide-leave-to {
@@ -303,16 +301,12 @@ main {
 // Alert transitions
 .alert-enter,
 .alert-leave-to {
-  transform: translateY(-10px);
+  transform: translateY(-20px);
   opacity: 0;
 }
 .alert-enter-active,
 .alert-leave-active {
-  transition: 0.6s;
-}
-
-.alert-enter-active {
-  transition-delay: 0.2s;
+  transition: 0.4s;
 }
 
 // Tablet
