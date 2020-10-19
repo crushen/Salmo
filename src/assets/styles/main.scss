@@ -85,6 +85,11 @@ button {
     background-size: 110%;
     background-position: center;
   }
+
+  &.none {
+    background: none;
+    padding: 0;
+  }
 }
 
 // Pages

@@ -3,16 +3,19 @@
     <img :src="profilePicture" class="profile-pic" alt="Randomised profile picture">
 
     <div class="info">
-      <p>{{ user.profile.name }}</p>
-      <p>{{ birthday }}</p>
-      <p>{{ user.profile.nationality }}</p>
-      <p>{{ dependants }}</p>
+      <p class="name">{{ user.profile.name }}</p>
+      <div class="details">
+        <p>{{ birthday }}</p>
+        <p>{{ user.profile.nationality }}</p>
+        <p>{{ dependants }}</p>
+      </div>
     </div>
 
     <router-link
       :to="{ name: 'settings', params: { username: user.profile.username } }"
-      tag="button">
-      Edit
+      tag="button"
+      class="none">
+      <img src="@/assets/icons/edit.svg" alt="">
     </router-link>
   </div>
 </template>
@@ -58,8 +61,36 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/styles/variables.scss';
+@import '@/assets/styles/main.scss';
+
 .profile-card {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.info {
+  width: 35%;
+  .name {
+    color: $blue;
+    @include font(1.2em, 600)
+  }
+
+  .details {
+    font-size: 0.9em;
+    margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    p {
+      border-bottom: 1px solid #B4D5DE;
+    }
+  }
+}
+
+button {
+  align-self: flex-start;
 }
 </style>
