@@ -111,7 +111,7 @@ h1 {
   justify-content: center;
   position: absolute;
   right: 0;
-  bottom: 60px;
+  bottom: 48px;
 
   a {
     margin-left: 1em;

@@ -118,6 +118,38 @@ button {
   }
 }
 
+.margin {
+  &-s {
+    &.top {
+      margin-top: 1em
+    }
+
+    &.bottom {
+      margin-bottom: 1em;
+    }
+  }
+
+  &-m {
+    &.top {
+      margin-top: 2em
+    }
+
+    &.bottom {
+      margin-bottom: 2em;
+    }
+  }
+
+  &-l {
+    &.top {
+      margin-top: 3em
+    }
+
+    &.bottom {
+      margin-bottom: 3em;
+    }
+  }
+}
+
 .text {
   p:not(:last-of-type) {
     margin-bottom: 1em;

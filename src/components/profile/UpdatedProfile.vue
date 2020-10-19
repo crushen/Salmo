@@ -1,14 +1,15 @@
 <template>
-  <section class="content">
-    <h1>Profile</h1>
+  <section class="content page padding top">
+    <h1 class="margin-s bottom">Profile</h1>
 
     <profile-card :user="user" />
 
-    <h2>My Status</h2>
+    <h2 class="margin-s top">My Status</h2>
     
     <button
       v-if="!user.profile.nextVisa"
-      @click="toggleModal">
+      @click="toggleModal"
+      class="margin-l top bottom">
       Choose my next visa
     </button>
 
@@ -23,7 +24,7 @@
 
     <visa-dates-card class="dates-card" :user="user" />
 
-    <h2>Tools</h2>
+    <h2 class="margin-s top">Tools</h2>
 
     <tools :user="user" />
 
