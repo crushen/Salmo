@@ -68,7 +68,7 @@ export default {
     },
     handleLogout() {
       this.showAlert = false
-      
+
       setTimeout(() => {
         this.$store.dispatch('auth/logOut')
         .then(() => {
@@ -81,7 +81,7 @@ export default {
             this.$router.push('/')
           }
         })
-      }, 400)
+      }, 800)
     }
   },
   mounted() {

@@ -27,7 +27,20 @@
 
     <tools :user="user" />
 
+    <button @click="showLogoutAlert = true, setOverlay()">
+      Sign Out
+    </button>
+
     <!-- Alerts -->
+    <div id="overlay" />
+
+    <transition name="alert" mode="out-in">
+      <logout-alert
+        v-if="showLogoutAlert"
+        @confirm="handleLogout"
+        @cancel="showLogoutAlert = false" />
+    </transition>
+
     <close-alert
       v-if="confirmingClose"
       @confirm="confirmClose"
@@ -48,6 +61,7 @@ import visaDatesCard from '@/components/profile/VisaDatesCard'
 import visaChoices from '@/components/modals/VisaChoices'
 import tools from '@/components/profile/Tools'
 
+import logoutAlert from '@/components/alerts/logout/ConfirmLogout'
 import closeAlert from '@/components/alerts/visaChoices/Close'
 import changeAlert from '@/components/alerts/visaChoices/Change'
 
@@ -55,12 +69,21 @@ import { documentChecklist } from '@/assets/js/documentChecklist'
 
 export default {
   props: { user: { required: true, type: Object } },
-  components: { profileCard, visaDatesCard, visaChoices, tools, closeAlert, changeAlert },
+  components: {
+    profileCard,
+    visaDatesCard,
+    visaChoices,
+    tools,
+    logoutAlert,
+    closeAlert,
+    changeAlert
+  },
   data() {
     return {
       modalIsOpen: false,
       confirmingClose: false,
       confirmingChange: false,
+      showLogoutAlert: false,
       documentChecklist
     }
   },
@@ -101,6 +124,23 @@ export default {
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       this.toggleModal()
       this.confirmingChange = false
+    },
+    handleLogout() {
+      this.showLogoutAlert = false
+
+      setTimeout(() => {
+        this.$store.dispatch('auth/logOut')
+        .then(() => {
+          this.$store. commit('auth/setLoggedOut')
+          this.$store.commit('wave/setWaveAway', false)
+          this.$store.commit('wave/setFullScreen', false)
+          this.$store.dispatch('wave/handleTransition')
+
+          if(this.$route.path !== '/') {
+            this.$router.push('/')
+          }
+        })
+      }, 800)
     }
   }
 }
