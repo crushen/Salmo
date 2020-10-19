@@ -52,7 +52,7 @@ dialog {
   color: white;
   border: none;
   text-align: center;
-  border-radius: .5em;
+  border-radius: $radius;
 }
 
 p {

@@ -3,7 +3,7 @@
     <img :src="profilePicture" class="profile-pic" alt="Randomised profile picture">
 
     <div class="info">
-      <p class="name">{{ user.profile.name }}</p>
+      <p class="name title">{{ user.profile.name }}</p>
       <div class="details">
         <p>{{ birthday }}</p>
         <p>{{ user.profile.nationality }}</p>
@@ -72,9 +72,9 @@ export default {
 
 .info {
   width: 35%;
+
   .name {
     color: $blue;
-    @include font(1.2em, 600)
   }
 
   .details {

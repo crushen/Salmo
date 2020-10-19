@@ -1,12 +1,12 @@
 <template>
   <div class="card">
     <div>
-      <p>{{ endDate }}</p>
+      <p class="title">{{ endDate }}</p>
       <p>visa expiry date</p>
     </div>
 
     <div>
-      <p>{{ daysLeft }} days left</p>
+      <p class="title">{{ daysLeft }} days left</p>
       <p>until visa preparation</p>
     </div>
   </div>
@@ -44,9 +44,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
 .card {
   display: flex;
   width: 100%;
   justify-content: space-between;
+  background: $pink;
+  border-radius: $radius;
+  padding: 1em 1.5em;
+}
+
+p {
+  &.title {
+    color: $red;
+  }
+  
+  &:not(.title) {
+    font-size: 0.9em;
+  }
 }
 </style>

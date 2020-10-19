@@ -18,13 +18,9 @@ h2 { @include font(1.3em, 600) }
 
 p { @include font(1em, 300) }
 
-a {
-  color: $red;
-}
+a, .error { color: $red }
 
-.error {
-  color: $red;
-}
+.title { @include font(1.2em, 600) }
 
 // Elements
 .button-center {
@@ -45,7 +41,7 @@ button {
   }
 
   &.secondary {
-    background: lighten($color: $red, $amount: 35%);
+    background: $pink;
     color: $red;
   }
 
