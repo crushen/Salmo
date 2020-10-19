@@ -2,13 +2,17 @@
   <main
     :class="verified ? 'fade' : ''"
     class="content page padding top">
-    <logout-alert
-      v-if="showAlert"
-      @confirm="handleLogout"
-      @cancel="showAlert = false" />
+
+    <div id="overlay" />
+    <transition name="alert" mode="out-in">
+      <logout-alert
+        v-if="showAlert"
+        @confirm="handleLogout"
+        @cancel="showAlert = false" />
+    </transition>
 
     <button
-      @click="showAlert = true"
+      @click="showAlert = true, setOverlay()"
       class="back">
       <img src="@/assets/icons/back.svg" alt="">
       Sign Out

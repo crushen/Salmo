@@ -1,14 +1,16 @@
 <template>
-  <dialog open>
-    <slot />
+  <div class="container">
+    <dialog open>
+      <slot />
 
-    <p class="confirm">{{ confirmText }}</p>
+      <p class="confirm">{{ confirmText }}</p>
 
-    <div class="buttons">
-      <button @click="confirm" class="confirm">Yes</button>
-      <button @click="cancel" class="cancel">No</button>
-    </div>
-  </dialog>
+      <div class="buttons">
+        <button @click="confirm" class="confirm">Yes</button>
+        <button @click="cancel" class="cancel">No</button>
+      </div>
+    </dialog>
+  </div>
 </template>
 
 <script>
@@ -17,9 +19,11 @@ export default {
   methods: {
     confirm() {
       this.$emit('confirm')
+      this.removeOverlay()
     },
     cancel() {
       this.$emit('cancel')
+      this.removeOverlay()
     }
   }
 }
@@ -28,19 +32,27 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+.container {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
 dialog {
   width: 90%;
+  position: relative;
   padding: 1em;
-  position: absolute;
-  top: 50%; 
-  left: 50%; 
-  transform: translate(-50%, -50%);
   background: $red;
   color: white;
   border: none;
   text-align: center;
   border-radius: .5em;
-  z-index: 50;
 }
 
 p {

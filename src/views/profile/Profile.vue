@@ -4,7 +4,7 @@
 
     <updated-profile v-else :user="user" />
 
-    <!-- <settings /> -->
+    <settings />
     <img
       v-if="!this.user.profile.completeUserInfo"
       src="@/assets/backgrounds/bottom-wave.svg"
@@ -20,8 +20,8 @@ import settings from '@/components/profile/Settings'
 export default {
   components: {
     userInfo,
-    updatedProfile
-    // settings
+    updatedProfile,
+    settings
   },
   computed: {
     user() {

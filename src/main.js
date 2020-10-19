@@ -21,6 +21,20 @@ Vue.mixin({
   methods: {
     makeOptions(array) {
       return Object.assign({}, ...array.map(key => ({[key]: key})))
+    },
+    setOverlay() {
+      const overlay = document.querySelector('#overlay')
+      overlay.style.opacity = 1
+      overlay.style.visibility = 'visible'
+
+      document.querySelector('body').style.overflow = 'hidden'
+    },
+    removeOverlay() {
+      const overlay = document.querySelector('#overlay')
+      overlay.style.opacity = 0
+      overlay.style.visibility = 'hidden'
+      
+      document.querySelector('body').style.overflow = 'auto'
     }
   }
 })
