@@ -17,10 +17,10 @@ h1 { @include font(1.5em, 600) }
 h2 { @include font(1.3em, 600) }
 
 p { @include font(1em, 300) }
+p.title { @include font(1.2em, 600) }
 
 a, .error { color: $red }
 
-.title { @include font(1.2em, 600) }
 
 // Elements
 .button-center {
@@ -90,6 +90,7 @@ button {
   &.none {
     background: none;
     padding: 0;
+    border-radius: 0;
   }
 }
 

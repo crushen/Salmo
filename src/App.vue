@@ -16,8 +16,9 @@
         backgroundPosition: `${waveX}px ${waveY}px`
       }" />
 
-    <!-- <mobile-nav v-if="innerWidth < 600" />
-    <sidebar-nav v-else /> -->
+    <mobile-nav v-if="innerWidth < 600 && $route.meta.onlyVerifiedUser" />
+
+    <!-- <sidebar-nav v-else /> -->
 
     <img
       src="@/assets/logo/colour.svg" 
@@ -40,7 +41,7 @@ import sidebarNav from '@/components/nav/SidebarNav'
 
 export default {
   components: {
-    // mobileNav,
+    mobileNav
     // sidebarNav
   },
   data () {
@@ -195,7 +196,7 @@ body.using-mouse :focus {
   background-repeat: repeat-x;
   pointer-events: none;
   transition: 1.7s cubic-bezier(.26,.3,.36,.94);
-  z-index: 1;
+  z-index: 0;
   opacity: 1;
   visibility: visible;
 
@@ -211,11 +212,6 @@ body.using-mouse :focus {
     visibility: visible;
   }
 }
-
-// @keyframes wave-animation {
-//   0%   { background-position: 0 -800px; }
-//   100% {background-position: 998px -800px;}
-// }
 
 .arrow-btn {
   background: none;
@@ -239,16 +235,11 @@ body.using-mouse :focus {
   z-index: 5;
 }
 
-p {
-  margin: 0;
-  padding: 0;
-}
-
 .content-wrapper {
   position: relative;
-  z-index: 1;
 }
 
+// Page transitions
 main {
   transition: 0.5s;
   opacity: 1;
@@ -274,7 +265,6 @@ main {
   pointer-events: none;
 }
 
-// Page transitions
 .slide-enter,
 .slide-leave-to {
   transform: translateX(20px);
@@ -289,16 +279,6 @@ main {
 .slide-enter-active {
   transition-delay: 0.5s;
 }
-
-// .page-enter-active,
-// .page-leave-active {
-//   transition: 0.4s;
-// }
-
-// .page-enter, 
-// .page-leave-to {
-//   opacity: 0;
-// }
 
 // Alert transitions
 .alert-enter,
