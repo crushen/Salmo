@@ -3,7 +3,8 @@ export default {
   state: {
     waveFullScreen: false,
     waveAway: false,
-    transition: true
+    transition: true,
+    signingIn: false
   },
   actions: {
     handleTransition({commit}) {
@@ -23,6 +24,9 @@ export default {
     },
     setTransition(state, set) {
       state.transition = set
+    },
+    setSigningIn(state, set) {
+      state.signingIn = set
     }
   }
 }

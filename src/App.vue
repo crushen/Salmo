@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     ...mapState('auth', ['user']),
-    ...mapState('wave', ['waveFullScreen', 'waveAway', 'transition']),
+    ...mapState('wave', ['waveFullScreen', 'waveAway', 'transition', 'signingIn']),
     waveX() {
       if(!this.waveFullScreen) {
         switch(this.$route.name) {
@@ -63,11 +63,11 @@ export default {
           case 'sign-up':
             return 950
           case 'sign-in':
-            return 950
+            return 1450
           case 'forgot-password':
-            return 1950
+            return 2450
           case 'link-sent':
-            return 2950
+            return 3450
           case 'sign-up-terms':
             return 1950
           case 'verify-email':
@@ -75,6 +75,8 @@ export default {
           default:
             return -50
         }
+      } else if(this.waveFullScreen && this.signingIn) {
+        return 2950
       } else {
         return 3950
       }

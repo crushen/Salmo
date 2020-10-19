@@ -55,6 +55,8 @@ export default {
     handleSignIn() {
       this.error = null
 
+      this.$store.commit('wave/setSigningIn', true)
+
       this.$store.dispatch('auth/logIn', this.form)
       .then(() => {
         const user = this.$store.state.auth.user
@@ -69,6 +71,7 @@ export default {
         setTimeout(() => {
           this.$router.push({name: 'profile', params: {username: user.profile.username}})
           this.$store.commit('auth/setLoggedIn')
+          this.$store.commit('wave/setSigningIn', false)
         }, 2000)
       })
       .catch(() => this.error = 'Invalid email address or password')
