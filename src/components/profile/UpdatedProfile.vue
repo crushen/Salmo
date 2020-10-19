@@ -4,14 +4,17 @@
 
     <profile-card :user="user" />
 
-    <h2 class="margin-s top">My Status</h2>
+    <h2 class="margin-s top">{{ statusText }}</h2>
     
-    <button
+    <div
       v-if="!user.profile.nextVisa"
-      @click="toggleModal"
-      class="margin-l top bottom">
-      Choose my next visa
-    </button>
+      class="button-center">
+      <button
+        @click="toggleModal"
+        class="margin-l top bottom primary">
+        Choose my next visa
+      </button>
+    </div>
 
     <div v-else>
       <p>You're Here</p>
@@ -91,6 +94,13 @@ export default {
   computed: {
     profileToUpdate() { 
       return {...this.user.profile} 
+    },
+    statusText() {
+      if(!this.user.profile.nextVisa) {
+        return 'My Status'
+      } else {
+        return 'My Visa'
+      }
     }
   },
   methods: {
