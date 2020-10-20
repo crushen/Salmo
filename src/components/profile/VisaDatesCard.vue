@@ -1,13 +1,15 @@
 <template>
-  <div class="card">
-    <div>
-      <p class="title">{{ endDate }}</p>
-      <p>visa expiry date</p>
-    </div>
+  <div class="content">
+    <div class="card">
+      <div>
+        <p class="title">{{ endDate }}</p>
+        <p>visa expiry date</p>
+      </div>
 
-    <div>
-      <p class="title">{{ daysLeft }} days left</p>
-      <p>until visa preparation</p>
+      <div>
+        <p class="title">{{ daysLeft }} days left</p>
+        <p>until visa preparation</p>
+      </div>
     </div>
   </div>
 </template>

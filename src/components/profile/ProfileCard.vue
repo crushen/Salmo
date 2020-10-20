@@ -1,22 +1,24 @@
 <template>
-  <div class="profile-card">
-    <img :src="profilePicture" class="profile-pic" alt="Randomised profile picture">
+  <div class="content">
+    <div class="profile-card">
+      <img :src="profilePicture" class="profile-pic" alt="Randomised profile picture">
 
-    <div class="info">
-      <p class="name title">{{ user.profile.name }}</p>
-      <div class="details">
-        <p>{{ birthday }}</p>
-        <p>{{ user.profile.nationality }}</p>
-        <p>{{ dependants }}</p>
+      <div class="info">
+        <p class="name title">{{ user.profile.name }}</p>
+        <div class="details">
+          <p>{{ birthday }}</p>
+          <p>{{ user.profile.nationality }}</p>
+          <p>{{ dependants }}</p>
+        </div>
       </div>
-    </div>
 
-    <router-link
-      :to="{ name: 'settings', params: { username: user.profile.username } }"
-      tag="button"
-      class="none">
-      <img src="@/assets/icons/edit.svg" alt="">
-    </router-link>
+      <router-link
+        :to="{ name: 'settings', params: { username: user.profile.username } }"
+        tag="button"
+        class="none">
+        <img src="@/assets/icons/edit.svg" alt="">
+      </router-link>
+    </div>
   </div>
 </template>
 

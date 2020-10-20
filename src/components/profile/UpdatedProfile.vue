@@ -1,10 +1,10 @@
 <template>
-  <section class="content page padding top">
-    <h1 class="margin-s bottom">Profile</h1>
+  <section class="page padding top bottom">
+    <h1 class="content margin-s bottom">Profile</h1>
 
     <profile-card :user="user" />
 
-    <div class="status-title margin-m top">
+    <div class="content status-title margin-m top">
       <h2>{{ statusText }}</h2>
 
       <button
@@ -17,7 +17,7 @@
     
     <div
       v-if="!user.profile.nextVisa"
-      class="button-center">
+      class="content button-center">
       <button
         @click="toggleModal"
         class="margin-l top bottom primary">
@@ -25,7 +25,7 @@
       </button>
     </div>
 
-    <div v-else class="margin-s bottom" >
+    <div v-else class="content margin-s bottom" >
       <status-timeline :user="user" />
     </div>
 
@@ -36,19 +36,17 @@
         @submitModal="saveVisa" />
     </transition>
 
-    <visa-dates-card class="dates-card" :user="user" />
+    <visa-dates-card :user="user" />
 
-    <h2 class="margin-m top">Tools</h2>
+    <h2 class="content margin-m top">Tools</h2>
 
     <tools :user="user" />
 
-    <button @click="showLogoutAlert = true">
+    <!-- <button @click="showLogoutAlert = true">
       Sign Out
-    </button>
+    </button> -->
 
     <!-- Alerts -->
-    <!-- <div id="overlay" /> -->
-
     <transition name="dialog" mode="out-in">
       <logout-alert
         v-if="showLogoutAlert"
