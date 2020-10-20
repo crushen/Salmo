@@ -15,6 +15,7 @@ export default {
   methods: {
     closeModal() {
       this.$emit('closeModal')
+      this.removeOverlay()
     }
   },
   mounted() {

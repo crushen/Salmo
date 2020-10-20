@@ -102,7 +102,7 @@ export default {
       return {...this.user.profile} 
     },
     statusText() {
-      if(!this.user.profile.nextVisa) {
+      if(this.user.profile.nextVisa) {
         return 'My Status'
       } else {
         return 'My Visa'
