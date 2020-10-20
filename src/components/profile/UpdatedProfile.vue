@@ -26,7 +26,9 @@
     </div>
 
     <div v-else class="content margin-s bottom" >
-      <status-timeline :user="user" />
+      <status-timeline 
+        :endDate="endDate"
+        :prepDate="prepDate" />
     </div>
 
     <transition name="dialog" mode="out-in">
@@ -36,7 +38,9 @@
         @submitModal="saveVisa" />
     </transition>
 
-    <visa-dates-card :user="user" />
+    <visa-dates-card
+      :endDate="endDate"
+      :daysLeft="daysLeft" />
 
     <h2 class="content margin-m top">Tools</h2>
 
@@ -102,6 +106,29 @@ export default {
       } else {
         return 'My Visa'
       }
+    },
+    endDate() {
+      const date = this.user.profile.currentVisa.end.split('-'),
+            year = date[0].split('').slice(-2).join('');
+
+      date[0] = year
+      return date.reverse().join('/')
+    },
+    prepDate() {
+      const timeStamp =  new Date(this.user.profile.currentVisa.end),
+            minusThreeMonths = timeStamp.setMonth(timeStamp.getMonth() - 3),
+            date = new Date(minusThreeMonths);
+
+      return date
+    },
+    daysLeft() {
+      const date1 = new Date(),
+            date2 = new Date(this.prepDate);
+      
+      const Difference_In_Time = date2.getTime() - date1.getTime(),
+            Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+
+      return Math.floor(Difference_In_Days)
     }
   },
   methods: {

@@ -8,7 +8,8 @@
 <script>
 export default {
   props: {
-    user: { type: Object, required: true }
+    endDate: { type: String, required: true },
+    prepDate: { type: Date, required: true }
   }
 }
 </script>
