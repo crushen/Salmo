@@ -32,7 +32,6 @@ export default {
 
 dialog {
   background: $red;
-  text-align: center;
   width: 85%;
 }
 

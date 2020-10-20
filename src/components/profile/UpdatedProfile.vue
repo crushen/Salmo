@@ -42,18 +42,7 @@
 
     <tools :user="user" />
 
-    <!-- <button @click="showLogoutAlert = true">
-      Sign Out
-    </button> -->
-
     <!-- Alerts -->
-    <transition name="dialog" mode="out-in">
-      <logout-alert
-        v-if="showLogoutAlert"
-        @confirm="handleLogout"
-        @cancel="showLogoutAlert = false" />
-    </transition>
-
     <transition name="dialog" mode="out-in">
       <close-alert
         v-if="confirmingClose"
@@ -79,7 +68,6 @@ import visaChoices from '@/components/modals/VisaChoices'
 import statusTimeline from '@/components/profile/StatusTimeline'
 import tools from '@/components/profile/Tools'
 
-import logoutAlert from '@/components/alerts/logout/ConfirmLogout'
 import closeAlert from '@/components/alerts/visaChoices/Close'
 import changeAlert from '@/components/alerts/visaChoices/Change'
 
@@ -93,7 +81,6 @@ export default {
     visaChoices,
     statusTimeline,
     tools,
-    logoutAlert,
     closeAlert,
     changeAlert
   },
@@ -102,7 +89,6 @@ export default {
       modalIsOpen: false,
       confirmingClose: false,
       confirmingChange: false,
-      showLogoutAlert: false,
       documentChecklist
     }
   },
@@ -150,23 +136,6 @@ export default {
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       this.toggleModal()
       this.confirmingChange = false
-    },
-    handleLogout() {
-      this.showLogoutAlert = false
-
-      setTimeout(() => {
-        this.$store.dispatch('auth/logOut')
-        .then(() => {
-          this.$store. commit('auth/setLoggedOut')
-          this.$store.commit('wave/setWaveAway', false)
-          this.$store.commit('wave/setFullScreen', false)
-          this.$store.dispatch('wave/handleTransition')
-
-          if(this.$route.path !== '/') {
-            this.$router.push('/')
-          }
-        })
-      }, 800)
     }
   }
 }

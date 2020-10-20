@@ -2,22 +2,25 @@
   <base-modal @closeModal="closeModal">
     <h1>Edit Account</h1>
 
-    <FormulateForm @submit="handleSubmit">
+    <FormulateForm @submit="handleSubmit" class="margin-m top">
       <FormulateInput
         v-model="form.name"
         type="text"
         label="Full Name"
-        validation="required" />
+        validation="required"
+        class="grey-label" />
 
       <FormulateInput
         v-model="form.username"
         type="text"
         label="username"
-        validation="bail|required|min:6|max:10" />
+        validation="bail|required|min:6|max:10"
+        class="grey-label" />
 
       <FormulateInput
         type="submit"
-        label="Save"/>
+        label="Save"
+        class="button margin-m top" />
     </FormulateForm>
   </base-modal>
 </template>
@@ -49,3 +52,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.button {
+  text-align: right;
+}
+</style>
