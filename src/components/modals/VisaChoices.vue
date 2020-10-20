@@ -78,7 +78,6 @@ export default {
     },
     handleSubmit() {
       this.$emit('submitModal', this.form)
-      this.removeOverlay()
     }
   }
 }

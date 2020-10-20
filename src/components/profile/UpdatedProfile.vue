@@ -25,8 +25,8 @@
       </button>
     </div>
 
-    <div class="margin-s top bottom" v-else>
-      <p>You're Here</p>
+    <div v-else class="margin-s bottom" >
+      <status-timeline :user="user" />
     </div>
 
     <transition name="dialog" mode="out-in">
@@ -78,6 +78,7 @@
 import profileCard from '@/components/profile/ProfileCard'
 import visaDatesCard from '@/components/profile/VisaDatesCard'
 import visaChoices from '@/components/modals/VisaChoices'
+import statusTimeline from '@/components/profile/StatusTimeline'
 import tools from '@/components/profile/Tools'
 
 import logoutAlert from '@/components/alerts/logout/ConfirmLogout'
@@ -92,6 +93,7 @@ export default {
     profileCard,
     visaDatesCard,
     visaChoices,
+    statusTimeline,
     tools,
     logoutAlert,
     closeAlert,
