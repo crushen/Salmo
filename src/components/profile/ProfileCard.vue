@@ -41,11 +41,11 @@ export default {
   },
   computed: {
     profilePicture() {
-      return this.profilePictures[Math.floor(Math.random()*10) + 1];
+      return this.profilePictures[Math.floor(Math.random()*10)]
     },
     birthday() {
-      const date = this.user.profile.birthday.split('-');
-      return date.reverse().join('/');
+      const date = this.user.profile.birthday.split('-')
+      return date.reverse().join('/')
     },
     dependants() {
       let string
