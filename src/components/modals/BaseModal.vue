@@ -1,7 +1,9 @@
 <template>
   <div class="container">
     <dialog open>
-      <button @click="closeModal">X</button>
+      <button @click="closeModal" class="none">
+        <img src="@/assets/icons/cross.svg" alt="">
+      </button>
 
       <slot />
     </dialog>
@@ -22,6 +24,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
 .container {
   width: 100%;
   height: 100vh;
@@ -35,7 +39,16 @@ export default {
 }
 
 dialog {
-  min-height: 50vh;
-  background: #eee;
+  background: $grey;
+}
+
+button {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+
+  img {
+    width: 1.8em;
+  }
 }
 </style>

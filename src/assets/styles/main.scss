@@ -13,6 +13,10 @@
 }
 
 // Text
+h1, h2, h3, h4, h5, h6, p, li {
+  color: $dark-font;
+}
+
 h1 { @include font(1.5em, 600) }
 h2 { @include font(1.3em, 600) }
 
@@ -34,6 +38,7 @@ button {
   @include font(1em, 600);
   padding: 0.5em 1.5em;
   border-radius: 100px;
+  cursor: pointer;
   
   &.primary {
     background: $red;
