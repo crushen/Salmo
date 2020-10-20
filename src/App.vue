@@ -249,22 +249,6 @@ main {
   }
 }
 
-#overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  z-index: 30;
-  opacity: 0;
-  visibility: hidden;
-  background: rgba($color: $dark-grey, $alpha: 0.5);
-  pointer-events: all;
-  transition: 0.4s;
-  pointer-events: none;
-}
-
 .slide-enter,
 .slide-leave-to {
   transform: translateX(20px);

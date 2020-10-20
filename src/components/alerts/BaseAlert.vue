@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="alert-modal-container">
     <dialog open>
       <slot />
 
@@ -19,33 +19,16 @@ export default {
   methods: {
     confirm() {
       this.$emit('confirm')
-      this.removeOverlay()
     },
     cancel() {
       this.$emit('cancel')
-      this.removeOverlay()
     }
-  },
-  mounted() {
-    this.setOverlay()
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
-
-.container {
-  width: 100%;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 50;
-}
 
 dialog {
   background: $red;

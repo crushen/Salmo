@@ -47,7 +47,7 @@
     </button>
 
     <!-- Alerts -->
-    <div id="overlay" />
+    <!-- <div id="overlay" /> -->
 
     <transition name="dialog" mode="out-in">
       <logout-alert
