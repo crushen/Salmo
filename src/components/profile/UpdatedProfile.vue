@@ -4,7 +4,16 @@
 
     <profile-card :user="user" />
 
-    <h2 class="margin-s top">{{ statusText }}</h2>
+    <div class="status-title margin-m top">
+      <h2>{{ statusText }}</h2>
+
+      <button
+        v-if="user.profile.nextVisa"
+        @click="toggleModal"
+        class="none">
+        <img src="@/assets/icons/edit.svg" alt="">
+      </button>
+    </div>
     
     <div
       v-if="!user.profile.nextVisa"
@@ -16,7 +25,7 @@
       </button>
     </div>
 
-    <div v-else>
+    <div class="margin-s top bottom" v-else>
       <p>You're Here</p>
     </div>
 
@@ -29,7 +38,7 @@
 
     <visa-dates-card class="dates-card" :user="user" />
 
-    <h2 class="margin-s top">Tools</h2>
+    <h2 class="margin-m top">Tools</h2>
 
     <tools :user="user" />
 
@@ -162,3 +171,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.status-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+</style>
