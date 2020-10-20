@@ -53,6 +53,10 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+p {
+  color: $light-font;
+}
+
 .title {
   max-width: 190px;
   text-align: right;
@@ -62,6 +66,7 @@ export default {
   right: 0;
 
   h1 {
+    color: $light-font;
     margin-bottom: .5em;
   }
 }

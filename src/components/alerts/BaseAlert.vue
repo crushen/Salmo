@@ -32,12 +32,12 @@ export default {
 
 dialog {
   background: $red;
-  color: $light-font;
   text-align: center;
   width: 85%;
 }
 
 p {
+  color: $light-font;
   margin-bottom: 1em;
 
   &.confirm {

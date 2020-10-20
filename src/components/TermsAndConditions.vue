@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="{ 'light': $route.name === 'sign-up-terms' }">
     <section>
       <h1>These terms and conditions using your Salmo account</h1>
       <p>These legal terms (English law applies and disputes will be settled by English courts) are between you and Salmo Visa Limited (Salmo/us/we) and you agree to them by using the Salmo web app. Your Salmo account is a personal identity account and you mustn’t use it for business purposes.</p>
@@ -125,6 +125,12 @@
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
+
+.light {
+  h1, p, li, a {
+    color: $light-font;
+  }
+}
 
 section:not(:last-of-type) {
   margin-bottom: $spacing*3;
