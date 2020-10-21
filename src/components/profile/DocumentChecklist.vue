@@ -1,60 +1,83 @@
 <template>
-  <section class="card">
-    <h2>Checklist</h2>
-    <h3 class="margin-s top">Click on any item to fade our your completed task!</h3>
+  <div>
+    <section class="card">
+      <h2>Checklist</h2>
+      <h3 class="margin-s top">Click on any item to fade our your completed task!</h3>
 
-    <ul>
-      <li
-        v-for="item in user.profile.nextVisa.documentChecklist"
-        :key="item.label"
-        :class="item.checked ? 'checked' : ''">
-          <div
-            @mouseenter="visibleNote = notes.find(note => note.label === item.label).note"
-            @mouseleave="visibleNote = null"
-            @click="item.checked = !item.checked"
-            class="inner">
-            <img
-              v-if="item.label.includes('CAS')"
-              src="@/assets/version-2/doc-checklist/cas.svg"
-              alt="">
+      <ul>
+        <li
+          v-for="item in user.profile.nextVisa.documentChecklist"
+          :key="item.label"
+          :class="item.checked ? 'checked' : ''">
+            <div
+              @mouseenter="visibleNote = notes.find(note => note.label === item.label).note"
+              @mouseleave="visibleNote = null"
+              @click="checkItem(item)"
+              class="inner">
+              <img
+                v-if="item.label.includes('CAS')"
+                src="@/assets/version-2/doc-checklist/cas.svg"
+                alt="">
 
-            <img
-              v-if="item.label.includes('English')"
-              src="@/assets/version-2/doc-checklist/english.svg"
-              alt="">
+              <img
+                v-if="item.label.includes('English')"
+                src="@/assets/version-2/doc-checklist/english.svg"
+                alt="">
 
-            <img
-              v-if="item.label.includes('Finance')"
-              src="@/assets/version-2/doc-checklist/money.svg"
-              alt="">
+              <img
+                v-if="item.label.includes('Finance')"
+                src="@/assets/version-2/doc-checklist/money.svg"
+                alt="">
 
-            <img
-              v-if="item.label.includes('Passport')"
-              src="@/assets/version-2/doc-checklist/passport.svg"
-              alt="">
+              <img
+                v-if="item.label.includes('Passport')"
+                src="@/assets/version-2/doc-checklist/passport.svg"
+                alt="">
 
-            <p>{{ item.label }}</p>
-          </div>
-      </li>
-    </ul>
+              <p>{{ item.label }}</p>
+            </div>
+        </li>
+      </ul>
 
-    <transition name="note" mode="out-in">
-      <p v-if="visibleNote" class="note">{{ visibleNote }}</p>
+      <transition name="note" mode="out-in">
+        <p v-if="visibleNote" class="note">{{ visibleNote }}</p>
+      </transition>
+    </section>
+
+    <transition name="dialog" mode="out-in">
+      <alert
+        v-if="showAlert"
+        @confirm="selected.checked = false, showAlert = false"
+        @cancel="showAlert = false" />
     </transition>
-  </section>
+  </div>
 </template>
 
 <script>
 import { notes } from '@/assets/js/documentChecklist'
+import alert from '@/components/alerts/DocChecklist'
 
 export default {
+  components: { alert },
   props: {
     user: { required: true, type: Object }
   },
   data() {
     return {
       notes,
-      visibleNote: null
+      visibleNote: null,
+      showAlert: false
+    }
+  },
+  methods: {
+    checkItem(item) {
+      this.selected = item
+
+      if(!item.checked) {
+        item.checked = true
+      } else {
+        this.showAlert = true
+      }
     }
   }
 }
