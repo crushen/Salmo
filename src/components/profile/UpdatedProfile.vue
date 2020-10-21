@@ -25,9 +25,9 @@
       </button>
     </div>
 
-    <div v-else class="content margin-s bottom" >
+    <div v-else class="margin-m bottom" >
       <status-timeline 
-        :endDate="endDate"
+        :user="user"
         :prepDate="prepDate" />
     </div>
 
