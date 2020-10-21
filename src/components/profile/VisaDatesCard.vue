@@ -7,7 +7,7 @@
       </div>
 
       <div>
-        <p class="title">{{ daysLeft }} days left</p>
+        <p class="title">{{ noNegativeNums }} days left</p>
         <p>until visa preparation</p>
       </div>
     </div>
@@ -19,6 +19,15 @@ export default {
   props: {
     endDate: { type: String, required: true },
     daysLeft: { type: Number, required: true }
+  },
+  computed: {
+    noNegativeNums() {
+      if(this.daysLeft < 0) {
+        return 0
+      } else {
+        return this.daysLeft
+      }
+    }
   }
 }
 </script>

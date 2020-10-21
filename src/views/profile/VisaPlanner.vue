@@ -35,12 +35,16 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+main {
+  height: 100vh;
+  overflow: hidden;
+}
+
 .background {
   width: 100%;
   height: 100vh;
-  position: fixed;
-  top: 85px;
-  left: 0;
+  // top: 85px;
+  // left: 0;
   background: $yellow;
   border-top-left-radius: $radius;
   border-top-right-radius: $radius;
