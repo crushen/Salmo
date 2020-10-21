@@ -18,24 +18,24 @@
           </div>
 
           <div v-if="questions.length" class="question">
-            <question 
-              :question="questions[currentQuestion]"
-              :questions="questions"
-              :currentQuestion="currentQuestion"
-              @submitAnswer="submitAnswer"
-              @previousQuestion="previousQuestion" />
+            <transition name="slide" mode="out-in">
+              <question
+                :key="questions[currentQuestion].question"
+                :question="questions[currentQuestion]"
+                :questions="questions"
+                :currentQuestion="currentQuestion"
+                @submitAnswer="submitAnswer"
+                @previousQuestion="previousQuestion" />
+            </transition>
           </div>
         </section>
 
-        <!-- Alerts -->
-        <transition name="alert" mode="out-in">
-          <alert 
+        <!-- Alerts -->      
+        <transition name="dialog" mode="out-in">
+          <alert
             v-if="showAlert"
-            alert="Progress will be lost"
-            text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
-            :buttons="['Leave Page', 'Stay On Page']"
-            @cancel="showAlert = false, $router.push(to)"
-            @confirm="showAlert = false, to = null, $router.go(1)" />
+            @cancel="showAlert = false, to = null"
+            @confirm="showAlert = false, $router.push(to)" />
         </transition>
       </div>
     </main>
@@ -45,7 +45,7 @@
 <script>
 import { mapState } from 'vuex'
 import question from '@/components/visaQuiz/Question'
-import alert from '@/components/Alert'
+import alert from '@/components/alerts/Quiz'
 
 export default {
   components: {
@@ -57,9 +57,6 @@ export default {
       showAlert: false,
       to: null,
       user: this.$store.state.auth.user,
-      introStage: true,
-      questionsStage: false,
-      resultsStage: false,
       questions: [],
       answers: [],
       currentQuestion: 0,
@@ -182,22 +179,13 @@ export default {
     this.startQuestionnaire()
   },
   beforeRouteLeave(to, from, next) {
-    if(this.questionsStage) {
-      if (this.to) {
-        next();
-      } else {
-        const overlay = document.querySelector('#overlay');
-        overlay.style.opacity = 1;
-        overlay.style.visibility = 'visible';
-        document.querySelector('body').style.overflow = 'hidden';
-        this.to = to;
-        this.showAlert = true;
-
-        const ariaBtns = document.querySelectorAll('.aria-btn');
-        this.changeBtnFocus(ariaBtns, '-1');
-      }
+    if (this.to) {
+      next()
     } else {
-      next();
+      this.to = to
+      this.showAlert = true
+      // const ariaBtns = document.querySelectorAll('.aria-btn')
+      // this.changeBtnFocus(ariaBtns, '-1')
     }
   }
 }
