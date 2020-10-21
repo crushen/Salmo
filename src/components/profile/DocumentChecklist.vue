@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="card">
+    <section class="tools-card">
       <h2>Checklist</h2>
       <h3 class="margin-s top">Click on any item to fade our your completed task!</h3>
 
@@ -86,22 +86,9 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.card {
-  width: 93%;
-  margin: auto;
-  background: white;
-  border-radius: $radius;
-  position: relative;
+.tools-card {
   padding-bottom: 4em;
   overflow: hidden;
-}
-
-h2 {
-  margin: 4% 4% 0;
-}
-
-h3 {
-  margin-left: 2em;
 }
 
 ul {

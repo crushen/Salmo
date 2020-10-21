@@ -1,39 +1,45 @@
 <template>
-  <main>
-    <transition name="alert" mode="out-in">
-      <alert 
-        v-if="showAlert"
-        alert="Progress will be lost"
-        text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
-        :buttons="['Leave Page', 'Stay On Page']"
-        @cancel="showAlert = false, $router.push(to)"
-        @confirm="showAlert = false, to = null, $router.go(1)" />
-    </transition>
+  <div class="tools-pages">
+    <main class="page padding top">
+      <div class="background">
+        <section class="content margin-m top bottom">
+          <h1>Visa Quiz</h1>
 
-    <section class="content questions-stage">
-      <h1>Visa Quiz</h1>
+          <h2 class="margin-s top bottom">Let’s work out your best options to remain in the UK. </h2>
 
-      <h2>Let’s work out your best options to remain in the UK. </h2>
+          <h3>The following questions are based off your current visa choice, so please ensure that your current visa in your profile is up to date.</h3>
+        </section>
 
-      <p>The following questions are based off your current visa choice, so please ensure that your current visa in your profile is up to date.</p>
+        <section class="tools-card">
+          <div class="progress-bar">
+            <div
+              :style="{ width: `${progress}%` }" 
+              class="progress-bar-inner"></div>
+          </div>
 
+          <div v-if="questions.length" class="question">
+            <question 
+              :question="questions[currentQuestion]"
+              :questions="questions"
+              :currentQuestion="currentQuestion"
+              @submitAnswer="submitAnswer"
+              @previousQuestion="previousQuestion" />
+          </div>
+        </section>
 
-      <div class="progress-bar">
-        <div
-          :style="{ width: `${progress}%` }" 
-          class="progress-bar-inner"></div>
+        <!-- Alerts -->
+        <transition name="alert" mode="out-in">
+          <alert 
+            v-if="showAlert"
+            alert="Progress will be lost"
+            text="Are you sure you want to go leave this page? Your progress will be lost if you continue."
+            :buttons="['Leave Page', 'Stay On Page']"
+            @cancel="showAlert = false, $router.push(to)"
+            @confirm="showAlert = false, to = null, $router.go(1)" />
+        </transition>
       </div>
-
-      <div v-if="questions.length" class="question">
-        <question 
-          :question="questions[currentQuestion]"
-          :questions="questions"
-          :currentQuestion="currentQuestion"
-          @submitAnswer="submitAnswer"
-          @previousQuestion="previousQuestion" />
-      </div>
-    </section>
-  </main>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -63,32 +69,32 @@ export default {
         recommendedVisa: []
       },
       visaList: [
+        // 'Marriage',
+        // 'Parent of Tier 4 Child',
+        // 'Standard Visitor',
         'Family',
         'Family (needs expanding)',
-        'Global Talent',
-        'Innovator',
-        'Marriage',
-        'Parent of Tier 4 Child',
-        'Standard Visitor',
-        'Startup',
-        'Tier 1 Entrepreneur',
-        'Tier 1 Exceptional Talent',
-        'Tier 1 Graduate Entrepreneur',
-        'Tier 1 Investor',
-        'Tier 2 General Work',
-        'Tier 2 Intra-company Transfer',
-        'Tier 2 Minister of Religion',
-        'Tier 2 Sportsperson',
-        'Tier 4 Child Student',
-        'Tier 4 General Student',
-        'Tier 4 Short Term Study',
-        'Tier 5 Charity Worker', 
-        'Tier 5 Creative and Sporting',
-        'Tier 5 Government Authorised Exchange',
-        'Tier 5 International Agreement',
-        'Tier 5 Religious Worker',
-        'Tier 5 Seasonal Worker',
-        'Tier 5 Youth Mobility Scheme'
+        'Tier 1 : Innovator',
+        'Tier 1 : Global Talent',
+        'Tier 1 : Startup',
+        'Tier 1 : Entrepreneur',
+        'Tier 1 : Exceptional Talent',
+        'Tier 1 : Graduate Entrepreneur',
+        'Tier 1 : Investor',
+        'Tier 2 : General Work',
+        'Tier 2 : Intra-company Transfer',
+        'Tier 2 : Minister of Religion',
+        'Tier 2 : Sportsperson',
+        'Tier 4 : Child Student',
+        'Tier 4 : General Student',
+        'Tier 4 : Short Term Study',
+        'Tier 5 : Charity Worker', 
+        'Tier 5 : Creative and Sporting',
+        'Tier 5 : Government Authorised Exchange',
+        'Tier 5 : International Agreement',
+        'Tier 5 : Religious Worker',
+        'Tier 5 : Seasonal Worker',
+        'Tier 5 : Youth Mobility Scheme'
       ]
     }
   },
@@ -200,63 +206,56 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.content {
-  padding: $spacing*12 0 $spacing*10;
+h3 {
+  margin-left: 10%;
 }
 
 .progress-bar,
 .progress-bar-inner {
-  width: 100%;
+  width: 90%;
   height: 12px;
   border-radius: 100px;
-  margin: auto;
+  margin: 1.5em auto;
   transition: width 500ms;
 }
 
 .progress-bar {
-  background-color: #eee;
+  background-color: #EEE;
 }
 
 .progress-bar-inner {
-  background-color: $primary-yellow; 
+  background-color: $dark-yellow; 
   margin: 0;
 }
 
-// Tablet
-@media screen and (min-width: 600px) {
-  .content {
-    &.questions-stage {
-      width: 85%;
-      max-width: 650px;
-    }
-  }
+// // Tablet
+// @media screen and (min-width: 600px) {
+//   .progress-bar {
+//     width: 65%;
+//     position: absolute;
+//     z-index: 2;
+//     top: 40px;
+//     right: 7%;
+//     background: white;
+//   }
 
-  .progress-bar {
-    width: 65%;
-    position: absolute;
-    z-index: 2;
-    top: 40px;
-    right: 7%;
-    background: white;
-  }
+//   .progress-bar-inner {
+//     width: 65%;
+//     position: absolute;
+//     z-index: 2;
+//     top: 0;
+//     left: 0;
+//   }
+// }
 
-  .progress-bar-inner {
-    width: 65%;
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    left: 0;
-  }
-}
+// // Desktop
+// @media screen and (min-width: 1100px) {
+//   .progress-bar {
+//     width: 75%;
+//   }
 
-// Desktop
-@media screen and (min-width: 1100px) {
-  .progress-bar {
-    width: 75%;
-  }
-
-  .progress-bar-inner {
-    width: 75%;
-  }
-}
+//   .progress-bar-inner {
+//     width: 75%;
+//   }
+// }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <section class="card">
+  <section class="tools-card">
     <h2>Estimated Timeline</h2>
 
     <div class="inner-scroll margin-m top bottom">
@@ -94,18 +94,6 @@ export default {
 
 b {
   font-weight: 500;
-}
-
-.card {
-  width: 93%;
-  margin: auto;
-  background: white;
-  border-radius: $radius;
-  position: relative;
-}
-
-h2 {
-  margin: 4% 4% 0;
 }
 
 .inner-scroll {

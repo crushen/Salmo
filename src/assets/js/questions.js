@@ -330,14 +330,14 @@
 export const questions = [
   // GENERAL STUDENT
   {
-    visa: 'Tier 4 General Student',
+    visa: 'Tier 4 : General Student',
     questions: [
       {
         question: 'Which best describes why you would like to remain in the UK?',
         number: 0,
         answers: [
           {
-            value: 'Tier 4 General Student',
+            value: 'Tier 4 : General Student',
             label: 'Study'
           },
           {
@@ -359,25 +359,25 @@ export const questions = [
         number: 1,
         answers: [
           {
-            value: 'Tier 1 Investor',
+            value: 'Tier 1 : Investor',
             label: 'Invest'
           },
           {
-            value: 'Startup',
+            value: 'Tier 1 : Startup',
             label: 'Start my own'
           }
         ]
       },
       {
-        question: 'Does your work involve Sports or Religion',
+        question: 'Does your work involve Sports or Religion?',
         number: 2,
         answers: [
           {
-            value: 'Tier 2 Sportsperson',
+            value: 'Tier 2 : Sportsperson',
             label: 'Sports'
           },
           {
-            value: 'Tier 2 Minister of Religion',
+            value: 'Tier 2 : Minister of Religion',
             label: 'Religion'
           },
           {
@@ -391,11 +391,11 @@ export const questions = [
         number: 3,
         answers: [
           {
-            value: 'Tier 5 Government Authorised Exchange',
+            value: 'Tier 5 : Government Authorised Exchange',
             label: 'Yes'
           },
           {
-            value: 'Tier 2 General Work',
+            value: 'Tier 2 : General Work',
             label: 'No'
           }
           // {
@@ -407,65 +407,65 @@ export const questions = [
     ]
   },
   // CHILD STUDENT
-  {
-    visa: 'Tier 4 Child Student',
-    questions: [
-      {
-        question: 'Which best describes why you would like to remain in the UK?',
-        number: 0,
-        answers: [
-          {
-            text: 'Family',
-            value: 'Family (needs expanding)'
-          },
-          {
-            text: 'Study',
-            value: 'Tier 4 General Student'
-          },
-          {
-            text: 'Work',
-            value: 1
-          }
-        ]
-      },
-      {
-        question: 'Does your work involve Sports or Religion',
-        number: 1,
-        answers: [
-          {
-            text: 'Sports',
-            value: 'Tier 2 Sportsperson'
-          },
-          {
-            text: 'Religion',
-            value: 'Tier 2 Minister of Religion'
-          },
-          {
-            text: 'Neither',
-            value: 2
-          }
-        ]
-      },
-      {
-        question: 'Is your job a part of an approved government authorised exchange scheme?',
-        number: 2,
-        answers: [
-          {
-            text: 'Yes',
-            value: 'Tier 5 Government Authorised Exchange'
-          },
-          {
-            text: 'No',
-            value: 'Tier 2 General Work'
-          }
-          // {
-          //   text: 'Not sure',
-          //   value: 'Take customer to page describing the scheme'
-          // }
-        ]
-      }
-    ]
-  }
+  // {
+  //   visa: 'Tier 4 Child Student',
+  //   questions: [
+  //     {
+  //       question: 'Which best describes why you would like to remain in the UK?',
+  //       number: 0,
+  //       answers: [
+  //         {
+  //           text: 'Family',
+  //           value: 'Family (needs expanding)'
+  //         },
+  //         {
+  //           text: 'Study',
+  //           value: 'Tier 4 General Student'
+  //         },
+  //         {
+  //           text: 'Work',
+  //           value: 1
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       question: 'Does your work involve Sports or Religion',
+  //       number: 1,
+  //       answers: [
+  //         {
+  //           text: 'Sports',
+  //           value: 'Tier 2 Sportsperson'
+  //         },
+  //         {
+  //           text: 'Religion',
+  //           value: 'Tier 2 Minister of Religion'
+  //         },
+  //         {
+  //           text: 'Neither',
+  //           value: 2
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       question: 'Is your job a part of an approved government authorised exchange scheme?',
+  //       number: 2,
+  //       answers: [
+  //         {
+  //           text: 'Yes',
+  //           value: 'Tier 5 Government Authorised Exchange'
+  //         },
+  //         {
+  //           text: 'No',
+  //           value: 'Tier 2 General Work'
+  //         }
+  //         // {
+  //         //   text: 'Not sure',
+  //         //   value: 'Take customer to page describing the scheme'
+  //         // }
+  //       ]
+  //     }
+  //   ]
+  // }
   // NON-SPECIFIC QUESTIONS
   // {
   //   visa: [

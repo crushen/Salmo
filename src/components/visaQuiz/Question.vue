@@ -1,7 +1,7 @@
 <template>
-  <section class="container">
+  <div>
     <div v-if="currentQuestion === 0">
-      <p>{{ question.question }}</p>
+      <h2>{{ question.question }}</h2>
       
       <div class="buttons">
         <button
@@ -13,7 +13,9 @@
           :style="{ backgroundImage: buttonBackground(index) }"
           :aria-pressed="answer.value === selected ?  'true' : 'false'">
           <div v-if="answer.value !== selected && selected !== null" class="btn-overlay" />
+
           {{ answer.label }}
+
           <img :src="buttonIcon(index)" class="icon">
         </button>
       </div>
@@ -26,43 +28,26 @@
         :options="question.answers"
         :label="question.question"
         validation="required"
-        error-behavior="submit" />
+        error-behavior="submit"
+        class="grey-label quiz" />
     </div>
 
     <div class="nav">
-      <button
-        v-if="currentQuestion === 0"
-        class="tertiary inactive"
-        disabled>
-        <span>&#8227;</span> 
-        <p>Previous</p>
-      </button>
-
-      <button
-        v-else
+      <!-- <button
         @click="previousQuestion"
         class="tertiary"
         aria-label="Previous question">
-        <span>&#8227;</span> 
         <p>Previous</p>
-      </button>
+      </button> -->
 
       <button
-        v-if="!selected"
-        class="secondary inactive"
-        disabled>
-        Next <span>&#8227;</span>
-      </button>
-
-      <button
-        v-else
         @click="submitAnswer"
-        class="secondary"
+        class="outline"
         aria-label="Next question">
-        Next <span>&#8227;</span>
+        Next
       </button>
     </div>
-  </section>
+  </div>
 </template>
 
 <script>
@@ -139,19 +124,8 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.container {
-  width: 100%;
-  min-height: 75vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  position: relative;
-  z-index: 2;
-}
-
-.background-1,
-.background-2 {
-  display: none;
+h2 {
+  margin: 0 5%;
 }
 
 .buttons {
@@ -161,7 +135,7 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: auto;
+  margin: 2em auto;
 
   .button {
     position: relative;
@@ -186,7 +160,7 @@ export default {
       right: 0;
       bottom: 0;
       left: 0;
-      background: rgba($color: $dark-font, $alpha: 0.6);
+      background: rgba($color: $dark-font, $alpha: 0.5);
       border-radius: $border-radius;
       z-index: 2;
     }
@@ -215,105 +189,25 @@ export default {
     .icon {
       width: 55px;
     }
-
-    &:focus {
-      //outline: none;
-      box-shadow: 0px 0px 0px 4px $primary-yellow;
-    }
   }
-}
-
-.un-checked {
-  opacity: 0.6;
 }
 
 .nav {
-  width: 100%;
+  width: 90%;
+  margin: auto;
+  padding-bottom: 2em;
   display: flex;
-  justify-content: space-between;
-
-  .secondary {
-    border: 3px solid $primary-yellow;
-    color: $primary-yellow;
-
-    &.inactive {
-      border: 3px solid $light-grey;
-      color: $light-grey;
-      pointer-events: none;
-    }
-
-    span {
-      font-size: 45px;
-      line-height: 0;
-      padding: 0 0 6px 6px;
-    }
-  }
-
-  .tertiary {
-    padding: 0;
-    text-decoration: none;
-
-    &.inactive {
-      color: $light-grey;
-      pointer-events: none;
-    }
-
-    span {
-      transform: rotate(180deg);
-      font-size: 45px;
-      line-height: 0;
-      padding: 0 0 8px 6px;
-    }
-  }
-
-  button {
-    display: flex;
-    align-items: center;
-    line-height: 0;
-    padding: 20px $spacing*3;
-    //outline: none;
-  }
+  justify-content: flex-end;
 }
 
 .radio-buttons {
-  display: flex;
-  flex-direction: column;
-  font-size: 18px;
-
-  .radio:not(:first-of-type) {
-    margin-top: $spacing*6;
-  }
+  width: 90%;
+  margin: auto;
+  margin-bottom: 2em;
 }
 
 // Tablet
 @media screen and (min-width: 600px) {
-  h3 {
-    font-size: 30px;
-  }
-
-  .container {
-    min-height: 60vh;
-    margin-top: $spacing*12;
-  }
-
-  .background-1 {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 100px;
-    width: calc(100% - 100px);
-    height: 220px;
-  }
-
-  .background-2 {
-    display: block;
-    position: absolute;
-    left: 90px;
-    bottom: 0;
-    width: calc(100% - 90px);
-    height: 270px;
-  }
-
   .buttons {
     max-width: none;
     justify-content: space-between;

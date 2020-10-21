@@ -1,17 +1,19 @@
 <template>
-  <main class="page padding top">
-    <div class="background">
-      <div class="content">
-        <h1 class="margin-s top">Visa Planner</h1>
+  <div class="tools-pages">
+    <main class="tools-pages page padding top">
+      <div class="background">
+        <div class="content">
+          <h1 class="margin-s top">Visa Planner</h1>
 
-        <h2 class="margin-s top bottom">{{ user.profile.nextVisa.name }}</h2>
+          <h2 class="margin-s top bottom">{{ user.profile.nextVisa.name }}</h2>
+        </div>
+
+        <doc-checklist :user="user" />
+
+        <timeline :user="user" class="margin-m top" />
       </div>
-
-      <doc-checklist :user="user" />
-
-      <timeline :user="user" class="margin-m top" />
-    </div>
-  </main>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -31,21 +33,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@/assets/styles/variables.scss';
-
-main {
-  height: 100vh;
-  overflow: hidden;
-}
-
-.background {
-  width: 100%;
-  height: 100vh;
-  background: $yellow;
-  border-top-left-radius: $radius;
-  border-top-right-radius: $radius;
-  padding-bottom: 180px;
-}
-</style>
