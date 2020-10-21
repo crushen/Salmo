@@ -4,7 +4,7 @@
     @cancel="cancel"
     confirmText="Are you sure you want to uncheck?">
  
-    <p>Unchecking this item will make it resume to it's original status.</p>
+    <p>Unchecking this item will make it return to it's original status.</p>
   </base-alert>
 </template>
 
