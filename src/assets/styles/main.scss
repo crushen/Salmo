@@ -19,6 +19,7 @@ h1, h2, h3, h4, h5, h6, p, li {
 
 h1 { @include font(1.5em, 600) }
 h2 { @include font(1.3em, 600) }
+h3 { @include font(1em, 400) }
 
 p { @include font(1em, 300) }
 p.title { @include font(1.2em, 600) }
@@ -130,11 +131,11 @@ dialog {
 .page {
   &.padding {
     &.top {
-      padding-top: 100px;
+      padding-top: 85px;
     }
     
     &.bottom {
-      padding-bottom: 100px;
+      padding-bottom: 85px;
     }
   }
 }

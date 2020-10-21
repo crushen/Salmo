@@ -1,12 +1,16 @@
 <template>
-  <main class="content">
-    <h1>Visa Planner</h1>
+  <main class="page padding top">
+    <div class="background">
+      <div class="content">
+        <h1 class="margin-s top">Visa Planner</h1>
 
-    <h2>{{ user.profile.nextVisa.name }}</h2>
+        <h2 class="margin-s top bottom">{{ user.profile.nextVisa.name }}</h2>
+      </div>
 
-    <doc-checklist :user="user" />
+      <doc-checklist :user="user" />
 
-    <timeline />
+      <timeline />
+    </div>
   </main>
 </template>
 
@@ -27,3 +31,18 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
+
+.background {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 85px;
+  left: 0;
+  background: $yellow;
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
+}
+</style>
