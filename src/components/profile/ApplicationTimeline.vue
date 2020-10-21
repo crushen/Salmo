@@ -1,81 +1,88 @@
 <template>
-  <div class="card">
-    <div class="title">
-      <h3>Estimated timeline for an external application</h3>
+  <section class="card">
+    <h2>Estimated Timeline</h2>
+
+    <div class="inner-scroll margin-m top bottom">
+      <div 
+        v-for="(item, index) in applicationTimeline"
+        :key="index"
+        class="timeline-item">
+        <p v-if="item.time.includes('before')"><b>{{ item.time }} 01/01/2011</b></p>
+        <p v-else><b>{{ item.time }}</b></p>
+
+        <p>{{ item.label }}</p>
+      </div>
     </div>
-    <div class="body">
-      <div class="timeline">
-        <div class="cards">
-          <div 
-            v-for="(card, index) in cards"
-            :key="index"
-            class="item">
-            <h4>{{ card.title }}</h4>
-            <p>{{ card.text }}</p>
+
+    <div class="tabs">
+      <button
+        @click="selectedTab = 1"
+        :class="{'selected': 1 === selectedTab}"
+        class="tab aria-btn"
+        aria-label="Show information on approved visas"
+        :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
+        <p>Approved</p>
+      </button>
+      <button
+        @click="selectedTab = 2"
+        :class="{'selected': 2 === selectedTab}"
+        class="tab aria-btn"
+        aria-label="Show information on denied visas"
+        :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
+        <p>Denied</p>
+      </button>
+    </div>
+    <div class="tab-result">
+      <transition name="slide" mode="out-in">
+        <div v-if="selectedTab === 1" key="1">
+          <p class="title">Prepare yourself for your new life in the UK!</p>
+          
+          <div class="flex">
+            <div class="left">
+              <p>Be sure not to arrive before your new visa starts.</p>
+              <p>Collect your BRP within 10 days of when you said you would arrive.</p>
+            </div>
+
+            <div class="img">
+              <img src="@/assets/illustrations/profilePages/Application success.svg" alt="">
+            </div>
           </div>
         </div>
-      </div>
-      <div class="tabs">
-        <button
-          @click="selectedTab = 1"
-          :class="{'selected': 1 === selectedTab}"
-          class="tab aria-btn"
-          aria-label="Show information on approved visas"
-          :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
-          <p>Approved</p>
-        </button>
-        <button
-          @click="selectedTab = 2"
-          :class="{'selected': 2 === selectedTab}"
-          class="tab aria-btn"
-          aria-label="Show information on denied visas"
-          :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
-          <p>Denied</p>
-        </button>
-      </div>
-      <div class="bottom">
-        <transition name="slide" mode="out-in">
-          <div v-if="selectedTab === 1" key="1">
-            <p>Prepare yourself for your new life in the UK!</p>
-            <p>Be sure not to arrive before your new visa starts.</p>
-            <p>Collect your BRP within 10 days of when you said you would arrive.</p>
 
-            <img src="@/assets/illustrations/profilePages/Application success.svg" alt="">
+        <div v-else key="2">
+          <p class="title">Don’t give up, you're not out of options!</p>
+          
+          <div class="flex">
+            <div class="left">
+              <p>It can be really tough to have your visa denied, but you’re not out of options yet.</p>
+              <p>If you feel as though you were misjudged, you can ask for a review.</p>
+            </div>
+
+            <div class="img">
+              <img src="@/assets/illustrations/profilePages/Application fail.svg" alt="">
+            </div>
           </div>
-
-          <div v-else key="2">
-            <p>Don’t give up!</p>
-            <p>It can be really tough to have your visa denied, but you’re not out of options yet.</p>
-            <p>If you feel as though you were misjudged, you can ask for a review.</p>
-
-            <img src="@/assets/illustrations/profilePages/Application fail.svg" alt="">
-          </div>
-        </transition>
-      </div>
+        </div>
+      </transition>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
+import { applicationTimelines } from '@/assets/js/applicationTimelines'
 
 export default {
+  props: {
+    user: { type: Object, required: true }
+  },
   data() {
     return {
       selectedTab: 1,
-      cards: [
-        {
-          title: '3 months before arrival in UK',
-          text: 'Submit application and book Biometric Residency Permit appointment.'
-        },
-        {
-          title: '1 day - 1 week wait',
-          text: 'Attend your BRP appointment. Be sure to bring all of your documents!'
-        },
-        {
-          title: '3 - 8 week wait',
-          text: "You'll receive a decision via email or text. Select below to see the results of each outcome."
-        }
-      ]
+    }
+  },
+  computed: {
+    applicationTimeline() {
+      return applicationTimelines.find(timeline => timeline.visa === this.user.profile.currentVisa.name).timeline
     }
   }
 }
@@ -85,83 +92,77 @@ export default {
 @import '@/assets/styles/variables.scss';
 @import '@/assets/styles/main.scss';
 
+b {
+  font-weight: 500;
+}
+
 .card {
+  width: 93%;
+  margin: auto;
   background: white;
-  border: 4px solid $primary-yellow;
-  border-radius: $border-radius;
+  border-radius: $radius;
   position: relative;
-  box-shadow: $shadow;
-  margin-top: $spacing*5;
+}
 
-  .title {
-    background: $primary-yellow;
-    text-align: center;
-    padding: $spacing;
+h2 {
+  margin: 4% 4% 0;
+}
 
-    h3 {
-      font-weight: 400;
-      max-width: 260px;
-      margin: auto;
-    }
+.inner-scroll {
+  width: 80%;
+  height: 200px;
+  overflow-y: scroll;
+  margin: auto;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: $grey;
   }
 
-  .body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $dark-yellow;
+    border-radius: 10px;
   }
 }
 
-.timeline {
-  padding: $spacing*2 $spacing;
-  display: flex;
-}
+.timeline-item {
+  margin: 2em 1em 2em 0;
 
-.cards {
-  .item {
-    background: $background;
-    border-radius: 4px;
-    padding: 10px $spacing;
-
-    &:not(:first-of-type) {
-      margin-top: $spacing*2;
-    }
-  }
-
-  h4 {
-    font-family: $sans-serif;
-    font-size: 16px;
-    margin-bottom: 5px;
+  &:first-of-type {
+    margin: 0 1em 2em 0;
   }
 }
 
 .tabs {
   display: flex;
   align-items: flex-end;
-  width: 90%;
-  height: 55px;
-  margin-top: $spacing*2;
+  width: 100%;
+  height: 40px;
 
   .tab {
     width: 50%;
     height: 80%;
-    background: #ffe4b3;
-    color: $grey;
+    background: $dark-yellow;
     border-radius: 0;
     box-shadow: none;
-    border-top-right-radius: $border-radius;
-    border-top-left-radius: $border-radius;
+    border-top-right-radius: $radius;
+    border-top-left-radius: $radius;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: 0.2s;
+    overflow: hidden;
 
     p {
-      font-weight: 600;
+      font-weight: 500;
     }
 
     &.selected {
-      background: $primary-yellow;
+      background: $med-yellow;
       height: 100%;
       z-index: 5;
       color: $dark-font;
@@ -169,23 +170,33 @@ export default {
   }
 }
 
-.bottom {
+.tab-result {
   width: 100%;
-  background: $primary-yellow;
-  padding: $spacing*3;
+  min-height: 340px;
+  background: $med-yellow;
+  padding: 2em;
 
-  p:first-of-type {
+  p {
+    margin-top: 1em;
+  }
+
+  .title {
     font-weight: 600;
+    margin-top: 0;
   }
 
-  p:not(:first-of-type) {
-    margin-top: $spacing*2;
-  }
+  .flex {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
 
-  img {
-    display: block;
-    height: 150px;
-    margin: $spacing*6 auto $spacing*3 auto;
+    .left {
+      width: 55%;
+    }
+
+    .img {
+      width: 40%;
+    }
   }
 }
 

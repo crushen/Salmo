@@ -9,7 +9,7 @@
 
       <doc-checklist :user="user" />
 
-      <timeline />
+      <timeline :user="user" class="margin-m top" />
     </div>
   </main>
 </template>
@@ -43,10 +43,9 @@ main {
 .background {
   width: 100%;
   height: 100vh;
-  // top: 85px;
-  // left: 0;
   background: $yellow;
   border-top-left-radius: $radius;
   border-top-right-radius: $radius;
+  padding-bottom: 180px;
 }
 </style>
