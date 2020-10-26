@@ -1,8 +1,14 @@
 <template>
-  <main v-if="visaList.length" class="content">
-    <h1>{{ category }} Visas</h1>
+  <main v-if="visaList.length" class="page padding top bottom">
+    <back-button
+      @go-back="$router.go(-1)"
+      text="Back" />
+
+    <div class="content margin-s top">
+      <h1>{{ category }} Visas</h1>
+    </div>
     
-    <section>
+    <section class="content">
       <visa-card 
         v-for="visa in visaList"
         :key="visa.name"
@@ -12,19 +18,20 @@
       </visa-card>
     </section>
 
-    <section>
+    <section class="content margin-l top">
       <help-centre-card />
     </section>
   </main>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import backButton from '@/components/BackButton'
 import visaCard from '@/components/visa/VisaCard'
 import helpCentreCard from '@/components/cards/HelpCentre'
-import { mapState } from 'vuex'
 
 export default {
-  components: { visaCard, helpCentreCard },
+  components: { backButton, visaCard, helpCentreCard },
   data() {
     return {
       user: this.$store.state.auth.user,
@@ -56,10 +63,9 @@ export default {
 
 h1 {
   text-transform: capitalize;
-  margin-bottom: 16px;
 }
 
 .visa-card {
-  margin-bottom: 16px;
+  margin-top: 2em;
 }
 </style>
