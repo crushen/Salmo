@@ -103,37 +103,44 @@ const routes = [
   { 
     path: '/visa-info', 
     name: 'visa-info', 
-    component: () => import('@/views/visa/VisaInfo')
+    component: () => import('@/views/visa/VisaInfo'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/visa-info/non-eu', 
     name: 'non-eu', 
-    component: () => import('@/views/visa/NonEU')
+    component: () => import('@/views/visa/NonEU'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/visa-info/eu', 
     name: 'visa-info-eu', 
-    component: () => import('@/views/visa/EU')
+    component: () => import('@/views/visa/EU'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/visa-info/non-eu/:category', 
     name: 'non-eu-category', 
-    component: () => import('@/views/visa/CategoryPage')
+    component: () => import('@/views/visa/CategoryPage'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/visa-info/eu/settled', 
     name: 'eu-settled', 
-    component: () => import('@/views/visa/Settled')
+    component: () => import('@/views/visa/Settled'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/visa-info/eu/pre-settled', 
     name: 'eu-pre-settled', 
-    component: () => import('@/views/visa/PreSettled')
+    component: () => import('@/views/visa/PreSettled'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/visa-info/:slug', 
     name: 'visa-page', 
     component: () => import('@/views/visa/VisaPage'),
+    meta: { onlyVerifiedUser: true },
     children: [
       {
         path: ':section',
@@ -146,31 +153,36 @@ const routes = [
   { 
     path: '/about', 
     name: 'about', 
-    component: () => import('@/views/About')
+    component: () => import('@/views/About'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/about/help-centre', 
     name: 'help-centre', 
-    component: () => import('@/views/helpCentre/HelpCentre')
+    component: () => import('@/views/helpCentre/HelpCentre'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/about/help-centre/:slug', 
     name: 'help-centre-page', 
-    component: () => import('@/views/helpCentre/HelpCentrePage')
+    component: () => import('@/views/helpCentre/HelpCentrePage'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/about/privacy', 
     name: 'privacy', 
-    component: () => import('@/views/Privacy')
+    component: () => import('@/views/Privacy'),
+    meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/about/terms-and-conditions', 
     name: 'terms', 
-    component: () => import('@/views/Terms')
+    component: () => import('@/views/Terms'),
+    meta: { onlyVerifiedUser: true }
   },
   { path: '/page-not-found',
     name: 'not-found',
-    component: () => import('@/views/NotFound')
+    component: () => import('@/views/NotFound'),
   },  
   { 
     path: '*', 
