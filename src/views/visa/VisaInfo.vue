@@ -1,29 +1,30 @@
 <template>
-  <main class="content">
+  <main class="content page padding top bottom">
     <section class="buttons">
       <h1>Visa Info</h1>
-      <h2>Looking for useful visa info to come to the UK?</h2>
-      <p>Let’s start by choosing a background that interests you the most :</p>
-
+      <h2 class="margin-s top bottom">Looking for useful visa info to come to the UK?</h2>
+      
       <div class="container">
+        <p class="margin-m bottom">Let’s start by choosing a background that interests you the most :</p>
+
         <router-link 
           :to="{name: 'non-eu'}"
           tag="button"
-          class="pink"
-          :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
+          class="primary margin-s bottom">
           Non - EU
         </router-link>
         <router-link 
           :to="{name: 'visa-info-eu'}"
           tag="button"
-          class="pink"
-          :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
+          class="secondary">
           EU
         </router-link>
       </div>
     </section>
 
-    <section>
+    <section class="help">
+      <img src="@/assets/illustrations/visaPages/Laptop Person.svg" alt="">
+
       <help-centre-card />
     </section>
   </main>
@@ -32,16 +33,35 @@
 <script>
 import helpCentreCard from '@/components/cards/HelpCentre'
 
-import waveH from '@/assets/patterns/wave-horizontal.svg'
-import waveV from '@/assets/patterns/wave-verticle.svg'
-
 export default {
-  components: { helpCentreCard },
-  data() {
-    return {
-      waveH,
-      waveV
-    }
-  }
+  components: { helpCentreCard }
 }
 </script>
+
+<style lang="scss" scoped>
+.container {
+  width: 85%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    min-width: 115px;
+  }
+}
+
+.help {
+  margin-top: 8em;
+  position: relative;
+  overflow: visible;
+
+  img {
+    width: 80px;
+    position: absolute;
+    transform: scaleX(-1);
+    top: -110px;
+    right: 20px;
+  }
+}
+</style>

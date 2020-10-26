@@ -71,6 +71,10 @@ button {
     text-decoration: underline;
   }
 
+  &.yellow {
+    background: $dark-yellow;
+  }
+
   &.back {
     background: none;
     padding: 0;
