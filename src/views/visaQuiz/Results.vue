@@ -1,106 +1,116 @@
 <template>
-  <main v-if="topResult && favoriteVisa" id="results" class="content">
-    <h1>Completed!</h1>
+  <div class="tools-pages">
+    <main v-if="topResult && favoriteVisa" id="results" class="page padding top">
+      <back-button
+        @go-back="$router.push({ name: 'profile', params: { username: this.user.profile.username } })"
+        text="Profile" />
 
-    <section class="top">
-      <h2>Your best option is...</h2>
+      <div class="background">
+        <div class="title margin-m top">
+          <h1 class="content">Completed!</h1>
+        </div>
 
-      <div class="sub-title">
-        <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
-        <p>Switch to</p>
-      </div>
-      
-      <visa-card
-        :visa="topResult"
-        :favouriteVisa="favoriteVisa.name"
-        class="top-card">
-      </visa-card>
+        <section class="content margin-m top">
+          <h2>Your best option is...</h2>
 
-      <p>Switching is the most cost effective and a more direct way to remain in the UK.</p>
-    </section>
-
-    <section>
-      <h2>Alternative optiosn are...</h2>
-
-      <div v-if="switchVisas.length" class="switch">
-        <div v-for="visa in switchVisas" :key="visa.name">
-          <div class="sub-title">
+          <div class="sub-title margin-m top">
             <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
             <p>Switch to</p>
           </div>
+          
+          <div class="margin-m top">
+            <visa-card
+              :visa="topResult"
+              :favouriteVisa="favoriteVisa.name">
+            </visa-card>
 
-          <small-card 
-            :visa="visa"
-            :name="`${visa.name}`"
-            class="card" />
-        </div>
-      </div>
+            <p class="margin-s top"><b>Switching</b> is the most cost effective and a more direct way to remain in the UK.</p>
+          </div>
+        </section>
 
-      <div v-if="otherVisas.length || youthMobility.length" class="other">
-        <div v-for="visa in otherVisas" :key="visa.name">
-          <div class="sub-title">
-            <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
-            <p>Apply to</p>
+        <section class="content margin-l top">
+          <h2>Alternative options are...</h2>
+
+          <div v-if="switchVisas.length" class="switch">
+            <div class="sub-title margin-m top">
+              <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
+              <p>Switch to</p>
+            </div>
+
+            <small-card
+              v-for="visa in switchVisas"
+              :key="visa.name"
+              :visa="visa"
+              :name="`${visa.name}`" />
           </div>
 
-          <small-card 
-            :visa="visa"
-            :name="visa.name"
-            class="card" />
-        </div>
+          <div v-if="otherVisas.length || youthMobility.length" class="other">
+            <div class="sub-title margin-m top">
+              <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
+              <p>Apply to</p>
+            </div>
 
-        <div v-if="youthMobility.length">
-          <div class="sub-title">
-            <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
-            <p>Apply to</p>
+            <small-card
+              v-for="visa in otherVisas"
+              :key="visa.name"
+              :visa="visa"
+              :name="visa.name" />
+
+            <div v-if="youthMobility.length">
+              <div class="sub-title margin-m top">
+                <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
+                <p>Apply to</p>
+              </div>
+
+              <small-card 
+                :visa="youthMobility[0]"
+                :name="`${youthMobility[0].name}`" />
+            </div>
           </div>
 
-          <small-card 
-            :visa="youthMobility[0]"
-            :name="`${youthMobility[0].name}`"
-            class="card" />
-        </div>
+          <div v-if="currentVisaObj && currentVisaObj.cardChecklist[3].state === 'true'" class="extend">
+            <div class="sub-title margin-m top">
+              <img src="@/assets/icons/results/extend.svg" alt="" class="icon">
+              <p>Extend</p>
+            </div>
+
+            <small-card 
+              :visa="currentVisaObj"
+              :name="currentVisaObj.name" />
+          </div>
+        </section>
+
+        <section class="content">
+          <div>
+            <p>Take your time to view all the options. Don’t worry about losing your results, they are all saved to your profile page!</p>
+
+            <p>Want to try again? Go for it! Just remember, taking the quiz again will clear your current options above.</p>
+
+            <router-link
+              :to="{ name: 'visa-quiz', params: { username: this.user.username } }">
+              Take again
+            </router-link>
+          </div>
+        </section>
       </div>
-
-      <div v-if="currentVisaObj && currentVisaObj.cardChecklist[3].state === 'true'" class="extend">
-        <div class="sub-title">
-          <img src="@/assets/icons/results/extend.svg" alt="" class="icon">
-          <p>Extend</p>
-        </div>
-
-        <small-card 
-          :visa="currentVisaObj"
-          :name="`${currentVisaObj.name} (Extend)`"
-          class="card" />
-      </div>
-    </section>
-
-    <section>
-      <div>
-        <p>Take your time to view all the options. Don’t worry about losing your results, they are all saved to your profile page!</p>
-
-        <p>Want to try again? Go for it! Just remember, taking the quiz again will clear your current options above.</p>
-
-        <router-link
-          :to="{ name: 'visa-quiz', params: { username: this.user.username } }">
-          Take again
-        </router-link>
-      </div>
-    </section>
-  </main>
+    </main>
+  </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-import visaCard from '@/components/visa/VisaCard';
-import smallCard from '@/components/visa/SmallCard';
-import lightbulb from '@/assets/icons/lightbulbs/tip.svg';
-import dots from '@/assets/patterns/dots.svg';
+import { mapState } from 'vuex'
+import visaCard from '@/components/visa/VisaCard'
+import smallCard from '@/components/visa/SmallCard'
+import lightbulb from '@/assets/icons/lightbulbs/tip.svg'
+import dots from '@/assets/patterns/dots.svg'
+
+import backButton from '@/components/BackButton'
 
 export default {
   components: {
     visaCard,
-    smallCard
+    smallCard,
+    backButton
   },
   data() {
     return {
@@ -186,250 +196,23 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .title {
-  text-align: center;
-
-  h1 {
-    margin-bottom: $spacing*2;
-  }
-}
-
-img {
-  &.hero {
-    display: block;
-    width: 60%;
-    margin: $spacing*7 auto;
-  }
-}
-
-strong {
-  font-weight: 600;
+  text-align: right;
 }
 
 .sub-title {
   position: relative;
+  overflow: visible;
 
   img {
-    width: 70px;
+    width: 60px;
     position: absolute;
     top: -15px;
     left: -5px;
   }
 
   p {
-    margin-left: 70px;
-    font-weight: 600;
-  }
-}
-
-
-.results {
-  max-width: 600px;
-  margin: auto;
-
-  .top {
-    margin-bottom: $spacing*8;
-  }
-
-  .top-card {
-    margin: $spacing*4 0;
-  }
-}
-
-.switch {
-  margin-bottom: $spacing*8;
-}
-
-.other {
-  .sub-title {
-    margin-bottom: $spacing*4;
-  }
-}
-
-.tip {
-  padding: $spacing*2;
-  background: $primary-yellow;
-  position: relative;
-  border-radius: 4px;
-  margin-bottom: $spacing*4;
-
-  p {
-    position: relative;
-    z-index: 2;
-  }
-
-  img {
-    width: 30px;
-    position: absolute;
-    z-index: 0;
-
-    &:nth-of-type(1) {
-      top: 8px;
-      left: 8px;
-    }
-
-    &:nth-of-type(2) {
-      top: 8px;
-      right: 8px;
-    }
-
-    &:nth-of-type(3) {
-      bottom: 8px;
-      left: 8px;
-    }
-
-    &:nth-of-type(4) {
-      bottom: 8px;
-      right: 8px;
-    }
-  }
-}
-
-.extend {
-  margin-top: $spacing*8;
-
-  p {
-    margin-bottom: $spacing*4;
-  }
-}
-
-.bottom {
-  background: $background;
-  padding: $spacing*6 0 $spacing*10 0;
-  margin-top: $spacing*6;
-
-  .button {
-    text-align: center;
-    margin-top: $spacing*3;
-  }
-}
-
-.retake-quiz {
-  background: $light-grey;
-  padding: $spacing*2;
-  border-radius: 4px;
-  margin-top: $spacing*6;
-
-  .button {
-    margin-top: $spacing*3;
-  }
-}
-
-// Tablet
-@media screen and (min-width: 600px) {
-  #results {
-    padding: $spacing*15 0 0;
-  }
-
-  .content {
-    width: 85%;
-  }
-
-  .page-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto $spacing*10 auto;
-
-    .title {
-      text-align: left;
-    }
-
-    img {
-      width: 38%;
-      max-width: 200px;
-      margin: 0 0 0 15%;
-    }
-  }
-
-  .results {
-    .top {
-      margin-bottom: $spacing*10;
-    }
-
-    .top-card {
-      margin: $spacing*6 0;
-    }
-  }
-
-  .small-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    .card {
-      width: 48%;
-    }
-  }
-
-  .switch {
-    .card-title {
-      margin-bottom: $spacing*2;
-    }
-    margin-bottom: $spacing*10;
-  }
-
-  .other {
-    .sub-title {
-      margin-bottom: $spacing*6;
-    }
-  }
-
-  .tip {
-    margin-bottom: 0;
-    padding: $spacing*3 $spacing*2;
-  }
-
-  .extend {
-    margin-top: $spacing*10;
-
-    p {
-      margin-bottom: $spacing*2;
-    }
-  }
-
-  .bottom {
-    padding: $spacing*8 0 $spacing*15 0;
-    margin-top: $spacing*8;
-
-    .content {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    .col {
-      width: 48%;
-
-      .margin {
-        margin-bottom: $spacing*2;
-      }
-    }
-  }
-
-  .retake-quiz {
-    background: $light-grey;
-    padding: $spacing*2;
-    border-radius: 4px;
-    margin-top: 0;
-
-    .button {
-      margin-top: $spacing*3;
-    }
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  .page-header {
-    h3 {
-      transform: translateX(8%);
-    }
-  }
-
-  .results {
-
-    .top-card {
-      margin: $spacing*6 auto;
-    }
+    margin-left: 55px;
+    font-weight: 400;
   }
 }
 </style>
