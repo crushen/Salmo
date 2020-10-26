@@ -18,7 +18,7 @@
             <p>Switch to</p>
           </div>
           
-          <div class="margin-m top">
+          <div class="margin-s top">
             <visa-card
               :visa="topResult"
               :favouriteVisa="favoriteVisa.name">
