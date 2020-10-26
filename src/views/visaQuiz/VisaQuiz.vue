@@ -56,6 +56,7 @@ export default {
     return {
       showAlert: false,
       to: null,
+      finished: false,
       user: this.$store.state.auth.user,
       questions: [],
       answers: [],
@@ -148,6 +149,7 @@ export default {
       this.currentQuestion = lastQuestion
     },
     finishQuestionnaire(answer) {
+      this.finished = true
       this.progress = 100
 
       // Check if answer is array
@@ -160,7 +162,6 @@ export default {
       this.$store.dispatch('questions/getResults', this.result)
       this.$store.dispatch('questions/sendDbResults')
 
-      this.introStage = false
       this.showResults()
     },
     showResults() { 
@@ -168,12 +169,12 @@ export default {
         this.questionsStage = false
         this.$router.push({ name: 'results', params: { username: this.user.profile.username } })
       }, 2000)
-    },
-    changeBtnFocus(buttons, focus) {
-      buttons.forEach(btn => {
-        btn.setAttribute('tabindex', focus)
-      })
     }
+    // changeBtnFocus(buttons, focus) {
+    //   buttons.forEach(btn => {
+    //     btn.setAttribute('tabindex', focus)
+    //   })
+    // }
   },
   mounted() {
     this.startQuestionnaire()
@@ -182,10 +183,14 @@ export default {
     if (this.to) {
       next()
     } else {
-      this.to = to
-      this.showAlert = true
-      // const ariaBtns = document.querySelectorAll('.aria-btn')
-      // this.changeBtnFocus(ariaBtns, '-1')
+      if(this.finished) {
+        next()
+      } else {
+        this.to = to
+        this.showAlert = true
+        // const ariaBtns = document.querySelectorAll('.aria-btn')
+        // this.changeBtnFocus(ariaBtns, '-1')
+      }
     }
   }
 }
