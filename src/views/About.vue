@@ -15,7 +15,8 @@
     </section>
 
     <section class="content margin-l top">
-      <help-centre-card />
+      <help-centre-card
+        text="For more general advice or help on the UK application process, take a look through our Help Centre:" />
     </section>
   </main>
 </template>

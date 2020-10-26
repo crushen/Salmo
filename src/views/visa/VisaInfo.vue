@@ -25,7 +25,8 @@
     <section class="help">
       <img src="@/assets/illustrations/visaPages/Laptop Person.svg" alt="">
 
-      <help-centre-card />
+      <help-centre-card
+        text="For more advice or resource on the application process to come to the UK, you can take a look at here:" />
     </section>
   </main>
 </template>

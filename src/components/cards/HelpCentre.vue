@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <p>For more advice or resource on the application process to come to the UK, you can take a look at here:</p>
+    <p>{{ text }}</p>
 
     <div class="button-center margin-s top">
       <router-link 
@@ -12,6 +12,14 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    text: { type: String, required: true }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
