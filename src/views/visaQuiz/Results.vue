@@ -1,6 +1,6 @@
 <template>
   <div class="tools-pages">
-    <main v-if="topResult && favoriteVisa" id="results" class="page padding top">
+    <main v-if="topResult" id="results" class="page padding top">
       <back-button
         @go-back="$router.push({ name: 'profile', params: { username: user.username } })"
         text="Profile" />
@@ -19,10 +19,7 @@
           </div>
           
           <div class="margin-s top">
-            <visa-card
-              :visa="topResult"
-              :favouriteVisa="favoriteVisa.name">
-            </visa-card>
+            <visa-card :visa="topResult" /> <!-- :favouriteVisa="favoriteVisa.name" -->
 
             <p class="margin-s top"><b>Switching</b> is the most cost effective and a more direct way to remain in the UK.</p>
           </div>
@@ -107,9 +104,6 @@
 import { mapState } from 'vuex'
 import visaCard from '@/components/visa/VisaCard'
 import smallCard from '@/components/visa/SmallCard'
-import lightbulb from '@/assets/icons/lightbulbs/tip.svg'
-import dots from '@/assets/patterns/dots.svg'
-
 import backButton from '@/components/BackButton'
 
 export default {
@@ -120,8 +114,6 @@ export default {
   },
   data() {
     return {
-      lightbulb,
-      dots,
       user: this.$store.state.auth.user.profile,
       userAge: this.$store.state.auth.user.profile.age,
       userCountry: this.$store.state.auth.user.profile.nationality,
@@ -135,34 +127,39 @@ export default {
   computed: {
     ...mapState('visas', ['visaList', 'favoriteVisa', 'topResult']),
     mostRecentResult() {
-      return this.results.slice(-1)[0]; 
+      return this.results.slice(-1)[0]
     },
     switchVisas() {
       // Filter visa list for user's switch options
-      const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name));
+      const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name))
+      
       // Get all visas in same category
-      const sameCategory = switchOptions.filter(item => item.category === this.topResult.category);
+      const sameCategory = switchOptions.filter(item => item.category === this.topResult.category)
+      
       // Remove top result visa
-      return sameCategory.filter(item => item.name !== this.topResult.name);
+      return sameCategory.filter(item => item.name !== this.topResult.name)
     },
     otherVisas() {
       // Filter visa list for visas in same category as top result
-      const sameCategory = this.visaList.filter(item => item.category === this.topResult.category);
+      const sameCategory = this.visaList.filter(item => item.category === this.topResult.category)
+      
       // Remove top result visa
-      const removeDup = sameCategory.filter(item => item.name !== this.topResult.name);
+      const removeDup = sameCategory.filter(item => item.name !== this.topResult.name)
+      
       // Remove youth mobility
       const removeYM = removeDup.filter(item => item.name !== 'Tier 5 Youth Mobility Scheme')
+      
       // Remove visa(s) that appear in switch visas
-      return removeYM.filter(item => !this.switchVisas.includes(item));
+      return removeYM.filter(item => !this.switchVisas.includes(item))
     },
     currentVisaObj() {
-      return this.visaList.find(item => item.name === this.currentVisa.name);
+      return this.visaList.find(item => item.name === this.currentVisa.name)
     }
   },
   methods: {
-    getFavoriteVisa() {
-      this.$store.dispatch('visas/getFaveVisa', this.mostRecentResult.recommendedVisa[0])
-    },
+    // getFavoriteVisa() {
+    //   this.$store.dispatch('visas/getFaveVisa', this.mostRecentResult.recommendedVisa[0])
+    // },
     getTopResult() {
       this.$store.dispatch('visas/getTopResult', this.mostRecentResult.recommendedVisa[0])
     },
@@ -176,23 +173,24 @@ export default {
       }
     },
     checkYouthMobility() {
-      const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)'];
+      const YMcountries = ['Australia', 'Canada', 'Japan', 'Monaco', 'New Zealand', 'Hong Kong', 'Hong Kong (British national overseas)', 'South Korea', 'Taiwan', 'British overseas citizen', 'British overseas territories citizen', 'British national (overseas)']
+      
       YMcountries.forEach(country => {
         if(this.userCountry === country &&
         this.userAge >= 18 && 
         this.userAge <= 30 &&
         this.dependants === 'None') {
-          this.youthMobility = this.visaList.filter(item => item.name === 'Tier 5 Youth Mobility Scheme');
+          this.youthMobility = this.visaList.filter(item => item.name === 'Tier 5 Youth Mobility Scheme')
         }
-      });
+      })
     }
   },
   created() {
     this.$store.dispatch('visas/getAllVisas').then(() => {
-      this.getFavoriteVisa();
-      this.getTopResult();
-      this.checkSwitch();
-      this.checkYouthMobility();
+      //this.getFavoriteVisa()
+      this.getTopResult()
+      this.checkSwitch()
+      this.checkYouthMobility()
     })
   }
 }

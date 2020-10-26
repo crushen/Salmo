@@ -1,6 +1,10 @@
 <template>
   <div class="tools-pages">
     <main class="tools-pages page padding top">
+      <back-button
+        @go-back="$router.push({ name: 'profile', params: { username: user.profile.username } })"
+        text="Profile" />
+
       <div class="background">
         <div class="content">
           <h1 class="margin-s top">Visa Planner</h1>
@@ -19,9 +23,10 @@
 <script>
 import docChecklist from '@/components/profile/DocumentChecklist'
 import timeline from '@/components/profile/ApplicationTimeline'
+import backButton from '@/components/BackButton'
 
 export default {
-  components: { docChecklist, timeline },
+  components: { docChecklist, timeline, backButton },
   data() {
     return {
       user: this.$store.state.auth.user

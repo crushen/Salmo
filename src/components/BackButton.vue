@@ -24,7 +24,7 @@ export default {
   width: auto;
   position: absolute;
   top: 28px;
-  left: 6vw;
+  left: 5vw;
   z-index: 5;
   border-radius: 0;
   display: flex;
