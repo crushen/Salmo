@@ -1,6 +1,10 @@
 <template>
   <div class="tools-pages">
     <main class="page padding top">
+      <back-button
+        @go-back="goBack"
+        :text="backText" />
+
       <div class="background">
         <section class="content margin-m top bottom">
           <h1>Visa Quiz</h1>
@@ -46,11 +50,13 @@
 import { mapState } from 'vuex'
 import question from '@/components/visaQuiz/Question'
 import alert from '@/components/alerts/Quiz'
+import backButton from '@/components/BackButton'
 
 export default {
   components: {
     question,
-    alert
+    alert,
+    backButton
   },
   data() {
     return {
@@ -100,6 +106,13 @@ export default {
     ...mapState('visas', ['documentChecklist']),
     newVisa() {
       return this.documentChecklist.find(item => item.name === this.visa.name)
+    },
+    backText() {
+      if(this.currentQuestion === 0) {
+        return 'Profile'
+      } else {
+        return 'Back'
+      }
     }
   },
   methods: {
@@ -169,6 +182,13 @@ export default {
         this.questionsStage = false
         this.$router.push({ name: 'results', params: { username: this.user.profile.username } })
       }, 2000)
+    },
+    goBack() {
+      if(this.currentQuestion === 0) {
+        this.$router.push({ name: 'profile', params: { username: this.user.profile.username } })
+      } else {
+        this.previousQuestion()
+      }
     }
     // changeBtnFocus(buttons, focus) {
     //   buttons.forEach(btn => {
