@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h3 class="content">Check this timeline for all the important Brexit dates.</h3>
+    <h2 class="content">The Brexit Timeline</h2>
 
     <div 
       @mousedown="startDrag" 
@@ -157,18 +157,23 @@ export default {
 }
 
 .container {
-  background: $background;
-  margin-top: $spacing*8;
-  padding-top: $spacing*8;
+  background: $yellow;
+  padding-top: 2em;
+  border-radius: $radius;
 }
 
 .horizontal-scroll-container {
   overflow-x: scroll;
   overflow-y: hidden;
-  height: 300px;
+  scrollbar-width: none;
+  height: 250px;
   padding: 0 7.5%;
-  margin-top: $spacing*8;
+  margin-top: 2em;
   position: relative;
+}
+
+.horizontal-scroll-container::-webkit-scrollbar {
+  display: none;
 }
 
 ul {

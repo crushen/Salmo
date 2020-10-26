@@ -1,55 +1,58 @@
 <template>
-  <main id="eu">
-    <h1>Visa Info</h1>
-    <h2>Help with Brexit</h2>
+  <main id="eu" class="page padding top bottom">
+    <div class="content">
+      <h1>Visa Info</h1>
+      <h2 class="margin-s top bottom">Help with Brexit</h2>
+    </div>
 
-    <p>We know why you’re here! Brexit has everyone worried, but here you have all the information to make your next step fully informed.</p>
+    <section class="content buttons">
+      <p class="margin-m bottom">We know why you’re here! Brexit has everyone worried, but here you have all the information to make your next step fully informed.</p>
 
-    <section class="explore">
-      <div class="buttons">
-        <router-link
-          :to="{ name: 'eu-settled' }"
-          tag="button"
-          class="pink"
-          :style="{backgroundImage: `url(${waveH})`, backgroundSize: '110%', backgroundPosition: 'center'}">
-          Settled
-        </router-link>
+      <router-link
+        :to="{ name: 'eu-settled' }"
+        tag="button"
+        class="primary margin-s bottom">
+        Settled
+      </router-link>
 
-        <router-link
-          :to="{ name: 'eu-pre-settled' }"
-          tag="button"
-          class="pink"
-          :style="{backgroundImage: `url(${waveV})`, backgroundSize: '110%', backgroundPosition: 'center'}">
-          Pre-Settled
-        </router-link>
-      </div>
+      <router-link
+        :to="{ name: 'eu-pre-settled' }"
+        tag="button"
+        class="secondary">
+        Pre-Settled
+      </router-link>
     </section>
 
-    <section>
+    <section class="margin-l top">
       <brexit-timeline />
     </section>
 
-    <section>
+    <section class="content margin-l top">
       <help-centre-card />
     </section>
   </main>
 </template>
 
 <script>
-import waveH from '@/assets/patterns/wave-horizontal.svg'
-import waveV from '@/assets/patterns/wave-verticle.svg'
 
 import brexitTimeline from '@/components/BrexitTimeline'
 import helpCentreCard from '@/components/cards/HelpCentre'
 
 export default {
-  components: { brexitTimeline, helpCentreCard },
-  data() {
-    return { waveH, waveV }
-  }
+  components: { brexitTimeline, helpCentreCard }
 }
 </script>
 
 <style lang="scss" scoped>
+.buttons {
+  width: 85%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
+  button {
+    min-width: 135px;
+  }
+}
 </style>
