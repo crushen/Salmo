@@ -1,14 +1,8 @@
 <template>
-  <div>
-    <transition name="alert" mode="out-in">
-      <alert 
-        v-if="alert"
-        alert="Thank you!"
-        text="Your feedback is appreciated."
-        @confirm="alert = false" />
-    </transition>
+  <div class="card">
+    <h3>Was this article helpful?</h3>
 
-    <div class="faces">
+    <div class="faces margin-m top">
       <div class="button">
         <button 
           @click="yes($event)"
@@ -34,8 +28,6 @@
             <path d="M56.6447 33.9695C56.4564 33.9721 56.2695 33.9369 56.0951 33.866C55.9206 33.7952 55.7622 33.6901 55.629 33.5569C55.4959 33.4238 55.3908 33.2653 55.3199 33.0909C55.249 32.9164 55.2138 32.7295 55.2164 32.5413C55.3348 31.2771 54.9553 30.0166 54.1587 29.0279C53.362 28.0392 52.2111 27.4003 50.9506 27.2472C49.6793 27.4002 48.5192 28.0472 47.721 29.0485C46.9228 30.0498 46.5507 31.325 46.6849 32.5984C46.6849 32.9772 46.5344 33.3405 46.2665 33.6083C45.9987 33.8762 45.6354 34.0267 45.2566 34.0267C44.8778 34.0267 44.5145 33.8762 44.2467 33.6083C43.9788 33.3405 43.8283 32.9772 43.8283 32.5984C43.7559 31.5945 43.8832 30.5863 44.2027 29.6319C44.5222 28.6775 45.0277 27.7959 45.69 27.038C46.3523 26.2801 47.1582 25.661 48.0611 25.2164C48.964 24.7718 49.9461 24.5106 50.9506 24.4478C51.9551 24.5106 52.9372 24.7718 53.8402 25.2164C54.7431 25.661 55.549 26.2801 56.2113 27.038C56.8735 27.7959 57.379 28.6775 57.6986 29.6319C58.0181 30.5863 58.1454 31.5945 58.0729 32.5984C58.0582 32.9672 57.9012 33.316 57.6349 33.5716C57.3687 33.8272 57.0138 33.9698 56.6447 33.9695Z" fill="#393D3F"/>
           </svg>
         </button>
-
-        <p>Yes!</p>
       </div>
 
       <div class="button">
@@ -63,8 +55,6 @@
             <path d="M56.6325 30.6842H44.6077C44.2311 30.6842 43.8698 30.5337 43.6035 30.2658C43.3371 29.998 43.1875 29.6347 43.1875 29.2559C43.1875 28.8771 43.3371 28.5138 43.6035 28.246C43.8698 27.9781 44.2311 27.8276 44.6077 27.8276H56.6325C57.0092 27.8276 57.3704 27.9781 57.6368 28.246C57.9031 28.5138 58.0527 28.8771 58.0527 29.2559C58.0527 29.6347 57.9031 29.998 57.6368 30.2658C57.3704 30.5337 57.0092 30.6842 56.6325 30.6842Z" fill="#393D3F"/>
           </svg>
         </button>
-
-        <p>A little.</p>
       </div>
 
       <div class="button">
@@ -92,20 +82,13 @@
             <path d="M50.3999 34.5028C49.3954 34.4399 48.4133 34.1787 47.5103 33.7341C46.6074 33.2895 45.8015 32.6704 45.1392 31.9125C44.477 31.1546 43.9715 30.273 43.6519 29.3186C43.3324 28.3642 43.2051 27.356 43.2776 26.3521C43.2776 25.9733 43.428 25.61 43.6959 25.3422C43.9637 25.0743 44.327 24.9238 44.7058 24.9238C45.0846 24.9238 45.4479 25.0743 45.7158 25.3422C45.9836 25.61 46.1341 25.9733 46.1341 26.3521C46.0157 27.6163 46.3952 28.8768 47.1918 29.8655C47.9885 30.8542 49.1394 31.493 50.3999 31.6462C51.6603 31.493 52.8112 30.8542 53.6079 29.8655C54.4045 28.8768 54.784 27.6163 54.6656 26.3521C54.6656 25.9733 54.8161 25.61 55.084 25.3422C55.3518 25.0743 55.7151 24.9238 56.0939 24.9238C56.4727 24.9238 56.836 25.0743 57.1038 25.3422C57.3717 25.61 57.5222 25.9733 57.5222 26.3521C57.5946 27.356 57.4673 28.3642 57.1478 29.3186C56.8283 30.273 56.3228 31.1546 55.6605 31.9125C54.9982 32.6704 54.1924 33.2895 53.2894 33.7341C52.3865 34.1787 51.4044 34.4399 50.3999 34.5028Z" fill="#393D3F"/>
           </svg>
         </button>
-
-        <p>No.</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import alert from '@/components/Alert';
-
 export default {
-  components: {
-    alert
-  },
   data() {
     return {
       selected: null,
@@ -115,32 +98,34 @@ export default {
   methods: {
     yes(event) {
       if(!this.selected) {
-        document.querySelector('#yes').beginElement(); 
-        this.selectButton(event);
+        document.querySelector('#yes').beginElement()
+        this.selectButton(event)
       }
     },
     maybe(event) {
       if(!this.selected) {
-        document.querySelector('#maybe').beginElement(); 
-        this.selectButton(event);
+        document.querySelector('#maybe').beginElement()
+        this.selectButton(event)
       }
     },
     no(event) {
       if(!this.selected) {
-        document.querySelector('#no').beginElement();
-        this.selectButton(event);
+        document.querySelector('#no').beginElement()
+        this.selectButton(event)
       }
     },
     selectButton(event) {
-      this.selected = true; 
-      this.alert = true;
-      event.target.parentElement.parentElement.setAttribute('aria-pressed', 'true');
-      const ariaBtns = document.querySelectorAll('.aria-btn');
-      this.changeBtnFocus(ariaBtns, '-1');
+      this.selected = true
+      this.alert = true
+
+      event.target.parentElement.parentElement.setAttribute('aria-pressed', 'true')
+
+      const ariaBtns = document.querySelectorAll('.aria-btn')
+      this.changeBtnFocus(ariaBtns, '-1')
     },
     changeBtnFocus(buttons, focus) {
       buttons.forEach(btn => {
-        btn.setAttribute('tabindex', focus);
+        btn.setAttribute('tabindex', focus)
       })
     }
   }
@@ -150,11 +135,20 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+h3 {
+  font-weight: 500;
+}
+
+.card {
+  background: $med-grey;
+  border-radius: $radius;
+  padding: 1em;
+}
+
 .faces {
-  margin-top: $spacing*6;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 button {
@@ -162,7 +156,6 @@ button {
   border: none;
   padding: 0;
   box-shadow: none;
-  margin-bottom: $spacing;
 
   .background {
     fill: #C4C4C4;

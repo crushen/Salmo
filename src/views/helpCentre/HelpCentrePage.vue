@@ -1,36 +1,23 @@
 <template>
-  <section id="help-center-page" v-if="article">
+  <main id="help-center-page" v-if="article" class="page padding top bottom">
     <article class="content">
       <h1>{{ article.title }}</h1>
 
       <div v-html="article.content.html" class="body" />
     </article> 
 
-    <section class="bottom">
-      <div class="content">
-        <h3>Was this article helpful?</h3>
-
-        <help-centre-feedback />
-
-        <router-link 
-          :to="{name: 'help-centre'}"
-          tag="button"
-          class="secondary aria-btn">
-          Back To Help Centre
-        </router-link>
-      </div>
+    <section class="content">
+      <help-centre-feedback />
     </section>  
-  </section>
+  </main>
 </template>
 
 <script>
-import helpCentreFeedback from '@/components/HelpCentreFeedback';
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
+import helpCentreFeedback from '@/components/cards/HelpCentreFeedback'
 
 export default {
-  components: {
-    helpCentreFeedback
-  },
+  components: { helpCentreFeedback },
   data() {
     return {
       slug: this.$route.params.slug,
@@ -40,29 +27,29 @@ export default {
     ...mapState('helpCentre', ['article'])
   },
   watch: {
-    $route: 'fetchArticle',
+    $route: 'fetchArticle'
   },
   methods: {
     fetchArticle() {
       this.$store.dispatch('helpCentre/getArticle', this.slug)
       .then(() => {
         if(!this.article) {
-          this.$router.push({name: 'not-found'});
+          this.$router.push({name: 'not-found'})
         } else {
-          this.makeAriaBtns();
+          this.makeAriaBtns()
         }
       })
     },
     makeAriaBtns() {
-      const links = document.querySelectorAll('a');
+      const links = document.querySelectorAll('a')
 
       links.forEach(link => {
-        link.classList.add('aria-btn');
+        link.classList.add('aria-btn')
       })
     }
   },
   created() {
-    this.fetchArticle();
+    this.fetchArticle()
   }
 }
 </script>
@@ -70,24 +57,20 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-#help-center-page {
-  padding: $spacing*12 0 0;
-}
-
 .body {
   /deep/ h3 {
-    margin-top: $spacing*4;
+    margin-top: 2em;
   }
 
   /deep/ .red {
     h3 {
-      color: $primary-pink;
-      margin-top: $spacing*6;
+      color: $red;
+      margin-top: 3em;
     }
   }
 
   /deep/ p {
-    margin-top: $spacing*2;
+    margin-top: 1em;
   }
 
   /deep/ a {
@@ -100,7 +83,7 @@ export default {
 
   /deep/ .centre {
     text-align: center;
-    margin: $spacing*6;
+    margin: 3em;
 
     img {
       width: 80%;
@@ -110,11 +93,11 @@ export default {
 
   /deep/ ul {
     list-style-position: inside;
-    margin: $spacing auto $spacing*5 auto;
+    margin: 0.5em auto 2.5em auto;
     max-width: 500px;
 
     li {
-      margin-top: $spacing*2;
+      margin-top: 1em;
 
       div {
         display: inline;
@@ -123,10 +106,7 @@ export default {
   }
 
   /deep/ .tip {
-    padding: $spacing*2;
-    margin: $spacing*6 0;
-    border-left: 6px solid $primary-yellow;
-    background: lighten($color: $primary-yellow, $amount: 23%);
+    margin: 3em 0;
 
     p {
       margin-top: 0;
@@ -139,7 +119,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: $spacing*6 auto;
+    margin: 3em auto;
     max-width: 500px;
 
     p {
@@ -157,7 +137,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: $spacing*2;
+    margin-top: 1em;
 
     p {
       width: 90%;
@@ -166,7 +146,7 @@ export default {
   }
 
   /deep/ table {
-    margin-bottom: $spacing*6;
+    margin-bottom: 3em;
 
     tr {
       td {
@@ -174,7 +154,7 @@ export default {
         text-align: center;
 
         p {
-          margin: $spacing auto auto;
+          margin: 0.5em auto auto;
           width: 90%;
           max-width: 180px;
         }
@@ -182,89 +162,72 @@ export default {
         img {
           width: 60%;
           max-width: 100px;
-          margin: $spacing*3 auto 0 auto;
+          margin: 1.5em auto 0 auto;
         }
       }
     }
   }
 }
 
-.bottom {
-  background: $background;
-  margin-top: $spacing*8;
-  padding: $spacing*8 0 $spacing*12 0;
-  text-align: center;
+// @media screen and (min-width: 600px) {
+//   .body {
+//     /deep/ h3 {
+//       margin-top: $spacing*6;
+//     }
 
-  button {
-    margin-top: $spacing*6;
-  }
-}
+//     /deep/ .red {
+//       h3 {
+//         margin-top: $spacing*8;
+//       }
+//     }
 
-// Tablet
-@media screen and (min-width: 600px) {
-  #help-center-page {
-    padding: $spacing*15 0 0;
-  }
+//     /deep/ p {
+//       margin-top: $spacing*4;
+//     }
 
-  .body {
-    /deep/ h3 {
-      margin-top: $spacing*6;
-    }
+//     /deep/ .centre {
+//       text-align: center;
+//       margin: $spacing*8;
+//     }
 
-    /deep/ .red {
-      h3 {
-        margin-top: $spacing*8;
-      }
-    }
+//     /deep/ ul {
+//       margin: $spacing*2 auto $spacing*8 auto;
+//     }
 
-    /deep/ p {
-      margin-top: $spacing*4;
-    }
+//     /deep/ .tip {
+//       margin: $spacing*8 0;
+//     }
+//   }
 
-    /deep/ .centre {
-      text-align: center;
-      margin: $spacing*8;
-    }
+//   /deep/ .text-img-left {
+//     margin-top: $spacing*4;
+//   }
 
-    /deep/ ul {
-      margin: $spacing*2 auto $spacing*8 auto;
-    }
+//   .bottom {
+//     margin-top: $spacing*10;
+//     padding: $spacing*10 0 $spacing*15 0;
+//     text-align: center;
 
-    /deep/ .tip {
-      margin: $spacing*8 0;
-    }
-  }
+//     button {
+//       margin-top: $spacing*6;
+//     }
+//   }
+// }
 
-  /deep/ .text-img-left {
-    margin-top: $spacing*4;
-  }
+// @media screen and (min-width: 1100px) {
+//   .body {
+//     max-width: 600px;
+//     margin: $spacing*10 auto 0 auto;
+//   }
 
-  .bottom {
-    margin-top: $spacing*10;
-    padding: $spacing*10 0 $spacing*15 0;
-    text-align: center;
+//   .bottom {
+//     margin-top: $spacing*15;
+//     padding: $spacing*15 0 $spacing*15 0;
+//     text-align: center;
 
-    button {
-      margin-top: $spacing*6;
-    }
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  .body {
-    max-width: 600px;
-    margin: $spacing*10 auto 0 auto;
-  }
-
-  .bottom {
-    margin-top: $spacing*15;
-    padding: $spacing*15 0 $spacing*15 0;
-    text-align: center;
-
-    button {
-      margin-top: $spacing*6;
-    }
-  }
-}
+//     button {
+//       margin-top: $spacing*6;
+//     }
+//   }
+// }
 </style>
