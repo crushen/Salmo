@@ -1,9 +1,15 @@
 <template>
-  <main class="content">
-    <h1>Visa Info</h1>
-    <h2>What is your main reason to stay in the UK?</h2>
+  <main id="non-eu" class="page padding top bottom">
+    <back-button
+      @go-back="$router.go(-1)"
+      text="Back" />
 
-    <section class="buttons">
+    <div class="content margin-s top">
+      <h1>Visa Info</h1>
+      <h2 class="margin-s top bottom">What is your main reason to stay in the UK?</h2>
+    </div>
+
+    <section class="buttons content">
       <router-link
         v-for="page in categories"
         :key="page.text"
@@ -15,7 +21,7 @@
       </router-link>
     </section>
 
-    <section>
+    <section class="content margin-l top">
       <help-centre-card />
     </section>
   </main>
@@ -23,19 +29,20 @@
 
 <script>
 import helpCentreCard from '@/components/cards/HelpCentre'
+import backButton from '@/components/BackButton'
 
-import study from '@/assets/icons/visa-buttons/study.svg';
-import work from '@/assets/icons/visa-buttons/work.svg';
-import business from '@/assets/icons/visa-buttons/business.svg';
-import family from '@/assets/icons/visa-buttons/family.svg';
+import study from '@/assets/icons/visa-buttons/study.svg'
+import work from '@/assets/icons/visa-buttons/work.svg'
+import business from '@/assets/icons/visa-buttons/business.svg'
+import family from '@/assets/icons/visa-buttons/family.svg'
 
-import wave from '@/assets/patterns/wave-2.svg';
-import line from '@/assets/patterns/line.svg';
-import dashed from '@/assets/patterns/dashed-line.svg';
-import confetti from '@/assets/patterns/confetti.svg';
+import wave from '@/assets/patterns/wave-2.svg'
+import line from '@/assets/patterns/line.svg'
+import dashed from '@/assets/patterns/dashed-line.svg'
+import confetti from '@/assets/patterns/confetti.svg'
 
 export default {
-  components: { helpCentreCard },
+  components: { helpCentreCard, backButton },
   data() {
     return {
       visas: this.$store.state.visas.visaList,
@@ -60,7 +67,7 @@ export default {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: $spacing*4 auto auto;
+  margin: auto;
 
   button {
     width: 120px;
