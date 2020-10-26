@@ -40,8 +40,6 @@
 </template>
 
 <script>
-
-
 export default {
   data() {
     return {
@@ -115,29 +113,32 @@ export default {
   },
   methods: {
     startDrag(event) {
-      const slider = document.querySelector('.horizontal-scroll-container');
-      this.dragging = true;
-      this.startX = event.pageX - slider.offsetLeft;
-      this.scrollLeft = slider.scrollLeft;
+      const slider = document.querySelector('.horizontal-scroll-container')
+
+      this.dragging = true
+      this.startX = event.pageX - slider.offsetLeft
+      this.scrollLeft = slider.scrollLeft
     },
     doDrag(event) {
-      const slider = document.querySelector('.horizontal-scroll-container');
+      const slider = document.querySelector('.horizontal-scroll-container')
+      
       if(this.dragging) {
-        event.preventDefault();
-        const x = event.pageX - slider.offsetLeft;
-        const slide = (x - this.startX) * 2; //scroll-fast
-        slider.scrollLeft = this.scrollLeft - slide;
+        event.preventDefault()
+      
+        const x = event.pageX - slider.offsetLeft
+        const slide = (x - this.startX) * 2 //scroll-fast
+        slider.scrollLeft = this.scrollLeft - slide
       }
     },
     selectItem(index) {
-      this.selected = index;
+      this.selected = index
     }
   },
   mounted() {
     window.addEventListener('mouseup', () => {
-      this.dragging = false;
-      this.startX = null;
-      this.scrollLeft = null;
+      this.dragging = false
+      this.startX = null
+      this.scrollLeft = null
     });
   }
 }
@@ -185,7 +186,7 @@ ul {
 .line {
   width: 1800px;
   height: 12px;
-  background: $secondary-light-blue;
+  background: $light-blue;
   position: absolute;
   top: 20px;
   left: 7.5%;
@@ -196,15 +197,16 @@ ul {
   list-style: none;
   width: 120px;
   height: 100px;
-  background: $secondary-blue;
-  border-radius: $border-radius;
-  padding: $spacing*2 $spacing;
+  background: $med-blue;
+  border-radius: $radius;
+  padding: 1em 0.5em;
   margin-right: 40px;
   position: relative;
   z-index: 10;
   transition: 0.4s;
   cursor: pointer;
   outline: none;
+  overflow: hidden;
 
   p {
     color: white;
@@ -213,26 +215,26 @@ ul {
 
     &.date {
       font-weight: 700;
-      margin-bottom: $spacing;
+      margin-bottom: 0.5em;
     }
 
     &.text {
-      margin-top: $spacing;
+      margin-top: 0.5em;
     }
   }
 
   &.selected {
-    background: $primary-blue;
+    background: $blue;
     width: 180px;
     height: 200px;
   }
 
   &:nth-of-type(5),
   &:nth-of-type(12) {
-    background: $secondary-pink;
+    background: $med-pink;
 
     &.selected {
-      background: $primary-pink;
+      background: $red;
     }
   }
 
@@ -247,11 +249,11 @@ ul {
   }
 
   &:hover {
-    background-color: $primary-blue;
+    background-color: $blue;
 
     &:nth-of-type(5),
     &:nth-of-type(12) {
-      background-color: $primary-pink;
+      background-color: $red;
     }
   }
 }

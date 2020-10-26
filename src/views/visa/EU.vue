@@ -1,6 +1,10 @@
 <template>
   <main id="eu" class="page padding top bottom">
-    <div class="content">
+    <back-button
+      @go-back="$router.go(-1)"
+      text="Back" />
+
+    <div class="content margin-s top">
       <h1>Visa Info</h1>
       <h2 class="margin-s top bottom">Help with Brexit</h2>
     </div>
@@ -37,9 +41,10 @@
 
 import brexitTimeline from '@/components/BrexitTimeline'
 import helpCentreCard from '@/components/cards/HelpCentre'
+import backButton from '@/components/BackButton'
 
 export default {
-  components: { brexitTimeline, helpCentreCard }
+  components: { brexitTimeline, helpCentreCard, backButton }
 }
 </script>
 
