@@ -130,7 +130,7 @@ export default {
     // }
   },
   mounted() {
-    //this.$forceUpdate()
+    this.$forceUpdate()
     this.getIcon()
   }
 }

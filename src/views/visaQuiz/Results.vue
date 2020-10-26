@@ -2,7 +2,7 @@
   <div class="tools-pages">
     <main v-if="topResult && favoriteVisa" id="results" class="page padding top">
       <back-button
-        @go-back="$router.push({ name: 'profile', params: { username: this.user.profile.username } })"
+        @go-back="$router.push({ name: 'profile', params: { username: user.username } })"
         text="Profile" />
 
       <div class="background">
@@ -44,30 +44,6 @@
               :name="`${visa.name}`" />
           </div>
 
-          <div v-if="otherVisas.length || youthMobility.length" class="other">
-            <div class="sub-title margin-m top">
-              <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
-              <p>Apply to</p>
-            </div>
-
-            <small-card
-              v-for="visa in otherVisas"
-              :key="visa.name"
-              :visa="visa"
-              :name="visa.name" />
-
-            <div v-if="youthMobility.length">
-              <div class="sub-title margin-m top">
-                <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
-                <p>Apply to</p>
-              </div>
-
-              <small-card 
-                :visa="youthMobility[0]"
-                :name="`${youthMobility[0].name}`" />
-            </div>
-          </div>
-
           <div v-if="currentVisaObj && currentVisaObj.cardChecklist[3].state === 'true'" class="extend">
             <div class="sub-title margin-m top">
               <img src="@/assets/icons/results/extend.svg" alt="" class="icon">
@@ -78,18 +54,48 @@
               :visa="currentVisaObj"
               :name="currentVisaObj.name" />
           </div>
+
+          <div v-if="otherVisas.length || youthMobility.length" class="other">
+            <div class="sub-title margin-m top">
+              <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
+              <p>Apply to</p>
+            </div>
+
+            <div class="tip margin-s top">
+              <p><b>Be aware!</b></p>
+
+              <p>All the below visas are great options, but you’ll need to <b>leave the UK</b> and apply <b>from your home country</b>. It’s best to think on this early.</p>
+            </div>
+
+            <small-card
+              v-for="visa in otherVisas"
+              :key="visa.name"
+              :visa="visa"
+              :name="visa.name" />
+
+            <small-card
+              v-if="youthMobility.length"
+              :visa="youthMobility[0]"
+              :name="`${youthMobility[0].name}`" />
+          </div>
         </section>
 
-        <section class="content">
-          <div>
-            <p>Take your time to view all the options. Don’t worry about losing your results, they are all saved to your profile page!</p>
+        <section class="content margin-l top">
+          <div class="white-card">
+            <img src="@/assets/illustrations/quiz/quiz-complete.svg" alt="">
 
-            <p>Want to try again? Go for it! Just remember, taking the quiz again will clear your current options above.</p>
+            <p class="margin-s top">Take your time to view all the options. Don’t worry about losing your results, they are all saved to your profile page!</p>
 
-            <router-link
-              :to="{ name: 'visa-quiz', params: { username: this.user.username } }">
-              Take again
-            </router-link>
+            <p class="margin-s top bottom">Want to try again? Go for it! Just remember, taking the quiz again will clear your current options above.</p>
+
+            <div class="button-center">
+              <router-link
+                :to="{ name: 'visa-quiz', params: { username: this.user.username } }"
+                tag="button"
+                class="primary">
+                Take again
+              </router-link>
+            </div>
           </div>
         </section>
       </div>
@@ -213,6 +219,14 @@ export default {
   p {
     margin-left: 55px;
     font-weight: 400;
+  }
+}
+
+.white-card {
+  img {
+    display: block;
+    width: 50%;
+    margin: auto;
   }
 }
 </style>

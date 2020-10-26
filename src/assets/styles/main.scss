@@ -121,6 +121,18 @@ dialog {
   border-radius: $radius;
 }
 
+.tip {
+  background: $dark-yellow;
+  border-radius: $radius;
+  padding: 1em;
+}
+
+.white-card {
+  background: white;
+  border-radius: $radius;
+  padding: 1em;
+}
+
 // Pages
 .content {
   width: 85%;
