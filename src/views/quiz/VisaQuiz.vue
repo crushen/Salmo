@@ -48,7 +48,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import question from '@/components/visaQuiz/Question'
+import question from '@/components/quiz/Question'
 import alert from '@/components/alerts/Quiz'
 import backButton from '@/components/BackButton'
 

@@ -86,17 +86,17 @@ const routes = [
     component: () => import('@/views/profile/ILR'),
     meta: { onlyVerifiedUser: true }
   },
-  // Questionnaire pages
+  // Quiz pages
   { 
     path: '/profile/:username/visa-quiz', 
     name: 'visa-quiz', 
-    component: () => import('@/views/visaQuiz/VisaQuiz'),
+    component: () => import('@/views/quiz/VisaQuiz'),
     meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/profile/:username/visa-quiz/results', 
     name: 'results', 
-    component: () => import('@/views/visaQuiz/Results'),
+    component: () => import('@/views/quiz/Results'),
     meta: { onlyVerifiedUser: true }
   },
   // Visa pages
