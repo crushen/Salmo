@@ -168,12 +168,13 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body,
-html {
   overflow-x: hidden;
 }
+
+// body,
+// html {
+//   overflow-x: hidden;
+// }
 
 :focus {
   outline: auto;

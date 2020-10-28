@@ -238,6 +238,10 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+* {
+  overflow: visible;
+}
+
 h3 {
   font-weight: 500;
 }
