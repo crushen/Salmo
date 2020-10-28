@@ -1,6 +1,6 @@
 <template>
   <div>
-    <transition name="modal" mode="out-in">
+    <!-- <transition name="modal" mode="out-in">
       <add-holiday
         id="add-holiday-modal"
         v-if="modalOpen"
@@ -24,7 +24,7 @@
         :buttons="['Cancel', 'Delete Holiday']"
         @cancel="showAlert = false"
         @confirm="deleteHoliday" />
-    </transition>
+    </transition> -->
 
     <div class="tools-card">
       <div class="header">
@@ -199,16 +199,16 @@
 </template>
 
 <script>
-import addHoliday from '@/components/profile/prCalc/AddHoliday';
-import editHoliday from '@/components/profile/prCalc/EditHoliday';
-import alert from '@/components/Alert';
+// import addHoliday from '@/components/profile/prCalc/AddHoliday';
+// import editHoliday from '@/components/profile/prCalc/EditHoliday';
+// import alert from '@/components/Alert';
 import waveV from '@/assets/patterns/wave-verticle.svg';
 
 export default {
   components: {
-    addHoliday,
-    editHoliday,
-    alert
+    // addHoliday,
+    // editHoliday,
+    // alert
   },
   data() {
     return {

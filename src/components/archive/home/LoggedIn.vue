@@ -25,12 +25,12 @@
           :link="{name: 'results', username: user.profile.username}"
           class="content" />
         <!-- If not, link to quiz page -->
-        <page-link-card
+        <!-- <page-link-card
           v-else
           text="A great place to start is by taking your first quiz. The results will give you a good guide to what visa suits you best."
           pageTitle="Take Quiz"
           :link="{name: 'questionnaire', username: user.profile.username}"
-          class="content" />
+          class="content" /> -->
 
         <div class="bottom">
           <img 
@@ -42,12 +42,12 @@
             src="@/assets/illustrations/homePage/Home 1.svg" 
             alt="An illustration of a person sat on the floor using their mobile phone" 
             class="image-2">
-
+<!-- 
           <page-link-card
             text="If you’ve got a specific question about a visa related topic, our Help Centre has lots of helpful guides to all things visa!"
             pageTitle="Help Centre"
             :link="{name: 'help-centre'}"
-            class="content" />
+            class="content" /> -->
         </div>
       </div>
     </section>
@@ -56,7 +56,7 @@
 
 <script>
 import news from '@/components/news/News';
-import pageLinkCard from '@/components/PageLinkCard';
+// import pageLinkCard from '@/components/PageLinkCard';
 
 export default {
   props: {
@@ -64,7 +64,7 @@ export default {
   },
   components: {
     news,
-    pageLinkCard
+    // pageLinkCard
   }
 }
 </script>

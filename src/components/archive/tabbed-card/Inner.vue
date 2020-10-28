@@ -7,9 +7,9 @@
       <h2>{{ section.title }}</h2>
       <p class="text">{{ section.text }}</p>
 
-      <tip 
+      <!-- <tip 
         v-if="section.tipText"
-        :text="section.tipText" />
+        :text="section.tipText" /> -->
     </section>
 
     <div 
@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import tip from '@/components/Tip';
+// import tip from '@/components/Tip';
 
 export default {
   props: {
@@ -32,7 +32,7 @@ export default {
     index: { required: true, type: Number }
   },
   components: {
-    tip
+    // tip
   }
 }
 </script>

@@ -2,18 +2,18 @@
   <section class="content">
     <h1>Pre-Settled Status</h1>
 
-    <tabbed-card 
+    <!-- <tabbed-card 
       :card="card"
-      class="card" />
+      class="card" /> -->
   </section>
 </template>
 
 <script>
-import tabbedCard from '@/components/tabbed-card/Card';
+// import tabbedCard from '@/components/tabbed-card/Card';
 
 export default {
   components: {
-    tabbedCard
+    // tabbedCard
   },
   data() {
     return {
