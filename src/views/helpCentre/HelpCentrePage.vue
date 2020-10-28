@@ -6,7 +6,7 @@
       <div v-html="article.content.html" class="body" />
     </article> 
 
-    <section class="content">
+    <section class="content margin-m top">
       <help-centre-feedback />
     </section>  
   </main>
@@ -58,22 +58,24 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .body {
-  /deep/ h3 {
-    margin-top: 2em;
+  /deep/ h2 {
+    margin-top: 36px;
   }
 
   /deep/ .red {
     h3 {
+      font-weight: 500;
       color: $red;
-      margin-top: 3em;
+      margin-top: 32px;
     }
   }
 
   /deep/ p {
-    margin-top: 1em;
+    margin-top: 16px;
   }
 
   /deep/ a {
+    color: $dark-font;
     text-decoration: underline;
   }
 
@@ -83,21 +85,21 @@ export default {
 
   /deep/ .centre {
     text-align: center;
-    margin: 3em;
+    margin: 32px;
 
     img {
-      width: 80%;
+      width: 70%;
       max-width: 200px;
     }
   }
 
   /deep/ ul {
     list-style-position: inside;
-    margin: 0.5em auto 2.5em auto;
+    margin: 8px auto;
     max-width: 500px;
 
     li {
-      margin-top: 1em;
+      margin-top: 16px;
 
       div {
         display: inline;
@@ -106,7 +108,7 @@ export default {
   }
 
   /deep/ .tip {
-    margin: 3em 0;
+    margin-top: 36px;
 
     p {
       margin-top: 0;
@@ -119,12 +121,13 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 3em auto;
+    margin: 36px auto;
     max-width: 500px;
 
     p {
+      width: 75%;
       margin: 0;
-      margin-right: 5%;
+      margin-right: 8px;
     }
 
     img {
@@ -137,7 +140,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 1em;
+    margin-top: 16px;
 
     p {
       width: 90%;
@@ -146,7 +149,7 @@ export default {
   }
 
   /deep/ table {
-    margin-bottom: 3em;
+    margin-bottom: 36px;
 
     tr {
       td {
@@ -154,7 +157,7 @@ export default {
         text-align: center;
 
         p {
-          margin: 0.5em auto auto;
+          margin: 8px auto auto;
           width: 90%;
           max-width: 180px;
         }
@@ -162,7 +165,7 @@ export default {
         img {
           width: 60%;
           max-width: 100px;
-          margin: 1.5em auto 0 auto;
+          margin: 8px auto 0 auto;
         }
       }
     }

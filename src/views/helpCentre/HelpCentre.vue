@@ -6,7 +6,7 @@
     </div>
 
     <transition-group name="slide" tag="div">
-      <section class="questions content slide-item" key="dynamic">
+      <section class="questions content slide-item margin-l top" key="dynamic">
         <transition-group name="slide" tag="ul">
           <li 
             v-for="(question, index) in questions"
@@ -41,7 +41,7 @@
 
       <div class="slide-item" key="static">
         <section class="content buttons-content margin-l top">
-          <h2 class="margin-s bottom">Want in-depth information? Check out the articles below!</h2>
+          <h2 class="margin-m bottom">Want in-depth information? Check out the articles below!</h2>
 
           <FormulateInput
             v-model="search"
