@@ -54,9 +54,9 @@
 </template>
 
 <script>
-import check from '@/assets/icons/visa-checklist/check-solid.svg'
-import cross from '@/assets/icons/visa-checklist/times-solid.svg'
-import question from '@/assets/icons/visa-checklist/question-solid.svg'
+import check from '@/assets/icons/white/check.svg'
+import cross from '@/assets/icons/white/cross.svg'
+import question from '@/assets/icons/white/question.svg'
 // import pinkHeart from '@/assets/icons/pink/heart-solid.svg'
 // import greyHeart from '@/assets/icons/heart-solid.svg'
 //import confirmFavorite from '@/components/visa/ConfirmFavorite'

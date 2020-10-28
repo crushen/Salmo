@@ -28,7 +28,7 @@
           <p>{{ visa }}</p>
 
           <button @click="removeFromList(visa)" class="none">
-            <img src="@/assets/icons/cross.svg" alt="">
+            <img src="@/assets/icons/grey/cross.svg" alt="">
           </button>
         </li>
       </ul>

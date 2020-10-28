@@ -2,7 +2,7 @@
   <div class="alert-modal-container">
     <dialog open>
       <button @click="closeModal" class="none">
-        <img src="@/assets/icons/cross.svg" alt="">
+        <img src="@/assets/icons/grey/cross.svg" alt="">
       </button>
 
       <slot />

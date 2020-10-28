@@ -4,7 +4,7 @@
       <div class="header">
         <h2>Travel Log</h2>
         <button class="none">
-          <img src="@/assets/icons/plus-red.svg" alt="">
+          <img src="@/assets/icons/red/plus.svg" alt="">
         </button>
       </div>
 

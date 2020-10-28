@@ -11,7 +11,7 @@
         v-if="user.profile.nextVisa"
         @click="toggleModal"
         class="none">
-        <img src="@/assets/icons/edit.svg" alt="">
+        <img src="@/assets/icons/red/edit.svg" alt="">
       </button>
     </div>
     

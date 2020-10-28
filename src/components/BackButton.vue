@@ -2,7 +2,7 @@
   <button
     @click="$emit('go-back')"
     class="arrow-btn">
-    <img src="@/assets/icons/back-blue.svg" alt="">
+    <img src="@/assets/icons/blue/arrow-left.svg" alt="">
     {{ text }}
   </button>
 </template>

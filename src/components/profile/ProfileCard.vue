@@ -16,7 +16,7 @@
         :to="{ name: 'settings', params: { username: user.profile.username } }"
         tag="button"
         class="none">
-        <img src="@/assets/icons/edit.svg" alt="">
+        <img src="@/assets/icons/red/edit.svg" alt="">
       </router-link>
     </div>
   </div>

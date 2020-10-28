@@ -4,7 +4,7 @@
       v-if="arrowPage && innerWidth < 1100"
       @click="$router.go(-1)"
       class="arrow-btn aria-btn">
-      <img src="@/assets/icons/back.svg" class="arrow">
+      <img src="@/assets/icons/white/arrow-left.svg" class="arrow">
     </button>
 
     <div

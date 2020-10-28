@@ -14,7 +14,7 @@
     <button
       @click="showAlert = true, setOverlay()"
       class="back">
-      <img src="@/assets/icons/back.svg" alt="">
+      <img src="@/assets/icons/white/arrow-left.svg" alt="">
       Sign Out
     </button>
 

@@ -10,7 +10,7 @@
       @click="confirm"
       class="exit"
       aria-label="Close confirmation">
-      <img :src="cross">
+      <!-- <img :src="cross"> -->
     </button>
 
     <div
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import cross from '@/assets/icons/white/times-solid.svg';
+// import cross from '@/assets/icons/white/times-solid.svg';
 
 export default {
   props: {
@@ -40,7 +40,7 @@ export default {
   },
   data() {
     return {
-      cross
+      // cross
     }
   },
   methods: {

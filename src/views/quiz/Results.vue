@@ -14,7 +14,7 @@
           <h2>Your best option is...</h2>
 
           <div class="sub-title margin-m top">
-            <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
+            <img src="@/assets/icons/grey/switch.svg" alt="" class="icon">
             <p>Switch to</p>
           </div>
           
@@ -30,7 +30,7 @@
 
           <div v-if="switchVisas.length" class="switch">
             <div class="sub-title margin-m top">
-              <img src="@/assets/icons/results/switch.svg" alt="" class="icon">
+              <img src="@/assets/icons/grey/switch.svg" alt="" class="icon">
               <p>Switch to</p>
             </div>
 
@@ -43,7 +43,7 @@
 
           <div v-if="currentVisaObj && currentVisaObj.cardChecklist[3].state === 'true'" class="extend">
             <div class="sub-title margin-m top">
-              <img src="@/assets/icons/results/extend.svg" alt="" class="icon">
+              <img src="@/assets/icons/grey/extend.svg" alt="" class="icon">
               <p>Extend</p>
             </div>
 
@@ -54,7 +54,7 @@
 
           <div v-if="otherVisas.length || youthMobility.length" class="other">
             <div class="sub-title margin-m top">
-              <img src="@/assets/icons/results/apply.svg" alt="" class="icon">
+              <img src="@/assets/icons/grey/apply.svg" alt="" class="icon">
               <p>Apply to</p>
             </div>
 

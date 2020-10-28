@@ -21,7 +21,7 @@
               <h3>{{ question.title }}</h3>
 
               <img 
-                src="@/assets/icons/pink/down.svg" 
+                src="@/assets/icons/red/arrow-down.svg" 
                 alt=""
                 :class="selected === index ? 'active' : ''" 
                 class="icon">
@@ -97,8 +97,6 @@
 <script>
 import { mapState } from 'vuex'
 import disclaimer from '@/components/cards/Disclaimer'
-import arrow from '@/assets/icons/white/down-arrow.svg'
-import cross from '@/assets/icons/white/times-solid.svg'
 
 import wave from '@/assets/patterns/wave-2.svg'
 import line from '@/assets/patterns/line.svg'
@@ -109,8 +107,6 @@ export default {
   components: { disclaimer },
   data() {
     return {
-      arrow,
-      cross,
       selected: null,
       questions: [
         {

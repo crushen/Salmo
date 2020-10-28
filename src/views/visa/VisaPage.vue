@@ -8,7 +8,7 @@
         :class="menuOpen ? 'active' : ''">
         Jump To Section
         <img 
-          src="@/assets/icons/pink/down.svg"
+          src="@/assets/icons/red/arrow-down.svg"
           :class="menuOpen ? 'active' : ''"
           alt=""
           class="icon">

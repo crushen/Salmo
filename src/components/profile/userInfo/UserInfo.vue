@@ -4,7 +4,7 @@
       v-if="stage > 1 && stage < 4"
       @click="prev"
       class="back">
-      <img src="@/assets/icons/back-blue.svg" alt="">
+      <img src="@/assets/icons/blue/arrow-left.svg" alt="">
       Back
     </button>
 

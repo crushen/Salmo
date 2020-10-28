@@ -6,7 +6,7 @@
       <div class="title">
         <h2>Account</h2>
         <button @click="modalIsOpen = true" class="none">
-          <img src="@/assets/icons/edit.svg" alt="">
+          <img src="@/assets/icons/red/edit.svg" alt="">
         </button>
       </div>
 

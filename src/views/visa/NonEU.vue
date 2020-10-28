@@ -32,10 +32,10 @@
 import helpCentreCard from '@/components/cards/HelpCentre'
 import backButton from '@/components/BackButton'
 
-import study from '@/assets/icons/visa-buttons/study.svg'
-import work from '@/assets/icons/visa-buttons/work.svg'
-import business from '@/assets/icons/visa-buttons/business.svg'
-import family from '@/assets/icons/visa-buttons/family.svg'
+import study from '@/assets/icons/blue/study.svg'
+import work from '@/assets/icons/blue/work.svg'
+import business from '@/assets/icons/blue/business.svg'
+import family from '@/assets/icons/blue/family.svg'
 
 import wave from '@/assets/patterns/wave-2.svg'
 import line from '@/assets/patterns/line.svg'
