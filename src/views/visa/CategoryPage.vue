@@ -4,7 +4,7 @@
       @go-back="$router.go(-1)"
       text="Back" />
 
-    <div class="content margin-s top">
+    <div class="content">
       <h1>{{ category }} Visas</h1>
     </div>
     

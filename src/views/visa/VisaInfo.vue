@@ -1,6 +1,6 @@
 <template>
   <main class="content page padding top bottom">
-    <section class="buttons margin-s top">
+    <section class="buttons">
       <h1>Visa Info</h1>
       <h2 class="margin-s top bottom">Looking for useful visa info to come to the UK?</h2>
       

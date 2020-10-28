@@ -4,7 +4,7 @@
       @go-back="$router.go(-1)"
       text="Back" />
 
-    <div class="content margin-s top">
+    <div class="content">
       <h1>Visa Info</h1>
       <h2 class="margin-s top bottom">Help with Brexit</h2>
     </div>
