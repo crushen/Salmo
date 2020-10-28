@@ -1,13 +1,15 @@
 <template>
-  <main class="content">
+  <main class="content page padding top bottom">
     <section v-if="stage === 1">
-      <h1>Oh! You're leaving?</h1>
+      <h1 class="margin-l bottom">Oh! You're leaving?</h1>
+
+      <p class="margin-m bottom">Before you go, please let us know why you’ve decided to leave Salmo:</p>
+
       <FormulateInput
         v-model="feedback.reason"
         type="radio"
         :options="options"
-        label="Before you go, please let us know why you’ve decided to leave Salmo:"
-        validation="required" />
+        class="grey-label" />
 
       <FormulateInput
         v-model="feedback.text"
@@ -15,16 +17,26 @@
         :disabled="feedback.reason !== 'other'"
         :validation="feedback.reason === 'other' ? 'required' : null" /> 
 
-      <button @click="submitFeedback">Submit Feedback</button>
+      <div class="button-center margin-l top bottom">
+        <button
+          @click="submitFeedback"
+          class="outline">
+          Submit Feedback
+        </button>
+      </div>
+
+      <img src="@/assets/version-2/girl-looking.svg" alt="" class="img-1">
     </section>
 
     <section v-else>
-      <h1>We're sorry to see you go!</h1>
+      <h1 class="margin-m bottom">We're sorry to see you go!</h1>
 
-      <p>Thanks for letting us know how you feel, we will reflect on your feedback!</p>
-      <p>If you wish to delete your account and have all personal details wiped out from our system, please enter your email address and password:</p>
+      <img src="@/assets/version-2/delete-account.svg" alt="" class="img-2">
 
-      <FormulateForm @submit="submitDelete">
+      <p class="margin-m top">Thanks for letting us know how you feel, we will reflect on your feedback!</p>
+      <p class="margin-s top">If you wish to delete your account and have all personal details wiped out from our system, please enter your email address and password:</p>
+
+      <FormulateForm @submit="submitDelete" class="margin-m top">
         <FormulateInput
           v-model="userDetails.email"
           type="email"
@@ -39,11 +51,12 @@
           validation="required"
           error-behavior="submit" />
 
-          <p><strong>THIS ACTION IS IRREVERSIBLE!</strong></p>
+          <p class="margin-m top"><strong>THIS ACTION IS IRREVERSIBLE!</strong></p>
 
         <FormulateInput
           type="submit"
-          label="Delete Account"/>
+          label="Delete Account"
+          class="tertiary margin-s top" />
 
         <p v-if="error">{{ error }}</p>
       </FormulateForm>
@@ -103,5 +116,38 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
 
+.content {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+h1 {
+  text-align: right;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.img-1 {
+  width: 120px;
+  position: absolute;
+  bottom: -42px;
+  left: -18px;
+}
+
+.img-2 {
+  display: block;
+  width: 55%;
+  margin: auto;
+}
+
+strong {
+  font-size: 20px;
+  color: $red;
+}
 </style>

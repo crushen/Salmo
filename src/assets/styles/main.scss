@@ -62,6 +62,7 @@ button {
   }
 
   &.tertiary {
+    @include font(14px, 300);
     padding: 0;
     background: none;
     color: $red;
@@ -136,7 +137,8 @@ dialog {
 
 // Pages
 .content {
-  margin: auto 16px;
+  width: 80%;
+  margin: auto;
   position: relative;
 }
 
@@ -167,31 +169,31 @@ dialog {
 .margin {
   &-s {
     &.top {
-      margin-top: 1em
+      margin-top: 16px;
     }
 
     &.bottom {
-      margin-bottom: 1em;
+      margin-bottom: 16px;
     }
   }
 
   &-m {
     &.top {
-      margin-top: 2em
+      margin-top: 32px;
     }
 
     &.bottom {
-      margin-bottom: 2em;
+      margin-bottom: 32px;
     }
   }
 
   &-l {
     &.top {
-      margin-top: 3em
+      margin-top: 64px;
     }
 
     &.bottom {
-      margin-bottom: 3em;
+      margin-bottom: 64px;
     }
   }
 }

@@ -71,7 +71,7 @@
       <button
         @click="showLogoutAlert = true"
         class="tertiary margin-s top">
-        Sign Out of Salmo
+        Sign Out
       </button>
 
       <transition name="dialog" mode="out-in">
@@ -191,7 +191,6 @@ a {
 }
 
 .tertiary {
-  font-weight: 400;
   color: $dark-font;
 }
 

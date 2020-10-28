@@ -275,6 +275,7 @@ h3 {
   .icon {
     width: 28px;
     transition: 0.4s;
+    margin-left: 1em;
 
     &.active {
       transform: rotate(-180deg);
