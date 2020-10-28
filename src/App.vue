@@ -171,11 +171,6 @@ export default {
   overflow-x: hidden;
 }
 
-// body,
-// html {
-//   overflow-x: hidden;
-// }
-
 :focus {
   outline: auto;
 }
