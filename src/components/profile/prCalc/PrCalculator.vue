@@ -12,7 +12,7 @@
         v-if="editOpen"
         :holiday="sortByDate"
         :index="index"
-        @closeModal="editOpen = false, editHoliday = false;"
+        @closeModal="editOpen = false, editHoliday = false"
         @updateHoliday="updateHoliday" />
     </transition>
 
@@ -26,18 +26,19 @@
         @confirm="deleteHoliday" />
     </transition>
 
-    <div class="card">
-      <div class="title">
-        <h3>Holiday Tracker & Calculator</h3>
+    <div class="tools-card">
+      <div class="header">
+        <h2>Travel Log</h2>
+        <button
+          @click="openModal"
+          class="none">
+          <img src="@/assets/icons/plus-red.svg" alt="">
+        </button>
       </div>
 
       <div class="body">
-        <p class="text">To gain Indefinite Leave to Remain and eventually become a British Citizen, there are rules you’ll need to follow around absenses from the UK, to ensure you qualify.</p>
-        <p v-if="!user.profile.holiday.length">Let’s get started! First enter in all the dates you’ve left the UK (including the dates of travel) and we will take care of the rest...</p>
-        <div class="holiday-input">
-          <ul 
-            v-if="user.profile.holiday.length"
-            class="inner">
+        <div v-if="user.profile.holiday.length" class="holiday-input">
+          <ul class="inner">
             <li
               v-for="(item, index) in sortByDate"
               :key="index"
@@ -90,7 +91,7 @@
         </div>
       </div>
 
-      <div class="result">
+      <!-- <div class="result">
         <div class="description">
           <p><b>How is this calculated?</b></p>
           <p class="margin">To qualify for ILR, you are only allowed <b>180 days</b> of absence per rolling 12 month periods starting from the date of your first holiday. However any dates pre Nov 2016 will be calculated on a fixed 12 months from the date of your visa start.</p>
@@ -192,7 +193,7 @@
             </div>
           </section>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -247,13 +248,13 @@ export default {
   methods: {
     openModal() {
       this.modalOpen = true;
-      this.showOverlay();
+      //this.showOverlay();
 
-      const button = document.querySelector('#add-holiday-btn');
-      button.setAttribute('aria-expanded', 'true');
+      // const button = document.querySelector('#add-holiday-btn');
+      // button.setAttribute('aria-expanded', 'true');
 
-      const ariaBtns = document.querySelectorAll('.aria-btn');
-      this.changeBtnFocus(ariaBtns, '-1');
+      // const ariaBtns = document.querySelectorAll('.aria-btn');
+      // this.changeBtnFocus(ariaBtns, '-1');
     },
     updateHoliday() {
       this.checkIfPre2016();
@@ -263,7 +264,7 @@ export default {
     openEdit(index) {
       this.editOpen = true;
       this.index = index;
-      this.showOverlay();
+      //this.showOverlay();
 
       const button = document.querySelector(`#edit-btn-${index}`);
       button.setAttribute('aria-expanded', 'true');
@@ -281,7 +282,7 @@ export default {
     openAlert(index) {
       this.showAlert = true; 
       this.index = index;
-      this.showOverlay();
+      //this.showOverlay();
 
       const ariaBtns = document.querySelectorAll('.aria-btn');
       this.changeBtnFocus(ariaBtns, '-1');
@@ -544,15 +545,36 @@ export default {
     }
   },
   mounted() {
-    this.checkIfPre2016();
-    this.getPre2016visas();
-    this.getPost2016holiday();
+    //this.checkIfPre2016();
+    // this.getPre2016visas();
+    // this.getPost2016holiday();
   }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
+
+.header {
+  padding: 16px 26px;
+  display: flex;
+  justify-content: space-between;
+
+  h2 {
+    margin: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 .modal-enter,
 .modal-leave-to {

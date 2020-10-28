@@ -327,16 +327,16 @@ export default {
   methods: {
     closeModal() {
       this.$emit('closeModal');
-      const overlay = document.querySelector('#overlay');
-      overlay.style.opacity = 0;
-      overlay.style.visibility = 'hidden';
-      document.querySelector('body').style.overflow = 'auto';
+      // const overlay = document.querySelector('#overlay');
+      // overlay.style.opacity = 0;
+      // overlay.style.visibility = 'hidden';
+      // document.querySelector('body').style.overflow = 'auto';
 
-      const button = document.querySelector('#edit-holiday-btn');
-      button.setAttribute('aria-expanded', 'false');
+      // const button = document.querySelector('#edit-holiday-btn');
+      // button.setAttribute('aria-expanded', 'false');
 
-      const ariaBtns = document.querySelectorAll('.aria-btn');
-      this.changeBtnFocus(ariaBtns, '0');
+      // const ariaBtns = document.querySelectorAll('.aria-btn');
+      // this.changeBtnFocus(ariaBtns, '0');
     },
     changeBtnFocus(buttons, focus) {
       buttons.forEach(btn => {

@@ -252,6 +252,10 @@ dialog {
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
     padding-bottom: 180px;
+
+    &.blue {
+      background: #D4E7ED;
+    }
   }
 }
 
@@ -263,10 +267,11 @@ dialog {
   position: relative;
 
   h2 {
-    margin: 4% 4% 0;
+    margin: 16px 26px 0;
   }
 
   h3 {
-    margin-left: 10%;
+    width: 80%;
+    margin: auto;
   }
 }

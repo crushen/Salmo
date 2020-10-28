@@ -7,7 +7,7 @@
 
       <div class="background">
         <div class="content">
-          <h1 class="margin-s top">Visa Planner</h1>
+          <h1 class="margin-m top">Visa Planner</h1>
 
           <h2 class="margin-s top bottom">{{ user.profile.nextVisa.name }}</h2>
         </div>
