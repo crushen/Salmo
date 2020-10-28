@@ -4,7 +4,7 @@
       <div class="content">
         <h2 class="header">All you need for your next UK Visa, right here.</h2>
         <img 
-          src="@/assets/illustrations/homePage/Home 2.svg" 
+          src="@/assets/archive/homePage/Home 2.svg" 
           alt="An illustration of a person sat on the floor using their mobile phone" 
           class="header-img">
       </div>
@@ -34,12 +34,12 @@
 
         <div class="bottom">
           <img 
-            src="@/assets/illustrations/homePage/Home 2.svg" 
+            src="@/assets/archive/homePage/Home 2.svg" 
             alt="An illustration of a person sat on the floor using their mobile phone" 
             class="image-1">
 
           <img 
-            src="@/assets/illustrations/homePage/Home 1.svg" 
+            src="@/assets/archive/homePage/Home 1.svg" 
             alt="An illustration of a person sat on the floor using their mobile phone" 
             class="image-2">
 <!-- 

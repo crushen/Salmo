@@ -10,7 +10,7 @@ export const helpPages = [
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
     ],
     img: {
-      url: require('@/assets/illustrations/about/BRP-guide.svg'),
+      url: require('@/assets/archive/BRP-guide.svg'),
       alt: 'An illustration of a person holding their Biometric Residence Permit'
     }
   },
@@ -25,7 +25,7 @@ export const helpPages = [
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
     ],
     img: {
-      url: require('@/assets/illustrations/about/Applying with Dependants.svg'),
+      url: require('@/assets/archive/Applying with Dependants.svg'),
       alt: 'An illustration of a father and daughter holding hands'
     }
   },
@@ -40,7 +40,7 @@ export const helpPages = [
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
     ],
     img: {
-      url: require('@/assets/illustrations/about/Switch-Extend.svg'),
+      url: require('@/assets/archive/Switch-Extend.svg'),
       alt: 'An illustration of a person thinking'
     }
   },
@@ -55,7 +55,7 @@ export const helpPages = [
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
     ],
     img: {
-      url: require('@/assets/illustrations/about/ILR-Guide.svg'),
+      url: require('@/assets/archive/ILR-Guide.svg'),
       alt: 'An illustration of a person holding their passport with excitement'
     }
   },
@@ -70,7 +70,7 @@ export const helpPages = [
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
     ],
     img: {
-      url: require('@/assets/illustrations/about/ILR-Guide.svg'),
+      url: require('@/assets/archive/ILR-Guide.svg'),
       alt: 'An illustration of a person holding their passport with excitement'
     }
   },
@@ -85,7 +85,7 @@ export const helpPages = [
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
     ],
     img: {
-      url: require('@/assets/illustrations/about/ILR-Guide.svg'),
+      url: require('@/assets/archive/ILR-Guide.svg'),
       alt: 'An illustration of a person holding their passport with excitement'
     }
   },
@@ -100,7 +100,7 @@ export const helpPages = [
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
     ],
     img: {
-      url: require('@/assets/illustrations/about/ILR-Guide.svg'),
+      url: require('@/assets/archive/ILR-Guide.svg'),
       alt: 'An illustration of a person holding their passport with excitement'
     }
   },
@@ -115,7 +115,7 @@ export const helpPages = [
       'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae perferendis quo deserunt neque optio, quaerat, ipsam quia enim voluptatem magni illum facere atque explicabo voluptas porro ducimus eos aperiam nulla?'
     ],
     img: {
-      url: require('@/assets/illustrations/about/ILR-Guide.svg'),
+      url: require('@/assets/archive/ILR-Guide.svg'),
       alt: 'An illustration of a person holding their passport with excitement'
     }
   }

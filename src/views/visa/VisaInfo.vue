@@ -23,7 +23,7 @@
     </section>
 
     <section class="help">
-      <img src="@/assets/illustrations/visaPages/Laptop Person.svg" alt="">
+      <img src="@/assets/illustrations/visa-pages/laptop.svg" alt="">
 
       <help-centre-card
         text="For more advice or resource on the application process to come to the UK, you can take a look at here:" />

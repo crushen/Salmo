@@ -26,13 +26,13 @@
           </button>
         </div>
 
-        <img src="@/assets/version-2/girl-looking.svg" alt="" class="img-1">
+        <img src="@/assets/illustrations/delete-account/girl-looking.svg" alt="" class="img-1">
       </section>
 
       <section v-else key="2">
         <h1 class="margin-m bottom">We're sorry to see you go!</h1>
 
-        <img src="@/assets/version-2/delete-account.svg" alt="" class="img-2">
+        <img src="@/assets/illustrations/delete-account/delete-account.svg" alt="" class="img-2">
 
         <p class="margin-m top">Thanks for letting us know how you feel, we will reflect on your feedback!</p>
         <p class="margin-s top">If you wish to delete your account and have all personal details wiped out from our system, please enter your email address and password:</p>

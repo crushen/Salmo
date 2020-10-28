@@ -44,7 +44,7 @@
             </div>
 
             <div class="img">
-              <img src="@/assets/illustrations/profilePages/Application success.svg" alt="">
+              <img src="@/assets/illustrations/application-timeline/success.svg" alt="">
             </div>
           </div>
         </div>
@@ -59,7 +59,7 @@
             </div>
 
             <div class="img">
-              <img src="@/assets/illustrations/profilePages/Application fail.svg" alt="">
+              <img src="@/assets/illustrations/application-timeline/fail.svg" alt="">
             </div>
           </div>
         </div>

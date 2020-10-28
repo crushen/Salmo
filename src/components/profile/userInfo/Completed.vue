@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <img src="@/assets/version-2/point.svg" alt="">
+    <img src="@/assets/illustrations/user-info/point.svg" alt="">
 
     <div class="buttons content">
       <button

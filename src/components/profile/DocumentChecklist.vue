@@ -16,22 +16,22 @@
               class="inner">
               <img
                 v-if="item.label.includes('CAS')"
-                src="@/assets/version-2/doc-checklist/cas.svg"
+                src="@/assets/illustrations/doc-checklist/cas.svg"
                 alt="">
 
               <img
                 v-if="item.label.includes('English')"
-                src="@/assets/version-2/doc-checklist/english.svg"
+                src="@/assets/illustrations/doc-checklist/english.svg"
                 alt="">
 
               <img
                 v-if="item.label.includes('Finance')"
-                src="@/assets/version-2/doc-checklist/money.svg"
+                src="@/assets/illustrations/doc-checklist/money.svg"
                 alt="">
 
               <img
                 v-if="item.label.includes('Passport')"
-                src="@/assets/version-2/doc-checklist/passport.svg"
+                src="@/assets/illustrations/doc-checklist/passport.svg"
                 alt="">
 
               <p>{{ item.label }}</p>

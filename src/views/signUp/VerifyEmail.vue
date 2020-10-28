@@ -34,7 +34,7 @@
 
     <img
       class="email-img"
-      src="@/assets/version-2/email.svg"
+      src="@/assets/illustrations/sign-up/email.svg"
       alt="">
   </main>
 </template>

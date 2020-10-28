@@ -23,16 +23,16 @@
 </template>
 
 <script>
-import img1 from '@/assets/illustrations/profilePages/profilePictures/Profile 1.svg'
-import img2 from '@/assets/illustrations/profilePages/profilePictures/Profile 2.svg'
-import img3 from '@/assets/illustrations/profilePages/profilePictures/Profile 3.svg'
-import img4 from '@/assets/illustrations/profilePages/profilePictures/Profile 4.svg'
-import img5 from '@/assets/illustrations/profilePages/profilePictures/Profile 5.svg'
-import img6 from '@/assets/illustrations/profilePages/profilePictures/Profile 6.svg'
-import img7 from '@/assets/illustrations/profilePages/profilePictures/Profile 7.svg'
-import img8 from '@/assets/illustrations/profilePages/profilePictures/Profile 8.svg'
-import img9 from '@/assets/illustrations/profilePages/profilePictures/Profile 9.svg'
-import img10 from '@/assets/illustrations/profilePages/profilePictures/Profile 10.svg'
+import img1 from '@/assets/illustrations/profile-pictures/1.svg'
+import img2 from '@/assets/illustrations/profile-pictures/2.svg'
+import img3 from '@/assets/illustrations/profile-pictures/3.svg'
+import img4 from '@/assets/illustrations/profile-pictures/4.svg'
+import img5 from '@/assets/illustrations/profile-pictures/5.svg'
+import img6 from '@/assets/illustrations/profile-pictures/6.svg'
+import img7 from '@/assets/illustrations/profile-pictures/7.svg'
+import img8 from '@/assets/illustrations/profile-pictures/8.svg'
+import img9 from '@/assets/illustrations/profile-pictures/9.svg'
+import img10 from '@/assets/illustrations/profile-pictures/10.svg'
 
 export default {
   props: { user: { required: true, type: Object } },

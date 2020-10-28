@@ -1,41 +1,32 @@
 <template>
-  <section>
-    <img
-      src="@/assets/grey-background.png" alt=""
-      class="background-1">
-    <img 
-      src="@/assets/grey-background-bottom.png" alt=""
-      class="background-2">
+  <main>
+    <section>
+      <header>
+        <h1>404 Uh-Oh!</h1>
+        <img 
+          src="@/assets/illustrations/not-found/not-found.svg" 
+          alt="An illustration of a a confused person"
+          class="main-img">
+      </header>
 
-    <div class="content">
-      <section class="single-page">
-        <header>
-          <h1>404 Uh-Oh!</h1>
-          <img 
-            src="@/assets/illustrations/alternateStates/404.svg" 
-            alt="An illustration of a a confused person"
-            class="main-img">
-        </header>
-
-        <div class="body">
-          <h3>We're sorry that page you wanted cannot be found!</h3>
-          <p>Let's try again, you can visit home, UK visa information, your profile and the about pages from the blue button, or click below to go to our help centre.</p>
-          <div class="button">
-            <router-link 
-              :to="{name: 'help-centre'}"
-              :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}"
-              tag="button">
-              Help Centre
-            </router-link>
-          </div>
+      <div class="body">
+        <h3>We're sorry that page you wanted cannot be found!</h3>
+        <p>Let's try again, you can visit home, UK visa information, your profile and the about pages from the blue button, or click below to go to our help centre.</p>
+        <div class="button">
+          <router-link 
+            :to="{name: 'help-centre'}"
+            :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}"
+            tag="button">
+            Help Centre
+          </router-link>
         </div>
-      </section>  
-    </div>
-  </section>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script>
-import dots from '@/assets/patterns/dots.svg';
+import dots from '@/assets/patterns/dots.svg'
 
 export default {
   data() {
