@@ -7,21 +7,19 @@
     <section id="home" class="content page padding bottom">
       <div class="buttons">
         <router-link
-          :to="{ name: 'sign-up' }"
-          tag="button"
-          class="primary wave-background">
-          Sign Up
-        </router-link>
-        <!-- :style="{ backgroundImage: `url(${require('@/assets/patterns/wave-horizontal.svg')})` }" -->
-
-        <router-link
           :to="{ name: 'sign-in' }"
           tag="button"
           
-          class="secondary wave-background">
+          class="primary">
           Sign In
         </router-link>
-        <!-- :style="{ backgroundImage: `url(${require('@/assets/patterns/wave-verticle.svg')})` }" -->
+
+        <router-link
+          :to="{ name: 'sign-up' }"
+          tag="button"
+          class="secondary">
+          Sign Up
+        </router-link>
       </div>
 
       <p>by signing up on Salmo, you agree to our Terms & Conditions and Privacy Policies.</p>
