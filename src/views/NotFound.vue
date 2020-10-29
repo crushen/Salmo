@@ -1,121 +1,53 @@
 <template>
-  <main>
-    <section>
-      <header>
-        <h1>404 Uh-Oh!</h1>
-        <img 
-          src="@/assets/illustrations/not-found/not-found.svg" 
-          alt="An illustration of a a confused person"
-          class="main-img">
-      </header>
+  <main class="page padding top bottom">
+    <back-button
+      @go-back="$router.go(-1)"
+      text="Back" />
 
-      <div class="body">
-        <h3>We're sorry that page you wanted cannot be found!</h3>
-        <p>Let's try again, you can visit home, UK visa information, your profile and the about pages from the blue button, or click below to go to our help centre.</p>
-        <div class="button">
-          <router-link 
-            :to="{name: 'help-centre'}"
-            :style="{backgroundImage: `url(${dots})`, backgroundSize: '100%', backgroundPosition: 'center'}"
-            tag="button">
-            Help Centre
-          </router-link>
-        </div>
+    <div class="content">
+      <h1>404 Uh-Oh!</h1>
+      <h2 class="margin-m top">We're sorry that page you wanted cannot be found!</h2>
+    </div>
+
+    <section class="content">
+      <img 
+        src="@/assets/illustrations/not-found/not-found.svg" 
+        alt="An illustration of a a confused person"
+        class="margin-m top bottom">
+
+      
+      <p>Let’s try again.</p>
+ 
+      <p class="margin-s top">
+        You can visit Home, Visa Info, Profile and About page from the blue menu button at the bottom, or click below to go to our help centre.
+      </p>
+
+      <div class="button-center margin-m top">
+        <router-link 
+          :to="{name: 'help-centre'}"
+          tag="button"
+          class="yellow">
+          Help Centre
+        </router-link>
       </div>
     </section>
   </main>
 </template>
 
 <script>
-import dots from '@/assets/patterns/dots.svg'
+import backButton from '@/components/BackButton'
 
 export default {
-  data() {
-    return {
-      dots
-    }
-  }
+  components: { backButton }
 }
 </script>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.single-page {
-  text-align: center;
-  position: absolute;
-}
-
-.background-1,
-.background-2 {
-  display: none;
-  position: relative;
-  z-index: 1;
-}
-
-.content {
-  position: relative;
-  z-index: 2;
-}
-
-.main-img {
+img {
   display: block;
-  width: 48vw;
-  max-width: 250px;
-  margin: 8vw auto;
-}
-
-.body {
-  text-align: left;
-
-  h3 {
-    margin-bottom: 10px;
-  }
-
-  .button {
-    text-align: center;
-    margin-top: 8vw;
-  }
-}
-
-// Tablet
-@media screen and (min-width: 600px) {
-  .main-img {
-    margin: $spacing*5 auto;
-  }
-
-  .body {
-    h3 {
-      margin-bottom: $spacing*2;
-    }
-
-    .button {
-      margin-top: $spacing*5;
-    }
-  }
-
-  .background-1 {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 230px;
-  }
-
-  .background-2 {
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 270px;
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  .content {
-    max-width: 600px;
-  }
+  width: 60%;
+  margin: auto;
 }
 </style>
