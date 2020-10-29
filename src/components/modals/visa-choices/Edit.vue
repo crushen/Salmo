@@ -18,7 +18,7 @@
         <ul class="margin-s top">
           <li
             @click="selected = visa"
-            v-for="visa in visaOptions"
+            v-for="visa in noDuplicateVisaOptions"
             :key="visa.label"
             class="visa-card">
             <img :src="visa.img" alt="">
@@ -83,6 +83,9 @@ export default {
   computed: {
     nextVisa() {
       return this.visaOptions.find(visa => visa.label === this.profileToUpdate.nextVisa.name)
+    },
+    noDuplicateVisaOptions() {
+      return this.visaOptions.filter(visa => visa.label !== this.profileToUpdate.nextVisa.name)
     }
   },
   methods: {
