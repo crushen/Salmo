@@ -1,7 +1,11 @@
 <template>
-  <main class="content page padding top bottom">
+  <main class="page padding top">
+    <back-button
+      @go-back="$router.go(-1)"
+      text="Back" />
+
     <transition name="slide" mode="out-in">
-      <section v-if="stage === 1" key="1">
+      <section v-if="stage === 1" key="1" class="content">
         <h1 class="margin-l bottom">Oh! You're leaving?</h1>
 
         <p class="margin-m bottom">Before you go, please let us know why you’ve decided to leave Salmo:</p>
@@ -29,7 +33,7 @@
         <img src="@/assets/illustrations/delete-account/girl-looking.svg" alt="" class="img-1">
       </section>
 
-      <section v-else key="2">
+      <section v-else key="2" class="content margin-l bottom">
         <h1 class="margin-m bottom">We're sorry to see you go!</h1>
 
         <img src="@/assets/illustrations/delete-account/delete-account.svg" alt="" class="img-2">
@@ -67,11 +71,13 @@
 </template>
 
 <script>
+import backButton from '@/components/BackButton'
+
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
 export default {
-  components: {},
+  components: { backButton },
   data() {
     return {
       stage: 1,

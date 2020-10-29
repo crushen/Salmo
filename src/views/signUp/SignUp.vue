@@ -15,11 +15,33 @@
         label="email"
         validation="bail|required|email" />
 
-      <FormulateInput
-        v-model="form.password"
-        type="password"
-        label="password"
-        validation="bail|required|min:6|not:password" />
+      <div
+        v-if="!showPassword"
+        class="form-password">
+        <FormulateInput
+          v-model="form.password"
+          type="password"
+          label="password"
+          validation="bail|required|min:6|not:password" />
+
+        <button @click.prevent="showPassword = true" class="none">
+          <img src="@/assets/icons/blue/password-hide.svg" alt="">
+        </button>
+      </div>
+
+      <div
+        v-else
+        class="form-password">
+        <FormulateInput
+          v-model="form.password"
+          type="text"
+          label="password"
+          validation="bail|required|min:6|not:password" />
+
+        <button @click.prevent="showPassword = false" class="none">
+          <img src="@/assets/icons/blue/password-show.svg" alt="">
+        </button>
+      </div>
 
       <p v-if="error" class="error">{{ error }}</p>
 
@@ -35,6 +57,7 @@
 export default {
   data() {
     return {
+      showPassword: false,
       error: null,
       form: {
         username: null,

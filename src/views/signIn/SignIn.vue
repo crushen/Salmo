@@ -9,11 +9,33 @@
         label="email"
         validation="bail|required|email" />
 
-      <FormulateInput
-        v-model="form.password"
-        type="password"
-        label="password"
-        validation="required" />
+      <div
+        v-if="!showPassword"
+        class="form-password">
+        <FormulateInput
+          v-model="form.password"
+          type="password"
+          label="password"
+          validation="required" />
+
+        <button @click.prevent="showPassword = true" class="none">
+          <img src="@/assets/icons/blue/password-hide.svg" alt="">
+        </button>
+      </div>
+
+      <div
+        v-else
+        class="form-password">
+        <FormulateInput
+          v-model="form.password"
+          type="text"
+          label="password"
+          validation="required" />
+
+        <button @click.prevent="showPassword = false" class="none">
+          <img src="@/assets/icons/blue/password-show.svg" alt="">
+        </button>
+      </div>
 
       <router-link
         :to="{ name: 'forgot-password' }"
@@ -43,6 +65,7 @@
 export default {
   data() {
     return {
+      showPassword: false,
       error: null,
       form: {
         email: null,
