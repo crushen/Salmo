@@ -8,18 +8,26 @@
       <h2>{{ statusText }}</h2>
 
       <button
-        v-if="user.profile.nextVisa"
-        @click="toggleModal"
+        v-if="user.profile.nextVisa.name"
+        @click="visaEditIsOpen = true"
         class="none">
         <img src="@/assets/icons/red/edit.svg" alt="">
       </button>
+
+      <transition name="dialog" mode="out-in">
+        <visa-edit
+          v-if="visaEditIsOpen"
+          @closeModal="confirmingClose = true"
+          @submitModal="saveNextVisa"
+          :profileToUpdate="profileToUpdate" />
+      </transition>
     </div>
     
     <div
       v-if="!user.profile.nextVisa.name"
       class="content button-center">
       <button
-        @click="toggleModal"
+        @click="visaSelectIsOpen = true"
         class="margin-l top bottom primary">
         Choose my next visa
       </button>
@@ -32,10 +40,10 @@
     </div>
 
     <transition name="dialog" mode="out-in">
-      <visa-choices
-        v-if="modalIsOpen"
+      <visa-select
+        v-if="visaSelectIsOpen"
         @closeModal="confirmingClose = true"
-        @submitModal="saveVisa"
+        @submitModal="saveNextVisa"
         :profileToUpdate="profileToUpdate" />
     </transition>
 
@@ -54,28 +62,18 @@
         @confirm="confirmClose"
         @cancel="confirmingClose = false" />
     </transition>
-
-    <transition name="dialog" mode="out-in">
-      <change-alert
-        v-if="confirmingChange"
-        @confirm="confirmChange"
-        @cancel="confirmingChange = false"
-        :user="user"
-        :profileToUpdate="profileToUpdate"
-        :nextVisa="nextVisa" />
-    </transition>
   </section>
 </template>
 
 <script>
 import profileCard from '@/components/profile/ProfileCard'
 import visaDatesCard from '@/components/profile/VisaDatesCard'
-import visaChoices from '@/components/modals/VisaChoices'
 import statusTimeline from '@/components/profile/StatusTimeline'
 import tools from '@/components/profile/Tools'
 
+import visaSelect from '@/components/modals/visa-choices/Select'
+import visaEdit from '@/components/modals/visa-choices/Edit'
 import closeAlert from '@/components/alerts/visaChoices/Close'
-import changeAlert from '@/components/alerts/visaChoices/Change'
 
 import { documentChecklist } from '@/assets/js/documentChecklist'
 
@@ -84,15 +82,16 @@ export default {
   components: {
     profileCard,
     visaDatesCard,
-    visaChoices,
     statusTimeline,
     tools,
-    closeAlert,
-    changeAlert
+    visaSelect,
+    visaEdit,
+    closeAlert
   },
   data() {
     return {
-      modalIsOpen: false,
+      visaSelectIsOpen: false,
+      visaEditIsOpen: false,
       confirmingClose: false,
       confirmingChange: false,
       nextVisa: null,
@@ -135,42 +134,20 @@ export default {
     }
   },
   methods: {
-    toggleModal() {
-      this.modalIsOpen = !this.modalIsOpen
-    },
-    saveVisa(form) {
-      if(form.nextVisa) {
-        if(this.user.profile.nextVisa.name) {
-          this.nextVisa = form.nextVisa
-          this.confirmingChange = true
-        } else {
-          this.profileToUpdate.nextVisa.name = form.nextVisa
+    saveNextVisa(selected) {
+      this.profileToUpdate.nextVisa.name = selected
 
-          const checklistObj = this.documentChecklist.find(item => item.name === form.nextVisa)
-          this.profileToUpdate.nextVisa.documentChecklist = checklistObj.checklist
-
-          // if(form.interestedVisas) {
-          //   this.profileToUpdate.interestedVisas = form.interestedVisas
-          // }
-
-          this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
-          this.toggleModal()
-        }
-      }
-    },
-    confirmClose() {
-      this.toggleModal()
-      this.confirmingClose = false
-    },
-    confirmChange() {
-      this.profileToUpdate.nextVisa.name = this.nextVisa
-
-      const checklistObj = this.documentChecklist.find(item => item.name === this.nextVisa)
+      const checklistObj = this.documentChecklist.find(item => item.name === selected)
       this.profileToUpdate.nextVisa.documentChecklist = checklistObj.checklist
 
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
-      this.toggleModal()
-      this.confirmingChange = false
+      this.visaSelectIsOpen = false
+      this.visaEditIsOpen = false
+    },
+    confirmClose() {
+      this.visaSelectIsOpen = false
+      this.visaEditIsOpen = false
+      this.confirmingClose = false
     }
   }
 }

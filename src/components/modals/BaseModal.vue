@@ -1,7 +1,7 @@
 <template>
   <div class="alert-modal-container">
     <dialog open>
-      <button @click="closeModal" class="none">
+      <button @click="closeModal" class="none close">
         <img src="@/assets/icons/grey/cross.svg" alt="">
       </button>
 
@@ -27,7 +27,7 @@ dialog {
   background: $grey;
 }
 
-button {
+button.close {
   position: absolute;
   top: 1em;
   right: 1em;
