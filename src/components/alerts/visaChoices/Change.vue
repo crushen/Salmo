@@ -4,7 +4,7 @@
     @cancel="cancel"
     confirmText="Are you sure you want to change your next visa?">
  
-    <p>You are about to change <b>{{ user.profile.nextVisa.name }}</b> to <b>{{ profileToUpdate.nextVisa.name }}</b>.</p> 
+    <p>You are about to change <b>{{ user.profile.nextVisa.name }}</b> to <b>{{ nextVisa }}</b>.</p> 
     <p>Changing your next visa will restart your documentation list and anything you’ve made to the list will be lost.</p>
   </base-alert>
 </template>
@@ -15,7 +15,8 @@ import baseAlert from '@/components/alerts/BaseAlert'
 export default {
   props: {
     user: { required: true, type: Object },
-    profileToUpdate: { required: true, type: Object }
+    profileToUpdate: { required: true, type: Object },
+    nextVisa: { required: true, type: String }
   },
   components: { baseAlert },
   methods: {

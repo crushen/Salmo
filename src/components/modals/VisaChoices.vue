@@ -46,13 +46,16 @@ import baseModal from '@/components/modals/BaseModal'
 import { visaOptions } from '@/assets/js/visaOptions'
 
 export default {
+  props: {
+    profileToUpdate: { required: true, type: Object }
+  },
   components: { baseModal },
   data() {
     return {
       visaOptions,
       interested: null,
       form: {
-        nextVisa: null,
+        nextVisa: this.profileToUpdate.nextVisa.name,
         interestedVisas: []
       }
     }

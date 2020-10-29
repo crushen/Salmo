@@ -57,6 +57,9 @@ export default {
             questionnaireResults: [],
             currentVisa: {},
             holiday: [],
+            nextVisa: {
+              name: null
+            },
             notifications: {
               newsletter: true,
               planner: true,

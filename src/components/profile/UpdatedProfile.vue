@@ -16,7 +16,7 @@
     </div>
     
     <div
-      v-if="!user.profile.nextVisa"
+      v-if="!user.profile.nextVisa.name"
       class="content button-center">
       <button
         @click="toggleModal"
@@ -35,7 +35,8 @@
       <visa-choices
         v-if="modalIsOpen"
         @closeModal="confirmingClose = true"
-        @submitModal="saveVisa" />
+        @submitModal="saveVisa"
+        :profileToUpdate="profileToUpdate" />
     </transition>
 
     <visa-dates-card
@@ -60,7 +61,8 @@
         @confirm="confirmChange"
         @cancel="confirmingChange = false"
         :user="user"
-        :profileToUpdate="profileToUpdate" />
+        :profileToUpdate="profileToUpdate"
+        :nextVisa="nextVisa" />
     </transition>
   </section>
 </template>
@@ -93,6 +95,7 @@ export default {
       modalIsOpen: false,
       confirmingClose: false,
       confirmingChange: false,
+      nextVisa: null,
       documentChecklist
     }
   },
@@ -137,19 +140,19 @@ export default {
     },
     saveVisa(form) {
       if(form.nextVisa) {
-        this.profileToUpdate.nextVisa = {}
-        this.profileToUpdate.nextVisa.name = form.nextVisa
-
-        const checklistObj = this.documentChecklist.find(item => item.name === form.nextVisa)
-        this.profileToUpdate.nextVisa.documentChecklist = checklistObj.checklist
-
-        if(form.interestedVisas) {
-          this.profileToUpdate.interestedVisas = form.interestedVisas
-        }
-
-        if(this.user.profile.nextVisa) {
+        if(this.user.profile.nextVisa.name) {
+          this.nextVisa = form.nextVisa
           this.confirmingChange = true
         } else {
+          this.profileToUpdate.nextVisa.name = form.nextVisa
+
+          const checklistObj = this.documentChecklist.find(item => item.name === form.nextVisa)
+          this.profileToUpdate.nextVisa.documentChecklist = checklistObj.checklist
+
+          // if(form.interestedVisas) {
+          //   this.profileToUpdate.interestedVisas = form.interestedVisas
+          // }
+
           this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
           this.toggleModal()
         }
@@ -160,6 +163,11 @@ export default {
       this.confirmingClose = false
     },
     confirmChange() {
+      this.profileToUpdate.nextVisa.name = this.nextVisa
+
+      const checklistObj = this.documentChecklist.find(item => item.name === this.nextVisa)
+      this.profileToUpdate.nextVisa.documentChecklist = checklistObj.checklist
+
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       this.toggleModal()
       this.confirmingChange = false
