@@ -1,13 +1,14 @@
 <template>
-  <base-modal @closeModal="closeModal">
+  <base-modal @closeModal="closeModal" class="next-visa-select">
     <h2>Edit my next visa</h2>
 
-    <div v-if="!selected">
+    <div v-if="!selected" class="margin-s top">
       <h3>Your current choice is:</h3>
 
       <div class="center">
         <div class="visa-card margin-s top">
-          <p>{{ nextVisa }}</p>
+          <img :src="nextVisa.img" alt="">
+          <p>{{ nextVisa.label }}</p>
         </div>
       </div>
 
@@ -16,30 +17,31 @@
       <div class="scroll-container">
         <ul class="margin-s top">
           <li
-            @click="selected = visa.label"
+            @click="selected = visa"
             v-for="visa in visaOptions"
             :key="visa.label"
             class="visa-card">
+            <img :src="visa.img" alt="">
             {{ visa.label }}
           </li>
         </ul>
       </div>
     </div>
 
-    <div v-else>
+    <div v-else class="margin-s top">
       <h3>Your change of visa:</h3>
 
       <div class="center">
         <div class="visa-card margin-s top">
-          <p>{{ nextVisa }}</p>
+          <img :src="nextVisa.img" alt="">
+          <p>{{ nextVisa.label }}</p>
         </div>
-      </div>
 
-      <p>to</p>
+        <img src="@/assets/icons/grey/arrow-down.svg" alt="" class="margin-s top">
 
-      <div class="center">
         <div class="visa-card margin-s top">
-          <p>{{ selected }}</p>
+          <img :src="selected.img" alt="">
+          <p>{{ selected.label }}</p>
         </div>
       </div>
 
@@ -75,8 +77,12 @@ export default {
   data() {
     return {
       visaOptions,
-      nextVisa: this.profileToUpdate.nextVisa.name,
       selected: null
+    }
+  },
+  computed: {
+    nextVisa() {
+      return this.visaOptions.find(visa => visa.label === this.profileToUpdate.nextVisa.name)
     }
   },
   methods: {
@@ -84,61 +90,8 @@ export default {
       this.$emit('closeModal')
     },
     handleSubmit() {
-      this.$emit('submitModal', this.selected)
+      this.$emit('submitModal', this.selected.label)
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@/assets/styles/variables.scss';
-
-.scroll-container {
-  overflow-x: scroll;
-  scrollbar-width: none;
-}
-
-.scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-ul {
-  margin-left: 3em;
-  width: 1200px;
-  display: flex;
-  overflow-y: visible;
-}
-
-li {
-  position: relative;
-  margin-right: 1em;
-  display: inline-block;
-}
-
-.visa-card {
-  width: 150px;
-  height: 150px;
-  padding: 1em;
-  border-radius: $radius;
-  background: white;
-  display: flex;
-  align-items: flex-end;
-}
-
-.center {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  // justify-content: center;
-  align-items: center;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-
-  button {
-    min-width: 120px;
-  }
-}
-</style>

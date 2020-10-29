@@ -1,5 +1,5 @@
 <template>
-  <base-modal @closeModal="closeModal">
+  <base-modal @closeModal="closeModal" class="next-visa-select">
     <h2>Choose my next visa</h2>
 
     <div
@@ -10,10 +10,11 @@
       <div class="scroll-container">
         <ul class="margin-s top">
           <li
-            @click="selected = visa.label"
+            @click="selected = visa"
             v-for="visa in visaOptions"
             :key="visa.label"
             class="visa-card">
+            <img :src="visa.img" alt="">
             {{ visa.label }}
           </li>
         </ul>
@@ -25,7 +26,8 @@
 
       <div class="center">
         <div class="visa-card margin-s top">
-          <p>{{ selected }}</p>
+          <img :src="selected.img" alt="">
+          <p>{{ selected.label }}</p>
         </div>
 
         <p class="margin-s top">We will plan everything for you based on your visa choice. Press <b>‘save’</b> to proceed or <b>‘back’</b> to choose again.</p>
@@ -45,26 +47,6 @@
         </div>
       </div>
     </div>
-
-    <div v-else-if="nextVisa && !selected">
-      <p>hello</p>
-    </div>
-
-
-    <!-- <FormulateForm @submit="handleSubmit" class="margin-s top">
-      <FormulateInput
-        v-model="form.nextVisa"
-        type="select"
-        :options="visaOptions"
-        label="Choose your next visa:"
-        placeholder="visa name"
-        class="grey-label" />
-      
-      <FormulateInput
-        type="submit"
-        label="Save"
-        class="margin-m top button" />
-    </FormulateForm> -->
   </base-modal>
 </template>
 
@@ -89,88 +71,8 @@ export default {
       this.$emit('closeModal')
     },
     handleSubmit() {
-      this.$emit('submitModal', this.selected)
+      this.$emit('submitModal', this.selected.label)
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-@import '@/assets/styles/variables.scss';
-
-
-
-.scroll-container {
-  overflow-x: scroll;
-  scrollbar-width: none;
-}
-
-.scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-ul {
-  margin-left: 3em;
-  width: 1200px;
-  display: flex;
-  overflow-y: visible;
-}
-
-li {
-  position: relative;
-  margin-right: 1em;
-  display: inline-block;
-}
-
-.visa-card {
-  width: 150px;
-  height: 150px;
-  padding: 1em;
-  border-radius: $radius;
-  background: white;
-  display: flex;
-  align-items: flex-end;
-}
-
-.center {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  // justify-content: center;
-  align-items: center;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-
-  button {
-    min-width: 120px;
-  }
-}
-// .button {
-//   text-align: right;
-// }
-
-// .interested {
-//   display: flex;
-//   align-items: center;
-
-//   p {
-//     padding-bottom: 0.2em;
-//   }
-
-//   button {
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     margin-left: 0.5em;
-//   }
-
-//   &:not(:first-of-type) {
-//     margin-top: 0.5em;
-//   }
-// }
-
-
-</style>
