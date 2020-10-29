@@ -28,6 +28,13 @@
           <p class="title">ILR Tracker</p>
         </router-link>
       </li>
+
+      <li>
+        <router-link :to="{ name: 'settings', params: { username: user.profile.username } }">
+          <img src="@/assets/illustrations/tools/ilr-tracker.svg" alt="">
+          <p class="title">Settings</p>
+        </router-link>
+      </li>
     </ul>
   </div>
 </template>
@@ -52,7 +59,7 @@ export default {
 
 ul {
   margin-left: 3em;
-  width: 600px;
+  width: 750px;
 }
 
 li {

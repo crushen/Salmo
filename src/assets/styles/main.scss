@@ -268,6 +268,10 @@ dialog {
     &.blue {
       background: #D4E7ED;
     }
+
+    &.grey {
+      background: #EDECEC;
+    }
   }
 }
 
@@ -285,6 +289,11 @@ dialog {
   h3 {
     width: 80%;
     margin: auto;
+  }
+
+  .inner {
+    width: 80%;
+    margin: auto auto 26px;
   }
 }
 

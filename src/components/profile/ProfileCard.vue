@@ -11,13 +11,6 @@
           <p>{{ dependants }}</p>
         </div>
       </div>
-
-      <router-link
-        :to="{ name: 'settings', params: { username: user.profile.username } }"
-        tag="button"
-        class="none">
-        <img src="@/assets/icons/red/edit.svg" alt="">
-      </router-link>
     </div>
   </div>
 </template>
@@ -73,7 +66,7 @@ export default {
 }
 
 .info {
-  width: 35%;
+  width: 50%;
 
   .name {
     color: $blue;
