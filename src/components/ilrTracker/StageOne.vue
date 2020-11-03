@@ -16,9 +16,9 @@
       <h2>Do you have any past visas?</h2>
 
       <div class="inner">
-        <p class="margin-s top">Please list out your previous visas if you already had some. Otherwise, please click “No”. </p>
+        <p class="margin-s top">Please list out your previous visas if you already had some. Otherwise, please click 'Save'. </p>
 
-        <FormulateForm @submit="submitForm" class="margin-m top">
+        <FormulateForm @submit="addVisaToList" class="margin-m top">
 
           <FormulateInput
             v-model="form.pastVisa.name"
@@ -32,37 +32,53 @@
             v-model="form.pastVisa.start"
             type="date"
             label="start"
-            validation="bail|date|customDate"
-            :validation-rules="{customDate: ({ value }) => value < form.currentVisa.end}"
-            :validation-messages="{customDate: 'Start date must be before end date'}"
-            error-behavior="submit"
+            validation="customDateStart"
+            :validation-rules="{customDateStart}"
+            :validation-messages="{customDateStart: 'Start date must be before end date'}"
             class="grey-label" />
 
           <FormulateInput
             v-model="form.pastVisa.end"
             type="date"
             label="end"
-            validation="bail|date|customDate"
-            :validation-rules="{customDate: ({ value }) => value > form.pastVisa.start}"
-            :validation-messages="{customDate: 'End date must be after start date'}"
-            error-behavior="submit"
+            validation="customDateEnd"
+            :validation-rules="{customDateEnd}"
+            :validation-messages="{customDateEnd: 'End date must be after start date'}"
             class="grey-label" />
 
-          <div class="button-center">
+          <div class="btn-container">
             <FormulateInput
               type="submit"
-              label="Save"
+              label="Add Visa"
               class="button margin-s top" />
           </div>
         </FormulateForm>
 
-        <ul v-if="pastVisas.length" class="past-visa-list">
+        <ul v-if="pastVisas.length" class="past-visa-list margin-m top">
           <li
-            v-for="visa in pastVisas"
+            v-for="(visa, index) in sortByDate"
             :key="visa.name">
-            <p>{{ visa.name }} - {{ visa.start }} to {{ visa.end }}</p>
+            <div class="text">
+              <p><b>{{ visa.name }}</b></p>
+              <p>{{ date(visa.start) }} to {{ date(visa.end) }}</p>
+            </div>
+
+
+            <div class="buttons">
+              <button @click="deleteVisa(index)" class="none">
+                <img src="@/assets/icons/red/cross.svg" alt="">
+              </button>
+            </div>
           </li>
         </ul>
+
+        <div class="btn-container">
+          <button
+            :class="pastVisas.length ? 'margin-m' : 'margin-s'"
+            class="top primary">
+            Save
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -85,10 +101,68 @@ export default {
       visaOptions
     }
   },
+  computed: {
+    sortByDate() {
+      const array = this.pastVisas
+      return array.sort((a, b) => new Date(b.start) - new Date(a.start)).reverse()
+    }
+  },
   methods: {
-    submitForm() {
-      console.log('hello')
+    customDateStart({ value }) {
+      if(this.form.pastVisa.start && this.form.pastVisa.end) {
+        return value < this.form.pastVisa.end
+      } else {
+        return true
+      }
+    },
+    customDateEnd({ value }) {
+      if(this.form.pastVisa.end && this.form.pastVisa.start) {
+        return value > this.form.pastVisa.start
+      } else {
+        return true
+      }
+    },
+    addVisaToList() {
+      this.pastVisas.push(this.form.pastVisa)
+      this.form.pastVisa = { name: null, start: null, end: null }
+    },
+    deleteVisa(index) {
+      this.pastVisas.splice(index, 1)
+    },
+    date(date) {
+      return date.split('-').reverse().join('/')
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.btn-container {
+  text-align: right;
+
+  button {
+    min-width: 120px;
+  }
+}
+
+.past-visa-list {
+  li {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:not(:first-of-type) {
+      margin-top: 1rem;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.buttons button {
+  margin-left: 0.5rem;
+}
+</style>
