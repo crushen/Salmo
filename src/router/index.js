@@ -153,32 +153,32 @@ const routes = [
   { 
     path: '/about', 
     name: 'about', 
-    component: () => import('@/views/About'),
-    meta: { onlyVerifiedUser: true }
+    component: () => import('@/views/About')
+    // meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/about/help-centre', 
     name: 'help-centre', 
-    component: () => import('@/views/helpCentre/HelpCentre'),
-    meta: { onlyVerifiedUser: true }
+    component: () => import('@/views/helpCentre/HelpCentre')
+    // meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/about/help-centre/:slug', 
     name: 'help-centre-page', 
-    component: () => import('@/views/helpCentre/HelpCentrePage'),
-    meta: { onlyVerifiedUser: true }
+    component: () => import('@/views/helpCentre/HelpCentrePage')
+    // meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/about/privacy', 
     name: 'privacy', 
-    component: () => import('@/views/Privacy'),
-    meta: { onlyVerifiedUser: true }
+    component: () => import('@/views/Privacy')
+    // meta: { onlyVerifiedUser: true }
   },
   { 
     path: '/about/terms-and-conditions', 
     name: 'terms', 
-    component: () => import('@/views/Terms'),
-    meta: { onlyVerifiedUser: true }
+    component: () => import('@/views/Terms')
+    // meta: { onlyVerifiedUser: true }
   },
   { path: '/page-not-found',
     name: 'not-found',

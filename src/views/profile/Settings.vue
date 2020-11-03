@@ -74,23 +74,6 @@
           </div>
         </section>
 
-        <!-- <section class="margin-m top">
-          <h2>Sign Out</h2>
-
-          <button
-            @click="showLogoutAlert = true"
-            class="tertiary margin-s top">
-            Sign Out
-          </button>
-
-          <transition name="dialog" mode="out-in">
-            <logout-alert
-              v-if="showLogoutAlert"
-              @confirm="handleLogout"
-              @cancel="showLogoutAlert = false" />
-          </transition>
-        </section> -->
-
         <section class="tools-card margin-m top">
           <h2 class="margin-s bottom">Reset Password</h2>
 
@@ -122,7 +105,6 @@
 import backButton from '@/components/BackButton'
 import editAccount from '@/components/modals/EditAccount'
 import editAccountAlert from '@/components/alerts/CloseEditAccount'
-// import logoutAlert from '@/components/alerts/logout/ConfirmLogout'
 
 export default {
   components: { backButton, editAccount, editAccountAlert },
@@ -130,8 +112,7 @@ export default {
     return {
       user: this.$store.state.auth.user,
       modalIsOpen: false,
-      confirmingClose: false,
-      showLogoutAlert: false
+      confirmingClose: false
     }
   },
   watch: {
@@ -183,23 +164,6 @@ export default {
     confirmClose() {
       this.confirmingClose = false
       this.toggleModal()
-    },
-    handleLogout() {
-      this.showLogoutAlert = false
-
-      setTimeout(() => {
-        this.$store.dispatch('auth/logOut')
-        .then(() => {
-          this.$store. commit('auth/setLoggedOut')
-          this.$store.commit('wave/setWaveAway', false)
-          this.$store.commit('wave/setFullScreen', false)
-          this.$store.dispatch('wave/handleTransition')
-
-          if(this.$route.path !== '/') {
-            this.$router.push('/')
-          }
-        })
-      }, 800)
     }
   }
 }

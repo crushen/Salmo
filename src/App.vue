@@ -16,7 +16,7 @@
         backgroundPosition: `${waveX}px ${waveY}px`
       }" />
 
-    <mobile-nav v-if="innerWidth < 600 && $route.meta.onlyVerifiedUser" />
+    <mobile-nav v-if="innerWidth < 600" />
 
     <!-- <sidebar-nav v-else /> -->
 
