@@ -10,7 +10,22 @@
             <h1>ILR Tracker</h1>
           </div>
 
-          <section class="content margin-m top bottom">
+          <section v-if="!user.profile.pastVisas" class="margin-m top">
+            <stage-one />
+          </section>
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- <section class="content margin-m top bottom">
             <div class="year-title">
               <h2>10 Year Plan</h2>
               <button class="none">
@@ -26,7 +41,7 @@
 
           <section>
             <pr-calc />
-          </section>
+          </section> -->
 
           <!-- <section>
             <tracker
@@ -51,12 +66,14 @@ import results from '@/components/ilrTracker/Results'
 import backButton from '@/components/BackButton'
 import prCalc from '@/components/profile/prCalc/PrCalculator'
 
+import stageOne from '@/components/ilrTracker/StageOne'
+
 // import addHoliday from '@/components/profile/prCalc/AddHoliday'
 // import editHoliday from '@/components/profile/prCalc/EditHoliday'
 // import alert from '@/components/Alert'
 
 export default {
-  components: { backButton, prCalc },
+  components: { backButton, stageOne },
   data() {
     return {
       showResults: false,
@@ -71,11 +88,12 @@ export default {
       index: null,
       showAlert: false
     }
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user
+    }
   }
-  // computed: {
-  //   user() {
-  //     return this.$store.state.auth.user
-  //   },
   //   sortByDate() {
   //     const array = this.user.profile.holiday
   //     return array.sort((a, b) => new Date(b.start) - new Date(a.start)).reverse()
