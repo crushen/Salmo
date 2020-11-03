@@ -29,7 +29,7 @@
           <p>Home</p>
         </router-link>
 
-        <template v-if="$route.meta.onlyVerifiedUser">
+        <template v-if="user && user.emailVerified">
           <router-link 
             @click.native="nextPage"
             :to="{ name: 'visa-info' }">
@@ -70,7 +70,7 @@
           </router-link>
         </template> -->
 
-        <template v-if="$route.meta.onlyVerifiedUser">
+        <template v-if="user && user.emailVerified">
           <router-link 
             @click.native="nextPage"
             :to="{ name: 'profile', params: { username: user.profile.username } }">
@@ -84,8 +84,8 @@
           </router-link>
         </template>
 
-        <template v-if="$route.meta.onlyVerifiedUser">
-          <a @click="showLogoutAlert = true">
+        <template v-if="user">
+          <a @click="showLogoutAlert = true, nextPage()">
             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48">
               <path class="background" d="M8.19,39.74C10,37.87,14.57,32.19,24,32.19a20.28,20.28,0,0,1,15.81,7.55" fill="#77b3c4"/>
               <ellipse class="background" cx="24" cy="19.26" rx="9.92" ry="9.96" fill="#77b3c4"/>
@@ -130,10 +130,10 @@ export default {
   },
   computed: {
     user() {
-      return this.$store.state.auth.user;
+      return this.$store.state.auth.user
     },
     isAuthenticated() {
-      return this.$store.getters['auth/isAuthenticated'];
+      return this.$store.getters['auth/isAuthenticated']
     }
   },
   methods: {
@@ -155,7 +155,7 @@ export default {
       if(this.open) {
         anime({
           targets: '.morph',
-          d: [{ value: 'M213 584C115.12 583.999 33 584 0 584V667L375 667V584C319 584 234 584 213 584Z' }],//
+          d: [{ value: 'M213 584C115.12 583.999 33 584 0 584V667L375 667V584C319 584 234 584 213 584Z' }],
           easing: 'easeInOutQuint',
           duration: 700
         })
