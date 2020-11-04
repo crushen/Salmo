@@ -10,20 +10,15 @@
             <h1>ILR Tracker</h1>
           </div>
 
-          <section v-if="!user.profile.pastVisas" class="margin-m top">
-            <stage-one />
-          </section>
+          <transition name="slide" mode="out-in">
+            <section v-if="!user.profile.ilrPlan" class="margin-m top" key="stageOne">
+              <stage-one :user="user" :profileToUpdate="profileToUpdate" />
+            </section>
 
-
-
-
-
-
-
-
-
-
-
+            <section v-else key="stageTwo">
+              <h2>hello</h2>
+            </section>
+          </transition>
 
           <!-- <section class="content margin-m top bottom">
             <div class="year-title">
@@ -92,6 +87,9 @@ export default {
   computed: {
     user() {
       return this.$store.state.auth.user
+    },
+    profileToUpdate() { 
+      return {...this.user.profile} 
     }
   }
   //   sortByDate() {
