@@ -1,5 +1,12 @@
 <template>
   <div>
+    <transition name="dialog" mode="out-in">
+      <delete-alert
+        v-if="deletingVisa"
+        @confirm="deleteVisa(deleteIndex), deletingVisa = false"
+        @cancel="deletingVisa = false, deleteIndex = null" />
+    </transition>
+
     <div class="tools-card margin-m bottom">
       <h2>What is ILR?</h2>
 
@@ -72,7 +79,7 @@
             </div>
 
             <div class="buttons">
-              <button @click="deleteVisa(index)" class="none">
+              <button @click="deletingVisa = true, deleteIndex = index" class="none">
                 <img src="@/assets/icons/red/cross.svg" alt="">
               </button>
             </div>
@@ -119,12 +126,14 @@
 
 <script>
 import { visaOptions } from '@/assets/js/visaOptions'
+import deleteAlert from '@/components/alerts/ilrTracker/Delete'
 
 export default {
   props: {
     user: { type: Object, required: true },
     profileToUpdate: { type: Object, required: true }
   },
+  components: { deleteAlert },
   data() {
     return {
       form: {
@@ -137,7 +146,9 @@ export default {
       pastVisas: [],
       selectedPlan: null,
       error: null,
-      visaOptions
+      visaOptions,
+      deletingVisa: false,
+      deleteIndex: null
     }
   },
   computed: {
