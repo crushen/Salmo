@@ -5,10 +5,18 @@
         v-if="editingPrefs"
         @closeModal="editingPrefs = false"
         @submitModal="handleEdit"
-        @add-past-visa="addPastVisa"
+        @add-past-visa="addingPastVisa = true"
         @edit-past-visa="editPastVisa"
         @delete-past-visa="deletePastVisa"
         :profileToUpdate="profileToUpdate"
+        :user="user" />
+    </transition>
+
+    <transition name="dialog" mode="out-in">
+      <add-past-visa
+        v-if="addingPastVisa"
+        @closeModal="addingPastVisa = false"
+        @submitModal="handleAddVisa"
         :user="user" />
     </transition>
 
@@ -57,15 +65,17 @@ import travelLog from '@/components/ilrTracker/TravelLog'
 import results from '@/components/ilrTracker/Results'
 import editPreferences from '@/components/modals/ilrTracker/EditPreferences'
 import editPastVisa from '@/components/modals/ilrTracker/EditPastVisa'
+import addPastVisa from '@/components/modals/ilrTracker/AddPastVisa'
 import deleteAlert from '@/components/alerts/ilrTracker/Delete'
 
 import prCalc from '@/components/profile/prCalc/PrCalculator'
 
 export default {
-  components: { travelLog, results, prCalc, editPreferences, editPastVisa, deleteAlert },
+  components: { travelLog, results, prCalc, editPreferences, addPastVisa, editPastVisa, deleteAlert },
   data() {
     return {
       user: this.$store.state.auth.user,
+      addingPastVisa: false,
       editingPrefs: false,
       editingPastVisa: false,
       visaToEdit: null,
@@ -80,6 +90,12 @@ export default {
     }
   },
   methods: {
+    handleAddVisa(visa) {
+      this.profileToUpdate.pastVisas.push(visa)
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
+
+      this.addingPastVisa = false
+    },
     handleEdit(form) {
       this.editingPrefs = false
       this.profileToUpdate.ilrPlan = form.selectedPlan
@@ -93,9 +109,6 @@ export default {
       this.editingPastVisa = false
       this.visaToEdit = null
       this.visaIndex = null
-    },
-    addPastVisa() {
-      console.log('add')
     },
     editPastVisa(index) {
       this.visaToEdit = this.user.profile.pastVisas[index]
