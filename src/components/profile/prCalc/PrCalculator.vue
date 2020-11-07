@@ -91,7 +91,7 @@
         </div>
       </div>
 
-      <!-- <div class="result">
+      <div class="result">
         <div class="description">
           <p><b>How is this calculated?</b></p>
           <p class="margin">To qualify for ILR, you are only allowed <b>180 days</b> of absence per rolling 12 month periods starting from the date of your first holiday. However any dates pre Nov 2016 will be calculated on a fixed 12 months from the date of your visa start.</p>
@@ -193,7 +193,7 @@
             </div>
           </section>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -545,9 +545,9 @@ export default {
     }
   },
   mounted() {
-    //this.checkIfPre2016();
-    // this.getPre2016visas();
-    // this.getPost2016holiday();
+    this.checkIfPre2016();
+    this.getPre2016visas();
+    this.getPost2016holiday();
   }
 }
 </script>

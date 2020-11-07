@@ -24,6 +24,10 @@ h3 { @include font(14px, 400) }
 p, a, li { @include font(14px, 300) }
 a, .error { color: $red }
 
+p.small {
+  font-size: 12px;
+}
+
 // Elements
 .button-center {
   width: 100%;
@@ -291,9 +295,24 @@ dialog {
     margin: auto;
   }
 
+  .header {
+    margin: 16px 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
   .inner {
     width: 80%;
     margin: auto auto 26px;
+  }
+
+  &.empty {
+    min-height: 180px;
   }
 }
 
