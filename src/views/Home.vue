@@ -1,30 +1,62 @@
 <template>
-  <main>
-    <div
-      class="background"
-      :style="{ backgroundImage: `url(${require('@/assets/backgrounds/home-background.svg')})` }" />
+  <div>
+    <header>
+      <img src="@/assets/backgrounds/home-background-2.svg" alt="" class="background">
 
-    <section id="home" class="content page padding bottom">
-      <div class="buttons">
-        <router-link
-          :to="{ name: 'sign-in' }"
-          tag="button"
-          
-          class="primary">
-          Sign In
-        </router-link>
+      <div class="logo">
+        <img src="@/assets/logo/name.svg" alt="" class="text">
+        <img src="@/assets/logo/colour.svg" alt="" class="img">
+      </div>
+    </header>
 
-        <router-link
-          :to="{ name: 'sign-up' }"
-          tag="button"
-          class="secondary">
+    <main>
+      <section class="button-center">
+        <router-link :to="{ name: 'register' }" tag="button" class="primary">
           Sign Up
         </router-link>
-      </div>
+      </section>
 
-      <p>by signing up on Salmo, you agree to our Terms & Conditions and Privacy Policies.</p>
-    </section>
-  </main>
+      <section class="content margin-l top">
+        <h1>Making your visa process an easier journey.</h1>
+
+        <div class="inner">
+          <p class=" margin-m top">Whether you have a plan or not, we are here to help you in every step of the way.</p>
+
+          <p class="margin-s top">Research, organisation, preparation. You name it. Just Salmo it.</p>
+        </div>
+      </section>
+
+      <section class="margin-l top">
+        <div class="tools-card">
+          <p>Your personal assistance for the next visa.</p>
+
+          <img src="@/assets/illustrations/home/card-1.svg" alt="" class="img">
+        </div>
+
+        <div class="tools-card">
+          <p>A tailored quiz to fit your past, present and future.</p>
+
+          <img src="@/assets/illustrations/home/card-2.svg" alt="" class="img">
+        </div>
+
+        <div class="tools-card blue">
+          <p>Plus, the most complete & free visa guide. Ever.</p>
+
+          <img src="@/assets/illustrations/home/card-3.svg" alt="" class="img">
+        </div>
+
+        <div class="tools-card yellow">
+          <p>More hidden features for limited time, sign up to experience now!</p>
+        </div>
+      </section>
+
+      <section class="button-center margin-m top">
+        <router-link :to="{ name: 'register' }" tag="button" class="primary">
+          Sign Up
+        </router-link>
+      </section>
+    </main>
+  </div>
 </template>
 
 <script>
@@ -79,41 +111,90 @@
 </script>
 
 <style lang="scss" scoped>
+@import '@/assets/styles/variables.scss';
 
-.background {
-  width: 100%;
-  height: calc(100vh - 120px);
-  margin-top: 120px;
-  position: absolute;
-  opacity: 0.2;
-  background-position: right top;
-  z-index: 0;
+main {
+  padding-bottom: 100px;
 }
 
-#home {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+header {
   position: relative;
-  z-index: 5;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  button {
-    width: 152px;
-
-    &:last-of-type {
-      margin: 8px 0 32px 0;
-    }
-  }
+  height: 80vh;
 }
 
 p {
-  text-align: center;
+  font-weight: 500;
+}
+
+.background {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.logo {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 150px;
+
+  .img {
+    width: 60px;
+  }
+}
+
+button {
+  min-width: 140px;
+}
+
+.inner {
+  width: 85%;
+  margin: auto;
+}
+
+.tools-card {
+  background: $pink;
+  padding: 16px 26px;
+  position: relative;
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+
+  &:not(:first-of-type) {
+    margin: 1rem;
+  }
+
+  &.blue {
+    background: $light-blue;
+  }
+
+  &.yellow {
+    background: $yellow;
+  }
+
+  p {
+    width: 40%;
+    font-size: 16px;
+    padding-bottom: 2rem;
+  }
+
+  .img {
+    position: absolute;
+    left: 2rem;
+    bottom: 0;
+  }
+
+  &:nth-of-type(2) {
+    .img {
+      left: 6rem;
+    }
+  }
 }
 </style>

@@ -14,6 +14,12 @@ const routes = [
     component: () => import('@/views/Home.vue')
   },
   {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/Register.vue'),
+    meta: { onlyGuestUser: true }
+  },
+  {
     path: '/sign-in',
     name: 'sign-in',
     component: () => import('@/views/signIn/SignIn'),

@@ -21,6 +21,7 @@
     <!-- <sidebar-nav v-else /> -->
 
     <img
+      v-if="$route.name !== 'home'"
       src="@/assets/logo/colour.svg" 
       alt="Salmo logo"
       class="small-logo">
@@ -59,7 +60,7 @@ export default {
     waveX() {
       if(!this.waveFullScreen) {
         switch(this.$route.name) {
-          case 'home':
+          case 'register':
             return -50
           case 'sign-up':
             return 950
@@ -85,7 +86,7 @@ export default {
     waveY() {
       if(!this.waveFullScreen) {
         switch(this.$route.name) {
-          case 'home':
+          case 'register':
             return -800
           case 'sign-up':
             return -650
@@ -122,7 +123,7 @@ export default {
     },
     visible() {
       switch(this.$route.name) {
-        case 'home':
+        case 'register':
           return true
         case 'sign-up':
           return true
