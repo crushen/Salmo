@@ -52,11 +52,11 @@
       </div>
     </div>
 
-    <travel-log />
+    <travel-log :user="user" :profileToUpdate="profileToUpdate" />
 
     <results class="margin-m top" />
 
-    <pr-calc />
+    <!-- <pr-calc /> -->
   </div>
 </template>
 
@@ -68,13 +68,12 @@ import editPastVisa from '@/components/modals/ilrTracker/EditPastVisa'
 import addPastVisa from '@/components/modals/ilrTracker/AddPastVisa'
 import deleteAlert from '@/components/alerts/ilrTracker/Delete'
 
-import prCalc from '@/components/profile/prCalc/PrCalculator'
+// import prCalc from '@/components/profile/prCalc/PrCalculator'
 
 export default {
-  components: { travelLog, results, prCalc, editPreferences, addPastVisa, editPastVisa, deleteAlert },
+  components: { travelLog, results, editPreferences, addPastVisa, editPastVisa, deleteAlert },
   data() {
     return {
-      user: this.$store.state.auth.user,
       addingPastVisa: false,
       editingPrefs: false,
       editingPastVisa: false,
@@ -85,6 +84,9 @@ export default {
     }
   },
   computed: {
+    user() {
+      return this.$store.state.auth.user
+    },
     profileToUpdate() { 
       return {...this.user.profile} 
     }
@@ -125,7 +127,7 @@ export default {
 
       this.deletingVisa = false
       this.deleteIndex = null
-    },
+    }
   }
 }
 </script>
