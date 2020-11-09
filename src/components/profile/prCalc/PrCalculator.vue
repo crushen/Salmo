@@ -43,10 +43,10 @@
               v-for="(item, index) in sortByDate"
               :key="index"
               class="item">
-              <p class="location">{{ item.location }}</p>
+              <p class="location">{{ item.location.city }}</p>
               <p
                 class="dates" 
-                :aria-label="`${item.location} start and end`">
+                :aria-label="`${item.location.city} start and end`">
                 {{ date(item.start) }} - {{ date(item.end) }}
               </p>
 
@@ -55,14 +55,14 @@
                   :id="`edit-btn-${index}`"
                   @click="openEdit(index)"
                   class="tertiary aria-btn edit-btn"
-                  :aria-label="`Edit ${item.location}`"
+                  :aria-label="`Edit ${item.location.city}`"
                   aria-expanded="false">
                   Edit
                 </button>
                 <button 
                   @click="openAlert(index)"
                   class="tertiary aria-btn"
-                  :aria-label="`Delete ${item.location}`">
+                  :aria-label="`Delete ${item.location.city}`">
                   Delete
                 </button>
               </div>
@@ -127,9 +127,9 @@
 
                 <div 
                   v-for="holiday in year.holidays"
-                  :key="holiday.location"
+                  :key="holiday.location.city"
                   class="year">
-                  {{ holiday.location }} - {{ holiday.days }} days
+                  {{ holiday.location.city }} - {{ holiday.days }} days
                 </div>
 
                 <img
@@ -167,7 +167,7 @@
                 v-for="(holiday, index) in year.holidays"
                 :key="index"
                 class="year">
-                {{ holiday.location }} - {{ holiday.days }} days
+                {{ holiday.location.city }} - {{ holiday.days }} days
               </div>
 
               <img

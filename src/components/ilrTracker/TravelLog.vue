@@ -19,7 +19,7 @@
 
       <ul v-if="user.profile.holiday.length" class="holiday">
         <li
-          v-for="(item, index) in sortByDate"
+          v-for="(item, index) in user.profile.holiday"
           :key="index"
           class="item">
           <p class="location">{{ item.location.city }},<br>{{ item.location.country }}</p>
@@ -46,10 +46,10 @@ export default {
     }
   },
   computed: {
-    sortByDate() {
-      const array = this.user.profile.holiday
-      return array.sort((a, b) => new Date(a.start) - new Date(b.start))
-    }
+    // sortByDate() {
+    //   const array = this.user.profile.holiday
+    //   return array.sort((a, b) => new Date(a.start) - new Date(b.start))
+    // }
   },
   methods: {
     date(date) {
