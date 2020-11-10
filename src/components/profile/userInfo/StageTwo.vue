@@ -1,30 +1,34 @@
 <template>
-  <section class="user-profile">
-    <div class="title content">
-      <h1>What is your plan in the UK? (1/2)</h1>
+  <section class="user-profile content">
+    <div class="title">
+      <h1>What is your plan in the UK? <br>(1/2)</h1>
     </div>
 
-    <FormulateForm
-      @submit="submitForm"
-      class="content">
+    <FormulateForm>
       <FormulateInput
         v-model="form.planningTo"
         type="checkbox"
         :options="{study: 'study', work: 'work', business: 'start a business', notSure: 'not sure yet! see how it goes'}"
-        label="I'm planning to..." />
+        label="I'm planning to..."
+        class="grey-label user-info" />
 
-      <FormulateInput
-        v-model="form.permanentResidency"
-        type="radio"
-        :options="{yes: 'yes', no: 'no'}"
-        label="Get permanent residency?"
-        validation="required" />
-
-      <FormulateInput
-        type="submit"
-        label="Next"
-        class="button" />
+      <div class="margin-top">
+        <FormulateInput
+          v-if="form.planningTo.length"
+          v-model="form.permanentResidency"
+          type="radio"
+          :options="{yes: 'yes', no: 'no'}"
+          label="Get permanent residency?"
+          validation="required"
+          class="grey-label user-info" />
+      </div>
     </FormulateForm>
+
+    <div v-if="form.permanentResidency" class="button">
+      <button @click="submitForm" class="outline submit">
+        Next
+      </button>
+    </div>
   </section>
 </template>
 
@@ -52,3 +56,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+br {
+  display: none;
+}
+
+@media screen and (min-width: 700px) {
+  br {
+    display: block;
+  }
+}
+</style>

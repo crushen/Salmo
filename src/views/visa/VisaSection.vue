@@ -163,6 +163,7 @@ h3 {
   /deep/ a {
     color: $dark-font;
     text-decoration: underline;
+    font-weight: 500;
   }
 
   /deep/ strong {
@@ -179,7 +180,8 @@ h3 {
     }
   }
 
-  /deep/ ul {
+  /deep/ ul,
+  /deep/ ol {
     list-style-position: inside;
     margin: 8px auto;
     max-width: 500px;

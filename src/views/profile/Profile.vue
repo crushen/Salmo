@@ -4,10 +4,10 @@
 
     <updated-profile v-else :user="user" />
 
-    <img
+    <!-- <img
       v-if="!this.user.profile.completeUserInfo"
       src="@/assets/backgrounds/bottom-wave.svg"
-      alt="">
+      alt=""> -->
   </main>
 </template>
 

@@ -82,4 +82,19 @@ img {
   position: absolute;
   transform: translate3d(0, 3em, 0);
 }
+
+@media screen and (min-width: 700px) {
+  .buttons {
+    margin-top: 15em;
+
+    button:first-of-type {
+      margin-bottom: 1em;
+    }
+  }
+
+  img {
+    width: 200px;
+    transform: translate3d(0, 8rem, 0);
+  }
+}
 </style>

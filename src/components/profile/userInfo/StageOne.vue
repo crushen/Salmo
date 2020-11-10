@@ -1,23 +1,23 @@
 <template>
-  <section class="user-profile">
-    <div class="title content">
+  <section class="user-profile content">
+    <div class="title">
       <h1>Complete your profile</h1>
     </div>
 
-    <FormulateForm
-      @submit="submitForm"
-      class="content">
+    <FormulateForm>
       <FormulateInput
         v-model="form.name"
         type="text"
         label="full name"
-        validation="required" />
+        validation="required"
+        class="grey-label user-info" />
 
       <FormulateInput
         v-model="form.birthday"
         type="date"
         label="birthday"
-        validation="bail|required|date" />
+        validation="bail|required|date"
+        class="grey-label user-info" />
 
       <FormulateInput
         v-model="form.nationality"
@@ -25,7 +25,8 @@
         :options="makeOptions(countries)"
         label="nationality"
         validation="required"
-        placeholder="select an option" />
+        placeholder="select an option"
+        class="grey-label user-info" />
 
       <FormulateInput
         v-model="form.currentVisa.name"
@@ -33,7 +34,8 @@
         :options="visaOptions"
         label="current visa"
         validation="required"
-        placeholder="select an option" />
+        placeholder="select an option"
+        class="grey-label user-info" />
 
       <FormulateInput
         v-model="form.currentVisa.start"
@@ -42,7 +44,8 @@
         validation="bail|required|date|customDate"
         :validation-rules="{customDate: ({ value }) => value < form.currentVisa.end}"
         :validation-messages="{customDate: 'Start date must be before end date'}"
-        error-behavior="submit" />
+        error-behavior="submit"
+        class="grey-label user-info" />
 
       <FormulateInput
         v-model="form.currentVisa.end"
@@ -51,20 +54,25 @@
         validation="bail|required|date|customDate"
         :validation-rules="{customDate: ({ value }) => value > form.currentVisa.start}"
         :validation-messages="{customDate: 'End date must be after start date'}"
-        error-behavior="submit" />
+        error-behavior="submit"
+        class="grey-label user-info" />
 
-      <FormulateInput
-        v-model="form.dependants"
-        type="radio"
-        :options="{yes: 'yes', no: 'no'}"
-        label="do you have dependants?"
-        validation="required" />
-
-      <FormulateInput
-        type="submit"
-        label="Next"
-        class="button" />
+      <div class="margin-top">
+        <FormulateInput
+          v-model="form.dependants"
+          type="radio"
+          :options="{yes: 'yes', no: 'no'}"
+          label="do you have dependants?"
+          validation="required"
+          class="grey-label user-info" />
+      </div>
     </FormulateForm>
+
+    <div class="button">
+      <button @click="submitForm" class="outline submit">
+        Next
+      </button>
+    </div>
   </section>
 </template>
 

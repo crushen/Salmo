@@ -1,32 +1,35 @@
 <template>
-  <section class="user-profile">
-    <div class="title content">
-      <h1>Let's talk about your visa. (2/2)</h1>
+  <section class="user-profile content">
+    <div class="title">
+      <h1>Let's talk about your visa. <br>(2/2)</h1>
     </div>
     
-    <FormulateForm
-      @submit="submitForm"
-      class="content">
+    <FormulateForm>
       <FormulateInput
         v-model="form.newVisaOptions"
         type="radio"
         :options="{yes: 'yes', no: 'no', notSure: 'not sure yet'}"
         label="Are you looking to apply, extend, or switch to a new visa?"
-        validation="required"  />
+        validation="required"
+        class="grey-label user-info" />
 
-      <FormulateInput
-        v-if="form.newVisaOptions === 'yes'"
-        v-model="form.whichVisa"
-        type="radio"
-        :options="{yes: 'yes', no: 'no'}"
-        label="Do you already know which visa you want to apply to?"
-        validation="required" />
-
-      <FormulateInput
-        type="submit"
-        label="Save"
-        class="button" />
+      <div class="margin-top">
+        <FormulateInput
+          v-if="form.newVisaOptions === 'yes'"
+          v-model="form.whichVisa"
+          type="radio"
+          :options="{yes: 'yes', no: 'no'}"
+          label="Do you already know which visa you want to apply to?"
+          validation="required"
+          class="grey-label user-info" />
+      </div>
     </FormulateForm>
+
+    <div v-if="form.newVisaOptions" class="button">
+      <button @click="submitForm" class="outline submit">
+        Save
+      </button>
+    </div>
   </section>
 </template>
 
@@ -55,3 +58,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+br {
+  display: none;
+}
+
+@media screen and (min-width: 700px) {
+  br {
+    display: block;
+  }
+}
+</style>
