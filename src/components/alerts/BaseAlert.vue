@@ -33,6 +33,7 @@ export default {
 dialog {
   background: $red;
   width: 85%;
+  max-width: 400px;
 }
 
 p {
