@@ -75,4 +75,17 @@ li {
     width: 60%;
   }
 }
+
+@media screen and (min-width: 700px) {
+  ul {
+    margin-left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+    li {
+      margin-right: 0;
+    }
+  }
+}
 </style>

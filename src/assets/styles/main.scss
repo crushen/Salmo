@@ -395,6 +395,38 @@ dialog {
     }
   }
 
+  .margin {
+    &-s {
+      &.top {
+        margin-top: 20px;
+      }
+  
+      &.bottom {
+        margin-bottom: 20px;
+      }
+    }
+  
+    &-m {
+      &.top {
+        margin-top: 48px;
+      }
+  
+      &.bottom {
+        margin-bottom: 48px;
+      }
+    }
+  
+    &-l {
+      &.top {
+        margin-top: 96px;
+      }
+  
+      &.bottom {
+        margin-bottom: 96px;
+      }
+    }
+  }
+
   .user-profile {
     min-height: calc(100vh - 300px);
     margin: auto;

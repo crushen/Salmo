@@ -63,6 +63,8 @@ export default {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  max-width: 400px;
+  margin: auto;
 }
 
 .info {

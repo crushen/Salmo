@@ -38,6 +38,8 @@ export default {
 .card {
   display: flex;
   width: 100%;
+  max-width: 450px;
+  margin: auto;
   justify-content: space-between;
   background: $pink;
   border-radius: $radius;
