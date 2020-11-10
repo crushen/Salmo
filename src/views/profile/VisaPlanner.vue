@@ -9,10 +9,11 @@
         <div class="content">
           <h1 class="margin-m top">Visa Planner</h1>
 
-          <h2 class="margin-s top bottom">{{ user.profile.nextVisa.name }}</h2>
+          <h2 v-if="!user.profile.nextVisa.name" class="margin-s top">We will update your planner once you have chosen your next visa!</h2>
+          <h2 v-else class="margin-s top">{{ user.profile.nextVisa.name }}</h2>
         </div>
 
-        <doc-checklist :user="user" />
+        <doc-checklist :user="user" class="margin-m top" />
 
         <timeline :user="user" class="margin-m top" />
       </div>

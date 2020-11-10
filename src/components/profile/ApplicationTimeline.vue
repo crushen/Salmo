@@ -1,69 +1,71 @@
 <template>
-  <section class="tools-card">
+  <section class="tools-card empty">
     <h2>Estimated Timeline</h2>
 
-    <div class="inner-scroll margin-m top bottom">
-      <div 
-        v-for="(item, index) in applicationTimeline"
-        :key="index"
-        class="timeline-item">
-        <p v-if="item.time.includes('before')"><b>{{ item.time }} 01/01/2011</b></p>
-        <p v-else><b>{{ item.time }}</b></p>
+    <div v-if="user.profile.nextVisa.name">
+      <div class="inner-scroll margin-m top bottom">
+        <div 
+          v-for="(item, index) in applicationTimeline"
+          :key="index"
+          class="timeline-item">
+          <p v-if="item.time.includes('before')"><b>{{ item.time }} 01/01/2011</b></p>
+          <p v-else><b>{{ item.time }}</b></p>
 
-        <p>{{ item.label }}</p>
+          <p>{{ item.label }}</p>
+        </div>
       </div>
-    </div>
 
-    <div class="tabs">
-      <button
-        @click="selectedTab = 1"
-        :class="{'selected': 1 === selectedTab}"
-        class="tab aria-btn"
-        aria-label="Show information on approved visas"
-        :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
-        <p>Approved</p>
-      </button>
-      <button
-        @click="selectedTab = 2"
-        :class="{'selected': 2 === selectedTab}"
-        class="tab aria-btn"
-        aria-label="Show information on denied visas"
-        :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
-        <p>Denied</p>
-      </button>
-    </div>
-    <div class="tab-result">
-      <transition name="slide" mode="out-in">
-        <div v-if="selectedTab === 1" key="1">
-          <p class="title">Prepare yourself for your new life in the UK!</p>
-          
-          <div class="flex">
-            <div class="left">
-              <p>Be sure not to arrive before your new visa starts.</p>
-              <p>Collect your BRP within 10 days of when you said you would arrive.</p>
-            </div>
+      <div class="tabs">
+        <button
+          @click="selectedTab = 1"
+          :class="{'selected': 1 === selectedTab}"
+          class="tab aria-btn"
+          aria-label="Show information on approved visas"
+          :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
+          <p>Approved</p>
+        </button>
+        <button
+          @click="selectedTab = 2"
+          :class="{'selected': 2 === selectedTab}"
+          class="tab aria-btn"
+          aria-label="Show information on denied visas"
+          :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
+          <p>Denied</p>
+        </button>
+      </div>
+      <div class="tab-result">
+        <transition name="slide" mode="out-in">
+          <div v-if="selectedTab === 1" key="1">
+            <p class="title">Prepare yourself for your new life in the UK!</p>
+            
+            <div class="flex">
+              <div class="left">
+                <p>Be sure not to arrive before your new visa starts.</p>
+                <p>Collect your BRP within 10 days of when you said you would arrive.</p>
+              </div>
 
-            <div class="img">
-              <img src="@/assets/illustrations/application-timeline/success.svg" alt="">
-            </div>
-          </div>
-        </div>
-
-        <div v-else key="2">
-          <p class="title">Don’t give up, you're not out of options!</p>
-          
-          <div class="flex">
-            <div class="left">
-              <p>It can be really tough to have your visa denied, but you’re not out of options yet.</p>
-              <p>If you feel as though you were misjudged, you can ask for a review.</p>
-            </div>
-
-            <div class="img">
-              <img src="@/assets/illustrations/application-timeline/fail.svg" alt="">
+              <div class="img">
+                <img src="@/assets/illustrations/application-timeline/success.svg" alt="">
+              </div>
             </div>
           </div>
-        </div>
-      </transition>
+
+          <div v-else key="2">
+            <p class="title">Don’t give up, you're not out of options!</p>
+            
+            <div class="flex">
+              <div class="left">
+                <p>It can be really tough to have your visa denied, but you’re not out of options yet.</p>
+                <p>If you feel as though you were misjudged, you can ask for a review.</p>
+              </div>
+
+              <div class="img">
+                <img src="@/assets/illustrations/application-timeline/fail.svg" alt="">
+              </div>
+            </div>
+          </div>
+        </transition>
+      </div>
     </div>
   </section>
 </template>
