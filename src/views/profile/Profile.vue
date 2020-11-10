@@ -1,8 +1,10 @@
 <template>
   <main v-if="this.user" id="profile">
-    <user-info v-if="!this.user.profile.completeUserInfo" />
+    <transition name="slide" mode="out-in">
+      <user-info v-if="!this.user.profile.completeUserInfo" key="info" />
 
-    <updated-profile v-else :user="user" />
+      <updated-profile v-else :user="user" key="updated" />
+    </transition>
 
     <!-- <img
       v-if="!this.user.profile.completeUserInfo"
