@@ -8,13 +8,15 @@
       Back
     </button>
 
-    <stage-one v-if="stage === 1" @nextStage="next" :form="form" />
+    <transition name="slide" mode="out-in">
+      <stage-one v-if="stage === 1" @nextStage="next" :form="form" key="one" />
 
-    <stage-two v-else-if="stage === 2" @nextStage="next" :form="form" />
+      <stage-two v-else-if="stage === 2" @nextStage="next" :form="form" key="two" />
 
-    <stage-three v-else-if="stage === 3" @nextStage="next" :form="form" />
+      <stage-three v-else-if="stage === 3" @nextStage="next" :form="form" key="three" />
 
-    <completed v-else :user="user" />
+      <completed v-else :user="user" key="four" />
+    </transition>
   </section>
 </template>
 

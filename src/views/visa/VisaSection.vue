@@ -237,12 +237,13 @@ h3 {
   }
 
   /deep/ table {
-    margin-bottom: 36px;
+    margin: 8px 0 0 0;
 
     tr {
       td {
         width: 30%;
         text-align: center;
+        vertical-align: top;
 
         p {
           margin: 8px auto auto;
@@ -253,7 +254,7 @@ h3 {
         img {
           width: 60%;
           max-width: 100px;
-          margin: 8px auto 0 auto;
+          margin: 0 auto;
         }
       }
     }
