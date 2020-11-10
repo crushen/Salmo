@@ -62,17 +62,24 @@ h1 {
   width: 100%;
   height: 250px;
   color: $light-font;
+  padding-right: 1rem;
 
   &::-webkit-scrollbar {
-    width: 0.2em;
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 5px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba($color: $light-font, $alpha: 0.8)
+    background-color: rgba($color: $light-font, $alpha: 0.8);
+    border-radius: 5px;
   }
 }
 
 .form {
+  width: 100%;
   position: absolute;
   bottom: 60px;
   left: 0;
@@ -85,6 +92,32 @@ h1 {
 @media screen and (min-width: 370px) {
   .content {
     min-height: 100vh;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  h1 {
+    top: 480px;
+  }
+
+  .scroll-container {
+    height: 350px;
+
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+    }
+  }
+
+  .button {
+    margin-top: 4rem;
   }
 }
 </style>

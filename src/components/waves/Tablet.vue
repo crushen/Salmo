@@ -4,7 +4,7 @@
     :class="{ 'fast': waveAway, 'none': !transition }"
     class="wave"
     :style="{ 
-      backgroundImage: `url(${require('@/assets/backgrounds/wave-tablet-2.svg')})`,
+      backgroundImage: `url(${require('@/assets/backgrounds/wave-tablet.svg')})`,
       backgroundPosition: `${waveX}px ${waveY}px`
     }" />
 </template>
@@ -13,14 +13,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  data() {
-    return {
-      wavePosition: {
-        x: -50,
-        y: -800
-      }
-    }
-  },
   computed: {
     ...mapState('auth', ['user']),
     ...mapState('wave', ['waveFullScreen', 'waveAway', 'transition', 'signingIn']),
@@ -52,43 +44,43 @@ export default {
           case 'sign-up':
             return 1950
           case 'sign-in':
-            return 1450
-          case 'forgot-password':
-            return 2450
-          case 'link-sent':
-            return 3450
-          case 'sign-up-terms':
-            return 1950
-          case 'verify-email':
             return 2950
+          case 'forgot-password':
+            return 3950
+          case 'link-sent':
+            return 4950
+          case 'sign-up-terms':
+            return 2950
+          case 'verify-email':
+            return 3950
           default:
             return 0
         }
       } else if(this.waveFullScreen && this.signingIn) {
-        return 2950
+        return 4550
       } else {
-        return 3950
+        return 5550
       }
     },
     waveY() {
       if(!this.waveFullScreen) {
         switch(this.$route.name) {
           case 'register':
-            return -750
+            return -950
           case 'sign-up':
-            return -550
-          case 'sign-in':
-            return -550
-          case 'forgot-password':
-            return -450
-          case 'link-sent':
-            return -320
-          case 'sign-up-terms':
-            return -320
-          case 'verify-email':
-            return -320
-          default:
             return -750
+          case 'sign-in':
+            return -750
+          case 'forgot-password':
+            return -550
+          case 'link-sent':
+            return -520
+          case 'sign-up-terms':
+            return -470
+          case 'verify-email':
+            return -470
+          default:
+            return -950
         }
       } else {
         return 0

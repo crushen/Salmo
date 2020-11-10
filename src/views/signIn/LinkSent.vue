@@ -1,11 +1,11 @@
 <template>
   <main class="content">
-    <h1>On it's way!</h1>
+    <div class="title">
+      <h1>Check your inbox to find the password reset email!</h1>
+      <p>Don’t forget to check your junk mail.</p>
+    </div>
 
-    <section class="form">      
-      <p>The email containing a link to reset your password has been sent.</p>
-      <p>Once you've reset your passowrd, please head to the Sign In page.</p>
-
+    <section class="form">
       <router-link
         :to="{ name: 'sign-in' }"
         tag="button"
@@ -13,19 +13,32 @@
         Sign In
       </router-link>
     </section>
+
+    <img
+      class="email-img"
+      src="@/assets/illustrations/sign-up/email.svg"
+      alt="">
   </main>
 </template>
 
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-h1 {
-  max-width: 190px;
+p {
+  color: $light-font;
+}
+
+.title {
   text-align: right;
   color: $light-font;
   position: absolute;
-  top: 370px;
+  top: 200px;
   right: 0;
+
+  h1 {
+    color: $light-font;
+    margin-bottom: 1rem;
+  }
 }
 
 .form {
@@ -47,9 +60,27 @@ h1 {
   right: 0;
 }
 
+.email-img {
+  display: none;
+}
+
 @media screen and (min-width: 370px) {
   .form {
     min-height: 100vh;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .title {
+    top: 300px;
+    max-width: 300px;
+  }
+
+  .email-img {
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
   }
 }
 </style>

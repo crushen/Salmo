@@ -74,7 +74,7 @@ export default {
       if(!this.waveFullScreen) {
         switch(this.$route.name) {
           case 'register':
-            return -800
+            return -775
           case 'sign-up':
             return -650
           case 'sign-in':
@@ -88,7 +88,7 @@ export default {
           case 'verify-email':
             return -420
           default:
-            return -800
+            return -775
         }
       } else {
         return 0

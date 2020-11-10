@@ -367,3 +367,10 @@ dialog {
     }
   }
 }
+
+@media screen and (min-width: 700px) {
+  // Pages
+  .content {
+    width: 70%;
+  }
+}

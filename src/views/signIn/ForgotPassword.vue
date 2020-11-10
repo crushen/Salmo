@@ -1,8 +1,8 @@
 <template>
   <main class="content page sign-up-in">
     <div class="title">
-      <h1>Let's reset your password!</h1>
-      <p>we will send an email to you for verification.</p>
+      <h1>Reset your password</h1>
+      <p>If your email addres is registered with us, you will receive an email that will direct you to a dedicated page for resetting your password.</p>
     </div>
 
     <section>
@@ -58,7 +58,6 @@ p {
 }
 
 .title {
-  max-width: 190px;
   text-align: right;
   color: $light-font;
   position: absolute;
@@ -67,7 +66,7 @@ p {
 
   h1 {
     color: $light-font;
-    margin-bottom: .5em;
+    margin-bottom: 1rem;
   }
 }
 
@@ -83,6 +82,13 @@ p {
 @media screen and (min-width: 370px) {
   .form {
     min-height: 100vh;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .title {
+    top: 200px;
+    max-width: 300px;
   }
 }
 </style>

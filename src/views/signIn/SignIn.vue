@@ -3,6 +3,8 @@
     :class="verified ? 'fade' : ''"
     class="content page sign-up-in">
     <FormulateForm @submit="handleSignIn" class="form">
+      <h1>What's your account?</h1>
+
       <FormulateInput
         v-model="form.email"
         type="email"
@@ -148,6 +150,12 @@ h1 {
 @media screen and (min-width: 370px) {
   .form {
     min-height: 100vh;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  h1 {
+    top: 200px;
   }
 }
 </style>

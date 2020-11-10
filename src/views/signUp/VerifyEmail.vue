@@ -20,7 +20,7 @@
 
     <h1>Verify your email address</h1>
 
-    <section>
+    <section class="text">
       <p>Please click on the link in your email to begin setting up your account. Don’t forget to check you junk/spam folders!</p>
       <p>If you’ve clicked the link and still see this message, try refreshing the page before clicking the button.</p>
       <p>Once you’ve completed your verification, you’ll be able to access your account to complete your profile.</p>
@@ -141,6 +141,16 @@ p {
 
   p {
     font-size: 1em;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  h1 {
+    top: 480px;
+  }
+
+  .text {
+    margin-top: 100px;
   }
 }
 </style>

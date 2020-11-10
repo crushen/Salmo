@@ -1,6 +1,6 @@
 <template>
   <main id="sign-up" class="content sign-up-in">
-    <h1>What's your account?</h1>
+    <h1>Let’s create your account!</h1>
 
     <FormulateForm @submit="handleSignUp" class="form">
       <FormulateInput
@@ -50,6 +50,13 @@
         label="Next"
         class="button" />
     </FormulateForm>
+
+    <div class="sign-in">
+      <p>already a member?</p>
+      <router-link :to="{ name: 'sign-in' }">
+        sign in
+      </router-link>
+    </div>
   </main>
 </template>
 
@@ -121,9 +128,28 @@ h1 {
   bottom: 60px;
 }
 
+.sign-in {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  bottom: 48px;
+
+  a {
+    margin-left: 1em;
+  }
+}
+
 @media screen and (min-width: 370px) {
   .form {
     min-height: 100vh;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  h1 {
+    top: 200px;
   }
 }
 </style>
