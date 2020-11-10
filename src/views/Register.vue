@@ -1,8 +1,10 @@
 <template>
   <main>
-    <div
+    <!-- <div
       class="background"
-      :style="{ backgroundImage: `url(${require('@/assets/backgrounds/home-background.svg')})` }" />
+      :style="{ backgroundImage: `url(${require('@/assets/backgrounds/home-background.svg')})` }" /> -->
+
+    <img src="@/assets/logo/name-blue.svg" alt="" class="logo">
 
     <section id="home" class="content page padding bottom">
       <div class="buttons">
@@ -29,14 +31,20 @@
 
 <style lang="scss" scoped>
 
-.background {
-  width: 100%;
-  height: calc(100vh - 120px);
-  margin-top: 120px;
+// .background {
+//   width: 100%;
+//   height: calc(100vh - 120px);
+//   margin-top: 120px;
+//   position: absolute;
+//   opacity: 0.2;
+//   background-position: right top;
+//   z-index: 0;
+// }
+
+.logo {
   position: absolute;
-  opacity: 0.2;
-  background-position: right top;
-  z-index: 0;
+  top: 30vh;
+  left: calc(50vw - 122.5px);
 }
 
 #home {
@@ -64,5 +72,19 @@
 
 p {
   text-align: center;
+}
+
+@media screen and (min-width: 700px) {
+  .logo {
+    top: 35vh;
+  }
+
+  .buttons {
+    button {
+      &:last-of-type {
+        margin: 8px 0 12vh 0;
+      }
+    }
+  }
 }
 </style>

@@ -7,16 +7,11 @@
       <img src="@/assets/icons/white/arrow-left.svg" class="arrow">
     </button>
 
-    <div
-      v-if="visible"
-      :class="{ 'fast': waveAway, 'none': !transition }"
-      class="wave"
-      :style="{ 
-        backgroundImage: `url(${require('@/assets/backgrounds/wave.svg')})`,
-        backgroundPosition: `${waveX}px ${waveY}px`
-      }" />
+    <mobile-wave v-if="innerWidth < 600" />
 
-    <mobile-nav v-if="innerWidth < 600" />
+    <tablet-wave v-else />
+
+    <mobile-nav v-if="user && user.emailVerified"  />
 
     <!-- <sidebar-nav v-else /> -->
 
@@ -40,88 +35,26 @@ import { mapState } from 'vuex'
 import mobileNav from '@/components/nav/MobileNav'
 import sidebarNav from '@/components/nav/SidebarNav'
 
+import mobileWave from '@/components/waves/Mobile'
+import tabletWave from '@/components/waves/Tablet'
+
 export default {
   components: {
-    mobileNav
+    mobileNav,
+    mobileWave,
+    tabletWave
     // sidebarNav
   },
   data () {
     return {
-      innerWidth: null,
-      wavePosition: {
-        x: -50,
-        y: -800
-      }
+      innerWidth: null
     }
   },
   computed: {
-    ...mapState('auth', ['user']),
-    ...mapState('wave', ['waveFullScreen', 'waveAway', 'transition', 'signingIn']),
-    waveX() {
-      if(!this.waveFullScreen) {
-        switch(this.$route.name) {
-          case 'register':
-            return -50
-          case 'sign-up':
-            return 950
-          case 'sign-in':
-            return 1450
-          case 'forgot-password':
-            return 2450
-          case 'link-sent':
-            return 3450
-          case 'sign-up-terms':
-            return 1950
-          case 'verify-email':
-            return 2950
-          default:
-            return -50
-        }
-      } else if(this.waveFullScreen && this.signingIn) {
-        return 2950
-      } else {
-        return 3950
-      }
-    },
-    waveY() {
-      if(!this.waveFullScreen) {
-        switch(this.$route.name) {
-          case 'register':
-            return -800
-          case 'sign-up':
-            return -650
-          case 'sign-in':
-            return -650
-          case 'forgot-password':
-            return -550
-          case 'link-sent':
-            return -420
-          case 'sign-up-terms':
-            return -420
-          case 'verify-email':
-            return -420
-          default:
-            return -800
-        }
-      } else {
-        return 0
-      } 
+    user() {
+      return this.$store.state.auth.user
     },
     arrowPage() {
-      switch(this.$route.name) {
-        case 'sign-up':
-          return true
-        case 'sign-in':
-          return true
-        case 'forgot-password':
-          return true
-        case 'link-sent':
-          return true
-        default:
-          return false;
-      }
-    },
-    visible() {
       switch(this.$route.name) {
         case 'register':
           return true
@@ -133,17 +66,13 @@ export default {
           return true
         case 'link-sent':
           return true
-        case 'sign-up-terms':
-          return true
-        case 'verify-email':
-          return true
         default:
-          return false
+          return false;
       }
     }
   },
   mounted() {
-    this.innerWidth = window.innerWidth;
+    this.innerWidth = window.innerWidth
     window.addEventListener('resize', () => {
       this.innerWidth = window.innerWidth
     })
@@ -278,12 +207,12 @@ main {
 
 // Tablet
 @media screen and (min-width: 600px) {
-  .content-wrapper {
-    margin-left: 100px;
-  }
+  // .content-wrapper {
+  //   margin-left: 100px;
+  // }
 
-  .small-logo {
-    display: none;
-  }
+  // .small-logo {
+  //   display: none;
+  // }
 }
 </style>
