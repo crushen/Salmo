@@ -1,6 +1,6 @@
 export const applicationTimelines = [
   {
-    visa: 'Tier 4 : General Student',
+    visa: 'Tier 4 : Student',
     timeline: [
       {
         time: 'July - December',

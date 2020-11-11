@@ -330,14 +330,14 @@
 export const questions = [
   // GENERAL STUDENT
   {
-    visa: 'Tier 4 : General Student',
+    visa: 'Tier 4 : Student',
     questions: [
       {
         question: 'Which best describes why you would like to remain in the UK?',
         number: 0,
         answers: [
           {
-            value: 'Tier 4 : General Student',
+            value: 'Tier 4 : Student',
             label: 'Study'
           },
           {

@@ -19,7 +19,7 @@
               <p>Switch to</p>
             </div>
             
-            <div class="margin-m top">
+            <div class="margin-s top">
               <visa-card :visa="topResult" />
 
               <p class="margin-s top"><b>NOTE: Switching</b> is the most cost effective and a more direct way to remain in the UK.</p>
@@ -154,7 +154,7 @@ export default {
       const removeDup = sameCategory.filter(item => item.name !== this.topResult.name)
       
       // Remove youth mobility
-      const removeYM = removeDup.filter(item => item.name !== 'Tier 5 Youth Mobility Scheme')
+      const removeYM = removeDup.filter(item => item.name !== 'Tier 5 : Youth Mobility')
       
       // Remove visa(s) that appear in switch visas
       return removeYM.filter(item => !this.switchVisas.includes(item))
@@ -170,13 +170,9 @@ export default {
     getTopResult() {
       this.$store.dispatch('visas/getTopResult', this.mostRecentResult.recommendedVisa[0])
     },
-    checkSwitch() {  
-      // For now, will only be testing Student specific questionnaires, so all top results will be switchable
-      // However, this will change when other current visas are options
-      if(this.currentVisa.name === 'Tier 4 General Student') {
-        this.switchOptions = ['Startup', 'Tier 1 Investor', 'Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']
-      } else if(this.currentVisa === 'Tier 4 Child Student') {
-        this.switchOptions = ['Tier 2 General Work', 'Tier 2 Sportsperson', 'Tier 2 Minister of Religion', 'Tier 4 General Student', 'Tier 5 Government Authorised Exchange', 'Family (needs expanding)']
+    checkSwitch() {
+      if(this.currentVisa.name === 'Tier 4 : Student') {
+        this.switchOptions = ['Tier 1 : Startup', 'Tier 1 : Investor', 'Tier 2 : General Work']
       }
     },
     checkYouthMobility() {
@@ -186,8 +182,8 @@ export default {
         if(this.userCountry === country &&
         this.userAge >= 18 && 
         this.userAge <= 30 &&
-        this.dependants === 'None') {
-          this.youthMobility = this.visaList.filter(item => item.name === 'Tier 5 Youth Mobility Scheme')
+        this.dependants === 'no') {
+          this.youthMobility = this.visaList.filter(item => item.name === 'Tier 5 : Youth Mobility')
         }
       })
     }
@@ -227,14 +223,6 @@ export default {
   }
 }
 
-.white-card {
-  img {
-    display: block;
-    width: 50%;
-    margin: auto;
-  }
-}
-
 .buttons {
   width: 100%;
   display: flex;
@@ -243,6 +231,15 @@ export default {
 
   button {
     min-width: 130px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .other,
+  .extend,
+  .switch {
+    width: 90%;
+    margin: auto;
   }
 }
 </style>
