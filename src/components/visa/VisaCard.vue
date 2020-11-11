@@ -1,9 +1,9 @@
 <template>
-  <div class="card visa-card-pointer">
+  <div class="card">
     <p class="title">{{ visa.name }}</p>
 
     <div class="body margin-s top">
-      <p>{{ visa.subtitle }}</p>
+      <p class="sub-title">{{ visa.subtitle }}</p>
 
       <div class="checklist">
         <div
@@ -11,7 +11,7 @@
           :key="item.name" 
           class="item"
           :style="item.icon === check ? {opacity: 1} : {opacity: 0.5}">
-          <div class="inner">
+          <div class="checklist-inner">
             <img 
               :src="item.icon"
               :alt="item.alt"
@@ -141,6 +141,8 @@ export default {
 @import '@/assets/styles/main.scss';
 
 .card {
+  max-width: 450px;
+  margin: auto;
   background: $red;
   border-radius: $radius;
   box-shadow: $shadow;
@@ -149,6 +151,7 @@ export default {
 
   p {
     color: $light-font;
+    
   }
 
   .body {
@@ -156,9 +159,13 @@ export default {
     flex-direction: column;
     align-items: center;
 
+    .sub-title {
+      align-self: flex-start;
+    }
+
     .checklist {
       width: 100%;
-      margin-top: 0.5em;
+      margin-top: 1rem;
       @include grid(repeat(2, 1fr), repeat(3, 1fr), 0.5em);
     }
 
@@ -167,7 +174,7 @@ export default {
       align-items: center;
       justify-content: flex-start;
 
-      .inner {
+      .checklist-inner {
         padding: 4px 8px;
         background: lighten($color: $red, $amount: 15%);
         display: flex;
@@ -206,30 +213,10 @@ export default {
   // }
 }
 
-// Tablet
+
 @media screen and (min-width: 600px) {
-  .card {
-    width: 90%;
-    margin: auto;
-
-    .body {
-      .checklist {
-        margin: $spacing*5 auto 0 auto;
-        @include grid(repeat(3, 120px), repeat(2, 1fr), $spacing*2);
-      }
-      
-      button {
-        margin-top: $spacing*6;
-      }
-    }
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  .card {
-    width: 75%;
-    margin: auto;
+  button {
+    align-self: flex-end;
   }
 }
 </style>

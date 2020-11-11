@@ -1,6 +1,6 @@
 <template>
   <div class="tools-pages">
-    <main class="page padding top">
+    <main class="page padding top quiz">
       <back-button
         @go-back="goBack"
         :text="backText" />
@@ -241,34 +241,17 @@ h3 {
   margin: 0;
 }
 
-// // Tablet
-// @media screen and (min-width: 600px) {
-//   .progress-bar {
-//     width: 65%;
-//     position: absolute;
-//     z-index: 2;
-//     top: 40px;
-//     right: 7%;
-//     background: white;
-//   }
+.tools-card {
+  min-height: 520px;
+}
 
-//   .progress-bar-inner {
-//     width: 65%;
-//     position: absolute;
-//     z-index: 2;
-//     top: 0;
-//     left: 0;
-//   }
-// }
+@media screen and (min-width: 700px) {
+  .progress-bar {
+    width: 80%;
+  }
 
-// // Desktop
-// @media screen and (min-width: 1100px) {
-//   .progress-bar {
-//     width: 75%;
-//   }
-
-//   .progress-bar-inner {
-//     width: 75%;
-//   }
-// }
+  .progress-bar-inner {
+    width: 80%;
+  }
+}
 </style>

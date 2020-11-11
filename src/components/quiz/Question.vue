@@ -33,14 +33,8 @@
     </div>
 
     <div class="nav">
-      <!-- <button
-        @click="previousQuestion"
-        class="tertiary"
-        aria-label="Previous question">
-        <p>Previous</p>
-      </button> -->
-
       <button
+        v-if="selected"
         @click="submitAnswer"
         class="outline"
         aria-label="Next question">
@@ -135,7 +129,7 @@ h2 {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  margin: 2em auto;
+  margin: 2em auto 6em auto;
 
   .button {
     position: relative;
@@ -193,28 +187,26 @@ h2 {
 }
 
 .nav {
-  width: 90%;
-  margin: auto;
-  padding-bottom: 2em;
-  display: flex;
-  justify-content: flex-end;
+  position: absolute;
+  bottom: 24px;
+  right:5%;
 }
 
 .radio-buttons {
   width: 90%;
   margin: auto;
-  margin-bottom: 2em;
+  margin-bottom: 6em;
 }
 
-// Tablet
-@media screen and (min-width: 600px) {
-  .buttons {
-    max-width: none;
-    justify-content: space-between;
+@media screen and (min-width: 700px) {
+  h2 {
+    margin: 0 10%;
+  }
 
-    .button {
-      margin: 0;
-    }
+  .radio-buttons {
+    width: 80%;
+    margin: auto;
+    margin-bottom: 6em;
   }
 }
 </style>

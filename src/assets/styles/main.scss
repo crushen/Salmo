@@ -395,7 +395,8 @@ dialog {
       }
     }
 
-    &.tools-pages {
+    &.tools-pages,
+    &.quiz {
       &.padding {
         &.top {
           padding-top: 85px;

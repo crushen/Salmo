@@ -1,11 +1,17 @@
 <template>
-  <router-link
-    :to="{ name: 'visa-page', params: { slug: visa.slug } }"
-    class="card">
+  <div class="card">
     <p class="title">{{ name }}</p>
     
     <p class="margin-s top">{{ visa.subtitle }}</p>
-  </router-link>
+
+    <router-link
+      tag="button"
+      :to="{ name: 'visa-page', params: { slug: visa.slug } }"
+      class="primary margin-s top aria-btn"
+      :aria-label="`Tell me more about ${name }`">
+      Tell Me More!
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -23,6 +29,7 @@ export default {
 
 .card {
   width: 100%;
+  max-width: 450px;
   min-height: 120px;
   padding: 1em;
   background: $red;
@@ -30,10 +37,11 @@ export default {
   position: relative;
   box-shadow: $shadow;
   transition: 0.2s;
-  margin-top: 1em;
+  margin: 1rem auto 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: flex-start;
 
   .title {
     text-align: center;
@@ -41,6 +49,23 @@ export default {
 
   p {
     color: $light-font;
+  }
+
+  button {
+    border: 2px solid white;
+    width: 60%;
+    max-width: 160px;
+    align-self: center;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .card {
+    margin: 2rem auto 0 auto;
+
+    button {
+      align-self: flex-end;
+    }
   }
 }
 </style>

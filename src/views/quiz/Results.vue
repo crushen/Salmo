@@ -1,6 +1,6 @@
 <template>
   <div class="tools-pages">
-    <main v-if="topResult" id="results" class="page padding top">
+    <main v-if="topResult" id="results" class="page padding top quiz">
       <back-button
         @go-back="$router.push({ name: 'profile', params: { username: user.username } })"
         text="Profile" />
@@ -10,18 +10,20 @@
           <h1 class="content">Completed!</h1>
         </div>
 
-        <section class="content margin-m top">
+        <section class="tools-card margin-m top">
           <h2>Your best option is...</h2>
 
-          <div class="sub-title margin-m top">
-            <img src="@/assets/icons/grey/switch.svg" alt="" class="icon">
-            <p>Switch to</p>
-          </div>
-          
-          <div class="margin-s top">
-            <visa-card :visa="topResult" /> <!-- :favouriteVisa="favoriteVisa.name" -->
+          <div class="inner">
+            <div class="sub-title margin-m top">
+              <img src="@/assets/icons/grey/switch.svg" alt="" class="icon">
+              <p>Switch to</p>
+            </div>
+            
+            <div class="margin-m top">
+              <visa-card :visa="topResult" />
 
-            <p class="margin-s top"><b>Switching</b> is the most cost effective and a more direct way to remain in the UK.</p>
+              <p class="margin-s top"><b>NOTE: Switching</b> is the most cost effective and a more direct way to remain in the UK.</p>
+            </div>
           </div>
         </section>
 
@@ -77,23 +79,28 @@
           </div>
         </section>
 
-        <section class="content margin-l top">
-          <div class="white-card">
-            <img src="@/assets/illustrations/quiz/quiz-complete.svg" alt="">
+        <section class="tools-card margin-l top">
+            <div class="inner">
+              <p class="margin-m top">Take your time to view all the options. Don’t worry about losing your results, they are all saved to your profile page!</p>
 
-            <p class="margin-s top">Take your time to view all the options. Don’t worry about losing your results, they are all saved to your profile page!</p>
+              <p class="margin-s top">Want to try again? Go for it! Just remember, taking the quiz again will clear your current options above.</p>
 
-            <p class="margin-s top bottom">Want to try again? Go for it! Just remember, taking the quiz again will clear your current options above.</p>
+              <div class="buttons margin-m top">
+                <router-link
+                  :to="{ name: 'visa-quiz', params: { username: this.user.username } }"
+                  tag="button"
+                  class="primary">
+                  Take again
+                </router-link>
 
-            <div class="button-center">
-              <router-link
-                :to="{ name: 'visa-quiz', params: { username: this.user.username } }"
-                tag="button"
-                class="primary">
-                Take again
-              </router-link>
+                <router-link
+                  :to="{ name: 'profile', params: { username: this.user.username } }"
+                  tag="button"
+                  class="secondary margin-s top">
+                  To Profile
+                </router-link>
+              </div>
             </div>
-          </div>
         </section>
       </div>
     </main>
@@ -225,6 +232,17 @@ export default {
     display: block;
     width: 50%;
     margin: auto;
+  }
+}
+
+.buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    min-width: 130px;
   }
 }
 </style>
