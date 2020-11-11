@@ -40,8 +40,7 @@
             
             <div class="flex">
               <div class="left">
-                <p>Be sure not to arrive before your new visa starts.</p>
-                <p>Collect your BRP within 10 days of when you said you would arrive.</p>
+                <p>Remember to collect your BRP within 10 days at your designated post office after your visa is approved!</p>
               </div>
 
               <div class="img">
@@ -55,8 +54,7 @@
             
             <div class="flex">
               <div class="left">
-                <p>It can be really tough to have your visa denied, but you’re not out of options yet.</p>
-                <p>If you feel as though you were misjudged, you can ask for a review.</p>
+                <p>It can be really tough to have your visa denied, but you’re not out of options yet. If you feel as though you were misjudged, you can ask for a review.</p>
               </div>
 
               <div class="img">
@@ -182,8 +180,9 @@ b {
 
   .flex {
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-between;
+    margin-top: 2rem;
 
     .left {
       width: 55%;
@@ -191,6 +190,7 @@ b {
 
     .img {
       width: 40%;
+      max-width: 170px;
     }
   }
 }

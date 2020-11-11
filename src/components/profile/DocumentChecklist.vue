@@ -158,6 +158,10 @@ li {
       min-height: 0;
       height: 120px;
       width: 120px;
+
+      img {
+        width: 45%;
+      }
     }
   }
 }
