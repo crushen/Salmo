@@ -215,7 +215,7 @@ h3 {
     p {
       width: 75%;
       margin: 0;
-      margin-right: 8px;
+      margin-right: 24px;
     }
 
     img {

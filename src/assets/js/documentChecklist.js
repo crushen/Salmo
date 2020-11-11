@@ -1,89 +1,20 @@
 export const documentChecklist = [
   {
-    name: 'Tier 5 : Creative and Sporting',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 5 : Government Authorised Exchange',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 2 : Intra-company Transfer',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Family (needs expanding)',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
     name: 'Tier 1 : Global Talent',
     checklist: [
       { 
         label: 'Passport (ID)',
+        img: require('@/assets/illustrations/doc-checklist/passport.svg'),
         checked: false
       },
       { 
-        label: 'Proof of English',
+        label: 'Endorsement Letter',
+        img: require('@/assets/illustrations/doc-checklist/endorsement.svg'),
         checked: false
       },
       { 
-        label: 'CAS Number',
-        checked: false
-      },
-      { 
-        label: 'Proof of Finance',
+        label: 'Tuberculosis Test Result',
+        img: require('@/assets/illustrations/doc-checklist/tb-test.svg'),
         checked: false
       }
     ]
@@ -92,15 +23,28 @@ export const documentChecklist = [
     name: 'Tier 1 : Innovator',
     checklist: [
       { 
-        label: 'Current passport (or travel documentation with blank page)',
+        label: 'Passport (ID)',
+        img: require('@/assets/illustrations/doc-checklist/passport.svg'),
         checked: false
       },
       { 
-        label: 'TB test results',
+        label: 'Endorsement Letter',
+        img: require('@/assets/illustrations/doc-checklist/endorsement.svg'),
         checked: false
       },
       { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+        label: 'Proof of Finance',
+        img: require('@/assets/illustrations/doc-checklist/money.svg'),
+        checked: false
+      },
+      { 
+        label: 'Proof of English',
+        img: require('@/assets/illustrations/doc-checklist/english.svg'),
+        checked: false
+      },
+      { 
+        label: 'Tuberculosis Test Result',
+        img: require('@/assets/illustrations/doc-checklist/tb-test.svg'),
         checked: false
       }
     ]
@@ -109,15 +53,28 @@ export const documentChecklist = [
     name: 'Tier 1 : Startup',
     checklist: [
       { 
-        label: 'Current passport (or travel documentation with blank page)',
+        label: 'Passport (ID)',
+        img: require('@/assets/illustrations/doc-checklist/passport.svg'),
         checked: false
       },
       { 
-        label: 'TB test results',
+        label: 'Endorsement Letter',
+        img: require('@/assets/illustrations/doc-checklist/endorsement.svg'),
         checked: false
       },
       { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+        label: 'Proof of Finance',
+        img: require('@/assets/illustrations/doc-checklist/money.svg'),
+        checked: false
+      },
+      { 
+        label: 'Proof of English',
+        img: require('@/assets/illustrations/doc-checklist/english.svg'),
+        checked: false
+      },
+      { 
+        label: 'Tuberculosis Test Result',
+        img: require('@/assets/illustrations/doc-checklist/tb-test.svg'),
         checked: false
       }
     ]
@@ -127,171 +84,133 @@ export const documentChecklist = [
     checklist: [
       { 
         label: 'Passport (ID)',
+        img: require('@/assets/illustrations/doc-checklist/passport.svg'),
         checked: false
       },
       { 
-        label: 'Proof of English',
+        label: 'Proof of UK Bank Account',
+        img: require('@/assets/illustrations/doc-checklist/prison.svg'),
         checked: false
       },
       { 
-        label: 'CAS Number',
+        label: 'Proof of Investment Funds',
+        img: require('@/assets/illustrations/doc-checklist/prison.svg'),
+        checked: false
+      },
+      { 
+        label: 'Criminal Record',
+        img: require('@/assets/illustrations/doc-checklist/prison.svg'),
+        checked: false
+      },
+      { 
+        label: 'Tuberculosis Test Result',
+        img: require('@/assets/illustrations/doc-checklist/tb-test.svg'),
+        checked: false
+      }
+    ]
+  },
+  {
+    name: 'Tier 2 : Health & Care',
+    checklist: [
+      { 
+        label: 'Passport (ID)',
+        img: require('@/assets/illustrations/doc-checklist/passport.svg'),
+        checked: false
+      },
+      { 
+        label: 'CoS',
+        img: require('@/assets/illustrations/doc-checklist/cos.svg'),
         checked: false
       },
       { 
         label: 'Proof of Finance',
+        img: require('@/assets/illustrations/doc-checklist/money.svg'),
+        checked: false
+      },
+      { 
+        label: 'Proof of English',
+        img: require('@/assets/illustrations/doc-checklist/english.svg'),
+        checked: false
+      },
+      { 
+        label: 'Last 5 Years of Travel History',
+        img: require('@/assets/illustrations/doc-checklist/english.svg'),
+        checked: false
+      },
+      { 
+        label: 'Tuberculosis Test Result',
+        img: require('@/assets/illustrations/doc-checklist/tb-test.svg'),
+        checked: false
+      },
+      { 
+        label: 'Criminal Record',
+        img: require('@/assets/illustrations/doc-checklist/prison.svg'),
         checked: false
       }
     ]
   },
+
   {
     name: 'Tier 2 : General Work',
     checklist: [
       { 
-        label: 'Current passport (or travel documentation with blank page)',
+        label: 'Passport (ID)',
+        img: require('@/assets/illustrations/doc-checklist/passport.svg'),
         checked: false
       },
       { 
-        label: 'TB test results',
+        label: 'CAS Number',
+        img: require('@/assets/illustrations/doc-checklist/cas.svg'),
         checked: false
       },
       { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+        label: 'Proof of Finance',
+        img: require('@/assets/illustrations/doc-checklist/money.svg'),
+        checked: false
+      },
+      { 
+        label: 'Proof of English',
+        img: require('@/assets/illustrations/doc-checklist/english.svg'),
+        checked: false
+      },
+      { 
+        label: 'Tuberculosis Test Result',
+        img: require('@/assets/illustrations/doc-checklist/tb-test.svg'),
+        checked: false
+      },
+      { 
+        label: 'Criminal Record',
+        img: require('@/assets/illustrations/doc-checklist/prison.svg'),
         checked: false
       }
     ]
   },
   {
-    name: 'Tier 2 : Minister of Religion',
+    name: 'Tier 4 : Student',
     checklist: [
       { 
-        label: 'Current passport (or travel documentation with blank page)',
+        label: 'Passport (ID)',
+        img: require('@/assets/illustrations/doc-checklist/passport.svg'),
         checked: false
       },
       { 
-        label: 'TB test results',
+        label: 'CoS',
+        img: require('@/assets/illustrations/doc-checklist/cos.svg'),
         checked: false
       },
       { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 2 : Sportsperson',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
+        label: 'Proof of Finance',
+        img: require('@/assets/illustrations/doc-checklist/money.svg'),
         checked: false
       },
       { 
-        label: 'TB test results',
+        label: 'Proof of English',
+        img: require('@/assets/illustrations/doc-checklist/english.svg'),
         checked: false
       },
       { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 4 : General Student',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 4 : Short Term Study',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 5 : Charity Worker',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 5 : International Agreement',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 5 : Religious Worker',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 5 : Seasonal Worker',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+        label: 'Tuberculosis Test Result',
+        img: require('@/assets/illustrations/doc-checklist/tb-test.svg'),
         checked: false
       }
     ]
@@ -300,36 +219,226 @@ export const documentChecklist = [
     name: 'Tier 5 : Youth Mobility Scheme',
     checklist: [
       { 
-        label: 'Current passport (or travel documentation with blank page)',
+        label: 'Passport (ID)',
+        img: require('@/assets/illustrations/doc-checklist/passport.svg'),
         checked: false
       },
       { 
-        label: 'TB test results',
+        label: 'Proof of Finance',
+        img: require('@/assets/illustrations/doc-checklist/money.svg'),
         checked: false
       },
       { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
-        checked: false
-      }
-    ]
-  },
-  {
-    name: 'Tier 4 : Child Student',
-    checklist: [
-      { 
-        label: 'Current passport (or travel documentation with blank page)',
-        checked: false
-      },
-      { 
-        label: 'TB test results',
-        checked: false
-      },
-      { 
-        label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+        label: 'Tuberculosis Test Result',
+        img: require('@/assets/illustrations/doc-checklist/tb-test.svg'),
         checked: false
       }
     ]
   }
+  // {
+  //   name: 'Tier 5 : Creative and Sporting',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 5 : Government Authorised Exchange',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 2 : Intra-company Transfer',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Family (needs expanding)',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 2 : Minister of Religion',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 2 : Sportsperson',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 4 : Short Term Study',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 5 : Charity Worker',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 5 : International Agreement',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 5 : Religious Worker',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 5 : Seasonal Worker',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Tier 4 : Child Student',
+  //   checklist: [
+  //     { 
+  //       label: 'Current passport (or travel documentation with blank page)',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: 'TB test results',
+  //       checked: false
+  //     },
+  //     { 
+  //       label: "Criminal record certificate (from any country you've been in for longer than 12 months in the last 10 years)",
+  //       checked: false
+  //     }
+  //   ]
+  // }
 ]
 
 export const notes = [
@@ -346,11 +455,35 @@ export const notes = [
     note: 'You would need the make sure all the details are correct, otherwise you need to contact your school to edit it.'
   },
   {
-    label: 'CAS Number',
-    note: 'You would need the make sure all the details are correct, otherwise you need to contact your school to edit it.'
+    label: 'Proof of Finance',
+    note: 'You would need to have enough maintenance money in your bank account for 28 consecutive days.'
   },
   {
-    label: 'Proof of Finance',
+    label: 'Tuberculosis Test Result',
+    note: 'You would need to have enough maintenance money in your bank account for 28 consecutive days.'
+  },
+  {
+    label: 'CoS',
+    note: 'You would need to have enough maintenance money in your bank account for 28 consecutive days.'
+  },
+  {
+    label: 'Criminal Record',
+    note: 'You would need to have enough maintenance money in your bank account for 28 consecutive days.'
+  },
+  {
+    label: 'Endorsement Letter',
+    note: 'You would need to have enough maintenance money in your bank account for 28 consecutive days.'
+  },
+  {
+    label: 'Proof of UK Bank Account',
+    note: 'You would need to have enough maintenance money in your bank account for 28 consecutive days.'
+  },
+  {
+    label: 'Proof of Investment Funds',
+    note: 'You would need to have enough maintenance money in your bank account for 28 consecutive days.'
+  },
+  {
+    label: 'Last 5 Years of Travel History',
     note: 'You would need to have enough maintenance money in your bank account for 28 consecutive days.'
   }
 ]

@@ -8,7 +8,7 @@
           v-for="(item, index) in applicationTimeline"
           :key="index"
           class="timeline-item">
-          <p v-if="item.time.includes('before')"><b>{{ item.time }} 01/01/2011</b></p>
+          <p v-if="item.time.includes('before')"><b>{{ item.time }} {{ date(user.profile.currentVisa.end) }}</b></p>
           <p v-else><b>{{ item.time }}</b></p>
 
           <p>{{ item.label }}</p>
@@ -84,7 +84,12 @@ export default {
   },
   computed: {
     applicationTimeline() {
-      return applicationTimelines.find(timeline => timeline.visa === this.user.profile.currentVisa.name).timeline
+      return applicationTimelines.find(timeline => timeline.visa === this.user.profile.nextVisa.name).timeline
+    }
+  },
+  methods: {
+    date(date) {
+      return date.split('-').reverse().join('/')
     }
   }
 }

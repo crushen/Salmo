@@ -394,6 +394,18 @@ dialog {
         padding-bottom: 150px;
       }
     }
+
+    &.tools-pages {
+      &.padding {
+        &.top {
+          padding-top: 85px;
+        }
+        
+        &.bottom {
+          padding-bottom: 150px;
+        }
+      }
+    }
   }
 
   .margin {
@@ -459,6 +471,39 @@ dialog {
       position: absolute;
       bottom: 0;
       right: 0;
+    }
+  }
+
+  .tools-card {
+    width: 75%;
+  
+    h2 {
+      margin: 16px 26px 0;
+    }
+  
+    h3 {
+      width: 80%;
+      margin: auto;
+    }
+  
+    .header {
+      margin: 16px 26px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      h2 {
+        margin: 0;
+      }
+    }
+  
+    .inner {
+      width: 80%;
+      margin: auto auto 26px;
+    }
+  
+    &.empty {
+      min-height: 180px;
     }
   }
 }

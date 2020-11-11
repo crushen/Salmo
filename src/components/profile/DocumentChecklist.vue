@@ -16,26 +16,7 @@
                 @mouseleave="visibleNote = null"
                 @click="checkItem(item)"
                 class="inner">
-                <img
-                  v-if="item.label.includes('CAS')"
-                  src="@/assets/illustrations/doc-checklist/cas.svg"
-                  alt="">
-
-                <img
-                  v-if="item.label.includes('English')"
-                  src="@/assets/illustrations/doc-checklist/english.svg"
-                  alt="">
-
-                <img
-                  v-if="item.label.includes('Finance')"
-                  src="@/assets/illustrations/doc-checklist/money.svg"
-                  alt="">
-
-                <img
-                  v-if="item.label.includes('Passport')"
-                  src="@/assets/illustrations/doc-checklist/passport.svg"
-                  alt="">
-
+                <img :src="`${item.img}`" alt="">
                 <p>{{ item.label }}</p>
               </div>
           </li>
@@ -100,6 +81,7 @@ ul {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 li {
@@ -119,6 +101,8 @@ li {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    transition: border 0.3s;
+    text-align: center;
 
     &:hover {
       border: 4px solid $red;
@@ -161,6 +145,19 @@ li {
     .inner {
       min-height: 150px;
       min-width: 150px;
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  li {
+    width: 25%;
+
+    .inner {
+      min-width: 0;
+      min-height: 0;
+      height: 120px;
+      width: 120px;
     }
   }
 }
