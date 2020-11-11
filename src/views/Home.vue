@@ -28,25 +28,41 @@
 
       <section class="margin-l top">
         <div class="tools-card">
-          <p>Your personal assistance for the next visa.</p>
+          <div class="flex">
+            <p>Your personal assistance for the next visa.</p>
 
-          <img src="@/assets/illustrations/home/card-1.svg" alt="" class="img">
+            <img src="@/assets/mock-ups/iphone-visa-planner.svg" alt="" class="phone">
+
+            <img src="@/assets/illustrations/home/card-1.svg" alt="" class="img">
+          </div>
         </div>
 
         <div class="tools-card">
-          <p>A tailored quiz to fit your past, present and future.</p>
+          <div class="flex">
+            <p>A tailored quiz to fit your past, present and future.</p>
 
-          <img src="@/assets/illustrations/home/card-2.svg" alt="" class="img">
+            <img src="@/assets/mock-ups/iphone-visa-quiz.svg" alt="" class="phone">
+
+            <img src="@/assets/illustrations/home/card-2.svg" alt="" class="img">
+          </div>
         </div>
 
         <div class="tools-card blue">
-          <p>Plus, the most complete & free visa guide. Ever.</p>
+          <div class="flex">
+            <p>Plus, the most complete & free visa guide. Ever.</p>
 
-          <img src="@/assets/illustrations/home/card-3.svg" alt="" class="img">
+            <img src="@/assets/mock-ups/iphone-visa-info.svg" alt="" class="phone">
+
+            <img src="@/assets/illustrations/home/card-3.svg" alt="" class="img">
+          </div>
         </div>
 
         <div class="tools-card yellow">
-          <p>More hidden features for limited time, sign up to experience now!</p>
+          <div class="flex">
+            <p>More hidden features for limited time, sign up to experience now!</p>
+
+            <img src="@/assets/mock-ups/iphone-ilr-tracker.svg" alt="" class="phone">
+          </div>
         </div>
       </section>
 
@@ -156,6 +172,7 @@ header {
 
 p {
   font-weight: 500;
+  font-size: 16px;
 }
 
 .background {
@@ -192,23 +209,32 @@ button {
 }
 
 .tools-card {
-  background: $pink;
-  padding: 16px 26px;
-  position: relative;
-  min-height: 40vh;
-  display: flex;
-  align-items: center;
+  background: #FBF0EF;
+  padding: 16px 26px 0 26px;
+  height: 310px;
+  margin: auto;
+
+  .flex {
+    width: 100%;
+    height: 100%;
+    max-width: 350px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
 
   &:not(:first-of-type) {
-    margin: 1rem;
+    margin: 1rem auto;
   }
 
   &.blue {
-    background: $light-blue;
+    background: #E9F2F5;
   }
 
   &.yellow {
-    background: $yellow;
+    background: #FFF8EA;
   }
 
   p {
@@ -219,13 +245,24 @@ button {
 
   .img {
     position: absolute;
-    left: 2rem;
     bottom: 0;
   }
 
-  &:nth-of-type(2) {
+  &:nth-of-type(1),
+  &:nth-of-type(4) {
     .img {
-      left: 6rem;
+      left: 0;
+    }
+  }
+
+  &:nth-of-type(2),
+  &:nth-of-type(3) {
+    .flex {
+      flex-direction: row-reverse;
+    }
+    
+    .img {
+      right: 0;
     }
   }
 }
@@ -242,13 +279,58 @@ footer {
     width: 60px;
   }
 
-  a {
-    color: white;
-  }
-
+  a,
   p {
+    font-size: 14px;
     color: white;
     font-weight: 300;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  p {
+    font-size: 20px;
+  }
+
+  .tools-card {
+    height: 340px;
+
+    &:not(:first-of-type) {
+      margin: 2rem auto;
+    }
+
+    .flex {
+      overflow: visible;
+    }
+
+    p {
+      width: 56%;
+    }
+
+    .phone {
+      width: 40%;
+    }
+
+    &:nth-of-type(1) {
+      .img {
+        width: 100px;
+        left: -60px;
+      }
+    }
+
+    &:nth-of-type(2) {
+      .img {
+        width: 80px;
+        right: -40px;
+      }
+    }
+    
+    &:nth-of-type(3) {
+      .img {
+        width: 120px;
+        right: 0;
+      }
+    }
   }
 }
 </style>

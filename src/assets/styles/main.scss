@@ -379,6 +379,18 @@ dialog {
 }
 
 @media screen and (min-width: 700px) {
+  // Text
+  h1 { @include font(24px, 600) }
+  h2, p.title { @include font(20px, 500) }
+  h3 { @include font(16px, 400) }
+
+  p, a, li { @include font(16px, 300) }
+  a, .error { color: $red }
+
+  p.small {
+    font-size: 14px;
+  }
+
   // Pages
   .content {
     width: 70%;
