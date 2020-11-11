@@ -69,4 +69,9 @@ h1 {
 .visa-card {
   margin-top: 2em;
 }
+@media screen and (min-width: 700px) {
+  h1 {
+    margin-bottom: 3rem;
+  }
+}
 </style>

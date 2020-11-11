@@ -380,8 +380,6 @@ dialog {
 
 @media screen and (min-width: 700px) {
   // Text
-  h1 { @include font(24px, 600) }
-  h2, p.title { @include font(20px, 500) }
   h3 { @include font(16px, 400) }
 
   p, a, li { @include font(16px, 300) }
@@ -518,5 +516,13 @@ dialog {
     &.empty {
       min-height: 180px;
     }
+  }
+
+  .btn-margin-top {
+    margin-top: 4rem;
+  }
+
+  .btn-margin-bottom {
+    margin-bottom: 4rem;
   }
 }

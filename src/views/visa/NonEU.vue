@@ -110,16 +110,9 @@ export default {
   }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 700px) {
   .buttons {
-    max-width: none;
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  .buttons {
-    position: relative;
+    margin: 4rem auto;
   }
 }
 </style>

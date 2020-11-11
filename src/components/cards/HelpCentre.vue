@@ -28,5 +28,7 @@ export default {
   background: $med-grey;
   border-radius: $radius;
   padding: 1em;
+  max-width: 450px;
+  margin: auto;
 }
 </style>

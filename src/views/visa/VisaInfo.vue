@@ -1,6 +1,6 @@
 <template>
   <main class="content page padding top bottom">
-    <section class="buttons">
+    <section>
       <h1>Visa Info</h1>
       <h2 class="margin-s top bottom">Looking for useful visa info to come to the UK?</h2>
       
@@ -10,13 +10,13 @@
         <router-link 
           :to="{name: 'non-eu'}"
           tag="button"
-          class="primary margin-s bottom">
+          class="primary margin-s bottom btn-margin-top">
           Non - EU
         </router-link>
         <router-link 
           :to="{name: 'visa-info-eu'}"
           tag="button"
-          class="secondary">
+          class="secondary btn-margin-bottom">
           EU
         </router-link>
       </div>
@@ -40,6 +40,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.content {
+  min-height: 100vh;
+  position: relative;
+}
+
 .container {
   width: 85%;
   margin: auto;
@@ -63,6 +68,12 @@ export default {
     transform: scaleX(-1);
     top: -110px;
     right: 20px;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .help {
+    margin: 8em auto 0 auto;
   }
 }
 </style>
