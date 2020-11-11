@@ -113,5 +113,18 @@ export const applicationTimelines = [
         label: 'Send application & book visa centre appointment.'
       }
     ]
+  },
+  {
+    visa: 'Tier 2 : Health & Care',
+    timeline: [
+      {
+        time: '4 to 6 months before',
+        label: 'Get endorsement.'
+      },
+      {
+        time: '1 to 7 days before',
+        label: 'Send application & book visa centre appointment.'
+      }
+    ]
   }
 ]
