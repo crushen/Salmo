@@ -196,7 +196,7 @@ ul {
 .card {
   list-style: none;
   width: 120px;
-  height: 100px;
+  height: 110px;
   background: $med-blue;
   border-radius: $radius;
   padding: 1em 0.5em;
@@ -226,7 +226,7 @@ ul {
   &.selected {
     background: $blue;
     width: 180px;
-    height: 200px;
+    height: 220px;
   }
 
   &:nth-of-type(5),
