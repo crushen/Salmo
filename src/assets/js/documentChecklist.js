@@ -115,7 +115,7 @@ export const documentChecklist = [
       },
       { 
         label: 'Criminal Record',
-        note: 'You would need to apply this through your local councils from all the places you have lived more then X months in the past 10 years.',
+        note: 'You would need to apply this through your local councils from all the places you have lived more than 12 months in the past 10 years.',
         img: require('@/assets/illustrations/doc-checklist/prison.svg'),
         checked: false
       },
@@ -162,7 +162,7 @@ export const documentChecklist = [
       },
       { 
         label: 'Criminal Record',
-        note: 'You would need to apply this through your local councils from all the places you have lived more then X months in the past 10 years.',
+        note: 'You would need to apply this through your local councils from all the places you have lived more than 12 months in the past 10 years.',
         img: require('@/assets/illustrations/doc-checklist/prison.svg'),
         checked: false
       },
@@ -204,7 +204,7 @@ export const documentChecklist = [
       },
       { 
         label: 'Criminal Record',
-        note: 'You would need to apply this through your local councils from all the places you have lived more then X months in the past 10 years.',
+        note: 'You would need to apply this through your local councils from all the places you have lived more then 12 months in the past 10 years.',
         img: require('@/assets/illustrations/doc-checklist/prison.svg'),
         checked: false
       },

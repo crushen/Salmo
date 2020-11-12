@@ -5,66 +5,69 @@
       text="Back" />
 
     <transition name="slide" mode="out-in">
-      <section v-if="stage === 1" key="1" class="content">
+      <section v-if="stage === 1" key="1" class="content form">
         <h1 class="margin-l bottom">Oh! You're leaving?</h1>
 
-        <p class="margin-m bottom">Before you go, please let us know why you’ve decided to leave Salmo:</p>
+        <div class="inner">
+          <p class="margin-m bottom">Before you go, please let us know why you’ve decided to leave Salmo:</p>
 
-        <FormulateInput
-          v-model="feedback.reason"
-          type="radio"
-          :options="options"
-          class="grey-label" />
+          <FormulateInput
+            v-model="feedback.reason"
+            type="radio"
+            :options="options"
+            class="grey-label" />
 
-        <FormulateInput
-          v-model="feedback.text"
-          type="text"
-          :disabled="feedback.reason !== 'other'"
-          :validation="feedback.reason === 'other' ? 'required' : null" /> 
+          <FormulateInput
+            v-model="feedback.text"
+            type="text"
+            :disabled="feedback.reason !== 'other'"
+            :validation="feedback.reason === 'other' ? 'required' : null" /> 
 
-        <div class="button-center margin-l top bottom">
-          <button
-            @click="submitFeedback"
-            class="outline">
-            Submit Feedback
-          </button>
+          <div class="button-center margin-l top bottom">
+            <button
+              @click="submitFeedback"
+              class="outline">
+              Submit Feedback
+            </button>
+          </div>
         </div>
-
         <img src="@/assets/illustrations/delete-account/girl-looking.svg" alt="" class="img-1">
       </section>
 
       <section v-else key="2" class="content margin-l bottom">
         <h1 class="margin-m bottom">We're sorry to see you go!</h1>
 
-        <img src="@/assets/illustrations/delete-account/delete-account.svg" alt="" class="img-2">
+        <div class="inner">
+          <img src="@/assets/illustrations/delete-account/delete-account.svg" alt="" class="img-2">
 
-        <p class="margin-m top">Thanks for letting us know how you feel, we will reflect on your feedback!</p>
-        <p class="margin-s top">If you wish to delete your account and have all personal details wiped out from our system, please enter your email address and password:</p>
+          <p class="margin-m top">Thanks for letting us know how you feel, we will reflect on your feedback!</p>
+          <p class="margin-s top">If you wish to delete your account and have all personal details wiped out from our system, please enter your email address and password:</p>
 
-        <FormulateForm @submit="submitDelete" class="margin-m top">
-          <FormulateInput
-            v-model="userDetails.email"
-            type="email"
-            label="email address"
-            validation="bail|required|email"
-            error-behavior="submit" />
+          <FormulateForm @submit="submitDelete" class="margin-m top">
+            <FormulateInput
+              v-model="userDetails.email"
+              type="email"
+              label="email address"
+              validation="bail|required|email"
+              error-behavior="submit" />
 
-          <FormulateInput
-            v-model="userDetails.password"
-            type="password"
-            label="password"
-            validation="required"
-            error-behavior="submit" />
+            <FormulateInput
+              v-model="userDetails.password"
+              type="password"
+              label="password"
+              validation="required"
+              error-behavior="submit" />
 
-            <p class="margin-m top"><strong>THIS ACTION IS IRREVERSIBLE!</strong></p>
+              <p class="margin-m top"><strong>THIS ACTION IS IRREVERSIBLE!</strong></p>
 
-          <FormulateInput
-            type="submit"
-            label="Delete Account"
-            class="tertiary margin-s top" />
+            <FormulateInput
+              type="submit"
+              label="Delete Account"
+              class="tertiary margin-s top" />
 
-          <p v-if="error">{{ error }}</p>
-        </FormulateForm>
+            <p v-if="error">{{ error }}</p>
+          </FormulateForm>
+        </div>
       </section>
     </transition>
   </main>
@@ -127,7 +130,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 .content {
-  min-height: 100vh;
+  min-height: calc(100vh - 85px);
   position: relative;
   overflow: hidden;
 }
@@ -151,11 +154,34 @@ p {
 .img-2 {
   display: block;
   width: 55%;
+  max-width: 200px;
   margin: auto;
 }
 
 strong {
   font-size: 20px;
   color: $red;
+}
+
+.form {
+  padding-bottom: 100px;
+
+  .inner {
+    max-width: 450px;
+    margin: auto;
+  }
+}
+
+.bottom {
+  .inner {
+    max-width: 450px;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .content {
+    min-height: calc(100vh - 150px);
+  }
 }
 </style>

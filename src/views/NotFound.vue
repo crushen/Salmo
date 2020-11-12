@@ -1,8 +1,8 @@
 <template>
   <main class="page padding top bottom">
     <back-button
-      @go-back="$router.go(-1)"
-      text="Back" />
+      @go-back="$router.push({ name: 'home' })"
+      text="Home" />
 
     <div class="content">
       <h1>404 Uh-Oh!</h1>
@@ -48,6 +48,7 @@ export default {
 img {
   display: block;
   width: 60%;
+  max-width: 200px;
   margin: auto;
 }
 </style>
