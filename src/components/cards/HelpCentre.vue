@@ -27,8 +27,14 @@ export default {
 .card {
   background: $med-grey;
   border-radius: $radius;
-  padding: 1em;
+  padding: 1rem;
   max-width: 450px;
   margin: auto;
+}
+
+@media screen and (min-width: 700px) {
+  .card {
+    padding: 1.5rem;
+  }
 }
 </style>

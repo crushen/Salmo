@@ -142,7 +142,7 @@ const routes = [
     component: () => import('@/views/visa/PreSettled'),
     meta: { onlyVerifiedUser: true }
   },
-  { 
+  {
     path: '/visa-info/:slug', 
     name: 'visa-page', 
     component: () => import('@/views/visa/VisaPage'),
@@ -154,6 +154,12 @@ const routes = [
         component: () => import('@/views/visa/VisaSection')
       }
     ]
+  },
+  { 
+    path: '/visa-info/family-visa', 
+    name: 'family-visa', 
+    component: () => import('@/views/visa/FamilyVisa'),
+    meta: { onlyVerifiedUser: true }
   },
   // About and Help centre pages
   { 

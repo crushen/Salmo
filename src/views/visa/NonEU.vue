@@ -19,6 +19,14 @@
         {{ page.text }}
         <img :src="page.icon" class="icon">
       </router-link>
+
+      <router-link
+        :to="{ name: 'family-visa' }"
+        tag="button"
+        :style="{ backgroundImage: `url(${family.bg})` }">
+        {{ family.text }}
+        <img :src="family.icon" class="icon">
+      </router-link>
     </section>
 
     <section class="content margin-l top">
@@ -50,9 +58,14 @@ export default {
       categories: [
         { icon: study, bg: wave, text: 'study' },
         { icon: work, bg: line, text: 'work' },
-        { icon: business, bg: dashed, text: 'business' },
-        { icon: family, bg: confetti, text: 'family' }
-      ]
+        { icon: business, bg: dashed, text: 'business' }
+        // { icon: family, bg: confetti, text: 'family' }
+      ],
+      family: {
+        icon: family,
+        bg: confetti,
+        text: 'family'
+      }
     }
   }
 }
