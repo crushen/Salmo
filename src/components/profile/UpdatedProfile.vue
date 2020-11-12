@@ -5,7 +5,7 @@
     <profile-card :user="user" />
 
     <div class="content status-title margin-m top">
-      <h2>{{ statusText }}</h2>
+      <h2>My Visa</h2>
 
       <button
         v-if="user.profile.nextVisa.name"
@@ -33,7 +33,7 @@
       </button>
     </div>
 
-    <div v-else class="margin-m bottom" >
+    <div v-else class="timeline">
       <status-timeline 
         :user="user"
         :prepDate="prepDate" />
@@ -102,13 +102,6 @@ export default {
     profileToUpdate() { 
       return {...this.user.profile} 
     },
-    statusText() {
-      if(this.user.profile.nextVisa) {
-        return 'My Status'
-      } else {
-        return 'My Visa'
-      }
-    },
     endDate() {
       const date = this.user.profile.currentVisa.end.split('-'),
             year = date[0].split('').slice(-2).join('');
@@ -164,5 +157,9 @@ export default {
     align-items: center;
     justify-content: center;
   }
+}
+
+.timeline {
+  overflow: visible;
 }
 </style>
