@@ -208,7 +208,7 @@ const router = new VueRouter({
   routes,
   scrollBehavior() {
     return new Promise((resolve) => {
-      setTimeout(() => {resolve({ x: 0, y: 0 })}, 400)
+      setTimeout(() => {resolve({ x: 0, y: 0 })}, 500) // for delay in page transition
     })
   }
 })
