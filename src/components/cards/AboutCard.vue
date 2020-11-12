@@ -30,6 +30,7 @@ export default {
 
   img {
     width: 60%;
+    max-width: 200px;
     margin: auto;
   }
 
