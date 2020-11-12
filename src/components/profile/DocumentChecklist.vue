@@ -12,7 +12,7 @@
             :key="item.label"
             :class="item.checked ? 'checked' : ''">
               <div
-                @mouseenter="visibleNote = notes.find(note => note.label === item.label).note"
+                @mouseenter="visibleNote = item.note"
                 @mouseleave="visibleNote = null"
                 @click="checkItem(item)"
                 class="inner">
@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import { notes } from '@/assets/js/documentChecklist'
 import alert from '@/components/alerts/DocChecklist'
 
 export default {
@@ -48,7 +47,6 @@ export default {
   },
   data() {
     return {
-      notes,
       visibleNote: null,
       showAlert: false
     }
@@ -113,6 +111,8 @@ li {
     color: $blue;
     font-weight: 400;
     margin-top: 0.5em;
+    font-size: 12px;
+    overflow: hidden;
   }
 
   &.checked {
