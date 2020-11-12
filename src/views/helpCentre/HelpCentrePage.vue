@@ -1,5 +1,9 @@
 <template>
   <main id="help-center-page" v-if="article" class="page padding top bottom">
+    <back-button
+      @go-back="$router.push({ name: 'help-centre' })"
+      text="Help Centre" />
+
     <article class="content">
       <h1>{{ article.title }}</h1>
 
@@ -15,9 +19,10 @@
 <script>
 import { mapState } from 'vuex'
 import helpCentreFeedback from '@/components/cards/HelpCentreFeedback'
+import backButton from '@/components/BackButton'
 
 export default {
-  components: { helpCentreFeedback },
+  components: { helpCentreFeedback, backButton },
   data() {
     return {
       slug: this.$route.params.slug,

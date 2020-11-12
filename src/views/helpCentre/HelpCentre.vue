@@ -1,5 +1,9 @@
 <template>
   <main id="help-centre" class="page padding top bottom">
+    <back-button
+      @go-back="$router.push({ name: 'about' })"
+      text="About" />
+
     <div class="content">
       <h1>Help Centre</h1>
       <h2 class="margin-s top">You can find all the information here to answer your questions!</h2>
@@ -97,6 +101,7 @@
 <script>
 import { mapState } from 'vuex'
 import disclaimer from '@/components/cards/Disclaimer'
+import backButton from '@/components/BackButton'
 
 import wave from '@/assets/patterns/wave-2.svg'
 import line from '@/assets/patterns/line.svg'
@@ -104,7 +109,7 @@ import dashed from '@/assets/patterns/dashed-line.svg'
 import confetti from '@/assets/patterns/confetti.svg'
 
 export default {
-  components: { disclaimer },
+  components: { disclaimer, backButton },
   data() {
     return {
       selected: null,
