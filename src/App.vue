@@ -116,6 +116,10 @@ body.using-mouse :focus {
   min-height: 100vh;
 }
 
+p {
+  overflow: visible;
+}
+
 .wave {
   height: 100vh;
   position: absolute;

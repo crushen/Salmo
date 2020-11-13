@@ -10,15 +10,28 @@
           <h1>ILR Tracker</h1>
         </div>
 
-        <transition name="slide" mode="out-in">
-          <section v-if="!user.profile.ilrPlan" class="margin-m top" key="stageOne">
-            <stage-one :user="user" :profileToUpdate="profileToUpdate" />
-          </section>
+        
+          <section v-if="!user.profile.ilrPlan" class="margin-m top">
+            <transition name="slide" mode="out-in">
+              <stage-one
+                v-if="stage === 1"
+                key="one"
+                @next-stage="stage++" />
 
-          <section v-else key="stageTwo">
-            <stage-two />
+              <stage-two
+                v-if="stage === 2"
+                key="two"
+                :user="user"
+                :profileToUpdate="profileToUpdate"
+                @next-stage="stage++" />
+
+              <stage-three
+                v-if="stage === 3"
+                key="three"
+                
+                @next-stage="stage++" />
+            </transition>
           </section>
-        </transition>
       </div>
     </main>
   </div>
@@ -32,23 +45,14 @@ import prCalc from '@/components/profile/prCalc/PrCalculator'
 
 import stageOne from '@/components/ilrTracker/StageOne'
 import stageTwo from '@/components/ilrTracker/StageTwo'
+import stageThree from '@/components/ilrTracker/StageThree'
 
 
 export default {
-  components: { backButton, stageOne, stageTwo },
+  components: { backButton, stageOne, stageTwo, stageThree },
   data() {
     return {
-      showResults: false,
-      pre2016: [],
-      post2016: [],
-      pre2016visas: [],
-      post2016holiday: [],
-      modalOpen: false,
-      editHoliday: false,
-      readMoreOpen: false,
-      editOpen: false,
-      index: null,
-      showAlert: false
+      stage: 1
     }
   },
   computed: {
@@ -68,7 +72,6 @@ export default {
   width: 85%;
   margin: auto;
 }
-
 
 .year-title {
   display: flex;
