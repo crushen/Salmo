@@ -9,7 +9,9 @@
 
     <mobile-wave v-if="innerWidth < 600" />
 
-    <tablet-wave v-else />
+    <tablet-wave v-else-if="innerWidth >= 600 && innerWidth < 1000" />
+
+    <desktop-wave v-else />
 
     <mobile-nav v-if="user && user.emailVerified"  />
 
@@ -37,12 +39,14 @@ import sidebarNav from '@/components/nav/SidebarNav'
 
 import mobileWave from '@/components/waves/Mobile'
 import tabletWave from '@/components/waves/Tablet'
+import desktopWave from '@/components/waves/Desktop'
 
 export default {
   components: {
     mobileNav,
     mobileWave,
-    tabletWave
+    tabletWave,
+    desktopWave
     // sidebarNav
   },
   data () {
