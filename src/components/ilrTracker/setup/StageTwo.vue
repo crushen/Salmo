@@ -59,11 +59,6 @@
     <pr-calc />
   </div> -->
 
-
-
-
-  
-
   <div>
     <transition name="dialog" mode="out-in">
       <delete-alert
@@ -73,7 +68,7 @@
     </transition>
 
     <div class="tools-card">
-      <h2 v-if="!pastVisas.length">Do you have any past visas?</h2>
+      <h2 v-if="!pastVisas.length">Do you have any past visas? (1/3)</h2>
       <h2 v-else>Here are your past visas :</h2>
 
       <div class="inner">
@@ -84,20 +79,25 @@
             <li
               v-for="(visa, index) in sortByDate"
               :key="visa.name">
-              <div class="text">
+              <div class="inner-text">
                 <p><b>{{ visa.name }}</b></p>
-                <p>{{ date(visa.start) }} to {{ date(visa.end) }}</p>
+
+                <p><b>Valid from {{ date(visa.start) }} to {{ date(visa.end) }}</b></p>
+
+                <p class="margin-s top">Applied on <b>{{ date(visa.appliedDate) }}</b> in <b>{{ visa.locationApplied }}</b></p>
+
+                <p>Entered the UK on <b>{{ date(visa.entryDate) }}</b></p>
               </div>
 
               <div class="buttons">
-                <button @click="deletingVisa = true, deleteIndex = index" class="none">
+                <button @click="deletingVisa = true, deleteIndex = index" class="none delete">
                   <img src="@/assets/icons/red/cross.svg" alt="">
                 </button>
               </div>
             </li>
           </ul>
 
-          <button @click="showForm = true" class="none">
+          <button @click="showForm = true" class="none margin-m top">
             <img src="@/assets/icons/red/plus.svg" alt="">
           </button>
         </div>
@@ -125,7 +125,7 @@
             validation="bail|required|customDateStart|overlappedDates|overlappedWithCurrentVisa"
             :validation-rules="{customDateStart, overlappedDates, overlappedWithCurrentVisa}"
             :validation-messages="{
-              customDateStart: 'Start date must be before end date',
+              customDateStart: 'Valid from must be before valid to date',
               overlappedDates: 'Past visas can not overlap',
               overlappedWithCurrentVisa: 'Past visa can not overlap current visa'
             }"
@@ -139,7 +139,7 @@
             validation="bail|required|customDateEnd|overlappedDates|overlappedWithCurrentVisa"
             :validation-rules="{customDateEnd, overlappedDates, overlappedWithCurrentVisa}"
             :validation-messages="{
-              customDateEnd: 'End date must be after start date',
+              customDateEnd: 'Valid to date must be after valid from date',
               overlappedDates: 'Past visas can not overlap',
               overlappedWithCurrentVisa: 'Past visa can not overlap current visa'
             }"
@@ -153,7 +153,7 @@
             validation="bail|required|beforeStartDate"
             :validation-rules="{beforeStartDate}"
             :validation-messages="{
-              beforeStartDate: 'Date must be before valid from date'
+              beforeStartDate: 'Date applied must be before valid from date'
             }"
             error-behavior="submit"
             class="grey-label" />
@@ -407,14 +407,32 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: $med-blue;
+    background: $light-blue;
+    border-radius: $radius;
+    padding: 0.5rem;
+    position: relative;
 
     &:not(:first-of-type) {
       margin-top: 1rem;
     }
 
-    p {
-      margin: 0;
+    p:first-of-type {
+      // margin-top: 1rem;
+      font-size: 18px;
+    }
+
+    b {
+      font-weight: 500;
+    }
+
+    .delete {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+
+      img {
+        width: 20px;
+      }
     }
   }
 }

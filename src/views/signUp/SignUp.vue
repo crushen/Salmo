@@ -90,6 +90,7 @@ export default {
             nextVisa: {
               name: null
             },
+            ilrTracker: {},
             notifications: {
               newsletter: true,
               planner: true,

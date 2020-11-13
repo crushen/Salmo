@@ -10,8 +10,11 @@
           <h1>ILR Tracker</h1>
         </div>
 
-        
-          <section v-if="!user.profile.ilrPlan" class="margin-m top">
+        <transition name="slide" mode="out-in">
+          <section
+            v-if="!user.profile.ilrTracker.startDate"
+            class="margin-m top"
+            key="sect-one">
             <transition name="slide" mode="out-in">
               <stage-one
                 v-if="stage === 1"
@@ -28,10 +31,20 @@
               <stage-three
                 v-if="stage === 3"
                 key="three"
-                
+                :profileToUpdate="profileToUpdate"
                 @next-stage="stage++" />
+
+              <stage-four
+                v-if="stage === 4"
+                key="four"
+                :profileToUpdate="profileToUpdate" />
             </transition>
           </section>
+
+          <section v-else key="sect-2">
+            <p>hello</p>
+          </section>
+        </transition>
       </div>
     </main>
   </div>
@@ -43,13 +56,14 @@ import results from '@/components/ilrTracker/Results'
 import backButton from '@/components/BackButton'
 import prCalc from '@/components/profile/prCalc/PrCalculator'
 
-import stageOne from '@/components/ilrTracker/StageOne'
-import stageTwo from '@/components/ilrTracker/StageTwo'
-import stageThree from '@/components/ilrTracker/StageThree'
+import stageOne from '@/components/ilrTracker/setup/StageOne'
+import stageTwo from '@/components/ilrTracker/setup/StageTwo'
+import stageThree from '@/components/ilrTracker/setup/StageThree'
+import stageFour from '@/components/ilrTracker/setup/StageFour'
 
 
 export default {
-  components: { backButton, stageOne, stageTwo, stageThree },
+  components: { backButton, stageOne, stageTwo, stageThree, stageFour },
   data() {
     return {
       stage: 1
