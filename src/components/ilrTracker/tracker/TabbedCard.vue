@@ -21,7 +21,22 @@
       <div class="tab-result">
         <transition name="slide" mode="out-in">
           <div v-if="selectedTab === 1" key="1">
-            <p>Travel Log</p>
+            <div class="buttons">
+              <button @click="addHoliday = true" class="none">
+                <img src="@/assets/icons/red/plus.svg" alt="">
+              </button>
+
+              <button class="none">
+                <img src="@/assets/icons/red/edit.svg" alt="">
+              </button>
+            </div>
+            
+            <transition name="slide" mode="out-in">
+              <add-holiday-form
+                v-if="addHoliday"
+                :profileToUpdate="profileToUpdate"
+                @cancel="addHoliday = false" />
+            </transition>
           </div>
 
           <div v-else key="2">
@@ -34,10 +49,21 @@
 </template>
 
 <script>
+import addHolidayForm from '@/components/ilrTracker/tracker/AddHoliday'
 export default {
+  components: { addHolidayForm },
   data() {
     return {
       selectedTab: 1,
+      addHoliday: false
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user
+    },
+    profileToUpdate() { 
+      return {...this.user.profile} 
     }
   }
 }
@@ -87,32 +113,17 @@ export default {
 .tab-result {
   width: 100%;
   min-height: 180px;
-  padding: 2em;
+  padding: 1em;
   background: white;
+}
 
-  p {
-    margin-top: 1em;
-  }
+.buttons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
 
-  .title {
-    font-weight: 600;
-    margin-top: 0;
-  }
-
-  .flex {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-top: 2rem;
-
-    .left {
-      width: 55%;
-    }
-
-    .img {
-      width: 40%;
-      max-width: 170px;
-    }
+  button {
+    margin-left: 1rem;
   }
 }
 
