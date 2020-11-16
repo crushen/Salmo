@@ -9,18 +9,32 @@
       </div>
     </div>
 
-    <tabbed-card class="margin-m top" />
+    <transition name="slide" mode="out-in">
+      <tabbed-card v-if="!settingsOpen" class="margin-m top" />
+
+      <settings
+        v-else :profileToUpdate="profileToUpdate"
+        @cancel="$emit('cancel')"
+        class="margin-m top" />
+    </transition>
   </div>
 </template>
 
 <script>
 import tabbedCard from '@/components/ilrTracker/tracker/TabbedCard'
+import settings from '@/components/ilrTracker/tracker/Settings'
 
 export default {
-  components: { tabbedCard },
+  components: { tabbedCard, settings },
+  props: {
+    settingsOpen: { type: Boolean, required: false }
+  },
   computed: {
     user() {
       return this.$store.state.auth.user
+    },
+    profileToUpdate() { 
+      return {...this.user.profile} 
     }
   }
 }

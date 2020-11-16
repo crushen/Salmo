@@ -26,7 +26,7 @@
               <img src="@/assets/icons/red/lightbulb.svg" alt="">
             </button>
 
-            <button class="none">
+            <button class="none" @click="settingsOpen = true">
               <img src="@/assets/icons/red/edit.svg" alt="">
             </button>
           </div>
@@ -64,7 +64,7 @@
           </section>
 
           <section v-else key="sect-2">
-            <tracker-page />
+            <tracker-page :settingsOpen="settingsOpen" @cancel="settingsOpen = false" />
           </section>
         </transition>
       </div>
@@ -101,7 +101,8 @@ export default {
   data() {
     return {
       stage: 1,
-      tipOpen: false
+      tipOpen: false,
+      settingsOpen: false
     }
   },
   computed: {
