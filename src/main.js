@@ -4,8 +4,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-import Vuelidate from 'vuelidate'
-import VCalendar from 'v-calendar'
+// import Vuelidate from 'vuelidate'
+// import VCalendar from 'v-calendar'
 import VueFormulate from '@braid/vue-formulate'
 
 import firebase from 'firebase/app'
@@ -13,8 +13,8 @@ import 'firebase/auth'
 
 Vue.config.productionTip = false
 
-Vue.use(Vuelidate)
-Vue.use(VCalendar)
+// Vue.use(Vuelidate)
+// Vue.use(VCalendar)
 Vue.use(VueFormulate)
 
 Vue.mixin({
