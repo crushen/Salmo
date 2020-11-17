@@ -7,14 +7,14 @@
           :class="{'selected': 1 === selectedTab}"
           class="tab"
           :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
-          <p>Travel Log</p>
+          <h2>Travel Log</h2>
         </button>
         <button
           @click="selectedTab = 2"
           :class="{'selected': 2 === selectedTab}"
           class="tab"
           :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
-          <p>Visa History</p>
+          <h2>Visa History</h2>
         </button>
       </div>
 
@@ -91,6 +91,7 @@ export default {
 
 .tools-card {
   background: #D4E7ED;
+  max-width: 520px;
 }
 
 .tabs {
@@ -102,6 +103,7 @@ export default {
   .tab {
     width: 50%;
     height: 80%;
+    padding: 0.5rem 0;
     border-radius: 0;
     box-shadow: none;
     border-top-right-radius: $radius;
@@ -112,8 +114,10 @@ export default {
     transition: 0.2s;
     overflow: hidden;
 
-    p {
-      font-weight: 500;
+    h2 {
+      margin: 0;
+      font-size: 16px;
+      transition: 0.2s;
     }
 
     &.selected {
@@ -121,6 +125,10 @@ export default {
       z-index: 5;
       color: $dark-font;
       background: white;
+
+      h2 {
+        font-size: 18px;
+      }
     }
   }
 }
@@ -151,9 +159,9 @@ export default {
 }
 
 // Tablet
-@media screen and (min-width: 600px) {
-  .card {
-    margin-top: 0;
+@media screen and (min-width: 700px) {
+  .tab-result {
+    padding: 2em;
   }
 }
 </style>

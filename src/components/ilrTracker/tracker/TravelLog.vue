@@ -1,15 +1,31 @@
 <template>
-  <ul class="holiday">
-    <li
-      v-for="(item, index) in invalidHoliayYears"
-      :key="index"
-      class="item">
-      <!-- <p class="location"><br>{{ item.country }}</p> -->
-      <!-- <p class="dates" :aria-label="`${item.country} start and end`">
-        from {{ date(item.leftUk) }}<br>to {{ date(item.returnedUk) }}
-      </p> -->
-    </li>
-  </ul>
+  <div>
+    <ul class="travel-log margin-s top">
+      <li
+        v-for="(year, index) in allHolidayYears"
+        :key="index"
+        :class="{ 'invalid': year.invalid, 'selected': selected === index }"
+        @click="selected === index ? selected = null : selected = index"
+        aria-label="Expand year to see holidays"
+        class="year">
+        <p v-if="selected !== index" class="year-text"><b>{{ year.startDate.getFullYear() }}</b></p>
+        <div v-else>
+          <p class="year-text"><b>{{ year.startDate.getFullYear() }}</b></p>
+
+          <ul class="holiday-list">
+            <li
+              v-for="holiday in year.holidays"
+              :key="holiday.leftUk"
+              class="holiday">
+              <p class="location"><b>{{ holiday.country }}</b></p>
+
+              <p class="dates">from {{ date(holiday.leftUk) }} to {{ date(holiday.returnedUk) }}</p>
+            </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -20,6 +36,7 @@ export default {
   },
   data() {
     return {
+      selected: null
     }
   },
   computed: {
@@ -30,9 +47,15 @@ export default {
       const array = this.user.profile.holiday.filter(holiday => holiday.leftUk > this.startDate)
       return this.sortIntoYears(array)
     },
-    invalidHoliayYears() {
-      const array = this.user.profile.holiday.filter(holiday => holiday.returnedUk <= this.startDate)
-      return this.sortIntoYears(array)
+    invalidHolidayYears() {
+      const array = this.user.profile.holiday.filter(holiday => holiday.returnedUk <= this.startDate);
+      let invalidYears =  this.sortIntoYears(array)
+
+      invalidYears.forEach(year => year.invalid = true)
+      return invalidYears
+    },
+    allHolidayYears() {
+      return this.invalidHolidayYears.concat(this.validHolidayYears)
     }
   },
   methods: {
@@ -119,31 +142,51 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
-.holiday {
-  padding: 0 26px 26px 26px;
+.travel-log {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 
-  li {
+  .year {
+    width: 48%;
     background: #D4E7ED;
+    margin-top: 0.5rem;
     border: 4px solid #D4E7ED;
     border-radius: $radius;
     padding: 0.2rem 1rem;
-    display: flex;
-    justify-content: space-between;
+    text-align: center;
 
-    &:not(:first-of-type) {
-      margin-top: 0.5rem;
-    }
-
-    &:nth-of-type(even) {
-      background: white;
-    }
-
-    .location {
+    b {
       font-weight: 500;
     }
 
-    .dates {
-      text-align: right;
+    &:nth-of-type(odd) {
+      background: white;
+    }
+
+    &.invalid {
+      background: $med-grey;
+      border: 4px solid $med-grey;
+      text-decoration: line-through;
+    }
+
+    &.selected {
+      width: 100%;
+      text-align: left;
+    }
+
+    .year-text {
+      font-size: 18px;
+    }
+
+    .holiday-list {
+      margin-top: 0.5rem;
+    }
+
+    .holiday {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }
