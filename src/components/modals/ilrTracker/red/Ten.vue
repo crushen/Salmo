@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import baseTip from '@/components/modals/ilrTracker/tips/BaseTip'
+import baseTip from '@/components/modals/ilrTracker/red/BaseTip'
 
 export default {
   components: { baseTip },

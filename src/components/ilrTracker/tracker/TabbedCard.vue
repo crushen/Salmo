@@ -1,76 +1,95 @@
 <template>
-  <section class="tools-card">
-    <div>
-      <div class="tabs">
-        <button
-          @click="selectedTab = 1"
-          :class="{'selected': 1 === selectedTab}"
-          class="tab"
-          :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
-          <h2>Travel Log</h2>
-        </button>
-        <button
-          @click="selectedTab = 2"
-          :class="{'selected': 2 === selectedTab}"
-          class="tab"
-          :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
-          <h2>Visa History</h2>
-        </button>
-      </div>
+  <div>
+    <transition name="dialog" mode="out-in">
+      <edit-holiday-modal
+        v-if="showEditModal"
+        :holiday="holidayToEdit"
+        :profileToUpdate="profileToUpdate"
+        @closeModal="showEditModal = false" />
+    </transition>
 
-      <div class="tab-result">
-        <transition name="slide" mode="out-in">
-          <!-- Travel Log -->
-          <div v-if="selectedTab === 1" key="1">
-            <div class="buttons">
-              <button
-                @click="addHoliday = true"
-                class="none">
-                <img src="@/assets/icons/red/plus.svg" alt="">
-              </button>
+    <section class="tools-card">
+      <div>
+        <div class="tabs">
+          <button
+            @click="selectedTab = 1"
+            :class="{'selected': 1 === selectedTab}"
+            class="tab"
+            :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
+            <h2>Travel Log</h2>
+          </button>
+          <button
+            @click="selectedTab = 2"
+            :class="{'selected': 2 === selectedTab}"
+            class="tab"
+            :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
+            <h2>Visa History</h2>
+          </button>
+        </div>
 
-              <button
-                v-if="user.profile.holiday.length"
-                @click="editHolidays = true"
-                class="none">
-                <img src="@/assets/icons/red/edit.svg" alt="">
-              </button>
+        <div class="tab-result">
+          <transition name="slide" mode="out-in">
+            <!-- Travel Log -->
+            <div v-if="selectedTab === 1" key="1">
+              <div class="buttons">
+                <button
+                  @click="addHoliday = true"
+                  class="none"
+                  aria-label="Add holiday">
+                  <img src="@/assets/icons/red/plus.svg" alt="">
+                </button>
+
+                <button
+                  v-if="user.profile.holiday.length"
+                  @click="editHolidays = !editHolidays"
+                  class="none"
+                  aria-label="Toggle holiday editor">
+                  <img v-if="!editHolidays" src="@/assets/icons/red/edit.svg" alt="">
+                  <img v-else src="@/assets/icons/red/edit-solid.svg" alt="">
+                </button>
+              </div>
+
+              <transition name="slide" mode="out-in">
+                <add-holiday-form
+                  v-if="addHoliday"
+                  :profileToUpdate="profileToUpdate"
+                  @cancel="addHoliday = false" />
+
+                <travel-log
+                  v-if="!addHoliday && user.profile.holiday.length"
+                  :user="user"
+                  :profileToUpdate="profileToUpdate"
+                  :editHolidays="editHolidays"
+                  @editHoliday="editHoliday" />
+              </transition>
             </div>
 
-            <transition name="slide" mode="out-in">
-              <add-holiday-form
-                v-if="addHoliday"
-                :profileToUpdate="profileToUpdate"
-                @cancel="addHoliday = false" />
-
-              <travel-log
-                v-if="!addHoliday && user.profile.holiday.length"
-                :user="user"
-                :profileToUpdate="profileToUpdate" />
-            </transition>
-          </div>
-
-          <!-- Visa History -->
-          <div v-else key="2">
-            <p>Visa History</p>
-          </div>
-        </transition>
+            <!-- Visa History -->
+            <div v-else key="2">
+              <p>Visa History</p>
+            </div>
+          </transition>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script>
 import addHolidayForm from '@/components/ilrTracker/tracker/AddHoliday'
 import travelLog from '@/components/ilrTracker/tracker/TravelLog'
+import editHolidayModal from '@/components/modals/ilrTracker/red/EditHoliday'
+
 
 export default {
-  components: { addHolidayForm, travelLog },
+  components: { addHolidayForm, travelLog, editHolidayModal },
   data() {
     return {
       selectedTab: 1,
       addHoliday: false,
-      editHolidays: false
+      editHolidays: false,
+      holidayToEdit: {},
+      showEditModal: false
     }
   },
   computed: {
@@ -79,6 +98,12 @@ export default {
     },
     profileToUpdate() { 
       return {...this.user.profile} 
+    }
+  },
+  methods: {
+    editHoliday(holiday) {
+      this.holidayToEdit = holiday
+      this.showEditModal = true
     }
   }
 }

@@ -73,21 +73,14 @@
 </template>
 
 <script>
-// import tracker from '@/components/ilrTracker/Tracker'
-// import results from '@/components/ilrTracker/Results'
-// import prCalc from '@/components/profile/prCalc/PrCalculator'
-import fiveTip from '@/components/modals/ilrTracker/tips/Five'
-import tenTip from '@/components/modals/ilrTracker/tips/Ten'
-
 import backButton from '@/components/BackButton'
-
+import fiveTip from '@/components/modals/ilrTracker/red/Five'
+import tenTip from '@/components/modals/ilrTracker/red/Ten'
 import stageOne from '@/components/ilrTracker/setup/StageOne'
 import stageTwo from '@/components/ilrTracker/setup/StageTwo'
 import stageThree from '@/components/ilrTracker/setup/StageThree'
 import stageFour from '@/components/ilrTracker/setup/StageFour'
-
 import trackerPage from '@/components/ilrTracker/tracker/TrackerPage'
-
 
 export default {
   components: {
