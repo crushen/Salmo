@@ -20,25 +20,37 @@
 
       <div class="tab-result">
         <transition name="slide" mode="out-in">
+          <!-- Travel Log -->
           <div v-if="selectedTab === 1" key="1">
             <div class="buttons">
-              <button @click="addHoliday = true" class="none">
+              <button
+                @click="addHoliday = true"
+                class="none">
                 <img src="@/assets/icons/red/plus.svg" alt="">
               </button>
 
-              <button class="none">
+              <button
+                v-if="user.profile.holiday.length"
+                @click="editHolidays = true"
+                class="none">
                 <img src="@/assets/icons/red/edit.svg" alt="">
               </button>
             </div>
-            
+
             <transition name="slide" mode="out-in">
               <add-holiday-form
                 v-if="addHoliday"
                 :profileToUpdate="profileToUpdate"
                 @cancel="addHoliday = false" />
+
+              <travel-log
+                v-if="!addHoliday && user.profile.holiday.length"
+                :user="user"
+                :profileToUpdate="profileToUpdate" />
             </transition>
           </div>
 
+          <!-- Visa History -->
           <div v-else key="2">
             <p>Visa History</p>
           </div>
@@ -50,12 +62,15 @@
 
 <script>
 import addHolidayForm from '@/components/ilrTracker/tracker/AddHoliday'
+import travelLog from '@/components/ilrTracker/tracker/TravelLog'
+
 export default {
-  components: { addHolidayForm },
+  components: { addHolidayForm, travelLog },
   data() {
     return {
       selectedTab: 1,
-      addHoliday: false
+      addHoliday: false,
+      editHolidays: false
     }
   },
   computed: {
