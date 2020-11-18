@@ -44,7 +44,10 @@ export default {
         currentVisa: {
           name: null,
           start: null,
-          end: null
+          end: null,
+          appliedDate: null,
+          locationApplied: null,
+          entryDate: null
         },
         planningTo: [],
         permanentResidency: null,

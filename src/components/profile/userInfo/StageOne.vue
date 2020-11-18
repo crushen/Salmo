@@ -32,15 +32,16 @@
         v-model="form.currentVisa.name"
         type="select"
         :options="visaOptions"
-        label="current visa"
-        validation="required"
+        label="current visa name"
         placeholder="select an option"
+        validation="required"
         class="grey-label user-info" />
+
 
       <FormulateInput
         v-model="form.currentVisa.start"
         type="date"
-        label="start"
+        label="valid from"
         validation="bail|required|date|customDate"
         :validation-rules="{customDate: ({ value }) => value < form.currentVisa.end}"
         :validation-messages="{customDate: 'Start date must be before end date'}"
@@ -50,10 +51,37 @@
       <FormulateInput
         v-model="form.currentVisa.end"
         type="date"
-        label="end"
+        label="valid to"
         validation="bail|required|date|customDate"
         :validation-rules="{customDate: ({ value }) => value > form.currentVisa.start}"
         :validation-messages="{customDate: 'End date must be after start date'}"
+        error-behavior="submit"
+        class="grey-label user-info" />
+
+      <FormulateInput
+        v-model="form.currentVisa.appliedDate"
+        type="date"
+        label="date applied (the day you submitted your application online)"
+        validation="bail|required|date|customDate"
+        :validation-rules="{customDate: ({ value }) => value < form.currentVisa.start}"
+        :validation-messages="{customDate: 'Applied date must be before start date'}"
+        error-behavior="submit"
+        class="grey-label user-info" />
+
+      <FormulateInput
+        v-model="form.currentVisa.locationApplied"
+        type="select"
+        :options="makeOptions(countries)"
+        label="where did you apply?"
+        placeholder="select an option"
+        validation="required"
+        error-behavior="submit"
+        class="grey-label user-info" />
+
+      <FormulateInput
+        v-model="form.currentVisa.entryDate"
+        type="date"
+        label="date entered the UK (only if you applied for your visa from your home country)"
         error-behavior="submit"
         class="grey-label user-info" />
 

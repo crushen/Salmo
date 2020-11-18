@@ -28,28 +28,68 @@
         v-model="form.currentVisa.name"
         type="select"
         :options="visaOptions"
-        label="current visa"
-        validation="required"
+        label="current visa name"
         placeholder="select an option"
+        validation="required"
         class="grey-label" />
+
 
       <FormulateInput
         v-model="form.currentVisa.start"
         type="date"
-        label="start"
-        validation="bail|required|date|customDate"
-        :validation-rules="{customDate: ({ value }) => value < form.currentVisa.end}"
-        :validation-messages="{customDate: 'Start date must be before end date'}"
+        label="valid from"
+        validation="bail|required|date|customDate|afterPastVisas"
+        :validation-rules="{
+          customDate: ({ value }) => value < form.currentVisa.end,
+          afterPastVisas: ({ value }) => value > user.profile.pastVisas[user.profile.pastVisas.length -1].end 
+        }"
+        :validation-messages="{
+          customDate: 'Start date must be before end date',
+          afterPastVisas: 'Current visa must be after past visas'
+        }"
         error-behavior="submit"
         class="grey-label" />
 
       <FormulateInput
         v-model="form.currentVisa.end"
         type="date"
-        label="end"
+        label="valid to"
+        validation="bail|required|date|customDate|afterPastVisas"
+        :validation-rules="{
+          customDate: ({ value }) => value > form.currentVisa.start,
+          afterPastVisas: ({ value }) => value > user.profile.pastVisas[user.profile.pastVisas.length -1].end 
+        }"
+        :validation-messages="{
+          customDate: 'End date must be after start date',
+          afterPastVisas: 'Current visa must be after past visas'
+        }"
+        error-behavior="submit"
+        class="grey-label" />
+
+      <FormulateInput
+        v-model="form.currentVisa.appliedDate"
+        type="date"
+        label="date applied (the day you submitted your application online)"
         validation="bail|required|date|customDate"
-        :validation-rules="{customDate: ({ value }) => value > form.currentVisa.start}"
-        :validation-messages="{customDate: 'End date must be after start date'}"
+        :validation-rules="{customDate: ({ value }) => value < form.currentVisa.start}"
+        :validation-messages="{customDate: 'Applied date must be before start date'}"
+        error-behavior="submit"
+        class="grey-label" />
+
+      <FormulateInput
+        v-model="form.currentVisa.locationApplied"
+        type="select"
+        :options="makeOptions(countries)"
+        label="where did you apply?"
+        placeholder="select an option"
+        validation="required"
+        error-behavior="submit"
+        class="grey-label" />
+
+      <FormulateInput
+        v-model="form.currentVisa.entryDate"
+        type="date"
+        label="date entered the UK (only if you applied for your visa from your home country)"
         error-behavior="submit"
         class="grey-label" />
 
@@ -71,6 +111,7 @@
 
 <script>
 import baseModal from '@/components/modals/BaseModal'
+import { countries } from '@/assets/js/countries'
 import { visaOptions } from '@/assets/js/visaOptions'
 
 export default {
@@ -81,6 +122,7 @@ export default {
   components: { baseModal },
   data() {
     return {
+      countries,
       visaOptions,
       form: {
         name: this.profileToUpdate.name,
