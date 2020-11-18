@@ -11,14 +11,14 @@
         placeholder="select an option"
         validation="required"
         error-behavior="submit"
-        class="grey-label" />
+        class="white-label" />
 
       <FormulateInput
         v-model="holiday.city"
         type="text"
         label="destination city (optional):"
         error-behavior="submit"
-        class="grey-label" />
+        class="white-label" />
 
       <FormulateInput
         v-model="holiday.leftUk"
@@ -31,7 +31,7 @@
           overlappedDates: 'Holiday dates cannot overlap',
         }"
         error-behavior="submit"
-        class="grey-label" />
+        class="white-label" />
 
       <FormulateInput
         v-model="holiday.returnedUk"
@@ -44,7 +44,7 @@
           overlappedDates: 'Holiday dates cannot overlap',
         }"
         error-behavior="submit"
-        class="grey-label" />
+        class="white-label" />
 
       <button class="tertiary margin-m top">
         Delete This Trip
@@ -55,11 +55,11 @@
           type="submit"
           label="Save"
           error-behavior="submit"
-          class="primary-button margin-m top" />
+          class="white margin-m top" />
 
         <button
-          @click.prevent="cancel"
-          class="outline">
+          @click.prevent="closeModal"
+          class="primary">
           Cancel
         </button>
       </div>
@@ -99,7 +99,7 @@ export default {
     calculateDays(start, end) {
       const dt1 = new Date(start),
             dt2 = new Date(end);
-            
+
       // -2 to take off the two travel days
       return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24)) - 2
     },
@@ -146,4 +146,29 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/styles/variables.scss';
 
+h1,
+.tertiary {
+  color: white;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.tertiary {
+  color: white;
+  font-size: 20px;
+}
+
+.primary {
+  border: 3px solid white;
+
+  &:hover {
+    background: white;
+    color: $red;
+  }
+}
 </style>
