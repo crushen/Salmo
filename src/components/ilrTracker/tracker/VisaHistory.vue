@@ -19,11 +19,10 @@
       @click="handleEditVisa(user.profile.currentVisa)"
       :class="{'editing': editVisas}"
       class="current visa">
-      <div class="name">
-        <p><b>{{ user.profile.currentVisa.name }}</b></p>
-        <p><b v-if="user.profile.currentVisa.locationApplied === 'UK'">(Extend)</b></p>
+      <p class="name">
+        <b>{{ user.profile.currentVisa.name }}</b>
         <img class="current-visa-img" src="@/assets/icons/red/star-solid.svg" alt="">
-      </div>
+      </p>
       <p><b>valid from {{ date(user.profile.currentVisa.start) }} to {{ date(user.profile.currentVisa.end) }}</b></p>
 
       <div class="bottom">
@@ -85,7 +84,7 @@ export default {
     border: 4px solid #D4E7ED;
     border-radius: $radius;
     padding: 0.2rem 1rem;
-    min-height: 101px;
+    min-height: 110px;
     position: relative;
 
     b {

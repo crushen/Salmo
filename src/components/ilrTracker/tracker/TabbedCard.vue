@@ -110,6 +110,14 @@
         </div>
       </div>
     </section>
+
+    <transition name="slide-button" mode="out-in">
+      <div v-if="user.profile.holiday.length && selectedTab === 1" class="button-center">
+        <button class="primary margin-m top">
+          Calculate
+        </button>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -174,7 +182,6 @@ export default {
 <style scoped lang="scss">
 @import '@/assets/styles/variables.scss';
 @import '@/assets/styles/main.scss';
-
 
 .tools-card {
   background: #D4E7ED;
@@ -241,8 +248,26 @@ export default {
   transform: translateX(10px);
   opacity: 0;
 }
+
 .slide-enter-active {
+  transition-timing-function: cubic-bezier(0,1.15,1,.99);
   transition: 0.6s;
+}
+
+.slide-button-enter,
+.slide-button-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+
+.slide-button-enter-active,
+.slide-button-leave-active {
+  transition: 0.6s;
+  transition-timing-function: cubic-bezier(0,1.15,1,.99);
+}
+
+.slide-button-enter-active {
+  transition-delay: 0.7s;
 }
 
 // Tablet
