@@ -172,6 +172,7 @@ export default {
     border-radius: $radius;
     padding: 0.2rem 1rem;
     text-align: center;
+    cursor: pointer;
 
     b {
       font-weight: 500;
@@ -191,6 +192,7 @@ export default {
       justify-content: space-between;
       border-radius: $radius;
       padding: 0.2rem 0.5rem;
+      cursor: pointer;
     }
 
     &:nth-of-type(odd) {

@@ -2,24 +2,32 @@
   <div>
     <transition name="dialog" mode="out-in">
       <edit-holiday-modal
-        v-if="showEditModal"
+        v-if="showHolidayEditModal"
         :holiday="holidayToEdit"
         :profileToUpdate="profileToUpdate"
-        @closeModal="showEditModal = false" />
+        @closeModal="showHolidayEditModal = false" />
+    </transition>
+
+    <transition name="dialog" mode="out-in">
+      <edit-visa-modal
+        v-if="showVisaEditModal"
+        :visa="visaToEdit"
+        :profileToUpdate="profileToUpdate"
+        @closeModal="showVisaEditModal = false" />
     </transition>
 
     <section class="tools-card">
       <div>
         <div class="tabs">
           <button
-            @click="selectedTab = 1"
+            @click="selectTab"
             :class="{'selected': 1 === selectedTab}"
             class="tab"
             :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
             <h2>Travel Log</h2>
           </button>
           <button
-            @click="selectedTab = 2"
+            @click="selectTab"
             :class="{'selected': 2 === selectedTab}"
             class="tab"
             :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
@@ -93,7 +101,9 @@
                 <visa-history
                   v-else
                   :user="user"
-                  :profileToUpdate="profileToUpdate" />
+                  :profileToUpdate="profileToUpdate"
+                  :editVisas="editVisas"
+                  @editVisa="editVisa" />
               </transition>
             </div>
           </transition>
@@ -109,19 +119,29 @@ import travelLog from '@/components/ilrTracker/tracker/TravelLog'
 import visaHistory from '@/components/ilrTracker/tracker/VisaHistory'
 import editHolidayModal from '@/components/modals/ilrTracker/red/EditHoliday'
 import addVisaForm from '@/components/ilrTracker/tracker/AddVisa'
+import editVisaModal from '@/components/modals/ilrTracker/red/EditVisa'
 
 
 export default {
-  components: { addHolidayForm, travelLog, visaHistory, editHolidayModal, addVisaForm },
+  components: {
+    addHolidayForm,
+    travelLog,
+    visaHistory,
+    editHolidayModal,
+    addVisaForm,
+    editVisaModal
+  },
   data() {
     return {
       selectedTab: 1,
       addHoliday: false,
       editHolidays: false,
       holidayToEdit: {},
-      showEditModal: false,
+      showHolidayEditModal: false,
       addVisa: false,
-      editVisas: false
+      editVisas: false,
+      visaToEdit: {},
+      showVisaEditModal: false,
     }
   },
   computed: {
@@ -133,9 +153,19 @@ export default {
     }
   },
   methods: {
+    selectTab() {
+      this.selectedTab === 1 ? this.selectedTab = 2 : this.selectedTab = 1
+
+      this.editHolidays = false
+      this.editVisas = false
+    },
     editHoliday(holiday) {
       this.holidayToEdit = holiday
-      this.showEditModal = true
+      this.showHolidayEditModal = true
+    },
+    editVisa(visa) {
+      this.visaToEdit = visa
+      this.showVisaEditModal = true
     }
   }
 }
