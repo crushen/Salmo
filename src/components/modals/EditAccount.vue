@@ -41,7 +41,7 @@
         validation="bail|required|date|customDate|afterPastVisas"
         :validation-rules="{
           customDate: ({ value }) => value < form.currentVisa.end,
-          afterPastVisas: ({ value }) => value > user.profile.pastVisas[user.profile.pastVisas.length -1].end 
+          afterPastVisas: ({ value }) => value >= user.profile.pastVisas[user.profile.pastVisas.length -1].end 
         }"
         :validation-messages="{
           customDate: 'Start date must be before end date',

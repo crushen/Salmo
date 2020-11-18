@@ -206,6 +206,7 @@ export const countries = [
   "Tuvalu",
   "USA",
   "Uganda",
+  "UK",
   "Ukraine",
   "United Arab Emirates",
   "Uruguay",
