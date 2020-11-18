@@ -52,10 +52,6 @@ export default {
     // }
   },
   methods: {
-    date(date) {
-      const newDate = date.split('-')
-      return newDate.reverse().join('/')
-    },
     addHoliday(holiday) {
       this.addHolidayOpen = false
       this.$store.dispatch('prCalc/addHoliday', holiday)

@@ -79,10 +79,6 @@ export default {
         this.$emit('editHoliday', holiday)
       }
     },
-    date(date) {
-      const newDate = date.split('-')
-      return newDate.reverse().join('/')
-    },
     getSplitYearHolidayDays(holiday, year) {
       const totalDays = holiday.days,
             dt1 = new Date(holiday.leftUk),

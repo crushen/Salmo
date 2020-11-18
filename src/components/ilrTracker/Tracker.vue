@@ -78,12 +78,7 @@
 
 <script>
 export default {
-  props: ['user', 'sortByDate'],
-  methods: {
-    date(date) {
-      return date.split('-').reverse().join('/')
-    }
-  }
+  props: ['user', 'sortByDate']
 }
 </script>
 

@@ -92,9 +92,6 @@ export default {
     handleSubmit() {
       this.$emit('submitModal', this.form)
     },
-    date(date) {
-      return date.split('-').reverse().join('/')
-    },
     selectPlan(event) {
       this.form.selectedPlan = event.target.parentElement.textContent.trim()
     }

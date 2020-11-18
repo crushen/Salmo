@@ -66,7 +66,35 @@
 
             <!-- Visa History -->
             <div v-else key="2">
-              <p>Visa History</p>
+              <div class="buttons">
+                <button
+                  @click="addVisa = true"
+                  class="none"
+                  aria-label="Add past visa">
+                  <img src="@/assets/icons/red/plus.svg" alt="">
+                </button>
+
+                <button
+                  v-if="user.profile.holiday.length"
+                  @click="editVisas = !editVisas"
+                  class="none"
+                  aria-label="Toggle visa editor">
+                  <img v-if="!editHolidays" src="@/assets/icons/red/edit.svg" alt="">
+                  <img v-else src="@/assets/icons/red/edit-solid.svg" alt="">
+                </button>
+              </div>
+
+              <transition name="slide" mode="out-in">
+                <add-visa-form
+                  v-if="addVisa"
+                  :profileToUpdate="profileToUpdate"
+                  @cancel="addVisa = false" />
+
+                <visa-history
+                  v-else
+                  :user="user"
+                  :profileToUpdate="profileToUpdate" />
+              </transition>
             </div>
           </transition>
         </div>
@@ -78,18 +106,22 @@
 <script>
 import addHolidayForm from '@/components/ilrTracker/tracker/AddHoliday'
 import travelLog from '@/components/ilrTracker/tracker/TravelLog'
+import visaHistory from '@/components/ilrTracker/tracker/VisaHistory'
 import editHolidayModal from '@/components/modals/ilrTracker/red/EditHoliday'
+import addVisaForm from '@/components/ilrTracker/tracker/AddVisa'
 
 
 export default {
-  components: { addHolidayForm, travelLog, editHolidayModal },
+  components: { addHolidayForm, travelLog, visaHistory, editHolidayModal, addVisaForm },
   data() {
     return {
       selectedTab: 1,
       addHoliday: false,
       editHolidays: false,
       holidayToEdit: {},
-      showEditModal: false
+      showEditModal: false,
+      addVisa: false,
+      editVisas: false
     }
   },
   computed: {

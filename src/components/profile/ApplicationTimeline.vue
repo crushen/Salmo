@@ -84,11 +84,6 @@ export default {
     applicationTimeline() {
       return applicationTimelines.find(timeline => timeline.visa === this.user.profile.nextVisa.name).timeline
     }
-  },
-  methods: {
-    date(date) {
-      return date.split('-').reverse().join('/')
-    }
   }
 }
 </script>

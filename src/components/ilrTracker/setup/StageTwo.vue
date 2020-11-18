@@ -234,9 +234,6 @@ export default {
     }
   },
   methods: {
-    date(date) {
-      return date.split('-').reverse().join('/')
-    },
     addVisa() {
       this.pastVisas.push(this.form.pastVisa)
       this.form.pastVisa = { name: null, start: null, end: null }
