@@ -87,7 +87,7 @@
                   @click="editVisas = !editVisas"
                   class="none"
                   aria-label="Toggle visa editor">
-                  <img v-if="!editHolidays" src="@/assets/icons/red/edit.svg" alt="">
+                  <img v-if="!editVisas" src="@/assets/icons/red/edit.svg" alt="">
                   <img v-else src="@/assets/icons/red/edit-solid.svg" alt="">
                 </button>
               </div>

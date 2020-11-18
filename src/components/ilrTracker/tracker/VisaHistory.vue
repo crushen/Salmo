@@ -123,6 +123,7 @@ export default {
       cursor: pointer;
       border: 4px solid $red;
       background: white;
+      transition: 0.2s;
 
       p {
         color: $red;
