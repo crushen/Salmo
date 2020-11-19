@@ -4,7 +4,8 @@
       <h2>Edit your ILR</h2>
 
       <div class="inner">
-        <p class="margin-s top">You can change your ILR plan or starting day of your day count right here:</p>
+        <p v-if="qualifiesForFive" class="margin-s top">You can change your ILR plan or starting day of your day count right here:</p>
+        <p v-else class="margin-s top">You currently only qualify for the 10 year plan, but you can change starting day of your day count right here:</p>
       </div>
       
       <h3>ILR Plan</h3>
@@ -12,6 +13,7 @@
       <div class="inner">
         <div class="plan-btns margin-s top">
           <button
+            v-if="qualifiesForFive"
             @click="selectedPlan = '5 year plan'"
             :class="selectedPlan === '5 year plan' ? 'border' : ''"
             class="none">
@@ -70,6 +72,50 @@ export default {
     return {
       selectedPlan: this.profileToUpdate.ilrTracker.plan,
       startDate: this.profileToUpdate.ilrTracker.startDate
+    }
+  },
+  computed: {
+    qualifiesForFive() {
+      const currentVisa = this.profileToUpdate.currentVisa.name,
+            pastVisas = this.profileToUpdate.pastVisas,
+            currentType = this.profileToUpdate.currentVisa.type;
+
+      let qualifies = false
+
+      // If their current visa is a tier 1 or tier 2 visa
+      if(currentVisa.includes('Tier 1') || currentVisa.includes('Tier 2')) {
+        // If they have no past visas
+        if(!pastVisas.length) {
+          qualifies = true
+        } else {
+          // If their only past visa is Student visa
+          if(pastVisas.length === 1) {
+            if(pastVisas[0].name === 'Tier 4 : Student') {
+              qualifies = true
+            }
+          } else {
+            // If their first past visa is Student and every visa after is Tier 1 or Tier 2
+            const removeFirst = pastVisas.slice(1),
+                  allTierOneTierTwo = visa => visa.name.includes('Tier 1') || visa.name.includes('Tier 2');
+
+            if(removeFirst.every(allTierOneTierTwo) && pastVisas[0].name === 'Tier 4 : Student'){
+              qualifies = true
+            } else {
+              // If all their past visas are Tier 1 or Tier 2
+              if(pastVisas.every(allTierOneTierTwo)) {
+                qualifies = true
+              }
+            }
+          }
+        }
+      }
+
+      // If any of their past or current visas were swithced
+      if(currentType === 'switch' || pastVisas.find(visa => visa.type === 'switch')) {
+        qualifies = false
+      }
+
+      return qualifies
     }
   },
   methods: {
