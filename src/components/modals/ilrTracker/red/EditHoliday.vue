@@ -47,7 +47,7 @@
         class="white-label" />
 
       <button
-        @click="deleteHoliday"
+        @click.prevent="deleteHoliday"
         class="tertiary margin-m top">
         Delete This Trip
       </button>
@@ -98,11 +98,11 @@ export default {
       this.$store.dispatch('prCalc/editHoliday', holidays)
       .then(() => this.$emit('closeModal'))
     },
-    deletHoliday() {
+    deleteHoliday() {
       const holidays = this.profileToUpdate.holiday,
             index = holidays.findIndex(item => item.country === this.holiday.country && item.leftUk === this.holiday.leftUk);
-      
-      holidays.splice(holidays[index], 1)
+
+      holidays.splice(index, 1)
 
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       .then(() => this.$emit('closeModal'))

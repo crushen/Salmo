@@ -22,9 +22,7 @@
               :key="holiday.leftUk"
               class="holiday"
               @click="handleEditHoliday(holiday)">
-              <p class="location"><b>{{ holiday.country }}</b></p>
-
-              <p class="dates">from {{ date(holiday.leftUk) }} to {{ date(holiday.returnedUk) }}</p>
+              <b>{{ holiday.country }}</b> from {{ date(holiday.leftUk) }} to {{ date(holiday.returnedUk) }}
             </li>
           </ul>
         </div>
@@ -97,8 +95,10 @@ export default {
         const holiday = ascendingDates.shift(),
               holidayStart = new Date(holiday.leftUk),
               holidayEnd = new Date(holiday.returnedUk),
-              yearStart = new Date(holiday.leftUk),
-              yearEnd = new Date(new Date(holiday.leftUk).setFullYear(new Date(holiday.leftUk).getFullYear() + 1));
+              yearStart = new Date(`${new Date(holiday.leftUk).getFullYear()}, 01, 01`),
+              yearEnd = new Date(new Date(yearStart).setFullYear(new Date(yearStart).getFullYear() + 1));
+              // yearStart = new Date(holiday.leftUk),
+              // yearEnd = new Date(new Date(holiday.leftUk).setFullYear(new Date(holiday.leftUk).getFullYear() + 1));
 
         // create first holiday obj if years array is empty
         if(!years.length) {
@@ -118,8 +118,10 @@ export default {
             } else {
               // get start and end date for following year & push to years
               const splitHolidayDates = this.getSplitYearHolidayDays(holiday, prevYear),
-                    nextYearStart = new Date(holidayStart.setDate(holidayStart.getDate() + splitHolidayDates.currentYearDays)),
-                    nextYearEnd = new Date(yearEnd.setDate(yearEnd.getDate() + splitHolidayDates.currentYearDays));
+                    nextYearStart = yearEnd,
+                    nextYearEnd = new Date(new Date(yearEnd).setFullYear(new Date(yearEnd).getFullYear() + 1));
+                    // nextYearStart = new Date(holidayStart.setDate(holidayStart.getDate() + splitHolidayDates.currentYearDays)),
+                    // nextYearEnd = new Date(yearEnd.setDate(yearEnd.getDate() + splitHolidayDates.currentYearDays));
 
               years.push({
                 startDate: nextYearStart,
@@ -188,8 +190,6 @@ export default {
     }
 
     .holiday {
-      display: flex;
-      justify-content: space-between;
       border-radius: $radius;
       padding: 0.2rem 0.5rem;
       cursor: pointer;

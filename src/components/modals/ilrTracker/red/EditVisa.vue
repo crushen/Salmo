@@ -82,7 +82,7 @@
       <!-- Only show delete for past visas -->
       <button
         v-if="new Date(visa.end) < new Date()"
-        @click="deleteVisa"
+        @click.prevent="deleteVisa"
         class="tertiary margin-s top">
         Delete This Visa
       </button>
@@ -138,7 +138,7 @@ export default {
       const pastVisas = this.profileToUpdate.pastVisas,
             index = pastVisas.findIndex(item => item.name === this.visa.name && item.start === this.visa.start);
       
-      pastVisas.splice(pastVisas[index], 1)
+      pastVisas.splice(index, 1)
 
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       .then(() => this.$emit('closeModal'))
