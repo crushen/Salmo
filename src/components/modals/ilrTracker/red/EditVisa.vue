@@ -72,16 +72,18 @@
         error-behavior="submit"
         class="white-label" />
 
-      <div class="margin-l top">
-        <FormulateInput
-          v-model="visa.entryDate"
-          type="date"
-          label="date entered the UK (only if you applied for your visa from your home country)"
-          error-behavior="submit"
-          class="white-label" />
-      </div>
+      <FormulateInput
+        v-model="visa.entryDate"
+        type="date"
+        label="date entered the UK (only if you applied for your visa from your home country)"
+        error-behavior="submit"
+        class="white-label" />
 
-      <button class="tertiary margin-m top">
+      <!-- Only show delete for past visas -->
+      <button
+        v-if="new Date(visa.end) < new Date()"
+        @click="deleteVisa"
+        class="tertiary margin-s top">
         Delete This Visa
       </button>
 
@@ -128,6 +130,15 @@ export default {
             index = pastVisas.findIndex(item => item.name === this.visa.name && item.start === this.visa.start);
       
       pastVisas[index] = this.visa
+
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
+      .then(() => this.$emit('closeModal'))
+    },
+    deleteVisa() {
+      const pastVisas = this.profileToUpdate.pastVisas,
+            index = pastVisas.findIndex(item => item.name === this.visa.name && item.start === this.visa.start);
+      
+      pastVisas.splice(pastVisas[index], 1)
 
       this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       .then(() => this.$emit('closeModal'))

@@ -46,7 +46,9 @@
         error-behavior="submit"
         class="white-label" />
 
-      <button class="tertiary margin-m top">
+      <button
+        @click="deleteHoliday"
+        class="tertiary margin-m top">
         Delete This Trip
       </button>
 
@@ -94,6 +96,15 @@ export default {
       holidays[index] = this.holiday
 
       this.$store.dispatch('prCalc/editHoliday', holidays)
+      .then(() => this.$emit('closeModal'))
+    },
+    deletHoliday() {
+      const holidays = this.profileToUpdate.holiday,
+            index = holidays.findIndex(item => item.country === this.holiday.country && item.leftUk === this.holiday.leftUk);
+      
+      holidays.splice(holidays[index], 1)
+
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       .then(() => this.$emit('closeModal'))
     },
     calculateDays(start, end) {
