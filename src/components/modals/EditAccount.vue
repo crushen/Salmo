@@ -41,7 +41,7 @@
         validation="bail|required|date|customDate|afterPastVisas"
         :validation-rules="{
           customDate: ({ value }) => value < form.currentVisa.end,
-          afterPastVisas: ({ value }) => value >= user.profile.pastVisas[user.profile.pastVisas.length -1].end 
+          afterPastVisas 
         }"
         :validation-messages="{
           customDate: 'Start date must be before end date',
@@ -57,7 +57,7 @@
         validation="bail|required|date|customDate|afterPastVisas"
         :validation-rules="{
           customDate: ({ value }) => value > form.currentVisa.start,
-          afterPastVisas: ({ value }) => value > user.profile.pastVisas[user.profile.pastVisas.length -1].end 
+          afterPastVisas 
         }"
         :validation-messages="{
           customDate: 'End date must be after start date',
@@ -74,6 +74,15 @@
         :validation-rules="{customDate: ({ value }) => value < form.currentVisa.start}"
         :validation-messages="{customDate: 'Applied date must be before start date'}"
         error-behavior="submit"
+        class="grey-label" />
+
+      <FormulateInput
+        v-model="form.currentVisa.type"
+        type="select"
+        :options="{extension: 'Extension', switch: 'Switch', new: 'New Visa'}"
+        label="was this an extension, switch or a new visa?"
+        validation="required"
+        placeholder="select an option"
         class="grey-label" />
 
       <FormulateInput
@@ -139,6 +148,22 @@ export default {
     },
     handleSubmit() {
       this.$emit('submitModal', this.form)
+    },
+    // Validations
+    afterPastVisas() {
+      let valid = true
+
+      if(this.user.profile.pastVisas && this.form.currentVisa.start && this.form.currentVisa.end) {
+        if(this.form.currentVisa.start <= this.user.profile.pastVisas[this.user.profile.pastVisas.length -1].end) {
+          valid = false
+        }
+
+        if(this.form.currentVisa.end < this.user.profile.pastVisas[this.user.profile.pastVisas.length -1].end) {
+          valid = false
+        }
+      }
+
+      return valid
     }
   }
 }

@@ -51,6 +51,15 @@
       class="grey-label" />
 
     <FormulateInput
+      v-model="form.pastVisa.type"
+      type="select"
+      :options="{extension: 'Extension', switch: 'Switch', new: 'New Visa'}"
+      label="was this an extension, switch or a new visa?"
+      validation="required"
+      placeholder="select an option"
+      class="grey-label" />
+
+    <FormulateInput
       v-model="form.pastVisa.locationApplied"
       type="select"
       :options="makeOptions(countries)"
@@ -101,6 +110,7 @@ export default {
           start: null,
           end: null,
           appliedDate: null,
+          type: null,
           locationApplied: null,
           entryDate: null
         }

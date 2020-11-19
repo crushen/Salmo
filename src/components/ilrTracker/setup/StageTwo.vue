@@ -26,7 +26,7 @@
 
                 <p class="margin-s top">Applied on <b>{{ date(visa.appliedDate) }}</b> in <b>{{ visa.locationApplied }}</b></p>
 
-                <p>Entered the UK on <b>{{ date(visa.entryDate) }}</b></p>
+                <p v-if="visa.entryDate">Entered the UK on <b>{{ date(visa.entryDate) }}</b></p>
               </div>
 
               <div class="buttons">
@@ -98,6 +98,15 @@
             class="grey-label" />
 
           <FormulateInput
+            v-model="form.pastVisa.type"
+            type="select"
+            :options="{extension: 'Extension', switch: 'Switch', new: 'New Visa'}"
+            label="was this an extension, switch or a new visa?"
+            validation="required"
+            placeholder="select an option"
+            class="grey-label" />
+
+          <FormulateInput
             v-model="form.pastVisa.locationApplied"
             type="select"
             :options="makeOptions(countries)"
@@ -160,6 +169,7 @@ export default {
           start: null,
           end: null,
           appliedDate: null,
+          type: null,
           locationApplied: null,
           entryDate: null
         }
@@ -182,7 +192,7 @@ export default {
       this.pastVisas.splice(index, 1)
     },
     submitForm() {
-      if(this.pastVisas) {
+      if(this.pastVisas.length) {
         this.profileToUpdate.pastVisas = this.pastVisas
         this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       }
@@ -270,17 +280,17 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: $light-blue;
+    background: #D4E7ED;
     border-radius: $radius;
     padding: 0.5rem;
     position: relative;
+    border: 4px solid #D4E7ED;
 
     &:not(:first-of-type) {
       margin-top: 1rem;
     }
 
     p:first-of-type {
-      // margin-top: 1rem;
       font-size: 18px;
     }
 
@@ -296,6 +306,10 @@ export default {
       img {
         width: 20px;
       }
+    }
+
+    &:nth-of-type(even) {
+      background: white;
     }
   }
 }

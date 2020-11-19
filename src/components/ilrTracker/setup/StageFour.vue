@@ -27,7 +27,7 @@
 
       <div class="inner">
         <FormulateInput
-          v-model="date"
+          v-model="startDate"
           type="date"
           aria-label="date"
           validation="bail|required|date"
@@ -50,14 +50,14 @@ export default {
   },
   data() {
     return {
-      date: null,
+      startDate: null,
       error: null
     }
   },
   methods: {
     submitForm() {
       if(this.date) {
-        this.profileToUpdate.ilrTracker.startDate = this.date
+        this.profileToUpdate.ilrTracker.startDate = this.startDate
         this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       } else {
         this.error = 'Please select a date to continue'

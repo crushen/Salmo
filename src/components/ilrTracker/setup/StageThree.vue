@@ -86,7 +86,8 @@ export default {
   computed: {
     qualifiesForFive() {
       const currentVisa = this.profileToUpdate.currentVisa.name,
-            pastVisas = this.profileToUpdate.pastVisas;
+            pastVisas = this.profileToUpdate.pastVisas,
+            currentType = this.profileToUpdate.currentVisa.type;
 
       let qualifies = false
 
@@ -116,6 +117,11 @@ export default {
             }
           }
         }
+      }
+
+      // If any of their past or current visas were swithced
+      if(currentType === 'switch' || pastVisas.find(visa => visa.type === 'switch')) {
+        qualifies = false
       }
 
       return qualifies

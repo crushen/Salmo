@@ -46,6 +46,7 @@ export default {
           start: null,
           end: null,
           appliedDate: null,
+          type: null,
           locationApplied: null,
           entryDate: null
         },

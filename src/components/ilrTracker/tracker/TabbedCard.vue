@@ -83,7 +83,7 @@
                 </button>
 
                 <button
-                  v-if="user.profile.holiday.length"
+                  v-if="user.profile.pastVisas.length"
                   @click="editVisas = !editVisas"
                   class="none"
                   aria-label="Toggle visa editor">

@@ -69,6 +69,15 @@
         class="grey-label user-info" />
 
       <FormulateInput
+        v-model="form.currentVisa.type"
+        type="select"
+        :options="{extension: 'Extension', switch: 'Switch', new: 'New Visa'}"
+        label="was this an extension, switch or a new visa?"
+        validation="required"
+        placeholder="select an option"
+        class="grey-label user-info" />
+
+      <FormulateInput
         v-model="form.currentVisa.locationApplied"
         type="select"
         :options="makeOptions(countries)"

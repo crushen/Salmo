@@ -54,6 +54,15 @@
         class="white-label" />
 
       <FormulateInput
+        v-model="visa.type"
+        type="select"
+        :options="{extension: 'Extension', switch: 'Switch', new: 'New Visa'}"
+        label="was this an extension, switch or a new visa?"
+        validation="required"
+        placeholder="select an option"
+        class="white-label" />
+
+      <FormulateInput
         v-model="visa.locationApplied"
         type="select"
         :options="makeOptions(countries)"
