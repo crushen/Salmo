@@ -16,7 +16,7 @@
         @closeModal="showVisaEditModal = false" />
     </transition>
 
-    <section class="tools-card">
+    <section class="tools-card main">
       <div>
         <div class="tabs">
           <button
@@ -68,6 +68,7 @@
                   :user="user"
                   :profileToUpdate="profileToUpdate"
                   :editHolidays="editHolidays"
+                  :allHolidayYears="allHolidayYears"
                   @editHoliday="editHoliday" />
               </transition>
             </div>
@@ -113,10 +114,21 @@
 
     <transition name="slide-button" mode="out-in">
       <div v-if="user.profile.holiday.length && selectedTab === 1" class="button-center">
-        <button class="primary margin-m top">
+        <button @click="resultsOpen = true" class="primary margin-m top">
           Calculate
         </button>
       </div>
+    </transition>
+
+    <transition name="slide-button" mode="out-in">
+      <ten-results
+        v-if="resultsOpen && user.profile.ilrTracker.plan === '10 year plan'"
+        :user="user"
+        :validHolidayYears="validHolidayYears" />
+
+      <five-results
+        v-if="resultsOpen && user.profile.ilrTracker.plan === '5 year plan'"
+        :validHolidayYears="validHolidayYears" />
     </transition>
   </div>
 </template>
@@ -128,6 +140,8 @@ import visaHistory from '@/components/ilrTracker/tracker/VisaHistory'
 import editHolidayModal from '@/components/modals/ilrTracker/red/EditHoliday'
 import addVisaForm from '@/components/ilrTracker/tracker/AddVisa'
 import editVisaModal from '@/components/modals/ilrTracker/red/EditVisa'
+import tenResults from '@/components/ilrTracker/results/TenYearPlan'
+import fiveResults from '@/components/ilrTracker/results/FiveYearPlan'
 
 
 export default {
@@ -137,7 +151,9 @@ export default {
     visaHistory,
     editHolidayModal,
     addVisaForm,
-    editVisaModal
+    editVisaModal,
+    tenResults,
+    fiveResults
   },
   data() {
     return {
@@ -150,6 +166,7 @@ export default {
       editVisas: false,
       visaToEdit: {},
       showVisaEditModal: false,
+      resultsOpen: false
     }
   },
   computed: {
@@ -158,6 +175,23 @@ export default {
     },
     profileToUpdate() { 
       return {...this.user.profile} 
+    },
+    startDate() {
+      return this.user.profile.ilrTracker.startDate
+    },
+    validHolidayYears() {
+      const array = this.user.profile.holiday.filter(holiday => holiday.leftUk > this.startDate)
+      return this.sortIntoYears(array)
+    },
+    invalidHolidayYears() {
+      const array = this.user.profile.holiday.filter(holiday => holiday.returnedUk <= this.startDate);
+      let invalidYears =  this.sortIntoYears(array)
+
+      invalidYears.forEach(year => year.invalid = true)
+      return invalidYears
+    },
+    allHolidayYears() {
+      return this.invalidHolidayYears.concat(this.validHolidayYears)
     }
   },
   methods: {
@@ -174,6 +208,82 @@ export default {
     editVisa(visa) {
       this.visaToEdit = visa
       this.showVisaEditModal = true
+    },
+    getSplitYearHolidayDays(holiday, year) {
+      const totalDays = holiday.days,
+            dt1 = new Date(holiday.leftUk),
+            dt2 = new Date(year.endDate),
+            currentYearDays = Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24)),
+            nextYearDays = totalDays - currentYearDays;
+
+      return { currentYearDays: currentYearDays, nextYearDays: nextYearDays }
+    },
+    sortIntoYears(array) {
+      const ascendingDates = array.sort((a, b) => new Date(a.leftUk) - new Date(b.leftUk)),
+            years = [];
+
+      while(ascendingDates.length) {
+        // get holiday from start of array
+        const holiday = ascendingDates.shift(),
+              holidayStart = new Date(holiday.leftUk),
+              holidayEnd = new Date(holiday.returnedUk),
+              yearStart = new Date(`${new Date(holiday.leftUk).getFullYear()}, 01, 01`),
+              yearEnd = new Date(new Date(yearStart).setFullYear(new Date(yearStart).getFullYear() + 1));
+              // yearStart = new Date(holiday.leftUk),
+              // yearEnd = new Date(new Date(holiday.leftUk).setFullYear(new Date(holiday.leftUk).getFullYear() + 1));
+
+        // create first holiday obj if years array is empty
+        if(!years.length) {
+          years.push({
+            startDate: yearStart,
+            endDate: yearEnd,
+            holidays: [holiday]
+          })
+        } else {
+          const prevYear = years[years.length - 1]
+
+          // IF HOLIDAY STARTED AND ENDED WITHIN THE YEAR
+          if(holidayStart > prevYear.startDate && holidayStart < prevYear.endDate) {
+            if(holidayStart > prevYear.startDate && holidayEnd < prevYear.endDate) {
+              prevYear.holidays.push(holiday)
+              // IF HOLIDAY IS SPLIT OVER 2 YEARS
+            } else {
+              // get start and end date for following year & push to years
+              const splitHolidayDates = this.getSplitYearHolidayDays(holiday, prevYear),
+                    nextYearStart = yearEnd,
+                    nextYearEnd = new Date(new Date(yearEnd).setFullYear(new Date(yearEnd).getFullYear() + 1));
+                    // nextYearStart = new Date(holidayStart.setDate(holidayStart.getDate() + splitHolidayDates.currentYearDays)),
+                    // nextYearEnd = new Date(yearEnd.setDate(yearEnd.getDate() + splitHolidayDates.currentYearDays));
+
+              years.push({
+                startDate: nextYearStart,
+                endDate: nextYearEnd,
+                holidays: []
+              })
+
+              // get last two years and push split holidays
+              const last = years[years.length - 1],
+                    secondToLast = years[years.length - 2],
+                    // get split holiday dates for second to last year
+                    splitHolidayDates_2 = this.getSplitYearHolidayDays(holiday, secondToLast);
+
+              // add holidays to relative years & balance out flight days
+              last.holidays.push({...holiday, days: splitHolidayDates_2.nextYearDays + 1})
+              secondToLast.holidays.push({...holiday, days: splitHolidayDates_2.currentYearDays - 1})
+            }
+            // IF HOLIDAY DIDN'T START AND END IN THE YEAR
+          } else {
+            // add new year
+            years.push({
+              startDate: yearStart,
+              endDate: yearEnd,
+              holidays: [holiday]
+            })
+          }
+        }
+      }
+
+      return years
     }
   }
 }
@@ -183,7 +293,7 @@ export default {
 @import '@/assets/styles/variables.scss';
 @import '@/assets/styles/main.scss';
 
-.tools-card {
+.tools-card.main {
   background: #D4E7ED;
   max-width: 520px;
 }

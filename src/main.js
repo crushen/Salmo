@@ -25,6 +25,12 @@ Vue.mixin({
     date(date) {
       const newDate = date.split('-')
       return newDate.reverse().join('/')
+    },
+    jsDate(date) {
+      const newDate = (((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + date.getFullYear()),
+            formatted = newDate.split('/');
+            
+      return `${formatted[1]}/${formatted[0]}/${formatted[2]}`
     }
     // setOverlay() {
     //   const overlay = document.querySelector('#overlay')
