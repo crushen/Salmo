@@ -117,21 +117,31 @@ export default {
       return visas
     },
     // ERRORS
+    missingInfo() {
+      let errors
+
+      // loop through allVisasWithHolidays
+      // not including first visa - if visa is NEW (not extend or switch)
+      // if previous visa doesn't have a holiday which spans over that visa end and current visa start
+      // throw error stating that they need to include travel info going home inbetween visas
+
+      return errors
+    },
     moreThan_180() {
-      let error = []
+      const errors = []
 
       this.years.forEach(year => {
         year.holidays.forEach(holiday => {
           if(holiday.days > 180) {
-            error.push(holiday)
+            errors.push(holiday)
           }
         })
       })
 
-      return error
+      return errors
     },
     overstayPre_2016() {
-      const array = [],
+      const errors = [],
             visas =  this.sortByDateVisas.concat(this.user.profile.currentVisa),
             holidays = this.user.profile.holiday;
 
@@ -144,7 +154,7 @@ export default {
                 holidayEnd = new Date(holiday.returnedUk);
 
           // if visa is not last in array (users current visa)
-          if(visa !== visas[visas.length -1]) {
+          if(visa !== visas[visas.length - 1]) {
             const nextVisaApplication = new Date(visas[index + 1].appliedDate)
 
             // if applied date is before Nov 24 2016
@@ -158,11 +168,11 @@ export default {
                 // holiday is invalid and will throw error
                 if(days > 28) {
                   holiday.within_28 = false
-                  array.push(holiday)
+                  errors.push(holiday)
                   // otherwise user will get chance to give a valid reason to explain the overstay
                 } else {
                   holiday.within_28 = true
-                  array.push(holiday)
+                  errors.push(holiday)
                 }
               }
             }
@@ -170,10 +180,10 @@ export default {
         })
       })
 
-      return array
+      return errors
     },
     overstayPost_2016() {
-      const array = [],
+      const errors = [],
             visas =  this.sortByDateVisas.concat(this.user.profile.currentVisa),
             holidays = this.user.profile.holiday;
 
@@ -186,18 +196,18 @@ export default {
                 holidayEnd = new Date(holiday.returnedUk);
 
           // if visa is not last in array (users current visa)
-          if(visa !== visas[visas.length -1]) {
+          if(visa !== visas[visas.length - 1]) {
             const nextVisaApplication = new Date(visas[index + 1].appliedDate)
 
             // if holiday starts after visa exp, and starts before next visa appl
             if(holidayStart > visaExpire && holidayStart < nextVisaApplication) {
-              array.push(holiday)
+              errors.push(holiday)
             }
           }
         })
       })
 
-      return array
+      return errors
     }
   }
 }

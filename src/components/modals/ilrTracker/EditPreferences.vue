@@ -82,7 +82,7 @@ export default {
     },
     sortByDate() {
       const array = this.pastVisas
-      return array.sort((a, b) => new Date(b.start) - new Date(a.start)).reverse()
+      return array.sort((a, b) => new Date(a.start) - new Date(b.start))
     }
   },
   methods: {

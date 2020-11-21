@@ -193,11 +193,12 @@ export default {
       return invalidYears
     },
     allHolidayYears() {
-      return this.invalidHolidayYears.concat(this.validHolidayYears)
+      const visas = this.invalidHolidayYears.concat(this.validHolidayYears)
+      return visas.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
     },
     sortByDateVisas() {
       const array = this.user.profile.pastVisas
-      return array.sort((a, b) => new Date(b.start) - new Date(a.start)).reverse()
+      return array.sort((a, b) => new Date(a.start) - new Date(b.start))
     }
   },
   methods: {
