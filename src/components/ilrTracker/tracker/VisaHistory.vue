@@ -38,25 +38,8 @@ export default {
   props: {
     user: { type: Object, required: true },
     profileToUpdate: { type: Object, required: true },
+    sortByDate: { type: Array, required: true },
     editVisas: { type: Boolean, required: true }
-  },
-  computed: {
-    sortByDate() {
-      const array = this.user.profile.pastVisas
-      return array.sort((a, b) => new Date(b.start) - new Date(a.start)).reverse()
-    },
-    currentExtended() {
-      let extended = false
-
-      if(this.user.profile.currentVisa.name === this.sortByDate[this.sortByDate.length -1].name) {
-        extended = true
-        // if() {
-
-        // }
-      }
-
-      return extended
-    }
   },
   methods: {
     handleEditVisa(visa) {

@@ -38,7 +38,8 @@
 export default {
   props: {
     user: { type: Object, required: true },
-    validHolidayYears: { type: Array, required: true }
+    validHolidayYears: { type: Array, required: true },
+    sortByDateVisas: { type: Array, required: true }
   },
   computed: {
     endDate() {
@@ -81,6 +82,40 @@ export default {
 
       return years.reverse()
     },
+    allVisasWithHolidays() {
+      const visas =  this.sortByDateVisas.concat(this.user.profile.currentVisa),
+            holidays = this.user.profile.holiday;
+
+      visas.forEach((visa, index) => {
+        visa.holidays = []
+        const visaStart = new Date(visa.start),
+              visaExpire = new Date(visa.end);
+
+        holidays.forEach(holiday => {
+          const holidayStart = new Date(holiday.leftUk),
+                holidayEnd = new Date(holiday.returnedUk);
+
+          // if holiday was taken within the visa - valid holiday
+          if(holidayStart > visaStart && holidayEnd < visaExpire) {
+            visa.holidays.push(holiday)
+          }
+
+          // if visa is not last in array (users current visa)
+          if(visa !== visas[visas.length -1]) {
+            const nextVisaApplication = new Date(visas[index + 1].appliedDate)
+
+            // if holiday was overlapping visa expiry and next visa application date - valid holiday
+            // however, if gap between visaExpire and nextVisaApplication > 180 days
+            // this will throw ar error for 180+ days, and therefore not valid holiday
+            if(holidayStart < visaExpire && holidayEnd > nextVisaApplication) {
+              visa.holidays.push(holiday)
+            }
+          }
+        })
+      })
+
+      return visas
+    },
     // ERRORS
     moreThan_180() {
       let error = []
@@ -96,29 +131,73 @@ export default {
       return error
     },
     overstayPre_2016() {
-      let error 
+      const array = [],
+            visas =  this.sortByDateVisas.concat(this.user.profile.currentVisa),
+            holidays = this.user.profile.holiday;
 
-      return error
-      
-      // PRE 2016
-      // get all visas
-      // if any holiday started after visa expiery
-      // and there's another visa with a visa application date AFTER current visa iteration
-      // if next application date =< 28 days
-      // = blue maybe error (give option to provide a reason)
-      // if next application date > 28 days
-      // = error
+      visas.forEach((visa, index) => {
+        const visaStart = new Date(visa.start),
+              visaExpire = new Date(visa.end);
+
+        holidays.forEach(holiday => {
+          const holidayStart = new Date(holiday.leftUk),
+                holidayEnd = new Date(holiday.returnedUk);
+
+          // if visa is not last in array (users current visa)
+          if(visa !== visas[visas.length -1]) {
+            const nextVisaApplication = new Date(visas[index + 1].appliedDate)
+
+            // if applied date is before Nov 24 2016
+            if(nextVisaApplication <= new Date(2016, 10, 24)) {
+              // if holiday starts after visa exp, and starts before next visa appl
+              if(holidayStart > visaExpire && holidayStart < nextVisaApplication) {
+                const difference = holidayStart.getTime() - visaExpire.getTime(),
+                      days = Math.ceil(difference / (1000 * 3600 * 24));
+                
+                // if holiday start was more than 28 days after visa expiry
+                // holiday is invalid and will throw error
+                if(days > 28) {
+                  holiday.within_28 = false
+                  array.push(holiday)
+                  // otherwise user will get chance to give a valid reason to explain the overstay
+                } else {
+                  holiday.within_28 = true
+                  array.push(holiday)
+                }
+              }
+            }
+          }
+        })
+      })
+
+      return array
     },
     overstayPost_2016() {
-      let error
+      const array = [],
+            visas =  this.sortByDateVisas.concat(this.user.profile.currentVisa),
+            holidays = this.user.profile.holiday;
 
-      return error
+      visas.forEach((visa, index) => {
+        const visaStart = new Date(visa.start),
+              visaExpire = new Date(visa.end);
 
-      // POST 2016
-      // get all visas
-      // if any holiday started after visa expiery
-      // and there's another visa with a visa application date AFTER current visa iteration
-      // = error
+        holidays.forEach(holiday => {
+          const holidayStart = new Date(holiday.leftUk),
+                holidayEnd = new Date(holiday.returnedUk);
+
+          // if visa is not last in array (users current visa)
+          if(visa !== visas[visas.length -1]) {
+            const nextVisaApplication = new Date(visas[index + 1].appliedDate)
+
+            // if holiday starts after visa exp, and starts before next visa appl
+            if(holidayStart > visaExpire && holidayStart < nextVisaApplication) {
+              array.push(holiday)
+            }
+          }
+        })
+      })
+
+      return array
     }
   }
 }

@@ -103,6 +103,7 @@
                   v-else
                   :user="user"
                   :profileToUpdate="profileToUpdate"
+                  :sortByDate="sortByDateVisas"
                   :editVisas="editVisas"
                   @editVisa="editVisa" />
               </transition>
@@ -124,7 +125,8 @@
       <ten-results
         v-if="resultsOpen && user.profile.ilrTracker.plan === '10 year plan'"
         :user="user"
-        :validHolidayYears="validHolidayYears" />
+        :validHolidayYears="validHolidayYears"
+        :sortByDateVisas="sortByDateVisas" />
 
       <five-results
         v-if="resultsOpen && user.profile.ilrTracker.plan === '5 year plan'"
@@ -192,6 +194,10 @@ export default {
     },
     allHolidayYears() {
       return this.invalidHolidayYears.concat(this.validHolidayYears)
+    },
+    sortByDateVisas() {
+      const array = this.user.profile.pastVisas
+      return array.sort((a, b) => new Date(b.start) - new Date(a.start)).reverse()
     }
   },
   methods: {
