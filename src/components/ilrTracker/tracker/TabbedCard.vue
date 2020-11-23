@@ -195,10 +195,10 @@ export default {
       let years = []
 
       if(this.invalidHolidayYears.length) {
-        years = this.invalidHolidayYears.concat(this.validHolidayYears)
+        years = [...this.invalidHolidayYears.concat(this.validHolidayYears)]
         years.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
       } else {
-        years = this.validHolidayYears
+        years = [...this.validHolidayYears]
         years.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
       }
       
@@ -208,7 +208,7 @@ export default {
       let visas = []
 
       if(this.user.profile.pastVisas.length) {
-        visas = this.user.profile.pastVisas
+        visas = [...this.user.profile.pastVisas]
         visas.sort((a, b) => new Date(a.start) - new Date(b.start))
       }
       
