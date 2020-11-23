@@ -239,13 +239,36 @@ export default {
               // yearStart = new Date(holiday.leftUk),
               // yearEnd = new Date(new Date(holiday.leftUk).setFullYear(new Date(holiday.leftUk).getFullYear() + 1));
 
-        // create first holiday obj if years array is empty
         if(!years.length) {
-          years.push({
-            startDate: yearStart,
-            endDate: yearEnd,
-            holidays: [holiday]
-          })
+          // if holiday goes over the end of year
+          if(holidayStart < yearEnd && holidayEnd > yearEnd) {
+            // get following year dates and holiday info
+            const nextYearStart = yearEnd,
+                  nextYearEnd = new Date(new Date(yearEnd).setFullYear(new Date(yearEnd).getFullYear() + 1)),
+                  currentYear = { startDate: yearStart, endDate: yearEnd, holidays: [] },
+                  splitHolidayDates = this.getSplitYearHolidayDays(holiday, currentYear);
+
+            // push first year with correct holiday days
+            years.push({
+              startDate: yearStart,
+              endDate: yearEnd,
+              holidays: [{...holiday, days: splitHolidayDates.currentYearDays - 1}]
+            })
+            
+            // then push the next year with correct holiday days
+            years.push({
+              startDate: nextYearStart,
+              endDate: nextYearEnd,
+              holidays: [{...holiday, days: splitHolidayDates.nextYearDays + 1}]
+            })
+            // otherwise, just push year with holiday as normal
+          } else {
+            years.push({
+              startDate: yearStart,
+              endDate: yearEnd,
+              holidays: [holiday]
+            })
+          }
         } else {
           const prevYear = years[years.length - 1]
 
