@@ -87,6 +87,7 @@ export default {
             questionnaireResults: [],
             currentVisa: {},
             holiday: [],
+            pastVisas: [],
             nextVisa: {
               name: null
             },

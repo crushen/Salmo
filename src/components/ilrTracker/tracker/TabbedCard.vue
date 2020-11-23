@@ -100,7 +100,7 @@
                   @cancel="addVisa = false" />
 
                 <visa-history
-                  v-else
+                  v-if="!addVisa && user.profile.pastVisas.length"
                   :user="user"
                   :profileToUpdate="profileToUpdate"
                   :sortByDate="sortByDateVisas"
@@ -208,9 +208,9 @@ export default {
     sortByDateVisas() {
       let visas = []
 
-      if(this.user.profile.pastVisas) {
+      if(this.user.profile.pastVisas.length) {
         visas = this.user.profile.pastVisas
-        visaHistory.sort((a, b) => new Date(a.start) - new Date(b.start))
+        visas.sort((a, b) => new Date(a.start) - new Date(b.start))
       }
       
       return visas
@@ -446,26 +446,19 @@ export default {
   }
 }
 
-.slide-enter {
+.slide-enter,
+.slide-leave-to,
+.slide-button-enter,
+.slide-button-leave-to {
   transform: translateX(10px);
   opacity: 0;
 }
 
-.slide-enter-active {
-  transition-timing-function: cubic-bezier(0,1.15,1,.99);
-  transition: 0.6s;
-}
-
-.slide-button-enter,
-.slide-button-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-
+.slide-enter-active,
 .slide-button-enter-active,
 .slide-button-leave-active {
-  transition: 0.6s;
   transition-timing-function: cubic-bezier(0,1.15,1,.99);
+  transition: 0.6s;
 }
 
 .slide-button-enter-active {
