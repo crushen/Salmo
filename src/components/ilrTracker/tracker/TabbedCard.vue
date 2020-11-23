@@ -84,7 +84,6 @@
                 </button>
 
                 <button
-                  v-if="user.profile.pastVisas.length"
                   @click="editVisas = !editVisas"
                   class="none"
                   aria-label="Toggle visa editor">
@@ -100,7 +99,7 @@
                   @cancel="addVisa = false" />
 
                 <visa-history
-                  v-if="!addVisa && user.profile.pastVisas.length"
+                  v-else
                   :user="user"
                   :profileToUpdate="profileToUpdate"
                   :sortByDate="sortByDateVisas"
