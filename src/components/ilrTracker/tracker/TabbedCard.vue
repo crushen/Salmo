@@ -193,12 +193,27 @@ export default {
       return invalidYears
     },
     allHolidayYears() {
-      const visas = this.invalidHolidayYears.concat(this.validHolidayYears)
-      return visas.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+      let years = []
+
+      if(this.invalidHolidayYears.length) {
+        years = this.invalidHolidayYears.concat(this.validHolidayYears)
+        years.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+      } else {
+        years = this.validHolidayYears
+        years.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+      }
+      
+      return years
     },
     sortByDateVisas() {
-      const array = this.user.profile.pastVisas
-      return array.sort((a, b) => new Date(a.start) - new Date(b.start))
+      let visas = []
+
+      if(this.user.profile.pastVisas) {
+        visas = this.user.profile.pastVisas
+        visaHistory.sort((a, b) => new Date(a.start) - new Date(b.start))
+      }
+      
+      return visas
     }
   },
   methods: {
@@ -239,6 +254,7 @@ export default {
               // yearStart = new Date(holiday.leftUk),
               // yearEnd = new Date(new Date(holiday.leftUk).setFullYear(new Date(holiday.leftUk).getFullYear() + 1));
 
+        // IF YEAR IS FIRST IN ARRAY
         if(!years.length) {
           // if holiday goes over the end of year
           if(holidayStart < yearEnd && holidayEnd > yearEnd) {
