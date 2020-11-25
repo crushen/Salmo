@@ -61,6 +61,14 @@
     </div>
 
     <base-message :buttonText="messageButtonText">
+      <!-- Messages for no errors -->
+      <finished-message v-if="noErrors && daysLeft === 0" />
+
+      <watch-days-message v-else-if="noErrors && daysLeft <= 100" :days="daysLeft" />
+
+      <no-errors-message v-else-if="noErrors && daysLeft > 100" />
+
+      <!-- Error messages -->
       <too-many-days-trip-message v-if="moreThan_180.length" />
 
       <too-many-days-total-message v-if="totalDays > 540" />
@@ -71,7 +79,7 @@
 
       <overstay-pre-nov v-if="overstayPre_2016.length && overstayPre_2016.find(holiday => !holiday.within_28)" />
 
-      <application-message />
+      <!-- <application-message /> -->
     </base-message>
   </div>
 </template>
@@ -79,6 +87,9 @@
 <script>
 import overstayAlert from '@/components/ilrTracker/results/OverstayAlert'
 import baseMessage from '@/components/ilrTracker/results/messages/BaseMessage'
+import noErrorsMessage from '@/components/ilrTracker/results/messages/ten-year/NoErrors'
+import finishedMessage from '@/components/ilrTracker/results/messages/ten-year/Finished'
+import watchDaysMessage from '@/components/ilrTracker/results/messages/ten-year/WatchDays'
 import tooManyDaysTripMessage from '@/components/ilrTracker/results/messages/ten-year/180_Days'
 import tooManyDaysTotalMessage from '@/components/ilrTracker/results/messages/ten-year/540_Days'
 import overstayPostNov from '@/components/ilrTracker/results/messages/ten-year/OverstayPost_2016'
@@ -95,12 +106,15 @@ export default {
   components: {
     overstayAlert,
     baseMessage,
+    noErrorsMessage,
+    finishedMessage,
+    watchDaysMessage,
     tooManyDaysTripMessage,
     tooManyDaysTotalMessage,
     overstayPostNov,
     overstayPreNovWithin,
     overstayPreNov,
-    applicationMessage
+    // applicationMessage
   },
   data() {
     return {
@@ -139,6 +153,17 @@ export default {
       let text
 
       // here will go texts for all happy messages
+      if(this.noErrors) {
+        if(this.daysLeft === 0) {
+          text = 'It’s finished!'
+        } else if(this.daysLeft <= 10 && this.daysLeft > 0) {
+          text = 'Only a few days left!'
+        } else if(this.daysLeft <= 100 && this.daysLeft > 10) {
+          text = 'Watch out on your days!'
+        } else {
+          text = 'Everything looks great so far!'
+        }
+      }
 
       // here will go 'hmmm' for Application message
 
@@ -213,6 +238,15 @@ export default {
       return visas
     },
     // ERRORS
+    noErrors() {
+      let errors = true
+
+      if(this.moreThan_180.length || this.overstayPre_2016.length || this.overstayPost_2016.length || this.totalDays > 540) {
+        errors = false
+      }
+
+      return errors
+    },
     missingInfo() {
       let errors
 
