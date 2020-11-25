@@ -59,11 +59,32 @@
         </li>
       </ul>
     </div>
+
+    <base-message :buttonText="messageButtonText">
+      <too-many-days-trip-message v-if="moreThan_180.length" />
+
+      <too-many-days-total-message v-if="totalDays > 540" />
+      
+      <overstay-post-nov v-if="overstayPost_2016.length" />
+
+      <overstay-pre-nov-within v-if="overstayPre_2016.length && overstayPre_2016.every(holiday => holiday.within_28)" />
+
+      <overstay-pre-nov v-if="overstayPre_2016.length && overstayPre_2016.find(holiday => !holiday.within_28)" />
+
+      <application-message />
+    </base-message>
   </div>
 </template>
 
 <script>
 import overstayAlert from '@/components/ilrTracker/results/OverstayAlert'
+import baseMessage from '@/components/ilrTracker/results/messages/BaseMessage'
+import tooManyDaysTripMessage from '@/components/ilrTracker/results/messages/ten-year/180_Days'
+import tooManyDaysTotalMessage from '@/components/ilrTracker/results/messages/ten-year/540_Days'
+import overstayPostNov from '@/components/ilrTracker/results/messages/ten-year/OverstayPost_2016'
+import overstayPreNovWithin from '@/components/ilrTracker/results/messages/ten-year/OverstayPre_2016_Within_28'
+import overstayPreNov from '@/components/ilrTracker/results/messages/ten-year/OverstayPre_2016'
+import applicationMessage from '@/components/ilrTracker/results/messages/ten-year/Application'
 
 export default {
   props: {
@@ -71,7 +92,16 @@ export default {
     validHolidayYears: { type: Array, required: true },
     sortByDateVisas: { type: Array, required: true }
   },
-  components: { overstayAlert },
+  components: {
+    overstayAlert,
+    baseMessage,
+    tooManyDaysTripMessage,
+    tooManyDaysTotalMessage,
+    overstayPostNov,
+    overstayPreNovWithin,
+    overstayPreNov,
+    applicationMessage
+  },
   data() {
     return {
       selectedYear: null
@@ -104,6 +134,27 @@ export default {
       total >= 0 ?  days = total : days = 0
 
       return days
+    },
+    messageButtonText() {
+      let text
+
+      // here will go texts for all happy messages
+
+      // here will go 'hmmm' for Application message
+
+      if(this.overstayPre_2016.length) {
+        if(this.overstayPre_2016.find(holiday => holiday.within_28)) {
+          text = 'Hmmm.'
+        } else {
+          text = 'Something is wrong!'
+        }
+      }
+
+      if(this.moreThan_180.length || this.overstayPost_2016.length || this.totalDays > 540) {
+        text = 'Something is wrong!'
+      }
+
+      return text
     },
     years() {
       let years = this.validHolidayYears

@@ -378,6 +378,33 @@ dialog {
   }
 }
 
+.message-inner {
+  position: relative;
+  
+  .line {
+    position: absolute;
+    width: 8px;
+    height: 100%;
+    border-radius: $radius;
+  }
+
+  .inner-text {
+    margin-left: 1rem;
+
+    p, li {
+      color: white;
+    }
+  }
+
+  ol {
+    li {
+      font-weight: 500;
+      list-style-position: inside;
+      list-style-type: decimal;
+    }
+  }
+}
+
 @media screen and (min-width: 700px) {
   // Text
   h3 { @include font(16px, 400) }
