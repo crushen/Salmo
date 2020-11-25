@@ -261,7 +261,8 @@ export default {
               holidays: [{
                 ...holiday,
                 days: splitHolidayDates.currentYearDays - 1,
-                extendedToNext: true
+                extendedToNext: true,
+                extendedFromLast: false
               }]
             })
             
@@ -271,7 +272,8 @@ export default {
               holidays: [{
                 ...holiday,
                 days: splitHolidayDates.nextYearDays + 1,
-                extendedFromLast: true
+                extendedFromLast: true,
+                extendedToNext: false
               }],
             })
             // otherwise, just push year with holiday as normal
@@ -314,13 +316,15 @@ export default {
               last.holidays.push({
                 ...holiday,
                 days: splitHolidayDates_2.nextYearDays + 1,
-                extendedFromLast: true
+                extendedFromLast: true,
+                extendedToNext: false
               })
 
               secondToLast.holidays.push({
                 ...holiday,
                 days: splitHolidayDates_2.currentYearDays - 1,
-                extendedToNext: true
+                extendedToNext: true,
+                extendedFromLast: false
               })
             }
             // IF HOLIDAY DIDN'T START AND END IN THE YEAR
@@ -340,7 +344,8 @@ export default {
                 holidays: [{
                   ...holiday,
                   days: splitHolidayDates.currentYearDays - 1,
-                  extendedToNext: true
+                  extendedToNext: true,
+                  extendedFromLast: false
                 }]
               })
               
@@ -350,7 +355,8 @@ export default {
                 holidays: [{
                   ...holiday,
                   days: splitHolidayDates.nextYearDays + 1,
-                  extendedFromLast: true
+                  extendedFromLast: true,
+                  extendedToNext: false
                 }],
               })
               // otherwise, just push year with holiday as normal
