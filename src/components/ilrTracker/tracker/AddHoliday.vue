@@ -79,7 +79,14 @@ export default {
         city: null,
         leftUk: null,
         returnedUk: null,
-        days: null
+        days: null,
+        overstayDays: null,
+        within_28: null,
+        reason: {
+          haveReason: null,
+          reason: null,
+          note: null
+        }
       }
     }
   },
