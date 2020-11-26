@@ -1,86 +1,85 @@
 <template>
-  <div class="tools-card margin-m top">
-    <h2>Results</h2>
+  <div>
+    <div class="tools-card margin-m top">
+      <h2>Results</h2>
 
-    <div class="inner">
-      <p class="margin-s top">Starting date: {{ date(user.profile.ilrTracker.startDate) }}</p>
-      <p>Ending date: {{ jsDate(endDate) }}</p>
-      <p>Earliest application date: {{ jsDate(earliestApplicationDate) }}</p>
+      <div class="inner">
+        <p class="margin-s top">Starting date: {{ date(user.profile.ilrTracker.startDate) }}</p>
+        <p>Ending date: {{ jsDate(endDate) }}</p>
+        <p>Earliest application date: {{ jsDate(earliestApplicationDate) }}</p>
 
-      <p
-        :class="{ 'error': totalDays > 540 }"
-        class="total margin-s top">
-        <b>{{ totalDays }} days away in total</b>
-      </p>
-      <p class="total">{{ daysLeft }} days left until {{ jsDate(endDate) }}</p>
+        <p
+          :class="{ 'error': totalDays > 540 }"
+          class="total margin-s top">
+          <b>{{ totalDays }} days away in total</b>
+        </p>
+        <p class="total">{{ daysLeft }} days left until {{ jsDate(endDate) }}</p>
 
-      <ul class="results margin-s top">
-        <li
-          v-for="(year, index) in years"
-          :key="year.startDate.getFullYear()"
-          class="container">
-          <overstay-alert
-            v-if="overstayYearsPost_2016.includes(year) || overstayYearsPre_2016.includes(year)"
-            :days="year.overstayHoliday.overstayDays"
-            :button="overstayYearsPre_2016.includes(year) && year.overstayHoliday.within_28 ? true : false"
-            :colour="overstayYearsPre_2016.includes(year) && year.overstayHoliday.within_28 ? 'blue' : 'red'" />
-
-          <div
-            @click="selectedYear === index ? selectedYear = null : selectedYear = index"
-            class="year">
+        <ul class="results margin-s top">
+          <li
+            v-for="(year, index) in years"
+            :key="year.startDate.getFullYear()"
+            class="container">
+            <overstay-alert
+              v-if="overstayYearsPost_2016.includes(year) || overstayYearsPre_2016.includes(year)"
+              :overstayHoliday="year.overstayHoliday" />
             <div
-              :class="{
-                'error-red': year.totalDays > 180 || overstayYearsPre_2016.includes(year) || overstayYearsPost_2016.includes(year),
-                'error-blue': overstayYearsPre_2016.includes(year) && year.overstayHoliday.within_28
-              }"
-              class="top">
-              <p><b>{{ year.startDate.getFullYear() }}</b></p>
-              
-              <p>{{ year.totalDays }} days</p>
+              @click="selectedYear === index ? selectedYear = null : selectedYear = index"
+              class="year">
+              <div
+                :class="{
+                  'error-red': year.totalDays > 180 || overstayYearsPre_2016.includes(year) || overstayYearsPost_2016.includes(year),
+                  'error-blue': overstayYearsPre_2016.includes(year) && year.overstayHoliday.within_28 && year.overstayHoliday.reason.haveReason !== 'no'
+                }"
+                class="top">
+                <p><b>{{ year.startDate.getFullYear() }}</b></p>
+                
+                <p>{{ year.totalDays }} days</p>
+              </div>
+
+              <ul class="holiday-list" v-if="selectedYear === index">
+                <li
+                  v-for="holiday in year.holidays"
+                  :key="holiday.country"
+                  class="holiday"
+                  :class="{ 
+                    'error-180': moreThan_180.find(h => h.country === holiday.country && h.leftUk === holiday.leftUk) && selectedYear === index,
+                    'error-post2016': overstayPost_2016.includes(holiday) && selectedYear === index,
+                    'error-pre2016-red': overstayPre_2016.includes(holiday) &&  selectedYear === index,
+                    'error-pre2016-blue': overstayPre_2016.includes(holiday) && holiday.within_28 && holiday.reason.haveReason !== 'no' && selectedYear === index
+                  }">
+                  <p>{{ holiday.country }}</p>
+
+                  <p>{{ holiday.days }} days</p>
+                </li>
+              </ul>
             </div>
+          </li>
+        </ul>
+      </div>
 
-            <ul class="holiday-list" v-if="selectedYear === index">
-              <li
-                v-for="holiday in year.holidays"
-                :key="holiday.country"
-                class="holiday"
-                :class="{ 
-                  'error-180': moreThan_180.find(h => h.country === holiday.country && h.leftUk === holiday.leftUk) && selectedYear === index,
-                  'error-post2016': overstayPost_2016.includes(holiday) && selectedYear === index,
-                  'error-pre2016-red': overstayPre_2016.includes(holiday) && !holiday.within_28 &&  selectedYear === index,
-                  'error-pre2016-blue': overstayPre_2016.includes(holiday) && holiday.within_28 && selectedYear === index
-                }">
-                <p>{{ holiday.country }}</p>
+      <base-message :buttonText="messageButtonText">
+        <!-- Messages for no errors -->
+        <finished-message v-if="noErrors && daysLeft === 0" />
 
-                <p>{{ holiday.days }} days</p>
-              </li>
-            </ul>
-          </div>
-        </li>
-      </ul>
+        <watch-days-message v-else-if="noErrors && daysLeft <= 100" :days="daysLeft" />
+
+        <no-errors-message v-else-if="noErrors && daysLeft > 100" />
+
+        <!-- Error messages -->
+        <too-many-days-trip-message v-if="moreThan_180.length" />
+
+        <too-many-days-total-message v-if="totalDays > 540" />
+        
+        <overstay-post-nov v-if="overstayPost_2016.length" />
+
+        <overstay-pre-nov v-if="(overstayPre_2016.length && overstayPre_2016.find(holiday => !holiday.within_28)) || (overstayPre_2016.length && overstayPre_2016.find(holiday => holiday.reason.haveReason === 'no'))" />
+
+        <overstay-pre-nov-within v-if="overstayPre_2016.length && overstayPre_2016.find(holiday => holiday.within_28) && overstayPre_2016.find(holiday => !holiday.reason.haveReason)" />
+
+        <application-message v-if="overstayPre_2016.length && overstayPre_2016.find(holiday => holiday.reason.haveReason === 'yes')" />
+      </base-message>
     </div>
-
-    <base-message :buttonText="messageButtonText">
-      <!-- Messages for no errors -->
-      <finished-message v-if="noErrors && daysLeft === 0" />
-
-      <watch-days-message v-else-if="noErrors && daysLeft <= 100" :days="daysLeft" />
-
-      <no-errors-message v-else-if="noErrors && daysLeft > 100" />
-
-      <!-- Error messages -->
-      <too-many-days-trip-message v-if="moreThan_180.length" />
-
-      <too-many-days-total-message v-if="totalDays > 540" />
-      
-      <overstay-post-nov v-if="overstayPost_2016.length" />
-
-      <overstay-pre-nov-within v-if="overstayPre_2016.length && overstayPre_2016.every(holiday => holiday.within_28)" />
-
-      <overstay-pre-nov v-if="overstayPre_2016.length && overstayPre_2016.find(holiday => !holiday.within_28)" />
-
-      <!-- <application-message /> -->
-    </base-message>
   </div>
 </template>
 
@@ -114,7 +113,7 @@ export default {
     overstayPostNov,
     overstayPreNovWithin,
     overstayPreNov,
-    // applicationMessage
+    applicationMessage
   },
   data() {
     return {
@@ -152,7 +151,6 @@ export default {
     messageButtonText() {
       let text
 
-      // here will go texts for all happy messages
       if(this.noErrors) {
         if(this.daysLeft === 0) {
           text = 'It’s finished!'
@@ -165,11 +163,13 @@ export default {
         }
       }
 
-      // here will go 'hmmm' for Application message
-
       if(this.overstayPre_2016.length) {
         if(this.overstayPre_2016.find(holiday => holiday.within_28)) {
           text = 'Hmmm.'
+
+          if(this.overstayPre_2016.find(holiday => holiday.reason.haveReason === 'no')) {
+            text = 'Something is wrong!'
+          }
         } else {
           text = 'Something is wrong!'
         }
@@ -283,27 +283,31 @@ export default {
 
           // if visa is not last in array (users current visa)
           if(visa !== visas[visas.length - 1]) {
-            const nextVisaApplication = new Date(visas[index + 1].appliedDate)
+            const nextVisaApplication = new Date(visas[index + 1].appliedDate),
+                  trackerStart = new Date(this.user.profile.ilrTracker.startDate);
 
-            // if applied date is before Nov 24 2016
-            if(nextVisaApplication <= new Date(2016, 10, 24)) {
-              // if holiday starts after visa exp, and starts before next visa appl
-              if(holidayStart > visaExpire && holidayStart < nextVisaApplication) {
-                const difference = holidayStart.getTime() - visaExpire.getTime(),
-                      days = Math.ceil(difference / (1000 * 3600 * 24));
-                
-                holiday.overstayDays = days
+            // if holiday started after the ilrTracker start date
+            if(holidayStart >= trackerStart) {
+              // if applied date is before Nov 24 2016
+              if(nextVisaApplication <= new Date(2016, 10, 24)) {
+                // if holiday starts after visa exp, and starts before next visa appl
+                if(holidayStart > visaExpire && holidayStart < nextVisaApplication) {
+                  const difference = holidayStart.getTime() - visaExpire.getTime(),
+                        days = Math.ceil(difference / (1000 * 3600 * 24));
+                  
+                  holiday.overstayDays = days
 
-                // if holiday start was more than 28 days after visa expiry
-                // holiday is invalid and will throw error
-                if(days > 28) {
-                  holiday.within_28 = false
-                  // otherwise user will get chance to give a valid reason to explain the overstay
-                } else {
-                  holiday.within_28 = true
+                  // if holiday start was more than 28 days after visa expiry
+                  // holiday is invalid and will throw error
+                  if(days > 28) {
+                    holiday.within_28 = false
+                    // otherwise user will get chance to give a valid reason to explain the overstay
+                  } else {
+                    holiday.within_28 = true
+                  }
+
+                  errors.push(holiday)
                 }
-
-                errors.push(holiday)
               }
             }
           }
@@ -347,17 +351,21 @@ export default {
 
           // if visa is not last in array (users current visa)
           if(visa !== visas[visas.length - 1]) {
-            const nextVisaApplication = new Date(visas[index + 1].appliedDate)
+            const nextVisaApplication = new Date(visas[index + 1].appliedDate),
+                  trackerStart = new Date(this.user.profile.ilrTracker.startDate);
 
-            // if applied date is after Nov 24 2016
-            if(nextVisaApplication > new Date(2016, 10, 24)) {
-              // if holiday starts after visa exp, and starts before next visa appl
-              if(holidayStart > visaExpire && holidayStart < nextVisaApplication) {
-                const difference = holidayStart.getTime() - visaExpire.getTime(),
-                      days = Math.ceil(difference / (1000 * 3600 * 24));
+            // if holiday started after the ilrTracker start date
+            if(holidayStart >= trackerStart) {
+              // if applied date is after Nov 24 2016
+              if(nextVisaApplication > new Date(2016, 10, 24)) {
+                // if holiday starts after visa exp, and starts before next visa appl
+                if(holidayStart > visaExpire && holidayStart < nextVisaApplication) {
+                  const difference = holidayStart.getTime() - visaExpire.getTime(),
+                        days = Math.ceil(difference / (1000 * 3600 * 24));
 
-                holiday.overstayDays = days
-                errors.push(holiday)
+                  holiday.overstayDays = days
+                  errors.push(holiday)
+                }
               }
             }
           }
