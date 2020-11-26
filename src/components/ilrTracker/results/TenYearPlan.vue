@@ -272,7 +272,7 @@ export default {
     overstayPre_2016() {
       const errors = [],
             visas =  cloneDeep(this.sortByDateVisas).concat(this.user.profile.currentVisa),
-            holidays = cloneDeep(this.user.profile.holiday);
+            holidays = this.years.flatMap(year => year.holidays);
 
       visas.forEach((visa, index) => {
         const visaStart = new Date(visa.start),
@@ -324,7 +324,7 @@ export default {
         const yearStart = new Date(year.startDate),
               yearEnd = new Date(year.endDate);
 
-        this.overstayPre_2016.forEach(holiday => {
+        this.user.profile.holiday.forEach(holiday => {
             const holidayStart = new Date(holiday.leftUk),
                   holidayEnd = new Date(holiday.returnedUk);
 
@@ -340,7 +340,7 @@ export default {
     overstayPost_2016() {
       const errors = [],
             visas =  cloneDeep(this.sortByDateVisas).concat(this.user.profile.currentVisa),
-            holidays = cloneDeep(this.user.profile.holiday);
+            holidays = this.years.flatMap(year => year.holidays);
 
       visas.forEach((visa, index) => {
         const visaStart = new Date(visa.start),
@@ -382,7 +382,7 @@ export default {
         const yearStart = new Date(year.startDate),
               yearEnd = new Date(year.endDate);
 
-        this.overstayPost_2016.forEach(holiday => {
+        this.user.profile.holiday.forEach(holiday => {
             const holidayStart = new Date(holiday.leftUk),
                   holidayEnd = new Date(holiday.returnedUk);
 
