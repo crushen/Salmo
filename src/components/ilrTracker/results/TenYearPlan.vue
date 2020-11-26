@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import { cloneDeep } from 'lodash'
 import overstayAlert from '@/components/ilrTracker/results/OverstayAlert'
 import baseMessage from '@/components/ilrTracker/results/messages/BaseMessage'
 import noErrorsMessage from '@/components/ilrTracker/results/messages/ten-year/NoErrors'
@@ -182,7 +183,7 @@ export default {
       return text
     },
     years() {
-      let years = this.validHolidayYears
+      let years = cloneDeep(this.validHolidayYears)
 
       years.forEach(year => {
         let total = year.holidays.reduce((prev, cur) => prev + cur.days, 0)
@@ -270,8 +271,8 @@ export default {
     },
     overstayPre_2016() {
       const errors = [],
-            visas =  [...this.sortByDateVisas.concat(this.user.profile.currentVisa)],
-            holidays = [...this.user.profile.holiday];
+            visas =  cloneDeep(this.sortByDateVisas).concat(this.user.profile.currentVisa),
+            holidays = cloneDeep(this.user.profile.holiday);
 
       visas.forEach((visa, index) => {
         const visaStart = new Date(visa.start),
@@ -338,8 +339,8 @@ export default {
     },
     overstayPost_2016() {
       const errors = [],
-            visas =  [...this.sortByDateVisas.concat(this.user.profile.currentVisa)],
-            holidays = [...this.user.profile.holiday];
+            visas =  cloneDeep(this.sortByDateVisas).concat(this.user.profile.currentVisa),
+            holidays = cloneDeep(this.user.profile.holiday);
 
       visas.forEach((visa, index) => {
         const visaStart = new Date(visa.start),

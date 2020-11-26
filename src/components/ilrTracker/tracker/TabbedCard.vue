@@ -35,92 +35,96 @@
           </button>
         </div>
 
-        <div class="tab-result">
-          <transition name="slide" mode="out-in">
-            <!-- Travel Log -->
-            <div v-if="selectedTab === 1" key="1">
-              <div class="buttons">
-                <button
-                  @click="addHoliday = true"
-                  class="none"
-                  aria-label="Add holiday">
-                  <img src="@/assets/icons/red/plus.svg" alt="">
-                </button>
+        <div :class="{'no-min-height': resultsOpen}" class="tab-result">
+          <div v-if="!resultsOpen">
+            <transition name="slide" mode="out-in">
+              <!-- Travel Log -->
+              <div v-if="selectedTab === 1" key="1">
+                <div class="buttons">
+                  <button
+                    @click="addHoliday = true"
+                    class="none"
+                    aria-label="Add holiday">
+                    <img src="@/assets/icons/red/plus.svg" alt="">
+                  </button>
 
-                <button
-                  v-if="user.profile.holiday.length"
-                  @click="editHolidays = !editHolidays"
-                  class="none"
-                  aria-label="Toggle holiday editor">
-                  <img v-if="!editHolidays" src="@/assets/icons/red/edit.svg" alt="">
-                  <img v-else src="@/assets/icons/red/edit-solid.svg" alt="">
-                </button>
+                  <button
+                    v-if="user.profile.holiday.length"
+                    @click="editHolidays = !editHolidays"
+                    class="none"
+                    aria-label="Toggle holiday editor">
+                    <img v-if="!editHolidays" src="@/assets/icons/red/edit.svg" alt="">
+                    <img v-else src="@/assets/icons/red/edit-solid.svg" alt="">
+                  </button>
+                </div>
+
+                <transition name="slide" mode="out-in">
+                  <add-holiday-form
+                    v-if="addHoliday"
+                    :profileToUpdate="profileToUpdate"
+                    @cancel="addHoliday = false" />
+
+                  <travel-log
+                    v-if="!addHoliday && user.profile.holiday.length"
+                    :user="user"
+                    :profileToUpdate="profileToUpdate"
+                    :editHolidays="editHolidays"
+                    :allHolidayYears="allHolidayYears"
+                    @editHoliday="editHoliday" />
+                </transition>
               </div>
 
-              <transition name="slide" mode="out-in">
-                <add-holiday-form
-                  v-if="addHoliday"
-                  :profileToUpdate="profileToUpdate"
-                  @cancel="addHoliday = false" />
+              <!-- Visa History -->
+              <div v-else key="2">
+                <div class="buttons">
+                  <button
+                    @click="addVisa = true"
+                    class="none"
+                    aria-label="Add past visa">
+                    <img src="@/assets/icons/red/plus.svg" alt="">
+                  </button>
 
-                <travel-log
-                  v-if="!addHoliday && user.profile.holiday.length"
-                  :user="user"
-                  :profileToUpdate="profileToUpdate"
-                  :editHolidays="editHolidays"
-                  :allHolidayYears="allHolidayYears"
-                  @editHoliday="editHoliday" />
-              </transition>
-            </div>
+                  <button
+                    @click="editVisas = !editVisas"
+                    class="none"
+                    aria-label="Toggle visa editor">
+                    <img v-if="!editVisas" src="@/assets/icons/red/edit.svg" alt="">
+                    <img v-else src="@/assets/icons/red/edit-solid.svg" alt="">
+                  </button>
+                </div>
 
-            <!-- Visa History -->
-            <div v-else key="2">
-              <div class="buttons">
-                <button
-                  @click="addVisa = true"
-                  class="none"
-                  aria-label="Add past visa">
-                  <img src="@/assets/icons/red/plus.svg" alt="">
-                </button>
+                <transition name="slide" mode="out-in">
+                  <add-visa-form
+                    v-if="addVisa"
+                    :profileToUpdate="profileToUpdate"
+                    @cancel="addVisa = false" />
 
-                <button
-                  @click="editVisas = !editVisas"
-                  class="none"
-                  aria-label="Toggle visa editor">
-                  <img v-if="!editVisas" src="@/assets/icons/red/edit.svg" alt="">
-                  <img v-else src="@/assets/icons/red/edit-solid.svg" alt="">
-                </button>
+                  <visa-history
+                    v-else
+                    :user="user"
+                    :profileToUpdate="profileToUpdate"
+                    :sortByDate="sortByDateVisas"
+                    :editVisas="editVisas"
+                    @editVisa="editVisa" />
+                </transition>
               </div>
+            </transition>
+          </div>
 
-              <transition name="slide" mode="out-in">
-                <add-visa-form
-                  v-if="addVisa"
-                  :profileToUpdate="profileToUpdate"
-                  @cancel="addVisa = false" />
-
-                <visa-history
-                  v-else
-                  :user="user"
-                  :profileToUpdate="profileToUpdate"
-                  :sortByDate="sortByDateVisas"
-                  :editVisas="editVisas"
-                  @editVisa="editVisa" />
-              </transition>
-            </div>
-          </transition>
+          <div @click="resultsOpen = false" v-if="resultsOpen" class="line"></div>
         </div>
       </div>
     </section>
 
-    <transition name="slide-button" mode="out-in">
-      <div v-if="user.profile.holiday.length && selectedTab === 1" class="button-center">
+    <!-- <transition name="slide-button" mode="out-in"> -->
+      <div v-if="user.profile.holiday.length && !resultsOpen" class="button-center">
         <button @click="resultsOpen = true" class="primary margin-m top">
           Calculate
         </button>
       </div>
-    </transition>
+    <!-- </transition> -->
 
-    <transition name="slide-button" mode="out-in">
+    <!-- <transition name="slide-button" mode="out-in"> -->
       <ten-results
         v-if="resultsOpen && user.profile.ilrTracker.plan === '10 year plan'"
         :user="user"
@@ -130,11 +134,12 @@
       <five-results
         v-if="resultsOpen && user.profile.ilrTracker.plan === '5 year plan'"
         :validHolidayYears="validHolidayYears" />
-    </transition>
+    <!-- </transition> -->
   </div>
 </template>
 
 <script>
+import { cloneDeep } from 'lodash'
 import addHolidayForm from '@/components/ilrTracker/tracker/AddHoliday'
 import travelLog from '@/components/ilrTracker/tracker/TravelLog'
 import visaHistory from '@/components/ilrTracker/tracker/VisaHistory'
@@ -181,11 +186,11 @@ export default {
       return this.user.profile.ilrTracker.startDate
     },
     validHolidayYears() {
-      const array = this.user.profile.holiday.filter(holiday => holiday.leftUk > this.startDate)
+      const array = cloneDeep(this.user.profile.holiday).filter(holiday => holiday.leftUk > this.startDate)
       return this.sortIntoYears(array)
     },
     invalidHolidayYears() {
-      const array = this.user.profile.holiday.filter(holiday => holiday.returnedUk <= this.startDate);
+      const array = cloneDeep(this.user.profile.holiday).filter(holiday => holiday.returnedUk <= this.startDate)
       let invalidYears =  this.sortIntoYears(array)
 
       invalidYears.forEach(year => year.invalid = true)
@@ -195,10 +200,10 @@ export default {
       let years = []
 
       if(this.invalidHolidayYears.length) {
-        years = [...this.invalidHolidayYears.concat(this.validHolidayYears)]
+        years = cloneDeep(this.invalidHolidayYears).concat(this.validHolidayYears)
         years.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
       } else {
-        years = [...this.validHolidayYears]
+        years = cloneDeep(this.validHolidayYears)
         years.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
       }
       
@@ -208,7 +213,7 @@ export default {
       let visas = []
 
       if(this.user.profile.pastVisas.length) {
-        visas = [...this.user.profile.pastVisas]
+        visas = cloneDeep(this.user.profile.pastVisas)
         visas.sort((a, b) => new Date(a.start) - new Date(b.start))
       }
       
@@ -231,7 +236,7 @@ export default {
       this.showVisaEditModal = true
     },
     sortIntoYears(array) {
-      const ascendingDates = array.sort((a, b) => new Date(a.leftUk) - new Date(b.leftUk)),
+      const ascendingDates = cloneDeep(array).sort((a, b) => new Date(a.leftUk) - new Date(b.leftUk)),
             years = [];
 
       while(ascendingDates.length) {
@@ -393,6 +398,14 @@ export default {
 .tools-card.main {
   background: #D4E7ED;
   max-width: 520px;
+
+  .line {
+    width: 60%;
+    height: 4px;
+    background: $med-blue;
+    margin: 1rem auto 0 auto;
+    border-radius: $radius;
+  }
 }
 
 .tabs {
@@ -439,6 +452,10 @@ export default {
   min-height: 180px;
   padding: 1em;
   background: white;
+
+  &.no-min-height {
+    min-height: 0;
+  }
 }
 
 .buttons {
