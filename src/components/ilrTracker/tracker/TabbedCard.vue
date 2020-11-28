@@ -5,7 +5,7 @@
         v-if="showHolidayEditModal"
         :holiday="holidayToEdit"
         :profileToUpdate="profileToUpdate"
-        @closeModal="showHolidayEditModal = false" />
+        @closeModal="showHolidayEditModal = false, editHolidays = false" />
     </transition>
 
     <transition name="dialog" mode="out-in">
@@ -13,7 +13,7 @@
         v-if="showVisaEditModal"
         :visa="visaToEdit"
         :profileToUpdate="profileToUpdate"
-        @closeModal="showVisaEditModal = false" />
+        @closeModal="showVisaEditModal = false, editVisas = false" />
     </transition>
 
     <section class="tools-card main">
@@ -124,7 +124,7 @@
       </div>
     <!-- </transition> -->
 
-    <!-- <transition name="slide-button" mode="out-in"> -->
+    <transition name="slide-button" mode="out-in">
       <ten-results
         v-if="resultsOpen && user.profile.ilrTracker.plan === '10 year plan'"
         :user="user"
@@ -134,7 +134,7 @@
       <five-results
         v-if="resultsOpen && user.profile.ilrTracker.plan === '5 year plan'"
         :validHolidayYears="validHolidayYears" />
-    <!-- </transition> -->
+    </transition>
   </div>
 </template>
 
