@@ -94,7 +94,7 @@ export default {
       // If their current visa is a tier 1 or tier 2 visa
       if(currentVisa.includes('Tier 1') || currentVisa.includes('Tier 2')) {
         // If they have no past visas
-        if(!pastVisas) {
+        if(!pastVisas.length) {
           qualifies = true
         } else {
           // If their only past visa is Student visa

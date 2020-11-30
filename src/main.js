@@ -31,21 +31,143 @@ Vue.mixin({
             formatted = newDate.split('/');
             
       return `${formatted[1]}/${formatted[0]}/${formatted[2]}`
-    }
-    // setOverlay() {
-    //   const overlay = document.querySelector('#overlay')
-    //   overlay.style.opacity = 1
-    //   overlay.style.visibility = 'visible'
+    },
+    sortYearsArray(years, holiday, holidayStart, holidayEnd, yearStart, yearEnd) {
+      // IF YEAR IS FIRST IN ARRAY
+      if(!years.length) {
+        // if holiday goes over the end of year
+        if(holidayStart < yearEnd && holidayEnd > yearEnd) {
+          // get following year dates and holiday info
+          const nextYearStart = yearEnd,
+                nextYearEnd = new Date(new Date(yearEnd).setFullYear(new Date(yearEnd).getFullYear() + 1)),
+                currentYear = { startDate: yearStart, endDate: yearEnd, holidays: [] },
+                splitHolidayDates = this.getSplitYearHolidayDays(holiday, currentYear);
 
-    //   document.querySelector('body').style.overflow = 'hidden'
-    // },
-    // removeOverlay() {
-    //   const overlay = document.querySelector('#overlay')
-    //   overlay.style.opacity = 0
-    //   overlay.style.visibility = 'hidden'
-      
-    //   document.querySelector('body').style.overflow = 'auto'
-    // }
+          // push years with correct holiday days & balance out flight days
+          years.push({
+            startDate: yearStart,
+            endDate: yearEnd,
+            holidays: [{
+              ...holiday,
+              days: splitHolidayDates.currentYearDays - 1,
+              extendedToNext: true,
+              extendedFromLast: false
+            }]
+          })
+          
+          years.push({
+            startDate: nextYearStart,
+            endDate: nextYearEnd,
+            holidays: [{
+              ...holiday,
+              days: splitHolidayDates.nextYearDays + 1,
+              extendedFromLast: true,
+              extendedToNext: false
+            }],
+          })
+          // otherwise, just push year with holiday as normal
+        } else {
+          years.push({
+            startDate: yearStart,
+            endDate: yearEnd,
+            holidays: [holiday]
+          })
+        }
+      } else {
+        const prevYear = years[years.length - 1]
+
+        // IF HOLIDAY STARTED AND ENDED WITHIN THE YEAR
+        if(holidayStart > prevYear.startDate && holidayStart < prevYear.endDate) {
+          if(holidayStart > prevYear.startDate && holidayEnd < prevYear.endDate) {
+            prevYear.holidays.push(holiday)
+            // IF HOLIDAY IS SPLIT OVER 2 YEARS
+          } else {
+            // get start and end date for following year & push to years
+            const splitHolidayDates = this.getSplitYearHolidayDays(holiday, prevYear),
+                  nextYearStart = yearEnd,
+                  nextYearEnd = new Date(new Date(yearEnd).setFullYear(new Date(yearEnd).getFullYear() + 1));
+                  // nextYearStart = new Date(holidayStart.setDate(holidayStart.getDate() + splitHolidayDates.currentYearDays)),
+                  // nextYearEnd = new Date(yearEnd.setDate(yearEnd.getDate() + splitHolidayDates.currentYearDays));
+
+            years.push({
+              startDate: nextYearStart,
+              endDate: nextYearEnd,
+              holidays: []
+            })
+
+            // get last two years and push split holidays
+            const last = years[years.length - 1],
+                  secondToLast = years[years.length - 2],
+                  // get split holiday dates for second to last year
+                  splitHolidayDates_2 = this.getSplitYearHolidayDays(holiday, secondToLast);
+
+            // add holidays to relative years & balance out flight days
+            last.holidays.push({
+              ...holiday,
+              days: splitHolidayDates_2.nextYearDays + 1,
+              extendedFromLast: true,
+              extendedToNext: false
+            })
+
+            secondToLast.holidays.push({
+              ...holiday,
+              days: splitHolidayDates_2.currentYearDays - 1,
+              extendedToNext: true,
+              extendedFromLast: false
+            })
+          }
+          // IF HOLIDAY DIDN'T START AND END IN THE YEAR
+        } else {
+          // if holiday goes over the end of year
+          if(holidayStart < yearEnd && holidayEnd > yearEnd) {
+            // get following year dates and holiday info
+            const nextYearStart = yearEnd,
+                  nextYearEnd = new Date(new Date(yearEnd).setFullYear(new Date(yearEnd).getFullYear() + 1)),
+                  currentYear = { startDate: yearStart, endDate: yearEnd, holidays: [] },
+                  splitHolidayDates = this.getSplitYearHolidayDays(holiday, currentYear);
+
+            // push years with correct holiday days & balance out flight days
+            years.push({
+              startDate: yearStart,
+              endDate: yearEnd,
+              holidays: [{
+                ...holiday,
+                days: splitHolidayDates.currentYearDays - 1,
+                extendedToNext: true,
+                extendedFromLast: false
+              }]
+            })
+            
+            years.push({
+              startDate: nextYearStart,
+              endDate: nextYearEnd,
+              holidays: [{
+                ...holiday,
+                days: splitHolidayDates.nextYearDays + 1,
+                extendedFromLast: true,
+                extendedToNext: false
+              }],
+            })
+            // otherwise, just push year with holiday as normal
+          } else {
+            years.push({
+              startDate: yearStart,
+              endDate: yearEnd,
+              holidays: [holiday]
+            })
+          }
+        }
+      }      
+    },
+    getSplitYearHolidayDays(holiday, year) {
+      const totalDays = holiday.days,
+            dt1 = new Date(holiday.leftUk),
+            dt2 = new Date(year.endDate),
+            currentYearDays = Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24)),
+            nextYearDays = totalDays - currentYearDays;
+
+      return { currentYearDays: currentYearDays, nextYearDays: nextYearDays }
+    }
   }
 })
 

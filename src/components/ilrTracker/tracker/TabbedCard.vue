@@ -3,7 +3,7 @@
     <transition name="dialog" mode="out-in">
       <edit-holiday-modal
         v-if="showHolidayEditModal"
-        :holiday="holidayToEdit"
+        :holidayToEdit="holidayToEdit"
         :profileToUpdate="profileToUpdate"
         @closeModal="showHolidayEditModal = false, editHolidays = false" />
     </transition>
@@ -11,7 +11,7 @@
     <transition name="dialog" mode="out-in">
       <edit-visa-modal
         v-if="showVisaEditModal"
-        :visa="visaToEdit"
+        :visaToEdit="visaToEdit"
         :profileToUpdate="profileToUpdate"
         @closeModal="showVisaEditModal = false, editVisas = false" />
     </transition>
@@ -125,15 +125,11 @@
     <!-- </transition> -->
 
     <transition name="slide-button" mode="out-in">
-      <ten-results
-        v-if="resultsOpen && user.profile.ilrTracker.plan === '10 year plan'"
+      <results
+        v-if="resultsOpen"
         :user="user"
         :validHolidayYears="validHolidayYears"
         :sortByDateVisas="sortByDateVisas" />
-
-      <five-results
-        v-if="resultsOpen && user.profile.ilrTracker.plan === '5 year plan'"
-        :validHolidayYears="validHolidayYears" />
     </transition>
   </div>
 </template>
@@ -146,8 +142,7 @@ import visaHistory from '@/components/ilrTracker/tracker/VisaHistory'
 import editHolidayModal from '@/components/modals/ilrTracker/red/EditHoliday'
 import addVisaForm from '@/components/ilrTracker/tracker/AddVisa'
 import editVisaModal from '@/components/modals/ilrTracker/red/EditVisa'
-import tenResults from '@/components/ilrTracker/results/TenYearPlan'
-import fiveResults from '@/components/ilrTracker/results/FiveYearPlan'
+import results from '@/components/ilrTracker/results/Results'
 
 
 export default {
@@ -158,8 +153,7 @@ export default {
     editHolidayModal,
     addVisaForm,
     editVisaModal,
-    tenResults,
-    fiveResults
+    results
   },
   data() {
     return {
@@ -246,146 +240,11 @@ export default {
               holidayEnd = new Date(holiday.returnedUk),
               yearStart = new Date(`${new Date(holiday.leftUk).getFullYear()}, 01, 01`),
               yearEnd = new Date(new Date(yearStart).setFullYear(new Date(yearStart).getFullYear() + 1));
-              // yearStart = new Date(holiday.leftUk),
-              // yearEnd = new Date(new Date(holiday.leftUk).setFullYear(new Date(holiday.leftUk).getFullYear() + 1));
 
-        // IF YEAR IS FIRST IN ARRAY
-        if(!years.length) {
-          // if holiday goes over the end of year
-          if(holidayStart < yearEnd && holidayEnd > yearEnd) {
-            // get following year dates and holiday info
-            const nextYearStart = yearEnd,
-                  nextYearEnd = new Date(new Date(yearEnd).setFullYear(new Date(yearEnd).getFullYear() + 1)),
-                  currentYear = { startDate: yearStart, endDate: yearEnd, holidays: [] },
-                  splitHolidayDates = this.getSplitYearHolidayDays(holiday, currentYear);
-
-            // push years with correct holiday days & balance out flight days
-            years.push({
-              startDate: yearStart,
-              endDate: yearEnd,
-              holidays: [{
-                ...holiday,
-                days: splitHolidayDates.currentYearDays - 1,
-                extendedToNext: true,
-                extendedFromLast: false
-              }]
-            })
-            
-            years.push({
-              startDate: nextYearStart,
-              endDate: nextYearEnd,
-              holidays: [{
-                ...holiday,
-                days: splitHolidayDates.nextYearDays + 1,
-                extendedFromLast: true,
-                extendedToNext: false
-              }],
-            })
-            // otherwise, just push year with holiday as normal
-          } else {
-            years.push({
-              startDate: yearStart,
-              endDate: yearEnd,
-              holidays: [holiday]
-            })
-          }
-        } else {
-          const prevYear = years[years.length - 1]
-
-          // IF HOLIDAY STARTED AND ENDED WITHIN THE YEAR
-          if(holidayStart > prevYear.startDate && holidayStart < prevYear.endDate) {
-            if(holidayStart > prevYear.startDate && holidayEnd < prevYear.endDate) {
-              prevYear.holidays.push(holiday)
-              // IF HOLIDAY IS SPLIT OVER 2 YEARS
-            } else {
-              // get start and end date for following year & push to years
-              const splitHolidayDates = this.getSplitYearHolidayDays(holiday, prevYear),
-                    nextYearStart = yearEnd,
-                    nextYearEnd = new Date(new Date(yearEnd).setFullYear(new Date(yearEnd).getFullYear() + 1));
-                    // nextYearStart = new Date(holidayStart.setDate(holidayStart.getDate() + splitHolidayDates.currentYearDays)),
-                    // nextYearEnd = new Date(yearEnd.setDate(yearEnd.getDate() + splitHolidayDates.currentYearDays));
-
-              years.push({
-                startDate: nextYearStart,
-                endDate: nextYearEnd,
-                holidays: []
-              })
-
-              // get last two years and push split holidays
-              const last = years[years.length - 1],
-                    secondToLast = years[years.length - 2],
-                    // get split holiday dates for second to last year
-                    splitHolidayDates_2 = this.getSplitYearHolidayDays(holiday, secondToLast);
-
-              // add holidays to relative years & balance out flight days
-              last.holidays.push({
-                ...holiday,
-                days: splitHolidayDates_2.nextYearDays + 1,
-                extendedFromLast: true,
-                extendedToNext: false
-              })
-
-              secondToLast.holidays.push({
-                ...holiday,
-                days: splitHolidayDates_2.currentYearDays - 1,
-                extendedToNext: true,
-                extendedFromLast: false
-              })
-            }
-            // IF HOLIDAY DIDN'T START AND END IN THE YEAR
-          } else {
-            // if holiday goes over the end of year
-            if(holidayStart < yearEnd && holidayEnd > yearEnd) {
-              // get following year dates and holiday info
-              const nextYearStart = yearEnd,
-                    nextYearEnd = new Date(new Date(yearEnd).setFullYear(new Date(yearEnd).getFullYear() + 1)),
-                    currentYear = { startDate: yearStart, endDate: yearEnd, holidays: [] },
-                    splitHolidayDates = this.getSplitYearHolidayDays(holiday, currentYear);
-
-              // push years with correct holiday days & balance out flight days
-              years.push({
-                startDate: yearStart,
-                endDate: yearEnd,
-                holidays: [{
-                  ...holiday,
-                  days: splitHolidayDates.currentYearDays - 1,
-                  extendedToNext: true,
-                  extendedFromLast: false
-                }]
-              })
-              
-              years.push({
-                startDate: nextYearStart,
-                endDate: nextYearEnd,
-                holidays: [{
-                  ...holiday,
-                  days: splitHolidayDates.nextYearDays + 1,
-                  extendedFromLast: true,
-                  extendedToNext: false
-                }],
-              })
-              // otherwise, just push year with holiday as normal
-            } else {
-              years.push({
-                startDate: yearStart,
-                endDate: yearEnd,
-                holidays: [holiday]
-              })
-            }
-          }
-        }
+        this.sortYearsArray(years, holiday, holidayStart, holidayEnd, yearStart, yearEnd)
       }
 
       return years
-    },
-    getSplitYearHolidayDays(holiday, year) {
-      const totalDays = holiday.days,
-            dt1 = new Date(holiday.leftUk),
-            dt2 = new Date(year.endDate),
-            currentYearDays = Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24)),
-            nextYearDays = totalDays - currentYearDays;
-
-      return { currentYearDays: currentYearDays, nextYearDays: nextYearDays }
     }
   }
 }
