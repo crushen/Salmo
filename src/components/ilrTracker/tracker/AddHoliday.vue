@@ -99,7 +99,9 @@ export default {
     },
     submitForm() {
       this.form.days = this.calculateDays(this.form.leftUk, this.form.returnedUk)
-      this.$store.dispatch('prCalc/addHoliday', this.form)
+      this.profileToUpdate.holiday.push(this.form)
+
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       .then(() => this.$emit('cancel'))
     },
     cancel() {

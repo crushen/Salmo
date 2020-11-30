@@ -97,7 +97,7 @@ export default {
       this.holiday.days = this.calculateDays(this.holiday.leftUk, this.holiday.returnedUk)
       holidays[index] = this.holiday
 
-      this.$store.dispatch('prCalc/editHoliday', holidays)
+      this.$store.dispatch('auth/updateProfile', this.profileToUpdate)
       .then(() => this.$emit('closeModal'))
     },
     deleteHoliday() {
