@@ -70,18 +70,20 @@
 </template>
 
 <script>
-import baseTip from '@/components/modals/ilrTracker/red/BaseTip'
+import { cloneDeep } from 'lodash'
 import { countries } from '@/assets/js/countries'
+import baseTip from '@/components/modals/ilrTracker/red/BaseTip'
 
 export default {
   props: {
-    holiday: { type: Object, required: true },
+    holidayToEdit: { type: Object, required: true },
     profileToUpdate: { type: Object, required: true }
   },
   components: { baseTip },
   data() {
     return {
-      countries
+      countries,
+      holiday: cloneDeep(this.holidayToEdit)
     }
   },
   methods: {
@@ -90,7 +92,7 @@ export default {
     },
     submitForm() {
       const holidays = this.profileToUpdate.holiday,
-            index = holidays.findIndex(item => item.country === this.holiday.country && item.leftUk === this.holiday.leftUk);
+            index = holidays.findIndex(item => item.country === this.holidayToEdit.country && item.leftUk === this.holidayToEdit.leftUk);
       
       this.holiday.days = this.calculateDays(this.holiday.leftUk, this.holiday.returnedUk)
       holidays[index] = this.holiday

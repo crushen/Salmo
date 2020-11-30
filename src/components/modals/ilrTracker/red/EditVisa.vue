@@ -105,20 +105,22 @@
 </template>
 
 <script>
-import baseTip from '@/components/modals/ilrTracker/red/BaseTip'
+import { cloneDeep } from 'lodash'
 import { visaOptions } from '@/assets/js/visaOptions'
 import { countries } from '@/assets/js/countries'
+import baseTip from '@/components/modals/ilrTracker/red/BaseTip'
 
 export default {
   props: {
-    visa: { type: Object, required: true },
+    visaToEdit: { type: Object, required: true },
     profileToUpdate: { type: Object, required: true }
   },
   components: { baseTip },
   data() {
     return {
       visaOptions,
-      countries
+      countries,
+      visa: cloneDeep(this.visaToEdit)
     }
   },
   methods: {
@@ -127,7 +129,7 @@ export default {
     },
     submitForm() {
       const pastVisas = this.profileToUpdate.pastVisas,
-            index = pastVisas.findIndex(item => item.name === this.visa.name && item.start === this.visa.start);
+            index = pastVisas.findIndex(item => item.name === this.visaToEdit.name && item.start === this.visaToEdit.start);
       
       pastVisas[index] = this.visa
 
