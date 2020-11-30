@@ -23,14 +23,14 @@
             @click="selectTab"
             :class="{'selected': 1 === selectedTab}"
             class="tab"
-            :aria-expanded="selectedTab === 1 ? 'true' : 'false'">
+            aria-label="open travel log">
             <h2>Travel Log</h2>
           </button>
           <button
             @click="selectTab"
             :class="{'selected': 2 === selectedTab}"
             class="tab"
-            :aria-expanded="selectedTab === 2 ? 'true' : 'false'">
+            aria-label="open visa history">
             <h2>Visa History</h2>
           </button>
         </div>
@@ -111,14 +111,25 @@
             </transition>
           </div>
 
-          <div @click="resultsOpen = false" v-if="resultsOpen" class="line"></div>
+          <div class="button-center">
+            <button
+              v-if="resultsOpen"
+              @click="resultsOpen = false"
+              class="none line-button"
+              aria-label="close results and open travel log / visa history">
+              <div class="line"></div>
+            </button>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- <transition name="slide-button" mode="out-in"> -->
       <div v-if="user.profile.holiday.length && !resultsOpen" class="button-center">
-        <button @click="resultsOpen = true" class="primary margin-m top">
+        <button
+          @click="resultsOpen = true"
+          class="primary margin-m top"
+          aria-label="calculate results">
           Calculate
         </button>
       </div>
@@ -258,12 +269,17 @@ export default {
   background: #D4E7ED;
   max-width: 520px;
 
-  .line {
+  .line-button {
     width: 60%;
-    height: 4px;
-    background: $med-blue;
-    margin: 1rem auto 0 auto;
-    border-radius: $radius;
+    height: 40px;
+    margin-top: 1rem;
+
+    .line {
+      width: 100%;
+      height: 4px;
+      background: $med-blue;
+      border-radius: $radius;
+    }
   }
 }
 
@@ -314,6 +330,7 @@ export default {
 
   &.no-min-height {
     min-height: 0;
+    padding: 0 1em;
   }
 }
 
