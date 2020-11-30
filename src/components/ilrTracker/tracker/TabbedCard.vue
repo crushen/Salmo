@@ -124,18 +124,16 @@
       </div>
     </section>
 
-    <!-- <transition name="slide-button" mode="out-in"> -->
-      <div v-if="user.profile.holiday.length && !resultsOpen" class="button-center">
-        <button
-          @click="resultsOpen = true"
-          class="primary margin-m top"
-          aria-label="calculate results">
-          Calculate
-        </button>
-      </div>
-    <!-- </transition> -->
+    <div v-if="user.profile.holiday.length && !resultsOpen" class="button-center">
+      <button
+        @click="resultsOpen = true"
+        class="primary margin-m top"
+        aria-label="calculate results">
+        Calculate
+      </button>
+    </div>
 
-    <transition name="slide-button" mode="out-in">
+    <transition name="slide" mode="out-in">
       <results
         v-if="resultsOpen"
         :user="user"
@@ -342,25 +340,6 @@ export default {
   button {
     margin-left: 1rem;
   }
-}
-
-.slide-enter,
-.slide-leave-to,
-.slide-button-enter,
-.slide-button-leave-to {
-  transform: translateX(10px);
-  opacity: 0;
-}
-
-.slide-enter-active,
-.slide-button-enter-active,
-.slide-button-leave-active {
-  transition-timing-function: cubic-bezier(0,1.15,1,.99);
-  transition: 0.6s;
-}
-
-.slide-button-enter-active {
-  transition-delay: 0.7s;
 }
 
 // Tablet
