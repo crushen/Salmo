@@ -13,9 +13,9 @@
 
     <desktop-wave v-else />
 
-    <mobile-nav v-if="user && user.emailVerified"  />
+    <mobile-nav v-if="user && user.emailVerified && innerWidth < 1200"  />
 
-    <!-- <sidebar-nav v-else /> -->
+    <sidebar-nav v-if="user && user.emailVerified && innerWidth >= 1200" />
 
     <img
       v-if="$route.name !== 'home'"
@@ -46,8 +46,8 @@ export default {
     mobileNav,
     mobileWave,
     tabletWave,
-    desktopWave
-    // sidebarNav
+    desktopWave,
+    sidebarNav
   },
   data () {
     return {
