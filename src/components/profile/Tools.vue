@@ -15,12 +15,12 @@
         </router-link>
       </li>
 
-      <li>
+      <!-- <li>
         <router-link :to="{ name: 'visa-book', params: { username: user.profile.username } }">
           <img src="@/assets/illustrations/tools/visa-book.svg" alt="">
           <p class="title">Visa Book</p>
         </router-link>
-      </li>
+      </li> -->
 
       <li>
         <router-link :to="{ name: 'ilr-tracker', params: { username: user.profile.username } }">
@@ -51,6 +51,8 @@ export default {
 .scroll-container {
   overflow-x: scroll;
   scrollbar-width: none;
+  max-width: 700px;
+  margin: auto;
 }
 
 .scroll-container::-webkit-scrollbar {

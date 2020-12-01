@@ -116,23 +116,23 @@ export default {
       questions: [
         {
           title: 'Do I need to submit documents to use Salmo?',
-          text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates velit dolorem expedita, placeat ratione.',
+          text: 'Not at all! In fact Salmo is an information only web app (for now!). We don’t accept any applications so please do not send us any of your documents.',
         },
         {
           title: "How much can I trust Salmo's information?",
-          text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates velit dolorem expedita, placeat ratione.'
+          text: 'You certainly shouldn’t automatically trust everything you read online, so we’re glad you’re checking your sources! For Salmo we have curated all of our information directly from the same legal documents that are used to process your application. This has then been cross check by an OISC regulated lawyer, to ensure clarity and accurate information. We also check over our information regularly to ensure nothing is out of date.'
         },
         {
           title: "What if my application gets rejected?",
-          text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates velit dolorem expedita, placeat ratione.'
+          text: 'Oh no! We’re sorry to hear this. We understand how hard it is to apply for visas. Be sure to look after your mental health in these stressful times, and check out our article on rejected applications for more detailed advice.'
         },
         {
           title: "If necessary, can I contact a human for help?",
-          text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates velit dolorem expedita, placeat ratione.'
+          text: 'Human contact is always a great thing! Sadly we can’t offer this quite yet, it is in our grand plan though!'
         },
         {
           title: "Why should I use Salmo?",
-          text: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptates velit dolorem expedita, placeat ratione.'
+          text: 'Great question. Salmo is made by immigrants, for immigrants with user-led design and a friendly feel. We think it’s great for anyone who is tired of trawling through GOV.UK and is looking for a more informative alternative. But don’t just take our word for it, go over to our visa section now and take a look.'
         }
       ],
       search: null,
