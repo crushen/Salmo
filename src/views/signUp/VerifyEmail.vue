@@ -128,7 +128,6 @@ p {
 }
 
 .email-img {
-  width: 30vw;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -148,9 +147,11 @@ p {
   h1 {
     top: 480px;
   }
+}
 
-  .text {
-    margin-top: 100px;
+@media screen and (min-width: 1200px) {
+  h1 {
+    top: 400px;
   }
 }
 </style>

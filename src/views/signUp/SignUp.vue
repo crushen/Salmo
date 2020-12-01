@@ -127,7 +127,7 @@ h1 {
 }
 
 .button {
-  bottom: 60px;
+  bottom: 80px;
 }
 
 .sign-in {
@@ -136,7 +136,7 @@ h1 {
   justify-content: center;
   position: absolute;
   right: 0;
-  bottom: 48px;
+  bottom: 40px;
 
   a {
     margin-left: 1em;
@@ -152,6 +152,20 @@ h1 {
 @media screen and (min-width: 700px) {
   h1 {
     top: 200px;
+  }
+
+  .button {
+    bottom: 140px;
+  }
+
+  .sign-in {
+    bottom: 60px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  h1 {
+    top: 150px;
   }
 }
 </style>

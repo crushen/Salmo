@@ -48,17 +48,17 @@ export default {
           case 'register':
             return -1100
           case 'sign-up':
-            return -900
+            return -975
           case 'sign-in':
-            return -900
+            return -975
           case 'forgot-password':
-            return -800
+            return -850
           case 'link-sent':
-            return -800
+            return -750
           case 'sign-up-terms':
             return -700
           case 'verify-email':
-            return -800
+            return -700
           default:
             return -1100
         }

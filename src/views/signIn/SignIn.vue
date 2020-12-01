@@ -157,5 +157,19 @@ h1 {
   h1 {
     top: 200px;
   }
+
+  .button {
+    bottom: 140px;
+  }
+
+  .sign-up {
+    bottom: 60px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  h1 {
+    top: 150px;
+  }
 }
 </style>

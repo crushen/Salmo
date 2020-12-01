@@ -120,4 +120,26 @@ h1 {
     margin-top: 4rem;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  h1 {
+    top: 440px;
+  }
+
+  .page {
+    &.padding {
+      &.top {
+        padding-top: 80px;
+      }
+    }
+  }
+
+  .scroll-container {
+    height: 300px;
+  }
+
+  form {
+    max-width: none;
+  }
+}
 </style>

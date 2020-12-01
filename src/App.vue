@@ -9,7 +9,7 @@
 
     <mobile-wave v-if="innerWidth < 600" />
 
-    <tablet-wave v-else-if="innerWidth >= 600 && innerWidth < 1000" />
+    <tablet-wave v-else-if="innerWidth >= 600 && innerWidth < 1200" />
 
     <desktop-wave v-else />
 

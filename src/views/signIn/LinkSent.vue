@@ -83,4 +83,10 @@ p {
     bottom: 0;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .title {
+    top: 250px;
+  }
+}
 </style>
