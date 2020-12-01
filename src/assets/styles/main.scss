@@ -423,7 +423,7 @@ dialog {
 
   // Pages
   .content {
-    max-width: 800px;
+    max-width: 700px;
     width: 70%;
   }
 
@@ -513,6 +513,7 @@ dialog {
 
   .tools-card {
     width: 75%;
+    max-width: 700px;
   
     h2 {
       margin: 16px 26px 0;
@@ -560,4 +561,43 @@ dialog {
   h3 { @include font(20px, 400) }
   
   p, a, li { @include font(16px, 300) }
+
+  .margin {
+    &-s {
+      &.top {
+        margin-top: 24px;
+      }
+  
+      &.bottom {
+        margin-bottom: 24px;
+      }
+    }
+  
+    &-m {
+      &.top {
+        margin-top: 60px;
+      }
+  
+      &.bottom {
+        margin-bottom: 60px;
+      }
+    }
+  
+    &-l {
+      &.top {
+        margin-top: 120px;
+      }
+  
+      &.bottom {
+        margin-bottom: 120px;
+      }
+    }
+  }
+
+  .tools-pages {
+    .background {
+      width: calc(100% - 100px);
+      margin-left: 100px;
+    }
+  }
 }

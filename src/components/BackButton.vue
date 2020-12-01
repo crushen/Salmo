@@ -36,4 +36,10 @@ export default {
     width: 32px;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .arrow-btn {
+    left: calc(100px + 5vw);
+  }
+}
 </style>
