@@ -222,6 +222,7 @@ nav {
   z-index: 21;
 
   a {
+    cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: center;
