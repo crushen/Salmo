@@ -209,4 +209,11 @@ h2 {
     margin-bottom: 6em;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .buttons {
+    max-width: none;
+    margin: 6em auto 6em auto;
+  }
+}
 </style>
