@@ -119,7 +119,6 @@ export default {
     startQuestionnaire() {
       this.getQuestions()
 
-      this.introStage = false
       this.questionsStage = true
       this.buildProfile = true
     },
@@ -127,10 +126,9 @@ export default {
       this.$store.dispatch('questions/getQuestions')
       this.questions = this.$store.state.questions.items
 
-      // If user is 18 or over, don't ask this question
-      if(this.user.profile.age >= 18 && this.questions[0].question === 'Will you be over 18 at the time of application?') {
-        this.currentQuestion = 3
-      }
+      // if(this.user.profile.age >= 18 && this.questions[0].question === 'Will you be over 18 at the time of application?') {
+      //   this.currentQuestion = 3
+      // }
     },
     submitAnswer(answer) {
       if(answer) {
@@ -190,11 +188,6 @@ export default {
         this.previousQuestion()
       }
     }
-    // changeBtnFocus(buttons, focus) {
-    //   buttons.forEach(btn => {
-    //     btn.setAttribute('tabindex', focus)
-    //   })
-    // }
   },
   mounted() {
     this.startQuestionnaire()
@@ -208,8 +201,6 @@ export default {
       } else {
         this.to = to
         this.showAlert = true
-        // const ariaBtns = document.querySelectorAll('.aria-btn')
-        // this.changeBtnFocus(ariaBtns, '-1')
       }
     }
   }

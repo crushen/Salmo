@@ -3,7 +3,7 @@ var _ = require('lodash');
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 
-import { questions } from '@/assets/js/questions'
+import { questions } from '@/assets/js/questionsGeneral'
 
 export default {
   namespaced: true,
@@ -17,7 +17,7 @@ export default {
   actions: {
     getQuestions(context) {
       const userCurrentVisa = context.rootState.auth.user.profile.currentVisa.name
-      context.commit('setQuestions', userCurrentVisa)
+      context.commit('setQuestions')
     },
     getResults(context, results) {
       context.commit('setResults', results)
@@ -52,18 +52,19 @@ export default {
     }
   },
   mutations: {
-    setQuestions(state, userCurrentVisa) {
-      questions.forEach(set => {
-        if(set.visa === userCurrentVisa) {
-          state.items = set.questions
-        } else if(Array.isArray(set.visa)) {
-          set.visa.forEach((visa) => {
-            if(visa === userCurrentVisa) {
-              state.items = set.questions
-            }
-          })
-        }
-      })
+    setQuestions(state) {
+      state.items = questions
+      // questions.forEach(set => {
+      //   if(set.visa === userCurrentVisa) {
+      //     state.items = set.questions
+      //   } else if(Array.isArray(set.visa)) {
+      //     set.visa.forEach((visa) => {
+      //       if(visa === userCurrentVisa) {
+      //         state.items = set.questions
+      //       }
+      //     })
+      //   }
+      // })
     },
     setResults(state, results) {
       state.result.recommendedVisa = results.recommendedVisa
