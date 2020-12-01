@@ -85,7 +85,7 @@ img {
 
 @media screen and (min-width: 700px) {
   .buttons {
-    margin-top: 15em;
+    margin-top: 10em;
 
     button:first-of-type {
       margin-bottom: 1em;
@@ -95,6 +95,15 @@ img {
   img {
     width: 200px;
     transform: translate3d(0, 8rem, 0);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  img {
+    transform: translate3d(0, 0, 0) scaleX(-1);
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 }
 </style>

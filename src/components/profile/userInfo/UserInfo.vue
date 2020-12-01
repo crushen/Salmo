@@ -81,4 +81,10 @@ export default {
 .back {
   left: 7.5vw;
 }
+
+@media screen and (min-width: 1200px) {
+  .back {
+    left: calc(100px + 7.5vw);
+  }
+}
 </style>

@@ -430,11 +430,11 @@ dialog {
   .page {
     &.padding {
       &.top {
-        padding-top: 150px;
+        padding-top: 100px;
       }
       
       &.bottom {
-        padding-bottom: 150px;
+        padding-bottom: 100px;
       }
     }
 
@@ -485,16 +485,8 @@ dialog {
   }
 
   .user-profile {
-    min-height: calc(100vh - 300px);
+    min-height: calc(100vh - 200px);
     margin: auto;
-
-    &.content {
-      max-width: 450px;
-    }
-
-    .content {
-      max-width: 450px;
-    }
   
     .title {
       h1 {
@@ -503,7 +495,8 @@ dialog {
     }
   
     form {
-      margin: 4rem 0 0 0;
+      max-width: 450px;
+      margin: 4rem auto 0 auto;
 
       .margin-top {
         margin-top: 4rem;
