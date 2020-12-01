@@ -12,7 +12,7 @@ import wave from './modules/wave'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+const store =  new Vuex.Store({
   modules: {
     auth,
     questions,
@@ -34,3 +34,5 @@ export default new Vuex.Store({
     ...vuexfireMutations
   },
 })
+
+export default store

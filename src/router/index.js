@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
+import store from '@/store/index'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -214,6 +216,14 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  if(window.innerWidth < 700) {
+    store.commit('wave/moveWave', 1000)
+  } else if(window.innerWidth >= 700 && window.innerWidth < 1000) {
+    store.commit('wave/moveWave', 2000)
+  } else if(window.innerWidth >= 1000) {
+    store.commit('wave/moveWave', 2880)
+  }
+  
   const authenticatedUser = firebase.auth().currentUser
   let verifiedUser
 

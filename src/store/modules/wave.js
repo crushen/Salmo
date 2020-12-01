@@ -1,6 +1,7 @@
 export default {
   namespaced: true,
   state: {
+    waveXposition: -50,
     waveFullScreen: false,
     waveAway: false,
     transition: true,
@@ -16,6 +17,9 @@ export default {
     }
   },
   mutations: {
+    moveWave(state, position) {
+      state.waveXposition += position
+    },
     setFullScreen(state, set) {
       state.waveFullScreen = set
     },

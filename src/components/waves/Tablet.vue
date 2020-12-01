@@ -5,7 +5,7 @@
     class="wave"
     :style="{ 
       backgroundImage: `url(${require('@/assets/backgrounds/wave-tablet.svg')})`,
-      backgroundPosition: `${waveX}px ${waveY}px`
+      backgroundPosition: `${waveXposition}px ${waveY}px`
     }" />
 </template>
 
@@ -13,9 +13,15 @@
 import { mapState } from 'vuex'
 
 export default {
+  watch: {
+    waveFullScreen(signIn) {
+      if(signIn) {
+        this.$store.commit('wave/moveWave', 1000)
+      }
+    }
+  },
   computed: {
-    ...mapState('auth', ['user']),
-    ...mapState('wave', ['waveFullScreen', 'waveAway', 'transition', 'signingIn']),
+    ...mapState('wave', ['waveXposition', 'waveFullScreen', 'waveAway', 'transition', 'signingIn']),
     visible() {
       switch(this.$route.name) {
         case 'register':
@@ -34,32 +40,6 @@ export default {
           return true
         default:
           return false
-      }
-    },
-    waveX() {
-      if(!this.waveFullScreen) {
-        switch(this.$route.name) {
-          case 'register':
-            return 0
-          case 'sign-up':
-            return 1950
-          case 'sign-in':
-            return 2950
-          case 'forgot-password':
-            return 3950
-          case 'link-sent':
-            return 4950
-          case 'sign-up-terms':
-            return 2950
-          case 'verify-email':
-            return 3950
-          default:
-            return 0
-        }
-      } else if(this.waveFullScreen && this.signingIn) {
-        return 4550
-      } else {
-        return 5550
       }
     },
     waveY() {

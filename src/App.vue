@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <button
-      v-if="arrowPage && innerWidth < 1100"
+      v-if="arrowPage"
       @click="$router.go(-1)"
       class="arrow-btn aria-btn">
       <img src="@/assets/icons/white/arrow-left.svg" class="arrow">
