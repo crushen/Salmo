@@ -126,7 +126,7 @@ export default {
         event.preventDefault()
       
         const x = event.pageX - slider.offsetLeft
-        const slide = (x - this.startX) * 2 //scroll-fast
+        const slide = (x - this.startX)
         slider.scrollLeft = this.scrollLeft - slide
       }
     },
@@ -255,6 +255,13 @@ ul {
     &:nth-of-type(12) {
       background-color: $red;
     }
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .container {
+    margin: auto;
+    width: 700px;
   }
 }
 </style>

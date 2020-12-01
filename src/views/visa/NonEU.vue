@@ -128,4 +128,10 @@ export default {
     margin: 4rem auto;
   }
 }
+
+@media screen and (min-width: 1200px) {
+  .buttons {
+    max-width: none;
+  }
+}
 </style>

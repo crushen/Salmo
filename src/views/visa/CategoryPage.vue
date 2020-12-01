@@ -8,7 +8,9 @@
       <h1>{{ category }} Visas</h1>
     </div>
     
-    <section class="content">
+    <section
+      :class="visaList.length > 1 ? 'grid' : ''"
+      class="content visas">
       <visa-card 
         v-for="visa in visaList"
         :key="visa.name"
@@ -69,9 +71,30 @@ h1 {
 .visa-card {
   margin-top: 2em;
 }
+
 @media screen and (min-width: 700px) {
   h1 {
     margin-bottom: 3rem;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .content {
+    &.visas {
+      max-width: 832px;
+    }
+
+    &.grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      gap: 32px 32px;
+    }
+  }
+
+  .visa-card {
+    margin: 0 auto;
+    justify-self: center;
   }
 }
 </style>

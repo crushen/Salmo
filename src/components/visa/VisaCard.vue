@@ -21,27 +21,6 @@
         </div>
       </div>
 
-      <!-- <div v-if="user && favouriteVisa !== 'none'">
-        <button
-          v-if="favouriteVisa === visa.name"
-          @click="makeFavorite"
-          class="heart aria-btn"
-          aria-label="Favourite this visa"
-          disabled>
-          <img :src="heart">
-        </button>
-
-        <button
-          v-else
-          :id="`${visa.slug}-fave-btn`"
-          @click="makeFavorite"
-          class="heart aria-btn"
-          aria-label="Favourite this visa"
-          aria-expanded="false">
-          <img :src="heart">
-        </button>
-      </div> -->
-
       <router-link
         tag="button"
         :to="{ name: 'visa-page', params: { slug: visa.slug } }"
@@ -57,17 +36,11 @@
 import check from '@/assets/icons/white/check.svg'
 import cross from '@/assets/icons/white/cross.svg'
 import question from '@/assets/icons/white/question.svg'
-// import pinkHeart from '@/assets/icons/pink/heart-solid.svg'
-// import greyHeart from '@/assets/icons/heart-solid.svg'
-//import confirmFavorite from '@/components/visa/ConfirmFavorite'
 
 export default {
   props: {
     visa: { required: true, type: Object },
     favouriteVisa: { required:false, type: String }
-  },
-  components: { 
-    //confirmFavorite
   },
   data() {
     return {
@@ -77,19 +50,8 @@ export default {
       cross,
       question,
       favourite: null,
-      // pinkHeart,
-      // greyHeart,
       confirmChange: false
     }
-  },
-  computed: {
-    // heart() {
-    //   if(this.favouriteVisa === this.visa.name) {
-    //     return this.pinkHeart
-    //   } else {
-    //     return this.greyHeart
-    //   }
-    // }
   },
   methods: {
     getIcon() {
@@ -105,29 +67,7 @@ export default {
           item.alt = 'cross'
         }
       })
-    },
-    // makeFavorite() {
-    //   if(this.favouriteVisa !== this.visa.name) {
-    //     this.favourite = true
-    //     this.confirmChange = true
-
-    //     // const button = document.querySelector(`#${this.visa.slug}-fave-btn`);
-    //     // button.setAttribute('aria-expanded', 'true');
-
-    //     // const ariaBtns = document.querySelectorAll('.aria-btn');
-    //     // this.changeBtnFocus(ariaBtns, '-1');
-
-    //     // const cards = document.querySelectorAll('.visa-card-pointer');
-    //     // cards.forEach(card => {
-    //     //   card.style.pointerEvents = 'none';
-    //     // })
-    //   }
-    // }
-    // changeBtnFocus(buttons, focus) {
-    //   buttons.forEach(btn => {
-    //     btn.setAttribute('tabindex', focus);
-    //   })
-    // }
+    }
   },
   mounted() {
     this.$forceUpdate()
@@ -197,26 +137,25 @@ export default {
 
   button {
     border: 2px solid white;
+
+    &:hover {
+      background: white;
+      color: $red;
+    }
   }
-
-  // .heart {
-  //   padding: none;
-  //   background: transparent;
-  //   box-shadow: none;
-  //   position: absolute;
-  //   bottom: 0;
-  //   left: 0;
-
-  //   img {
-  //     width: 34px;
-  //   }
-  // }
 }
 
 
 @media screen and (min-width: 600px) {
   button {
     align-self: flex-end;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .card {
+    width: 400px;
+    height: 325px;
+    margin: 0;
   }
 }
 </style>
