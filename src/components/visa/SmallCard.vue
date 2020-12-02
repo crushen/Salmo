@@ -56,6 +56,11 @@ export default {
     width: 60%;
     max-width: 160px;
     align-self: center;
+
+    &:hover {
+      background: white;
+      color: $red;
+    }
   }
 }
 

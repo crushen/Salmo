@@ -151,10 +151,11 @@ export default {
     align-self: flex-end;
   }
 }
+
 @media screen and (min-width: 1200px) {
   .card {
     width: 400px;
-    height: 325px;
+    min-height: 325px;
     margin: 0;
   }
 }

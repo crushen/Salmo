@@ -153,7 +153,7 @@ export default {
     afterPastVisas() {
       let valid = true
 
-      if(this.user.profile.pastVisas && this.form.currentVisa.start && this.form.currentVisa.end) {
+      if(this.user.profile.pastVisas.length && this.form.currentVisa.start && this.form.currentVisa.end) {
         if(this.form.currentVisa.start <= this.user.profile.pastVisas[this.user.profile.pastVisas.length -1].end) {
           valid = false
         }

@@ -11,29 +11,33 @@
         </div>
 
         <section class="tools-card margin-m top">
-          <h2>Your best option is...</h2>
+          <h2 class="margin-s bottom">Your top result is:</h2>
 
           <div class="inner">
-            <div class="sub-title margin-m top">
-              <img src="@/assets/icons/grey/switch.svg" alt="" class="icon">
-              <p>Switch to</p>
-            </div>
             
             <div class="margin-s top">
-              <visa-card :visa="topResult" />
-
-              <p class="margin-s top"><b>NOTE: Switching</b> is the most cost effective and a more direct way to remain in the UK.</p>
+              <visa-card
+                v-for="visa in mostRecentResult.recommendedVisa"
+                :key="visa.name"
+                :visa="visaList.find(v => v.name === visa)"
+                class="margin-s bottom top-card" />
             </div>
           </div>
         </section>
 
         <section class="content margin-l top">
-          <h2>Alternative options are...</h2>
+          <h2>Alternative options in the same category are:</h2>
 
           <div v-if="switchVisas.length" class="switch">
             <div class="sub-title margin-m top">
               <img src="@/assets/icons/grey/switch.svg" alt="" class="icon">
               <p>Switch to</p>
+            </div>
+
+            <div class="tip margin-s top">
+              <p><b>Note!</b></p>
+
+              <p><b>Switching</b> is the most <b>cost effective</b> and a more direct way to remain in the UK.</p>
             </div>
 
             <small-card
@@ -137,26 +141,16 @@ export default {
       return this.results.slice(-1)[0]
     },
     switchVisas() {
-      // Filter visa list for user's switch options
-      const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name))
-      
-      // Get all visas in same category
-      const sameCategory = switchOptions.filter(item => item.category === this.topResult.category)
-      
-      // Remove top result visa
+      const switchOptions = this.visaList.filter(item => this.switchOptions.includes(item.name)),
+            sameCategory = switchOptions.filter(item => item.category === this.topResult.category);
+
       return sameCategory.filter(item => item.name !== this.topResult.name)
     },
     otherVisas() {
-      // Filter visa list for visas in same category as top result
-      const sameCategory = this.visaList.filter(item => item.category === this.topResult.category)
+      const sameCategory = this.visaList.filter(item => item.category === this.topResult.category),
+            removeDup = sameCategory.filter(item => item.name !== this.topResult.name),
+            removeYM = removeDup.filter(item => item.name !== 'Tier 5 : Youth Mobility');
       
-      // Remove top result visa
-      const removeDup = sameCategory.filter(item => item.name !== this.topResult.name)
-      
-      // Remove youth mobility
-      const removeYM = removeDup.filter(item => item.name !== 'Tier 5 : Youth Mobility')
-      
-      // Remove visa(s) that appear in switch visas
       return removeYM.filter(item => !this.switchVisas.includes(item))
     },
     currentVisaObj() {
@@ -164,15 +158,37 @@ export default {
     }
   },
   methods: {
-    // getFavoriteVisa() {
-    //   this.$store.dispatch('visas/getFaveVisa', this.mostRecentResult.recommendedVisa[0])
-    // },
     getTopResult() {
       this.$store.dispatch('visas/getTopResult', this.mostRecentResult.recommendedVisa[0])
     },
     checkSwitch() {
-      if(this.currentVisa.name === 'Tier 4 : Student') {
-        this.switchOptions = ['Tier 1 : Startup', 'Tier 1 : Investor', 'Tier 2 : General Work']
+      switch(this.currentVisa.name) {
+        case  'Tier 4 : Student':
+          this.switchOptions = ['Tier 1 : Startup', 'Tier 1 : Investor', 'Tier 2 : General Work']
+          break
+        case 'Tier 1 : Global Talent':
+          this.switchOptions = ['Tier 1 : Investor', 'Tier 2 : General Work', 'Tier 2 : Minister of Religion', 'Tier 2 : Sportsperson', 'Family' ]
+          break
+        case 'Tier 1 : Investor':
+          this.switchOptions = ['Tier 1 : Global Talent', 'Tier 2 : General Work', 'Tier 2 : Minister of Religion', 'Tier 2 : Sportsperson', 'Family' ]
+          break        
+        case 'Tier 1 : Innovator':
+          this.switchOptions = ['Tier 1 : Global Talent', 'Tier 1 : Investor', 'Tier 2 : General Work', 'Tier 2 : Minister of Religion', 'Tier 2 : Sportsperson', 'Family' ]
+          break
+        case 'Tier 1 : Startup':
+          this.switchOptions = ['Tier 1 : Innovator', 'Tier 1 : Global Talent', 'Tier 1 : Investor', 'Tier 2 : General Work', 'Tier 2 : Minister of Religion', 'Tier 2 : Sportsperson', 'Family' ]
+          break
+        case 'Tier 2 : General Work':
+          this.switchOptions = ['Tier 1 : Innovator', 'Tier 1 : Global Talent', 'Tier 1 : Startup', 'Tier 2 : Minister of Religion', 'Tier 2 : Sportsperson', 'Tier 4 : Student', 'Family' ]
+          break
+        case 'Tier 2 : Health and Care':
+          this.switchOptions = ['Tier 1 : Innovator', 'Tier 1 : Global Talent', 'Tier 1 : Startup', 'Tier 2 : Minister of Religion', 'Tier 2 : Sportsperson', 'Tier 4 : Student', 'Family' ]
+          break
+        case 'Tier 5 : Youth Mobility':
+          this.switchOptions = ['Family']
+          break
+        default:
+          this.switchOptions = []
       }
     },
     checkYouthMobility() {
@@ -190,7 +206,6 @@ export default {
   },
   created() {
     this.$store.dispatch('visas/getAllVisas').then(() => {
-      //this.getFavoriteVisa()
       this.getTopResult()
       this.checkSwitch()
       this.checkYouthMobility()
@@ -239,6 +254,17 @@ export default {
   .extend,
   .switch {
     width: 90%;
+    margin: auto;
+  }
+
+  .tip {
+    width: 450px;
+    margin: 2rem auto 0 auto;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .top-card {
     margin: auto;
   }
 }
