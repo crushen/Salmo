@@ -1,7 +1,15 @@
 <template>
   <div>
+    <transition name="dialog" mode="out-in">
+      <logged-out-alert v-if="showLoggedOutAlert" />
+    </transition>
+
+    <transition name="dialog" mode="out-in">
+      <deleted-account v-if="showDeleteAlert" />
+    </transition>
+
     <header>
-      <img src="@/assets/backgrounds/home-background-2.svg" alt="" class="background">
+      <!-- <img src="@/assets/backgrounds/home-background-2.svg" alt="" class="background"> -->
 
       <div class="logo">
         <img src="@/assets/logo/name.svg" alt="" class="text">
@@ -121,12 +129,16 @@
 
 <script>
 import patreonMessage from '@/components/PatreonMessage'
+import loggedOutAlert from '@/components/alerts/LoggedOut'
+import deletedAccount from '@/components/alerts/DeletedAccount'
 
 export default {
-  components: { patreonMessage },
+  components: { patreonMessage, loggedOutAlert, deletedAccount },
   data() {
     return {
       loggedOut: false,
+      showLoggedOutAlert: false,
+      showDeleteAlert: false,
       userDeleted: false
     }
   },
@@ -140,11 +152,21 @@ export default {
   },
   mounted() {
     if(this.$store.state.auth.loggedOut) {
-      setTimeout(() => this.loggedOut = true, 500)
+      setTimeout(() => {
+        this.loggedOut = true
+        this.showLoggedOutAlert = true
+      }, 500)
+
+      setTimeout(() => this.showLoggedOutAlert = false, 3000)
     }
 
     if(this.$store.state.auth.userDeleted) {
-      setTimeout(() => this.userDeleted = true, 500)
+      setTimeout(() => {
+        this.userDeleted = true
+        this.showDeleteAlert = true
+      }, 500)
+
+      setTimeout(() => this.showDeleteAlert = false, 3000)
     }
   }
 }
