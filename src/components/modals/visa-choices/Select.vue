@@ -1,5 +1,7 @@
 <template>
-  <base-modal @closeModal="closeModal" class="next-visa-select">
+  <base-modal
+    @closeModal="closeModal"
+    class="next-visa-select">
     <h2>Choose my next visa</h2>
 
     <div
@@ -7,7 +9,7 @@
       class="margin-s top">
       <h3>What is your next visa going to be?</h3>
 
-      <div class="scroll-container">
+      <div class="scroll-container" :class="{'allow-scroll': innerWidth > 700}">
         <ul class="margin-s top">
           <li
             @click="selected = visa"
@@ -63,7 +65,8 @@ export default {
     return {
       visaOptions,
       nextVisa: this.profileToUpdate.nextVisa.name,
-      selected: null
+      selected: null,
+      innerWidth: null
     }
   },
   methods: {
@@ -73,6 +76,25 @@ export default {
     handleSubmit() {
       this.$emit('submitModal', this.selected.label)
     }
+  },
+  mounted() {
+    this.innerWidth = window.innerWidth
+    window.addEventListener('resize', () => {
+      this.innerWidth = window.innerWidth
+    })
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.next-visa-select {
+  .scroll-container {
+    overflow-x: scroll;
+    scrollbar-width: auto;
+  }
+  
+  // .scroll-container::-webkit-scrollbar {
+  //   display: unset;
+  // }
+}
+</style>

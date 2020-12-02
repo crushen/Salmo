@@ -337,18 +337,24 @@ dialog {
 .next-visa-select {
   .scroll-container {
     overflow-x: scroll;
-    scrollbar-width: none;
-  }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+      background: $med-grey;
+      border-radius: 6px;
+    }
   
-  .scroll-container::-webkit-scrollbar {
-    display: none;
+    &::-webkit-scrollbar-thumb {
+      background-color: $blue;
+      border-radius: 6px;
+    }
   }
   
   ul {
-    margin-left: 3em;
     width: 1200px;
     display: flex;
     overflow-y: visible;
+    padding-bottom: 1rem;
   }
   
   li {

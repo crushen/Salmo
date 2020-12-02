@@ -160,21 +160,28 @@ export default {
 .container {
   background: $yellow;
   padding-top: 2em;
-  border-radius: $radius;
+  border-top-left-radius: $radius;
+  border-top-right-radius: $radius;
 }
 
 .horizontal-scroll-container {
   overflow-x: scroll;
   overflow-y: hidden;
-  scrollbar-width: none;
   height: 250px;
   padding: 0 7.5%;
   margin-top: 2em;
   position: relative;
-}
 
-.horizontal-scroll-container::-webkit-scrollbar {
-  display: none;
+  &::-webkit-scrollbar {
+    width: 6px;
+    background: $med-grey;
+    border-radius: $radius;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $blue;
+    border-radius: $radius;
+  }
 }
 
 ul {
