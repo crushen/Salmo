@@ -14,7 +14,6 @@
           <h2 class="margin-s bottom">Your top result is:</h2>
 
           <div class="inner">
-            
             <div class="margin-s top">
               <visa-card
                 v-for="visa in mostRecentResult.recommendedVisa"

@@ -11,8 +11,12 @@
 
     <main>
       <section class="button-center">
-        <router-link :to="{ name: 'register' }" tag="button" class="primary">
+        <router-link :to="{ name: 'sign-up' }" tag="button" class="primary">
           Sign Up
+        </router-link>
+
+        <router-link :to="{ name: 'sign-in' }" tag="button" class="secondary margin-s top">
+          Sign In
         </router-link>
       </section>
 
@@ -67,7 +71,7 @@
       </section>
 
       <section class="button-center margin-m top">
-        <router-link :to="{ name: 'register' }" tag="button" class="primary">
+        <router-link :to="{ name: 'sign-up' }" tag="button" class="primary">
           Sign Up
         </router-link>
       </section>
@@ -197,6 +201,12 @@ p {
   .img {
     width: 60px;
   }
+}
+
+.button-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 button {

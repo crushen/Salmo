@@ -60,7 +60,7 @@ export default {
     },
     arrowPage() {
       switch(this.$route.name) {
-        case 'register':
+        case 'home':
           return true
         case 'sign-up':
           return true

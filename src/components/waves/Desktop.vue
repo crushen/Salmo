@@ -24,7 +24,7 @@ export default {
     ...mapState('wave', ['waveXposition', 'waveFullScreen', 'waveAway', 'transition', 'signingIn']),
     visible() {
       switch(this.$route.name) {
-        case 'register':
+        case 'home':
           return true
         case 'sign-up':
           return true
@@ -45,7 +45,7 @@ export default {
     waveY() {
       if(!this.waveFullScreen) {
         switch(this.$route.name) {
-          case 'register':
+          case 'home':
             return -1100
           case 'sign-up':
             return -975
