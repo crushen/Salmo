@@ -19,7 +19,7 @@
       </button>
 
       <nav v-on-clickaway="closeNav" v-else>
-        <router-link 
+        <!-- <router-link 
           @click.native="nextPage"
           :to="{ name: 'home' }" exact>
           <svg width="38" height="41" viewBox="0 0 38 41" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,7 @@
             <path fill-rule="evenodd" clip-rule="evenodd" d="M14.4072 26.4017C14.4072 25.9285 14.7908 25.5449 15.264 25.5449H22.6433C23.1165 25.5449 23.5 25.9285 23.5 26.4017V39.6068C23.5 40.0799 23.1165 40.4635 22.6433 40.4635H15.264C14.7908 40.4635 14.4072 40.0799 14.4072 39.6068V26.4017ZM16.1207 27.2584V38.75H21.7866V27.2584H16.1207Z" fill="white"/>
           </svg>
           <p>Home</p>
-        </router-link>
+        </router-link> -->
 
         <template v-if="user && user.emailVerified">
           <router-link 
@@ -84,7 +84,7 @@
           </a>
         </template>
 
-        <template v-else>
+        <!-- <template v-else>
           <router-link 
             @click.native="nextPage"
             :to="{ name: 'sign-in' }">
@@ -95,7 +95,7 @@
             </svg>
             <p>Sign In</p>
           </router-link>
-        </template>
+        </template> -->
       </nav>
     </transition>
   </div>
