@@ -20,61 +20,65 @@
         </router-link>
       </section>
 
-      <section class="content margin-l top">
-        <h1>Making your visa process an easier journey.</h1>
+      <patreon-message v-if="loggedOut" />
 
-        <div class="inner">
-          <p class=" margin-m top">Whether you have a plan or not, we are here to help you in every step of the way.</p>
+      <div v-else>
+        <section class="content margin-l top">
+          <h1>Making your visa process an easier journey.</h1>
 
-          <p class="margin-s top">Research, organisation, preparation. You name it. Just Salmo it.</p>
-        </div>
-      </section>
+          <div class="inner">
+            <p class=" margin-m top">Whether you have a plan or not, we are here to help you in every step of the way.</p>
 
-      <section class="margin-l top">
-        <div class="tools-card">
-          <div class="flex">
-            <p>Your personal assistance for the next visa.</p>
-
-            <img src="@/assets/mock-ups/iphone-visa-planner.svg" alt="" class="phone">
-
-            <img src="@/assets/illustrations/home/card-1.svg" alt="" class="img">
+            <p class="margin-s top">Research, organisation, preparation. You name it. Just Salmo it.</p>
           </div>
-        </div>
+        </section>
 
-        <div class="tools-card">
-          <div class="flex">
-            <p>A tailored quiz to fit your past, present and future.</p>
+        <section class="margin-l top">
+          <div class="tools-card">
+            <div class="flex">
+              <p>Your personal assistance for the next visa.</p>
 
-            <img src="@/assets/mock-ups/iphone-visa-quiz.svg" alt="" class="phone">
+              <img src="@/assets/mock-ups/iphone-visa-planner.svg" alt="" class="phone">
 
-            <img src="@/assets/illustrations/home/card-2.svg" alt="" class="img">
+              <img src="@/assets/illustrations/home/card-1.svg" alt="" class="img">
+            </div>
           </div>
-        </div>
 
-        <div class="tools-card blue">
-          <div class="flex">
-            <p>Plus, the most complete & free visa guide. Ever.</p>
+          <div class="tools-card">
+            <div class="flex">
+              <p>A tailored quiz to fit your past, present and future.</p>
 
-            <img src="@/assets/mock-ups/iphone-visa-info.svg" alt="" class="phone">
+              <img src="@/assets/mock-ups/iphone-visa-quiz.svg" alt="" class="phone">
 
-            <img src="@/assets/illustrations/home/card-3.svg" alt="" class="img">
+              <img src="@/assets/illustrations/home/card-2.svg" alt="" class="img">
+            </div>
           </div>
-        </div>
 
-        <div class="tools-card yellow">
-          <div class="flex">
-            <p>More hidden features for limited time, sign up to experience now!</p>
+          <div class="tools-card blue">
+            <div class="flex">
+              <p>Plus, the most complete & free visa guide. Ever.</p>
 
-            <img src="@/assets/mock-ups/iphone-ilr-tracker.svg" alt="" class="phone">
+              <img src="@/assets/mock-ups/iphone-visa-info.svg" alt="" class="phone">
+
+              <img src="@/assets/illustrations/home/card-3.svg" alt="" class="img">
+            </div>
           </div>
-        </div>
-      </section>
 
-      <section class="button-center margin-m top">
-        <router-link :to="{ name: 'sign-up' }" tag="button" class="primary">
-          Sign Up
-        </router-link>
-      </section>
+          <div class="tools-card yellow">
+            <div class="flex">
+              <p>More hidden features for limited time, sign up to experience now!</p>
+
+              <img src="@/assets/mock-ups/iphone-ilr-tracker.svg" alt="" class="phone">
+            </div>
+          </div>
+        </section>
+
+        <section class="button-center margin-m top">
+          <router-link :to="{ name: 'sign-up' }" tag="button" class="primary">
+            Sign Up
+          </router-link>
+        </section>
+      </div>
     </main>
 
     <footer class="margin-l top">
@@ -116,54 +120,34 @@
 </template>
 
 <script>
-// export default {
-//   data() {
-//     return {
-//       loggedOut: false,
-//       userDeleted: false,
-//       innerWidth: null
-//     }
-//   },
-//   computed: {
-//     user() {
-//       return this.$store.state.auth.user;
-//     },
-//     isAuthenticated() {
-//       return this.$store.getters['auth/isAuthenticated'];
-//     }
-//   },
-//   methods: {
-//     changeBtnFocus(buttons, focus) {
-//       buttons.forEach(btn => {
-//         btn.setAttribute('tabindex', focus);
-//       })
-//     }
-//   },
-//   mounted() {
-//     if(this.$store.state.auth.loggedOut) {
-//       setTimeout(() => {
-//         this.loggedOut = true;
+import patreonMessage from '@/components/PatreonMessage'
 
-//         const ariaBtns = document.querySelectorAll('.aria-btn');
-//         this.changeBtnFocus(ariaBtns, '-1');
-//       }, 500)
-//     }
+export default {
+  components: { patreonMessage },
+  data() {
+    return {
+      loggedOut: false,
+      userDeleted: false
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user
+    },
+    isAuthenticated() {
+      return this.$store.getters['auth/isAuthenticated']
+    }
+  },
+  mounted() {
+    if(this.$store.state.auth.loggedOut) {
+      setTimeout(() => this.loggedOut = true, 500)
+    }
 
-//     if(this.$store.state.auth.userDeleted) {
-//       setTimeout(() => {
-//         this.userDeleted = true;
-
-//         const ariaBtns = document.querySelectorAll('.aria-btn');
-//         this.changeBtnFocus(ariaBtns, '-1');
-//       }, 500)
-//     }
-
-//     this.innerWidth = window.innerWidth;
-//     window.addEventListener('resize', () => {
-//       this.innerWidth = window.innerWidth;
-//     })
-//   }
-// }
+    if(this.$store.state.auth.userDeleted) {
+      setTimeout(() => this.userDeleted = true, 500)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>

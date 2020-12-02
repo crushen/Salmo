@@ -32,9 +32,11 @@ p.small {
 .button-center {
   width: 100%;
   text-align: center;
+  overflow: visible;
 }
 
-button {
+button,
+a.button {
   border: none;
   font-family: $sans-serif;
   @include font(1em, 600);
