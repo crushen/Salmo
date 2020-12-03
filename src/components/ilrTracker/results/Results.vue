@@ -17,8 +17,6 @@
     <five-results
       v-if="user.profile.ilrTracker.plan === '5 year plan'"
       :user="user"
-      :totalDays="totalDays"
-      :daysLeft="daysLeft"
       :years="years"
       :allVisasWithHolidays="allVisasWithHolidays"
       :overstayPre_2016="overstayPre_2016"

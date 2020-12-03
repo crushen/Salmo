@@ -5,12 +5,9 @@
       <p>Ending date: {{ jsDate(endDate) }}</p>
       <p>Earliest application date: {{ jsDate(earliestApplicationDate) }}</p>
 
-      <p
-        :class="{ 'error': totalDays > 540 }"
-        class="total margin-s top">
-        <b>{{ totalDays }} days away in total</b>
-      </p>
-      <p class="total">{{ daysLeft }} days left until {{ jsDate(endDate) }}</p>
+      <!-- <p class="total margin-s top"><b>Today is</b> {{ jsDate(new Date) }}</p>
+      <p class="total"><b>You have {{ daysLeft.days }} days left to travel!</b></p> -->
+
 
       <ul class="results margin-s top">
         <li
@@ -37,7 +34,7 @@
             <ul class="holiday-list" v-if="selectedYear === index">
               <li
                 v-for="holiday in year.holidays"
-                :key="holiday.country"
+                :key="`${holiday.country}${holiday.leftUk}`"
                 class="holiday"
                 :class="{ 
                   'error-post2016': overstayPost_2016.includes(holiday) && selectedYear === index,
@@ -57,11 +54,11 @@
 
     <base-message :buttonText="messageButtonText">
       <!-- Messages for no errors -->
-      <finished-message v-if="noErrors && daysLeft === 0" />
+      <!-- <finished-message v-if="noErrors && daysLeft === 0" />
 
-      <watch-days-message v-else-if="noErrors && daysLeft <= 100" :days="daysLeft" />
+      <watch-days-message v-else-if="noErrors && daysLeft <= 100" :days="daysLeft" /> -->
 
-      <no-errors-message v-else-if="noErrors && daysLeft > 100" />
+      <no-errors-message v-if="noErrors" />
 
       <!-- Error messages -->
       <must-change-message v-if="!qualifiesForFive" />
@@ -70,7 +67,7 @@
 
       <too-many-days-trip-post-jan v-if="qualifiesForFive && moreThan_180_post_2018.length" />
 
-      <too-many-days-total-message v-if="qualifiesForFive && totalDays > 540" />
+      <!-- <too-many-days-total-message v-if="qualifiesForFive && totalDays > 540" /> -->
       
       <overstay-post-nov v-if="qualifiesForFive && overstayPost_2016.length" />
 
@@ -102,8 +99,6 @@ import applicationMessage from '@/components/ilrTracker/results/messages/ten-yea
 export default {
   props: [
     'user',
-    'totalDays',
-    'daysLeft',
     'years',
     'allVisasWithHolidays',
     'overstayPre_2016',
@@ -115,12 +110,12 @@ export default {
     overstayAlert,
     baseMessage,
     noErrorsMessage,
-    finishedMessage,
-    watchDaysMessage,
+    // finishedMessage,
+    // watchDaysMessage,
     mustChangeMessage,
     tooManyDaysTripMessage,
     tooManyDaysTripPostJan,
-    tooManyDaysTotalMessage,
+    // tooManyDaysTotalMessage,
     overstayPostNov,
     overstayPreNovWithin,
     overstayPreNov,
@@ -132,6 +127,8 @@ export default {
     }
   },
   computed: {
+    // daysLeft() {
+    // },
     endDate() {
       const start = new Date(this.user.profile.ilrTracker.startDate),
              endDate = new Date(new Date(start).setFullYear(new Date(start).getFullYear() + 5)),
@@ -148,15 +145,16 @@ export default {
       let text
 
       if(this.noErrors) {
-        if(this.daysLeft === 0) {
-          text = 'It’s finished!'
-        } else if(this.daysLeft <= 10 && this.daysLeft > 0) {
-          text = 'Only a few days left!'
-        } else if(this.daysLeft <= 100 && this.daysLeft > 10) {
-          text = 'Watch out on your days!'
-        } else {
-          text = 'Everything looks great so far!'
-        }
+        text = 'Everything looks great so far!'
+        // if(this.daysLeft === 0) {
+        //   text = 'It’s finished!'
+        // } else if(this.daysLeft <= 10 && this.daysLeft > 0) {
+        //   text = 'Only a few days left!'
+        // } else if(this.daysLeft <= 100 && this.daysLeft > 10) {
+        //   text = 'Watch out on your days!'
+        // } else {
+        //   text = 'Everything looks great so far!'
+        // }
       }
 
       if(this.overstayPre_2016.length) {
@@ -171,17 +169,41 @@ export default {
         }
       }
 
-      if(this.moreThan_180_pre_2018.length || this.moreThan_180_post_2018.length || this.overstayPost_2016.length || this.totalDays > 540) {
+      if(this.moreThan_180_pre_2018.length || this.moreThan_180_post_2018.length || this.overstayPost_2016.length) {
         text = 'Something is wrong!'
       }
 
       return text
     },
+    userHoliday() {
+      const today = new Date,
+            allDates = [],
+            holidays = cloneDeep(this.user.profile.holiday);
+
+      holidays.forEach(holiday => {
+        const listDate = [],
+              startDate = holiday.leftUk,
+              endDate = holiday.returnedUk;
+        let   dateMove = new Date(startDate),
+              strDate = startDate;
+
+        while (strDate < endDate){
+          strDate = dateMove.toISOString().slice(0,10)
+          listDate.push(strDate)
+          dateMove.setDate(dateMove.getDate()+1)
+        }
+
+        listDate.splice(0, 3)
+        allDates.push(listDate)
+      })
+
+      return allDates.flat()
+    },
     // ERRORS
     noErrors() {
       let errors = true
 
-      if(this.moreThan_180_pre_2018.length || this.moreThan_180_post_2018.length || this.overstayPre_2016.length || this.overstayPost_2016.length || this.totalDays > 540) {
+      if(this.moreThan_180_pre_2018.length || this.moreThan_180_post_2018.length || this.overstayPre_2016.length || this.overstayPost_2016.length) {
         errors = false
       }
 
@@ -261,31 +283,39 @@ export default {
       return errors
     },
     moreThan_180_post_2018() {
-      const errors = [],
-            years = [],
-            holidays = cloneDeep(this.user.profile.holiday);
+      const allDates = [],
+            allYears = [],
+            startDate = '2018-07-11',
+            today = new Date(),
+            endDate = new Date(today.setMonth(today.getMonth() - 6)).toISOString();
+            
+      let   dateMove = new Date(startDate),
+            strDate = startDate;
 
-      holidays.forEach(holiday => {
-        const startDate = new Date(holiday.leftUk),
-              endDate = new Date(new Date(startDate).setFullYear(new Date(startDate).getFullYear() + 1)),
-              withinYear = holidays.filter(h => new Date(h.leftUk) >= startDate && new Date(h.leftUk) < endDate);
+      while (strDate < endDate) {
+        strDate = dateMove.toISOString().slice(0,10)
+        allDates.push(strDate)
+        dateMove.setDate(dateMove.getDate() + 1)
+      }
 
-        years.push({ yearStart: startDate, yearEnd: endDate, holidays: withinYear })
-      })
+      allDates.forEach(d => {
+        const date = new Date(d),
+              start = new Date(date.setMonth(date.getMonth() - 6)),
+              end =  new Date(new Date(start).setFullYear(new Date(start).getFullYear() + 1)),
+              holidayDates = [];
 
-      years.forEach(year => {
-        let total = year.holidays.reduce((prev, cur) => prev + cur.days, 0)
+        this.userHoliday.forEach(holidayDate => {
+          if(new Date(holidayDate) > start && new Date(holidayDate) < end) {
+            holidayDates.push(holidayDate)
+          }
+        })
 
-        year.totalDays = total
-
-        year.holidays.forEach(h => year.totalDays -= 2)
-
-        if(new Date(year.yearStart) >= new Date(2018, 0, 11) && year.totalDays > 180) {
-          errors.push(year)
+        if(holidayDates.length) {
+          allYears.push({ startDate: start, endDate: end, holidayDates: holidayDates })
         }
       })
 
-      return errors
+      return allYears.filter(year => year.holidayDates.length > 183)
     }
   },
   methods: {
@@ -331,6 +361,10 @@ export default {
   p {
     color: $blue;
   }
+}
+
+b {
+  font-weight: 600;
 }
 
 .results {
