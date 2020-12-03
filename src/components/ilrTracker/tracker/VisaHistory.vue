@@ -43,6 +43,10 @@ export default {
   },
   methods: {
     handleEditVisa(visa) {
+      if(visa === this.user.profile.currentVisa) {
+        visa.current = true
+      }
+
       if(this.editVisas) {
         this.$emit('editVisa', visa)
       }
