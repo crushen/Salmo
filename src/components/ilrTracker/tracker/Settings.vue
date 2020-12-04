@@ -11,7 +11,7 @@
       <h3>ILR Plan</h3>
 
       <div class="inner">
-        <div class="plan-btns margin-s top">
+        <div class="plan-btns">
           <button
             v-if="qualifiesForFive"
             @click="selectedPlan = '5 year plan'"
@@ -142,6 +142,8 @@ h3 {
 
 .plan-btns {
   width: 100%;
+  max-width: 350px;
+  margin: 2rem auto 0 auto;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -151,6 +153,7 @@ h3 {
     flex-direction: column;
     align-items: center;
     width: 48%;
+    max-width: 150px;
     border-radius: $radius;
     padding: 0.5rem;
 
