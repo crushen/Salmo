@@ -5,8 +5,11 @@
       <p>Ending date: {{ jsDate(endDate) }}</p>
       <p>Earliest application date: {{ jsDate(earliestApplicationDate) }}</p>
 
-      <!-- <p class="total margin-s top"><b>Today is</b> {{ jsDate(new Date) }}</p>
-      <p class="total"><b>You have {{ daysLeft.days }} days left to travel!</b></p> -->
+      <p
+        v-if="fiveYearDate && noErrors"
+        class="total margin-s top">
+        <b>You have {{ daysLeft }} days left to travel between now (today) and {{ date(fiveYearDate) }}!</b>
+      </p>
 
 
       <ul class="results margin-s top">
@@ -22,7 +25,7 @@
             class="year">
             <div
               :class="{
-                'error-red': year.totalDays > 180 || overstayYearsPre_2016.includes(year) || overstayYearsPost_2016.includes(year) || !qualifiesForFive,
+                'error-red': moreThan_180_pre_2018.find(y => y.year === year.startDate.getFullYear()) || moreThan_180_post_2018.find(y => y.year === year.startDate.getFullYear()) || overstayYearsPre_2016.includes(year) || overstayYearsPost_2016.includes(year) || !qualifiesForFive,
                 'error-blue': overstayYearsPre_2016.includes(year) && year.overstayHoliday.within_28 && year.overstayHoliday.reason.haveReason !== 'no'
               }"
               class="top">
@@ -41,7 +44,7 @@
                   'error-pre2016-red': overstayPre_2016.includes(holiday) &&  selectedYear === index,
                   'error-pre2016-blue': overstayPre_2016.includes(holiday) && holiday.within_28 && holiday.reason.haveReason !== 'no' && selectedYear === index
                 }">
-                <!-- 'error-180': moreThan_180.find(h => h.country === holiday.country && h.leftUk === holiday.leftUk) && selectedYear === index, --> 
+                <!--  --> 
                 <p>{{ holiday.country }}</p>
 
                 <p>{{ holiday.days }} days</p>
@@ -54,11 +57,11 @@
 
     <base-message :buttonText="messageButtonText">
       <!-- Messages for no errors -->
-      <!-- <finished-message v-if="noErrors && daysLeft === 0" />
+      <finished-message v-if="noErrors && daysLeft === 0" />
 
-      <watch-days-message v-else-if="noErrors && daysLeft <= 100" :days="daysLeft" /> -->
+      <watch-days-message v-else-if="noErrors && daysLeft <= 100" :days="daysLeft" />
 
-      <no-errors-message v-if="noErrors" />
+      <no-errors-message v-else-if="noErrors && daysLeft > 100" />
 
       <!-- Error messages -->
       <must-change-message v-if="!qualifiesForFive" />
@@ -90,7 +93,6 @@ import watchDaysMessage from '@/components/ilrTracker/results/messages/ten-year/
 import mustChangeMessage from '@/components/ilrTracker/results/messages/five-year/MustChange'
 import tooManyDaysTripMessage from '@/components/ilrTracker/results/messages/ten-year/180_Days'
 import tooManyDaysTripPostJan from '@/components/ilrTracker/results/messages/five-year/180_Days'
-import tooManyDaysTotalMessage from '@/components/ilrTracker/results/messages/ten-year/540_Days'
 import overstayPostNov from '@/components/ilrTracker/results/messages/ten-year/OverstayPost_2016'
 import overstayPreNovWithin from '@/components/ilrTracker/results/messages/ten-year/OverstayPre_2016_Within_28'
 import overstayPreNov from '@/components/ilrTracker/results/messages/ten-year/OverstayPre_2016'
@@ -104,18 +106,18 @@ export default {
     'overstayPre_2016',
     'overstayYearsPre_2016',
     'overstayPost_2016',
-    'overstayYearsPost_2016'
+    'overstayYearsPost_2016',
+    'fiveYearDate'
   ],
   components: {
     overstayAlert,
     baseMessage,
     noErrorsMessage,
-    // finishedMessage,
-    // watchDaysMessage,
+    finishedMessage,
+    watchDaysMessage,
     mustChangeMessage,
     tooManyDaysTripMessage,
     tooManyDaysTripPostJan,
-    // tooManyDaysTotalMessage,
     overstayPostNov,
     overstayPreNovWithin,
     overstayPreNov,
@@ -127,8 +129,23 @@ export default {
     }
   },
   computed: {
-    // daysLeft() {
-    // },
+    daysLeft() {
+      const end = new Date(this.fiveYearDate),
+            start = new Date(new Date(end).setFullYear(new Date(end).getFullYear() - 1)),
+            days = [];
+
+      this.userHoliday.forEach(date => {
+        if(new Date(date) > start && new Date(date) < end) {
+          days.push(date)
+        }
+      })
+
+      if(days.length >= 180) {
+        return 0
+      } else {
+        return 180 - days.length
+      }
+    },
     endDate() {
       const start = new Date(this.user.profile.ilrTracker.startDate),
              endDate = new Date(new Date(start).setFullYear(new Date(start).getFullYear() + 5)),
@@ -146,15 +163,15 @@ export default {
 
       if(this.noErrors) {
         text = 'Everything looks great so far!'
-        // if(this.daysLeft === 0) {
-        //   text = 'It’s finished!'
-        // } else if(this.daysLeft <= 10 && this.daysLeft > 0) {
-        //   text = 'Only a few days left!'
-        // } else if(this.daysLeft <= 100 && this.daysLeft > 10) {
-        //   text = 'Watch out on your days!'
-        // } else {
-        //   text = 'Everything looks great so far!'
-        // }
+        if(this.daysLeft === 0) {
+          text = 'It’s finished!'
+        } else if(this.daysLeft <= 10 && this.daysLeft > 0) {
+          text = 'Only a few days left!'
+        } else if(this.daysLeft <= 100 && this.daysLeft > 10) {
+          text = 'Watch out on your days!'
+        } else {
+          text = 'Everything looks great so far!'
+        }
       }
 
       if(this.overstayPre_2016.length) {
@@ -177,27 +194,28 @@ export default {
     },
     userHoliday() {
       const today = new Date,
-            allDates = [],
+            dates = [],
             holidays = cloneDeep(this.user.profile.holiday);
 
       holidays.forEach(holiday => {
         const listDate = [],
-              startDate = holiday.leftUk,
-              endDate = holiday.returnedUk;
+              startDate = new Date(new Date(holiday.leftUk).setDate(new Date(holiday.leftUk).getDate() + 1)).toISOString(),
+              endDate = new Date(new Date(holiday.returnedUk).setDate(new Date(holiday.returnedUk).getDate() - 2)).toISOString();
         let   dateMove = new Date(startDate),
               strDate = startDate;
 
         while (strDate < endDate){
-          strDate = dateMove.toISOString().slice(0,10)
+          strDate = dateMove.toISOString().slice(0, 10)
           listDate.push(strDate)
-          dateMove.setDate(dateMove.getDate()+1)
+          dateMove.setDate(dateMove.getDate() + 1)
         }
 
-        listDate.splice(0, 3)
-        allDates.push(listDate)
+        dates.push(listDate)
       })
 
-      return allDates.flat()
+      const allDates = dates.flat()
+
+      return [...new Set(allDates)]
     },
     // ERRORS
     noErrors() {
@@ -261,22 +279,10 @@ export default {
 
       years.forEach(year => {
         let total = year.holidays.reduce((prev, cur) => prev + cur.days, 0)
-
-        // take off flight days
-        year.holidays.forEach(holiday => {
-          if(holiday.extendedToNext || holiday.extendedFromLast) {
-            holiday.days -= 1
-            total -= 1
-          } else {
-            holiday.days -= 2
-            total -= 2
-          }
-        })
-
         year.totalDays = total
 
         if(year.startDate < new Date(2018, 0, 11) && year.totalDays > 180) {
-          errors.push(year)
+          errors.push({ ...year, year: year.startDate.getFullYear() })
         }
       })
 
@@ -293,7 +299,7 @@ export default {
             strDate = startDate;
 
       while (strDate < endDate) {
-        strDate = dateMove.toISOString().slice(0,10)
+        strDate = dateMove.toISOString().slice(0, 10)
         allDates.push(strDate)
         dateMove.setDate(dateMove.getDate() + 1)
       }
@@ -311,29 +317,30 @@ export default {
         })
 
         if(holidayDates.length) {
-          allYears.push({ startDate: start, endDate: end, holidayDates: holidayDates })
+          allYears.push({ startDate: start, endDate: end, year: start.getFullYear(), holidayDates: holidayDates })
         }
       })
 
-      return allYears.filter(year => year.holidayDates.length > 183)
+      return allYears.filter(year => year.holidayDates.length > 180)
     }
   },
   methods: {
     sortIntoYears(array) {
       const ascendingDates = cloneDeep(array).sort((a, b) => new Date(a.leftUk) - new Date(b.leftUk)),
             years = [];
-
+            
       while(ascendingDates.length) {
-        // get holiday from start of array
         const holiday = ascendingDates.shift(),
               holidayStart = new Date(holiday.leftUk),
               holidayEnd = new Date(holiday.returnedUk),
-              yearStart = new Date(this.user.profile.ilrTracker.startDate),
+              holidayYear = holidayStart.getFullYear(),
+              ilrStart = new Date(this.user.profile.ilrTracker.startDate),
+              yearStart = new Date(ilrStart.setFullYear(holidayYear)),
               yearEnd = new Date(new Date(yearStart).setFullYear(new Date(yearStart).getFullYear() + 1));
-
+              
         this.sortYearsArray(years, holiday, holidayStart, holidayEnd, yearStart, yearEnd)
       }
-
+      
       return years
     }
   }

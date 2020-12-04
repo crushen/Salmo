@@ -93,9 +93,10 @@ export default {
   methods: {
     calculateDays(start, end) {
       const dt1 = new Date(start),
-            dt2 = new Date(end);
+            dt2 = new Date(end),
+            days = Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24));
             
-      return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24))
+      return days - 1
     },
     submitForm() {
       this.form.days = this.calculateDays(this.form.leftUk, this.form.returnedUk)

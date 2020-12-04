@@ -22,7 +22,8 @@
       :overstayPre_2016="overstayPre_2016"
       :overstayYearsPre_2016="overstayYearsPre_2016"
       :overstayPost_2016="overstayPost_2016"
-      :overstayYearsPost_2016="overstayYearsPost_2016" />
+      :overstayYearsPost_2016="overstayYearsPost_2016"
+      :fiveYearDate="fiveYearDate" />
   </div>
 </template>
 
@@ -35,7 +36,8 @@ export default {
   props: {
     user: { type: Object, required: true },
     validHolidayYears: { type: Array, required: true },
-    sortByDateVisas: { type: Array, required: true }
+    sortByDateVisas: { type: Array, required: true },
+    fiveYearDate: { type: String, required: false }
   },
   components: { tenResults, fiveResults },
   computed: {
@@ -57,22 +59,7 @@ export default {
     years() {
       let years = cloneDeep(this.validHolidayYears)
 
-      years.forEach(year => {
-        let total = year.holidays.reduce((prev, cur) => prev + cur.days, 0)
-
-        // take off flight days
-        year.holidays.forEach(holiday => {
-          if(holiday.extendedToNext || holiday.extendedFromLast) {
-            holiday.days -= 1
-            total -= 1
-          } else {
-            holiday.days -= 2
-            total -= 2
-          }
-        })
-
-        year.totalDays = total
-      })
+      years.forEach(year => year.totalDays = year.holidays.reduce((prev, cur) => prev + cur.days, 0))
 
       return years.reverse()
     },
@@ -95,7 +82,7 @@ export default {
           }
 
           // if visa is not last in array (users current visa)
-          if(visa !== visas[visas.length -1]) {
+          if(visa !== visas[visas.length - 1]) {
             const nextVisaApplication = new Date(visas[index + 1].appliedDate)
 
             // if holiday was overlapping visa expiry and next visa application date - valid holiday

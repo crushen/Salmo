@@ -124,6 +124,26 @@
       </div>
     </section>
 
+    <section v-show="user.profile.ilrTracker.plan === '5 year plan' && !resultsOpen">
+      <div class="tools-card margin-m top">
+        <h2>Check My Trip</h2>
+
+        <div class="inner">
+          <p class="margin-s top">How many days can I travel between now and:</p>
+
+          <div class="date">
+            <FormulateInput
+              v-model="fiveYearDate"
+              type="date"
+              validation="customDate"
+              :validation-rules="{ customDate: ({ value }) => new Date(value) > new Date()}"
+              :validation-messages="{ customDate: 'Date must be after todays date' }"
+              class="grey-label" />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <div v-if="user.profile.holiday.length && !resultsOpen" class="button-center">
       <button
         @click="resultsOpen = true"
@@ -138,7 +158,8 @@
         v-if="resultsOpen"
         :user="user"
         :validHolidayYears="validHolidayYears"
-        :sortByDateVisas="sortByDateVisas" />
+        :sortByDateVisas="sortByDateVisas"
+        :fiveYearDate="fiveYearDate" />
     </transition>
   </div>
 </template>
@@ -175,7 +196,8 @@ export default {
       editVisas: false,
       visaToEdit: {},
       showVisaEditModal: false,
-      resultsOpen: false
+      resultsOpen: false,
+      fiveYearDate: null
     }
   },
   computed: {
@@ -265,7 +287,7 @@ export default {
 
 .tools-card.main {
   background: #D4E7ED;
-  max-width: 520px;
+  // max-width: 520px;
 
   .line-button {
     width: 60%;
@@ -340,6 +362,11 @@ export default {
   button {
     margin-left: 1rem;
   }
+}
+
+.date {
+  width: 70%;
+  margin: 2rem auto 0 auto;
 }
 
 // Tablet
