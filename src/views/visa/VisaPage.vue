@@ -1,89 +1,98 @@
 <template>
-  <section class="content" v-if="visa">
-    <h1>{{ visa.name }}</h1>
+  <div v-if="visa">
+    <section class="content" v-if="validVisa">
+      <h1>{{ visa.name }}</h1>
 
-    <div class="menu">
-      <button
-        @click="toggle"
-        :class="menuOpen ? 'active' : ''">
-        Jump To Section
-        <img 
-          src="@/assets/icons/red/arrow-down.svg"
-          :class="menuOpen ? 'active' : ''"
-          alt=""
-          class="icon">
-      </button>
-
-      <transition-group name="slide">
-        <div
-          class="slide-item"
-          :class="menuOpen ? 'active' : ''"
-          key="outer">
-          <transition-group
-            name="slide-2" 
-            tag="ul"
-            class="top outer-list">
-            <li
-              v-for="(section, index) in visa.sections"
-              :key="section.id"
-              class="top">
-              <p
-                @click="selectTab($event, index)"
-                class="section-title">
-                {{ section.title }}
-              </p>
-              <div class="tab" />
-
-              <ul
-                :class="selectedTab === index ? 'active' : ''"
-                class="inner-list">
-                <li
-                  v-for="subsection in section.subsections"
-                  :key="subsection.id"
-                  @click="close">
-                  <router-link :to="{ name: 'visa-section', params: { section: subsection.slug } }">
-                    {{ subsection.title }}
-                  </router-link>
-                </li>
-              </ul>
-            </li>
-          </transition-group>
-        </div>
-      </transition-group>
-    </div>
-
-    <section class="visa-sections">
-      <transition :name="animateOn" mode="out-in">
-        <h2 :key="title">{{ title }}</h2>
-      </transition>
-
-      <transition :name="animateOn" mode="out-in">
-        <router-view :key="key" />
-      </transition>
-
-      <div
-        :class="$route.params.section === firstSection ? 'first-section' : ''"
-        class="buttons">
+      <div class="menu">
         <button
-          v-if="$route.params.section !== firstSection"
-          @click="prevSection"
-          class="tertiary">
-          Previous
+          @click="toggle"
+          :class="menuOpen ? 'active' : ''">
+          Jump To Section
+          <img 
+            src="@/assets/icons/red/arrow-down.svg"
+            :class="menuOpen ? 'active' : ''"
+            alt=""
+            class="icon">
         </button>
 
-        <button
-          v-if="$route.params.section !== lastSection"
-          @click="nextSection"
-          class="tertiary">
-          Next
-        </button>
+        <transition-group name="slide">
+          <div
+            class="slide-item"
+            :class="menuOpen ? 'active' : ''"
+            key="outer">
+            <transition-group
+              name="slide-2" 
+              tag="ul"
+              class="top outer-list">
+              <li
+                v-for="(section, index) in visa.sections"
+                :key="section.id"
+                class="top">
+                <p
+                  @click="selectTab($event, index)"
+                  class="section-title">
+                  {{ section.title }}
+                </p>
+                <div class="tab" />
+
+                <ul
+                  :class="selectedTab === index ? 'active' : ''"
+                  class="inner-list">
+                  <li
+                    v-for="subsection in section.subsections"
+                    :key="subsection.id"
+                    @click="close">
+                    <router-link :to="{ name: 'visa-section', params: { section: subsection.slug } }">
+                      {{ subsection.title }}
+                    </router-link>
+                  </li>
+                </ul>
+              </li>
+            </transition-group>
+          </div>
+        </transition-group>
       </div>
-    </section>  
-  </section>
+
+      <section class="visa-sections">
+        <transition :name="animateOn" mode="out-in">
+          <h2 :key="title">{{ title }}</h2>
+        </transition>
+
+        <transition :name="animateOn" mode="out-in">
+          <router-view :key="key" />
+        </transition>
+
+        <div
+          :class="$route.params.section === firstSection ? 'first-section' : ''"
+          class="buttons">
+          <button
+            v-if="$route.params.section !== firstSection"
+            @click="prevSection"
+            class="tertiary">
+            Previous
+          </button>
+
+          <button
+            v-if="$route.params.section !== lastSection"
+            @click="nextSection"
+            class="tertiary">
+            Next
+          </button>
+        </div>
+      </section>  
+    </section>
+
+    <section v-else class="content">
+      <p>{{ invalidVisa.name }}</p>
+
+      <p>{{ invalidVisa.url }}</p>
+    </section>
+  </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
+import { visas } from '@/assets/js/invalidVisas'
 
 export default {
   components: {},
@@ -93,21 +102,48 @@ export default {
       menuOpen: false,
       selectedTab: 0,
       key: 0,
-      animateOn: 'none'
+      animateOn: 'none',
+      invalidVisas: visas
     }
   },
   computed: {
     ...mapState('visas', ['visa']),
+    validVisa() {
+      switch(this.visa.name) {
+        case 'Tier 1 : Global Talent':
+          return true
+        case 'Tier 1 : Innovator':
+          return true
+        case 'Tier 1 : Investor':
+          return true
+        case 'Tier 1 : Startup':
+          return true
+        case 'Tier 2 : General Work':
+          return true
+        case 'Tier 2 : Health & Care':
+          return true
+        case 'Tier 4 : Student':
+          return true
+        case 'Tier 5 : Youth Mobility':
+          return true
+        default:
+          return false
+      }
+    },
+    invalidVisa() {
+      return this.invalidVisas.find(v => v.name === this.visa.name)
+    },
     firstSection() {
-      return this.visa.sections[0].subsections[0].slug;
+      return this.visa.sections[0].subsections[0].slug
     },
     lastSection() {
-      const lastSection = this.visa.sections[this.visa.sections.length - 1];
-      const subsections = lastSection.subsections;
-      return subsections[subsections.length - 1].slug;
+      const lastSection = this.visa.sections[this.visa.sections.length - 1]
+      const subsections = lastSection.subsections
+
+      return subsections[subsections.length - 1].slug
     },
     title() {
-      let title = '';
+      let title = ''
 
       this.visa.sections.forEach((section, index) => {
         section.subsections.forEach(subsection => {
@@ -115,95 +151,109 @@ export default {
             title = this.visa.sections[index].title;
           }
         })
-      });
+      })
 
-      return title;
+      return title
     }
   },
   methods: {
     toggle() {
-      this.menuOpen = !this.menuOpen;
+      this.menuOpen = !this.menuOpen
     },
     close() {
-      this.menuOpen = false;
-      this.key++;
+      this.menuOpen = false
+      this.key++
     },
     selectTab(event, index) {
       if(event.target.classList.contains('section-title')) {
-        this.selectedTab = this.selectedTab === index ? null : index;
+        this.selectedTab = this.selectedTab === index ? null : index
       }
     },
     nextSection() {
-      let pushToSub = true;
+      let pushToSub = true
+
       this.visa.sections.forEach((section, index) => {
         if(this.title === section.title) {
-          const currentSubsection = section.subsections.find(subsection => this.$route.params.section === subsection.slug);
-          const currentIndex = section.subsections.indexOf(currentSubsection);
+          const currentSubsection = section.subsections.find(subsection => this.$route.params.section === subsection.slug),
+                currentIndex = section.subsections.indexOf(currentSubsection);
+
           // If current subsection is last in subsection array
           // but section isn't last in section array - go to next section
           if(currentSubsection === section.subsections[section.subsections.length - 1]) {
             if(section !== this.visa.sections[this.visa.sections.length - 1]) {
-              this.key ++;
-              const nextSection = this.visa.sections[index + 1];
+              const nextSection = this.visa.sections[index + 1]
+
+              this.key ++
+              
               this.$router.push({
                 name: 'visa-section',
                 params: { section: nextSection.subsections[0].slug }
-              });
-              pushToSub = false; // Dont push to next subsection when going to next section
+              })
+
+              // Dont push to next subsection when going to next section
+              pushToSub = false
             }
           } else {
             // If current subsection isn't last in array, go to next subsection
             if(pushToSub) {
-              this.key ++;
+              this.key ++
+
               this.$router.push({
                 name: 'visa-section',
                 params: { section: section.subsections[currentIndex + 1].slug }
-              });
+              })
             }
           }
         }
       });
     },
-      prevSection() {
-      let pushToSub = true;
+    prevSection() {
+      let pushToSub = true
+
       this.visa.sections.forEach((section, index) => {
         if(this.title === section.title) {
-          const currentSubsection = section.subsections.find(subsection => this.$route.params.section === subsection.slug);
-          const currentIndex = section.subsections.indexOf(currentSubsection);
+          const currentSubsection = section.subsections.find(subsection => this.$route.params.section === subsection.slug),
+                currentIndex = section.subsections.indexOf(currentSubsection);
+
           // If current subsection is first in subsection array
           // but section isn't first in section array - go to next section
           if(currentSubsection === section.subsections[0]) {
             if(section !== this.visa.sections[0]) {
-              this.key ++;
-              const prevSection = this.visa.sections[index - 1];
+              const prevSection = this.visa.sections[index - 1]
+
+              this.key ++
+              
               this.$router.push({
                 name: 'visa-section',
                 params: { section: prevSection.subsections[prevSection.subsections.length - 1].slug }
-              });
-              pushToSub = false; // Dont push to prev subsection when going to prev section
+              })
+
+              // Dont push to prev subsection when going to prev section
+              pushToSub = false
             }
           } else {
             // If current subsection isn't first in array, go to prev subsection
             if(pushToSub) {
-              this.key ++;
+              this.key ++
+
               this.$router.push({
                 name: 'visa-section',
                 params: { section: section.subsections[currentIndex - 1].slug }
-              });
+              })
             }
           }
         }
-      });
+      })
     },
     fetchVisa() {
       this.$store.dispatch('visas/getVisa', this.slug)
       .then(() => {
         // if no visa found, 404 page
         if(!this.visa) {
-          this.$router.push({name: 'not-found'});
+          this.$router.push({name: 'not-found'})
         } else {
           // if no section defined, go to first section... otherwise continue to defined section.
-          if(!this.$route.params.section) {
+          if(!this.$route.params.section && this.validVisa) {
             this.$router.push({
               name: 'visa-section',
               params: { section: this.firstSection }
@@ -214,7 +264,8 @@ export default {
     }
   }, 
   created() {
-    this.fetchVisa();
+    this.fetchVisa()
+    
     setTimeout(() => {
       this.animateOn = 'section'
     }, 1500)
