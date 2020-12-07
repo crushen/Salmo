@@ -81,7 +81,7 @@ export const applicationTimelines = [
     ]
   },
   {
-    visa: 'Tier 2 : Health & Care',
+    visa: 'Tier 2 : Health and Care',
     timeline: [
       {
         time: 'July - December',

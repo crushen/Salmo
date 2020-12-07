@@ -120,7 +120,7 @@ export default {
           return true
         case 'Tier 2 : General Work':
           return true
-        case 'Tier 2 : Health & Care':
+        case 'Tier 2 : Health and Care':
           return true
         case 'Tier 4 : Student':
           return true

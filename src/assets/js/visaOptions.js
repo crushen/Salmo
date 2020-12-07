@@ -25,8 +25,8 @@ export const visaOptions = [
     img: require('@/assets/illustrations/next-visa/general-work.svg')
   },
   {
-    value: 'Tier 2 : Health & Care',
-    label: 'Tier 2 : Health & Care',
+    value: 'Tier 2 : Health and Care',
+    label: 'Tier 2 : Health and Care',
     img: require('@/assets/illustrations/next-visa/health-and-care.svg')
   },
   {

@@ -128,7 +128,7 @@ export const documentChecklist = [
     ]
   },
   {
-    name: 'Tier 2 : Health & Care',
+    name: 'Tier 2 : Health and Care',
     checklist: [
       { 
         label: 'Passport (ID)',
