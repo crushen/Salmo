@@ -19,7 +19,7 @@
           class="container">
           <overstay-alert
             v-if="overstayYearsPost_2016.includes(year) || overstayYearsPre_2016.includes(year)"
-            :overstayHoliday="year.overstayHoliday" />
+            :overstayHoliday="user.profile.holiday.find(h => h.country === year.overstayHoliday.country && h.leftUk === year.overstayHoliday.leftUk)" />
           <div
             @click="selectedYear === index ? selectedYear = null : selectedYear = index"
             class="year">
@@ -186,7 +186,7 @@ export default {
         }
       }
 
-      if(this.moreThan_180_pre_2018.length || this.moreThan_180_post_2018.length || this.overstayPost_2016.length) {
+      if(this.moreThan_180_pre_2018.length || this.moreThan_180_post_2018.length || this.overstayPost_2016.length || !this.qualifiesForFive) {
         text = 'Something is wrong!'
       }
 
@@ -221,7 +221,7 @@ export default {
     noErrors() {
       let errors = true
 
-      if(this.moreThan_180_pre_2018.length || this.moreThan_180_post_2018.length || this.overstayPre_2016.length || this.overstayPost_2016.length) {
+      if(this.moreThan_180_pre_2018.length || this.moreThan_180_post_2018.length || this.overstayPre_2016.length || this.overstayPost_2016.length || !this.qualifiesForFive) {
         errors = false
       }
 

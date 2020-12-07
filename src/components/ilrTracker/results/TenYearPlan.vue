@@ -19,7 +19,7 @@
           class="container">
           <overstay-alert
             v-if="overstayYearsPost_2016.includes(year) || overstayYearsPre_2016.includes(year)"
-            :overstayHoliday="year.overstayHoliday" />
+            :overstayHoliday="user.profile.holiday.find(h => h.country === year.overstayHoliday.country && h.leftUk === year.overstayHoliday.leftUk)" />
           <div
             @click="selectedYear === index ? selectedYear = null : selectedYear = index"
             class="year">

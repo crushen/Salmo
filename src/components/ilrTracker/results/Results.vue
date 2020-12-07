@@ -146,14 +146,13 @@ export default {
       return errors
     },
     overstayYearsPre_2016() {
-      const errors = [],
-            holidays = this.user.profile.holiday.filter(holiday => this.overstayPre_2016.find(h => h.country === holiday.country && h.leftUk === holiday.leftUk));
+      const errors = [];
 
       this.years.forEach(year => {
         const yearStart = new Date(year.startDate),
               yearEnd = new Date(year.endDate);
 
-        holidays.forEach(holiday => {
+        this.overstayPre_2016.forEach(holiday => {
             const holidayStart = new Date(holiday.leftUk),
                   holidayEnd = new Date(holiday.returnedUk);
 
@@ -205,14 +204,13 @@ export default {
       return errors
     },
     overstayYearsPost_2016() {
-      const errors = [],
-            holidays = this.user.profile.holiday.filter(holiday => this.overstayPost_2016.find(h => h.country === holiday.country && h.leftUk === holiday.leftUk));
+      const errors = [];
 
       this.years.forEach(year => {
         const yearStart = new Date(year.startDate),
               yearEnd = new Date(year.endDate);
 
-        holidays.forEach(holiday => {
+        this.overstayPost_2016.forEach(holiday => {
             const holidayStart = new Date(holiday.leftUk),
                   holidayEnd = new Date(holiday.returnedUk);
 
