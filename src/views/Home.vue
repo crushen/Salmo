@@ -9,15 +9,14 @@
     </transition>
 
     <header>
-      <!-- <img src="@/assets/backgrounds/home-background-2.svg" alt="" class="background"> -->
+      <!-- <img src="@/assets/logo/colour.svg" alt="" class="logo"> -->
 
-      <div class="logo">
-        <img src="@/assets/logo/name.svg" alt="" class="text">
-        <img src="@/assets/logo/colour.svg" alt="" class="img">
-      </div>
-    </header>
+      <img src="@/assets/logo/name-blue.svg" alt="" class="logo-text">
 
-    <main>
+      <img src="@/assets/backgrounds/home/mobile-background.svg" alt="" class="background mobile">
+
+      <img src="@/assets/backgrounds/home/mobile-img.svg" alt="" class="people mobile">
+
       <section class="button-center">
         <router-link :to="{ name: 'sign-up' }" tag="button" class="primary">
           Sign Up
@@ -27,7 +26,9 @@
           Sign In
         </router-link>
       </section>
+    </header>
 
+    <main>
       <patreon-message v-if="loggedOut" />
 
       <div v-else>
@@ -177,7 +178,41 @@ export default {
 
 header {
   position: relative;
-  height: 80vh;
+  height: 100vh;
+  overflow: hidden;
+
+  .logo-text {
+    position: absolute;
+    width: 45%;
+    left: 27.5%;
+    top: 120px;
+  }
+
+  .background {
+    position: absolute;
+    bottom: -15%;
+    left: 0;
+    width: 100%;
+  }
+
+  .people {
+    position: absolute;
+    width: 90%;
+    left: 5%;
+    bottom: 180px;
+  }
+
+  .button-center {
+    position: absolute;
+    bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+button {
+  min-width: 140px;
 }
 
 p {
@@ -193,42 +228,16 @@ p {
   z-index: 0;
 }
 
-.logo {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 150px;
-
-  .img {
-    width: 60px;
-  }
-}
-
-.button-center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-button {
-  min-width: 140px;
-}
-
-.inner {
-  width: 85%;
-  margin: auto;
-}
-
 .tools-card {
   background: #FBF0EF;
   padding: 16px 26px 0 26px;
   height: 310px;
   margin: auto;
+
+  .inner {
+    width: 85%;
+    margin: auto;
+  }
 
   .flex {
     width: 100%;
@@ -300,6 +309,22 @@ footer {
     font-size: 14px;
     color: white;
     font-weight: 300;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  header {
+    .logo-text {
+      top: 23vh;
+    }
+
+    .background {
+      bottom: -120px;
+    }
+
+    .people {
+      bottom: 210px;
+    }
   }
 }
 

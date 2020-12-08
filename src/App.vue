@@ -17,11 +17,12 @@
 
     <sidebar-nav v-if="user && user.emailVerified && innerWidth >= 1200" />
 
+    <!-- v-if="$route.name !== 'home'" -->
     <img
-      v-if="$route.name !== 'home'"
       src="@/assets/logo/colour.svg" 
       alt="Salmo logo"
-      class="small-logo">
+      class="small-logo"
+      :class="{'home': $route.name === 'home'}">
       <!-- v-if="$route.path !== '/about' && $route.path !== '/'" -->
 
     <div class="content-wrapper">
@@ -171,6 +172,14 @@ p {
   top: 24px;
   right: 7.5vw;
   z-index: 5;
+  transition: 0.7s cubic-bezier(0,1.15,1,.99);
+  transition-delay: 0.7s;
+
+  &.home {
+    width: 50px;
+    top: 32px;
+    right: 32px;
+  }
 }
 
 .content-wrapper {
