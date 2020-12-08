@@ -397,8 +397,4 @@ footer {
     }
   }
 }
-
-@media screen and (min-width: 850px) {
-
-}
 </style>

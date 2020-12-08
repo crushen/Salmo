@@ -1,5 +1,9 @@
 <template>
   <div v-if="visa">
+    <back-button
+      @go-back="$router.push({ name: 'non-eu-category', params: { category: visa.category } })"
+      text="Visas" />
+
     <section class="content" v-if="validVisa">
       <h1>{{ visa.name }}</h1>
 
@@ -93,14 +97,15 @@
 <script>
 import { mapState } from 'vuex'
 import { visas } from '@/assets/js/invalidVisas'
+import backButton from '@/components/BackButton'
 
 export default {
-  components: {},
+  components: { backButton },
   data() {
     return {
       slug: this.$route.params.slug,
       menuOpen: false,
-      selectedTab: 0,
+      selectedTab: null,
       key: 0,
       animateOn: 'none',
       invalidVisas: visas
@@ -306,23 +311,24 @@ h1 {
 }
 
 .menu {
-  width: 80%;
+  width: 100%;
   position: absolute;
-  left: 10%;
+  overflow: hidden;
+  z-index: 20;
 
   button {
     padding: 12px;
-    border-radius: 4px;
+    border-radius: 0;
     background: white;
-    border: 3px solid $primary-pink;
+    border-bottom: 3px solid $primary-pink;
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     transition: 0.4s;
-    //outline: none;
     position: relative;
     z-index: 10;
+    color: $dark-font;
 
     &.active {
       color: #b3b3b5;
@@ -360,7 +366,7 @@ h1 {
       list-style: none;
       
       &.top {
-        width: 92%;
+        width: 100%;
         margin: auto;
         background: $primary-pink;
         border-bottom-left-radius: 4px;
@@ -387,6 +393,7 @@ h1 {
     }
 
     li {
+      overflow: hidden;
       margin-top: $spacing*2;
       position: relative;
 
@@ -412,6 +419,10 @@ h1 {
 
   p {
     font-weight: 600;
+
+    &.section-title {
+      color: $light-font;
+    }
   }
 
   a {
@@ -443,6 +454,14 @@ h1 {
       justify-content: flex-end;
     }
   }
+}
+
+a {
+  text-decoration: none;
+}
+
+a.router-link-active {
+  text-decoration: underline;
 }
 
 // Tablet

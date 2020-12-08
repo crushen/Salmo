@@ -94,6 +94,7 @@ export default {
                 query GetVisa($slug: String) {
                   visa(where: {slug: $slug}) {
                     name
+                    category
                     sections {
                       id
                       title
