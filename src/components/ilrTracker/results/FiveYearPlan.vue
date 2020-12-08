@@ -125,7 +125,16 @@ export default {
   },
   data() {
     return {
-      selectedYear: null
+      selectedYear: null,
+      validVisas: [
+        'Tier 1 : Global Talent',
+        'Tier 1 : Exceptional Talent',
+        'Tier 1 : Innovator',
+        'Tier 1 : Entrepreneur',
+        'Tier 1 : Investor',
+        'Tier 2 : General Work',
+        'Tier 2 : Health and Care'
+      ]
     }
   },
   computed: {
@@ -228,38 +237,39 @@ export default {
       return errors
     },
     qualifiesForFive() {
-      const currentVisa = this.user.profile.currentVisa.name,
-            pastVisas = this.user.profile.pastVisas,
-            currentType = this.user.profile.currentVisa.type;
+      const currentVisa = this.profileToUpdate.currentVisa.name,
+            pastVisas = this.profileToUpdate.pastVisas,
+            currentType = this.profileToUpdate.currentVisa.type;
 
       let qualifies = false
 
       // If their current visa is a tier 1 or tier 2 visa
-      if(currentVisa.includes('Tier 1') || currentVisa.includes('Tier 2')) {
-        // If they have no past visas
-        if(!pastVisas.length) {
-          qualifies = true
-        } else {
-          // If their only past visa is Student visa
-          if(pastVisas.length === 1) {
-            if(pastVisas[0].name === 'Tier 4 : Student') {
-              qualifies = true
-            }
-          } else {
-            // If their first past visa is Student and every visa after is Tier 1 or Tier 2
-            const removeFirst = pastVisas.slice(1),
-                  allTierOneTierTwo = visa => visa.name.includes('Tier 1') || visa.name.includes('Tier 2');
+      if(this.validVisas.includes(currentVisa)) {
+        qualifies = true
+        // // If they have no past visas
+        // if(!pastVisas.length) {
+        //   qualifies = true
+        // } else {
+        //   // If their only past visa is Student visa
+        //   if(pastVisas.length === 1) {
+        //     if(pastVisas[0].name === 'Tier 4 : Student') {
+        //       qualifies = true
+        //     }
+        //   } else {
+        //     // If their first past visa is Student and every visa after is Tier 1 or Tier 2
+        //     const removeFirst = pastVisas.slice(1),
+        //           allTierOneTierTwo = visa => visa.name.includes('Tier 1') || visa.name.includes('Tier 2');
 
-            if(removeFirst.every(allTierOneTierTwo) && pastVisas[0].name === 'Tier 4 : Student'){
-              qualifies = true
-            } else {
-              // If all their past visas are Tier 1 or Tier 2
-              if(pastVisas.every(allTierOneTierTwo)) {
-                qualifies = true
-              }
-            }
-          }
-        }
+        //     if(removeFirst.every(allTierOneTierTwo) && pastVisas[0].name === 'Tier 4 : Student'){
+        //       qualifies = true
+        //     } else {
+        //       // If all their past visas are Tier 1 or Tier 2
+        //       if(pastVisas.every(allTierOneTierTwo)) {
+        //         qualifies = true
+        //       }
+        //     }
+        //   }
+        // }
       }
 
       // If any of their past or current visas were swithced

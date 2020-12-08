@@ -6,14 +6,14 @@
       <div class="inner">
         <p v-if="qualifiesForFive" class="margin-s top">Based on your past visas and your current profile, you have two options for the ILR route. Click the one you want to for:</p>
         
-        <div v-else class="margin-s top">
+        <p v-else>Based on your past visas and your current profile, you currently only qualify for the 10 year plan. Please click the 10 year plan to continue:</p>
+        
+        <!-- <div v-else class="margin-s top">
           <div v-if="profileToUpdate.currentVisa.name === 'Tier 4 : Student' && !profileToUpdate.pastVisas.length">
             <p class="margin-s top">Based on your past visas and your current profile, you currently only qualify for the 10 year plan.</p>
             <p class="margin-s top">However, if your next visa is a Tier 1 or Tier 2 visa, you may then qualify for the 5 year plan. Please click the 10 year plan to contiue (but don't worry, you can change this later):</p>
           </div>
-         
-          <p v-else>Based on your past visas and your current profile, you currently only qualify for the 10 year plan. Please click the 10 year plan to continue:</p>
-        </div>
+        </div> -->
       </div>
 
       <div class="plan-btns">
@@ -80,7 +80,16 @@ export default {
   data() {
     return {
       selectedPlan: null,
-      error: null
+      error: null,
+      validVisas: [
+        'Tier 1 : Global Talent',
+        'Tier 1 : Exceptional Talent',
+        'Tier 1 : Innovator',
+        'Tier 1 : Entrepreneur',
+        'Tier 1 : Investor',
+        'Tier 2 : General Work',
+        'Tier 2 : Health and Care'
+      ]
     }
   },
   computed: {
@@ -92,31 +101,32 @@ export default {
       let qualifies = false
 
       // If their current visa is a tier 1 or tier 2 visa
-      if(currentVisa.includes('Tier 1') || currentVisa.includes('Tier 2')) {
-        // If they have no past visas
-        if(!pastVisas.length) {
-          qualifies = true
-        } else {
-          // If their only past visa is Student visa
-          if(pastVisas.length === 1) {
-            if(pastVisas[0].name === 'Tier 4 : Student') {
-              qualifies = true
-            }
-          } else {
-            // If their first past visa is Student and every visa after is Tier 1 or Tier 2
-            const removeFirst = pastVisas.slice(1),
-                  allTierOneTierTwo = visa => visa.name.includes('Tier 1') || visa.name.includes('Tier 2');
+      if(this.validVisas.includes(currentVisa)) {
+        qualifies = true
+        // // If they have no past visas
+        // if(!pastVisas.length) {
+        //   qualifies = true
+        // } else {
+        //   // If their only past visa is Student visa
+        //   if(pastVisas.length === 1) {
+        //     if(pastVisas[0].name === 'Tier 4 : Student') {
+        //       qualifies = true
+        //     }
+        //   } else {
+        //     // If their first past visa is Student and every visa after is Tier 1 or Tier 2
+        //     const removeFirst = pastVisas.slice(1),
+        //           allTierOneTierTwo = visa => visa.name.includes('Tier 1') || visa.name.includes('Tier 2');
 
-            if(removeFirst.every(allTierOneTierTwo) && pastVisas[0].name === 'Tier 4 : Student'){
-              qualifies = true
-            } else {
-              // If all their past visas are Tier 1 or Tier 2
-              if(pastVisas.every(allTierOneTierTwo)) {
-                qualifies = true
-              }
-            }
-          }
-        }
+        //     if(removeFirst.every(allTierOneTierTwo) && pastVisas[0].name === 'Tier 4 : Student'){
+        //       qualifies = true
+        //     } else {
+        //       // If all their past visas are Tier 1 or Tier 2
+        //       if(pastVisas.every(allTierOneTierTwo)) {
+        //         qualifies = true
+        //       }
+        //     }
+        //   }
+        // }
       }
 
       // If any of their past or current visas were swithced
