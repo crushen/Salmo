@@ -173,6 +173,7 @@ a {
 
   .five, .ten {
     padding: 0.2rem 0.5rem;
+    margin: auto;
     border: 4px solid transparent;
     display: flex;
     justify-content: space-between;
@@ -190,6 +191,7 @@ a {
 
   .five {
     flex-direction: row-reverse;
+    margin-bottom: 2rem;
   }
 
   button {
@@ -214,5 +216,34 @@ a {
 
 .error {
   text-align: center;
+}
+
+@media screen and (min-width: 700px) {
+  .plan-btns {
+    flex-direction: row;
+    max-width: 500px;
+    margin: auto;
+
+    .five, .ten {
+      flex-direction: column;
+
+      .inner-text {
+        width: 80%;
+        margin-top: 2rem;
+      }
+    }
+
+    .five {
+      margin: auto;
+    }
+
+    button {
+      width: 100px;
+
+      img {
+        width: 100px;
+      }
+    }
+  }
 }
 </style>

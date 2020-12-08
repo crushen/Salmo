@@ -25,7 +25,7 @@
     <div class="tools-card margin-m top">
       <h2>My Starting Day is...</h2>
 
-      <div class="inner">
+      <div class="inner input">
         <FormulateInput
           v-model="startDate"
           type="date"
@@ -71,7 +71,10 @@ export default {
 @import '@/assets/styles/variables.scss';
 
 img {
+  display: block;
   width: 100%;
+  max-width: 450px;
+  margin: 2rem auto 0 auto;
 }
 
 .btn-container {
@@ -80,5 +83,9 @@ img {
   button {
     min-width: 120px;
   }
+}
+
+.input {
+  max-width: 450px;
 }
 </style>

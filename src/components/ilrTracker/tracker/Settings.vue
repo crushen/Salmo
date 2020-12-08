@@ -11,7 +11,7 @@
       <h3>ILR Plan</h3>
 
       <div class="inner">
-        <div class="plan-btns">
+        <div class="plan-btns" :class="qualifiesForFive ? '' : 'center'">
           <button
             v-if="qualifiesForFive"
             @click="selectedPlan = '5 year plan'"
@@ -161,6 +161,10 @@ h3 {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
+
+  &.center {
+    justify-content: center;
+  }
 
   button {
     display: flex;
