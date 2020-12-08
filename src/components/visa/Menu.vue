@@ -29,7 +29,6 @@
               class="section-title">
               {{ section.title }}
             </p>
-            <div class="tab" />
 
             <ul
               :class="selectedTab === index ? 'active' : ''"
@@ -88,13 +87,13 @@ export default {
   width: 100%;
   position: absolute;
   overflow: hidden;
-  z-index: 20;
+  z-index: 15;
 
   button {
     padding: 12px;
     border-radius: 0;
     background: white;
-    border-bottom: 3px solid $primary-pink;
+    border-bottom: 3px solid $red;
     width: 100%;
     display: flex;
     align-items: center;
@@ -136,16 +135,15 @@ export default {
 
     ul {
       color: $light-font;
-      padding: $spacing*2;
+      padding: 1rem;
       list-style: none;
       
       &.top {
         width: 100%;
         margin: auto;
-        background: $primary-pink;
+        background: $red;
         border-bottom-left-radius: 4px;
         border-bottom-right-radius: 4px;
-        box-shadow: $shadow;
         transition: 0.4s;
       }
 
@@ -168,7 +166,7 @@ export default {
 
     li {
       overflow: hidden;
-      margin-top: $spacing*2;
+      margin-top: 1rem;
       position: relative;
 
       &.top {
@@ -178,16 +176,6 @@ export default {
       &:first-of-type {
         margin-top: 0;
       }
-    }
-
-    .tab {
-      width: 20px;
-      height: 100%;
-      background: $primary-pink;
-      border-radius: $spacing;
-      position: absolute;
-      left: -24px;
-      top: 0;
     }
   }
 

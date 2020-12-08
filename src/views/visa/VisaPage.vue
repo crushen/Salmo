@@ -4,8 +4,8 @@
       @go-back="$router.push({ name: 'non-eu-category', params: { category: visa.category } })"
       text="Visas" />
 
-    <section class="content" v-if="validVisa">
-      <h1>{{ visa.name }}</h1>
+    <section class="content page padding top bottom" v-if="validVisa">
+      <h1 class="margin-s top">{{ visa.name }}</h1>
 
       <visa-menu
         :menuOpen="menuOpen"
@@ -13,11 +13,12 @@
         :selectedTab="selectedTab"
         @toggle="toggle"
         @close="close"
-        @select-tab="selectTab" />
+        @select-tab="selectTab"
+        class="margin-m top" />
 
       <section class="visa-sections">
         <transition :name="animateOn" mode="out-in">
-          <h2 :key="title">{{ title }}</h2>
+          <h2 :key="title" class="margin-m bottom">{{ title }}</h2>
         </transition>
 
         <transition :name="animateOn" mode="out-in">
@@ -26,7 +27,7 @@
 
         <div
           :class="$route.params.section === firstSection ? 'first-section' : ''"
-          class="buttons">
+          class="buttons margin-m top">
           <button
             v-if="$route.params.section !== firstSection"
             @click="prevSection"
@@ -255,21 +256,11 @@ export default {
   transition-timing-function: cubic-bezier(0,1.15,1,.99);
 }
 
-// Styles
-.content {
-  padding: $spacing*15 0 $spacing*12 0;
-}
-
-h1 {
-  margin-bottom: $spacing*5;
-}
-
 .visa-sections {
-  padding-top: $spacing*12;
+  padding-top: 132px;
 
   h2 {
-    color: $primary-pink;
-    margin-bottom: $spacing*3;
+    color: $red;
   }
 
   .buttons {
@@ -277,30 +268,10 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: $spacing*6;
 
     &.first-section {
       justify-content: flex-end;
     }
-  }
-}
-
-// Tablet
-@media screen and (min-width: 600px) {
-  h1 {
-    margin-bottom: $spacing*8;
-  }
-}
-
-// Desktop
-@media screen and (min-width: 1100px) {
-  h1 {
-    margin-bottom: $spacing*10;
-  }
-  
-  .card {
-    width: 75%;
-    margin: auto;
   }
 }
 </style>
