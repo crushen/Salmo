@@ -129,7 +129,6 @@ p {
   height: 100vh;
   position: absolute;
   width: 100%;
-  z-index: 12;
   left: 0;
   top: 0;
   background-repeat: repeat-x;

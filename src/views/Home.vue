@@ -9,14 +9,16 @@
     </transition>
 
     <header>
-      <!-- <img src="@/assets/logo/colour.svg" alt="" class="logo"> -->
+      <div class="container logo-container">
+        <img src="@/assets/logo/name-blue.svg" alt="" class="logo-text">
+      </div>
 
-      <img src="@/assets/logo/name-blue.svg" alt="" class="logo-text">
+      <img src="@/assets/backgrounds/home/wave.svg" alt="" class="background">
 
-      <img src="@/assets/backgrounds/home/mobile-background.svg" alt="" class="background mobile">
-
-      <img src="@/assets/backgrounds/home/mobile-img.svg" alt="" class="people mobile">
-
+      <div class="container people-container">
+        <img src="@/assets/backgrounds/home/mobile-img.svg" alt="" class="people mobile">
+      </div>
+    
       <section class="button-center">
         <router-link :to="{ name: 'sign-up' }" tag="button" class="primary">
           Sign Up
@@ -140,7 +142,8 @@ export default {
       loggedOut: false,
       showLoggedOutAlert: false,
       showDeleteAlert: false,
-      userDeleted: false
+      userDeleted: false,
+      innerWidth: null
     }
   },
   computed: {
@@ -169,6 +172,9 @@ export default {
 
       setTimeout(() => this.showDeleteAlert = false, 3000)
     }
+
+    this.innerWidth = window.innerWidth
+    window.addEventListener('resize', () => this.innerWidth = window.innerWidth)
   }
 }
 </script>
@@ -178,28 +184,43 @@ export default {
 
 header {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 
-  .logo-text {
+  .container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
-    width: 45%;
-    left: 27.5%;
-    top: 120px;
+    z-index: 5;
+  }
+
+  .logo-container {
+    top: 25vh;
+
+    img {
+      width: 40%;
+      max-width: 220px;
+    }
   }
 
   .background {
     position: absolute;
-    bottom: -15%;
-    left: 0;
-    width: 100%;
+    bottom: 0;
+    right: 0;
+    z-index: 0;
+    height: 60vh;
+    width: auto;
   }
 
-  .people {
-    position: absolute;
-    width: 90%;
-    left: 5%;
-    bottom: 180px;
+  .people-container {
+    bottom: 32vh;
+
+    img {
+      width: 90%;
+      max-width: 450px;
+    }
   }
 
   .button-center {
@@ -218,14 +239,6 @@ button {
 p {
   font-weight: 500;
   font-size: 16px;
-}
-
-.background {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  z-index: 0;
 }
 
 .tools-card {
@@ -314,21 +327,31 @@ footer {
 
 @media screen and (min-width: 375px) {
   header {
-    .logo-text {
-      top: 23vh;
-    }
+    .logo-container {
+      top: 22vh;
 
-    .background {
-      bottom: -120px;
-    }
-
-    .people {
-      bottom: 210px;
+      img {
+        width: 45%;
+      }
     }
   }
 }
 
 @media screen and (min-width: 700px) {
+  header {
+    .logo-container {
+      top: 26vh;
+    }
+
+    .background {
+      height: 58vh;
+    }
+
+    .people-container {
+      bottom: 23vh;
+    }
+  }
+
   p {
     font-size: 20px;
   }
@@ -373,5 +396,9 @@ footer {
       }
     }
   }
+}
+
+@media screen and (min-width: 850px) {
+
 }
 </style>
