@@ -1,6 +1,12 @@
 <template>
   <div v-if="visa">
     <back-button
+      v-if="slug === 'brexit'"
+      @go-back="$router.push({ name: 'visa-info-eu' })"
+      text="Back" />
+
+    <back-button
+      v-else
       @go-back="$router.push({ name: 'non-eu-category', params: { category: visa.category } })"
       text="Visas" />
 
@@ -90,6 +96,8 @@ export default {
         case 'Tier 4 : Student':
           return true
         case 'Tier 5 : Youth Mobility':
+          return true
+        case 'Brexit : Settlement Scheme':
           return true
         default:
           return false

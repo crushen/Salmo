@@ -8,7 +8,7 @@
       tag="button"
       :to="{ name: 'visa-page', params: { slug: visa.slug } }"
       class="primary margin-s top aria-btn"
-      :aria-label="`Tell me more about ${name }`">
+      :aria-label="`Tell me more about ${name}`">
       Tell Me More!
     </router-link>
   </div>
@@ -43,17 +43,13 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
 
-  .title {
-    text-align: center;
-  }
-
   p {
     color: $light-font;
   }
 
   button {
     border: 2px solid white;
-    width: 60%;
+    width: 100%;
     max-width: 160px;
     align-self: center;
 

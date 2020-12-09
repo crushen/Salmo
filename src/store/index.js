@@ -9,6 +9,7 @@ import helpCentre from './modules/helpCentre'
 import prCalc from './modules/prCalc'
 import news from './modules/news'
 import wave from './modules/wave'
+import brexit from './modules/brexit'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ const store =  new Vuex.Store({
     helpCentre,
     prCalc,
     news,
-    wave
+    wave,
+    brexit
   },
   state() {
     return {}

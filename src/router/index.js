@@ -127,18 +127,6 @@ const routes = [
     component: () => import('@/views/visa/CategoryPage'),
     meta: { onlyVerifiedUser: true }
   },
-  { 
-    path: '/visa-info/eu/settled', 
-    name: 'eu-settled', 
-    component: () => import('@/views/visa/Settled'),
-    meta: { onlyVerifiedUser: true }
-  },
-  { 
-    path: '/visa-info/eu/pre-settled', 
-    name: 'eu-pre-settled', 
-    component: () => import('@/views/visa/PreSettled'),
-    meta: { onlyVerifiedUser: true }
-  },
   {
     path: '/visa-info/:slug', 
     name: 'visa-page', 

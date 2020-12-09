@@ -13,21 +13,10 @@
       <div class="txt-btns">
         <p class="margin-m bottom">We know why you’re here! Brexit has everyone worried, but here you have all the information to make your next step fully informed.</p>
 
-        <div class="buttons">
-          <router-link
-            :to="{ name: 'eu-settled' }"
-            tag="button"
-            class="primary margin-s bottom">
-            Settled
-          </router-link>
-
-          <router-link
-            :to="{ name: 'eu-pre-settled' }"
-            tag="button"
-            class="secondary">
-            Pre-Settled
-          </router-link>
-        </div>
+        <visa-card
+          v-if="brexitPage"
+          :visa="brexitPage"
+          :name="brexitPage.name" />
       </div>
     </section>
 
@@ -43,13 +32,20 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex'
 import brexitTimeline from '@/components/BrexitTimeline'
 import helpCentreCard from '@/components/cards/HelpCentre'
 import backButton from '@/components/BackButton'
+import visaCard from '@/components/visa/SmallCard'
 
 export default {
-  components: { brexitTimeline, helpCentreCard, backButton }
+  components: { brexitTimeline, helpCentreCard, backButton, visaCard },
+  computed: {
+    ...mapState('brexit', ['brexitPage']),
+  },
+  mounted() {
+    this.$store.dispatch('brexit/getBrexitPage', 'brexit')
+  }
 }
 </script>
 
@@ -57,15 +53,5 @@ export default {
 .txt-btns {
   width: 85%;
   margin: auto;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  button {
-    min-width: 135px;
-  }
 }
 </style>
