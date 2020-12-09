@@ -2,7 +2,7 @@
   <div class="card">
     <h3>Was this article helpful?</h3>
 
-    <div class="faces margin-m top">
+    <div class="faces">
       <div class="button">
         <button 
           @click="yes($event)"
@@ -117,16 +117,6 @@ export default {
     selectButton(event) {
       this.selected = true
       this.alert = true
-
-      event.target.parentElement.parentElement.setAttribute('aria-pressed', 'true')
-
-      const ariaBtns = document.querySelectorAll('.aria-btn')
-      this.changeBtnFocus(ariaBtns, '-1')
-    },
-    changeBtnFocus(buttons, focus) {
-      buttons.forEach(btn => {
-        btn.setAttribute('tabindex', focus)
-      })
     }
   }
 }
@@ -149,6 +139,8 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 400px;
+  margin: 3rem auto 2rem auto;
 }
 
 button {
