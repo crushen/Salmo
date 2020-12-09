@@ -1,5 +1,9 @@
 <template>
   <div class="card">
+    <transition name="dialog" mode="out-in">
+      <feedback-alert v-if="alert" />
+    </transition>
+
     <h3>Was this article helpful?</h3>
 
     <div class="faces">
@@ -88,7 +92,10 @@
 </template>
 
 <script>
+import feedbackAlert from '@/components/alerts/Feedback'
+
 export default {
+  components: { feedbackAlert },
   data() {
     return {
       selected: null,
@@ -117,6 +124,8 @@ export default {
     selectButton(event) {
       this.selected = true
       this.alert = true
+
+      setTimeout(() => this.alert = false, 3000)
     }
   }
 }
