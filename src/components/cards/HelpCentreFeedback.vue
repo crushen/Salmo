@@ -149,6 +149,8 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 400px;
+  margin: 3rem auto 2rem auto;
 }
 
 button {
