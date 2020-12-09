@@ -1,10 +1,10 @@
  <template>
-  <main id="about" class="page padding top bottom">
+  <main id="about">
     <back-button
       @go-back="$router.go(-1)"
       text="Back" />
 
-    <section class="content">
+    <section class="content page padding top bottom">
       <h1>About Salmo</h1>
       <h2 class="margin-s top">Our future goals for the UK visa industry.</h2>
 
@@ -21,6 +21,8 @@
       <help-centre-card
         text="For more general advice or help on the UK application process, take a look through our Help Centre:" />
     </section>
+
+    <app-footer v-if="!user" />
   </main>
 </template>
 
@@ -28,9 +30,10 @@
 import aboutCard from '@/components/cards/AboutCard'
 import helpCentreCard from '@/components/cards/HelpCentre'
 import backButton from '@/components/BackButton'
+import appFooter from '@/components/Footer'
 
 export default {
-  components: { aboutCard, helpCentreCard, backButton },
+  components: { aboutCard, helpCentreCard, backButton, appFooter },
   data() {
     return {
       innerWidth: null,
@@ -51,6 +54,11 @@ export default {
           img: require('@/assets/illustrations/about/goals-3.svg')
         }
       ]
+    }
+  },
+  computed: {
+    user() {
+      return this.$store.state.auth.user
     }
   },
   mounted() {

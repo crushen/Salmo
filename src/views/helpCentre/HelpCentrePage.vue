@@ -1,35 +1,43 @@
 <template>
-  <main id="help-center-page" v-if="article" class="page padding top bottom">
-    <back-button
-      @go-back="$router.push({ name: 'help-centre' })"
-      text="Help Centre" />
+  <div>
+    <main id="help-center-page" v-if="article" class="page padding top" :class="{'bottom': user}">
+      <back-button
+        @go-back="$router.push({ name: 'help-centre' })"
+        text="Help Centre" />
 
-    <article class="content">
-      <h1 class="margin-s top">{{ article.title }}</h1>
+      <article class="content">
+        <h1 class="margin-s top">{{ article.title }}</h1>
 
-      <div v-html="article.content.html" class="body" />
-    </article> 
+        <div v-html="article.content.html" class="body" />
+      </article> 
 
-    <section class="content margin-m top">
-      <help-centre-feedback />
-    </section>  
-  </main>
+      <section class="content margin-m top">
+        <help-centre-feedback />
+      </section>  
+    </main>
+
+    <app-footer v-if="!user" />
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import helpCentreFeedback from '@/components/cards/HelpCentreFeedback'
 import backButton from '@/components/BackButton'
+import appFooter from '@/components/Footer'
 
 export default {
-  components: { helpCentreFeedback, backButton },
+  components: { helpCentreFeedback, backButton, appFooter },
   data() {
     return {
       slug: this.$route.params.slug,
     }
   },
   computed: {
-    ...mapState('helpCentre', ['article'])
+    ...mapState('helpCentre', ['article']),
+    user() {
+      return this.$store.state.auth.user
+    }
   },
   watch: {
     $route: 'fetchArticle'

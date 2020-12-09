@@ -1,107 +1,112 @@
 <template>
-  <main id="help-centre" class="page padding top bottom">
-    <back-button
-      @go-back="$router.push({ name: 'about' })"
-      text="About" />
+  <div>
+    <main id="help-centre" class="page padding top" >
+      <back-button
+        @go-back="$router.push({ name: 'about' })"
+        text="About" />
 
-    <div class="content">
-      <h1>Help Centre</h1>
-      <h2 class="margin-s top">You can find all the information here to answer your questions!</h2>
-    </div>
-
-    <transition-group name="slide" tag="div">
-      <section class="questions content slide-item margin-l top" key="dynamic">
-        <transition-group name="slide" tag="ul">
-          <li 
-            v-for="(question, index) in questions"
-            :key="index"
-            class="slide-item">
-            <button
-              @click="selected = selected === index ? null : index, setAria(index)"
-              :id="`button-${index}`"
-              aria-expanded="false"
-              aria-controls="text"
-              class="title">
-              <h3>{{ question.title }}</h3>
-
-              <img 
-                src="@/assets/icons/red/arrow-down.svg" 
-                alt=""
-                :class="selected === index ? 'active' : ''" 
-                class="icon">
-            </button>
-
-            <div 
-              :class="selected === index ? 'active' : ''"
-              id="text"
-              class="text"
-              role="region"
-              :aria-labelledby="`button-${index}`">
-              <p>{{ question.text }}</p>
-            </div>
-          </li>
-        </transition-group>
-      </section>
-
-      <div class="slide-item" key="static">
-        <section class="content buttons-content margin-l top">
-          <h2 class="margin-m bottom">Want in-depth information? Check out the articles below!</h2>
-
-          <FormulateInput
-            v-model="search"
-            type="search"
-            name="sample"
-            label="Search"
-            placeholder="Try visa, dependants, country.." />
-
-          <div v-if="!filteredPages.length" class="no-results">
-            <p>No results found.</p>
-          </div>
-
-          <div class="buttons">
-            <router-link
-              class="button"
-              v-for="page in filteredPages"
-              :key="page.title"
-              :to="{ name: 'help-centre-page', params: { slug: page.slug } }"
-              tag="button"
-              :style="{ 
-                backgroundImage: getBackground(page.background),
-                backgroundSize: getSize(page.background) 
-              }">
-              {{ page.title }}
-            </router-link>
-          </div>
-
-          <div v-if="!search" class="see-more">
-            <button
-              v-if="!showMore"
-              @click="showMore = true"
-              class="tertiary">
-              Show More
-            </button>
-
-            <button 
-              v-else
-              @click="showMore = false"
-              class="tertiary">
-              Show Less
-            </button>
-          </div>
-        </section>
-
-        <section class="content margin-l top">
-          <disclaimer />
-        </section>
+      <div class="content">
+        <h1>Help Centre</h1>
+        <h2 class="margin-s top">You can find all the information here to answer your questions!</h2>
       </div>
-    </transition-group>
-  </main>
+
+      <transition-group name="slide" tag="div">
+        <section class="questions content slide-item margin-l top" key="dynamic">
+          <transition-group name="slide" tag="ul">
+            <li 
+              v-for="(question, index) in questions"
+              :key="index"
+              class="slide-item">
+              <button
+                @click="selected = selected === index ? null : index, setAria(index)"
+                :id="`button-${index}`"
+                aria-expanded="false"
+                aria-controls="text"
+                class="title">
+                <h3>{{ question.title }}</h3>
+
+                <img 
+                  src="@/assets/icons/red/arrow-down.svg" 
+                  alt=""
+                  :class="selected === index ? 'active' : ''" 
+                  class="icon">
+              </button>
+
+              <div 
+                :class="selected === index ? 'active' : ''"
+                id="text"
+                class="text"
+                role="region"
+                :aria-labelledby="`button-${index}`">
+                <p>{{ question.text }}</p>
+              </div>
+            </li>
+          </transition-group>
+        </section>
+
+        <div class="slide-item" key="static">
+          <section class="content buttons-content margin-l top">
+            <h2 class="margin-m bottom">Want in-depth information? Check out the articles below!</h2>
+
+            <FormulateInput
+              v-model="search"
+              type="search"
+              name="sample"
+              label="Search"
+              placeholder="Try visa, dependants, country.." />
+
+            <div v-if="!filteredPages.length" class="no-results">
+              <p>No results found.</p>
+            </div>
+
+            <div class="buttons">
+              <router-link
+                class="button"
+                v-for="page in filteredPages"
+                :key="page.title"
+                :to="{ name: 'help-centre-page', params: { slug: page.slug } }"
+                tag="button"
+                :style="{ 
+                  backgroundImage: getBackground(page.background),
+                  backgroundSize: getSize(page.background) 
+                }">
+                {{ page.title }}
+              </router-link>
+            </div>
+
+            <div v-if="!search" class="see-more">
+              <button
+                v-if="!showMore"
+                @click="showMore = true"
+                class="tertiary">
+                Show More
+              </button>
+
+              <button 
+                v-else
+                @click="showMore = false"
+                class="tertiary">
+                Show Less
+              </button>
+            </div>
+          </section>
+
+          <section class="content margin-l top">
+            <disclaimer />
+          </section>
+        </div>
+      </transition-group>
+    </main>
+
+    <app-footer v-if="!user" />
+  </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import disclaimer from '@/components/cards/Disclaimer'
 import backButton from '@/components/BackButton'
+import appFooter from '@/components/Footer'
 
 import wave from '@/assets/patterns/wave-2.svg'
 import line from '@/assets/patterns/line.svg'
@@ -109,7 +114,7 @@ import dashed from '@/assets/patterns/dashed-line.svg'
 import confetti from '@/assets/patterns/confetti.svg'
 
 export default {
-  components: { disclaimer, backButton },
+  components: { disclaimer, backButton, appFooter },
   data() {
     return {
       selected: null,
@@ -145,6 +150,9 @@ export default {
   },
   computed: {
     ...mapState('helpCentre', ['buttons']),
+    user() {
+      return this.$store.state.auth.user
+    },
     filteredPages() {
       let pages = this.buttons
       let filtered = []
