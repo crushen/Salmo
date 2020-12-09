@@ -4,21 +4,14 @@
       <h2>Which ILR plan to go for? (2/3)</h2>
 
       <div class="inner">
-        <p v-if="qualifiesForFive" class="margin-s top">Based on your past visas and your current profile, you have two options for the ILR route. Click the one you want to for:</p>
+        <p v-if="!qualifiesForFive.length" class="margin-s top">Based on your past visas and your current profile, you have two options for the ILR route. Click the one you want to for:</p>
         
-        <p v-else>Based on your past visas and your current profile, you currently only qualify for the 10 year plan. Please click the 10 year plan to continue:</p>
-        
-        <!-- <div v-else class="margin-s top">
-          <div v-if="profileToUpdate.currentVisa.name === 'Tier 4 : Student' && !profileToUpdate.pastVisas.length">
-            <p class="margin-s top">Based on your past visas and your current profile, you currently only qualify for the 10 year plan.</p>
-            <p class="margin-s top">However, if your next visa is a Tier 1 or Tier 2 visa, you may then qualify for the 5 year plan. Please click the 10 year plan to contiue (but don't worry, you can change this later):</p>
-          </div>
-        </div> -->
+        <p v-else class="margin-s top">Based on your past visas and your profile, you currently only qualify for the 10 year plan. Please click the 10 year plan to continue:</p>
       </div>
 
       <div class="plan-btns">
         <div
-          v-if="qualifiesForFive"
+          v-if="!qualifiesForFive.length"
           :class="selectedPlan === '5 year plan' ? 'border' : ''"
           class="five margin-m bottom">
           <button @click="selectedPlan = '5 year plan'" class="none">
@@ -82,43 +75,52 @@ export default {
   data() {
     return {
       selectedPlan: null,
-      error: null,
-      validVisas: [
-        'Tier 1 : Global Talent',
-        'Tier 1 : Exceptional Talent',
-        'Tier 1 : Innovator',
-        'Tier 1 : Entrepreneur',
-        'Tier 1 : Investor',
-        'Tier 2 : General Work',
-        'Tier 2 : Health and Care'
-      ]
+      error: null
     }
   },
   computed: {
     qualifiesForFive() {
-      const currentVisa = cloneDeep(this.profileToUpdate.currentVisa.name),
+      const currentVisa = cloneDeep(this.profileToUpdate.currentVisa),
             pastVisas = cloneDeep(this.profileToUpdate.pastVisas),
             allVisas = pastVisas.concat(currentVisa),
-            currentType = this.profileToUpdate.currentVisa.type;
+            currentType = this.profileToUpdate.currentVisa.type,
+            validVisas = [
+              'Tier 1 : Global Talent',
+              'Tier 1 : Exceptional Talent',
+              'Tier 1 : Innovator',
+              'Tier 1 : Entrepreneur',
+              'Tier 1 : Investor',
+              'Tier 2 : General Work',
+              'Tier 2 : Health and Care'
+            ];
 
-      let qualifies = false
+      let errors = []
 
       allVisas.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
-      // loop all visas, if visa is switch
-      // check if current index is valid visa, and check if previous visa was valid visa
-      // vice versa
-      // if valid, and switched from another valid = error
-      // if valid, and switched from invalid = no error
-      // if invalid, and switched from valid = error
 
-      // if valid, and extended from valid = no error
+      allVisas.forEach((visa, index) => {
+        const previousVisa = allVisas[index - 1]
 
-      if(this.validVisas.includes(currentVisa)) {
-        qualifies = true
+        if(validVisas.includes(visa.name)) {
+          if(visa.type === 'switch') {
+            if(validVisas.includes(previousVisa.name)) {
+              errors.push(visa)
+            }
+          }
+
+          if(visa.type === 'extend') {
+            if(validVisas.includes(previousVisa.name)) {
+              errors.push(visa)
+            }
+          }
+        }
+      })
+
+      if(!validVisas.includes(currentVisa.name)) {
+        errors.push(currentVisa)
       }
 
-
-      return qualifies
+      return errors
     }
   },
   methods: {

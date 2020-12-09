@@ -11,7 +11,6 @@
         <b>You have {{ daysLeft }} days left to travel between now (today) and {{ date(fiveYearDate) }}!</b>
       </p>
 
-
       <ul class="results margin-s top">
         <li
           v-for="(year, index) in years"
@@ -125,16 +124,7 @@ export default {
   },
   data() {
     return {
-      selectedYear: null,
-      validVisas: [
-        'Tier 1 : Global Talent',
-        'Tier 1 : Exceptional Talent',
-        'Tier 1 : Innovator',
-        'Tier 1 : Entrepreneur',
-        'Tier 1 : Investor',
-        'Tier 2 : General Work',
-        'Tier 2 : Health and Care'
-      ]
+      selectedYear: null
     }
   },
   computed: {
@@ -237,51 +227,47 @@ export default {
       return errors
     },
     qualifiesForFive() {
-      const currentVisa = this.profileToUpdate.currentVisa.name,
-            pastVisas = this.profileToUpdate.pastVisas,
-            currentType = this.profileToUpdate.currentVisa.type;
+      const currentVisa = cloneDeep(this.profileToUpdate.currentVisa),
+            pastVisas = cloneDeep(this.profileToUpdate.pastVisas),
+            allVisas = pastVisas.concat(currentVisa),
+            currentType = this.profileToUpdate.currentVisa.type,
+            validVisas = [
+              'Tier 1 : Global Talent',
+              'Tier 1 : Exceptional Talent',
+              'Tier 1 : Innovator',
+              'Tier 1 : Entrepreneur',
+              'Tier 1 : Investor',
+              'Tier 2 : General Work',
+              'Tier 2 : Health and Care'
+            ];
 
-      let qualifies = false
+      let errors = []
 
-      // If their current visa is a tier 1 or tier 2 visa
-      if(this.validVisas.includes(currentVisa)) {
-        qualifies = true
-        // // If they have no past visas
-        // if(!pastVisas.length) {
-        //   qualifies = true
-        // } else {
-        //   // If their only past visa is Student visa
-        //   if(pastVisas.length === 1) {
-        //     if(pastVisas[0].name === 'Tier 4 : Student') {
-        //       qualifies = true
-        //     }
-        //   } else {
-        //     // If their first past visa is Student and every visa after is Tier 1 or Tier 2
-        //     const removeFirst = pastVisas.slice(1),
-        //           allTierOneTierTwo = visa => visa.name.includes('Tier 1') || visa.name.includes('Tier 2');
+      allVisas.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
 
-        //     if(removeFirst.every(allTierOneTierTwo) && pastVisas[0].name === 'Tier 4 : Student'){
-        //       qualifies = true
-        //     } else {
-        //       // If all their past visas are Tier 1 or Tier 2
-        //       if(pastVisas.every(allTierOneTierTwo)) {
-        //         qualifies = true
-        //       }
-        //     }
-        //   }
-        // }
+      allVisas.forEach((visa, index) => {
+        const previousVisa = allVisas[index - 1]
+
+        if(validVisas.includes(visa.name)) {
+          if(visa.type === 'switch') {
+            if(validVisas.includes(previousVisa.name)) {
+              errors.push(visa)
+            }
+          }
+
+          if(visa.type === 'extend') {
+            if(validVisas.includes(previousVisa.name)) {
+              errors.push(visa)
+            }
+          }
+        }
+      })
+
+      if(!validVisas.includes(currentVisa.name)) {
+        errors.push(currentVisa)
       }
 
-      // If any of their past or current visas were swithced
-      if(currentType === 'switch') {
-        qualifies = false
-      }
-      
-      if(pastVisas && pastVisas.find(visa => visa.type === 'switch')) {
-        qualifies = false
-      }
-
-      return qualifies
+      return errors
     },
     moreThan_180_pre_2018() {
       const errors = [],
