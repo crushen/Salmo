@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main id="help-centre" class="page padding top" >
+    <main id="help-centre" class="page padding top" :class="{'bottom': user}">
       <back-button
         @go-back="$router.push({ name: 'about' })"
         text="About" />

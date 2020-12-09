@@ -1,10 +1,10 @@
  <template>
-  <main id="about">
+  <main id="about" class="page padding top" :class="{'bottom': user}">
     <back-button
       @go-back="$router.go(-1)"
       text="Back" />
 
-    <section class="content page padding top bottom">
+    <section class="content">
       <h1>About Salmo</h1>
       <h2 class="margin-s top">Our future goals for the UK visa industry.</h2>
 
