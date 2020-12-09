@@ -5,7 +5,7 @@
       text="Help Centre" />
 
     <article class="content">
-      <h1>{{ article.title }}</h1>
+      <h1 class="margin-s top">{{ article.title }}</h1>
 
       <div v-html="article.content.html" class="body" />
     </article> 

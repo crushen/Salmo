@@ -38,8 +38,8 @@ export default {
 }
 
 @media screen and (min-width: 1200px) {
-  .arrow-btn {
-    left: calc(100px + 5vw);
-  }
+  // .arrow-btn {
+  //   left: calc(100px + 5vw);
+  // }
 }
 </style>

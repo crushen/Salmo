@@ -25,7 +25,7 @@
       :class="{'home': $route.name === 'home'}">
       <!-- v-if="$route.path !== '/about' && $route.path !== '/'" -->
 
-    <div class="content-wrapper">
+    <div :class="{'content-wrapper': user}">
       <transition name="slide" mode="out-in">
         <router-view />
       </transition>
@@ -223,9 +223,9 @@ main {
 
 // Tablet
 @media screen and (min-width: 600px) {
-  // .content-wrapper {
-  //   margin-left: 100px;
-  // }
+  .content-wrapper {
+    margin-left: 100px;
+  }
 
   // .small-logo {
   //   display: none;

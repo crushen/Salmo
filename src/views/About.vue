@@ -1,5 +1,8 @@
  <template>
   <main id="about" class="page padding top bottom">
+    <back-button
+      @go-back="$router.go(-1)"
+      text="Back" />
 
     <section class="content">
       <h1>About Salmo</h1>
@@ -24,9 +27,10 @@
 <script>
 import aboutCard from '@/components/cards/AboutCard'
 import helpCentreCard from '@/components/cards/HelpCentre'
+import backButton from '@/components/BackButton'
 
 export default {
-  components: { aboutCard, helpCentreCard },
+  components: { aboutCard, helpCentreCard, backButton },
   data() {
     return {
       innerWidth: null,
