@@ -61,8 +61,6 @@ export default {
     },
     arrowPage() {
       switch(this.$route.name) {
-        case 'home':
-          return true
         case 'sign-up':
           return true
         case 'sign-in':
@@ -171,13 +169,11 @@ p {
   top: 24px;
   right: 7.5vw;
   z-index: 5;
-  transition: 0.7s cubic-bezier(0,1.15,1,.99);
-  transition-delay: 0.7s;
 
   &.home {
-    width: 50px;
+    width: 60px;
     top: 32px;
-    right: 32px;
+    right: 7.5vw;
   }
 }
 
@@ -221,14 +217,22 @@ main {
   transition: 0.4s;
 }
 
-// Tablet
+@media screen and (min-width: 1200px) {
+  // .small-logo {
+  //   top: 24px;
+  //   right: 7.5vw;
+
+  //   &.home {
+  //     width: 50px;
+  //     top: 32px;
+  //     right: 32px;
+  //   }
+  // }
+}
+
 @media screen and (min-width: 1200px) {
   .content-wrapper {
     margin-left: 100px;
   }
-
-  // .small-logo {
-  //   display: none;
-  // }
 }
 </style>
