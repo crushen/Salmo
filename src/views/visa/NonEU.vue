@@ -1,7 +1,7 @@
 <template>
   <main id="non-eu" class="page padding top bottom">
     <back-button
-      @go-back="$router.go(-1)"
+      @go-back="$router.push({ name: 'visa-info' })"
       text="Back" />
 
     <div class="content">
