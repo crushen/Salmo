@@ -9,6 +9,11 @@
     </transition>
 
     <header>
+    <img
+      src="@/assets/logo/colour.svg" 
+      alt="Salmo logo"
+      class="small-logo">
+
       <div class="container logo-container">
         <img src="@/assets/logo/name-blue.svg" alt="" class="logo-text">
       </div>
@@ -161,6 +166,14 @@ header {
     justify-content: center;
     position: absolute;
     z-index: 5;
+  }
+
+  .small-logo {
+    position: absolute;
+    z-index: 1;
+    width: 60px;
+    top: 32px;
+    right: 7.5vw;
   }
 
   .logo-container {

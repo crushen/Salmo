@@ -13,17 +13,21 @@
 
     <desktop-wave v-else />
 
-    <mobile-nav v-if="user && user.emailVerified && innerWidth < 1200"  />
+    <transition name="nav" mode="out-in">
+      <mobile-nav v-if="user && user.emailVerified && innerWidth < 1200"  />
+    </transition>
 
-    <sidebar-nav v-if="user && user.emailVerified && innerWidth >= 1200" />
+    <transition name="nav" mode="out-in">
+      <sidebar-nav v-if="user && user.emailVerified && innerWidth >= 1200" />
+    </transition>
 
-    <!-- v-if="$route.name !== 'home'" -->
-    <img
-      src="@/assets/logo/colour.svg" 
-      alt="Salmo logo"
-      class="small-logo"
-      :class="{'home': $route.name === 'home'}">
-      <!-- v-if="$route.path !== '/about' && $route.path !== '/'" -->
+    <transition name="slide-logo" mode="out-in">
+      <img
+        v-if="$route.name !== 'home'"
+        src="@/assets/logo/colour.svg" 
+        alt="Salmo logo"
+        class="small-logo">
+    </transition>
 
     <div :class="{'content-wrapper': user}">
       <transition name="slide" mode="out-in">
@@ -168,13 +172,7 @@ p {
   position: absolute;
   top: 24px;
   right: 7.5vw;
-  z-index: 5;
-
-  &.home {
-    width: 60px;
-    top: 32px;
-    right: 7.5vw;
-  }
+  z-index: 1;
 }
 
 .content-wrapper {
@@ -206,28 +204,44 @@ main {
   transition-delay: 0.5s;
 }
 
+.slide-logo-enter,
+.slide-logo-leave-to {
+  transform: translateX(20px);
+  opacity: 0;
+}
+.slide-logo-enter-active,
+.slide-logo-leave-active {
+  transition: 0.7s;
+  transition-timing-function: cubic-bezier(0,1.15,1,.99);
+}
+
+.slide-logo-enter-active {
+  transition-delay: 1.3s;
+}
+
+.nav-enter,
+.nav-leave-to {
+  opacity: 0;
+}
+.nav-enter-active,
+.nav-leave-active {
+  transition: 0.4s;
+}
+
+.nav-enter-active {
+  transition-delay: 1.5s;
+}
+
 // Alert and Modal transitions
 .dialog-enter,
 .dialog-leave-to {
   transform: translateY(-20px);
   opacity: 0;
+  z-index: 50;
 }
 .dialog-enter-active,
 .dialog-leave-active {
   transition: 0.4s;
-}
-
-@media screen and (min-width: 1200px) {
-  // .small-logo {
-  //   top: 24px;
-  //   right: 7.5vw;
-
-  //   &.home {
-  //     width: 50px;
-  //     top: 32px;
-  //     right: 32px;
-  //   }
-  // }
 }
 
 @media screen and (min-width: 1200px) {
