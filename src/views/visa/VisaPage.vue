@@ -274,4 +274,10 @@ export default {
     }
   }
 }
+
+@media screen and (min-width: 700px) {
+  .visa-sections {
+    padding-top: 160px;
+  }
+}
 </style>

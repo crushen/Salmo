@@ -1,52 +1,55 @@
 <template>
-  <div class="menu">
-    <button
-      @click="$emit('toggle')"
-      :class="menuOpen ? 'active' : ''">
-      Jump To Section
-      <img 
-        src="@/assets/icons/red/arrow-down.svg"
-        :class="menuOpen ? 'active' : ''"
-        alt=""
-        class="icon">
-    </button>
+  <div>
+    <div class="menu">
+      <button
+        @click="$emit('toggle')"
+        :class="menuOpen ? 'active' : ''">
+        Jump To Section
+        <img 
+          src="@/assets/icons/red/arrow-down.svg"
+          :class="menuOpen ? 'active' : ''"
+          alt=""
+          class="icon">
+      </button>
 
-    <transition-group name="slide">
-      <div
-        class="slide-item"
-        :class="menuOpen ? 'active' : ''"
-        key="outer">
-        <transition-group
-          name="slide-2" 
-          tag="ul"
-          class="top outer-list">
-          <li
-            v-for="(section, index) in visa.sections"
-            :key="section.id"
-            class="top">
-            <p
-              @click="select($event, index)"
-              class="section-title">
-              {{ section.title }}
-            </p>
+      <transition-group name="slide">
+        <div
+          class="slide-item"
+          :class="menuOpen ? 'active' : ''"
+          key="outer">
+          <transition-group
+            name="slide-2" 
+            tag="ul"
+            class="top outer-list">
+            <li
+              v-for="(section, index) in visa.sections"
+              :key="section.id"
+              class="top">
+              <p
+                @click="select($event, index)"
+                class="section-title">
+                {{ section.title }}
+              </p>
 
-            <ul
-              :class="selectedTab === index ? 'active' : ''"
-              class="inner-list">
-              <li
-                v-for="subsection in section.subsections"
-                :key="subsection.id"
-                @click="$emit('close')">
-                <router-link :to="{ name: 'visa-section', params: { section: subsection.slug } }">
-                  {{ subsection.title }}
-                </router-link>
-              </li>
-            </ul>
-          </li>
-        </transition-group>
-      </div>
-    </transition-group>
+              <ul
+                :class="selectedTab === index ? 'active' : ''"
+                class="inner-list">
+                <li
+                  v-for="subsection in section.subsections"
+                  :key="subsection.id"
+                  @click="$emit('close')">
+                  <router-link :to="{ name: 'visa-section', params: { section: subsection.slug } }">
+                    {{ subsection.title }}
+                  </router-link>
+                </li>
+              </ul>
+            </li>
+          </transition-group>
+        </div>
+      </transition-group>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -196,5 +199,12 @@ export default {
       text-decoration: underline;
     }
   }
+}
+
+@media screen and (min-width: 700px) {
+  .menu {
+    width: 70%;
+    left: 15%;
+  } 
 }
 </style>
