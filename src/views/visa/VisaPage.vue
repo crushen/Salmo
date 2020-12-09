@@ -18,7 +18,7 @@
 
       <section class="visa-sections">
         <transition :name="animateOn" mode="out-in">
-          <h2 :key="title" class="margin-m bottom">{{ title }}</h2>
+          <h2 :key="title" class="title">{{ title }}</h2>
         </transition>
 
         <transition :name="animateOn" mode="out-in">
@@ -45,7 +45,7 @@
       </section>  
     </section>
 
-    <section v-else class="content">
+    <section v-else class="content page padding top bottom">
       <p>{{ invalidVisa.name }}</p>
 
       <p>{{ invalidVisa.url }}</p>
@@ -256,8 +256,12 @@ export default {
   transition-timing-function: cubic-bezier(0,1.15,1,.99);
 }
 
+.title {
+  margin-bottom: 32px;
+}
+
 .visa-sections {
-  padding-top: 132px;
+  padding-top: 100px;
 
   h2 {
     color: $red;
@@ -277,7 +281,7 @@ export default {
 
 @media screen and (min-width: 700px) {
   .visa-sections {
-    padding-top: 160px;
+    padding-top: 110px;
   }
 }
 </style>

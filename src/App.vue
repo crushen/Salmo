@@ -222,7 +222,7 @@ main {
 }
 
 // Tablet
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1200px) {
   .content-wrapper {
     margin-left: 100px;
   }

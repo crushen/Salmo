@@ -38,114 +38,9 @@ h3 {
   font-weight: 300;
 }
 
-// .body {
-//   /deep/ p {
-//     margin-top: $spacing*2;
-//   }
-
-//   /deep/ a {
-//     text-decoration: underline;
-//   }
-
-//   /deep/ strong {
-//     font-weight: 600;
-//   }
-
-//   // /deep/ .centre {
-//   //   text-align: center;
-//   //   margin: $spacing*6;
-
-//   //   img {
-//   //     width: 80%;
-//   //     max-width: 200px;
-//   //   }
-//   // }
-
-//   /deep/ ul,
-//   /deep/ ol {
-//     list-style-position: inside;
-//     margin: $spacing*4 auto;
-//     max-width: 500px;
-
-//     li {
-//       margin-top: $spacing*2;
-
-//       div {
-//         display: inline;
-//       }
-//     }
-//   }
-
-//   /deep/ .tip {
-//     padding: $spacing*2;
-//     margin: $spacing*6 0;
-//     border-left: 6px solid $primary-yellow;
-//     background: lighten($color: $primary-yellow, $amount: 23%);
-
-//     p {
-//       margin-top: 0;
-//       position: relative;
-//       z-index: 10;
-//     }
-//   }
-
-//   // /deep/ .text-img-right {
-//   //   display: flex;
-//   //   align-items: center;
-//   //   justify-content: space-between;
-//   //   margin: $spacing*6 auto;
-//   //   max-width: 500px;
-
-//   //   p {
-//   //     margin: 0;
-//   //     margin-right: 5%;
-//   //   }
-
-//   //   img {
-//   //     width: 25%;
-//   //     max-width: 100px;
-//   //   }
-//   // }
-
-//   // /deep/ .text-img-left {
-//   //   display: flex;
-//   //   align-items: center;
-//   //   justify-content: space-between;
-//   //   margin-top: $spacing*2;
-
-//   //   p {
-//   //     width: 90%;
-//   //     margin: 0;
-//   //   }
-//   // }
-
-//   // /deep/ table {
-//   //   margin-bottom: $spacing*6;
-
-//   //   tr {
-//   //     td {
-//   //       width: 30%;
-//   //       text-align: center;
-
-//   //       p {
-//   //         margin: $spacing auto auto;
-//   //         width: 90%;
-//   //         max-width: 180px;
-//   //       }
-
-//   //       img {
-//   //         width: 60%;
-//   //         max-width: 100px;
-//   //         margin: $spacing*3 auto 0 auto;
-//   //       }
-//   //     }
-//   //   }
-//   // }
-// }
-
 .body {
   /deep/ h2 {
-    margin-top: 36px;
+    margin-top: 32px;
   }
 
   /deep/ .red {
@@ -176,18 +71,37 @@ h3 {
 
     img {
       width: 70%;
-      max-width: 200px;
+      max-width: 150px;
+    }
+  }
+
+  /deep/ .centre-large,
+  /deep/ .centre-large-five,
+  /deep/ .img-text-centre  {
+    text-align: center;
+    margin: 32px 0;
+  }
+
+  /deep/ .centre-large-five {
+    img {
+      width: 100%;
+      max-width: 350px;
+    }
+  }
+
+  /deep/ .img-text-centre {
+    p {
+      margin: 0;
     }
   }
 
   /deep/ ul,
   /deep/ ol {
     list-style-position: inside;
-    margin: 8px auto;
-    max-width: 500px;
+    margin: 16px auto 0 auto;
 
     li {
-      margin-top: 16px;
+      margin-top: 8px;
 
       div {
         display: inline;
@@ -196,7 +110,8 @@ h3 {
   }
 
   /deep/ .tip {
-    margin-top: 36px;
+    margin: 32px auto 32px auto;
+    max-width: 500px;
 
     p {
       margin-top: 0;
@@ -209,7 +124,7 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 36px auto;
+    margin: 32px auto;
     max-width: 500px;
 
     p {
@@ -224,15 +139,21 @@ h3 {
     }
   }
 
-  /deep/ .text-img-left {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 16px;
+  /deep/ .section {
+    margin: 32px auto;
 
     p {
-      width: 90%;
       margin: 0;
+    }
+
+    ul, ol {
+      margin: 0 auto;
+    }
+  }
+
+  /deep/ .table-header {
+    p {
+      margin-top: 32px;
     }
   }
 
@@ -253,8 +174,28 @@ h3 {
 
         img {
           width: 60%;
-          max-width: 100px;
+          max-width: 80px;
           margin: 0 auto;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .body {
+    /deep/ .text-img-right {
+      p {
+        margin-right: 40px;
+      }
+    }
+
+    /deep/ table {
+      tr {
+        td {
+          p {
+            margin: 8px auto 8px auto;
+          }
         }
       }
     }

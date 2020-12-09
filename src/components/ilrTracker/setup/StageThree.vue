@@ -73,6 +73,8 @@
 </template>
 
 <script>
+import { cloneDeep } from 'lodash'
+
 export default {
   props: {
     profileToUpdate: { type: Object, required: true }
@@ -94,49 +96,27 @@ export default {
   },
   computed: {
     qualifiesForFive() {
-      const currentVisa = this.profileToUpdate.currentVisa.name,
-            pastVisas = this.profileToUpdate.pastVisas,
+      const currentVisa = cloneDeep(this.profileToUpdate.currentVisa.name),
+            pastVisas = cloneDeep(this.profileToUpdate.pastVisas),
+            allVisas = pastVisas.concat(currentVisa),
             currentType = this.profileToUpdate.currentVisa.type;
 
       let qualifies = false
 
-      // If their current visa is a tier 1 or tier 2 visa
+      allVisas.sort((a, b) => new Date(a.startDate) - new Date(b.startDate))
+      // loop all visas, if visa is switch
+      // check if current index is valid visa, and check if previous visa was valid visa
+      // vice versa
+      // if valid, and switched from another valid = error
+      // if valid, and switched from invalid = no error
+      // if invalid, and switched from valid = error
+
+      // if valid, and extended from valid = no error
+
       if(this.validVisas.includes(currentVisa)) {
         qualifies = true
-        // // If they have no past visas
-        // if(!pastVisas.length) {
-        //   qualifies = true
-        // } else {
-        //   // If their only past visa is Student visa
-        //   if(pastVisas.length === 1) {
-        //     if(pastVisas[0].name === 'Tier 4 : Student') {
-        //       qualifies = true
-        //     }
-        //   } else {
-        //     // If their first past visa is Student and every visa after is Tier 1 or Tier 2
-        //     const removeFirst = pastVisas.slice(1),
-        //           allTierOneTierTwo = visa => visa.name.includes('Tier 1') || visa.name.includes('Tier 2');
-
-        //     if(removeFirst.every(allTierOneTierTwo) && pastVisas[0].name === 'Tier 4 : Student'){
-        //       qualifies = true
-        //     } else {
-        //       // If all their past visas are Tier 1 or Tier 2
-        //       if(pastVisas.every(allTierOneTierTwo)) {
-        //         qualifies = true
-        //       }
-        //     }
-        //   }
-        // }
       }
 
-      // If any of their past or current visas were swithced
-      if(currentType === 'switch') {
-        qualifies = false
-      }
-      
-      if(pastVisas && pastVisas.find(visa => visa.type === 'switch')) {
-        qualifies = false
-      }
 
       return qualifies
     }
