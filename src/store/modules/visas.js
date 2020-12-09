@@ -30,9 +30,6 @@ export default {
                       label
                       state
                     }
-                    quicktip {
-                      html
-                    }
                   }
                 }
               `
@@ -63,9 +60,6 @@ export default {
                     cardChecklist {
                       label
                       state
-                    }
-                    quicktip {
-                      html
                     }
                   }
                 }
@@ -141,9 +135,6 @@ export default {
                       label
                       state
                     }
-                    quicktip {
-                      html
-                    }
                   }
                 }
               `,
@@ -177,9 +168,6 @@ export default {
                     cardChecklist {
                       label
                       state
-                    }
-                    quicktip {
-                      html
                     }
                   }
                 }

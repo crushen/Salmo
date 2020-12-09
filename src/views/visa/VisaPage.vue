@@ -124,9 +124,11 @@ export default {
   methods: {
     toggle() {
       this.menuOpen = !this.menuOpen
+      this.selectedTab = null
     },
     close() {
       this.menuOpen = false
+      this.selectedTab = null
       this.key++
     },
     selectTab({event, index}) {
@@ -219,7 +221,7 @@ export default {
         } else {
           // if no section defined, go to first section... otherwise continue to defined section.
           if(!this.$route.params.section && this.validVisa) {
-            this.$router.push({
+            this.$router.replace({
               name: 'visa-section',
               params: { section: this.firstSection }
             })
